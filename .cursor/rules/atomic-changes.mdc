@@ -33,3 +33,6 @@ Two capabilities that merely happen to touch the same file are still two changes
   feature would be. Do not begin the next feature without explicit approval.
 - **Ask when scope is ambiguous.** If a request seems to span several features, propose the
   breakdown and confirm the first slice before writing code.
+- **UI discoverability.** Every newly implemented page must be reachable through the
+  application UI without manually typing a URL. Inert-looking muted text does not count as
+  navigation — links must read as interactive.

@@ -50,7 +50,11 @@ export default async function DashboardPage() {
         )}
       </section>
 
-      <QuickActions editHref={routes.profileEdit} publicHref={publicPath} />
+      <QuickActions
+        editHref={routes.profileEdit}
+        linksHref={routes.profileLinks}
+        publicHref={publicPath}
+      />
     </div>
   );
 }

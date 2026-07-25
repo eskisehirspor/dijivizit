@@ -1,0 +1,138 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+
+import { type ActionResult, failure, success } from "@/lib/action-result";
+import {
+  createOwnProfileLink,
+  deleteOwnProfileLink,
+  getOwnProfileLinks,
+  moveOwnProfileLink,
+  setOwnProfileLinkVisibility,
+  updateOwnProfileLink,
+} from "@/lib/dal/profile-links";
+import { routes } from "@/lib/routes";
+import { createProfileLinkSchema, updateProfileLinkSchema } from "@/lib/validations/profile-links";
+
+function fieldErrorsOf(error: z.ZodError): Record<string, string> {
+  const result: Record<string, string> = {};
+
+  for (const issue of error.issues) {
+    const field = issue.path[0];
+
+    if (typeof field === "string" && !(field in result)) {
+      result[field] = issue.message;
+    }
+  }
+
+  return result;
+}
+
+function revalidateLinks() {
+  revalidatePath(routes.profileLinks);
+  revalidatePath(routes.dashboard);
+}
+
+export async function createProfileLinkAction(
+  _previous: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const parsed = createProfileLinkSchema.safeParse({
+    platform: formData.get("platform"),
+    value: formData.get("value"),
+  });
+
+  if (!parsed.success) {
+    return failure("profile.links.errors.saveFailed", fieldErrorsOf(parsed.error));
+  }
+
+  const result = await createOwnProfileLink(parsed.data);
+
+  if (!result.ok) {
+    return failure(
+      result.code === "limit"
+        ? "profile.links.errors.limitReached"
+        : "profile.links.errors.saveFailed",
+    );
+  }
+
+  revalidateLinks();
+  return success();
+}
+
+export async function updateProfileLinkAction(
+  _previous: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const id = formData.get("id")?.toString() ?? "";
+  const links = await getOwnProfileLinks();
+  const existing = links.find((link) => link.id === id);
+
+  if (!existing) {
+    return failure("profile.links.errors.saveFailed");
+  }
+
+  const parsed = updateProfileLinkSchema.safeParse({
+    id,
+    value: formData.get("value"),
+    platform: existing.platform,
+  });
+
+  if (!parsed.success) {
+    return failure("profile.links.errors.saveFailed", fieldErrorsOf(parsed.error));
+  }
+
+  // MVP UI does not edit labels; preserve whatever is already stored.
+  const ok = await updateOwnProfileLink({
+    id: parsed.data.id,
+    value: parsed.data.value,
+    label: existing.label,
+  });
+
+  if (!ok) {
+    return failure("profile.links.errors.saveFailed");
+  }
+
+  revalidateLinks();
+  return success();
+}
+
+export async function toggleProfileLinkVisibilityAction(
+  id: string,
+  isVisible: boolean,
+): Promise<ActionResult> {
+  const ok = await setOwnProfileLinkVisibility(id, isVisible);
+
+  if (!ok) {
+    return failure("profile.links.errors.saveFailed");
+  }
+
+  revalidateLinks();
+  return success();
+}
+
+export async function deleteProfileLinkAction(id: string): Promise<ActionResult> {
+  const ok = await deleteOwnProfileLink(id);
+
+  if (!ok) {
+    return failure("profile.links.errors.deleteFailed");
+  }
+
+  revalidateLinks();
+  return success();
+}
+
+export async function moveProfileLinkAction(
+  id: string,
+  direction: "up" | "down",
+): Promise<ActionResult> {
+  const ok = await moveOwnProfileLink(id, direction);
+
+  if (!ok) {
+    return failure("profile.links.errors.reorderFailed");
+  }
+
+  revalidateLinks();
+  return success();
+}

@@ -90,7 +90,9 @@
     "actions": {
       "title": "Hızlı işlemler",
       "editProfile": "Profili düzenle",
-      "editProfileDescription": "Ad, unvan ve iletişim bilgilerinizi güncelleyin.",
+      "editProfileDescription": "Ad, unvan ve hakkınızda metnini güncelleyin.",
+      "manageLinks": "Bağlantılar",
+      "manageLinksDescription": "Telefon, e-posta ve sosyal profillerinizi yönetin.",
       "viewPublic": "Herkese açık profil",
       "viewPublicDescription": "Kartınızın ziyaretçilere nasıl göründüğünü görün.",
       "qrCode": "QR kod",
@@ -111,7 +113,8 @@
     "edit": {
       "title": "Profili düzenle",
       "subtitle": "Kartınızda görünen temel bilgileri güncelleyin.",
-      "saved": "Profil güncellendi."
+      "saved": "Profil güncellendi.",
+      "manageLinks": "İletişim bağlantılarını yönet"
     },
     "fields": {
       "fullName": "Ad soyad",
@@ -122,6 +125,62 @@
     },
     "errors": {
       "saveFailed": "Profil kaydedilemedi. Lütfen tekrar deneyin."
+    },
+    "links": {
+      "title": "Bağlantılar",
+      "subtitle": "Telefon, e-posta ve sosyal profillerinizi yönetin.",
+      "backToEdit": "Temel bilgilere dön",
+      "listTitle": "Mevcut bağlantılar",
+      "counter": "{current} / {max} bağlantı",
+      "empty": "Henüz bir bağlantı eklemediniz.",
+      "addTitle": "Bağlantı ekle",
+      "addSubtitle": "Kartınızda görünecek bir iletişim yöntemi ekleyin.",
+      "add": "Bağlantı ekle",
+      "created": "Bağlantı eklendi.",
+      "updated": "Bağlantı güncellendi.",
+      "deleted": "Bağlantı silindi.",
+      "visible": "Kartta göster",
+      "moveUp": "Yukarı taşı",
+      "moveDown": "Aşağı taşı",
+      "delete": "Sil",
+      "deleteTitle": "Bağlantıyı sil?",
+      "deleteBody": "Bu bağlantı kalıcı olarak kaldırılacak. Bu işlemi geri alamazsınız.",
+      "deleteConfirm": "Sil",
+      "fields": {
+        "platform": "Platform",
+        "value": "Değer",
+        "label": "Etiket (isteğe bağlı)"
+      },
+      "valueLabels": {
+        "phone": "Telefon Numarası",
+        "email": "E-posta Adresi",
+        "website": "Web Sitesi",
+        "username": "Kullanıcı Adı"
+      },
+      "platforms": {
+        "phone": "Telefon",
+        "email": "E-posta",
+        "website": "Web sitesi",
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram",
+        "x": "X",
+        "whatsapp": "WhatsApp"
+      },
+      "placeholders": {
+        "phone": "+90 532 000 00 00",
+        "email": "ornek@sirket.com",
+        "website": "https://ornek.com",
+        "linkedin": "kullanici-adi",
+        "instagram": "kullaniciadi",
+        "x": "kullaniciadi",
+        "whatsapp": "+90 532 000 00 00"
+      },
+      "errors": {
+        "saveFailed": "Bağlantı kaydedilemedi. Lütfen tekrar deneyin.",
+        "deleteFailed": "Bağlantı silinemedi. Lütfen tekrar deneyin.",
+        "reorderFailed": "Sıra güncellenemedi. Lütfen tekrar deneyin.",
+        "limitReached": "En fazla 20 bağlantı ekleyebilirsiniz."
+      }
     }
   },
   "validation": {
@@ -147,6 +206,18 @@
     },
     "about": {
       "tooLong": "Hakkımda en fazla 5000 karakter olabilir."
+    },
+    "link": {
+      "valueRequired": "Değer gerekli.",
+      "platformInvalid": "Geçersiz platform.",
+      "idInvalid": "Geçersiz bağlantı.",
+      "labelTooLong": "Etiket en fazla 60 karakter olabilir.",
+      "phoneInvalid": "Geçerli bir telefon numarası girin.",
+      "emailInvalid": "Geçerli bir e-posta adresi girin.",
+      "urlInvalid": "Geçerli bir http(s) bağlantısı girin.",
+      "urlTooLong": "Bağlantı en fazla 2048 karakter olabilir.",
+      "whatsappInvalid": "Geçerli bir WhatsApp numarası veya bağlantısı girin.",
+      "usernameInvalid": "Geçerli bir kullanıcı adı girin."
     }
   },
 
