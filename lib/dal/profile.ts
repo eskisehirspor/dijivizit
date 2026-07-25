@@ -4,6 +4,7 @@ import { cache } from "react";
 
 import type { ProfileRow } from "@/lib/db/tables";
 import { createClient } from "@/lib/supabase/server";
+import type { BasicProfileInput } from "@/lib/validations/profile";
 
 import { requireUser } from "./auth";
 
@@ -42,3 +43,26 @@ export const getOwnProfile = cache(async (): Promise<OwnProfile | null> => {
 
   return data;
 });
+
+/**
+ * Updates only the basic identity fields. Avatar, links, skills, theme, locale,
+ * and publish state have their own slices and must not be written here.
+ */
+export async function updateOwnBasicProfile(input: BasicProfileInput): Promise<void> {
+  const user = await requireUser();
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      full_name: input.fullName,
+      title: input.title,
+      company: input.company,
+      about: input.about,
+    })
+    .eq("id", user.id);
+
+  if (error) {
+    throw new Error(`Failed to update profile: ${error.message}`);
+  }
+}

@@ -70,7 +70,7 @@ export async function QuickActions({
               <div
                 aria-disabled="true"
                 className={cn(
-                  "flex h-full flex-col gap-2 rounded-lg border border-border/60 p-4",
+                  "flex h-full flex-col gap-3 rounded-lg border border-border/60 p-6",
                   "cursor-not-allowed opacity-50",
                 )}
               >
@@ -80,7 +80,7 @@ export async function QuickActions({
               <Link
                 href={action.href}
                 className={cn(
-                  "flex h-full flex-col gap-2 rounded-lg border border-border/60 p-4",
+                  "flex h-full flex-col gap-3 rounded-lg border border-border/60 p-6",
                   "transition-colors hover:border-border hover:bg-muted/40",
                 )}
               >

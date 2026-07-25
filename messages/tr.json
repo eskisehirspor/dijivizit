@@ -107,6 +107,23 @@
     "visitWebsite": "Web sitesi",
     "saveContact": "Rehbere kaydet"
   },
+  "profile": {
+    "edit": {
+      "title": "Profili düzenle",
+      "subtitle": "Kartınızda görünen temel bilgileri güncelleyin.",
+      "saved": "Profil güncellendi."
+    },
+    "fields": {
+      "fullName": "Ad soyad",
+      "title": "Unvan",
+      "company": "Şirket",
+      "about": "Hakkımda",
+      "aboutCount": "{current} / {max}"
+    },
+    "errors": {
+      "saveFailed": "Profil kaydedilemedi. Lütfen tekrar deneyin."
+    }
+  },
   "validation": {
     "email": {
       "required": "E-posta gerekli.",
@@ -121,8 +138,18 @@
     "fullName": {
       "tooShort": "Ad soyad en az 2 karakter olmalı.",
       "tooLong": "Ad soyad en fazla 120 karakter olabilir."
+    },
+    "title": {
+      "tooLong": "Unvan en fazla 120 karakter olabilir."
+    },
+    "company": {
+      "tooLong": "Şirket en fazla 120 karakter olabilir."
+    },
+    "about": {
+      "tooLong": "Hakkımda en fazla 5000 karakter olabilir."
     }
   },
+
   "errors": {
     "genericTitle": "Bir şeyler ters gitti",
     "genericBody": "İşlem tamamlanamadı. Lütfen tekrar deneyin.",
