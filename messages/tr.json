@@ -78,13 +78,26 @@
     "title": "Panelim",
     "greeting": "Merhaba, {name}",
     "greetingAnonymous": "Merhaba",
+    "subtitle": "Kartınızı yönetin ve paylaşın.",
     "cardStatus": "Kart durumu",
     "published": "Yayında",
     "draft": "Taslak",
     "publicUrl": "Herkese açık bağlantı",
     "emptyTitle": "Kartınız henüz hazır değil",
     "emptyBody": "Bilgilerinizi ekleyerek dijital kartvizitinizi yayınlayın.",
-    "editCard": "Kartı düzenle"
+    "editCard": "Kartı düzenle",
+    "copyFailed": "Bağlantı kopyalanamadı. Lütfen tekrar deneyin.",
+    "actions": {
+      "title": "Hızlı işlemler",
+      "editProfile": "Profili düzenle",
+      "editProfileDescription": "Ad, unvan ve iletişim bilgilerinizi güncelleyin.",
+      "viewPublic": "Herkese açık profil",
+      "viewPublicDescription": "Kartınızın ziyaretçilere nasıl göründüğünü görün.",
+      "qrCode": "QR kod",
+      "qrCodeDescription": "Yakında — kartınız için QR kod oluşturun.",
+      "downloadVcard": "vCard indir",
+      "downloadVcardDescription": "Yakında — rehbere kaydedilebilir iletişim dosyası."
+    }
   },
   "card": {
     "notFoundTitle": "Kart bulunamadı",

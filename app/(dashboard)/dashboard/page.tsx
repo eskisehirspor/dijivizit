@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
+import { CopyUrlButton } from "@/components/dashboard/copy-url-button";
+import { QuickActions } from "@/components/dashboard/quick-actions";
 import { Badge } from "@/components/ui/badge";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { clientEnv } from "@/lib/env/client";
@@ -13,19 +15,18 @@ export async function generateMetadata() {
 export default async function DashboardPage() {
   const [t, profile] = await Promise.all([getTranslations(), getOwnProfile()]);
 
-  const publicUrl = profile
-    ? `${clientEnv.NEXT_PUBLIC_SITE_URL}${routes.publicCard(profile.public_id)}`
-    : null;
+  const publicPath = profile ? routes.publicCard(profile.public_id) : null;
+  const publicUrl = publicPath ? `${clientEnv.NEXT_PUBLIC_SITE_URL}${publicPath}` : null;
 
   return (
     <div className="flex animate-rise flex-col gap-12">
       <div className="flex flex-col gap-1.5">
-        <h1 className="text-2xl font-semibold">{t("dashboard.title")}</h1>
-        <p className="text-sm text-muted-foreground">
+        <h1 className="text-2xl font-semibold tracking-tight text-balance">
           {profile?.full_name
             ? t("dashboard.greeting", { name: profile.full_name })
             : t("dashboard.greetingAnonymous")}
-        </p>
+        </h1>
+        <p className="text-sm text-pretty text-muted-foreground">{t("dashboard.subtitle")}</p>
       </div>
 
       <section className="flex flex-col gap-5 rounded-lg border border-border/60 p-6">
@@ -36,15 +37,20 @@ export default async function DashboardPage() {
           </Badge>
         </div>
 
-        {publicUrl ? (
-          <div className="flex flex-col gap-1.5">
+        {publicUrl && publicPath ? (
+          <div className="flex flex-col gap-3">
             <p className="text-xs text-muted-foreground">{t("dashboard.publicUrl")}</p>
-            <p className="font-mono text-sm break-all">{publicUrl}</p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="font-mono text-sm break-all">{publicUrl}</p>
+              <CopyUrlButton url={publicUrl} />
+            </div>
           </div>
         ) : (
           <p className="text-sm text-pretty text-muted-foreground">{t("dashboard.emptyBody")}</p>
         )}
       </section>
+
+      <QuickActions editHref={routes.profileEdit} publicHref={publicPath} />
     </div>
   );
 }
