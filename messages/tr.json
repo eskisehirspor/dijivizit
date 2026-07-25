@@ -1,0 +1,118 @@
+{
+  "app": {
+    "name": "Dijivizit",
+    "tagline": "Temassız dijital kartvizit",
+    "description": "NFC ve QR ile çalışan premium dijital kartvizit. Kartınızı bir kez oluşturun, tek dokunuşla paylaşın."
+  },
+  "common": {
+    "loading": "Yükleniyor…",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "continue": "Devam et",
+    "back": "Geri",
+    "retry": "Tekrar dene",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı"
+  },
+  "nav": {
+    "login": "Giriş yap",
+    "register": "Kayıt ol",
+    "dashboard": "Panelim",
+    "settings": "Ayarlar",
+    "logout": "Çıkış yap"
+  },
+  "marketing": {
+    "heroTitle": "Kartvizitiniz, tek dokunuş uzağınızda",
+    "heroSubtitle": "Profesyonel kimliğinizi bir kez oluşturun; NFC kartınız veya QR kodunuzla saniyeler içinde paylaşın.",
+    "ctaPrimary": "Ücretsiz başlayın",
+    "ctaSecondary": "Giriş yap",
+    "preview": {
+      "label": "Örnek Dijivizit kartı",
+      "initials": "GS",
+      "name": "Görkem Sönmez",
+      "role": "Ürün Tasarımcısı",
+      "company": "Dijivizit",
+      "url": "dijivizit.com/p/A8fK29LmQx7"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Hesabınıza giriş yapın",
+      "subtitle": "Kartınızı yönetmek için giriş yapın.",
+      "submit": "Giriş yap",
+      "forgotPassword": "Parolamı unuttum",
+      "noAccount": "Hesabınız yok mu?",
+      "registerLink": "Kayıt olun"
+    },
+    "register": {
+      "title": "Dijivizit hesabı oluşturun",
+      "subtitle": "Dijital kartvizitinizi dakikalar içinde hazırlayın.",
+      "submit": "Hesap oluştur",
+      "hasAccount": "Zaten hesabınız var mı?",
+      "loginLink": "Giriş yapın",
+      "checkEmailTitle": "E-postanızı kontrol edin",
+      "checkEmailBody": "Hesabınızı doğrulamak için size bir bağlantı gönderdik."
+    },
+    "fields": {
+      "fullName": "Ad soyad",
+      "email": "E-posta",
+      "password": "Parola",
+      "fullNamePlaceholder": "Görkem Sönmez",
+      "emailPlaceholder": "ornek@sirket.com"
+    },
+    "google": {
+      "continue": "Google ile devam et"
+    },
+    "divider": "veya",
+    "errors": {
+      "invalidCredentials": "E-posta veya parola hatalı.",
+      "emailInUse": "Bu e-posta adresi zaten kayıtlı.",
+      "emailNotConfirmed": "Lütfen önce e-posta adresinizi doğrulayın.",
+      "rateLimited": "Çok fazla deneme yapıldı. Lütfen biraz sonra tekrar deneyin.",
+      "oauthFailed": "Google ile giriş tamamlanamadı. Lütfen tekrar deneyin.",
+      "unknown": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin."
+    }
+  },
+  "dashboard": {
+    "title": "Panelim",
+    "greeting": "Merhaba, {name}",
+    "greetingAnonymous": "Merhaba",
+    "cardStatus": "Kart durumu",
+    "published": "Yayında",
+    "draft": "Taslak",
+    "publicUrl": "Herkese açık bağlantı",
+    "emptyTitle": "Kartınız henüz hazır değil",
+    "emptyBody": "Bilgilerinizi ekleyerek dijital kartvizitinizi yayınlayın.",
+    "editCard": "Kartı düzenle"
+  },
+  "card": {
+    "notFoundTitle": "Kart bulunamadı",
+    "notFoundBody": "Bu bağlantı geçersiz olabilir veya kart yayından kaldırılmış olabilir.",
+    "call": "Ara",
+    "sendEmail": "E-posta gönder",
+    "visitWebsite": "Web sitesi",
+    "saveContact": "Rehbere kaydet"
+  },
+  "validation": {
+    "email": {
+      "invalid": "Geçerli bir e-posta adresi girin.",
+      "tooLong": "E-posta adresi çok uzun."
+    },
+    "password": {
+      "required": "Parola gerekli.",
+      "tooShort": "Parola en az 8 karakter olmalı.",
+      "tooLong": "Parola en fazla 72 karakter olabilir."
+    },
+    "fullName": {
+      "tooShort": "Ad soyad en az 2 karakter olmalı.",
+      "tooLong": "Ad soyad en fazla 120 karakter olabilir."
+    }
+  },
+  "errors": {
+    "genericTitle": "Bir şeyler ters gitti",
+    "genericBody": "İşlem tamamlanamadı. Lütfen tekrar deneyin.",
+    "notFoundTitle": "Sayfa bulunamadı",
+    "notFoundBody": "Aradığınız sayfa taşınmış veya hiç var olmamış olabilir.",
+    "backHome": "Ana sayfaya dön"
+  }
+}

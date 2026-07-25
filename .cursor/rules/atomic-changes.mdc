@@ -1,0 +1,35 @@
+---
+description: One feature per change; stop for approval before the next
+alwaysApply: true
+---
+
+# Atomic Changes
+
+Ship one feature per change, then stop and wait for approval. Every change must be reviewable in a
+single sitting.
+
+## What counts as one feature
+
+A single user-visible capability, or a single infrastructure concern. A feature is a **vertical
+slice**: the migration, DAL function, validation schema, server action, and UI that one capability
+needs all belong to the same change. Splitting a slice across changes leaves the repo broken and is
+worse, not better.
+
+Two capabilities that merely happen to touch the same file are still two changes.
+
+```
+✅ One change: "Avatar upload" — storage policy + upload action + AvatarField + its test
+❌ One change: "Edit profile, avatar upload, and QR code"
+❌ One change: "Edit profile + rename the DAL helpers while I'm here"
+```
+
+## Rules
+
+- **No drive-by work.** No unrelated refactors, renames, dependency bumps, or cleanup. If you spot
+  an unrelated problem, report it in the summary and leave the code alone.
+- **Verify before stopping.** `npm run typecheck`, `npm run lint`, `npm run format:check`,
+  `npm test`, and `npm run build` all pass.
+- **Stop and report.** State what changed, anything deliberately left out, and what the next
+  feature would be. Do not begin the next feature without explicit approval.
+- **Ask when scope is ambiguous.** If a request seems to span several features, propose the
+  breakdown and confirm the first slice before writing code.

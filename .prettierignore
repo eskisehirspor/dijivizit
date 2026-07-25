@@ -1,0 +1,13 @@
+.next/
+node_modules/
+package-lock.json
+next-env.d.ts
+supabase/.temp/
+
+# Prettier has no parser for .mdc.
+.cursor/rules/
+
+# Generated output — reformatting these only creates churn.
+lib/db/database.types.ts
+AGENTS.md
+CLAUDE.md
