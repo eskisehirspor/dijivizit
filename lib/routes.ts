@@ -7,6 +7,8 @@ export const routes = {
   settings: "/settings",
   profileEdit: "/profile/edit",
   profileLinks: "/profile/links",
+  profileSkills: "/profile/skills",
+  profileAvatar: "/profile/avatar",
   authCallback: "/auth/callback",
   authConfirm: "/auth/confirm",
   publicCard: (publicId: string) => `/p/${publicId}`,

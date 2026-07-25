@@ -1,0 +1,165 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { type ChangeEvent, useRef, useState, useTransition } from "react";
+import { toast } from "sonner";
+
+import { removeAvatarAction, uploadAvatarAction } from "@/app/actions/profile-avatar";
+import { AvatarPreview } from "@/components/profile/avatar-preview";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { AVATAR_MIME_TYPES } from "@/lib/profile/avatar";
+
+export function AvatarManager({ avatarUrl, alt }: { avatarUrl: string | null; alt: string }) {
+  const t = useTranslations();
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [previewUrl, setPreviewUrl] = useState(avatarUrl);
+  const [propSnapshot, setPropSnapshot] = useState(avatarUrl);
+  const [removeOpen, setRemoveOpen] = useState(false);
+  const [isUploading, startUpload] = useTransition();
+  const [isRemoving, startRemove] = useTransition();
+
+  // When the server provides a URL (full page load or a completed refresh), adopt it.
+  // Do not clear local preview when the prop is temporarily null during refresh.
+  if (avatarUrl !== propSnapshot) {
+    setPropSnapshot(avatarUrl);
+    if (avatarUrl) {
+      setPreviewUrl(avatarUrl);
+    }
+  }
+
+  const busy = isUploading || isRemoving;
+  const accept = AVATAR_MIME_TYPES.join(",");
+
+  function openPicker() {
+    inputRef.current?.click();
+  }
+
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+
+    if (!file) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.set("avatar", file);
+    const hadAvatar = Boolean(previewUrl);
+
+    startUpload(async () => {
+      const result = await uploadAvatarAction(formData);
+      if (!result.ok) {
+        toast.error(t(result.code));
+        return;
+      }
+
+      const nextUrl = result.data.avatarUrl;
+      if (nextUrl) {
+        setPreviewUrl(nextUrl);
+      }
+      router.refresh();
+      toast.success(hadAvatar ? t("profile.avatar.replaced") : t("profile.avatar.uploaded"));
+    });
+  }
+
+  function handleRemove() {
+    startRemove(async () => {
+      const result = await removeAvatarAction();
+      if (!result.ok) {
+        toast.error(t(result.code));
+        return;
+      }
+
+      setPreviewUrl(null);
+      setPropSnapshot(null);
+      setRemoveOpen(false);
+      router.refresh();
+      toast.success(t("profile.avatar.removed"));
+    });
+  }
+
+  return (
+    <div className="flex flex-col gap-6 rounded-lg border border-border/60 p-6">
+      <div className="flex flex-col gap-1">
+        <h2 className="text-sm font-medium">{t("profile.avatar.previewTitle")}</h2>
+        <p className="text-xs text-pretty text-muted-foreground">
+          {t("profile.avatar.previewSubtitle")}
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+        <AvatarPreview src={previewUrl} alt={alt} />
+
+        <div className="flex flex-col gap-3">
+          <input
+            ref={inputRef}
+            type="file"
+            accept={accept}
+            className="sr-only"
+            disabled={busy}
+            onChange={handleFileChange}
+          />
+
+          <Button type="button" className="h-10 w-fit" disabled={busy} onClick={openPicker}>
+            {isUploading
+              ? t("common.loading")
+              : previewUrl
+                ? t("profile.avatar.replace")
+                : t("profile.avatar.upload")}
+          </Button>
+
+          {previewUrl ? (
+            <Button
+              type="button"
+              variant="ghost"
+              className="h-10 w-fit"
+              disabled={busy}
+              onClick={() => setRemoveOpen(true)}
+            >
+              {t("profile.avatar.remove")}
+            </Button>
+          ) : null}
+
+          <p className="text-xs text-pretty text-muted-foreground">{t("profile.avatar.hint")}</p>
+        </div>
+      </div>
+
+      <Dialog open={removeOpen} onOpenChange={setRemoveOpen}>
+        <DialogContent showCloseButton={false}>
+          <DialogHeader>
+            <DialogTitle>{t("profile.avatar.removeTitle")}</DialogTitle>
+            <DialogDescription>{t("profile.avatar.removeBody")}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={isRemoving}
+              onClick={() => setRemoveOpen(false)}
+            >
+              {t("common.cancel")}
+            </Button>
+            <Button
+              type="button"
+              variant="destructive"
+              disabled={isRemoving}
+              onClick={handleRemove}
+            >
+              {isRemoving ? t("common.loading") : t("profile.avatar.removeConfirm")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}

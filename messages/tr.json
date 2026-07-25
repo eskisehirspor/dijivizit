@@ -91,8 +91,12 @@
       "title": "Hızlı işlemler",
       "editProfile": "Profili düzenle",
       "editProfileDescription": "Ad, unvan ve hakkınızda metnini güncelleyin.",
+      "manageAvatar": "Profil fotoğrafı",
+      "manageAvatarDescription": "Kartınızda görünecek fotoğrafı yükleyin veya değiştirin.",
       "manageLinks": "Bağlantılar",
       "manageLinksDescription": "Telefon, e-posta ve sosyal profillerinizi yönetin.",
+      "manageSkills": "Uzmanlık ve yetenekler",
+      "manageSkillsDescription": "Uzmanlık alanlarınızı ve yeteneklerinizi yönetin.",
       "viewPublic": "Herkese açık profil",
       "viewPublicDescription": "Kartınızın ziyaretçilere nasıl göründüğünü görün.",
       "qrCode": "QR kod",
@@ -114,7 +118,9 @@
       "title": "Profili düzenle",
       "subtitle": "Kartınızda görünen temel bilgileri güncelleyin.",
       "saved": "Profil güncellendi.",
-      "manageLinks": "İletişim bağlantılarını yönet"
+      "manageAvatar": "Profil fotoğrafını yönet",
+      "manageLinks": "İletişim bağlantılarını yönet",
+      "manageSkills": "Uzmanlık ve yetenekleri yönet"
     },
     "fields": {
       "fullName": "Ad soyad",
@@ -181,6 +187,69 @@
         "reorderFailed": "Sıra güncellenemedi. Lütfen tekrar deneyin.",
         "limitReached": "En fazla 20 bağlantı ekleyebilirsiniz."
       }
+    },
+    "skills": {
+      "title": "Uzmanlık ve yetenekler",
+      "subtitle": "Kartınızda görünecek uzmanlık alanlarını ve yetenekleri yönetin.",
+      "backToEdit": "Temel bilgilere dön",
+      "listTitle": "Mevcut öğeler",
+      "counter": "{current} / {max} öğe",
+      "empty": "Henüz bir uzmanlık alanı veya yetenek eklemediniz.",
+      "addTitle": "Öğe ekle",
+      "addSubtitle": "Bir uzmanlık alanı veya yetenek ekleyin.",
+      "add": "Ekle",
+      "created": "Öğe eklendi.",
+      "updated": "Öğe güncellendi.",
+      "deleted": "Öğe silindi.",
+      "moveUp": "Yukarı taşı",
+      "moveDown": "Aşağı taşı",
+      "edit": "Düzenle",
+      "delete": "Sil",
+      "deleteTitle": "Öğeyi sil?",
+      "deleteBody": "Bu öğe kalıcı olarak kaldırılacak. Bu işlemi geri alamazsınız.",
+      "deleteConfirm": "Sil",
+      "fields": {
+        "type": "Tür",
+        "name": "Ad"
+      },
+      "types": {
+        "expertise": "Uzmanlık Alanı",
+        "skill": "Yetenek"
+      },
+      "placeholders": {
+        "name": "Örn. Ürün Yönetimi"
+      },
+      "errors": {
+        "saveFailed": "Öğe kaydedilemedi. Lütfen tekrar deneyin.",
+        "deleteFailed": "Öğe silinemedi. Lütfen tekrar deneyin.",
+        "reorderFailed": "Sıra güncellenemedi. Lütfen tekrar deneyin.",
+        "limitReached": "En fazla 20 öğe ekleyebilirsiniz.",
+        "duplicate": "Bu tür için aynı ad zaten eklenmiş."
+      }
+    },
+    "avatar": {
+      "title": "Profil fotoğrafı",
+      "subtitle": "Kartınızda görünecek fotoğrafı yükleyin veya kaldırın.",
+      "backToEdit": "Temel bilgilere dön",
+      "previewTitle": "Önizleme",
+      "previewSubtitle": "Fotoğraf kare bir alanda, kırpılarak gösterilir.",
+      "upload": "Fotoğraf yükle",
+      "replace": "Değiştir",
+      "remove": "Kaldır",
+      "removeTitle": "Fotoğrafı kaldır?",
+      "removeBody": "Profil fotoğrafınız kalıcı olarak kaldırılacak. Bu işlemi geri alamazsınız.",
+      "removeConfirm": "Kaldır",
+      "uploaded": "Fotoğraf yüklendi.",
+      "replaced": "Fotoğraf güncellendi.",
+      "removed": "Fotoğraf kaldırıldı.",
+      "hint": "JPEG, PNG veya WebP. En fazla 2 MB.",
+      "errors": {
+        "typeInvalid": "Yalnızca JPEG, PNG veya WebP dosyaları yükleyebilirsiniz.",
+        "tooLarge": "Dosya en fazla 2 MB olabilir.",
+        "empty": "Geçerli bir dosya seçin.",
+        "uploadFailed": "Fotoğraf yüklenemedi. Lütfen tekrar deneyin.",
+        "removeFailed": "Fotoğraf kaldırılamadı. Lütfen tekrar deneyin."
+      }
     }
   },
   "validation": {
@@ -218,6 +287,13 @@
       "urlTooLong": "Bağlantı en fazla 2048 karakter olabilir.",
       "whatsappInvalid": "Geçerli bir WhatsApp numarası veya bağlantısı girin.",
       "usernameInvalid": "Geçerli bir kullanıcı adı girin."
+    },
+    "skill": {
+      "nameRequired": "Ad gerekli.",
+      "nameTooLong": "Ad en fazla 60 karakter olabilir.",
+      "typeInvalid": "Geçersiz tür.",
+      "idInvalid": "Geçersiz öğe.",
+      "duplicate": "Bu tür için aynı ad zaten eklenmiş."
     }
   },
 

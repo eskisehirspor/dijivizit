@@ -1,4 +1,4 @@
-import { Contact, Eye, Link2, Pencil, QrCode } from "lucide-react";
+import { Contact, Eye, Link2, Pencil, QrCode, Sparkles, UserRound } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
@@ -14,11 +14,15 @@ type QuickAction = {
 
 export async function QuickActions({
   editHref,
+  avatarHref,
   linksHref,
+  skillsHref,
   publicHref,
 }: {
   editHref: string;
+  avatarHref: string;
   linksHref: string;
+  skillsHref: string;
   publicHref: string | null;
 }) {
   const t = await getTranslations("dashboard.actions");
@@ -32,11 +36,25 @@ export async function QuickActions({
       href: editHref,
     },
     {
+      key: "avatar",
+      title: t("manageAvatar"),
+      description: t("manageAvatarDescription"),
+      icon: <UserRound aria-hidden="true" className="size-4" />,
+      href: avatarHref,
+    },
+    {
       key: "links",
       title: t("manageLinks"),
       description: t("manageLinksDescription"),
       icon: <Link2 aria-hidden="true" className="size-4" />,
       href: linksHref,
+    },
+    {
+      key: "skills",
+      title: t("manageSkills"),
+      description: t("manageSkillsDescription"),
+      icon: <Sparkles aria-hidden="true" className="size-4" />,
+      href: skillsHref,
     },
     publicHref
       ? {

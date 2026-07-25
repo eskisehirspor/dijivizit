@@ -52,7 +52,9 @@ export default async function DashboardPage() {
 
       <QuickActions
         editHref={routes.profileEdit}
+        avatarHref={routes.profileAvatar}
         linksHref={routes.profileLinks}
+        skillsHref={routes.profileSkills}
         publicHref={publicPath}
       />
     </div>

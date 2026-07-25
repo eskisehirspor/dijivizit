@@ -23,14 +23,26 @@ export default async function ProfileEditPage() {
       <div className="flex flex-col gap-1.5">
         <h1 className="text-2xl font-semibold tracking-tight text-balance">{t("title")}</h1>
         <p className="text-sm text-pretty text-muted-foreground">{t("subtitle")}</p>
-        <p className="pt-3">
+        <div className="flex flex-col gap-2 pt-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
+          <Link
+            href={routes.profileAvatar}
+            className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+          >
+            {t("manageAvatar")}
+          </Link>
           <Link
             href={routes.profileLinks}
             className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
           >
             {t("manageLinks")}
           </Link>
-        </p>
+          <Link
+            href={routes.profileSkills}
+            className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+          >
+            {t("manageSkills")}
+          </Link>
+        </div>
       </div>
 
       <BasicInfoForm
