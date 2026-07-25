@@ -70,6 +70,7 @@
       "emailNotConfirmed": "Lütfen önce e-posta adresinizi doğrulayın.",
       "rateLimited": "Çok fazla deneme yapıldı. Lütfen biraz sonra tekrar deneyin.",
       "oauthFailed": "Google ile giriş tamamlanamadı. Lütfen tekrar deneyin.",
+      "confirmFailed": "Doğrulama bağlantısı geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapmayı deneyin.",
       "unknown": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin."
     }
   },
@@ -95,6 +96,7 @@
   },
   "validation": {
     "email": {
+      "required": "E-posta gerekli.",
       "invalid": "Geçerli bir e-posta adresi girin.",
       "tooLong": "E-posta adresi çok uzun."
     },

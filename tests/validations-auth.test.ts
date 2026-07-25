@@ -31,6 +31,15 @@ describe("loginSchema", () => {
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.message).toBe("validation.email.invalid");
   });
+
+  it("reports empty email and password as required field errors", () => {
+    const result = loginSchema.safeParse({ email: "", password: "" });
+    expect(result.success).toBe(false);
+
+    const messages = result.error?.issues.map((issue) => issue.message) ?? [];
+    expect(messages).toContain("validation.email.required");
+    expect(messages).toContain("validation.password.required");
+  });
 });
 
 describe("registerSchema", () => {

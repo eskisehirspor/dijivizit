@@ -3,9 +3,15 @@ import { z } from "zod";
 // Messages are i18n keys, not text. They are resolved against messages/tr.json
 // at render time so validation logic stays locale-agnostic.
 
+// Length and emptiness are checked before the format, so a blank field reports
+// that it is required rather than that it is malformed. z.email() alone cannot
+// draw that distinction: "" fails it as an invalid address.
 export const emailSchema = z
-  .email({ error: "validation.email.invalid" })
-  .max(254, { error: "validation.email.tooLong" });
+  .string({ error: "validation.email.required" })
+  .trim()
+  .min(1, { error: "validation.email.required" })
+  .max(254, { error: "validation.email.tooLong" })
+  .pipe(z.email({ error: "validation.email.invalid" }));
 
 export const passwordSchema = z
   .string()

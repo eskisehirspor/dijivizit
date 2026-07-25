@@ -18,3 +18,23 @@ const ERROR_KEY_BY_CODE: Record<string, string> = {
 export function authErrorKey(error: AuthError): string {
   return (error.code && ERROR_KEY_BY_CODE[error.code]) ?? "auth.errors.unknown";
 }
+
+/**
+ * Maps the `?error=` tokens our own route handlers redirect with.
+ *
+ * The token stays opaque and is resolved against this allowlist rather than
+ * being a message key itself, so a crafted URL cannot render arbitrary copy on
+ * the login page.
+ */
+const ERROR_KEY_BY_PARAM: Record<string, string> = {
+  oauth: "auth.errors.oauthFailed",
+  confirm: "auth.errors.confirmFailed",
+};
+
+export function pageErrorKey(param: string | null | undefined): string | null {
+  if (!param) {
+    return null;
+  }
+
+  return ERROR_KEY_BY_PARAM[param] ?? "auth.errors.unknown";
+}

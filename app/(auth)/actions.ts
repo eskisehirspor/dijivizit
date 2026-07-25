@@ -36,7 +36,9 @@ export async function loginAction(
   });
 
   if (!parsed.success) {
-    return failure("auth.errors.invalidCredentials", fieldErrorsOf(parsed.error));
+    // A malformed submission is not a rejected credential, so it must not claim
+    // to be one. The field errors carry the detail the user can act on.
+    return failure("auth.errors.unknown", fieldErrorsOf(parsed.error));
   }
 
   const supabase = await createClient();

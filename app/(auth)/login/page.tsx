@@ -5,6 +5,7 @@ import { AuthDivider } from "@/components/auth/auth-divider";
 import { GoogleButton } from "@/components/auth/google-button";
 import { LoginForm } from "@/components/auth/login-form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { pageErrorKey } from "@/lib/auth/errors";
 import { routes } from "@/lib/routes";
 
 export async function generateMetadata() {
@@ -20,6 +21,8 @@ export default async function LoginPage({
   const { next, error } = await searchParams;
   const t = await getTranslations();
 
+  const errorKey = pageErrorKey(error);
+
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
@@ -31,9 +34,9 @@ export default async function LoginPage({
         </p>
       </div>
 
-      {error ? (
+      {errorKey ? (
         <Alert variant="destructive">
-          <AlertDescription>{t("auth.errors.oauthFailed")}</AlertDescription>
+          <AlertDescription>{t(errorKey)}</AlertDescription>
         </Alert>
       ) : null}
 

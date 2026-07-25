@@ -24,7 +24,7 @@ export function LoginForm({ next }: { next?: string }) {
     <form action={formAction} className="grid gap-5">
       {next ? <input type="hidden" name="next" value={next} /> : null}
 
-      {failed ? (
+      {failed && !failed.fieldErrors ? (
         <Alert variant="destructive">
           <AlertDescription>{t(failed.code)}</AlertDescription>
         </Alert>
