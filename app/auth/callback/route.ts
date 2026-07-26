@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { syncOAuthProfile } from "@/lib/auth/sync-oauth-profile";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { safeRedirectPath } from "@/lib/utils/safe-redirect";
@@ -23,6 +24,19 @@ export async function GET(request: NextRequest) {
 
   if (error) {
     return NextResponse.redirect(failureUrl);
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    // Best-effort: never block sign-in if Google avatar import fails.
+    try {
+      await syncOAuthProfile(user);
+    } catch {
+      // Profile trigger already created the row; enrichment is optional.
+    }
   }
 
   return NextResponse.redirect(new URL(next, origin));

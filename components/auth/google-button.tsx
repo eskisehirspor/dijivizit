@@ -30,13 +30,13 @@ function GoogleMark() {
 }
 
 function SubmitButton() {
-  const t = useTranslations("auth.google");
+  const t = useTranslations();
   const { pending } = useFormStatus();
 
   return (
     <Button type="submit" variant="outline" className="h-10 w-full" disabled={pending}>
-      <GoogleMark />
-      {t("continue")}
+      {pending ? null : <GoogleMark />}
+      {pending ? t("common.loading") : t("auth.google.continue")}
     </Button>
   );
 }
