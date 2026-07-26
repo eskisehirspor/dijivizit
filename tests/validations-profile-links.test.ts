@@ -10,7 +10,14 @@ describe("normalizeLinkValue", () => {
   it("accepts a phone number", () => {
     expect(normalizeLinkValue("phone", "+90 532 000 00 00")).toEqual({
       ok: true,
-      value: "+90 532 000 00 00",
+      value: "+905320000000",
+    });
+  });
+
+  it("accepts phone numbers pasted with tel: or unicode spaces", () => {
+    expect(normalizeLinkValue("phone", "tel:+90\u00a0532\u00a0000\u00a000\u00a000")).toEqual({
+      ok: true,
+      value: "+905320000000",
     });
   });
 

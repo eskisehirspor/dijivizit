@@ -5,12 +5,12 @@ import { routes } from "@/lib/routes";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-full flex-col items-center justify-center px-6 py-20">
-      <div className="w-full max-w-sm animate-rise">
-        <Link href={routes.home} className="mb-14 inline-block transition-opacity hover:opacity-70">
+    <div className="flex min-h-full flex-col items-center px-6 pt-16 pb-20 sm:pt-20 sm:pb-24">
+      <div className="flex w-full max-w-sm animate-rise flex-col items-center">
+        <Link href={routes.home} className="mb-14 transition-opacity hover:opacity-70 sm:mb-16">
           <Wordmark />
         </Link>
-        {children}
+        <div className="w-full">{children}</div>
       </div>
     </div>
   );

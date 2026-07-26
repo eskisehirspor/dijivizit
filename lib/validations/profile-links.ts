@@ -16,6 +16,17 @@ function digitsOnly(value: string): string {
   return value.replace(/\D/g, "");
 }
 
+/** Strip tel: prefixes, unicode spaces/dashes so pasted numbers validate reliably. */
+export function sanitizePhoneInput(raw: string): string {
+  return raw
+    .trim()
+    .replace(/^tel:/i, "")
+    .replace(/[\u00A0\u202F\u2007\u2060]/g, " ")
+    .replace(/[－−–—]/g, "-")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 /**
  * Pulls a bare username out of a stored profile URL (or a raw username / @handle).
  * Used so the editor can show only the editable segment.
@@ -99,10 +110,19 @@ export function normalizeLinkValue(
 
   switch (platform) {
     case "phone": {
-      if (!phonePattern.test(trimmed)) {
+      const cleaned = sanitizePhoneInput(trimmed);
+      if (!phonePattern.test(cleaned)) {
         return { ok: false, message: "validation.link.phoneInvalid" };
       }
-      return { ok: true, value: trimmed };
+
+      const hasPlus = cleaned.startsWith("+");
+      const digits = digitsOnly(cleaned);
+      if (digits.length < 8 || digits.length > 15) {
+        return { ok: false, message: "validation.link.phoneInvalid" };
+      }
+
+      // Canonical storage: keep international +, drop decorative formatting.
+      return { ok: true, value: hasPlus ? `+${digits}` : digits };
     }
     case "email": {
       if (!emailPattern.test(trimmed) || trimmed.length > 254) {

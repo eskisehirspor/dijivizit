@@ -16,3 +16,15 @@ export type ProfileLinkUpdate = TablesUpdate<"profile_links">;
 export type ProfileSkillRow = Tables<"profile_skills">;
 export type ProfileSkillInsert = TablesInsert<"profile_skills">;
 export type ProfileSkillUpdate = TablesUpdate<"profile_skills">;
+
+export type BankAccountRow = Tables<"bank_accounts">;
+export type BankAccountInsert = TablesInsert<"bank_accounts">;
+export type BankAccountUpdate = TablesUpdate<"bank_accounts">;
+
+export type BillingInfoRow = Tables<"billing_infos">;
+export type BillingInfoInsert = TablesInsert<"billing_infos">;
+export type BillingInfoUpdate = TablesUpdate<"billing_infos">;
+
+export type DocumentRow = Tables<"documents">;
+export type DocumentInsert = TablesInsert<"documents">;
+export type DocumentUpdate = TablesUpdate<"documents">;

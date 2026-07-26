@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
-import { updateOwnBasicProfile } from "@/lib/dal/profile";
+import { getOwnProfile, updateOwnBasicProfile } from "@/lib/dal/profile";
 import { routes } from "@/lib/routes";
 import { basicProfileSchema } from "@/lib/validations/profile";
 
@@ -32,11 +32,14 @@ export async function updateBasicProfileAction(
     title: formData.get("title"),
     company: formData.get("company"),
     about: formData.get("about"),
+    address: formData.get("address"),
   });
 
   if (!parsed.success) {
     return failure("profile.errors.saveFailed", fieldErrorsOf(parsed.error));
   }
+
+  const profile = await getOwnProfile();
 
   try {
     await updateOwnBasicProfile(parsed.data);
@@ -46,6 +49,11 @@ export async function updateBasicProfileAction(
 
   revalidatePath(routes.dashboard);
   revalidatePath(routes.profileEdit);
+  revalidatePath(routes.share);
+  if (profile?.public_id) {
+    revalidatePath(routes.publicCard(profile.public_id));
+    revalidatePath(routes.publicVcard(profile.public_id));
+  }
 
   return success();
 }

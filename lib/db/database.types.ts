@@ -39,6 +39,108 @@ export type Database = {
   }
   public: {
     Tables: {
+      bank_accounts: {
+        Row: {
+          account_holder: string
+          bank_name: string
+          created_at: string
+          iban: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_holder: string
+          bank_name: string
+          created_at?: string
+          iban: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_holder?: string
+          bank_name?: string
+          created_at?: string
+          iban?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      billing_infos: {
+        Row: {
+          company_address: string
+          company_title: string
+          created_at: string
+          id: string
+          tax_number: string
+          tax_office: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          company_address: string
+          company_title: string
+          created_at?: string
+          id?: string
+          tax_number: string
+          tax_office: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          company_address?: string
+          company_title?: string
+          created_at?: string
+          id?: string
+          tax_number?: string
+          tax_office?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      documents: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_size: number
+          id: string
+          mime_type: string
+          storage_path: string
+          title: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_size: number
+          id?: string
+          mime_type: string
+          storage_path: string
+          title: string
+          type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_size?: number
+          id?: string
+          mime_type?: string
+          storage_path?: string
+          title?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profile_links: {
         Row: {
           created_at: string
@@ -124,6 +226,7 @@ export type Database = {
       profiles: {
         Row: {
           about: string | null
+          address: string | null
           avatar_path: string | null
           company: string | null
           created_at: string
@@ -138,6 +241,7 @@ export type Database = {
         }
         Insert: {
           about?: string | null
+          address?: string | null
           avatar_path?: string | null
           company?: string | null
           created_at?: string
@@ -152,6 +256,7 @@ export type Database = {
         }
         Update: {
           about?: string | null
+          address?: string | null
           avatar_path?: string | null
           company?: string | null
           created_at?: string

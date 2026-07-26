@@ -1,4 +1,14 @@
-import { Contact, Eye, Link2, Pencil, QrCode, Sparkles, UserRound } from "lucide-react";
+import {
+  Building2,
+  Eye,
+  FileText,
+  Link2,
+  Pencil,
+  Receipt,
+  Share2,
+  Sparkles,
+  UserRound,
+} from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
@@ -17,12 +27,20 @@ export async function QuickActions({
   avatarHref,
   linksHref,
   skillsHref,
+  bankHref,
+  billingHref,
+  cvHref,
+  shareHref,
   publicHref,
 }: {
   editHref: string;
   avatarHref: string;
   linksHref: string;
   skillsHref: string;
+  bankHref: string;
+  billingHref: string;
+  cvHref: string;
+  shareHref: string;
   publicHref: string | null;
 }) {
   const t = await getTranslations("dashboard.actions");
@@ -56,6 +74,34 @@ export async function QuickActions({
       icon: <Sparkles aria-hidden="true" className="size-4" />,
       href: skillsHref,
     },
+    {
+      key: "bank",
+      title: t("manageBank"),
+      description: t("manageBankDescription"),
+      icon: <Building2 aria-hidden="true" className="size-4" />,
+      href: bankHref,
+    },
+    {
+      key: "billing",
+      title: t("manageBilling"),
+      description: t("manageBillingDescription"),
+      icon: <Receipt aria-hidden="true" className="size-4" />,
+      href: billingHref,
+    },
+    {
+      key: "cv",
+      title: t("manageCv"),
+      description: t("manageCvDescription"),
+      icon: <FileText aria-hidden="true" className="size-4" />,
+      href: cvHref,
+    },
+    {
+      key: "share",
+      title: t("share"),
+      description: t("shareDescription"),
+      icon: <Share2 aria-hidden="true" className="size-4" />,
+      href: shareHref,
+    },
     publicHref
       ? {
           key: "view",
@@ -71,20 +117,6 @@ export async function QuickActions({
           icon: <Eye aria-hidden="true" className="size-4" />,
           disabled: true,
         },
-    {
-      key: "qr",
-      title: t("qrCode"),
-      description: t("qrCodeDescription"),
-      icon: <QrCode aria-hidden="true" className="size-4" />,
-      disabled: true,
-    },
-    {
-      key: "vcard",
-      title: t("downloadVcard"),
-      description: t("downloadVcardDescription"),
-      icon: <Contact aria-hidden="true" className="size-4" />,
-      disabled: true,
-    },
   ];
 
   return (

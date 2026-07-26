@@ -30,6 +30,11 @@ export function isMvpLinkPlatform(value: string): value is MvpLinkPlatform {
   return (MVP_LINK_PLATFORMS as readonly string[]).includes(value);
 }
 
+/** Platforms that have a translated public-card label (links + profile address). */
+export function hasContactPlatformLabel(platform: string): boolean {
+  return isMvpLinkPlatform(platform) || platform === "address";
+}
+
 export function isUsernamePlatform(value: string): value is UsernamePlatform {
   return value in USERNAME_PLATFORM_PREFIXES;
 }

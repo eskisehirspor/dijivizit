@@ -24,8 +24,8 @@
   "marketing": {
     "heroTitle": "Kartvizitiniz, tek dokunuş uzağınızda",
     "heroSubtitle": "Profesyonel kimliğinizi bir kez oluşturun; NFC kartınız veya QR kodunuzla saniyeler içinde paylaşın.",
-    "ctaPrimary": "Ücretsiz başlayın",
-    "ctaSecondary": "Giriş yap",
+    "ctaPrimary": "Ücretsiz Başlayın",
+    "ctaSecondary": "Giriş Yap",
     "preview": {
       "label": "Örnek Dijivizit kartı",
       "initials": "GS",
@@ -33,6 +33,11 @@
       "role": "Ürün Tasarımcısı",
       "company": "Dijivizit",
       "url": "dijivizit.com/p/A8fK29LmQx7"
+    },
+    "metalCards": {
+      "label": "Dijivizit premium NFC kartvizitleri — mat siyah metal, fırçalı çelik, fırçalı altın, ceviz ve bambu",
+      "company": "Firma Logosu",
+      "name": "İsim Soyisim"
     }
   },
   "auth": {
@@ -83,10 +88,25 @@
     "published": "Yayında",
     "draft": "Taslak",
     "publicUrl": "Herkese açık bağlantı",
+    "openPublic": "Profili aç",
     "emptyTitle": "Kartınız henüz hazır değil",
     "emptyBody": "Bilgilerinizi ekleyerek dijital kartvizitinizi yayınlayın.",
     "editCard": "Kartı düzenle",
     "copyFailed": "Bağlantı kopyalanamadı. Lütfen tekrar deneyin.",
+    "publish": {
+      "label": "Herkese açık profil",
+      "descriptionDraft": "Yayınlandığında bağlantınız ziyaretçilere açılır.",
+      "descriptionPublished": "Profiliniz şu anda herkese açık.",
+      "publishedToast": "Profil yayınlandı.",
+      "unpublishedToast": "Profil yayından kaldırıldı.",
+      "unpublishTitle": "Yayından kaldırılsın mı?",
+      "unpublishBody": "Bağlantınız çalışmaya devam eder, ancak ziyaretçiler profili göremez.",
+      "unpublishConfirm": "Yayından kaldır",
+      "urlDraftHint": "Bağlantıyı şimdi kopyalayabilirsiniz. Yayınlanana kadar ziyaretçiler 404 görür.",
+      "errors": {
+        "saveFailed": "Yayın durumu güncellenemedi. Lütfen tekrar deneyin."
+      }
+    },
     "actions": {
       "title": "Hızlı işlemler",
       "editProfile": "Profili düzenle",
@@ -97,12 +117,37 @@
       "manageLinksDescription": "Telefon, e-posta ve sosyal profillerinizi yönetin.",
       "manageSkills": "Uzmanlık ve yetenekler",
       "manageSkillsDescription": "Uzmanlık alanlarınızı ve yeteneklerinizi yönetin.",
+      "manageBank": "Banka bilgileri",
+      "manageBankDescription": "IBAN ve hesap bilgilerinizi ekleyin.",
+      "manageBilling": "Fatura bilgileri",
+      "manageBillingDescription": "Vergi ve fatura bilgilerinizi ekleyin.",
+      "manageCv": "Özgeçmiş",
+      "manageCvDescription": "PDF özgeçmişinizi yükleyin veya güncelleyin.",
       "viewPublic": "Herkese açık profil",
       "viewPublicDescription": "Kartınızın ziyaretçilere nasıl göründüğünü görün.",
-      "qrCode": "QR kod",
-      "qrCodeDescription": "Yakında — kartınız için QR kod oluşturun.",
-      "downloadVcard": "vCard indir",
-      "downloadVcardDescription": "Yakında — rehbere kaydedilebilir iletişim dosyası."
+      "share": "Paylaş",
+      "shareDescription": "Bağlantı ve QR kod ile paylaşın."
+    },
+    "share": {
+      "title": "Paylaş",
+      "subtitle": "Kartınızı bağlantı veya QR kod ile paylaşın.",
+      "backToDashboard": "Panele dön",
+      "publicProfile": {
+        "title": "Herkese açık profil",
+        "description": "Profilinizin kalıcı bağlantısı. Yayınlanana kadar ziyaretçiler 404 görür.",
+        "copyLink": "Bağlantıyı kopyala"
+      },
+      "qr": {
+        "title": "QR kod",
+        "description": "Herkese açık profilinize yönlendiren QR kod.",
+        "previewLabel": "Profil QR kodu",
+        "downloadPng": "PNG indir",
+        "downloadSvg": "SVG indir",
+        "errors": {
+          "failed": "QR kod indirilemedi. Lütfen tekrar deneyin."
+        }
+      },
+      "empty": "Paylaşmak için önce profilinizi oluşturun."
     }
   },
   "card": {
@@ -111,7 +156,31 @@
     "call": "Ara",
     "sendEmail": "E-posta gönder",
     "visitWebsite": "Web sitesi",
-    "saveContact": "Rehbere kaydet"
+    "saveContact": "Rehberime Kaydet",
+    "bank": {
+      "title": "Banka Bilgileri",
+      "accountHolder": "Hesap sahibi",
+      "iban": "IBAN",
+      "bankName": "Banka",
+      "copyAccountHolder": "Hesap sahibini kopyala",
+      "copyIban": "IBAN kopyala"
+    },
+    "billing": {
+      "title": "Fatura Bilgileri",
+      "companyTitle": "Şirket Ünvanı",
+      "companyAddress": "Şirket Adresi",
+      "taxNumber": "Vergi Numarası",
+      "taxOffice": "Vergi Dairesi",
+      "copyCompanyTitle": "Şirket ünvanını kopyala",
+      "copyCompanyAddress": "Şirket adresini kopyala",
+      "copyTaxNumber": "Vergi numarasını kopyala"
+    },
+    "cv": {
+      "title": "Özgeçmiş",
+      "documentLabel": "Belge",
+      "pdfDocument": "PDF Belgesi",
+      "view": "Özgeçmişi Görüntüle"
+    }
   },
   "profile": {
     "edit": {
@@ -126,11 +195,52 @@
       "fullName": "Ad soyad",
       "title": "Unvan",
       "company": "Şirket",
+      "address": "Adres",
+      "addressPlaceholder": "Sokak, mahalle, şehir, ülke",
+      "addressCount": "{current} / {max}",
       "about": "Hakkımda",
       "aboutCount": "{current} / {max}"
     },
     "errors": {
       "saveFailed": "Profil kaydedilemedi. Lütfen tekrar deneyin."
+    },
+    "bank": {
+      "title": "Banka bilgileri",
+      "subtitle": "Kartınızda görünecek IBAN ve hesap bilgilerini yönetin.",
+      "backToDashboard": "Panele dön",
+      "saved": "Banka bilgileri kaydedildi.",
+      "deleted": "Banka bilgileri silindi.",
+      "delete": "Sil",
+      "detectedHint": "Banka, IBAN üzerinden otomatik algılandı.",
+      "manualHint": "Banka otomatik algılanamadı. Lütfen seçin.",
+      "fields": {
+        "accountHolder": "Hesap sahibi",
+        "iban": "IBAN",
+        "bankName": "Banka adı",
+        "bankNamePlaceholder": "Banka seçin"
+      },
+      "errors": {
+        "saveFailed": "Banka bilgileri kaydedilemedi. Lütfen tekrar deneyin.",
+        "deleteFailed": "Banka bilgileri silinemedi. Lütfen tekrar deneyin."
+      }
+    },
+    "billing": {
+      "title": "Fatura bilgileri",
+      "subtitle": "Kartınızda görünecek vergi ve fatura bilgilerini yönetin.",
+      "backToDashboard": "Panele dön",
+      "saved": "Fatura bilgileri kaydedildi.",
+      "deleted": "Fatura bilgileri silindi.",
+      "delete": "Sil",
+      "fields": {
+        "companyTitle": "Şirket Ünvanı",
+        "companyAddress": "Şirket Adresi",
+        "taxNumber": "Vergi Numarası",
+        "taxOffice": "Vergi Dairesi"
+      },
+      "errors": {
+        "saveFailed": "Fatura bilgileri kaydedilemedi. Lütfen tekrar deneyin.",
+        "deleteFailed": "Fatura bilgileri silinemedi. Lütfen tekrar deneyin."
+      }
     },
     "links": {
       "title": "Bağlantılar",
@@ -167,6 +277,7 @@
         "phone": "Telefon",
         "email": "E-posta",
         "website": "Web sitesi",
+        "address": "Adres",
         "linkedin": "LinkedIn",
         "instagram": "Instagram",
         "x": "X",
@@ -250,6 +361,32 @@
         "uploadFailed": "Fotoğraf yüklenemedi. Lütfen tekrar deneyin.",
         "removeFailed": "Fotoğraf kaldırılamadı. Lütfen tekrar deneyin."
       }
+    },
+    "cv": {
+      "title": "Özgeçmiş",
+      "subtitle": "Kartınızda görünecek PDF özgeçmişinizi yükleyin veya kaldırın.",
+      "backToEdit": "Temel bilgilere dön",
+      "previewTitle": "Önizleme",
+      "previewSubtitle": "Yüklenen PDF, ziyaretçiler tarafından görüntülenebilir.",
+      "empty": "Henüz bir özgeçmiş yüklemediniz.",
+      "upload": "PDF yükle",
+      "replace": "Değiştir",
+      "view": "Özgeçmişi Görüntüle",
+      "delete": "Sil",
+      "deleteTitle": "Özgeçmişi sil?",
+      "deleteBody": "Özgeçmişiniz kalıcı olarak kaldırılacak. Bu işlemi geri alamazsınız.",
+      "deleteConfirm": "Sil",
+      "uploaded": "Özgeçmiş yüklendi.",
+      "replaced": "Özgeçmiş güncellendi.",
+      "deleted": "Özgeçmiş silindi.",
+      "hint": "Yalnızca PDF. En fazla 10 MB.",
+      "errors": {
+        "typeInvalid": "Yalnızca PDF dosyaları yükleyebilirsiniz.",
+        "tooLarge": "Dosya en fazla 10 MB olabilir.",
+        "empty": "Geçerli bir dosya seçin.",
+        "uploadFailed": "Özgeçmiş yüklenemedi. Lütfen tekrar deneyin.",
+        "deleteFailed": "Özgeçmiş silinemedi. Lütfen tekrar deneyin."
+      }
     }
   },
   "validation": {
@@ -275,6 +412,31 @@
     },
     "about": {
       "tooLong": "Hakkımda en fazla 5000 karakter olabilir."
+    },
+    "address": {
+      "tooLong": "Adres en fazla 500 karakter olabilir."
+    },
+    "bank": {
+      "accountHolderRequired": "Hesap sahibi gerekli.",
+      "accountHolderTooShort": "Hesap sahibi en az 2 karakter olmalı.",
+      "accountHolderTooLong": "Hesap sahibi en fazla 120 karakter olabilir.",
+      "ibanRequired": "IBAN gerekli.",
+      "ibanInvalid": "Geçerli bir IBAN girin.",
+      "bankNameRequired": "Banka adı gerekli.",
+      "bankNameTooLong": "Banka adı en fazla 120 karakter olabilir."
+    },
+    "billing": {
+      "companyTitleRequired": "Şirket ünvanı gerekli.",
+      "companyTitleTooShort": "Şirket ünvanı en az 2 karakter olmalı.",
+      "companyTitleTooLong": "Şirket ünvanı en fazla 200 karakter olabilir.",
+      "companyAddressRequired": "Şirket adresi gerekli.",
+      "companyAddressTooShort": "Şirket adresi en az 2 karakter olmalı.",
+      "companyAddressTooLong": "Şirket adresi en fazla 500 karakter olabilir.",
+      "taxNumberRequired": "Vergi numarası gerekli.",
+      "taxNumberInvalid": "Geçerli bir vergi numarası girin (10 veya 11 haneli).",
+      "taxOfficeRequired": "Vergi dairesi gerekli.",
+      "taxOfficeTooShort": "Vergi dairesi en az 2 karakter olmalı.",
+      "taxOfficeTooLong": "Vergi dairesi en fazla 120 karakter olabilir."
     },
     "link": {
       "valueRequired": "Değer gerekli.",

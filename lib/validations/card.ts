@@ -21,19 +21,45 @@ export const publicCardSkillSchema = z.object({
   type: z.enum(["expertise", "skill"]),
 });
 
+export const publicCardBankAccountSchema = z.object({
+  accountHolder: z.string(),
+  iban: z.string(),
+  bankName: z.string(),
+});
+
+export const publicCardBillingInfoSchema = z.object({
+  companyTitle: z.string(),
+  companyAddress: z.string(),
+  taxNumber: z.string(),
+  taxOffice: z.string(),
+});
+
+export const publicCardCvSchema = z.object({
+  title: z.string(),
+  fileName: z.string(),
+  storagePath: z.string(),
+});
+
 export const publicCardSchema = z.object({
   publicId: z.string(),
   fullName: z.string().nullable(),
   title: z.string().nullable(),
   company: z.string().nullable(),
   about: z.string().nullable(),
+  address: z.string().nullable(),
   avatarPath: z.string().nullable(),
   theme: z.string(),
   locale: z.string(),
+  bankAccount: publicCardBankAccountSchema.nullable().optional(),
+  billingInfo: publicCardBillingInfoSchema.nullable().optional(),
+  cv: publicCardCvSchema.nullable().optional(),
   links: z.array(publicCardLinkSchema),
   skills: z.array(publicCardSkillSchema),
 });
 
 export type PublicCardLink = z.infer<typeof publicCardLinkSchema>;
 export type PublicCardSkill = z.infer<typeof publicCardSkillSchema>;
+export type PublicCardBankAccount = z.infer<typeof publicCardBankAccountSchema>;
+export type PublicCardBillingInfo = z.infer<typeof publicCardBillingInfoSchema>;
+export type PublicCardCv = z.infer<typeof publicCardCvSchema>;
 export type PublicCard = z.infer<typeof publicCardSchema>;

@@ -4,14 +4,21 @@ export const routes = {
   register: "/register",
   forgotPassword: "/forgot-password",
   dashboard: "/dashboard",
+  share: "/dashboard/share",
   settings: "/settings",
   profileEdit: "/profile/edit",
   profileLinks: "/profile/links",
   profileSkills: "/profile/skills",
   profileAvatar: "/profile/avatar",
+  profileBank: "/profile/bank",
+  profileBilling: "/profile/billing",
+  profileCv: "/profile/cv",
+  profileCvFile: "/profile/cv/file",
   authCallback: "/auth/callback",
   authConfirm: "/auth/confirm",
   publicCard: (publicId: string) => `/p/${publicId}`,
+  publicVcard: (publicId: string) => `/p/${publicId}/vcard`,
+  publicCv: (publicId: string) => `/p/${publicId}/cv`,
 } as const;
 
 /** Path prefixes that require an authenticated session. */

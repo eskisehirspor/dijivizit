@@ -51,6 +51,7 @@ export default async function ProfileEditPage() {
           title: profile.title ?? "",
           company: profile.company ?? "",
           about: profile.about ?? "",
+          address: profile.address ?? "",
         }}
       />
     </div>

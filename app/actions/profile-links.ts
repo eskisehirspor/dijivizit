@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
+import { getOwnProfile } from "@/lib/dal/profile";
 import {
   createOwnProfileLink,
   deleteOwnProfileLink,
@@ -29,9 +30,16 @@ function fieldErrorsOf(error: z.ZodError): Record<string, string> {
   return result;
 }
 
-function revalidateLinks() {
+async function revalidateLinks() {
   revalidatePath(routes.profileLinks);
   revalidatePath(routes.dashboard);
+  revalidatePath(routes.share);
+
+  const profile = await getOwnProfile();
+  if (profile?.public_id) {
+    revalidatePath(routes.publicCard(profile.public_id));
+    revalidatePath(routes.publicVcard(profile.public_id));
+  }
 }
 
 export async function createProfileLinkAction(
@@ -57,7 +65,7 @@ export async function createProfileLinkAction(
     );
   }
 
-  revalidateLinks();
+  await revalidateLinks();
   return success();
 }
 
@@ -94,7 +102,7 @@ export async function updateProfileLinkAction(
     return failure("profile.links.errors.saveFailed");
   }
 
-  revalidateLinks();
+  await revalidateLinks();
   return success();
 }
 
@@ -108,7 +116,7 @@ export async function toggleProfileLinkVisibilityAction(
     return failure("profile.links.errors.saveFailed");
   }
 
-  revalidateLinks();
+  await revalidateLinks();
   return success();
 }
 
@@ -119,7 +127,7 @@ export async function deleteProfileLinkAction(id: string): Promise<ActionResult>
     return failure("profile.links.errors.deleteFailed");
   }
 
-  revalidateLinks();
+  await revalidateLinks();
   return success();
 }
 
@@ -133,6 +141,6 @@ export async function moveProfileLinkAction(
     return failure("profile.links.errors.reorderFailed");
   }
 
-  revalidateLinks();
+  await revalidateLinks();
   return success();
 }

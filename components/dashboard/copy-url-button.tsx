@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 
-export function CopyUrlButton({ url }: { url: string }) {
+export function CopyUrlButton({ url, label }: { url: string; label?: string }) {
   const t = useTranslations();
   const [copied, setCopied] = useState(false);
 
@@ -25,7 +25,7 @@ export function CopyUrlButton({ url }: { url: string }) {
   return (
     <Button type="button" variant="outline" size="sm" onClick={handleCopy} className="shrink-0">
       {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
-      {copied ? t("common.copied") : t("common.copy")}
+      {copied ? t("common.copied") : (label ?? t("common.copy"))}
     </Button>
   );
 }

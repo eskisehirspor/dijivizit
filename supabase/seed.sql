@@ -71,6 +71,7 @@ begin
             'Son on yılda marka kimliği, ürün tasarımı ve mobil deneyim alanlarında '
             'ekipler kurdum; şimdi profesyonel kimliği tek bir dokunuşla '
             'paylaşılabilir hale getirmeye odaklanıyorum.',
+    address = E'Kolektif House Levent\nBüyükdere Cad. No: 201\n34394 Şişli / İstanbul',
     is_published = true
   where id = demo_user_id;
 

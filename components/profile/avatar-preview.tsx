@@ -15,6 +15,7 @@ export function AvatarPreview({
     <div className={cn("shrink-0", className)}>
       {src ? (
         // Plain <img>: next/image optimization was failing to display storage URLs in the dashboard preview.
+        // eslint-disable-next-line @next/next/no-img-element -- remote storage URLs; next/image failed in-app
         <img
           src={src}
           alt={alt}

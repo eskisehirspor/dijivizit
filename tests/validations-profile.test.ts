@@ -9,10 +9,12 @@ describe("basicProfileSchema", () => {
       title: "Ürün Tasarımcısı",
       company: "Dijivizit",
       about: "Kısa bir giriş.",
+      address: "Levent, İstanbul",
     });
 
     expect(result.success).toBe(true);
     expect(result.data?.fullName).toBe("Görkem Sönmez");
+    expect(result.data?.address).toBe("Levent, İstanbul");
   });
 
   it("requires a full name", () => {
@@ -21,6 +23,7 @@ describe("basicProfileSchema", () => {
       title: "",
       company: "",
       about: "",
+      address: "",
     });
 
     expect(result.success).toBe(false);
@@ -33,6 +36,7 @@ describe("basicProfileSchema", () => {
       title: "   ",
       company: "",
       about: "",
+      address: "  ",
     });
 
     expect(result.success).toBe(true);
@@ -41,6 +45,7 @@ describe("basicProfileSchema", () => {
       title: null,
       company: null,
       about: null,
+      address: null,
     });
   });
 
@@ -50,9 +55,23 @@ describe("basicProfileSchema", () => {
       title: "",
       company: "",
       about: "a".repeat(5001),
+      address: "",
     });
 
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.message).toBe("validation.about.tooLong");
+  });
+
+  it("rejects an address over 500 characters", () => {
+    const result = basicProfileSchema.safeParse({
+      fullName: "Görkem Sönmez",
+      title: "",
+      company: "",
+      about: "",
+      address: "a".repeat(501),
+    });
+
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.message).toBe("validation.address.tooLong");
   });
 });

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -14,31 +15,30 @@ import { Textarea } from "@/components/ui/textarea";
 import type { ActionResult } from "@/lib/action-result";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-import { ABOUT_MAX_LENGTH } from "@/lib/validations/profile";
+import { ABOUT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "@/lib/validations/profile";
 
 export type BasicInfoDefaults = {
   fullName: string;
   title: string;
   company: string;
   about: string;
+  address: string;
 };
 
 export function BasicInfoForm({ defaults }: { defaults: BasicInfoDefaults }) {
   const t = useTranslations();
+  const router = useRouter();
   const [state, formAction, isPending] = useActionState<ActionResult | null, FormData>(
     updateBasicProfileAction,
     null,
   );
 
-  const [baseline, setBaseline] = useState(defaults);
+  const [baseline] = useState(defaults);
   const [values, setValues] = useState(defaults);
   const [acknowledgedSuccess, setAcknowledgedSuccess] = useState<ActionResult | null>(null);
 
-  // When a save succeeds, adopt the current values as the clean baseline during
-  // render (React's recommended alternative to setState-in-effect for this case).
   if (state?.ok && state !== acknowledgedSuccess) {
     setAcknowledgedSuccess(state);
-    setBaseline(values);
   }
 
   useEffect(() => {
@@ -47,19 +47,22 @@ export function BasicInfoForm({ defaults }: { defaults: BasicInfoDefaults }) {
     }
 
     toast.success(t("profile.edit.saved"));
-  }, [acknowledgedSuccess, t]);
+    router.push(routes.dashboard);
+  }, [acknowledgedSuccess, router, t]);
 
   const isDirty = useMemo(
     () =>
       values.fullName !== baseline.fullName ||
       values.title !== baseline.title ||
       values.company !== baseline.company ||
-      values.about !== baseline.about,
+      values.about !== baseline.about ||
+      values.address !== baseline.address,
     [baseline, values],
   );
 
   const failed = state && !state.ok ? state : null;
   const aboutLength = values.about.length;
+  const addressLength = values.address.length;
 
   return (
     <form action={formAction} className="grid gap-6">
@@ -96,6 +99,44 @@ export function BasicInfoForm({ defaults }: { defaults: BasicInfoDefaults }) {
         onChange={(event) => setValues((current) => ({ ...current, company: event.target.value }))}
         error={failed?.fieldErrors?.company ? t(failed.fieldErrors.company) : undefined}
       />
+
+      <div className="grid gap-2">
+        <div className="flex items-baseline justify-between gap-3">
+          <Label htmlFor="address" className="text-xs font-medium text-muted-foreground">
+            {t("profile.fields.address")}
+          </Label>
+          <span
+            className={cn(
+              "text-xs text-muted-foreground tabular-nums",
+              addressLength > ADDRESS_MAX_LENGTH && "text-destructive",
+            )}
+          >
+            {t("profile.fields.addressCount", {
+              current: addressLength,
+              max: ADDRESS_MAX_LENGTH,
+            })}
+          </span>
+        </div>
+        <Textarea
+          id="address"
+          name="address"
+          rows={3}
+          autoComplete="street-address"
+          value={values.address}
+          onChange={(event) =>
+            setValues((current) => ({ ...current, address: event.target.value }))
+          }
+          aria-invalid={failed?.fieldErrors?.address ? true : undefined}
+          aria-describedby={failed?.fieldErrors?.address ? "address-error" : undefined}
+          className="min-h-24"
+          placeholder={t("profile.fields.addressPlaceholder")}
+        />
+        {failed?.fieldErrors?.address ? (
+          <p id="address-error" className="text-sm text-destructive">
+            {t(failed.fieldErrors.address)}
+          </p>
+        ) : null}
+      </div>
 
       <div className="grid gap-2">
         <div className="flex items-baseline justify-between gap-3">
