@@ -39,6 +39,53 @@ export type Database = {
   }
   public: {
     Tables: {
+      analytics_events: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          device: string | null
+          event_type: string
+          id: string
+          ip_hash: string | null
+          profile_id: string
+          referrer: string | null
+          visitor_id: string | null
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          device?: string | null
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          profile_id: string
+          referrer?: string | null
+          visitor_id?: string | null
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          device?: string | null
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          profile_id?: string
+          referrer?: string | null
+          visitor_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analytics_events_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bank_accounts: {
         Row: {
           account_holder: string
@@ -235,6 +282,7 @@ export type Database = {
           is_published: boolean
           locale: string
           public_id: string
+          skills_section_title: string
           theme: string
           title: string | null
           updated_at: string
@@ -250,6 +298,7 @@ export type Database = {
           is_published?: boolean
           locale?: string
           public_id: string
+          skills_section_title?: string
           theme?: string
           title?: string | null
           updated_at?: string
@@ -265,6 +314,7 @@ export type Database = {
           is_published?: boolean
           locale?: string
           public_id?: string
+          skills_section_title?: string
           theme?: string
           title?: string | null
           updated_at?: string
@@ -277,7 +327,16 @@ export type Database = {
     }
     Functions: {
       generate_public_id: { Args: { id_length?: number }; Returns: string }
+      get_own_analytics_summary: { Args: never; Returns: Json }
       get_public_card: { Args: { p_public_id: string }; Returns: Json }
+      record_card_event: {
+        Args: {
+          p_event_type: string
+          p_public_id: string
+          p_visitor_id?: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

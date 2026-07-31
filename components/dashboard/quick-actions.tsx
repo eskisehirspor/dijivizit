@@ -1,5 +1,6 @@
 import {
   Building2,
+  ChartColumn,
   Eye,
   FileText,
   Link2,
@@ -30,6 +31,7 @@ export async function QuickActions({
   bankHref,
   billingHref,
   cvHref,
+  analyticsHref,
   shareHref,
   publicHref,
 }: {
@@ -40,6 +42,7 @@ export async function QuickActions({
   bankHref: string;
   billingHref: string;
   cvHref: string;
+  analyticsHref: string;
   shareHref: string;
   publicHref: string | null;
 }) {
@@ -94,6 +97,13 @@ export async function QuickActions({
       description: t("manageCvDescription"),
       icon: <FileText aria-hidden="true" className="size-4" />,
       href: cvHref,
+    },
+    {
+      key: "analytics",
+      title: t("analytics"),
+      description: t("analyticsDescription"),
+      icon: <ChartColumn aria-hidden="true" className="size-4" />,
+      href: analyticsHref,
     },
     {
       key: "share",

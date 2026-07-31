@@ -4,6 +4,10 @@ import { getTranslations } from "next-intl/server";
 
 import { BasicInfoForm } from "@/components/profile/basic-info-form";
 import { getOwnProfile } from "@/lib/dal/profile";
+import {
+  DEFAULT_SKILLS_SECTION_TITLE,
+  isSkillsSectionTitle,
+} from "@/lib/profile/skills-section-title";
 import { routes } from "@/lib/routes";
 
 export async function generateMetadata() {
@@ -52,6 +56,9 @@ export default async function ProfileEditPage() {
           company: profile.company ?? "",
           about: profile.about ?? "",
           address: profile.address ?? "",
+          skillsSectionTitle: isSkillsSectionTitle(profile.skills_section_title)
+            ? profile.skills_section_title
+            : DEFAULT_SKILLS_SECTION_TITLE,
         }}
       />
     </div>

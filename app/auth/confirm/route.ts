@@ -18,13 +18,17 @@ function isEmailOtpType(value: string | null): value is EmailOtpType {
   return value !== null && (VALID_OTP_TYPES as readonly string[]).includes(value);
 }
 
-/** Landing point for links sent by email: signup confirmation, recovery, etc. */
+/** Landing point for email OTP links (token_hash): signup confirmation, etc.
+ * Password recovery uses the PKCE code flow on /auth/callback instead.
+ */
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl;
 
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type");
-  const next = safeRedirectPath(searchParams.get("next"), routes.dashboard);
+  // token_hash recovery templates (if any) still land here; PKCE recovery does not.
+  const defaultNext = type === "recovery" ? routes.resetPassword : routes.dashboard;
+  const next = safeRedirectPath(searchParams.get("next"), defaultNext);
 
   const failureUrl = new URL(routes.login, origin);
   failureUrl.searchParams.set("error", "confirm");

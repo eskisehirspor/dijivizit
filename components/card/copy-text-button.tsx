@@ -16,7 +16,7 @@ export function CopyTextButton({ value, label }: { value: string; label: string 
       toast.success(t("common.copied"));
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error(t("dashboard.copyFailed"));
+      toast.error(t("common.copyFailed"));
     }
   }
 
@@ -25,7 +25,7 @@ export function CopyTextButton({ value, label }: { value: string; label: string 
       type="button"
       onClick={handleCopy}
       aria-label={copied ? t("common.copied") : label}
-      className="shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+      className="flex size-10 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
     >
       {copied ? (
         <Check aria-hidden="true" className="size-[18px]" strokeWidth={1.75} />

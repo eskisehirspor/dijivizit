@@ -7,12 +7,20 @@ import { iconForLinkPlatform } from "@/components/card/platform-icons";
 import { PublicBankCard } from "@/components/card/public-bank-card";
 import { PublicBillingCard } from "@/components/card/public-billing-card";
 import { PublicCvCard } from "@/components/card/public-cv-card";
+import { PublicShareMenu } from "@/components/card/public-share-menu";
+import { PublicSkillsSection } from "@/components/card/public-skills-section";
+import { TrackProfileView } from "@/components/card/track-profile-view";
+import { TrackedPublicLink } from "@/components/card/tracked-public-link";
 import { Button } from "@/components/ui/button";
 import { getAvatarUrl, getPublicCard } from "@/lib/dal/public-card";
 import { displayValueForPublicLink } from "@/lib/profile/link-display";
 import { hrefForPublicLink } from "@/lib/profile/link-href";
 import { hasContactPlatformLabel } from "@/lib/profile/platforms";
 import { visiblePublicContactLinks } from "@/lib/profile/public-contacts";
+import {
+  DEFAULT_SKILLS_SECTION_TITLE,
+  isSkillsSectionTitle,
+} from "@/lib/profile/skills-section-title";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
@@ -73,9 +81,13 @@ export default async function PublicCardPage({ params }: PublicCardPageProps) {
   const contactLinks = visiblePublicContactLinks(card.links, publicUrl, card.address);
 
   return (
-    <div className="flex min-h-full flex-1 justify-center px-6 py-12 sm:py-16">
+    <main className="flex min-h-full flex-1 justify-center px-6 py-12 sm:py-16">
+      <TrackProfileView publicId={card.publicId} />
       <div className="flex w-full max-w-sm animate-rise flex-col gap-10">
-        <div className="flex flex-col items-center gap-6 text-center">
+        <div className="relative flex flex-col items-center gap-6 text-center">
+          <div className="absolute top-0 right-0">
+            <PublicShareMenu publicId={card.publicId} publicUrl={publicUrl} />
+          </div>
           <div className="size-[200px] shrink-0 overflow-hidden rounded-full bg-muted ring-1 ring-border/60">
             {avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element -- remote storage URLs; next/image failed in-app
@@ -143,10 +155,11 @@ export default async function PublicCardPage({ params }: PublicCardPageProps) {
 
               return (
                 <li key={`${link.platform}-${link.value}`}>
-                  <a
+                  <TrackedPublicLink
+                    publicId={card.publicId}
+                    platform={link.platform}
                     href={href}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
+                    external={external}
                     className={cn(
                       "flex min-h-10 items-center gap-3 rounded-lg border border-border/60 px-4 py-3 text-left transition-colors",
                       "hover:border-border hover:bg-muted/40",
@@ -171,7 +184,7 @@ export default async function PublicCardPage({ params }: PublicCardPageProps) {
                         </span>
                       ) : null}
                     </span>
-                  </a>
+                  </TrackedPublicLink>
                 </li>
               );
             })}
@@ -197,19 +210,15 @@ export default async function PublicCardPage({ params }: PublicCardPageProps) {
 
         {card.cv ? <PublicCvCard viewHref={routes.publicCv(card.publicId)} /> : null}
 
-        {card.skills.length > 0 ? (
-          <ul className="flex flex-wrap justify-center gap-2">
-            {card.skills.map((skill) => (
-              <li
-                key={`${skill.type}-${skill.name}`}
-                className="rounded-lg border border-border/60 px-3 py-1.5 text-xs text-muted-foreground"
-              >
-                {skill.name}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <PublicSkillsSection
+          titleKey={
+            isSkillsSectionTitle(card.skillsSectionTitle)
+              ? card.skillsSectionTitle
+              : DEFAULT_SKILLS_SECTION_TITLE
+          }
+          skills={card.skills}
+        />
       </div>
-    </div>
+    </main>
   );
 }

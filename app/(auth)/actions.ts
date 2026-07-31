@@ -5,11 +5,19 @@ import { z } from "zod";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
 import { authErrorKey } from "@/lib/auth/errors";
+import { requestPasswordReset, updatePassword } from "@/lib/dal/auth-password";
+import { changeUnverifiedEmail, resendSignupVerificationEmail } from "@/lib/dal/auth-verification";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { safeRedirectPath } from "@/lib/utils/safe-redirect";
-import { loginSchema, registerSchema } from "@/lib/validations/auth";
+import {
+  emailSchema,
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+  resetPasswordSchema,
+} from "@/lib/validations/auth";
 
 /** Keeps the first message per field, keyed by top-level field name. */
 function fieldErrorsOf(error: z.ZodError): Record<string, string> {
@@ -45,7 +53,19 @@ export async function loginAction(
   const { error } = await supabase.auth.signInWithPassword(parsed.data);
 
   if (error) {
+    if (error.code === "email_not_confirmed") {
+      redirect(`${routes.verifyEmail}?email=${encodeURIComponent(parsed.data.email)}`);
+    }
+
     return failure(authErrorKey(error));
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user && !user.email_confirmed_at) {
+    redirect(`${routes.verifyEmail}?email=${encodeURIComponent(user.email ?? parsed.data.email)}`);
   }
 
   redirect(safeRedirectPath(formData.get("next")?.toString(), routes.dashboard));
@@ -90,7 +110,7 @@ export async function registerAction(
   // already taken and Supabase returned a decoy user to avoid confirming its
   // existence to an attacker. Both must look identical here for that protection
   // to hold, so neither is distinguished.
-  return success();
+  redirect(`${routes.verifyEmail}?email=${encodeURIComponent(parsed.data.email)}`);
 }
 
 // Returns void rather than ActionResult so it can be used directly as a form
@@ -117,4 +137,112 @@ export async function logoutAction(): Promise<never> {
   await supabase.auth.signOut();
 
   redirect(routes.home);
+}
+
+export async function resendVerificationAction(
+  _previous: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const parsed = emailSchema.safeParse(formData.get("email"));
+
+  if (!parsed.success) {
+    return failure("validation.email.invalid");
+  }
+
+  const result = await resendSignupVerificationEmail(parsed.data);
+
+  if (!result.ok) {
+    if (result.code === "rate_limited") {
+      return failure("auth.errors.rateLimited");
+    }
+
+    return failure("auth.verify.resendFailed");
+  }
+
+  return success();
+}
+
+export async function changeVerificationEmailAction(
+  _previous: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const parsed = z.object({ email: emailSchema }).safeParse({ email: formData.get("email") });
+
+  if (!parsed.success) {
+    return failure("auth.errors.unknown", fieldErrorsOf(parsed.error));
+  }
+
+  const result = await changeUnverifiedEmail(parsed.data.email);
+
+  if (!result.ok) {
+    if (result.code === "unauthorized") {
+      return failure("auth.verify.changeEmailUseRegister");
+    }
+
+    if (result.code === "rate_limited") {
+      return failure("auth.errors.rateLimited");
+    }
+
+    return failure("auth.verify.changeEmailFailed");
+  }
+
+  redirect(`${routes.verifyEmail}?email=${encodeURIComponent(parsed.data.email)}`);
+}
+
+export async function forgotPasswordAction(
+  _previous: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const parsed = forgotPasswordSchema.safeParse({
+    email: formData.get("email"),
+  });
+
+  if (!parsed.success) {
+    return failure("auth.errors.unknown", fieldErrorsOf(parsed.error));
+  }
+
+  const result = await requestPasswordReset(parsed.data.email);
+
+  if (!result.ok) {
+    if (result.code === "rate_limited") {
+      return failure("auth.errors.rateLimited");
+    }
+
+    return failure("auth.forgotPassword.sendFailed");
+  }
+
+  return success();
+}
+
+export async function resetPasswordAction(
+  _previous: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  const parsed = resetPasswordSchema.safeParse({
+    password: formData.get("password"),
+    confirmPassword: formData.get("confirmPassword"),
+  });
+
+  if (!parsed.success) {
+    return failure("auth.errors.unknown", fieldErrorsOf(parsed.error));
+  }
+
+  const result = await updatePassword(parsed.data.password);
+
+  if (!result.ok) {
+    if (result.code === "unauthorized") {
+      return failure("auth.resetPassword.sessionExpired");
+    }
+
+    if (result.code === "rate_limited") {
+      return failure("auth.errors.rateLimited");
+    }
+
+    return failure("auth.resetPassword.saveFailed");
+  }
+
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+
+  redirect(routes.login);
 }

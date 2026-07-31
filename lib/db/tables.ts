@@ -28,3 +28,6 @@ export type BillingInfoUpdate = TablesUpdate<"billing_infos">;
 export type DocumentRow = Tables<"documents">;
 export type DocumentInsert = TablesInsert<"documents">;
 export type DocumentUpdate = TablesUpdate<"documents">;
+
+export type AnalyticsEventRow = Tables<"analytics_events">;
+export type AnalyticsEventInsert = TablesInsert<"analytics_events">;

@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { loginSchema, passwordSchema, registerSchema } from "@/lib/validations/auth";
+import {
+  loginSchema,
+  passwordSchema,
+  registerSchema,
+  resetPasswordSchema,
+} from "@/lib/validations/auth";
 
 describe("passwordSchema", () => {
   it("requires at least 8 characters", () => {
@@ -62,5 +67,26 @@ describe("registerSchema", () => {
     });
 
     expect(result.success).toBe(false);
+  });
+});
+
+describe("resetPasswordSchema", () => {
+  it("accepts matching passwords", () => {
+    const result = resetPasswordSchema.safeParse({
+      password: "longenough1",
+      confirmPassword: "longenough1",
+    });
+
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects mismatched passwords", () => {
+    const result = resetPasswordSchema.safeParse({
+      password: "longenough1",
+      confirmPassword: "different1",
+    });
+
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.message).toBe("validation.password.mismatch");
   });
 });

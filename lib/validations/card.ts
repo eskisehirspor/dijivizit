@@ -50,6 +50,7 @@ export const publicCardSchema = z.object({
   avatarPath: z.string().nullable(),
   theme: z.string(),
   locale: z.string(),
+  skillsSectionTitle: z.enum(["expertise_areas", "skills"]).default("expertise_areas"),
   bankAccount: publicCardBankAccountSchema.nullable().optional(),
   billingInfo: publicCardBillingInfoSchema.nullable().optional(),
   cv: publicCardCvSchema.nullable().optional(),

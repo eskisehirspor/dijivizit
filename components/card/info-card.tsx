@@ -31,7 +31,14 @@ export function InfoCard({
   action?: ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-border/60 px-5 py-6 sm:px-6">
+    <section
+      className={cn(
+        "rounded-lg border border-border/60 px-5 pt-6 sm:px-6",
+        // Rows carry their own py-3, so the card's own bottom inset is reduced
+        // to keep the visual padding even with the 24px above the header.
+        action ? "pb-4" : "pb-3",
+      )}
+    >
       <div className={cn(divided && "divide-y divide-border/60")}>
         <header className="flex min-h-9 items-center gap-4 pb-3">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
@@ -44,7 +51,7 @@ export function InfoCard({
           <div key={`${row.label}-${index}`} className="space-y-1.5 py-3">
             <p className="text-xs text-muted-foreground">{row.label}</p>
             {row.copy ? (
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex items-start justify-between gap-3">
                 <p
                   className={cn(
                     "min-w-0 flex-1 text-sm leading-relaxed text-pretty break-words",
@@ -53,7 +60,11 @@ export function InfoCard({
                 >
                   {row.value}
                 </p>
-                <CopyTextButton value={row.copy.value} label={row.copy.label} />
+                {/* Pulled up so the tap target centres on the first line rather
+                    than drifting to the middle of a multi-line address. */}
+                <span className="-mt-2 flex shrink-0">
+                  <CopyTextButton value={row.copy.value} label={row.copy.label} />
+                </span>
               </div>
             ) : (
               <p

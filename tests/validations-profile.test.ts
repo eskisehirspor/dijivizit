@@ -46,7 +46,22 @@ describe("basicProfileSchema", () => {
       company: null,
       about: null,
       address: null,
+      skillsSectionTitle: "expertise_areas",
     });
+  });
+
+  it("accepts an explicit skills section title", () => {
+    const result = basicProfileSchema.safeParse({
+      fullName: "Görkem Sönmez",
+      title: "",
+      company: "",
+      about: "",
+      address: "",
+      skillsSectionTitle: "skills",
+    });
+
+    expect(result.success).toBe(true);
+    expect(result.data?.skillsSectionTitle).toBe("skills");
   });
 
   it("rejects an about field over 5000 characters", () => {

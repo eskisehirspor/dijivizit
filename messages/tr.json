@@ -12,7 +12,8 @@
     "back": "Geri",
     "retry": "Tekrar dene",
     "copy": "Kopyala",
-    "copied": "Kopyalandı"
+    "copied": "Kopyalandı",
+    "copyFailed": "Kopyalanamadı. Lütfen tekrar deneyin."
   },
   "nav": {
     "login": "Giriş yap",
@@ -58,12 +59,49 @@
       "checkEmailTitle": "E-postanızı kontrol edin",
       "checkEmailBody": "Hesabınızı doğrulamak için size bir bağlantı gönderdik."
     },
+    "verify": {
+      "title": "E-posta adresinizi doğrulamanız gerekiyor.",
+      "subtitle": "Hesabınızı kullanmaya başlamadan önce e-posta adresinizi doğrulayın.",
+      "sentTitle": "E-posta gönderildi",
+      "sentBody": "Gelen kutunuzu ve spam klasörünü kontrol edin. Doğrulama bağlantısına tıklayarak devam edin.",
+      "resend": "Doğrulama e-postasını yeniden gönder",
+      "resendCooldown": "Yeniden gönder ({seconds}s)",
+      "resendSuccess": "Doğrulama e-postası yeniden gönderildi.",
+      "resendFailed": "Doğrulama e-postası gönderilemedi. Lütfen tekrar deneyin.",
+      "backToLogin": "Girişe dön",
+      "changeEmailToggle": "E-postayı değiştir",
+      "changeEmailSubmit": "E-postayı güncelle",
+      "changeEmailHint": "Oturumunuz yoksa doğru adresle yeniden kayıt olun.",
+      "changeEmailUseRegister": "E-postayı değiştirmek için doğru adresle yeniden kayıt olun.",
+      "changeEmailFailed": "E-posta güncellenemedi. Lütfen tekrar deneyin.",
+      "registerLink": "Kayıt ol",
+      "missingEmail": "Doğrulama e-postasını yeniden göndermek için giriş veya kayıt sayfasından devam edin."
+    },
     "fields": {
       "fullName": "Ad soyad",
       "email": "E-posta",
       "password": "Parola",
+      "newPassword": "Yeni parola",
+      "confirmPassword": "Parolayı doğrula",
       "fullNamePlaceholder": "Görkem Sönmez",
       "emailPlaceholder": "ornek@sirket.com"
+    },
+    "forgotPassword": {
+      "title": "Parolanızı sıfırlayın",
+      "subtitle": "Hesabınıza bağlı e-posta adresini girin. Size bir sıfırlama bağlantısı göndereceğiz.",
+      "submit": "Sıfırlama bağlantısı gönder",
+      "sentTitle": "E-posta gönderildi",
+      "sentBody": "Bu adres kayıtlıysa parola sıfırlama bağlantısı gönderildi. Gelen kutunuzu ve spam klasörünü kontrol edin.",
+      "sendFailed": "Sıfırlama e-postası gönderilemedi. Lütfen tekrar deneyin.",
+      "backToLogin": "Girişe dön"
+    },
+    "resetPassword": {
+      "title": "Yeni parola belirleyin",
+      "subtitle": "Hesabınız için yeni bir parola seçin.",
+      "submit": "Parolayı güncelle",
+      "saveFailed": "Parola güncellenemedi. Lütfen tekrar deneyin.",
+      "sessionExpired": "Oturumunuz sona erdi. Lütfen sıfırlama bağlantısını yeniden isteyin.",
+      "backToLogin": "Girişe dön"
     },
     "google": {
       "continue": "Google ile Devam Et"
@@ -123,10 +161,41 @@
       "manageBillingDescription": "Vergi ve fatura bilgilerinizi ekleyin.",
       "manageCv": "Özgeçmiş",
       "manageCvDescription": "PDF özgeçmişinizi yükleyin veya güncelleyin.",
+      "analytics": "Analitik",
+      "analyticsDescription": "Profil görüntülenmeleri ve etkileşimleri inceleyin.",
       "viewPublic": "Herkese açık profil",
       "viewPublicDescription": "Kartınızın ziyaretçilere nasıl göründüğünü görün.",
       "share": "Paylaş",
       "shareDescription": "Bağlantı ve QR kod ile paylaşın."
+    },
+    "analytics": {
+      "title": "Analitik",
+      "subtitle": "Herkese açık kartınızdaki görüntülenme ve etkileşim özeti.",
+      "backToDashboard": "Panele dön",
+      "views": {
+        "title": "Görüntülenmeler",
+        "total": "Toplam Görüntülenme",
+        "today": "Bugün",
+        "week": "Bu Hafta",
+        "month": "Bu Ay"
+      },
+      "events": {
+        "title": "Etkileşimler",
+        "types": {
+          "profile_view": "Profil görüntülenme",
+          "phone_click": "Telefon",
+          "whatsapp_click": "WhatsApp",
+          "email_click": "E-posta",
+          "website_click": "Web sitesi",
+          "linkedin_click": "LinkedIn",
+          "cv_open": "Özgeçmiş",
+          "vcard_download": "vCard indirme",
+          "address_open": "Adres / harita",
+          "share": "Paylaş menüsü",
+          "copy_link": "Bağlantı kopyalama",
+          "qr_open": "QR kod"
+        }
+      }
     },
     "share": {
       "title": "Paylaş",
@@ -157,6 +226,24 @@
     "sendEmail": "E-posta gönder",
     "visitWebsite": "Web sitesi",
     "saveContact": "Rehberime Kaydet",
+    "share": {
+      "trigger": "Paylaş",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "email": "E-posta",
+      "emailSubject": "Check out my digital business card",
+      "copyLink": "Bağlantıyı kopyala",
+      "copied": "Bağlantı kopyalandı",
+      "copyFailed": "Bağlantı kopyalanamadı",
+      "qrCode": "QR kod",
+      "qr": {
+        "title": "QR kod",
+        "description": "Bu profilin bağlantısını içeren QR kod.",
+        "previewLabel": "Profil QR kodu",
+        "downloadPng": "PNG indir",
+        "downloadFailed": "QR kod indirilemedi. Lütfen tekrar deneyin."
+      }
+    },
     "bank": {
       "title": "Banka Bilgileri",
       "accountHolder": "Hesap sahibi",
@@ -180,6 +267,12 @@
       "documentLabel": "Belge",
       "pdfDocument": "PDF Belgesi",
       "view": "Özgeçmişi Görüntüle"
+    },
+    "skills": {
+      "titles": {
+        "expertise_areas": "Uzmanlık Alanları",
+        "skills": "Yetenekler"
+      }
     }
   },
   "profile": {
@@ -199,7 +292,13 @@
       "addressPlaceholder": "Sokak, mahalle, şehir, ülke",
       "addressCount": "{current} / {max}",
       "about": "Hakkımda",
-      "aboutCount": "{current} / {max}"
+      "aboutCount": "{current} / {max}",
+      "skillsSectionTitle": "Bölüm başlığı",
+      "skillsSectionTitleHint": "Herkese açık profilde uzmanlık ve yetenekler bölümünün başlığı.",
+      "skillsSectionTitleOptions": {
+        "expertise_areas": "Uzmanlık Alanları",
+        "skills": "Yetenekler"
+      }
     },
     "errors": {
       "saveFailed": "Profil kaydedilemedi. Lütfen tekrar deneyin."
@@ -398,7 +497,8 @@
     "password": {
       "required": "Parola gerekli.",
       "tooShort": "Parola en az 8 karakter olmalı.",
-      "tooLong": "Parola en fazla 72 karakter olabilir."
+      "tooLong": "Parola en fazla 72 karakter olabilir.",
+      "mismatch": "Parolalar eşleşmiyor."
     },
     "fullName": {
       "tooShort": "Ad soyad en az 2 karakter olmalı.",
@@ -415,6 +515,9 @@
     },
     "address": {
       "tooLong": "Adres en fazla 500 karakter olabilir."
+    },
+    "skillsSectionTitle": {
+      "invalid": "Geçerli bir bölüm başlığı seçin."
     },
     "bank": {
       "accountHolderRequired": "Hesap sahibi gerekli.",

@@ -11,36 +11,60 @@ export type AuthenticatedUser = {
   email: string | null;
 };
 
+type AuthUserRecord = AuthenticatedUser & {
+  emailConfirmed: boolean;
+};
+
 /**
  * The authorization boundary. proxy.ts refreshes sessions and redirects, but it
  * does not reliably cover Server Actions, so every entry point that touches
  * private data goes through here.
  *
- * Wrapped in React `cache` so repeated calls within one render resolve once.
+ * Uses getUser() (not getClaims) so email_confirmed_at is available for the
+ * verification gate. Wrapped in React `cache` so repeated calls within one
+ * render resolve once.
  */
-export const getAuthenticatedUser = cache(async (): Promise<AuthenticatedUser | null> => {
+const getAuthUserRecord = cache(async (): Promise<AuthUserRecord | null> => {
   const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
-  // getClaims verifies the JWT signature; getSession would only read a
-  // client-controlled cookie.
-  const { data, error } = await supabase.auth.getClaims();
-
-  if (error || !data?.claims) {
+  if (error || !user) {
     return null;
   }
 
   return {
-    id: data.claims.sub,
-    email: typeof data.claims.email === "string" ? data.claims.email : null,
+    id: user.id,
+    email: user.email ?? null,
+    emailConfirmed: Boolean(user.email_confirmed_at),
   };
 });
 
+export const getAuthenticatedUser = cache(async (): Promise<AuthenticatedUser | null> => {
+  const user = await getAuthUserRecord();
+
+  if (!user) {
+    return null;
+  }
+
+  return { id: user.id, email: user.email };
+});
+
 export async function requireUser(): Promise<AuthenticatedUser> {
-  const user = await getAuthenticatedUser();
+  const user = await getAuthUserRecord();
 
   if (!user) {
     redirect(routes.login);
   }
 
-  return user;
+  if (!user.emailConfirmed) {
+    const path = user.email
+      ? `${routes.verifyEmail}?email=${encodeURIComponent(user.email)}`
+      : routes.verifyEmail;
+    redirect(path);
+  }
+
+  return { id: user.id, email: user.email };
 }

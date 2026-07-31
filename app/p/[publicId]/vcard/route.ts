@@ -1,3 +1,4 @@
+import { recordCardEvent } from "@/lib/dal/analytics";
 import { getPublicCard } from "@/lib/dal/public-card";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
@@ -19,6 +20,8 @@ export async function GET(_request: Request, context: RouteContext) {
   const publicUrl = `${clientEnv.NEXT_PUBLIC_SITE_URL}${routes.publicCard(card.publicId)}`;
   const content = buildVcard30(vcardInputFromPublicCard(card, publicUrl));
   const filename = vcardFilename(card.fullName);
+
+  await recordCardEvent({ publicId: card.publicId, eventType: "vcard_download" });
 
   return new Response(content, {
     status: 200,

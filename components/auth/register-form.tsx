@@ -1,12 +1,11 @@
 "use client";
 
-import { MailCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
 import { registerAction } from "@/app/(auth)/actions";
 import { FormField } from "@/components/auth/form-field";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import type { ActionResult } from "@/lib/action-result";
 
@@ -16,16 +15,6 @@ export function RegisterForm() {
     registerAction,
     null,
   );
-
-  if (state?.ok) {
-    return (
-      <Alert>
-        <MailCheck />
-        <AlertTitle>{t("auth.register.checkEmailTitle")}</AlertTitle>
-        <AlertDescription>{t("auth.register.checkEmailBody")}</AlertDescription>
-      </Alert>
-    );
-  }
 
   const failed = state && !state.ok ? state : null;
 

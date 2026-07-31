@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { ActionResult } from "@/lib/action-result";
+import { SKILLS_SECTION_TITLES, type SkillsSectionTitle } from "@/lib/profile/skills-section-title";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { ABOUT_MAX_LENGTH, ADDRESS_MAX_LENGTH } from "@/lib/validations/profile";
@@ -23,6 +24,7 @@ export type BasicInfoDefaults = {
   company: string;
   about: string;
   address: string;
+  skillsSectionTitle: SkillsSectionTitle;
 };
 
 export function BasicInfoForm({ defaults }: { defaults: BasicInfoDefaults }) {
@@ -56,7 +58,8 @@ export function BasicInfoForm({ defaults }: { defaults: BasicInfoDefaults }) {
       values.title !== baseline.title ||
       values.company !== baseline.company ||
       values.about !== baseline.about ||
-      values.address !== baseline.address,
+      values.address !== baseline.address ||
+      values.skillsSectionTitle !== baseline.skillsSectionTitle,
     [baseline, values],
   );
 
@@ -170,6 +173,41 @@ export function BasicInfoForm({ defaults }: { defaults: BasicInfoDefaults }) {
             {t(failed.fieldErrors.about)}
           </p>
         ) : null}
+      </div>
+
+      <div className="grid gap-2">
+        <Label htmlFor="skillsSectionTitle" className="text-xs font-medium text-muted-foreground">
+          {t("profile.fields.skillsSectionTitle")}
+        </Label>
+        <select
+          id="skillsSectionTitle"
+          name="skillsSectionTitle"
+          value={values.skillsSectionTitle}
+          onChange={(event) =>
+            setValues((current) => ({
+              ...current,
+              skillsSectionTitle: event.target.value as SkillsSectionTitle,
+            }))
+          }
+          aria-invalid={failed?.fieldErrors?.skillsSectionTitle ? true : undefined}
+          className={cn(
+            "h-10 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none",
+            "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+          )}
+        >
+          {SKILLS_SECTION_TITLES.map((option) => (
+            <option key={option} value={option}>
+              {t(`profile.fields.skillsSectionTitleOptions.${option}`)}
+            </option>
+          ))}
+        </select>
+        {failed?.fieldErrors?.skillsSectionTitle ? (
+          <p className="text-sm text-destructive">{t(failed.fieldErrors.skillsSectionTitle)}</p>
+        ) : (
+          <p className="text-xs text-muted-foreground">
+            {t("profile.fields.skillsSectionTitleHint")}
+          </p>
+        )}
       </div>
 
       <div className="flex items-center gap-6 pt-2">

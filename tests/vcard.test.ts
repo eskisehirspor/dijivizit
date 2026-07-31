@@ -108,6 +108,7 @@ describe("vcardInputFromPublicCard", () => {
       avatarPath: null,
       theme: "light",
       locale: "tr",
+      skillsSectionTitle: "expertise_areas",
       links: [
         { platform: "phone", label: null, value: "+905551112233" },
         { platform: "email", label: null, value: "hello@dijivizit.com" },
@@ -149,6 +150,7 @@ describe("vcardInputFromPublicCard", () => {
       avatarPath: null,
       theme: "light",
       locale: "tr",
+      skillsSectionTitle: "expertise_areas",
       links: [{ platform: "whatsapp", label: null, value: "https://wa.me/905423521515" }],
       skills: [],
     };

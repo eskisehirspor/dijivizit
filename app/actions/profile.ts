@@ -33,6 +33,7 @@ export async function updateBasicProfileAction(
     company: formData.get("company"),
     about: formData.get("about"),
     address: formData.get("address"),
+    skillsSectionTitle: formData.get("skillsSectionTitle"),
   });
 
   if (!parsed.success) {

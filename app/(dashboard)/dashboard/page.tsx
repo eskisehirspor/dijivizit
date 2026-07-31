@@ -78,6 +78,7 @@ export default async function DashboardPage() {
         bankHref={routes.profileBank}
         billingHref={routes.profileBilling}
         cvHref={routes.profileCv}
+        analyticsHref={routes.analytics}
         shareHref={routes.share}
         publicHref={isPublished ? publicPath : null}
       />

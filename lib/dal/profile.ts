@@ -21,10 +21,11 @@ export type OwnProfile = Pick<
   | "theme"
   | "locale"
   | "is_published"
+  | "skills_section_title"
 >;
 
 const OWN_PROFILE_COLUMNS =
-  "public_id, full_name, title, company, about, address, avatar_path, theme, locale, is_published";
+  "public_id, full_name, title, company, about, address, avatar_path, theme, locale, is_published, skills_section_title";
 
 export const getOwnProfile = cache(async (): Promise<OwnProfile | null> => {
   const user = await requireUser();
@@ -46,8 +47,8 @@ export const getOwnProfile = cache(async (): Promise<OwnProfile | null> => {
 });
 
 /**
- * Updates only the basic identity fields. Avatar, links, skills, theme, locale,
- * and publish state have their own slices and must not be written here.
+ * Updates only the basic identity fields. Avatar, links, skills list, theme,
+ * locale, and publish state have their own slices and must not be written here.
  */
 export async function updateOwnBasicProfile(input: BasicProfileInput): Promise<void> {
   const user = await requireUser();
@@ -61,6 +62,7 @@ export async function updateOwnBasicProfile(input: BasicProfileInput): Promise<v
       company: input.company,
       about: input.about,
       address: input.address,
+      skills_section_title: input.skillsSectionTitle,
     })
     .eq("id", user.id);
 

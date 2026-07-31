@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { recordCardEvent } from "@/lib/dal/analytics";
 import { getPublicCard } from "@/lib/dal/public-card";
 import { DOCUMENTS_BUCKET } from "@/lib/profile/documents";
 import { createClient } from "@/lib/supabase/server";
@@ -31,6 +32,8 @@ export async function GET(_request: Request, context: RouteContext) {
 
   const fileName = card.cv.fileName.replace(/"/g, "");
   const bytes = await data.arrayBuffer();
+
+  await recordCardEvent({ publicId: card.publicId, eventType: "cv_open" });
 
   return new Response(bytes, {
     status: 200,
