@@ -41,7 +41,7 @@ export default async function AnalyticsPage() {
 
       <section className="flex flex-col gap-4">
         <h2 className="text-sm font-medium">{t("views.title")}</h2>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid gap-3 sm:grid-cols-2">
           {viewCards.map((card) => (
             <li key={card.key}>
               <StatCard label={card.label} value={card.value} />
@@ -52,7 +52,7 @@ export default async function AnalyticsPage() {
 
       <section className="flex flex-col gap-4">
         <h2 className="text-sm font-medium">{t("events.title")}</h2>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-3 sm:grid-cols-2">
           {ANALYTICS_EVENT_TYPES.map((eventType) => (
             <li key={eventType}>
               <StatCard

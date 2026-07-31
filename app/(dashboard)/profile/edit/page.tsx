@@ -23,11 +23,19 @@ export default async function ProfileEditPage() {
   }
 
   return (
-    <div className="flex animate-rise flex-col gap-10">
+    <div className="flex animate-rise flex-col gap-12">
       <div className="flex flex-col gap-1.5">
         <h1 className="text-2xl font-semibold tracking-tight text-balance">{t("title")}</h1>
         <p className="text-sm text-pretty text-muted-foreground">{t("subtitle")}</p>
-        <div className="flex flex-col gap-2 pt-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
+        <p className="pt-3">
+          <Link
+            href={routes.dashboard}
+            className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+          >
+            {t("backToDashboard")}
+          </Link>
+        </p>
+        <div className="flex flex-col gap-2 pt-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
           <Link
             href={routes.profileAvatar}
             className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"

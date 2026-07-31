@@ -75,7 +75,11 @@ export function ShareQrCode({ url }: { url: string }) {
 
   return (
     <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-      <div className="flex size-[220px] items-center justify-center rounded-lg border border-border/60 bg-white p-3">
+      <div
+        className="flex size-[220px] items-center justify-center rounded-lg border border-border/60 bg-white p-3"
+        aria-busy={!preview}
+        aria-live="polite"
+      >
         {preview ? (
           // eslint-disable-next-line @next/next/no-img-element -- QR data URL preview
           <img

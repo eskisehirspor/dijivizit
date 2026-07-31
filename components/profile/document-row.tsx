@@ -197,15 +197,21 @@ export function DocumentRow({ document }: { document: OwnDocument }) {
           <Button type="submit" className="h-10 w-fit" disabled={isPending || isDeleting}>
             {isPending ? t("common.loading") : t("profile.documents.save")}
           </Button>
-          <Button asChild variant="outline" className="h-10 w-fit" disabled={isDeleting}>
-            <a
-              href={routes.profileDocumentFile(document.id)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          {isDeleting ? (
+            <Button type="button" variant="outline" className="h-10 w-fit" disabled>
               {t("profile.documents.view")}
-            </a>
-          </Button>
+            </Button>
+          ) : (
+            <Button asChild variant="outline" className="h-10 w-fit">
+              <a
+                href={routes.profileDocumentFile(document.id)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("profile.documents.view")}
+              </a>
+            </Button>
+          )}
           <Button
             type="button"
             variant="ghost"

@@ -23,7 +23,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
             <Wordmark />
           </Link>
           <form action={logoutAction}>
-            <Button type="submit" variant="ghost" size="sm">
+            <Button type="submit" variant="ghost" className="h-10">
               {t("nav.logout")}
             </Button>
           </form>

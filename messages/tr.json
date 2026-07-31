@@ -163,8 +163,9 @@
       "manageDocumentsDescription": "Özgeçmiş, katalog ve diğer PDF belgelerini yönetin.",
       "analytics": "Analitik",
       "analyticsDescription": "Profil görüntülenmeleri ve etkileşimleri inceleyin.",
-      "viewPublic": "Herkese açık profil",
+      "viewPublic": "Profili aç",
       "viewPublicDescription": "Kartınızın ziyaretçilere nasıl göründüğünü görün.",
+      "viewPublicDisabled": "Profil yayında değil. Yayınladıktan sonra görüntüleyebilirsiniz.",
       "share": "Paylaş",
       "shareDescription": "Bağlantı ve QR kod ile paylaşın."
     },
@@ -278,6 +279,7 @@
       "title": "Profili düzenle",
       "subtitle": "Kartınızda görünen temel bilgileri güncelleyin.",
       "saved": "Profil güncellendi.",
+      "backToDashboard": "Panele dön",
       "manageAvatar": "Profil fotoğrafını yönet",
       "manageLinks": "İletişim bağlantılarını yönet",
       "manageSkills": "Uzmanlık ve yetenekleri yönet"
@@ -462,7 +464,7 @@
     "documents": {
       "title": "Belgeler",
       "subtitle": "Kartınızda görünecek PDF belgelerini yükleyin ve yönetin.",
-      "backToEdit": "Temel bilgilere dön",
+      "backToDashboard": "Panele dön",
       "listTitle": "Belgeleriniz",
       "counter": "{current} / {max}",
       "empty": "Henüz bir belge yüklemediniz.",

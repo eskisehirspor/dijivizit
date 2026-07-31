@@ -14,7 +14,7 @@ export default async function ProfileSkillsPage() {
   const [t, skills] = await Promise.all([getTranslations("profile.skills"), getOwnProfileSkills()]);
 
   return (
-    <div className="flex animate-rise flex-col gap-10">
+    <div className="flex animate-rise flex-col gap-12">
       <div className="flex flex-col gap-1.5">
         <h1 className="text-2xl font-semibold tracking-tight text-balance">{t("title")}</h1>
         <p className="text-sm text-pretty text-muted-foreground">{t("subtitle")}</p>

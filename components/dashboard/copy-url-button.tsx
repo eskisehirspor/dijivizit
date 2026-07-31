@@ -23,7 +23,7 @@ export function CopyUrlButton({ url, label }: { url: string; label?: string }) {
   }
 
   return (
-    <Button type="button" variant="outline" size="sm" onClick={handleCopy} className="shrink-0">
+    <Button type="button" variant="outline" onClick={handleCopy} className="h-10 shrink-0">
       {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
       {copied ? t("common.copied") : (label ?? t("common.copy"))}
     </Button>

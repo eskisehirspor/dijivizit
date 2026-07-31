@@ -137,7 +137,14 @@ export async function QuickActions({
           <li key={action.key}>
             {action.disabled ? (
               <div
+                role="link"
                 aria-disabled="true"
+                title={action.key === "view" ? t("viewPublicDisabled") : undefined}
+                aria-label={
+                  action.key === "view"
+                    ? `${action.title}. ${t("viewPublicDisabled")}`
+                    : action.title
+                }
                 className={cn(
                   "flex h-full flex-col gap-3 rounded-lg border border-border/60 p-6",
                   "cursor-not-allowed opacity-50",

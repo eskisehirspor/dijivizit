@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { CopyUrlButton } from "@/components/dashboard/copy-url-button";
@@ -47,17 +46,7 @@ export default async function DashboardPage() {
             <p className="text-xs text-muted-foreground">{t("dashboard.publicUrl")}</p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p className="font-mono text-sm break-all">{publicUrl}</p>
-              <div className="flex flex-wrap items-center gap-3">
-                <CopyUrlButton url={publicUrl} />
-                {isPublished ? (
-                  <Link
-                    href={publicPath}
-                    className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
-                  >
-                    {t("dashboard.openPublic")}
-                  </Link>
-                ) : null}
-              </div>
+              <CopyUrlButton url={publicUrl} />
             </div>
             {!isPublished ? (
               <p className="text-xs text-pretty text-muted-foreground">
