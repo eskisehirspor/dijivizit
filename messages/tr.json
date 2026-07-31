@@ -159,8 +159,8 @@
       "manageBankDescription": "IBAN ve hesap bilgilerinizi ekleyin.",
       "manageBilling": "Fatura bilgileri",
       "manageBillingDescription": "Vergi ve fatura bilgilerinizi ekleyin.",
-      "manageCv": "Özgeçmiş",
-      "manageCvDescription": "PDF özgeçmişinizi yükleyin veya güncelleyin.",
+      "manageDocuments": "Belgeler",
+      "manageDocumentsDescription": "Özgeçmiş, katalog ve diğer PDF belgelerini yönetin.",
       "analytics": "Analitik",
       "analyticsDescription": "Profil görüntülenmeleri ve etkileşimleri inceleyin.",
       "viewPublic": "Herkese açık profil",
@@ -189,6 +189,7 @@
           "website_click": "Web sitesi",
           "linkedin_click": "LinkedIn",
           "cv_open": "Özgeçmiş",
+          "document_open": "Belge görüntüleme",
           "vcard_download": "vCard indirme",
           "address_open": "Adres / harita",
           "share": "Paylaş menüsü",
@@ -262,11 +263,8 @@
       "copyCompanyAddress": "Şirket adresini kopyala",
       "copyTaxNumber": "Vergi numarasını kopyala"
     },
-    "cv": {
-      "title": "Özgeçmiş",
-      "documentLabel": "Belge",
-      "pdfDocument": "PDF Belgesi",
-      "view": "Özgeçmişi Görüntüle"
+    "documents": {
+      "title": "Belgeler"
     },
     "skills": {
       "titles": {
@@ -461,30 +459,55 @@
         "removeFailed": "Fotoğraf kaldırılamadı. Lütfen tekrar deneyin."
       }
     },
-    "cv": {
-      "title": "Özgeçmiş",
-      "subtitle": "Kartınızda görünecek PDF özgeçmişinizi yükleyin veya kaldırın.",
+    "documents": {
+      "title": "Belgeler",
+      "subtitle": "Kartınızda görünecek PDF belgelerini yükleyin ve yönetin.",
       "backToEdit": "Temel bilgilere dön",
-      "previewTitle": "Önizleme",
-      "previewSubtitle": "Yüklenen PDF, ziyaretçiler tarafından görüntülenebilir.",
-      "empty": "Henüz bir özgeçmiş yüklemediniz.",
-      "upload": "PDF yükle",
-      "replace": "Değiştir",
-      "view": "Özgeçmişi Görüntüle",
+      "listTitle": "Belgeleriniz",
+      "counter": "{current} / {max}",
+      "empty": "Henüz bir belge yüklemediniz.",
+      "addTitle": "Belge ekle",
+      "addSubtitle": "PDF yükleyin, türünü seçin ve başlık girin.",
+      "chooseFile": "Dosya seç",
+      "noFileChosen": "Dosya seçilmedi",
+      "upload": "Belgeyi yükle",
+      "view": "Görüntüle",
       "delete": "Sil",
-      "deleteTitle": "Özgeçmişi sil?",
-      "deleteBody": "Özgeçmişiniz kalıcı olarak kaldırılacak. Bu işlemi geri alamazsınız.",
+      "deleteTitle": "Belgeyi sil?",
+      "deleteBody": "Bu belge kalıcı olarak kaldırılacak. Bu işlemi geri alamazsınız.",
       "deleteConfirm": "Sil",
-      "uploaded": "Özgeçmiş yüklendi.",
-      "replaced": "Özgeçmiş güncellendi.",
-      "deleted": "Özgeçmiş silindi.",
+      "uploaded": "Belge yüklendi.",
+      "updated": "Belge güncellendi.",
+      "deleted": "Belge silindi.",
+      "visible": "Aktif",
+      "hidden": "Pasif",
+      "save": "Kaydet",
       "hint": "Yalnızca PDF. En fazla 10 MB.",
+      "fields": {
+        "type": "Belge türü",
+        "title": "Başlık",
+        "description": "Açıklama",
+        "descriptionHint": "İsteğe bağlı.",
+        "file": "PDF dosyası",
+        "visible": "Herkese açık profilde göster"
+      },
+      "types": {
+        "cv": "Özgeçmiş",
+        "product_catalog": "Ürün Kataloğu",
+        "price_list": "Fiyat Listesi",
+        "brochure": "Broşür",
+        "presentation": "Sunum",
+        "technical": "Teknik Doküman",
+        "other": "Diğer"
+      },
       "errors": {
         "typeInvalid": "Yalnızca PDF dosyaları yükleyebilirsiniz.",
         "tooLarge": "Dosya en fazla 10 MB olabilir.",
         "empty": "Geçerli bir dosya seçin.",
-        "uploadFailed": "Özgeçmiş yüklenemedi. Lütfen tekrar deneyin.",
-        "deleteFailed": "Özgeçmiş silinemedi. Lütfen tekrar deneyin."
+        "uploadFailed": "Belge yüklenemedi. Lütfen tekrar deneyin.",
+        "updateFailed": "Belge güncellenemedi. Lütfen tekrar deneyin.",
+        "deleteFailed": "Belge silinemedi. Lütfen tekrar deneyin.",
+        "limitReached": "En fazla 10 belge ekleyebilirsiniz."
       }
     }
   },
@@ -518,6 +541,13 @@
     },
     "skillsSectionTitle": {
       "invalid": "Geçerli bir bölüm başlığı seçin."
+    },
+    "document": {
+      "typeInvalid": "Geçerli bir belge türü seçin.",
+      "titleRequired": "Başlık gerekli.",
+      "titleTooLong": "Başlık en fazla 200 karakter olabilir.",
+      "descriptionTooLong": "Açıklama en fazla 500 karakter olabilir.",
+      "idInvalid": "Geçersiz belge."
     },
     "bank": {
       "accountHolderRequired": "Hesap sahibi gerekli.",

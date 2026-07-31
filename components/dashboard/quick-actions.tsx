@@ -30,7 +30,7 @@ export async function QuickActions({
   skillsHref,
   bankHref,
   billingHref,
-  cvHref,
+  documentsHref,
   analyticsHref,
   shareHref,
   publicHref,
@@ -41,7 +41,7 @@ export async function QuickActions({
   skillsHref: string;
   bankHref: string;
   billingHref: string;
-  cvHref: string;
+  documentsHref: string;
   analyticsHref: string;
   shareHref: string;
   publicHref: string | null;
@@ -92,11 +92,11 @@ export async function QuickActions({
       href: billingHref,
     },
     {
-      key: "cv",
-      title: t("manageCv"),
-      description: t("manageCvDescription"),
+      key: "documents",
+      title: t("manageDocuments"),
+      description: t("manageDocumentsDescription"),
       icon: <FileText aria-hidden="true" className="size-4" />,
-      href: cvHref,
+      href: documentsHref,
     },
     {
       key: "analytics",

@@ -15,13 +15,14 @@ export const routes = {
   profileAvatar: "/profile/avatar",
   profileBank: "/profile/bank",
   profileBilling: "/profile/billing",
-  profileCv: "/profile/cv",
-  profileCvFile: "/profile/cv/file",
+  profileDocuments: "/profile/documents",
+  profileDocumentFile: (documentId: string) => `/profile/documents/${documentId}/file`,
   authCallback: "/auth/callback",
   authConfirm: "/auth/confirm",
   publicCard: (publicId: string) => `/p/${publicId}`,
   publicVcard: (publicId: string) => `/p/${publicId}/vcard`,
-  publicCv: (publicId: string) => `/p/${publicId}/cv`,
+  publicDocument: (publicId: string, documentId: string) =>
+    `/p/${publicId}/documents/${documentId}`,
 } as const;
 
 /** Path prefixes that require an authenticated session. */

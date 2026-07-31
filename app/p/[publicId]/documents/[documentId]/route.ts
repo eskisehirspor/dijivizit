@@ -2,44 +2,48 @@ import { notFound } from "next/navigation";
 
 import { recordCardEvent } from "@/lib/dal/analytics";
 import { getPublicCard } from "@/lib/dal/public-card";
-import { DOCUMENTS_BUCKET } from "@/lib/profile/documents";
+import { DOCUMENTS_BUCKET, inlinePdfContentDisposition } from "@/lib/profile/documents";
 import { createClient } from "@/lib/supabase/server";
 
 type RouteContext = {
-  params: Promise<{ publicId: string }>;
+  params: Promise<{ publicId: string; documentId: string }>;
 };
 
 /**
- * Serves the published CV PDF with Content-Disposition: inline so browsers
+ * Serves a published document PDF with Content-Disposition: inline so browsers
  * preview in a new tab instead of forcing a download.
+ * Reuses the previous public CV streaming pattern.
  */
 export async function GET(_request: Request, context: RouteContext) {
-  const { publicId } = await context.params;
+  const { publicId, documentId } = await context.params;
   const card = await getPublicCard(publicId);
+  if (!card) {
+    notFound();
+  }
 
-  if (!card?.cv?.storagePath) {
+  const document = card.documents.find((item) => item.id === documentId);
+  if (!document?.storagePath) {
     notFound();
   }
 
   const supabase = await createClient();
   const { data, error } = await supabase.storage
     .from(DOCUMENTS_BUCKET)
-    .download(card.cv.storagePath);
+    .download(document.storagePath);
 
   if (error || !data) {
     notFound();
   }
 
-  const fileName = card.cv.fileName.replace(/"/g, "");
   const bytes = await data.arrayBuffer();
 
-  await recordCardEvent({ publicId: card.publicId, eventType: "cv_open" });
+  await recordCardEvent({ publicId: card.publicId, eventType: "document_open" });
 
   return new Response(bytes, {
     status: 200,
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `inline; filename="${fileName}"; filename*=UTF-8''${encodeURIComponent(fileName)}`,
+      "Content-Disposition": inlinePdfContentDisposition(document.fileName),
       "Cache-Control": "private, max-age=300",
     },
   });

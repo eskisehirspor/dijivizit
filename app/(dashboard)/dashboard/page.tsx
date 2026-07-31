@@ -77,7 +77,7 @@ export default async function DashboardPage() {
         skillsHref={routes.profileSkills}
         bankHref={routes.profileBank}
         billingHref={routes.profileBilling}
-        cvHref={routes.profileCv}
+        documentsHref={routes.profileDocuments}
         analyticsHref={routes.analytics}
         shareHref={routes.share}
         publicHref={isPublished ? publicPath : null}

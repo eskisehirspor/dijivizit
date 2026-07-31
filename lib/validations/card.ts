@@ -34,8 +34,11 @@ export const publicCardBillingInfoSchema = z.object({
   taxOffice: z.string(),
 });
 
-export const publicCardCvSchema = z.object({
+export const publicCardDocumentSchema = z.object({
+  id: z.string(),
+  type: z.string(),
   title: z.string(),
+  description: z.string().nullable(),
   fileName: z.string(),
   storagePath: z.string(),
 });
@@ -53,7 +56,7 @@ export const publicCardSchema = z.object({
   skillsSectionTitle: z.enum(["expertise_areas", "skills"]).default("expertise_areas"),
   bankAccount: publicCardBankAccountSchema.nullable().optional(),
   billingInfo: publicCardBillingInfoSchema.nullable().optional(),
-  cv: publicCardCvSchema.nullable().optional(),
+  documents: z.array(publicCardDocumentSchema).default([]),
   links: z.array(publicCardLinkSchema),
   skills: z.array(publicCardSkillSchema),
 });
@@ -62,5 +65,5 @@ export type PublicCardLink = z.infer<typeof publicCardLinkSchema>;
 export type PublicCardSkill = z.infer<typeof publicCardSkillSchema>;
 export type PublicCardBankAccount = z.infer<typeof publicCardBankAccountSchema>;
 export type PublicCardBillingInfo = z.infer<typeof publicCardBillingInfoSchema>;
-export type PublicCardCv = z.infer<typeof publicCardCvSchema>;
+export type PublicCardDocument = z.infer<typeof publicCardDocumentSchema>;
 export type PublicCard = z.infer<typeof publicCardSchema>;

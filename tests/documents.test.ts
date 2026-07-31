@@ -1,25 +1,29 @@
 import { describe, expect, it } from "vitest";
 
 import { formatFileSize } from "@/lib/profile/documents";
-import { validateCvFile } from "@/lib/validations/document-cv";
+import { validateDocumentFile } from "@/lib/validations/documents";
 
-describe("validateCvFile", () => {
+describe("validateDocumentFile", () => {
   it("accepts a PDF within the size limit", () => {
-    expect(validateCvFile({ type: "application/pdf", size: 1024, name: "cv.pdf" })).toEqual({
+    expect(
+      validateDocumentFile({ type: "application/pdf", size: 1024, name: "belge.pdf" }),
+    ).toEqual({
       ok: true,
       mime: "application/pdf",
     });
   });
 
   it("rejects non-PDF types", () => {
-    expect(validateCvFile({ type: "image/png", size: 1024, name: "cv.png" })).toEqual({
+    expect(validateDocumentFile({ type: "image/png", size: 1024, name: "belge.png" })).toEqual({
       ok: false,
       code: "type",
     });
   });
 
   it("rejects oversized files", () => {
-    expect(validateCvFile({ type: "application/pdf", size: 11_000_000, name: "cv.pdf" })).toEqual({
+    expect(
+      validateDocumentFile({ type: "application/pdf", size: 11_000_000, name: "belge.pdf" }),
+    ).toEqual({
       ok: false,
       code: "size",
     });

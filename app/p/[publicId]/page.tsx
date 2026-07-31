@@ -6,7 +6,7 @@ import { User } from "lucide-react";
 import { iconForLinkPlatform } from "@/components/card/platform-icons";
 import { PublicBankCard } from "@/components/card/public-bank-card";
 import { PublicBillingCard } from "@/components/card/public-billing-card";
-import { PublicCvCard } from "@/components/card/public-cv-card";
+import { PublicDocumentsSection } from "@/components/card/public-documents-section";
 import { PublicShareMenu } from "@/components/card/public-share-menu";
 import { PublicSkillsSection } from "@/components/card/public-skills-section";
 import { TrackProfileView } from "@/components/card/track-profile-view";
@@ -208,7 +208,7 @@ export default async function PublicCardPage({ params }: PublicCardPageProps) {
           />
         ) : null}
 
-        {card.cv ? <PublicCvCard viewHref={routes.publicCv(card.publicId)} /> : null}
+        <PublicDocumentsSection publicId={card.publicId} documents={card.documents} />
 
         <PublicSkillsSection
           titleKey={

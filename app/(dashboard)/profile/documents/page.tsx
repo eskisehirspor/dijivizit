@@ -2,21 +2,21 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
-import { CvManager } from "@/components/profile/cv-manager";
-import { getOwnCvDocument } from "@/lib/dal/documents";
+import { DocumentsManager } from "@/components/profile/documents-manager";
+import { getOwnDocuments } from "@/lib/dal/documents";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { routes } from "@/lib/routes";
 
 export async function generateMetadata() {
-  const t = await getTranslations("profile.cv");
+  const t = await getTranslations("profile.documents");
   return { title: t("title") };
 }
 
-export default async function ProfileCvPage() {
-  const [t, profile, document] = await Promise.all([
-    getTranslations("profile.cv"),
+export default async function ProfileDocumentsPage() {
+  const [t, profile, documents] = await Promise.all([
+    getTranslations("profile.documents"),
     getOwnProfile(),
-    getOwnCvDocument(),
+    getOwnDocuments(),
   ]);
 
   if (!profile) {
@@ -38,18 +38,7 @@ export default async function ProfileCvPage() {
         </p>
       </div>
 
-      <CvManager
-        document={
-          document
-            ? {
-                fileName: document.file_name,
-                fileSize: document.file_size,
-                uploadedAt: document.updated_at,
-                viewUrl: routes.profileCvFile,
-              }
-            : null
-        }
-      />
+      <DocumentsManager documents={documents} />
     </div>
   );
 }

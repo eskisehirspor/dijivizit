@@ -10,6 +10,7 @@ export const ANALYTICS_EVENT_TYPES = [
   "website_click",
   "linkedin_click",
   "cv_open",
+  "document_open",
   "vcard_download",
   "address_open",
   "share",

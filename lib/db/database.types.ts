@@ -152,9 +152,12 @@ export type Database = {
       documents: {
         Row: {
           created_at: string
+          description: string | null
+          display_order: number
           file_name: string
           file_size: number
           id: string
+          is_visible: boolean
           mime_type: string
           storage_path: string
           title: string
@@ -164,9 +167,12 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          description?: string | null
+          display_order?: number
           file_name: string
           file_size: number
           id?: string
+          is_visible?: boolean
           mime_type: string
           storage_path: string
           title: string
@@ -176,9 +182,12 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          description?: string | null
+          display_order?: number
           file_name?: string
           file_size?: number
           id?: string
+          is_visible?: boolean
           mime_type?: string
           storage_path?: string
           title?: string
