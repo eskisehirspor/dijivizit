@@ -53,6 +53,8 @@
     "register": {
       "title": "Dijivizit hesabı oluşturun",
       "subtitle": "Dijital kartvizitinizi dakikalar içinde hazırlayın.",
+      "inviteHint": "Kayıt için geçerli bir davet kodu gerekir. Google ile yeni hesap yalnızca o Google e-postasına özel davet varsa açılır.",
+      "googleHint": "Google ile yeni hesap, davet kodunuz o Google e-postasına bağlıysa oluşur.",
       "submit": "Hesap oluştur",
       "hasAccount": "Zaten hesabınız var mı?",
       "loginLink": "Giriş yapın",
@@ -84,7 +86,18 @@
       "newPassword": "Yeni parola",
       "confirmPassword": "Parolayı doğrula",
       "fullNamePlaceholder": "Görkem Sönmez",
-      "emailPlaceholder": "ornek@sirket.com"
+      "emailPlaceholder": "ornek@sirket.com",
+      "invitationCode": "Davet kodu",
+      "invitationCodePlaceholder": "DIJI-XXXX-XXXX-XXXX"
+    },
+    "invite": {
+      "errors": {
+        "required": "Davet kodu gerekli.",
+        "invalid": "Davet kodu geçersiz.",
+        "expired": "Bu davet kodunun süresi dolmuş.",
+        "exhausted": "Bu davet kodu kullanım sınırına ulaşmış.",
+        "email_mismatch": "Bu davet kodu başka bir e-posta adresi için."
+      }
     },
     "forgotPassword": {
       "title": "Parolanızı sıfırlayın",
@@ -168,6 +181,35 @@
       "viewPublicDisabled": "Profil yayında değil. Yayınladıktan sonra görüntüleyebilirsiniz.",
       "share": "Paylaş",
       "shareDescription": "Bağlantı ve QR kod ile paylaşın."
+    },
+    "invites": {
+      "nav": "Davet kodları",
+      "title": "Davet kodları",
+      "subtitle": "Yeni kayıtlar yalnızca geçerli bir davet koduyla açılır.",
+      "backToDashboard": "Panele dön",
+      "createTitle": "Kod oluştur",
+      "submit": "Kod oluştur",
+      "createdTitle": "Davet kodu hazır",
+      "createdBody": "Bu kod yalnızca şimdi görünür. Kopyalayıp saklayın; daha sonra yeniden gösterilmez.",
+      "listTitle": "Oluşturulan kodlar",
+      "empty": "Henüz bir davet kodu yok.",
+      "unbound": "E-posta bağlı değil",
+      "usage": "{current} / {max} kullanım",
+      "expires": "Son tarih: {date}",
+      "noExpiry": "Süresiz",
+      "fields": {
+        "email": "E-posta (isteğe bağlı)",
+        "emailPlaceholder": "ornek@sirket.com",
+        "emailHint": "Doldurulursa kod yalnızca bu adresle ve Google kaydı için kullanılabilir.",
+        "maxUses": "Kullanım hakkı",
+        "expiresAt": "Son kullanma (isteğe bağlı)",
+        "expiresAtHint": "Boş bırakılırsa kodun süresi dolmaz."
+      },
+      "errors": {
+        "maxUses": "Kullanım hakkı 1 ile 100 arasında olmalı.",
+        "expiresAt": "Geçerli bir son kullanma tarihi girin.",
+        "createFailed": "Davet kodu oluşturulamadı. Lütfen tekrar deneyin."
+      }
     },
     "analytics": {
       "title": "Analitik",

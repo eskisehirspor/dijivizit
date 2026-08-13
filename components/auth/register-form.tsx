@@ -46,6 +46,19 @@ export function RegisterForm() {
       />
 
       <FormField
+        label={t("auth.fields.invitationCode")}
+        name="invitationCode"
+        autoComplete="off"
+        autoCapitalize="characters"
+        spellCheck={false}
+        placeholder={t("auth.fields.invitationCodePlaceholder")}
+        required
+        error={
+          failed?.fieldErrors?.invitationCode ? t(failed.fieldErrors.invitationCode) : undefined
+        }
+      />
+
+      <FormField
         label={t("auth.fields.password")}
         name="password"
         type="password"

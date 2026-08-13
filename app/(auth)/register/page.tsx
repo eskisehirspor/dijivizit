@@ -19,10 +19,12 @@ export default async function RegisterPage() {
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-semibold text-balance">{t("auth.register.title")}</h1>
         <p className="text-sm text-pretty text-muted-foreground">{t("auth.register.subtitle")}</p>
+        <p className="text-sm text-pretty text-muted-foreground">{t("auth.register.inviteHint")}</p>
       </div>
 
       <div className="flex flex-col gap-5">
         <GoogleButton />
+        <p className="text-xs text-pretty text-muted-foreground">{t("auth.register.googleHint")}</p>
         <AuthDivider />
         <RegisterForm />
       </div>

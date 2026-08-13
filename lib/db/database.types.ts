@@ -197,6 +197,65 @@ export type Database = {
         }
         Relationships: []
       }
+      invitation_codes: {
+        Row: {
+          code_hash: string
+          created_at: string
+          created_by: string | null
+          email: string | null
+          expires_at: string | null
+          id: string
+          max_uses: number
+          use_count: number
+        }
+        Insert: {
+          code_hash: string
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          expires_at?: string | null
+          id?: string
+          max_uses?: number
+          use_count?: number
+        }
+        Update: {
+          code_hash?: string
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          expires_at?: string | null
+          id?: string
+          max_uses?: number
+          use_count?: number
+        }
+        Relationships: []
+      }
+      invitation_redemptions: {
+        Row: {
+          code_id: string
+          redeemed_at: string
+          user_id: string
+        }
+        Insert: {
+          code_id: string
+          redeemed_at?: string
+          user_id: string
+        }
+        Update: {
+          code_id?: string
+          redeemed_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invitation_redemptions_code_id_fkey"
+            columns: ["code_id"]
+            isOneToOne: false
+            referencedRelation: "invitation_codes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile_links: {
         Row: {
           created_at: string
@@ -336,6 +395,15 @@ export type Database = {
     }
     Functions: {
       generate_public_id: { Args: { id_length?: number }; Returns: string }
+      redeem_invitation_for_signup: {
+        Args: {
+          p_email: string
+          p_invitation_code: string
+          p_provider: string
+          p_user_id: string
+        }
+        Returns: undefined
+      }
       get_own_analytics_summary: { Args: never; Returns: Json }
       get_public_card: { Args: { p_public_id: string }; Returns: Json }
       record_card_event: {

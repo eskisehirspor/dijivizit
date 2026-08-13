@@ -1,9 +1,12 @@
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { CopyUrlButton } from "@/components/dashboard/copy-url-button";
 import { PublishToggle } from "@/components/dashboard/publish-toggle";
 import { QuickActions } from "@/components/dashboard/quick-actions";
 import { Badge } from "@/components/ui/badge";
+import { getAuthenticatedUser } from "@/lib/dal/auth";
+import { viewerIsInviteOwner } from "@/lib/dal/invitations";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
@@ -14,7 +17,11 @@ export async function generateMetadata() {
 }
 
 export default async function DashboardPage() {
-  const [t, profile] = await Promise.all([getTranslations(), getOwnProfile()]);
+  const [t, profile, user] = await Promise.all([
+    getTranslations(),
+    getOwnProfile(),
+    getAuthenticatedUser(),
+  ]);
 
   const publicPath = profile ? routes.publicCard(profile.public_id) : null;
   const publicUrl = publicPath ? `${clientEnv.NEXT_PUBLIC_SITE_URL}${publicPath}` : null;
@@ -29,6 +36,16 @@ export default async function DashboardPage() {
             : t("dashboard.greetingAnonymous")}
         </h1>
         <p className="text-sm text-pretty text-muted-foreground">{t("dashboard.subtitle")}</p>
+        {viewerIsInviteOwner(user?.email) ? (
+          <p className="pt-3">
+            <Link
+              href={routes.invites}
+              className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+            >
+              {t("dashboard.invites.nav")}
+            </Link>
+          </p>
+        ) : null}
       </div>
 
       <section className="flex flex-col gap-6 rounded-lg border border-border/60 p-6">

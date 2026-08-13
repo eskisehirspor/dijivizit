@@ -6,6 +6,9 @@
 
 import type { Tables, TablesInsert, TablesUpdate } from "./database.types";
 
+export type InvitationCodeRow = Tables<"invitation_codes">;
+export type InvitationCodeInsert = TablesInsert<"invitation_codes">;
+
 export type ProfileRow = Tables<"profiles">;
 export type ProfileUpdate = TablesUpdate<"profiles">;
 
