@@ -3,6 +3,8 @@ import { z } from "zod";
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.url(),
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().min(1),
+  // Application origin. Production: https://app.dijivizit.com — OAuth, email
+  // confirmation, password reset, public card URLs, and marketing CTAs.
   NEXT_PUBLIC_SITE_URL: z.url(),
 });
 
