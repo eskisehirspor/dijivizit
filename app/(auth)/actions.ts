@@ -7,7 +7,9 @@ import { type ActionResult, failure, success } from "@/lib/action-result";
 import { authErrorKey } from "@/lib/auth/errors";
 import { requestPasswordReset, updatePassword } from "@/lib/dal/auth-password";
 import { changeUnverifiedEmail, resendSignupVerificationEmail } from "@/lib/dal/auth-verification";
+import { lookupInvitationByCode } from "@/lib/dal/invitations";
 import { clientEnv } from "@/lib/env/client";
+import { evaluateEmailSignupInvitation } from "@/lib/invitations/rules";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 import { safeRedirectPath } from "@/lib/utils/safe-redirect";
@@ -79,10 +81,20 @@ export async function registerAction(
     fullName: formData.get("fullName"),
     email: formData.get("email"),
     password: formData.get("password"),
+    invitationCode: formData.get("invitationCode"),
   });
 
   if (!parsed.success) {
     return failure("auth.errors.unknown", fieldErrorsOf(parsed.error));
+  }
+
+  const invitation = await lookupInvitationByCode(parsed.data.invitationCode);
+  const invitationDecision = evaluateEmailSignupInvitation(invitation, parsed.data.email);
+
+  if (!invitationDecision.ok) {
+    return failure(`auth.invite.errors.${invitationDecision.reason}`, {
+      invitationCode: `auth.invite.errors.${invitationDecision.reason}`,
+    });
   }
 
   const supabase = await createClient();
@@ -90,13 +102,23 @@ export async function registerAction(
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
-      // Read by the handle_new_user() trigger to prefill the profile.
-      data: { full_name: parsed.data.fullName },
+      // full_name: handle_new_user. invitation_code: enforce_signup_invitation.
+      // The trigger is the real gate; this lookup is only for field errors.
+      data: {
+        full_name: parsed.data.fullName,
+        invitation_code: parsed.data.invitationCode,
+      },
       emailRedirectTo: `${clientEnv.NEXT_PUBLIC_SITE_URL}${routes.authConfirm}`,
     },
   });
 
   if (error) {
+    if (error.message.includes("invitation_required")) {
+      return failure("auth.invite.errors.invalid", {
+        invitationCode: "auth.invite.errors.invalid",
+      });
+    }
+
     return failure(authErrorKey(error));
   }
 

@@ -31,10 +31,18 @@ export const loginSchema = z.object({
   password: z.string().min(1, { error: "validation.password.required" }),
 });
 
+export const invitationCodeSchema = z
+  .string({ error: "auth.invite.errors.required" })
+  .trim()
+  .min(1, { error: "auth.invite.errors.required" })
+  .max(32, { error: "auth.invite.errors.invalid" })
+  .transform((value) => value.toUpperCase());
+
 export const registerSchema = z.object({
   fullName: fullNameSchema,
   email: emailSchema,
   password: passwordSchema,
+  invitationCode: invitationCodeSchema,
 });
 
 export const forgotPasswordSchema = z.object({

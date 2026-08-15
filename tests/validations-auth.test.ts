@@ -53,6 +53,7 @@ describe("registerSchema", () => {
       fullName: "  Görkem Sönmez  ",
       email: "a@b.com",
       password: "longenough1",
+      invitationCode: "DIJI-ABCD-EFGH-JKMN",
     });
 
     expect(result.success).toBe(true);
@@ -64,6 +65,7 @@ describe("registerSchema", () => {
       fullName: "A",
       email: "a@b.com",
       password: "longenough1",
+      invitationCode: "DIJI-ABCD-EFGH-JKMN",
     });
 
     expect(result.success).toBe(false);

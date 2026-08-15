@@ -8,6 +8,7 @@ export const routes = {
   dashboard: "/dashboard",
   share: "/dashboard/share",
   analytics: "/dashboard/analytics",
+  invites: "/dashboard/invites",
   settings: "/settings",
   profileEdit: "/profile/edit",
   profileLinks: "/profile/links",

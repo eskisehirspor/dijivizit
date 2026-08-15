@@ -9,7 +9,16 @@
 do $$
 declare
   demo_user_id constant uuid := '11111111-1111-1111-1111-111111111111';
+  demo_invite_code constant text := 'DIJI-DEMO-SEED-0001';
 begin
+  insert into public.invitation_codes (code_hash, email, max_uses)
+  values (
+    encode(extensions.digest(convert_to(demo_invite_code, 'UTF8'), 'sha256'), 'hex'),
+    'demo@dijivizit.com',
+    1
+  )
+  on conflict (code_hash) do nothing;
+
   insert into auth.users (
     instance_id,
     id,
@@ -34,7 +43,7 @@ begin
     now(),
     now(),
     '{"provider":"email","providers":["email"]}'::jsonb,
-    '{"full_name":"Görkem Sönmez"}'::jsonb
+    jsonb_build_object('full_name', 'Görkem Sönmez', 'invitation_code', demo_invite_code)
   )
   on conflict (id) do nothing;
 
