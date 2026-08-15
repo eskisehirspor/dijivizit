@@ -11,8 +11,14 @@ export async function generateMetadata() {
   return { title: t("title") };
 }
 
-export default async function RegisterPage() {
+export default async function RegisterPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ invite?: string }>;
+}) {
   const t = await getTranslations();
+  const params = await searchParams;
+  const invitationCode = params.invite ?? "";
 
   return (
     <div className="flex flex-col gap-8">
@@ -26,7 +32,7 @@ export default async function RegisterPage() {
         <GoogleButton />
         <p className="text-xs text-pretty text-muted-foreground">{t("auth.register.googleHint")}</p>
         <AuthDivider />
-        <RegisterForm />
+        <RegisterForm invitationCode={invitationCode} />
       </div>
 
       <p className="text-sm text-muted-foreground">

@@ -9,7 +9,11 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import type { ActionResult } from "@/lib/action-result";
 
-export function RegisterForm() {
+export function RegisterForm({
+  invitationCode = "",
+}: {
+  invitationCode?: string;
+}) {
   const t = useTranslations();
   const [state, formAction, isPending] = useActionState<ActionResult | null, FormData>(
     registerAction,
@@ -48,6 +52,7 @@ export function RegisterForm() {
       <FormField
         label={t("auth.fields.invitationCode")}
         name="invitationCode"
+        defaultValue={invitationCode}
         autoComplete="off"
         autoCapitalize="characters"
         spellCheck={false}
