@@ -15,6 +15,7 @@ export type InvitationListItem = {
   useCount: number;
   expiresAt: string | null;
   createdAt: string;
+  revokedAt: string | null;
 };
 
 function ownerAllowlist(): string[] {
@@ -37,9 +38,10 @@ export async function requireInviteOwner(): Promise<AuthenticatedUser> {
 
 export async function lookupInvitationByCode(code: string): Promise<InvitationRecord | null> {
   const supabase = createAdminClient();
+
   const { data, error } = await supabase
     .from("invitation_codes")
-    .select("email, max_uses, use_count, expires_at")
+    .select("email, max_uses, use_count, expires_at, revoked_at")
     .eq("code_hash", hashInvitationCode(code))
     .maybeSingle();
 
@@ -52,15 +54,18 @@ export async function lookupInvitationByCode(code: string): Promise<InvitationRe
     maxUses: data.max_uses,
     useCount: data.use_count,
     expiresAt: data.expires_at ? new Date(data.expires_at) : null,
+    revokedAt: data.revoked_at ? new Date(data.revoked_at) : null,
   };
 }
 
 export async function listInvitationCodes(): Promise<InvitationListItem[]> {
   await requireInviteOwner();
+
   const supabase = createAdminClient();
+
   const { data, error } = await supabase
     .from("invitation_codes")
-    .select("id, email, max_uses, use_count, expires_at, created_at")
+    .select("id, email, max_uses, use_count, expires_at, created_at, revoked_at")
     .order("created_at", { ascending: false });
 
   if (error || !data) {
@@ -74,6 +79,7 @@ export async function listInvitationCodes(): Promise<InvitationListItem[]> {
     useCount: row.use_count,
     expiresAt: row.expires_at,
     createdAt: row.created_at,
+    revokedAt: row.revoked_at,
   }));
 }
 
@@ -99,4 +105,24 @@ export async function insertInvitationCode(input: {
   }
 
   return { plaintext };
+}
+
+export async function revokeInvitationCode(
+  invitationId: string,
+): Promise<{ ok: true } | { ok: false }> {
+  await requireInviteOwner();
+
+  const supabase = createAdminClient();
+
+  const { error } = await supabase
+    .from("invitation_codes")
+    .update({ revoked_at: new Date().toISOString() })
+    .eq("id", invitationId)
+    .is("revoked_at", null);
+
+  if (error) {
+    return { ok: false };
+  }
+
+  return { ok: true };
 }

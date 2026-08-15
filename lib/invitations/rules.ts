@@ -5,14 +5,21 @@ export type InvitationRecord = {
   maxUses: number;
   useCount: number;
   expiresAt: Date | null;
+  revokedAt: Date | null;
 };
 
 export type InvitationFailure = "invalid" | "expired" | "exhausted" | "email_mismatch";
 
-export type InvitationDecision = { ok: true } | { ok: false; reason: InvitationFailure };
+export type InvitationDecision =
+  | { ok: true }
+  | { ok: false; reason: InvitationFailure };
 
 function isExpired(record: InvitationRecord, now: Date): boolean {
   return record.expiresAt !== null && record.expiresAt.getTime() <= now.getTime();
+}
+
+function isRevoked(record: InvitationRecord): boolean {
+  return record.revokedAt !== null;
 }
 
 function isExhausted(record: InvitationRecord): boolean {
@@ -29,6 +36,10 @@ export function evaluateEmailSignupInvitation(
   now: Date = new Date(),
 ): InvitationDecision {
   if (!record) {
+    return { ok: false, reason: "invalid" };
+  }
+
+  if (isRevoked(record)) {
     return { ok: false, reason: "invalid" };
   }
 
@@ -62,6 +73,10 @@ export function evaluateGoogleSignupInvitation(
 
   if (record.email !== normalizeInvitationEmail(googleEmail)) {
     return { ok: false, reason: "email_mismatch" };
+  }
+
+  if (isRevoked(record)) {
+    return { ok: false, reason: "invalid" };
   }
 
   if (isExpired(record, now)) {

@@ -206,6 +206,7 @@ export type Database = {
           expires_at: string | null
           id: string
           max_uses: number
+          revoked_at: string | null
           use_count: number
         }
         Insert: {
@@ -216,6 +217,7 @@ export type Database = {
           expires_at?: string | null
           id?: string
           max_uses?: number
+          revoked_at?: string | null
           use_count?: number
         }
         Update: {
@@ -226,6 +228,7 @@ export type Database = {
           expires_at?: string | null
           id?: string
           max_uses?: number
+          revoked_at?: string | null
           use_count?: number
         }
         Relationships: []
@@ -395,15 +398,6 @@ export type Database = {
     }
     Functions: {
       generate_public_id: { Args: { id_length?: number }; Returns: string }
-      redeem_invitation_for_signup: {
-        Args: {
-          p_email: string
-          p_invitation_code: string
-          p_provider: string
-          p_user_id: string
-        }
-        Returns: undefined
-      }
       get_own_analytics_summary: { Args: never; Returns: Json }
       get_public_card: { Args: { p_public_id: string }; Returns: Json }
       record_card_event: {
@@ -413,6 +407,15 @@ export type Database = {
           p_visitor_id?: string
         }
         Returns: boolean
+      }
+      redeem_invitation_for_signup: {
+        Args: {
+          p_email: string
+          p_invitation_code: string
+          p_provider: string
+          p_user_id: string
+        }
+        Returns: undefined
       }
     }
     Enums: {

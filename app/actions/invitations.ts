@@ -5,10 +5,17 @@ import { Resend } from "resend";
 import { z } from "zod";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
-import { insertInvitationCode, requireInviteOwner } from "@/lib/dal/invitations";
+import {
+  insertInvitationCode,
+  requireInviteOwner,
+  revokeInvitationCode,
+} from "@/lib/dal/invitations";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
-import { createInvitationSchema, parseInvitationExpiry } from "@/lib/validations/invitations";
+import {
+  createInvitationSchema,
+  parseInvitationExpiry,
+} from "@/lib/validations/invitations";
 
 export type CreateInvitationData = {
   plaintext: string;
@@ -36,7 +43,7 @@ export async function createInvitationAction(
 
   const parsed = createInvitationSchema.safeParse({
     email: formData.get("email") ?? "",
-    maxUses: formData.get("maxUses") ?? "1",
+    maxUses: "1",
     expiresAt: formData.get("expiresAt") ?? "",
   });
 
@@ -55,7 +62,7 @@ export async function createInvitationAction(
   const result = await insertInvitationCode({
     createdBy: owner.id,
     email: parsed.data.email === "" ? null : parsed.data.email,
-    maxUses: parsed.data.maxUses,
+    maxUses: 1,
     expiresAt,
   });
 
@@ -70,6 +77,7 @@ export async function createInvitationAction(
       routes.register,
       clientEnv.NEXT_PUBLIC_SITE_URL,
     );
+
     registerUrl.searchParams.set("invite", result.plaintext);
 
     const { error: emailError } = await resend.emails.send({
@@ -149,11 +157,11 @@ export async function createInvitationAction(
               font-size:13px;
               color:#555555;
             ">
-              Davet kodunuz ${parsed.data.maxUses} kez kullanılabilir.
+              Davet kodunuz yalnızca 1 kez kullanılabilir.
               ${
                 expiresAt
                   ? `<br />Son kullanım tarihi: ${expiresAt}`
-                  : ""
+                  : `<br />Bu davetin son kullanım tarihi yoktur.`
               }
             </div>
           </div>
@@ -168,5 +176,24 @@ export async function createInvitationAction(
   }
 
   revalidatePath(routes.invites);
-  return success({ plaintext: result.plaintext });
+
+  return success({
+    plaintext: result.plaintext,
+  });
+}
+
+export async function revokeInvitationAction(
+  invitationId: string,
+): Promise<ActionResult> {
+  await requireInviteOwner();
+
+  const result = await revokeInvitationCode(invitationId);
+
+  if (!result.ok) {
+    return failure("dashboard.invites.errors.revokeFailed");
+  }
+
+  revalidatePath(routes.invites);
+
+  return success();
 }

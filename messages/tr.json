@@ -197,6 +197,16 @@
       "usage": "{current} / {max} kullanım",
       "expires": "Son tarih: {date}",
       "noExpiry": "Süresiz",
+      "status": {
+        "active": "Aktif",
+        "used": "Kullanıldı",
+        "expired": "Süresi doldu",
+        "revoked": "İptal edildi"
+      },
+      "revoke": "İptal Et",
+      "revoking": "İptal ediliyor...",
+      "revokeConfirm": "Bu davet kodunu iptal etmek istediğinize emin misiniz?",
+      "revokeSuccess": "Davet kodu iptal edildi.",
       "fields": {
         "email": "E-posta (isteğe bağlı)",
         "emailPlaceholder": "ornek@sirket.com",
@@ -208,7 +218,8 @@
       "errors": {
         "maxUses": "Kullanım hakkı 1 ile 100 arasında olmalı.",
         "expiresAt": "Geçerli bir son kullanma tarihi girin.",
-        "createFailed": "Davet kodu oluşturulamadı. Lütfen tekrar deneyin."
+        "createFailed": "Davet kodu oluşturulamadı. Lütfen tekrar deneyin.",
+        "revokeFailed": "Davet kodu iptal edilemedi. Lütfen tekrar deneyin."
       }
     },
     "analytics": {
@@ -635,7 +646,6 @@
       "duplicate": "Bu tür için aynı ad zaten eklenmiş."
     }
   },
-
   "errors": {
     "genericTitle": "Bir şeyler ters gitti",
     "genericBody": "İşlem tamamlanamadı. Lütfen tekrar deneyin.",

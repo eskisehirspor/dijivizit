@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
@@ -13,6 +14,8 @@ import type { ActionResult } from "@/lib/action-result";
 
 export function InviteCreateForm() {
   const t = useTranslations();
+  const [isUnlimited, setIsUnlimited] = useState(false);
+
   const [state, formAction, isPending] = useActionState<
     ActionResult<CreateInvitationData> | null,
     FormData
@@ -35,6 +38,7 @@ export function InviteCreateForm() {
           <p className="text-xs text-pretty text-muted-foreground">
             {t("dashboard.invites.createdBody")}
           </p>
+
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-mono text-sm tracking-wide">{created}</p>
             <CopyUrlButton url={created} label={t("common.copy")} />
@@ -46,6 +50,7 @@ export function InviteCreateForm() {
         <Label htmlFor="invite-email" className="text-xs font-medium text-muted-foreground">
           {t("dashboard.invites.fields.email")}
         </Label>
+
         <Input
           id="invite-email"
           name="email"
@@ -54,47 +59,53 @@ export function InviteCreateForm() {
           placeholder={t("dashboard.invites.fields.emailPlaceholder")}
           aria-invalid={Boolean(failed?.fieldErrors?.email)}
         />
-        <p className="text-xs text-muted-foreground">{t("dashboard.invites.fields.emailHint")}</p>
+
+        <p className="text-xs text-muted-foreground">
+          {t("dashboard.invites.fields.emailHint")}
+        </p>
+
         {failed?.fieldErrors?.email ? (
-          <p className="text-xs text-destructive">{t(failed.fieldErrors.email)}</p>
+          <p className="text-xs text-destructive">
+            {t(failed.fieldErrors.email)}
+          </p>
         ) : null}
       </div>
 
-      <div className="grid gap-2">
-        <Label htmlFor="invite-max-uses" className="text-xs font-medium text-muted-foreground">
-          {t("dashboard.invites.fields.maxUses")}
-        </Label>
-        <Input
-          id="invite-max-uses"
-          name="maxUses"
-          type="number"
-          min={1}
-          max={100}
-          defaultValue={1}
-          className="h-10"
-          aria-invalid={Boolean(failed?.fieldErrors?.maxUses)}
-        />
-        {failed?.fieldErrors?.maxUses ? (
-          <p className="text-xs text-destructive">{t(failed.fieldErrors.maxUses)}</p>
-        ) : null}
-      </div>
+      {/* Her davet kodu yalnızca 1 kez kullanılabilir. */}
+      <input type="hidden" name="maxUses" value="1" />
 
       <div className="grid gap-2">
         <Label htmlFor="invite-expires" className="text-xs font-medium text-muted-foreground">
           {t("dashboard.invites.fields.expiresAt")}
         </Label>
+
         <Input
           id="invite-expires"
           name="expiresAt"
           type="datetime-local"
           className="h-10"
+          disabled={isUnlimited}
           aria-invalid={Boolean(failed?.fieldErrors?.expiresAt)}
         />
+
+        <label className="flex cursor-pointer items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={isUnlimited}
+            onChange={(event) => setIsUnlimited(event.target.checked)}
+            className="size-4"
+          />
+          <span>Süresiz</span>
+        </label>
+
         <p className="text-xs text-muted-foreground">
-          {t("dashboard.invites.fields.expiresAtHint")}
+          Süresiz seçilirse davetin son kullanım tarihi olmaz.
         </p>
+
         {failed?.fieldErrors?.expiresAt ? (
-          <p className="text-xs text-destructive">{t(failed.fieldErrors.expiresAt)}</p>
+          <p className="text-xs text-destructive">
+            {t(failed.fieldErrors.expiresAt)}
+          </p>
         ) : null}
       </div>
 
