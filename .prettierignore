@@ -11,3 +11,5 @@ supabase/.temp/
 lib/db/database.types.ts
 AGENTS.md
 CLAUDE.md
+.open-next
+.wrangler

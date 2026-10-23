@@ -10,7 +10,10 @@ import { AUTH_ENTRY_ROUTES, PROTECTED_PREFIXES, routes } from "@/lib/routes";
 import { updateSession } from "@/lib/supabase/proxy";
 
 /**
- * Renamed from `middleware` in Next.js 16. Runs on the Node.js runtime.
+ * Deliberately kept on the (deprecated) `middleware` convention instead of
+ * Next 16's `proxy`: `proxy` always runs on Node.js, which OpenNext on
+ * Cloudflare Workers only supports experimentally, while `middleware` runs on
+ * the Edge runtime that Workers support natively. Nothing here needs Node APIs.
  *
  * This layer refreshes the Supabase session and handles coarse redirects. It is
  * NOT the authorization boundary: Server Actions are POSTs to the route that
@@ -21,7 +24,7 @@ import { updateSession } from "@/lib/supabase/proxy";
  * Localhost and preview deployments are neither, so they keep single-origin
  * behaviour (marketing on /, auth and dashboard on the same host).
  */
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { response, claims } = await updateSession(request);
   const { pathname, hostname, search, origin } = request.nextUrl;
 

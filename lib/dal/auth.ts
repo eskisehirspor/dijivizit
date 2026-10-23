@@ -16,7 +16,7 @@ type AuthUserRecord = AuthenticatedUser & {
 };
 
 /**
- * The authorization boundary. proxy.ts refreshes sessions and redirects, but it
+ * The authorization boundary. middleware.ts refreshes sessions and redirects, but it
  * does not reliably cover Server Actions, so every entry point that touches
  * private data goes through here.
  *

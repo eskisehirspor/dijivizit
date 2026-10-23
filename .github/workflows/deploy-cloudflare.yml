@@ -1,0 +1,83 @@
+name: Deploy to Cloudflare
+
+# Staging deploys on every push to the migration branch; production only runs
+# when started by hand (Actions → Deploy to Cloudflare → Run workflow).
+on:
+  push:
+    branches: [feat/cloudflare]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "staging or production"
+        required: true
+        default: staging
+        type: choice
+        options: [staging, production]
+
+concurrency:
+  group: deploy-cloudflare-${{ github.event.inputs.target || 'staging' }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.target || 'staging' }}
+
+    env:
+      TARGET: ${{ github.event.inputs.target || 'staging' }}
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Public values: they ship to every browser anyway.
+      NEXT_PUBLIC_SUPABASE_URL: https://mtspxgxgtvivkrbvlbuq.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_RTt4fno6MJ0GwqFgq4FarQ_cI2GKiFK
+      # Inlined at build time; set per GitHub environment (staging/production).
+      NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'https://app.dijivizit.com' }}
+      # Needed by the build's env validation; the real value is a Worker secret.
+      SUPABASE_SECRET_KEY: build-placeholder
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Build for Cloudflare
+        run: npx opennextjs-cloudflare build
+
+      - name: Deploy
+        run: |
+          if [ "$TARGET" = "production" ]; then
+            npx opennextjs-cloudflare deploy
+          else
+            npx opennextjs-cloudflare deploy --env staging
+          fi
+
+      - name: Sync runtime secrets
+        env:
+          SUPABASE_SECRET_KEY_VALUE: ${{ secrets.SUPABASE_SECRET_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          INVITE_OWNER_EMAILS: ${{ secrets.INVITE_OWNER_EMAILS }}
+        run: |
+          node -e '
+            const out = {
+              SUPABASE_SECRET_KEY: process.env.SUPABASE_SECRET_KEY_VALUE,
+              RESEND_API_KEY: process.env.RESEND_API_KEY,
+              INVITE_OWNER_EMAILS: process.env.INVITE_OWNER_EMAILS,
+            };
+            for (const k of Object.keys(out)) if (!out[k]) delete out[k];
+            require("fs").writeFileSync("secrets.json", JSON.stringify(out));
+          '
+          if [ "$TARGET" = "production" ]; then
+            npx wrangler secret bulk secrets.json
+          else
+            npx wrangler secret bulk secrets.json --env staging
+          fi
+          rm secrets.json
