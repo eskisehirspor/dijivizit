@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import { InvitationList } from "@/components/admin/invitation-list";
 import { InviteCreateForm } from "@/components/dashboard/invite-create-form";
-import { listInvitationCodes, requireInviteOwner } from "@/lib/dal/invitations";
+import { getAdminData } from "@/lib/dal/admin";
+import { requireInviteOwner } from "@/lib/dal/invitations";
 import { routes } from "@/lib/routes";
 
 export async function generateMetadata() {
@@ -13,9 +15,9 @@ export async function generateMetadata() {
 export default async function InvitesPage() {
   await requireInviteOwner();
 
-  const [t, invitations] = await Promise.all([
+  const [t, { invitations }] = await Promise.all([
     getTranslations("dashboard.invites"),
-    listInvitationCodes(),
+    getAdminData(),
   ]);
 
   return (
@@ -30,6 +32,15 @@ export default async function InvitesPage() {
           >
             {t("backToDashboard")}
           </Link>
+          <span className="px-2 text-muted-foreground" aria-hidden="true">
+            ·
+          </span>
+          <Link
+            href={routes.admin}
+            className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+          >
+            {t("adminLink")}
+          </Link>
         </p>
       </div>
 
@@ -40,32 +51,7 @@ export default async function InvitesPage() {
 
       <section className="flex flex-col gap-4">
         <h2 className="text-sm font-medium">{t("listTitle")}</h2>
-        {invitations.length === 0 ? (
-          <p className="text-sm text-pretty text-muted-foreground">{t("empty")}</p>
-        ) : (
-          <ul className="grid gap-3">
-            {invitations.map((invitation) => (
-              <li
-                key={invitation.id}
-                className="flex flex-col gap-1 rounded-lg border border-border/60 p-4"
-              >
-                <p className="text-sm font-medium">{invitation.email ?? t("unbound")}</p>
-                <p className="text-xs text-muted-foreground tabular-nums">
-                  {t("usage", { current: invitation.useCount, max: invitation.maxUses })}
-                  {invitation.expiresAt
-                    ? ` · ${t("expires", {
-                        date: new Intl.DateTimeFormat("tr-TR", {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        }).format(new Date(invitation.expiresAt)),
-                      })}`
-                    : ` · ${t("noExpiry")}`}
-                </p>
-              </li>
-            ))}
-          </ul>
-        )}
+        <InvitationList invitations={invitations} />
       </section>
     </div>
   );

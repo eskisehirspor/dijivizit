@@ -37,7 +37,13 @@ export default async function DashboardPage() {
         </h1>
         <p className="text-sm text-pretty text-muted-foreground">{t("dashboard.subtitle")}</p>
         {viewerIsInviteOwner(user?.email) ? (
-          <p className="pt-3">
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-3">
+            <Link
+              href={routes.admin}
+              className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+            >
+              {t("dashboard.admin.nav")}
+            </Link>
             <Link
               href={routes.invites}
               className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"

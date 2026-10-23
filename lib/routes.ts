@@ -9,6 +9,8 @@ export const routes = {
   share: "/dashboard/share",
   analytics: "/dashboard/analytics",
   invites: "/dashboard/invites",
+  admin: "/dashboard/admin",
+  adminUser: (userId: string) => `/dashboard/admin/users/${userId}`,
   settings: "/settings",
   profileEdit: "/profile/edit",
   profileLinks: "/profile/links",

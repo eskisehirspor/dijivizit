@@ -176,6 +176,7 @@ export async function createInvitationAction(
   }
 
   revalidatePath(routes.invites);
+  revalidatePath(routes.admin);
 
   return success({
     plaintext: result.plaintext,
@@ -194,6 +195,7 @@ export async function revokeInvitationAction(
   }
 
   revalidatePath(routes.invites);
+  revalidatePath(routes.admin);
 
   return success();
 }

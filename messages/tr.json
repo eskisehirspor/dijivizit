@@ -220,7 +220,8 @@
         "expiresAt": "Geçerli bir son kullanma tarihi girin.",
         "createFailed": "Davet kodu oluşturulamadı. Lütfen tekrar deneyin.",
         "revokeFailed": "Davet kodu iptal edilemedi. Lütfen tekrar deneyin."
-      }
+      },
+      "adminLink": "Yönetim"
     },
     "analytics": {
       "title": "Analitik",
@@ -272,6 +273,125 @@
         }
       },
       "empty": "Paylaşmak için önce profilinizi oluşturun."
+    },
+    "admin": {
+      "nav": "Yönetim",
+      "title": "Yönetim",
+      "subtitle": "Üyeler, kartlar ve davetler tek yerde.",
+      "backToDashboard": "Panele dön",
+      "backToAdmin": "Yönetime dön",
+      "stats": {
+        "users": "Üye",
+        "usersHint": "Son {days} günde +{count}",
+        "published": "Kartı yayında",
+        "publishedHint": "Üyelerin %{percent}'i",
+        "active": "Aktif üye",
+        "activeHint": "Son {days} günde giriş yapan",
+        "views": "Kart görüntülenme",
+        "viewsHint": "Son {days} günde {count}"
+      },
+      "funnel": {
+        "title": "Kullanıcı yolculuğu",
+        "subtitle": "Kayıt olanların ne kadarı kartını kullanıma alıyor.",
+        "registered": "Kayıt oldu",
+        "filled": "Profilini doldurmaya başladı",
+        "published": "Kartını yayınladı",
+        "viewed": "Kartı görüntülendi"
+      },
+      "users": {
+        "title": "Üyeler",
+        "search": "İsim, e-posta veya şirket ara",
+        "filters": {
+          "all": "Tümü",
+          "published": "Yayında",
+          "draft": "Taslak",
+          "empty": "Boş"
+        },
+        "sortLabel": "Sırala",
+        "sort": {
+          "newest": "En yeni kayıt",
+          "lastSignIn": "Son giriş",
+          "views": "En çok görüntülenen",
+          "completeness": "En dolu profil"
+        },
+        "count": "{shown} / {total} üye",
+        "empty": "Bu filtreye uyan üye yok.",
+        "noName": "İsimsiz üye",
+        "owner": "Yönetici",
+        "views": "{count} görüntülenme",
+        "completeness": "Profil %{percent}",
+        "joined": "Kayıt {date}",
+        "lastSeen": "Son giriş {date}",
+        "neverSignedIn": "Hiç giriş yapmadı",
+        "state": {
+          "published": "Yayında",
+          "draft": "Taslak",
+          "empty": "Boş"
+        }
+      },
+      "invites": {
+        "title": "Davet kodları",
+        "manage": "Kod oluştur ve yönet",
+        "summary": {
+          "active": "Aktif",
+          "used": "Kullanıldı",
+          "expired": "Süresi doldu",
+          "revoked": "İptal"
+        },
+        "redeemedBy": "Kullanan: {name}",
+        "empty": "Henüz davet kodu yok."
+      },
+      "detail": {
+        "openCard": "Kartı aç",
+        "account": "Hesap",
+        "fields": {
+          "email": "E-posta",
+          "joined": "Kayıt tarihi",
+          "lastSignIn": "Son giriş",
+          "provider": "Giriş yöntemi",
+          "confirmed": "E-posta onayı",
+          "invitation": "Davet",
+          "cardUrl": "Kart adresi",
+          "lastView": "Son görüntülenme"
+        },
+        "providers": {
+          "email": "E-posta ve şifre",
+          "google": "Google"
+        },
+        "yes": "Onaylı",
+        "no": "Onaysız",
+        "invitationBound": "{email} adresine özel kod · {date}",
+        "invitationGeneric": "Genel kod · {date}",
+        "invitationNone": "Kayıt yok",
+        "never": "Hiç",
+        "completeness": "Profil doluluğu",
+        "checks": {
+          "name": "Ad soyad",
+          "title": "Unvan",
+          "avatar": "Fotoğraf",
+          "links": "İletişim bağlantısı",
+          "about": "Hakkında, yetenek veya belge"
+        },
+        "content": "Kart içeriği",
+        "about": "Hakkında",
+        "address": "Adres",
+        "links": "Bağlantılar",
+        "skills": "Yetenekler",
+        "documents": "Belgeler",
+        "hidden": "Gizli",
+        "nothing": "Henüz bir şey eklenmemiş.",
+        "sensitive": "Hassas bilgiler",
+        "sensitiveHint": "KVKK gereği içerik burada gösterilmez, yalnızca girilip girilmediği görünür.",
+        "bank": "IBAN",
+        "billing": "Fatura bilgisi",
+        "entered": "Girildi",
+        "notEntered": "Yok",
+        "stats": "İstatistik",
+        "viewsTotal": "Toplam görüntülenme",
+        "viewsRecent": "Son {days} gün",
+        "interactions": "Toplam etkileşim",
+        "noEvents": "Henüz etkileşim yok."
+      }
     }
   },
   "card": {
