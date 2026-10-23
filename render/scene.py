@@ -156,45 +156,17 @@ FINISHES = {
 }
 
 
-WOODS = {
-    # dark line colour, light colour
-    "wood": ((0.1, 0.047, 0.02), (0.13, 0.062, 0.026)),  # walnut
-    "wood-light": ((0.57, 0.39, 0.21), (0.66, 0.47, 0.27)),  # oak
+WOOD_TEXTURES = {
+    # Photographed from a real Dijivizit wood card (perspective-flattened,
+    # lighting evened out); the light one is the same grain re-toned to oak.
+    "wood": "wood-dark.jpg",
+    "wood-light": "wood-light.jpg",
 }
 
 
 def wood_color(nt, loc=(-900, 500), finish="wood"):
-    """Walnut grain from object coordinates, so faces and edges line up."""
-    tc = node(nt, "ShaderNodeTexCoord", (loc[0] - 600, loc[1]))
-    mp = node(nt, "ShaderNodeMapping", (loc[0] - 400, loc[1]))
-    mp.inputs["Location"].default_value = (0.25, 1.4, 0.0)
-    mp.inputs["Scale"].default_value = (0.55, 1.0, 1.0)
-    nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
-    wave = node(nt, "ShaderNodeTexWave", loc)
-    wave.wave_type = "RINGS"
-    wave.rings_direction = "Z"
-    wave.inputs["Scale"].default_value = 11.0
-    wave.inputs["Distortion"].default_value = 2.5
-    wave.inputs["Detail"].default_value = 6.0
-    wave.inputs["Detail Scale"].default_value = 1.6
-    wave.inputs["Detail Roughness"].default_value = 0.7
-    nt.links.new(mp.outputs["Vector"], wave.inputs["Vector"])
-    ramp = node(nt, "ShaderNodeValToRGB", (loc[0] + 220, loc[1]))
-    dark, light = WOODS[finish]
-    ramp.color_ramp.elements[0].color = (*dark, 1)
-    ramp.color_ramp.elements[0].position = 0.15
-    ramp.color_ramp.elements[1].color = (*light, 1)
-    ramp.color_ramp.elements[1].position = 0.75
-    grain = node(nt, "ShaderNodeTexNoise", (loc[0], loc[1] - 250))
-    grain.inputs["Scale"].default_value = 3.0
-    grain.inputs["Detail"].default_value = 8.0
-    nt.links.new(mp.outputs["Vector"], grain.inputs["Vector"])
-    blend = node(nt, "ShaderNodeMix", (loc[0] + 120, loc[1] - 120))
-    blend.inputs["Factor"].default_value = 0.35
-    nt.links.new(wave.outputs["Fac"], blend.inputs["A"])
-    nt.links.new(grain.outputs["Fac"], blend.inputs["B"])
-    nt.links.new(blend.outputs["Result"], ramp.inputs["Fac"])
-    return ramp.outputs["Color"]
+    tex = image(nt, os.path.join(TEX, WOOD_TEXTURES[finish]), loc=loc)
+    return tex.outputs["Color"]
 
 
 def card_face_material(name, mask_path, finish="black"):
@@ -209,7 +181,7 @@ def card_face_material(name, mask_path, finish="black"):
     if wood:
         nt.links.new(wood_color(nt, finish=finish), base.inputs["A"])
         base.inputs["B"].default_value = (0.035, 0.02, 0.012, 1)  # laser burn
-        r0, r1 = 0.42, 0.85
+        r0, r1 = 0.55, 0.85
     else:
         a, b, r0, r1, _ = FINISHES[finish]
         base.inputs["A"].default_value = (*a, 1)
@@ -253,8 +225,8 @@ def card_face_material(name, mask_path, finish="black"):
 
 def card_edge_material(finish):
     if finish.startswith("wood"):
-        mat, bsdf = principled("CardEdge", **{"Roughness": 0.5})
-        mat.node_tree.links.new(wood_color(mat.node_tree, finish=finish), bsdf.inputs["Base Color"])
+        # Laser-cut wood edges come out dark and charred.
+        mat, _ = principled("CardEdge", **{"Base Color": (0.03, 0.015, 0.008, 1), "Roughness": 0.8})
         return mat
     mat, _ = principled("CardEdge", **{"Base Color": (*FINISHES[finish][4], 1), "Metallic": 1.0, "Roughness": 0.3})
     return mat
