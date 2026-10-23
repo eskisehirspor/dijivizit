@@ -11,7 +11,11 @@
   "observability": { "enabled": true },
   // Production custom domains. Cloudflare creates and owns their DNS records;
   // do not add A/CNAME records for these names by hand.
-  "routes": [{ "pattern": "app.dijivizit.com", "custom_domain": true }],
+  "routes": [
+    { "pattern": "app.dijivizit.com", "custom_domain": true },
+    { "pattern": "dijivizit.com", "custom_domain": true },
+    { "pattern": "www.dijivizit.com", "custom_domain": true },
+  ],
   "services": [
     // Self-reference binding; must match the worker name.
     { "binding": "WORKER_SELF_REFERENCE", "service": "dijivizit" },
