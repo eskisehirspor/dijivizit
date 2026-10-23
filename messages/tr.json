@@ -90,7 +90,9 @@
       "fullNamePlaceholder": "Görkem Sönmez",
       "emailPlaceholder": "ornek@sirket.com",
       "invitationCode": "Davet kodu",
-      "invitationCodePlaceholder": "DIJI-XXXX-XXXX-XXXX"
+      "invitationCodePlaceholder": "DIJI-XXXX-XXXX-XXXX",
+      "showPassword": "Parolayı göster",
+      "hidePassword": "Parolayı gizle"
     },
     "invite": {
       "errors": {
