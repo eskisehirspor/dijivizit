@@ -467,7 +467,7 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     key_value(mix_saved.inputs["Factor"], 164, 0.0)
     key_value(mix_saved.inputs["Factor"], 172, 1.0)
 
-    d = 1.35 if portrait else 1.0
+    d = 0.78 if portrait else 1.0
     key(cam, 0, (0.0, -6.0 * d, 0.15))
     key(cam, 50, (-0.1, -5.6 * d, 0.1))
     key(cam, 100, (0.1, -7.0 * d, 0.2))
@@ -477,13 +477,16 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     # Landscape frames keep the phone in the right third so copy fits on the
     # left; portrait frames centre it (copy sits below on phones).
     s = 0.0 if portrait else 1.0
-    key(target, 0, (0.0, 0.0, 0.08))
-    key(target, 50, (0.0, 0.0, 0.03))
-    key(target, 100, (-0.05 - 0.35 * s, 0.25, 0.1))
-    key(target, 120, (0.0 - 0.35 * s, 0.38, 0.3))
-    key(target, 150, (0.25 - 0.55 * s, 0.4, 0.22))
-    key(target, 172, (0.25 - 0.55 * s, 0.4, 0.05))
-    key(target, 191, (0.25 - 0.55 * s, 0.4, 0.02))
+    # Portrait: the hero copy sits above the card (push the card down), every
+    # later caption sits at the bottom (lift the subject up).
+    u = 1.0 - s
+    key(target, 0, (0.0, 0.0, 0.08 + 0.2 * u))
+    key(target, 50, (0.0, 0.0, 0.03 - 0.15 * u))
+    key(target, 100, (-0.05 - 0.35 * s, 0.25, 0.1 - 0.22 * u))
+    key(target, 120, (0.0 - 0.35 * s, 0.38, 0.3 - 0.22 * u))
+    key(target, 150, (0.25 - 0.55 * s, 0.4, 0.22 - 0.22 * u))
+    key(target, 172, (0.25 - 0.55 * s, 0.4, 0.05 - 0.22 * u))
+    key(target, 191, (0.25 - 0.55 * s, 0.4, 0.02 - 0.22 * u))
 
     for obj in (card, phone, cam, target):
         if obj.animation_data and obj.animation_data.action:

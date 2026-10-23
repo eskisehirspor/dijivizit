@@ -70,7 +70,7 @@ jobs:
           for p in sorted(glob.glob("out/png/*.png")):
               Image.open(p).convert("RGB").save(
                   os.path.join("out/webp", os.path.basename(p)[:-4] + ".webp"),
-                  "WEBP", quality=78, method=6)
+                  "WEBP", quality=90, method=6)
           PY
 
       - uses: actions/upload-artifact@v4
