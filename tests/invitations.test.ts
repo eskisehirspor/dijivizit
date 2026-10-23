@@ -24,6 +24,7 @@ function openInvite(overrides: Partial<InvitationRecord> = {}): InvitationRecord
     maxUses: 1,
     useCount: 0,
     expiresAt: null,
+    revokedAt: null,
     ...overrides,
   };
 }
