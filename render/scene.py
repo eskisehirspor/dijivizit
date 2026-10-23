@@ -30,6 +30,8 @@ def parse_args():
     p.add_argument("--frames", default="0-191")
     p.add_argument("--portrait", action="store_true")
     p.add_argument("--save-blend", default="")
+    p.add_argument("--finish", default="black", choices=["black", "silver", "gold", "wood"])
+    p.add_argument("--hide-phone", action="store_true")
     return p.parse_args(argv)
 
 
@@ -145,21 +147,67 @@ def principled(name, **inputs):
     return mat, bsdf
 
 
-def card_face_material(name, mask_path):
-    """Graphite brushed metal with laser-etched (lighter, rougher) artwork."""
-    mat, bsdf = principled(name, **{"Metallic": 1.0})
+FINISHES = {
+    # base, etched artwork, base roughness, etch roughness, edge
+    "black": ((0.09, 0.09, 0.1), (0.62, 0.62, 0.63), 0.28, 0.6, (0.5, 0.5, 0.52)),
+    "silver": ((0.9, 0.9, 0.92), (0.1, 0.1, 0.11), 0.12, 0.6, (0.9, 0.9, 0.92)),
+    "gold": ((1.0, 0.68, 0.2), (0.2, 0.12, 0.03), 0.05, 0.6, (1.0, 0.68, 0.2)),
+}
+
+
+def wood_color(nt, loc=(-900, 500)):
+    """Walnut grain from object coordinates, so faces and edges line up."""
+    tc = node(nt, "ShaderNodeTexCoord", (loc[0] - 600, loc[1]))
+    mp = node(nt, "ShaderNodeMapping", (loc[0] - 400, loc[1]))
+    mp.inputs["Location"].default_value = (0.25, 1.4, 0.0)
+    mp.inputs["Scale"].default_value = (0.55, 1.0, 1.0)
+    nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+    wave = node(nt, "ShaderNodeTexWave", loc)
+    wave.wave_type = "RINGS"
+    wave.rings_direction = "Z"
+    wave.inputs["Scale"].default_value = 11.0
+    wave.inputs["Distortion"].default_value = 2.5
+    wave.inputs["Detail"].default_value = 6.0
+    wave.inputs["Detail Scale"].default_value = 1.6
+    wave.inputs["Detail Roughness"].default_value = 0.7
+    nt.links.new(mp.outputs["Vector"], wave.inputs["Vector"])
+    ramp = node(nt, "ShaderNodeValToRGB", (loc[0] + 220, loc[1]))
+    ramp.color_ramp.elements[0].color = (0.17, 0.085, 0.038, 1)
+    ramp.color_ramp.elements[0].position = 0.15
+    ramp.color_ramp.elements[1].color = (0.36, 0.19, 0.09, 1)
+    ramp.color_ramp.elements[1].position = 0.75
+    nt.links.new(wave.outputs["Fac"], ramp.inputs["Fac"])
+    return ramp.outputs["Color"]
+
+
+def card_face_material(name, mask_path, finish="black"):
+    """Card face: brushed metal (black/silver/gold) or walnut, with the artwork
+    laser-etched (contrasting, rougher)."""
+    wood = finish == "wood"
+    mat, bsdf = principled(name, **{"Metallic": 0.0 if wood else 1.0})
     nt = mat.node_tree
     mask = image(nt, os.path.join(TEX, mask_path), non_color=True, loc=(-900, 0))
     base = node(nt, "ShaderNodeMix", (-400, 200))
     base.data_type = "RGBA"
-    base.inputs["A"].default_value = (0.09, 0.09, 0.1, 1)
-    base.inputs["B"].default_value = (0.62, 0.62, 0.63, 1)
+    if wood:
+        nt.links.new(wood_color(nt), base.inputs["A"])
+        base.inputs["B"].default_value = (0.035, 0.02, 0.012, 1)  # laser burn
+        r0, r1 = 0.42, 0.85
+    else:
+        a, b, r0, r1, _ = FINISHES[finish]
+        base.inputs["A"].default_value = (*a, 1)
+        base.inputs["B"].default_value = (*b, 1)
     nt.links.new(mask.outputs["Color"], base.inputs["Factor"])
     nt.links.new(base.outputs["Result"], bsdf.inputs["Base Color"])
     rough = node(nt, "ShaderNodeMapRange", (-400, -100))
-    rough.inputs["To Min"].default_value = 0.28
-    rough.inputs["To Max"].default_value = 0.6
+    rough.inputs["To Min"].default_value = r0
+    rough.inputs["To Max"].default_value = r1
     nt.links.new(mask.outputs["Color"], rough.inputs["Value"])
+    if wood:
+        nt.links.new(rough.outputs["Result"], bsdf.inputs["Roughness"])
+        bsdf.inputs["Coat Weight"].default_value = 0.25
+        bsdf.inputs["Coat Roughness"].default_value = 0.25
+        return mat
     # Fine brushed streaks: stretched noise into roughness.
     tc = node(nt, "ShaderNodeTexCoord", (-1300, -300))
     mp = node(nt, "ShaderNodeMapping", (-1100, -300))
@@ -170,18 +218,28 @@ def card_face_material(name, mask_path):
     noise.inputs["Detail"].default_value = 4.0
     nt.links.new(mp.outputs["Vector"], noise.inputs["Vector"])
     streak = node(nt, "ShaderNodeMapRange", (-650, -300))
-    streak.inputs["To Min"].default_value = -0.05
-    streak.inputs["To Max"].default_value = 0.05
+    amp = 0.03 if finish == "gold" else 0.05
+    streak.inputs["To Min"].default_value = -amp
+    streak.inputs["To Max"].default_value = amp
     nt.links.new(noise.outputs["Fac"], streak.inputs["Value"])
     add = node(nt, "ShaderNodeMath", (-200, -150))
     add.operation = "ADD"
     nt.links.new(rough.outputs["Result"], add.inputs[0])
     nt.links.new(streak.outputs["Result"], add.inputs[1])
     nt.links.new(add.outputs["Value"], bsdf.inputs["Roughness"])
-    bsdf.inputs["Anisotropic"].default_value = 0.6
+    bsdf.inputs["Anisotropic"].default_value = 0.3 if finish == "gold" else 0.6
     tangent = node(nt, "ShaderNodeTangent", (-400, -400))
     tangent.direction_type = "UV_MAP"
     nt.links.new(tangent.outputs["Tangent"], bsdf.inputs["Tangent"])
+    return mat
+
+
+def card_edge_material(finish):
+    if finish == "wood":
+        mat, bsdf = principled("CardEdge", **{"Roughness": 0.5})
+        mat.node_tree.links.new(wood_color(mat.node_tree), bsdf.inputs["Base Color"])
+        return mat
+    mat, _ = principled("CardEdge", **{"Base Color": (*FINISHES[finish][4], 1), "Metallic": 1.0, "Roughness": 0.18})
     return mat
 
 
@@ -212,7 +270,7 @@ def screen_material():
 
 # ---------------------------------------------------------------- scene
 
-def build(portrait):
+def build(portrait, finish="black", hide_phone=False):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
@@ -289,13 +347,31 @@ def build(portrait):
     rim_obj.location = (3.5, 1.5, 3.0)
     rim_obj.rotation_euler = (Vector((0, 0, 0)) - rim_obj.location).to_track_quat("-Z", "Y").to_euler()
 
+    # Softboxes that only show up in reflections, so polished metal has
+    # something bright to mirror.
+    for name, loc, size, power in (("BoxTop", (-1.2, -3.0, 3.2), (6.0, 1.2), 4.0), ("BoxLeft", (-3.6, -2.2, 0.4), (1.0, 3.5), 3.0), ("BoxLow", (0.0, -5.2, -1.8), (11.0, 1.1), 1.5)):
+        box = flat(name, size[0], size[1], 0.05, seg=2)
+        box.location = loc
+        box.rotation_euler = (Vector((0, 0, 0)) - Vector(loc)).to_track_quat("Z", "Y").to_euler()
+        em = bpy.data.materials.new(name)
+        em.use_nodes = True
+        nt = em.node_tree
+        nt.nodes.remove(nt.nodes["Principled BSDF"])
+        e = nt.nodes.new("ShaderNodeEmission")
+        # Dark metal would turn grey under a bright mirror image; keep it subtle.
+        e.inputs["Strength"].default_value = power * (0.25 if finish == "black" else 1.0)
+        nt.links.new(e.outputs["Emission"], nt.nodes["Material Output"].inputs["Surface"])
+        box.data.materials.append(em)
+        box.visible_camera = False
+        box.visible_diffuse = False
+        box.visible_shadow = False
+
     # Card
     card = slab("Card", 0.856, 0.54, 0.032, 0.012)
     bevel(card, 0.0025, 3)
-    edge, _ = principled("CardEdge", **{"Base Color": (0.5, 0.5, 0.52, 1), "Metallic": 1.0, "Roughness": 0.22})
-    card.data.materials.append(edge)
-    card.data.materials.append(card_face_material("CardFront", "card-front.png"))
-    card.data.materials.append(card_face_material("CardBack", "card-back.png"))
+    card.data.materials.append(card_edge_material(finish))
+    card.data.materials.append(card_face_material("CardFront", "card-front.png", finish))
+    card.data.materials.append(card_face_material("CardBack", "card-back.png", finish))
 
     # Phone: titanium body, black front, inset screen and island.
     phone = bpy.data.objects.new("Phone", None)
@@ -317,6 +393,9 @@ def build(portrait):
     island.parent = phone
     island.location = (0, 0.645, 0.0396)
     island.data.materials.append(glass)
+    if hide_phone:
+        for o in (body, screen, island):
+            o.hide_render = True
 
     # Camera rig
     target = bpy.data.objects.new("Target", None)
@@ -361,11 +440,7 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     key(card, 0, (0.0, 0.0, 0.08), (104, -6, -28))
     key(card, 36, (0.0, 0.0, 0.02), (96, -3, 14))
     key(card, 72, (-0.15, 0.0, 0.06), (96, 0, 172))
-    key(card, 96, (-0.55, 0.1, 0.25), (100, 4, 352))
-    key(card, 116, (-0.18, 0.42, 0.62), (100, 10, 372))  # contact behind top
-    key(card, 124, (-0.17, 0.43, 0.6), (100, 10, 372))
-    key(card, 150, (-1.5, 0.2, 0.9), (110, 25, 395))
-    key(card, 191, (-2.6, 0.2, 1.3), (120, 35, 410))
+    key(card, 96, (-0.75, 0.15, 0.3), (98, 3, 352))
 
     # Phone rises in from lower right and settles facing the camera.
     key(phone, 0, (1.6, 0.6, -3.2), (80, 0, -30))
@@ -373,6 +448,27 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     key(phone, 100, (0.28, 0.35, -0.05), (90, 0, -12))
     key(phone, 150, (0.25, 0.35, -0.05), (90, 0, -8))
     key(phone, 191, (0.25, 0.35, -0.05), (90, 0, -6))
+
+    # From here the card is keyed in the phone's local space (x right, y up,
+    # z out of the screen; the back glass is at z = -0.039) so it goes over
+    # the top, drops in behind and lies flat against the back - never through.
+    scene = bpy.context.scene
+
+    def behind(frame, local, tilt=(0, 0, 0)):
+        scene.frame_set(frame)
+        mw = phone.matrix_world.copy()
+        pz = math.degrees(phone.rotation_euler.z)
+        key(card, frame, tuple(mw @ Vector(local)), (90 + tilt[0], tilt[1], 360 + pz + tilt[2]))
+
+    behind(101, (-0.95, 0.95, -0.3), (8, 2, 2))
+    behind(106, (-0.25, 1.1, -0.24), (6, 0, 4))
+    behind(112, (-0.08, 0.7, -0.14), (2, 0, 1))
+    behind(118, (-0.08, 0.64, -0.0485))  # contact
+    behind(126, (-0.08, 0.64, -0.0485))
+    behind(134, (-0.14, 0.7, -0.22), (4, 0, 6))
+    behind(150, (-1.2, 0.95, -0.55), (10, 12, 20))
+    behind(191, (-2.5, 1.3, -0.95), (18, 22, 40))
+    scene.frame_set(0)
 
     # Screen states
     key_value(mix_profile.inputs["Factor"], 0, 0.0)
@@ -409,7 +505,7 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
 def main():
     args = parse_args()
     portrait = args.portrait
-    scene = build(portrait)
+    scene = build(portrait, args.finish, args.hide_phone)
     w, h = (int(v) for v in args.res.split("x"))
     scene.render.resolution_x, scene.render.resolution_y = w, h
     scene.render.resolution_percentage = 100

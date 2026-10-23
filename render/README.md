@@ -10,3 +10,7 @@
   them to `public/landing/{desktop,mobile}` and redeploys.
 - Local preview: `pip install bpy==5.2.3` then
   `python3 render/scene.py --out /tmp/frames --res 640x360 --samples 16 --frames 0,72,120,180`.
+- Card finishes: `--finish black|silver|gold|wood` (`--hide-phone` for the
+  finish stills shown on the landing page).
+- Profile photo in `textures-src/avatar.jpg`: Unsplash photo
+  `photo-1494790108377-be9c29b29330` (Unsplash License).
