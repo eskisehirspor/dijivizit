@@ -8,9 +8,12 @@ import { cn } from "@/lib/utils";
 export async function PublicDocumentsSection({
   publicId,
   documents,
+  preview = false,
 }: {
   publicId: string;
   documents: PublicCardDocument[];
+  /** Owner preview: unpublished cards can't serve public document links. */
+  preview?: boolean;
 }) {
   const t = await getTranslations("card.documents");
 
@@ -31,7 +34,11 @@ export async function PublicDocumentsSection({
         {documents.map((document) => (
           <li key={document.id}>
             <a
-              href={routes.publicDocument(publicId, document.id)}
+              href={
+                preview
+                  ? routes.profileDocumentFile(document.id)
+                  : routes.publicDocument(publicId, document.id)
+              }
               target="_blank"
               rel="noopener noreferrer"
               className={cn(

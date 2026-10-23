@@ -123,7 +123,7 @@ describe("vcardInputFromPublicCard", () => {
       skills: [],
     };
 
-    expect(vcardInputFromPublicCard(card, "https://dijivizit.com/p/AbCdEfGh123")).toEqual({
+    expect(vcardInputFromPublicCard(card, "https://dijivizit.com/p/AbCdEfGh123")).toMatchObject({
       fullName: "Görkem Sönmez",
       title: "Ürün Tasarımcısı",
       company: "Dijivizit",
@@ -173,5 +173,30 @@ describe("vcardFilename", () => {
     expect(vcardFilename("Görkem Sönmez")).toBe("gorkem-sonmez.vcf");
     expect(vcardFilename("  ")).toBe("dijivizit.vcf");
     expect(vcardFilename(null)).toBe("dijivizit.vcf");
+  });
+});
+
+describe("buildVcard30 multiple values", () => {
+  it("writes every phone, email and website with labels", () => {
+    const vcard = buildVcard30({
+      fullName: "Ayşe Demir",
+      phones: [
+        { value: "+905551112233", label: "Cep" },
+        { value: "+902121112233", label: "İş" },
+      ],
+      emails: [{ value: "is@ornek.com", label: "İş" }, { value: "ben@ornek.com" }],
+      websites: [
+        { value: "https://ornek.com" },
+        { value: "https://blog.ornek.com", label: "Blog" },
+      ],
+    });
+
+    expect(vcard).toContain("item1.TEL;TYPE=CELL,VOICE:+905551112233");
+    expect(vcard).toContain("item1.X-ABLabel:Cep");
+    expect(vcard).toContain("item2.TEL;TYPE=VOICE:+902121112233");
+    expect(vcard).toContain("item3.EMAIL;TYPE=INTERNET:is@ornek.com");
+    expect(vcard).toContain("EMAIL;TYPE=INTERNET:ben@ornek.com");
+    expect(vcard).toContain("X-ABLabel:Blog");
+    expect(vcard.match(/^item\d+\.URL/gm)).toHaveLength(2);
   });
 });

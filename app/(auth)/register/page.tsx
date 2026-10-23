@@ -55,6 +55,19 @@ export default async function RegisterPage({
         <RegisterForm invitationCode={invitationCode} />
       </div>
 
+      <p className="text-sm text-pretty text-muted-foreground">
+        {t.rich("auth.register.noInvite", {
+          link: (chunks) => (
+            <a
+              href="mailto:merhaba@dijivizit.com?subject=Dijivizit%20davet%20talebi"
+              className="font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground"
+            >
+              {chunks}
+            </a>
+          ),
+        })}
+      </p>
+
       <p className="text-sm text-muted-foreground">
         {t("auth.register.hasAccount")}{" "}
         <Link

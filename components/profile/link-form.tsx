@@ -8,6 +8,7 @@ import { createProfileLinkAction } from "@/app/actions/profile-links";
 import { LinkValueField } from "@/components/profile/link-value-field";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { LinkLabelField } from "@/components/profile/link-label-field";
 import { Label } from "@/components/ui/label";
 import type { ActionResult } from "@/lib/action-result";
 import {
@@ -90,6 +91,12 @@ export function LinkForm({ linkCount }: { linkCount: number }) {
         required
         disabled={atLimit || isPending}
         error={failed?.fieldErrors?.value ? t(failed.fieldErrors.value) : undefined}
+      />
+
+      <LinkLabelField
+        id="link-label-new"
+        disabled={atLimit || isPending}
+        error={failed?.fieldErrors?.label ? t(failed.fieldErrors.label) : undefined}
       />
 
       <Button type="submit" className="h-10 w-fit" disabled={atLimit || isPending}>

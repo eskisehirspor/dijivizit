@@ -23,6 +23,15 @@ export async function GET(request: NextRequest) {
   // Recovery failures are expired/invalid email links, not OAuth errors.
   failureUrl.searchParams.set("error", isPasswordRecovery ? "confirm" : "oauth");
 
+  // A brand-new Google identity without a matching invitation is rejected by
+  // the enforce_signup_invitation trigger; GoTrue reports that as a database
+  // error on user creation. Say so, instead of a generic OAuth failure.
+  const providerError = searchParams.get("error_description") ?? "";
+  if (!code && /database error saving new user|invitation_required/i.test(providerError)) {
+    failureUrl.searchParams.set("error", "invite");
+    return NextResponse.redirect(failureUrl);
+  }
+
   if (!code) {
     return NextResponse.redirect(failureUrl);
   }

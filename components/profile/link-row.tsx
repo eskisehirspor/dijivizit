@@ -22,6 +22,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { LinkLabelField } from "@/components/profile/link-label-field";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import type { ActionResult } from "@/lib/action-result";
@@ -98,7 +99,10 @@ export function LinkRow({
   return (
     <li className="grid gap-5 rounded-lg border border-border/60 p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm font-medium">{platformLabel}</p>
+        <p className="text-sm font-medium">
+          {platformLabel}
+          {link.label ? <span className="text-muted-foreground"> · {link.label}</span> : null}
+        </p>
 
         <div className="flex items-center gap-2">
           <Button
@@ -147,6 +151,12 @@ export function LinkRow({
           defaultValue={link.value}
           required
           error={failed?.fieldErrors?.value ? t(failed.fieldErrors.value) : undefined}
+        />
+
+        <LinkLabelField
+          id={`label-${link.id}`}
+          defaultValue={link.label}
+          error={failed?.fieldErrors?.label ? t(failed.fieldErrors.label) : undefined}
         />
 
         <div className="flex flex-wrap items-center justify-between gap-4">

@@ -1,4 +1,10 @@
+export type VcardLabeledValue = { value: string; label?: string | null };
+
 export type VcardInput = {
+  /** All numbers/addresses in card order; when set they replace phone/email/website. */
+  phones?: VcardLabeledValue[];
+  emails?: VcardLabeledValue[];
+  websites?: VcardLabeledValue[];
   fullName?: string | null;
   title?: string | null;
   company?: string | null;
@@ -33,6 +39,18 @@ export function normalizeVcardAddress(value: string): string {
     .join(" ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function cleanList(
+  list: VcardLabeledValue[] | undefined,
+  single: string | null,
+): { value: string; label: string | null }[] {
+  if (list) {
+    return list
+      .map((entry) => ({ value: entry.value.trim(), label: trimOrNull(entry.label) }))
+      .filter((entry) => entry.value.length > 0);
+  }
+  return single ? [{ value: single, label: null }] : [];
 }
 
 /** Escape text for vCard 3.0 property values. */
@@ -91,8 +109,30 @@ export function buildVcard30(input: VcardInput): string {
 
   if (company) lines.push(textProp("ORG", company));
   if (title) lines.push(textProp("TITLE", title));
-  if (phone) lines.push(`TEL;TYPE=CELL,VOICE:${escapeVcardValue(phone)}`);
-  if (email) lines.push(`EMAIL;TYPE=INTERNET:${escapeVcardValue(email)}`);
+  let item = 1;
+
+  const phones = cleanList(input.phones, phone);
+  phones.forEach((entry, index) => {
+    const type = index === 0 ? "TEL;TYPE=CELL,VOICE" : "TEL;TYPE=VOICE";
+    if (entry.label) {
+      lines.push(`item${item}.${type}:${escapeVcardValue(entry.value)}`);
+      lines.push(`item${item}.X-ABLabel:${escapeVcardValue(entry.label)}`);
+      item += 1;
+    } else {
+      lines.push(`${type}:${escapeVcardValue(entry.value)}`);
+    }
+  });
+
+  const emails = cleanList(input.emails, email);
+  emails.forEach((entry) => {
+    if (entry.label) {
+      lines.push(`item${item}.EMAIL;TYPE=INTERNET:${escapeVcardValue(entry.value)}`);
+      lines.push(`item${item}.X-ABLabel:${escapeVcardValue(entry.label)}`);
+      item += 1;
+    } else {
+      lines.push(`EMAIL;TYPE=INTERNET:${escapeVcardValue(entry.value)}`);
+    }
+  });
 
   // ADR: po-box;extended;street;city;region;postal;country
   // Freeform addresses go in the street component (index 3). A single-line
@@ -104,9 +144,8 @@ export function buildVcard30(input: VcardInput): string {
     }
   }
 
-  let item = 1;
-  if (website) {
-    lines.push(...labeledUrl(item, website, "Website"));
+  for (const entry of cleanList(input.websites, website)) {
+    lines.push(...labeledUrl(item, entry.value, entry.label ?? "Website"));
     item += 1;
   }
   if (linkedin) {

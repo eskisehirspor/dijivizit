@@ -26,9 +26,21 @@ export function withResolvedPhoneLink(links: PublicCard["links"]): PublicCardLin
   return [{ platform: "phone", label: null, value: phone }, ...links];
 }
 
+function linksOf(links: PublicCard["links"], platform: string) {
+  return links
+    .filter((link) => link.platform === platform && link.value.trim())
+    .map((link) => ({ value: link.value.trim(), label: link.label }));
+}
+
 /** Maps a published public card into vCard builder input. */
 export function vcardInputFromPublicCard(card: PublicCard, publicUrl: string): VcardInput {
+  const phones = linksOf(card.links, "phone");
+  const fallbackPhone = phones.length === 0 ? resolvePhoneFromLinks(card.links) : null;
+
   return {
+    phones: fallbackPhone ? [{ value: fallbackPhone }] : phones,
+    emails: linksOf(card.links, "email"),
+    websites: linksOf(card.links, "website"),
     fullName: card.fullName,
     title: card.title,
     company: card.company,

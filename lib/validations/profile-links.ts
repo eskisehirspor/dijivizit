@@ -187,7 +187,7 @@ export const createProfileLinkSchema = z
   .transform((data) => {
     const normalized = normalizeLinkValue(data.platform, data.value);
     if (!normalized.ok) {
-      return { platform: data.platform, value: data.value.trim(), label: null };
+      return { platform: data.platform, value: data.value.trim(), label: data.label ?? null };
     }
     return { platform: data.platform, value: normalized.value, label: data.label ?? null };
   });
@@ -199,6 +199,12 @@ export const updateProfileLinkSchema = z
     // Existing rows may use a platform outside the MVP picker; still validate
     // the value against that platform's rules so older rows remain editable.
     platform: z.string().min(1, { error: "validation.link.platformInvalid" }),
+    label: z
+      .string()
+      .trim()
+      .max(60, { error: "validation.link.labelTooLong" })
+      .optional()
+      .transform((value) => (!value || value.length === 0 ? null : value)),
   })
   .superRefine((data, ctx) => {
     const normalized = normalizeLinkValue(data.platform, data.value);
@@ -212,6 +218,7 @@ export const updateProfileLinkSchema = z
       id: data.id,
       platform: data.platform,
       value: normalized.ok ? normalized.value : data.value.trim(),
+      label: data.label ?? null,
     };
   });
 

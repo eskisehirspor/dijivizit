@@ -12,6 +12,8 @@ type TrackedPublicLinkProps = {
   platform: string;
   href: string;
   external: boolean;
+  /** False on the owner's draft preview, so previews never inflate stats. */
+  track?: boolean;
   className?: string;
   children: ReactNode;
 };
@@ -25,10 +27,11 @@ export function TrackedPublicLink({
   platform,
   href,
   external,
+  track = true,
   className,
   children,
 }: TrackedPublicLinkProps) {
-  const eventType = eventTypeForContactPlatform(platform);
+  const eventType = track ? eventTypeForContactPlatform(platform) : null;
 
   return (
     <a

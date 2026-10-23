@@ -49,6 +49,7 @@ export async function createProfileLinkAction(
   const parsed = createProfileLinkSchema.safeParse({
     platform: formData.get("platform"),
     value: formData.get("value"),
+    label: formData.get("label")?.toString() ?? "",
   });
 
   if (!parsed.success) {
@@ -85,17 +86,17 @@ export async function updateProfileLinkAction(
     id,
     value: formData.get("value"),
     platform: existing.platform,
+    label: formData.get("label")?.toString() ?? "",
   });
 
   if (!parsed.success) {
     return failure("profile.links.errors.saveFailed", fieldErrorsOf(parsed.error));
   }
 
-  // MVP UI does not edit labels; preserve whatever is already stored.
   const ok = await updateOwnProfileLink({
     id: parsed.data.id,
     value: parsed.data.value,
-    label: existing.label,
+    label: parsed.data.label,
   });
 
   if (!ok) {

@@ -60,7 +60,8 @@
       "hasAccount": "Zaten hesabınız var mı?",
       "loginLink": "Giriş yapın",
       "checkEmailTitle": "E-postanızı kontrol edin",
-      "checkEmailBody": "Hesabınızı doğrulamak için size bir bağlantı gönderdik."
+      "checkEmailBody": "Hesabınızı doğrulamak için size bir bağlantı gönderdik.",
+      "noInvite": "Davet kodun yok mu? <link>merhaba@dijivizit.com</link> adresine yaz, sana bir kod gönderelim."
     },
     "verify": {
       "title": "E-posta adresinizi doğrulamanız gerekiyor.",
@@ -128,7 +129,8 @@
       "rateLimited": "Çok fazla deneme yapıldı. Lütfen biraz sonra tekrar deneyin.",
       "oauthFailed": "Google ile giriş tamamlanamadı. Lütfen tekrar deneyin.",
       "confirmFailed": "Doğrulama bağlantısı geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapmayı deneyin.",
-      "unknown": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin."
+      "unknown": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.",
+      "inviteRequired": "Bu Google hesabı için bir davet bulunamadı. Dijivizit şu an davetle açılıyor; davet için merhaba@dijivizit.com adresine yazabilirsin."
     }
   },
   "dashboard": {
@@ -395,6 +397,14 @@
         "interactions": "Toplam etkileşim",
         "noEvents": "Henüz etkileşim yok."
       }
+    },
+    "preview": {
+      "title": "Kart önizlemesi",
+      "draftTitle": "Önizleme — kartın henüz yayında değil",
+      "draftBody": "Ziyaretçiler kartını yayınladığında böyle görecek. Bu sayfada görüntüleme ve tıklama sayılmaz.",
+      "publishedTitle": "Önizleme",
+      "publishedBody": "Kartın yayında. Ziyaretçiler tam olarak bunu görüyor; bu sayfada görüntüleme sayılmaz.",
+      "back": "Panele dön"
     }
   },
   "card": {
@@ -409,7 +419,7 @@
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
       "email": "E-posta",
-      "emailSubject": "Check out my digital business card",
+      "emailSubject": "Dijital kartvizitim",
       "copyLink": "Bağlantıyı kopyala",
       "copied": "Bağlantı kopyalandı",
       "copyFailed": "Bağlantı kopyalanamadı",
@@ -573,7 +583,8 @@
         "deleteFailed": "Bağlantı silinemedi. Lütfen tekrar deneyin.",
         "reorderFailed": "Sıra güncellenemedi. Lütfen tekrar deneyin.",
         "limitReached": "En fazla 20 bağlantı ekleyebilirsiniz."
-      }
+      },
+      "labelPlaceholder": "ör. İş, Cep, Kişisel"
     },
     "skills": {
       "title": "Uzmanlık ve yetenekler",

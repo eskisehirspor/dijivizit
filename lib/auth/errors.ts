@@ -29,6 +29,7 @@ export function authErrorKey(error: AuthError): string {
 const ERROR_KEY_BY_PARAM: Record<string, string> = {
   oauth: "auth.errors.oauthFailed",
   confirm: "auth.errors.confirmFailed",
+  invite: "auth.errors.inviteRequired",
 };
 
 export function pageErrorKey(param: string | null | undefined): string | null {

@@ -25,6 +25,26 @@ describe("visiblePublicContactLinks", () => {
       "website",
       "linkedin",
       "instagram",
+      "x",
+    ]);
+  });
+
+  it("keeps the owner's ordering instead of a fixed platform order", () => {
+    const links = visiblePublicContactLinks(
+      [
+        { platform: "linkedin", label: null, value: "https://www.linkedin.com/in/gorkem" },
+        { platform: "email", label: "İş", value: "is@ornek.com" },
+        { platform: "phone", label: "Cep", value: "+905555555555" },
+        { platform: "email", label: "Kişisel", value: "ben@ornek.com" },
+      ],
+      publicUrl,
+    );
+
+    expect(links.map((link) => link.label ?? link.platform)).toEqual([
+      "linkedin",
+      "İş",
+      "Cep",
+      "Kişisel",
     ]);
   });
 

@@ -47,7 +47,7 @@ export default async function LegalPage({ params }: LegalPageProps) {
   return (
     <div className="flex min-h-full flex-col">
       <header className="border-b border-border/60">
-        <div className="mx-auto flex h-16 w-full max-w-3xl items-center px-6">
+        <div className="mx-auto flex min-h-28 w-full max-w-3xl items-center px-6 pt-5 pb-3">
           <Link
             href={routes.home}
             className="transition-opacity hover:opacity-70"

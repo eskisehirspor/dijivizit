@@ -53,7 +53,8 @@ export default async function AnalyticsPage() {
       <section className="flex flex-col gap-4">
         <h2 className="text-sm font-medium">{t("events.title")}</h2>
         <ul className="grid gap-3 sm:grid-cols-2">
-          {ANALYTICS_EVENT_TYPES.map((eventType) => (
+          {/* cv_open is a legacy event that nothing records any more. */}
+          {ANALYTICS_EVENT_TYPES.filter((eventType) => eventType !== "cv_open").map((eventType) => (
             <li key={eventType}>
               <StatCard
                 label={t(`events.types.${eventType}`)}

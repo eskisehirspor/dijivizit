@@ -92,7 +92,7 @@ export default async function DashboardPage() {
         documentsHref={routes.profileDocuments}
         analyticsHref={routes.analytics}
         shareHref={routes.share}
-        publicHref={isPublished ? publicPath : null}
+        publicHref={isPublished ? publicPath : profile ? routes.cardPreview : null}
       />
     </div>
   );

@@ -9,19 +9,12 @@ const VISIBLE_CONTACT_PLATFORMS = new Set([
   "website",
   "linkedin",
   "instagram",
+  "x",
   "address",
 ]);
 
-/** Preferred display order for contact rows. */
-const CONTACT_ORDER = [
-  "phone",
-  "whatsapp",
-  "email",
-  "website",
-  "address",
-  "linkedin",
-  "instagram",
-] as const;
+/** Social profiles; the address row is placed just before the first of these. */
+const SOCIAL_PLATFORMS = new Set(["linkedin", "instagram", "x"]);
 
 function normalizeUrlCandidate(value: string): string {
   return value.trim().replace(/\/+$/, "").toLowerCase();
@@ -56,13 +49,21 @@ function isPublicProfileUrl(value: string, publicUrl: string): boolean {
   }
 }
 
-function sortContactLinks(links: PublicCardLink[]): PublicCardLink[] {
-  const rank = new Map(CONTACT_ORDER.map((platform, index) => [platform, index]));
-  return [...links].sort((a, b) => {
-    const aRank = rank.get(a.platform as (typeof CONTACT_ORDER)[number]) ?? CONTACT_ORDER.length;
-    const bRank = rank.get(b.platform as (typeof CONTACT_ORDER)[number]) ?? CONTACT_ORDER.length;
-    return aRank - bRank;
-  });
+/**
+ * Keeps the owner's own ordering (the card RPC returns links by display_order)
+ * and slots the profile address in after the direct contact methods.
+ */
+function insertAddress(links: PublicCardLink[], address: PublicCardLink | null): PublicCardLink[] {
+  if (!address) {
+    return links;
+  }
+
+  const firstSocial = links.findIndex((link) => SOCIAL_PLATFORMS.has(link.platform));
+  if (firstSocial === -1) {
+    return [...links, address];
+  }
+
+  return [...links.slice(0, firstSocial), address, ...links.slice(firstSocial)];
 }
 
 /**
@@ -87,10 +88,9 @@ export function visiblePublicContactLinks(
   });
 
   const trimmedAddress = address?.trim();
-  const withAddress =
-    trimmedAddress && trimmedAddress.length > 0
-      ? [...fromLinks, { platform: "address", label: null, value: trimmedAddress }]
-      : fromLinks;
 
-  return sortContactLinks(withAddress);
+  return insertAddress(
+    fromLinks,
+    trimmedAddress ? { platform: "address", label: null, value: trimmedAddress } : null,
+  );
 }

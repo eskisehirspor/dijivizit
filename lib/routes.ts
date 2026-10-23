@@ -8,6 +8,7 @@ export const routes = {
   dashboard: "/dashboard",
   share: "/dashboard/share",
   analytics: "/dashboard/analytics",
+  cardPreview: "/dashboard/preview",
   invites: "/dashboard/invites",
   admin: "/dashboard/admin",
   adminUser: (userId: string) => `/dashboard/admin/users/${userId}`,
