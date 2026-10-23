@@ -699,6 +699,14 @@
         "deleteFailed": "Belge silinemedi. Lütfen tekrar deneyin.",
         "limitReached": "En fazla 10 belge ekleyebilirsiniz."
       }
+    },
+    "cardVisibility": {
+      "label": "Kartımda göster",
+      "onHint": "Bu bilgiler herkese açık kartında görünüyor.",
+      "offHint": "Bilgiler kayıtlı kalır ama kartında görünmez.",
+      "shown": "Artık kartında görünüyor.",
+      "hidden": "Kartından gizlendi.",
+      "failed": "Ayar kaydedilemedi. Lütfen tekrar dene."
     }
   },
   "validation": {

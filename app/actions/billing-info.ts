@@ -4,7 +4,11 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
-import { deleteOwnBillingInfo, upsertOwnBillingInfo } from "@/lib/dal/billing-infos";
+import {
+  deleteOwnBillingInfo,
+  setOwnBillingInfoVisibility,
+  upsertOwnBillingInfo,
+} from "@/lib/dal/billing-infos";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { routes } from "@/lib/routes";
 import { billingInfoSchema } from "@/lib/validations/billing-info";
@@ -61,6 +65,16 @@ export async function deleteBillingInfoAction(): Promise<ActionResult> {
   const ok = await deleteOwnBillingInfo();
   if (!ok) {
     return failure("profile.billing.errors.deleteFailed");
+  }
+
+  await revalidateBillingPaths();
+  return success();
+}
+
+export async function setBillingInfoVisibilityAction(isVisible: boolean): Promise<ActionResult> {
+  const ok = await setOwnBillingInfoVisibility(isVisible);
+  if (!ok) {
+    return failure("profile.cardVisibility.failed");
   }
 
   await revalidateBillingPaths();

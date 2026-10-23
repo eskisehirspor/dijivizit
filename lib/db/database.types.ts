@@ -88,6 +88,7 @@ export type Database = {
       }
       bank_accounts: {
         Row: {
+          is_visible: boolean
           account_holder: string
           bank_name: string
           created_at: string
@@ -97,6 +98,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          is_visible?: boolean
           account_holder: string
           bank_name: string
           created_at?: string
@@ -106,6 +108,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          is_visible?: boolean
           account_holder?: string
           bank_name?: string
           created_at?: string
@@ -118,6 +121,7 @@ export type Database = {
       }
       billing_infos: {
         Row: {
+          is_visible: boolean
           company_address: string
           company_title: string
           created_at: string
@@ -128,6 +132,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          is_visible?: boolean
           company_address: string
           company_title: string
           created_at?: string
@@ -138,6 +143,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          is_visible?: boolean
           company_address?: string
           company_title?: string
           created_at?: string

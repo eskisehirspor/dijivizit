@@ -10,10 +10,17 @@ import { requireUser } from "./auth";
 
 export type OwnBillingInfo = Pick<
   BillingInfoRow,
-  "id" | "company_title" | "company_address" | "tax_number" | "tax_office" | "updated_at"
+  | "id"
+  | "company_title"
+  | "company_address"
+  | "tax_number"
+  | "tax_office"
+  | "is_visible"
+  | "updated_at"
 >;
 
-const BILLING_COLUMNS = "id, company_title, company_address, tax_number, tax_office, updated_at";
+const BILLING_COLUMNS =
+  "id, company_title, company_address, tax_number, tax_office, is_visible, updated_at";
 
 export const getOwnBillingInfo = cache(async (): Promise<OwnBillingInfo | null> => {
   const user = await requireUser();
@@ -68,6 +75,19 @@ export async function deleteOwnBillingInfo(): Promise<boolean> {
   const supabase = await createClient();
 
   const { error } = await supabase.from("billing_infos").delete().eq("user_id", user.id);
+
+  return !error;
+}
+
+/** Keeps billing details on file but shows or hides them on the public card. */
+export async function setOwnBillingInfoVisibility(isVisible: boolean): Promise<boolean> {
+  const user = await requireUser();
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("billing_infos")
+    .update({ is_visible: isVisible })
+    .eq("user_id", user.id);
 
   return !error;
 }

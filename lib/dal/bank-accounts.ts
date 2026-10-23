@@ -10,10 +10,10 @@ import { requireUser } from "./auth";
 
 export type OwnBankAccount = Pick<
   BankAccountRow,
-  "id" | "account_holder" | "iban" | "bank_name" | "updated_at"
+  "id" | "account_holder" | "iban" | "bank_name" | "is_visible" | "updated_at"
 >;
 
-const BANK_COLUMNS = "id, account_holder, iban, bank_name, updated_at";
+const BANK_COLUMNS = "id, account_holder, iban, bank_name, is_visible, updated_at";
 
 export const getOwnBankAccount = cache(async (): Promise<OwnBankAccount | null> => {
   const user = await requireUser();
@@ -70,6 +70,19 @@ export async function deleteOwnBankAccount(): Promise<boolean> {
   const supabase = await createClient();
 
   const { error } = await supabase.from("bank_accounts").delete().eq("user_id", user.id);
+
+  return !error;
+}
+
+/** Keeps the IBAN on file but shows or hides it on the public card. */
+export async function setOwnBankAccountVisibility(isVisible: boolean): Promise<boolean> {
+  const user = await requireUser();
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("bank_accounts")
+    .update({ is_visible: isVisible })
+    .eq("user_id", user.id);
 
   return !error;
 }

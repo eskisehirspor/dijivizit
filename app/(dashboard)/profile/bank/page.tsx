@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import { CardVisibilityToggle } from "@/components/profile/card-visibility-toggle";
 import { BankAccountForm } from "@/components/profile/bank-account-form";
 import { getOwnBankAccount } from "@/lib/dal/bank-accounts";
 import { formatIbanDisplay } from "@/lib/bank/turkish-iban";
@@ -28,6 +29,8 @@ export default async function ProfileBankPage() {
           </Link>
         </p>
       </div>
+
+      {account ? <CardVisibilityToggle kind="bank" visible={account.is_visible} /> : null}
 
       <BankAccountForm
         hasExisting={Boolean(account)}

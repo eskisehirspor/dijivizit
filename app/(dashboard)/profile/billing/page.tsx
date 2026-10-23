@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import { CardVisibilityToggle } from "@/components/profile/card-visibility-toggle";
 import { BillingInfoForm } from "@/components/profile/billing-info-form";
 import { getOwnBillingInfo } from "@/lib/dal/billing-infos";
 import { routes } from "@/lib/routes";
@@ -27,6 +28,8 @@ export default async function ProfileBillingPage() {
           </Link>
         </p>
       </div>
+
+      {info ? <CardVisibilityToggle kind="billing" visible={info.is_visible} /> : null}
 
       <BillingInfoForm
         hasExisting={Boolean(info)}

@@ -4,7 +4,11 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
-import { deleteOwnBankAccount, upsertOwnBankAccount } from "@/lib/dal/bank-accounts";
+import {
+  deleteOwnBankAccount,
+  setOwnBankAccountVisibility,
+  upsertOwnBankAccount,
+} from "@/lib/dal/bank-accounts";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { routes } from "@/lib/routes";
 import { bankAccountSchema } from "@/lib/validations/bank-account";
@@ -60,6 +64,16 @@ export async function deleteBankAccountAction(): Promise<ActionResult> {
   const ok = await deleteOwnBankAccount();
   if (!ok) {
     return failure("profile.bank.errors.deleteFailed");
+  }
+
+  await revalidateBankPaths();
+  return success();
+}
+
+export async function setBankAccountVisibilityAction(isVisible: boolean): Promise<ActionResult> {
+  const ok = await setOwnBankAccountVisibility(isVisible);
+  if (!ok) {
+    return failure("profile.cardVisibility.failed");
   }
 
   await revalidateBankPaths();
