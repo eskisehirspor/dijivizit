@@ -30,7 +30,7 @@ def parse_args():
     p.add_argument("--frames", default="0-191")
     p.add_argument("--portrait", action="store_true")
     p.add_argument("--save-blend", default="")
-    p.add_argument("--finish", default="black", choices=["black", "silver", "gold", "wood"])
+    p.add_argument("--finish", default="black", choices=["black", "silver", "gold", "wood", "wood-light"])
     p.add_argument("--hide-phone", action="store_true")
     return p.parse_args(argv)
 
@@ -150,12 +150,20 @@ def principled(name, **inputs):
 FINISHES = {
     # base, etched artwork, base roughness, etch roughness, edge
     "black": ((0.09, 0.09, 0.1), (0.62, 0.62, 0.63), 0.28, 0.6, (0.5, 0.5, 0.52)),
-    "silver": ((0.9, 0.9, 0.92), (0.1, 0.1, 0.11), 0.12, 0.6, (0.9, 0.9, 0.92)),
-    "gold": ((1.0, 0.68, 0.2), (0.2, 0.12, 0.03), 0.05, 0.6, (1.0, 0.68, 0.2)),
+    # Matte brushed metals: high base roughness, strong directional streaks.
+    "silver": ((0.6, 0.6, 0.62), (0.1, 0.1, 0.11), 0.34, 0.7, (0.62, 0.62, 0.64)),
+    "gold": ((0.74, 0.5, 0.2), (0.16, 0.1, 0.035), 0.34, 0.7, (0.76, 0.52, 0.21)),
 }
 
 
-def wood_color(nt, loc=(-900, 500)):
+WOODS = {
+    # dark line colour, light colour
+    "wood": ((0.04, 0.018, 0.008), (0.13, 0.062, 0.026)),  # walnut
+    "wood-light": ((0.42, 0.26, 0.12), (0.66, 0.47, 0.27)),  # oak
+}
+
+
+def wood_color(nt, loc=(-900, 500), finish="wood"):
     """Walnut grain from object coordinates, so faces and edges line up."""
     tc = node(nt, "ShaderNodeTexCoord", (loc[0] - 600, loc[1]))
     mp = node(nt, "ShaderNodeMapping", (loc[0] - 400, loc[1]))
@@ -172,25 +180,34 @@ def wood_color(nt, loc=(-900, 500)):
     wave.inputs["Detail Roughness"].default_value = 0.7
     nt.links.new(mp.outputs["Vector"], wave.inputs["Vector"])
     ramp = node(nt, "ShaderNodeValToRGB", (loc[0] + 220, loc[1]))
-    ramp.color_ramp.elements[0].color = (0.17, 0.085, 0.038, 1)
+    dark, light = WOODS[finish]
+    ramp.color_ramp.elements[0].color = (*dark, 1)
     ramp.color_ramp.elements[0].position = 0.15
-    ramp.color_ramp.elements[1].color = (0.36, 0.19, 0.09, 1)
+    ramp.color_ramp.elements[1].color = (*light, 1)
     ramp.color_ramp.elements[1].position = 0.75
-    nt.links.new(wave.outputs["Fac"], ramp.inputs["Fac"])
+    grain = node(nt, "ShaderNodeTexNoise", (loc[0], loc[1] - 250))
+    grain.inputs["Scale"].default_value = 3.0
+    grain.inputs["Detail"].default_value = 8.0
+    nt.links.new(mp.outputs["Vector"], grain.inputs["Vector"])
+    blend = node(nt, "ShaderNodeMix", (loc[0] + 120, loc[1] - 120))
+    blend.inputs["Factor"].default_value = 0.35
+    nt.links.new(wave.outputs["Fac"], blend.inputs["A"])
+    nt.links.new(grain.outputs["Fac"], blend.inputs["B"])
+    nt.links.new(blend.outputs["Result"], ramp.inputs["Fac"])
     return ramp.outputs["Color"]
 
 
 def card_face_material(name, mask_path, finish="black"):
     """Card face: brushed metal (black/silver/gold) or walnut, with the artwork
     laser-etched (contrasting, rougher)."""
-    wood = finish == "wood"
+    wood = finish.startswith("wood")
     mat, bsdf = principled(name, **{"Metallic": 0.0 if wood else 1.0})
     nt = mat.node_tree
     mask = image(nt, os.path.join(TEX, mask_path), non_color=True, loc=(-900, 0))
     base = node(nt, "ShaderNodeMix", (-400, 200))
     base.data_type = "RGBA"
     if wood:
-        nt.links.new(wood_color(nt), base.inputs["A"])
+        nt.links.new(wood_color(nt, finish=finish), base.inputs["A"])
         base.inputs["B"].default_value = (0.035, 0.02, 0.012, 1)  # laser burn
         r0, r1 = 0.42, 0.85
     else:
@@ -211,14 +228,14 @@ def card_face_material(name, mask_path, finish="black"):
     # Fine brushed streaks: stretched noise into roughness.
     tc = node(nt, "ShaderNodeTexCoord", (-1300, -300))
     mp = node(nt, "ShaderNodeMapping", (-1100, -300))
-    mp.inputs["Scale"].default_value = (2.0, 400.0, 1.0)
+    mp.inputs["Scale"].default_value = (1.5, 140.0, 1.0)
     nt.links.new(tc.outputs["UV"], mp.inputs["Vector"])
     noise = node(nt, "ShaderNodeTexNoise", (-900, -300))
     noise.inputs["Scale"].default_value = 6.0
     noise.inputs["Detail"].default_value = 4.0
     nt.links.new(mp.outputs["Vector"], noise.inputs["Vector"])
     streak = node(nt, "ShaderNodeMapRange", (-650, -300))
-    amp = 0.03 if finish == "gold" else 0.05
+    amp = 0.05 if finish == "black" else 0.12
     streak.inputs["To Min"].default_value = -amp
     streak.inputs["To Max"].default_value = amp
     nt.links.new(noise.outputs["Fac"], streak.inputs["Value"])
@@ -227,7 +244,7 @@ def card_face_material(name, mask_path, finish="black"):
     nt.links.new(rough.outputs["Result"], add.inputs[0])
     nt.links.new(streak.outputs["Result"], add.inputs[1])
     nt.links.new(add.outputs["Value"], bsdf.inputs["Roughness"])
-    bsdf.inputs["Anisotropic"].default_value = 0.3 if finish == "gold" else 0.6
+    bsdf.inputs["Anisotropic"].default_value = 0.6 if finish == "black" else 0.85
     tangent = node(nt, "ShaderNodeTangent", (-400, -400))
     tangent.direction_type = "UV_MAP"
     nt.links.new(tangent.outputs["Tangent"], bsdf.inputs["Tangent"])
@@ -235,11 +252,11 @@ def card_face_material(name, mask_path, finish="black"):
 
 
 def card_edge_material(finish):
-    if finish == "wood":
+    if finish.startswith("wood"):
         mat, bsdf = principled("CardEdge", **{"Roughness": 0.5})
-        mat.node_tree.links.new(wood_color(mat.node_tree), bsdf.inputs["Base Color"])
+        mat.node_tree.links.new(wood_color(mat.node_tree, finish=finish), bsdf.inputs["Base Color"])
         return mat
-    mat, _ = principled("CardEdge", **{"Base Color": (*FINISHES[finish][4], 1), "Metallic": 1.0, "Roughness": 0.18})
+    mat, _ = principled("CardEdge", **{"Base Color": (*FINISHES[finish][4], 1), "Metallic": 1.0, "Roughness": 0.3})
     return mat
 
 
@@ -359,7 +376,7 @@ def build(portrait, finish="black", hide_phone=False):
         nt.nodes.remove(nt.nodes["Principled BSDF"])
         e = nt.nodes.new("ShaderNodeEmission")
         # Dark metal would turn grey under a bright mirror image; keep it subtle.
-        e.inputs["Strength"].default_value = power * (0.25 if finish == "black" else 1.0)
+        e.inputs["Strength"].default_value = power * (0.25 if finish == "black" else 0.6)
         nt.links.new(e.outputs["Emission"], nt.nodes["Material Output"].inputs["Surface"])
         box.data.materials.append(em)
         box.visible_camera = False

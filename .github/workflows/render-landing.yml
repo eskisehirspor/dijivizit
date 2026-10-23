@@ -9,10 +9,10 @@ on:
         description: "Cycles samples per pixel"
         default: "64"
       variants:
-        description: "desktop, mobile or both"
+        description: "desktop, mobile, both (also renders finishes) or finishes only"
         default: both
         type: choice
-        options: [both, desktop, mobile]
+        options: [both, desktop, mobile, finishes]
 
 permissions:
   contents: write
@@ -85,7 +85,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        finish: [black, silver, gold, wood]
+        finish: [black, silver, gold, wood, wood-light]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
