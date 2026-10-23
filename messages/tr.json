@@ -48,7 +48,8 @@
       "submit": "Giriş yap",
       "forgotPassword": "Parolamı unuttum",
       "noAccount": "Hesabınız yok mu?",
-      "registerLink": "Kayıt olun"
+      "registerLink": "Kayıt olun",
+      "deleted": "Hesabın ve tüm verilerin silindi."
     },
     "register": {
       "title": "Dijivizit hesabı oluşturun",
@@ -789,5 +790,46 @@
     "home": "Ana sayfa",
     "consent": "<kvkk>KVKK Aydınlatma Metni</kvkk>'ni okudum, <terms>Kullanım Koşulları</terms>'nı kabul ediyorum.",
     "googleConsent": "Google ile devam ederek <terms>Kullanım Koşulları</terms>'nı kabul etmiş ve <kvkk>KVKK Aydınlatma Metni</kvkk>'ni okumuş olursunuz."
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "subtitle": "Giriş bilgilerin ve hesabın.",
+    "backToDashboard": "Panele dön",
+    "email": {
+      "title": "E-posta adresi",
+      "current": "Şu anki adresin: {email}",
+      "pending": "{email} adresine onay bağlantısı gönderildi. Bağlantıya tıklayana kadar eski adresin geçerli.",
+      "label": "Yeni e-posta",
+      "submit": "Onay bağlantısı gönder",
+      "sent": "Onay bağlantısı yeni adresine gönderildi."
+    },
+    "password": {
+      "title": "Şifre",
+      "setTitle": "Şifre belirle",
+      "googleHint": "Google ile giriş yapıyorsun. İstersen e-posta ile de girebilmek için bir şifre belirleyebilirsin.",
+      "current": "Mevcut şifre",
+      "new": "Yeni şifre",
+      "confirm": "Yeni şifre (tekrar)",
+      "submit": "Şifreyi güncelle",
+      "updated": "Şifren güncellendi."
+    },
+    "delete": {
+      "title": "Hesabı sil",
+      "body": "Hesabın, kartın, belgelerin, banka ve fatura bilgilerin ile tüm istatistiklerin kalıcı olarak silinir. Bu işlem geri alınamaz.",
+      "open": "Hesabımı sil",
+      "dialogTitle": "Hesabın kalıcı olarak silinsin mi?",
+      "dialogBody": "Onaylamak için aşağıya SİL yaz.",
+      "placeholder": "SİL",
+      "confirm": "Kalıcı olarak sil",
+      "confirmMismatch": "Onaylamak için SİL yazmalısın."
+    },
+    "errors": {
+      "wrongPassword": "Mevcut şifre yanlış.",
+      "sameEmail": "Bu zaten kullandığın adres.",
+      "emailTaken": "Bu e-posta adresi kullanılamıyor.",
+      "rateLimited": "Çok fazla deneme yapıldı. Biraz sonra tekrar dene.",
+      "weak": "Bu şifre çok zayıf ya da daha önce sızdırılmış. Başka bir şifre seç.",
+      "failed": "İşlem tamamlanamadı. Lütfen tekrar dene."
+    }
   }
 }

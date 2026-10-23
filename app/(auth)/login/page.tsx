@@ -16,9 +16,9 @@ export async function generateMetadata() {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string; error?: string }>;
+  searchParams: Promise<{ next?: string; error?: string; deleted?: string }>;
 }) {
-  const { next, error } = await searchParams;
+  const { next, error, deleted } = await searchParams;
   const t = await getTranslations();
 
   const errorKey = pageErrorKey(error);
@@ -33,6 +33,12 @@ export default async function LoginPage({
           {t("auth.login.subtitle")}
         </p>
       </div>
+
+      {deleted === "1" ? (
+        <Alert>
+          <AlertDescription>{t("auth.login.deleted")}</AlertDescription>
+        </Alert>
+      ) : null}
 
       {errorKey ? (
         <Alert variant="destructive">

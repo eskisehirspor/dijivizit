@@ -23,11 +23,16 @@ export default async function DashboardLayout({ children }: { children: React.Re
           <Link href={routes.dashboard} className="transition-opacity hover:opacity-70">
             <Wordmark />
           </Link>
-          <form action={logoutAction}>
-            <Button type="submit" variant="ghost" className="h-10">
-              {t("nav.logout")}
+          <div className="flex items-center gap-1">
+            <Button asChild variant="ghost" className="h-10">
+              <Link href={routes.settings}>{t("nav.settings")}</Link>
             </Button>
-          </form>
+            <form action={logoutAction}>
+              <Button type="submit" variant="ghost" className="h-10">
+                {t("nav.logout")}
+              </Button>
+            </form>
+          </div>
         </div>
       </header>
 
