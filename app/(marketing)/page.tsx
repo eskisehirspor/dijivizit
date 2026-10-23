@@ -71,7 +71,7 @@ const CAPTIONS: SequenceCaption[] = [
     title: "Tanışmanın yeni hali.",
     heading: "h1",
     body: "Kartvizitini bir kez tasarla. Bir dokunuşla paylaş, sonsuza dek güncel kalsın.",
-    place: "top",
+    place: "hero",
   },
   {
     start: 0.3,

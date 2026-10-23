@@ -19,7 +19,7 @@ export type SequenceCaption = {
   title: string;
   body?: string;
   /** Where the copy sits so it never covers the subject in that shot. */
-  place: "top" | "bottom" | "left" | "right";
+  place: "top" | "bottom" | "left" | "right" | "hero";
   /** The page's main heading; its kicker becomes part of the h1. */
   heading?: "h1" | "h2";
 };
@@ -82,7 +82,10 @@ export function ScrollSequence({
     const portrait = window.matchMedia("(max-aspect-ratio: 4/5)").matches;
     const source = portrait && mobile ? mobile : desktop;
     const frames: (HTMLImageElement | null)[] = new Array(source.count).fill(null);
-    let current = -1;
+    // The image currently on the canvas. Repaint whenever the best loaded
+    // frame for the scroll position changes (scrolling, or a closer frame
+    // finishing its download).
+    let drawn: HTMLImageElement | null = null;
     let raf = 0;
     let cancelled = false;
 
@@ -100,12 +103,11 @@ export function ScrollSequence({
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(canvas.clientWidth * dpr);
       canvas.height = Math.round(canvas.clientHeight * dpr);
-      current = -1;
+      drawn = null; // resizing clears the canvas
     };
 
-    const draw = (index: number) => {
-      const img = nearestLoaded(index);
-      if (!img) return;
+    const paint = (img: HTMLImageElement) => {
+      drawn = img;
       // object-fit: cover
       const scale = Math.max(canvas.width / source.width, canvas.height / source.height);
       const w = source.width * scale;
@@ -119,11 +121,8 @@ export function ScrollSequence({
       const span = Math.max(1, section.offsetHeight - window.innerHeight);
       const p = Math.min(1, Math.max(0, -rect.top / span));
       setProgress(p);
-      const index = Math.round(p * (source.count - 1));
-      if (index !== current || !frames[index]) {
-        current = index;
-        draw(index);
-      }
+      const img = nearestLoaded(Math.round(p * (source.count - 1)));
+      if (img && img !== drawn) paint(img);
     };
 
     const schedule = () => {
@@ -138,7 +137,7 @@ export function ScrollSequence({
         img.onload = () => {
           if (!cancelled) {
             frames[i] = img;
-            if (Math.abs(i - current) <= 1 || current === -1) schedule();
+            schedule();
           }
           resolve();
         };
@@ -196,6 +195,10 @@ export function ScrollSequence({
                 "pointer-events-none absolute flex max-w-xl flex-col gap-3 px-6 text-balance",
                 caption.place === "top" &&
                   "inset-x-0 top-24 mx-auto items-center text-center sm:top-28",
+                // Hero: above the card on phones, beside it on wide screens
+                // where the card fills the middle of the frame.
+                caption.place === "hero" &&
+                  "inset-x-0 top-24 mx-auto items-center text-center sm:top-28 md:inset-x-auto md:top-1/2 md:left-[5vw] md:max-w-[27vw] md:-translate-y-1/2 md:items-start md:px-0 md:text-left",
                 caption.place === "bottom" &&
                   "inset-x-0 bottom-16 mx-auto items-center text-center sm:bottom-20",
                 caption.place === "left" &&
