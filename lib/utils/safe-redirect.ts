@@ -12,7 +12,6 @@ export function safeRedirectPath(value: string | null | undefined, fallback: str
     return fallback;
   }
 
-  // eslint-disable-next-line no-control-regex -- rejecting control characters is the point
   if (/[\\\u0000-\u001f\u007f]/.test(value)) {
     return fallback;
   }
