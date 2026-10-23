@@ -812,7 +812,8 @@
       "pending": "{email} adresine onay bağlantısı gönderildi. Bağlantıya tıklayana kadar eski adresin geçerli.",
       "label": "Yeni e-posta",
       "submit": "Onay bağlantısı gönder",
-      "sent": "Onay bağlantısı yeni adresine gönderildi."
+      "sent": "Onay bağlantısı yeni adresine gönderildi.",
+      "linkNotice": "Onay bağlantın işlendi. Yeni adresin aşağıda görünmüyorsa, diğer adresine gelen onay bağlantısına da tıklaman gerekiyor olabilir."
     },
     "password": {
       "title": "Şifre",

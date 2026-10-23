@@ -170,6 +170,7 @@ function UserRow({ user }: { user: AdminUserListItem }) {
           label={t("completeness", { percent: user.completenessPercent })}
         />
         <p
+          suppressHydrationWarning
           className="truncate text-xs text-muted-foreground"
           title={user.lastSignInAt ? formatDate(user.lastSignInAt) : undefined}
         >

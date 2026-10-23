@@ -40,7 +40,9 @@ export async function getOwnAccount(): Promise<AccountSummary> {
   return {
     email: user?.email ?? null,
     pendingEmail: user?.new_email ?? null,
-    hasPassword: providers.includes("email"),
+    // Setting a password on a Google account doesn't add the "email" provider,
+    // so that case is recorded in app_metadata by changeOwnPassword.
+    hasPassword: providers.includes("email") || user?.app_metadata?.has_password === true,
     providers,
   };
 }
@@ -66,7 +68,10 @@ function mapError(code: string | undefined): AccountResult {
  * Checks a password without touching the caller's session cookies: a separate
  * client that never persists anything signs in and is discarded.
  */
-async function passwordMatches(email: string, password: string): Promise<boolean> {
+async function checkPassword(
+  email: string,
+  password: string,
+): Promise<"ok" | "wrong" | "unavailable"> {
   const probe = createStatelessClient<Database>(
     clientEnv.NEXT_PUBLIC_SUPABASE_URL,
     clientEnv.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
@@ -76,8 +81,12 @@ async function passwordMatches(email: string, password: string): Promise<boolean
   const { error } = await probe.auth.signInWithPassword({ email, password });
   if (!error) {
     await probe.auth.signOut({ scope: "local" });
+    return "ok";
   }
-  return !error;
+
+  // Only a credentials error means the password is wrong; rate limits and
+  // outages must not be reported as one.
+  return error.code === "invalid_credentials" ? "wrong" : "unavailable";
 }
 
 /**
@@ -91,15 +100,34 @@ export async function changeOwnPassword(input: {
   const account = await getOwnAccount();
 
   if (account.hasPassword) {
-    if (!account.email || !(await passwordMatches(account.email, input.currentPassword))) {
+    if (!account.email) {
+      return { ok: false, code: "failed" };
+    }
+    const check = await checkPassword(account.email, input.currentPassword);
+    if (check === "wrong") {
       return { ok: false, code: "wrong_password" };
+    }
+    if (check === "unavailable") {
+      return { ok: false, code: "rate_limited" };
     }
   }
 
+  const user = await requireUser();
   const supabase = await createClient();
   const { error } = await supabase.auth.updateUser({ password: input.newPassword });
 
-  return error ? mapError(error.code) : { ok: true };
+  if (error) {
+    return mapError(error.code);
+  }
+
+  if (!account.hasPassword) {
+    // From now on the current password is required to change it.
+    await createAdminClient().auth.admin.updateUserById(user.id, {
+      app_metadata: { has_password: true },
+    });
+  }
+
+  return { ok: true };
 }
 
 /** Starts an email change; Supabase mails a confirmation link to the new address. */
@@ -122,41 +150,57 @@ export async function changeOwnEmail(email: string): Promise<AccountResult> {
   return error ? mapError(error.code) : { ok: true };
 }
 
-async function removeFolder(bucket: string, folder: string): Promise<void> {
+async function removeFolder(bucket: string, folder: string): Promise<boolean> {
   const admin = createAdminClient();
 
   for (;;) {
     const { data, error } = await admin.storage.from(bucket).list(folder, { limit: 100 });
-    if (error || !data || data.length === 0) {
-      return;
+    if (error) {
+      return false;
+    }
+    if (!data || data.length === 0) {
+      return true;
     }
 
     const { error: removeError } = await admin.storage
       .from(bucket)
       .remove(data.map((object) => `${folder}/${object.name}`));
 
-    if (removeError || data.length < 100) {
-      return;
+    if (removeError) {
+      return false;
     }
   }
 }
 
 /**
- * Permanently deletes the caller's account (KVKK right to erasure). Storage
- * objects are removed first; deleting the auth user then cascades to the
- * profile, links, skills, documents, bank, billing, analytics and redemptions.
+ * Permanently deletes the caller's account (KVKK right to erasure).
+ *
+ * The auth user goes first: if that fails nothing is lost and the user can
+ * retry. Its deletion cascades to the profile, links, skills, documents rows,
+ * bank, billing, analytics and redemptions. Storage objects are then purged
+ * with the service role; leftovers are logged for manual cleanup rather than
+ * leaving the account half-deleted.
  */
 export async function deleteOwnAccount(): Promise<AccountResult> {
   const user = await requireUser();
-
-  await removeFolder(AVATAR_BUCKET, user.id);
-  await removeFolder(DOCUMENTS_BUCKET, user.id);
-
   const admin = createAdminClient();
-  const { error } = await admin.auth.admin.deleteUser(user.id);
 
+  const { error } = await admin.auth.admin.deleteUser(user.id);
   if (error) {
     return { ok: false, code: "failed" };
+  }
+
+  const [avatarsOk, documentsOk] = await Promise.all([
+    removeFolder(AVATAR_BUCKET, user.id),
+    removeFolder(DOCUMENTS_BUCKET, user.id),
+  ]);
+
+  if (!avatarsOk || !documentsOk) {
+    console.error("Account deleted but storage cleanup incomplete", {
+      userId: user.id,
+      avatarsOk,
+      documentsOk,
+    });
   }
 
   const supabase = await createClient();

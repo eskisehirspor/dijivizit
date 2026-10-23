@@ -52,6 +52,8 @@ export async function PublicCardView({
   preview?: boolean;
   banner?: ReactNode;
 }) {
+  // Inside the dashboard layout there is already a <main>.
+  const Wrapper = preview ? "div" : "main";
   const [avatarUrl, platforms, t] = await Promise.all([
     getAvatarUrl(card.avatarPath),
     getTranslations("profile.links.platforms"),
@@ -64,7 +66,7 @@ export async function PublicCardView({
   const contactLinks = visiblePublicContactLinks(card.links, publicUrl, card.address);
 
   return (
-    <main className="flex min-h-full flex-1 justify-center px-6 py-12 sm:py-16">
+    <Wrapper className="flex min-h-full flex-1 justify-center px-6 py-12 sm:py-16">
       {preview ? null : <TrackProfileView publicId={card.publicId} />}
       <div className="flex w-full max-w-sm animate-rise flex-col gap-10">
         {banner}
@@ -233,6 +235,6 @@ export async function PublicCardView({
           })}
         </p>
       </div>
-    </main>
+    </Wrapper>
   );
 }

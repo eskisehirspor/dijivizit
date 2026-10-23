@@ -32,15 +32,23 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(failureUrl);
   }
 
+  // Email-change links: with secure email change the first click carries no
+  // code, and a link opened in another browser/mail app can't redeem the PKCE
+  // code. Supabase has already recorded the confirmation either way, so this is
+  // not an OAuth failure: send the user to Settings with a neutral notice.
+  const isEmailChange = next === routes.settings;
+  const emailChangeUrl = new URL(routes.settings, origin);
+  emailChangeUrl.searchParams.set("email", "pending");
+
   if (!code) {
-    return NextResponse.redirect(failureUrl);
+    return NextResponse.redirect(isEmailChange ? emailChangeUrl : failureUrl);
   }
 
   const supabase = await createClient();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    return NextResponse.redirect(failureUrl);
+    return NextResponse.redirect(isEmailChange ? emailChangeUrl : failureUrl);
   }
 
   // OAuth-only enrichment. Recovery sessions are email/password accounts.

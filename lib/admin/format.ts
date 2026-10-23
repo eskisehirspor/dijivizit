@@ -2,6 +2,7 @@ const DATE_FORMAT = new Intl.DateTimeFormat("tr-TR", {
   day: "numeric",
   month: "short",
   year: "numeric",
+  timeZone: "Europe/Istanbul",
 });
 
 const RELATIVE_FORMAT = new Intl.RelativeTimeFormat("tr-TR", { numeric: "always" });

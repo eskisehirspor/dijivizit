@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 import { DeleteAccount } from "@/components/settings/delete-account";
 import { EmailForm } from "@/components/settings/email-form";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { PasswordForm } from "@/components/settings/password-form";
 import { getOwnAccount } from "@/lib/dal/account";
 import { routes } from "@/lib/routes";
@@ -12,8 +13,16 @@ export async function generateMetadata() {
   return { title: t("title") };
 }
 
-export default async function SettingsPage() {
-  const [t, account] = await Promise.all([getTranslations("settings"), getOwnAccount()]);
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ email?: string }>;
+}) {
+  const [{ email: emailNotice }, t, account] = await Promise.all([
+    searchParams,
+    getTranslations("settings"),
+    getOwnAccount(),
+  ]);
 
   return (
     <div className="flex animate-rise flex-col gap-12">
@@ -29,6 +38,12 @@ export default async function SettingsPage() {
           </Link>
         </p>
       </div>
+
+      {emailNotice === "pending" ? (
+        <Alert>
+          <AlertDescription>{t("email.linkNotice")}</AlertDescription>
+        </Alert>
+      ) : null}
 
       <section className="flex flex-col gap-6 rounded-lg border border-border/60 p-6">
         <div className="flex flex-col gap-1">

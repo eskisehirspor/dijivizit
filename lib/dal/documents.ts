@@ -205,7 +205,11 @@ export async function finalizeOwnDocument(input: {
     .single();
 
   if (insertError || !data) {
-    await discard();
+    // 23505: this path is already registered (a replayed finalize). The object
+    // belongs to that existing row, so it must not be deleted.
+    if (insertError?.code !== "23505") {
+      await discard();
+    }
     return { ok: false, code: "db" };
   }
 

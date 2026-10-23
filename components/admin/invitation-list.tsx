@@ -82,7 +82,7 @@ export function InvitationList({ invitations }: { invitations: AdminInvitation[]
                   {t(`dashboard.invites.status.${invitation.status}`)}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground tabular-nums">
+              <p className="text-xs text-muted-foreground tabular-nums" suppressHydrationWarning>
                 {formatDate(invitation.createdAt)}
                 {" · "}
                 {t("dashboard.invites.usage", {
