@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Wordmark } from "@/components/brand/wordmark";
+import { LegalLinks } from "@/components/legal/legal-links";
 import { routes } from "@/lib/routes";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -11,6 +12,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <Wordmark />
         </Link>
         <div className="w-full">{children}</div>
+        <LegalLinks className="mt-14" />
       </div>
     </div>
   );

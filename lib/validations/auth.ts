@@ -43,6 +43,7 @@ export const registerSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
   invitationCode: invitationCodeSchema,
+  acceptTerms: z.literal("on", { error: "validation.terms.required" }),
 });
 
 export const forgotPasswordSchema = z.object({

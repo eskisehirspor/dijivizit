@@ -22,6 +22,7 @@ import {
   isSkillsSectionTitle,
 } from "@/lib/profile/skills-section-title";
 import { clientEnv } from "@/lib/env/client";
+import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
@@ -218,6 +219,21 @@ export default async function PublicCardPage({ params }: PublicCardPageProps) {
           }
           skills={card.skills}
         />
+
+        <p className="pt-6 text-center text-xs text-muted-foreground">
+          {t.rich("footer", {
+            brand: (chunks) => (
+              <a href={MARKETING_ORIGIN} className="font-medium text-foreground hover:underline">
+                {chunks}
+              </a>
+            ),
+            privacy: (chunks) => (
+              <a href={routes.legal("gizlilik")} className="underline-offset-4 hover:underline">
+                {chunks}
+              </a>
+            ),
+          })}
+        </p>
       </div>
     </main>
   );

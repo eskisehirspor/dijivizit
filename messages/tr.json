@@ -447,7 +447,8 @@
         "expertise_areas": "Uzmanlık Alanları",
         "skills": "Yetenekler"
       }
-    }
+    },
+    "footer": "<brand>Dijivizit</brand> ile oluşturuldu · <privacy>Gizlilik</privacy>"
   },
   "profile": {
     "edit": {
@@ -766,6 +767,9 @@
       "typeInvalid": "Geçersiz tür.",
       "idInvalid": "Geçersiz öğe.",
       "duplicate": "Bu tür için aynı ad zaten eklenmiş."
+    },
+    "terms": {
+      "required": "Devam etmek için metinleri onaylamanız gerekir."
     }
   },
   "errors": {
@@ -774,5 +778,16 @@
     "notFoundTitle": "Sayfa bulunamadı",
     "notFoundBody": "Aradığınız sayfa taşınmış veya hiç var olmamış olabilir.",
     "backHome": "Ana sayfaya dön"
+  },
+  "legal": {
+    "nav": {
+      "kvkk": "KVKK",
+      "gizlilik": "Gizlilik",
+      "kullanim-kosullari": "Kullanım Koşulları"
+    },
+    "updated": "Son güncelleme: {date}",
+    "home": "Ana sayfa",
+    "consent": "<kvkk>KVKK Aydınlatma Metni</kvkk>'ni okudum, <terms>Kullanım Koşulları</terms>'nı kabul ediyorum.",
+    "googleConsent": "Google ile devam ederek <terms>Kullanım Koşulları</terms>'nı kabul etmiş ve <kvkk>KVKK Aydınlatma Metni</kvkk>'ni okumuş olursunuz."
   }
 }

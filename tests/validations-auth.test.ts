@@ -54,6 +54,7 @@ describe("registerSchema", () => {
       email: "a@b.com",
       password: "longenough1",
       invitationCode: "DIJI-ABCD-EFGH-JKMN",
+      acceptTerms: "on",
     });
 
     expect(result.success).toBe(true);
@@ -90,5 +91,18 @@ describe("resetPasswordSchema", () => {
 
     expect(result.success).toBe(false);
     expect(result.error?.issues[0]?.message).toBe("validation.password.mismatch");
+  });
+});
+
+describe("registerSchema consent", () => {
+  it("requires the terms checkbox", () => {
+    const result = registerSchema.safeParse({
+      fullName: "Ayşe Demir",
+      email: "ayse@example.com",
+      password: "Dijivizit123!",
+      invitationCode: "DIJI-ABCD-EFGH-JKMN",
+    });
+    expect(result.success).toBe(false);
+    expect(result.error?.issues[0]?.path[0]).toBe("acceptTerms");
   });
 });

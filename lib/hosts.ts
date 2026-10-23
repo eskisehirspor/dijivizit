@@ -7,6 +7,7 @@
  */
 export const APP_HOSTNAME = "app.dijivizit.com";
 export const APP_ORIGIN = "https://app.dijivizit.com";
+export const MARKETING_ORIGIN = "https://dijivizit.com";
 
 const MARKETING_HOSTNAMES = new Set(["dijivizit.com", "www.dijivizit.com"]);
 
@@ -33,6 +34,10 @@ export function shouldPassThroughOnMarketingHost(pathname: string): boolean {
   }
 
   if (pathname === "/p" || pathname.startsWith("/p/")) {
+    return true;
+  }
+
+  if (pathname.startsWith("/yasal/")) {
     return true;
   }
 

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 import { logoutAction } from "@/app/(auth)/actions";
 import { Wordmark } from "@/components/brand/wordmark";
+import { LegalLinks } from "@/components/legal/legal-links";
 import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/dal/auth";
 import { routes } from "@/lib/routes";
@@ -31,6 +32,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
       </header>
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12 sm:py-16">{children}</main>
+
+      <footer className="mx-auto w-full max-w-3xl px-6 pb-10">
+        <LegalLinks />
+      </footer>
     </div>
   );
 }

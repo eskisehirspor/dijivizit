@@ -20,6 +20,7 @@ export const routes = {
   profileBilling: "/profile/billing",
   profileDocuments: "/profile/documents",
   profileDocumentFile: (documentId: string) => `/profile/documents/${documentId}/file`,
+  legal: (slug: "kvkk" | "gizlilik" | "kullanim-kosullari") => `/yasal/${slug}`,
   authCallback: "/auth/callback",
   authConfirm: "/auth/confirm",
   publicCard: (publicId: string) => `/p/${publicId}`,

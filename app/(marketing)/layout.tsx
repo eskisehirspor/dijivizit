@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { Wordmark } from "@/components/brand/wordmark";
+import { LegalLinks } from "@/components/legal/legal-links";
 import { routes } from "@/lib/routes";
 
 export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
@@ -20,7 +21,8 @@ export default async function MarketingLayout({ children }: { children: React.Re
 
       <main className="flex-1">{children}</main>
 
-      <footer className="mx-auto w-full max-w-3xl px-6 pt-8 pb-12">
+      <footer className="mx-auto flex w-full max-w-3xl flex-col items-center gap-3 px-6 pt-8 pb-12">
+        <LegalLinks />
         <p className="text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} {t("app.name")}
         </p>

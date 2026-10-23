@@ -9,6 +9,7 @@ import { requestPasswordReset, updatePassword } from "@/lib/dal/auth-password";
 import { changeUnverifiedEmail, resendSignupVerificationEmail } from "@/lib/dal/auth-verification";
 import { lookupInvitationByCode } from "@/lib/dal/invitations";
 import { clientEnv } from "@/lib/env/client";
+import { LEGAL_VERSION } from "@/lib/legal/documents";
 import { evaluateEmailSignupInvitation } from "@/lib/invitations/rules";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
@@ -82,6 +83,7 @@ export async function registerAction(
     email: formData.get("email"),
     password: formData.get("password"),
     invitationCode: formData.get("invitationCode"),
+    acceptTerms: formData.get("acceptTerms"),
   });
 
   if (!parsed.success) {
@@ -107,6 +109,9 @@ export async function registerAction(
       data: {
         full_name: parsed.data.fullName,
         invitation_code: parsed.data.invitationCode,
+        // Proof of consent: which version of the legal texts was accepted, when.
+        terms_version: LEGAL_VERSION,
+        terms_accepted_at: new Date().toISOString(),
       },
       emailRedirectTo: `${clientEnv.NEXT_PUBLIC_SITE_URL}${routes.authConfirm}`,
     },

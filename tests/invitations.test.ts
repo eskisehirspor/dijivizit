@@ -192,6 +192,7 @@ describe("register schema", () => {
       email: "a@b.com",
       password: "longenough1",
       invitationCode: "diji-abcd-efgh-jkmn",
+      acceptTerms: "on",
     });
 
     expect(result.success).toBe(true);

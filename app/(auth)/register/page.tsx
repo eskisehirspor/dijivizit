@@ -31,6 +31,26 @@ export default async function RegisterPage({
       <div className="flex flex-col gap-5">
         <GoogleButton />
         <p className="text-xs text-pretty text-muted-foreground">{t("auth.register.googleHint")}</p>
+        <p className="text-xs text-pretty text-muted-foreground">
+          {t.rich("legal.googleConsent", {
+            kvkk: (chunks) => (
+              <Link
+                href={routes.legal("kvkk")}
+                className="underline underline-offset-4 hover:text-foreground"
+              >
+                {chunks}
+              </Link>
+            ),
+            terms: (chunks) => (
+              <Link
+                href={routes.legal("kullanim-kosullari")}
+                className="underline underline-offset-4 hover:text-foreground"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
         <AuthDivider />
         <RegisterForm invitationCode={invitationCode} />
       </div>
