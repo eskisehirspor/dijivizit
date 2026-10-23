@@ -11,6 +11,7 @@ import {
   revokeInvitationCode,
 } from "@/lib/dal/invitations";
 import { clientEnv } from "@/lib/env/client";
+import { buildInvitationEmail, EMAIL_FROM, EMAIL_REPLY_TO } from "@/lib/email/invitation";
 import { serverEnv } from "@/lib/env/server";
 import { routes } from "@/lib/routes";
 import { createInvitationSchema, parseInvitationExpiry } from "@/lib/validations/invitations";
@@ -106,107 +107,29 @@ async function sendInvitationEmail(input: {
     return false;
   }
 
-  const { plaintext } = input;
-  const expiresAt = input.expiresAt ? EXPIRY_FORMAT.format(new Date(input.expiresAt)) : null;
+  const registerUrl = new URL(routes.register, clientEnv.NEXT_PUBLIC_SITE_URL);
+  registerUrl.searchParams.set("invite", input.plaintext);
+
+  const email = buildInvitationEmail({
+    code: input.plaintext,
+    registerUrl: registerUrl.toString(),
+    expiresAt: input.expiresAt ? EXPIRY_FORMAT.format(new Date(input.expiresAt)) : null,
+    assetOrigin: clientEnv.NEXT_PUBLIC_SITE_URL,
+  });
 
   try {
     const resend = new Resend(serverEnv.RESEND_API_KEY);
-
-    const registerUrl = new URL(routes.register, clientEnv.NEXT_PUBLIC_SITE_URL);
-
-    registerUrl.searchParams.set("invite", plaintext);
-
-    const { error: emailError } = await resend.emails.send({
-      from: "Dijivizit <davet@dijivizit.com>",
+    const { error } = await resend.emails.send({
+      from: EMAIL_FROM,
+      replyTo: EMAIL_REPLY_TO,
       to: input.to,
-      subject: "Dijivizit'e davet edildiniz",
-      html: `
-        <div style="font-family: Arial, Helvetica, sans-serif; background:#ffffff; color:#111111; max-width:600px; margin:0 auto; padding:40px 24px;">
-          <div style="text-align:center;">
-            <h1 style="margin:0 0 8px; font-size:32px;">Dijivizit</h1>
-
-            <p style="font-size:18px; margin:0 0 32px;">
-              Dijivizit'e katılmanız için size bir davet gönderildi.
-            </p>
-
-            <p style="font-size:14px; color:#666666; margin-bottom:10px;">
-              Davet kodunuz
-            </p>
-
-            <div style="
-              background:#f6f6f6;
-              border:1px solid #e5e5e5;
-              border-radius:10px;
-              padding:18px;
-              font-size:24px;
-              font-weight:700;
-              letter-spacing:2px;
-              margin-bottom:24px;
-            ">
-              ${plaintext}
-            </div>
-
-            <a
-              href="${registerUrl.toString()}"
-              style="
-                display:inline-block;
-                background:#111111;
-                color:#ffffff;
-                text-decoration:none;
-                padding:14px 28px;
-                border-radius:8px;
-                font-size:16px;
-                font-weight:600;
-              "
-            >
-              Kayıt Ol
-            </a>
-
-            <p style="font-size:13px; color:#666666; margin-top:18px;">
-              Kayıt olurken davet kodunuz otomatik olarak doldurulacaktır.
-            </p>
-
-            <div style="
-              border-top:1px solid #eeeeee;
-              margin-top:32px;
-              padding-top:24px;
-              text-align:left;
-            ">
-              <p style="font-size:14px; font-weight:600;">
-                Nasıl kullanırım?
-              </p>
-
-              <p style="font-size:14px; color:#555555; line-height:1.6;">
-                <strong>1.</strong> Yukarıdaki <strong>Kayıt Ol</strong> butonuna tıklayın.
-                <br />
-                <strong>2.</strong> Kayıt formundaki bilgilerinizi doldurun.
-                <br />
-                <strong>3.</strong> Davet kodunuz kayıt sayfasında otomatik olarak doldurulacaktır.
-              </p>
-            </div>
-
-            <div style="
-              background:#f7f7f7;
-              border-radius:8px;
-              padding:16px;
-              margin-top:24px;
-              font-size:13px;
-              color:#555555;
-            ">
-              Davet kodunuz yalnızca 1 kez kullanılabilir.
-              ${
-                expiresAt
-                  ? `<br />Son kullanım tarihi: ${expiresAt}`
-                  : `<br />Bu davetin son kullanım tarihi yoktur.`
-              }
-            </div>
-          </div>
-        </div>
-      `,
+      subject: email.subject,
+      html: email.html,
+      text: email.text,
     });
 
-    if (emailError) {
-      console.error("Invitation email failed:", emailError);
+    if (error) {
+      console.error("Invitation email failed:", error);
       return false;
     }
 
