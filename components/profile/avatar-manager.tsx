@@ -28,20 +28,19 @@ export function AvatarManager({ avatarUrl, alt }: { avatarUrl: string | null; al
   const t = useTranslations();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState(avatarUrl);
-  const [propSnapshot, setPropSnapshot] = useState(avatarUrl);
+  // The last upload/remove wins until the server's avatarUrl catches up with
+  // it. Without this, a slightly stale refresh could bring a removed photo
+  // back on screen (or hide a fresh one) even though the save succeeded.
+  const [override, setOverride] = useState<{ url: string | null } | null>(null);
   const [removeOpen, setRemoveOpen] = useState(false);
   const [isUploading, startUpload] = useTransition();
   const [isRemoving, startRemove] = useTransition();
 
-  // When the server provides a URL (full page load or a completed refresh), adopt it.
-  // Do not clear local preview when the prop is temporarily null during refresh.
-  if (avatarUrl !== propSnapshot) {
-    setPropSnapshot(avatarUrl);
-    if (avatarUrl) {
-      setPreviewUrl(avatarUrl);
-    }
+  if (override && override.url === avatarUrl) {
+    setOverride(null);
   }
+
+  const previewUrl = override ? override.url : avatarUrl;
 
   const busy = isUploading || isRemoving;
   const accept = AVATAR_MIME_TYPES.join(",");
@@ -101,10 +100,7 @@ export function AvatarManager({ avatarUrl, alt }: { avatarUrl: string | null; al
           return;
         }
 
-        const nextUrl = result.data.avatarUrl;
-        if (nextUrl) {
-          setPreviewUrl(nextUrl);
-        }
+        setOverride({ url: result.data.avatarUrl });
       } catch {
         toast.error(t("profile.avatar.errors.uploadFailed"));
         return;
@@ -123,8 +119,7 @@ export function AvatarManager({ avatarUrl, alt }: { avatarUrl: string | null; al
         return;
       }
 
-      setPreviewUrl(null);
-      setPropSnapshot(null);
+      setOverride({ url: null });
       setRemoveOpen(false);
       router.refresh();
       toast.success(t("profile.avatar.removed"));
