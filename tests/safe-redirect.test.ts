@@ -31,3 +31,16 @@ describe("safeRedirectPath", () => {
     expect(safeRedirectPath("data:text/html,<script>", FALLBACK)).toBe(FALLBACK);
   });
 });
+
+describe("safeRedirectPath (browser normalisation)", () => {
+  it("rejects backslash and control-character tricks", () => {
+    expect(safeRedirectPath("/\\evil.example", "/dashboard")).toBe("/dashboard");
+    expect(safeRedirectPath("/\\/evil.example/x", "/dashboard")).toBe("/dashboard");
+    expect(safeRedirectPath("/\t/evil.example", "/dashboard")).toBe("/dashboard");
+    expect(safeRedirectPath("/%5Cevil.example", "/dashboard")).toBe("/%5Cevil.example");
+  });
+
+  it("keeps query and hash on legitimate paths", () => {
+    expect(safeRedirectPath("/dashboard/admin?x=1#top", "/")).toBe("/dashboard/admin?x=1#top");
+  });
+});

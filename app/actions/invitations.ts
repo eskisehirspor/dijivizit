@@ -11,12 +11,21 @@ import {
   revokeInvitationCode,
 } from "@/lib/dal/invitations";
 import { clientEnv } from "@/lib/env/client";
+import { serverEnv } from "@/lib/env/server";
 import { routes } from "@/lib/routes";
 import { createInvitationSchema, parseInvitationExpiry } from "@/lib/validations/invitations";
 
 export type CreateInvitationData = {
   plaintext: string;
+  /** null when no email was given; false when sending failed or is not configured. */
+  emailSent: boolean | null;
 };
+
+const EXPIRY_FORMAT = new Intl.DateTimeFormat("tr-TR", {
+  dateStyle: "long",
+  timeStyle: "short",
+  timeZone: "Europe/Istanbul",
+});
 
 function fieldErrorsOf(error: z.ZodError): Record<string, string> {
   const result: Record<string, string> = {};
@@ -67,16 +76,49 @@ export async function createInvitationAction(
     return failure("dashboard.invites.errors.createFailed");
   }
 
+  // The code already exists at this point, so a mail problem must not turn
+  // into a failure: the owner would never see the (valid) plaintext again.
+  let emailSent: boolean | null = null;
+
   if (parsed.data.email) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    emailSent = await sendInvitationEmail({
+      to: parsed.data.email,
+      plaintext: result.plaintext,
+      expiresAt,
+    });
+  }
+
+  revalidatePath(routes.invites);
+  revalidatePath(routes.admin);
+
+  return success({
+    plaintext: result.plaintext,
+    emailSent,
+  });
+}
+
+async function sendInvitationEmail(input: {
+  to: string;
+  plaintext: string;
+  expiresAt: string | null;
+}): Promise<boolean> {
+  if (!serverEnv.RESEND_API_KEY) {
+    return false;
+  }
+
+  const { plaintext } = input;
+  const expiresAt = input.expiresAt ? EXPIRY_FORMAT.format(new Date(input.expiresAt)) : null;
+
+  try {
+    const resend = new Resend(serverEnv.RESEND_API_KEY);
 
     const registerUrl = new URL(routes.register, clientEnv.NEXT_PUBLIC_SITE_URL);
 
-    registerUrl.searchParams.set("invite", result.plaintext);
+    registerUrl.searchParams.set("invite", plaintext);
 
     const { error: emailError } = await resend.emails.send({
       from: "Dijivizit <davet@dijivizit.com>",
-      to: parsed.data.email,
+      to: input.to,
       subject: "Dijivizit'e davet edildiniz",
       html: `
         <div style="font-family: Arial, Helvetica, sans-serif; background:#ffffff; color:#111111; max-width:600px; margin:0 auto; padding:40px 24px;">
@@ -101,7 +143,7 @@ export async function createInvitationAction(
               letter-spacing:2px;
               margin-bottom:24px;
             ">
-              ${result.plaintext}
+              ${plaintext}
             </div>
 
             <a
@@ -165,16 +207,14 @@ export async function createInvitationAction(
 
     if (emailError) {
       console.error("Invitation email failed:", emailError);
-      return failure("dashboard.invites.errors.createFailed");
+      return false;
     }
+
+    return true;
+  } catch (error) {
+    console.error("Invitation email failed:", error);
+    return false;
   }
-
-  revalidatePath(routes.invites);
-  revalidatePath(routes.admin);
-
-  return success({
-    plaintext: result.plaintext,
-  });
 }
 
 export async function revokeInvitationAction(invitationId: string): Promise<ActionResult> {

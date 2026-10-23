@@ -221,7 +221,9 @@
         "createFailed": "Davet kodu oluşturulamadı. Lütfen tekrar deneyin.",
         "revokeFailed": "Davet kodu iptal edilemedi. Lütfen tekrar deneyin."
       },
-      "adminLink": "Yönetim"
+      "adminLink": "Yönetim",
+      "emailSent": "Davet e-postası gönderildi.",
+      "emailNotSent": "Kod oluşturuldu ama davet e-postası gönderilemedi. Kodu kopyalayıp kendin ilet."
     },
     "analytics": {
       "title": "Analitik",

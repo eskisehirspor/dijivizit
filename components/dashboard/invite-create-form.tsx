@@ -23,6 +23,7 @@ export function InviteCreateForm() {
 
   const failed = state && !state.ok ? state : null;
   const created = state?.ok ? state.data.plaintext : null;
+  const emailSent = state?.ok ? state.data.emailSent : null;
 
   return (
     <form action={formAction} className="grid gap-5">
@@ -43,6 +44,16 @@ export function InviteCreateForm() {
             <p className="font-mono text-sm tracking-wide">{created}</p>
             <CopyUrlButton url={created} label={t("common.copy")} />
           </div>
+
+          {emailSent === true ? (
+            <p className="text-xs text-pretty text-muted-foreground">
+              {t("dashboard.invites.emailSent")}
+            </p>
+          ) : emailSent === false ? (
+            <p className="text-xs text-pretty text-destructive">
+              {t("dashboard.invites.emailNotSent")}
+            </p>
+          ) : null}
         </div>
       ) : null}
 

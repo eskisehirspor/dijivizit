@@ -53,9 +53,26 @@ export async function syncOAuthProfile(user: User): Promise<void> {
   await supabase.from("profiles").update(updates).eq("id", user.id);
 }
 
-async function importRemoteAvatar(userId: string, pictureUrl: string): Promise<string | null> {
+/** Only Google's own avatar CDN; user_metadata.picture is user-writable. */
+function isTrustedAvatarUrl(value: string): boolean {
   try {
-    const response = await fetch(pictureUrl);
+    const url = new URL(value);
+    return url.protocol === "https:" && /(^|\.)googleusercontent\.com$/.test(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
+async function importRemoteAvatar(userId: string, pictureUrl: string): Promise<string | null> {
+  if (!isTrustedAvatarUrl(pictureUrl)) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(pictureUrl, {
+      signal: AbortSignal.timeout(3000),
+      redirect: "error",
+    });
     if (!response.ok) {
       return null;
     }

@@ -15,6 +15,7 @@ import {
   type InvitationRecord,
 } from "@/lib/invitations/rules";
 import { loginSchema, registerSchema } from "@/lib/validations/auth";
+import { parseInvitationExpiry } from "@/lib/validations/invitations";
 
 const now = new Date("2026-08-13T12:00:00.000Z");
 
@@ -210,5 +211,20 @@ describe("invite owner allowlist", () => {
     expect(isInviteOwner("member@dijivizit.com", ["owner@dijivizit.com"])).toBe(false);
     expect(isInviteOwner("owner@dijivizit.com", ["owner@dijivizit.com"])).toBe(true);
     expect(isInviteOwner("owner@dijivizit.com", [])).toBe(false);
+  });
+});
+
+describe("parseInvitationExpiry", () => {
+  const now = new Date("2026-10-23T09:00:00.000Z");
+
+  it("reads zone-less input as Istanbul time", () => {
+    expect(parseInvitationExpiry("2026-11-01T14:30", now)).toBe("2026-11-01T11:30:00.000Z");
+    expect(parseInvitationExpiry("2026-11-01", now)).toBe("2026-11-01T20:59:59.000Z");
+  });
+
+  it("rejects past and invalid values, allows empty", () => {
+    expect(parseInvitationExpiry("2026-10-01T10:00", now)).toEqual({ error: true });
+    expect(parseInvitationExpiry("yarın", now)).toEqual({ error: true });
+    expect(parseInvitationExpiry("", now)).toBeNull();
   });
 });
