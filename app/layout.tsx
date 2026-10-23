@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 
@@ -8,17 +8,20 @@ import { DEFAULT_LOCALE } from "@/lib/i18n/config";
 
 import "./globals.css";
 
-// latin-ext carries ğ, ş, and ı. Without it Turkish text falls back to a
-// substitute face mid-word.
-const geistSans = Geist({
+// Geist is bundled from the `geist` package instead of fetched from Google
+// Fonts at build time, so builds don't depend on network access. The variable
+// files are the full character set, including Turkish ğ, ş and ı.
+const geistSans = localFont({
+  src: "../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
   variable: "--font-sans",
-  subsets: ["latin", "latin-ext"],
+  weight: "100 900",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin", "latin-ext"],
+  weight: "100 900",
   display: "swap",
 });
 

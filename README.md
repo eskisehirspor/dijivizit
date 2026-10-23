@@ -81,7 +81,7 @@ app/
   p/[publicId]/       Public digital card — the shareable URL
   auth/callback/      OAuth (PKCE) code exchange
   auth/confirm/       Email link verification
-proxy.ts              Session refresh and coarse redirects
+middleware.ts         Session refresh and coarse redirects (Edge runtime)
 components/ui/        shadcn/ui primitives
 components/auth/      Auth forms
 lib/
@@ -114,7 +114,7 @@ This only works if the ids cannot be enumerated, which drives two decisions:
 
 ### Authorization is enforced in the Data Access Layer, not the proxy
 
-`proxy.ts` refreshes the Supabase session and handles redirects, but Server
+`middleware.ts` refreshes the Supabase session and handles redirects, but Server
 Actions are POSTs to the route that hosts them, so a matcher change can silently
 remove proxy coverage. Every entry point that touches private data calls
 `requireUser()` from `lib/dal/auth.ts`, which verifies the JWT signature via
@@ -148,7 +148,9 @@ identity moments; it is not a surface colour.
 This project targets Next.js 16, which differs from older guides in ways that
 matter here:
 
-- `middleware.ts` is renamed to `proxy.ts` and runs on the Node.js runtime.
+- Next 16 renames `middleware.ts` to `proxy.ts` (Node.js only). This app keeps
+  `middleware.ts` on purpose so it runs on the Edge runtime that Cloudflare
+  Workers support natively (see the comment in `middleware.ts`).
 - `params`, `searchParams`, `cookies()`, and `headers()` are async-only.
 - Turbopack is the default for `dev` and `build`; `next lint` is removed.
 - `images.domains` is removed in favour of `images.remotePatterns`.

@@ -9,7 +9,7 @@ import { requireUser } from "@/lib/dal/auth";
 import { routes } from "@/lib/routes";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  // proxy.ts already redirects unauthenticated visitors, but Server Actions
+  // middleware.ts already redirects unauthenticated visitors, but Server Actions
   // rendered under this layout are not covered by its matcher, so the session is
   // verified here as well.
   await requireUser();
