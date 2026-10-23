@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 
 import { Toaster } from "@/components/ui/sonner";
+import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { DEFAULT_LOCALE } from "@/lib/i18n/config";
 
 import "./globals.css";
@@ -34,6 +35,15 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s — ${t("name")}`,
     },
     description: t("description"),
+    metadataBase: new URL(MARKETING_ORIGIN),
+    applicationName: t("name"),
+    openGraph: {
+      type: "website",
+      locale: "tr_TR",
+      siteName: t("name"),
+    },
+    twitter: { card: "summary_large_image" },
+    formatDetection: { telephone: false, email: false, address: false },
   };
 }
 

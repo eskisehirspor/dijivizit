@@ -30,6 +30,13 @@ export async function middleware(request: NextRequest) {
 
   const isAuthenticated = claims !== null;
 
+  if (hostname === "www.dijivizit.com") {
+    const url = request.nextUrl.clone();
+    url.hostname = "dijivizit.com";
+    url.port = "";
+    return NextResponse.redirect(url, 308);
+  }
+
   if (isMarketingHostname(hostname)) {
     if (shouldPassThroughOnMarketingHost(pathname)) {
       return response;

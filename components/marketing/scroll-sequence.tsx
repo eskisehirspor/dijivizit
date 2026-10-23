@@ -20,6 +20,8 @@ export type SequenceCaption = {
   body?: string;
   /** Where the copy sits so it never covers the subject in that shot. */
   place: "top" | "bottom" | "left" | "right";
+  /** The page's main heading; its kicker becomes part of the h1. */
+  heading?: "h1" | "h2";
 };
 
 const pad = (n: number) => String(n).padStart(4, "0");
@@ -206,14 +208,29 @@ export function ScrollSequence({
                 transform: `translateY(${(1 - opacity) * 12}px)`,
               }}
             >
-              {caption.kicker ? (
-                <p className="text-sm font-medium tracking-wide text-neutral-600">
-                  {caption.kicker}
-                </p>
-              ) : null}
-              <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 sm:text-6xl">
-                {caption.title}
-              </h2>
+              {caption.heading === "h1" ? (
+                <h1 className="flex flex-col gap-3">
+                  {caption.kicker ? (
+                    <span className="text-sm font-medium tracking-wide text-neutral-600">
+                      {caption.kicker}
+                    </span>
+                  ) : null}
+                  <span className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 sm:text-6xl">
+                    {caption.title}
+                  </span>
+                </h1>
+              ) : (
+                <>
+                  {caption.kicker ? (
+                    <p className="text-sm font-medium tracking-wide text-neutral-600">
+                      {caption.kicker}
+                    </p>
+                  ) : null}
+                  <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 sm:text-6xl">
+                    {caption.title}
+                  </h2>
+                </>
+              )}
               {caption.body ? (
                 <p className="max-w-md text-base leading-relaxed text-pretty text-neutral-700 sm:text-lg">
                   {caption.body}

@@ -6,9 +6,10 @@ import { cn } from "@/lib/utils";
 
 const FINISHES = [
   { id: "black", label: "Siyah metal", note: "Mat grafit, açık gri lazer kazıma." },
-  { id: "silver", label: "Gümüş", note: "Fırçalanmış çelik, koyu kazıma." },
-  { id: "gold", label: "Gold", note: "Parlak altın kaplama, derin kazıma." },
-  { id: "wood", label: "Ahşap", note: "Ceviz, lazerle yakılmış yazı." },
+  { id: "silver", label: "Gümüş", note: "Mat fırçalanmış gümüş, koyu lazer kazıma." },
+  { id: "gold", label: "Gold", note: "Mat fırçalanmış gold, koyu lazer kazıma." },
+  { id: "wood", label: "Koyu ahşap", note: "Ceviz, lazerle yakılmış yazı." },
+  { id: "wood-light", label: "Açık ahşap", note: "Meşe, lazerle yakılmış yazı." },
 ] as const;
 
 type FinishId = (typeof FINISHES)[number]["id"];
@@ -26,7 +27,7 @@ export function FinishPicker() {
           <img
             key={f.id}
             src={`/landing/finishes/${f.id}.webp`}
-            alt={`${f.label} Dijivizit kart`}
+            alt={`${f.label} Dijivizit NFC kartvizit`}
             width={1600}
             height={900}
             loading="lazy"
