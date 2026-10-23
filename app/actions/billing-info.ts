@@ -72,6 +72,11 @@ export async function deleteBillingInfoAction(): Promise<ActionResult> {
 }
 
 export async function setBillingInfoVisibilityAction(isVisible: boolean): Promise<ActionResult> {
+  // Server actions are public endpoints; never trust the argument's type.
+  if (typeof isVisible !== "boolean") {
+    return failure("profile.cardVisibility.failed");
+  }
+
   const ok = await setOwnBillingInfoVisibility(isVisible);
   if (!ok) {
     return failure("profile.cardVisibility.failed");

@@ -71,6 +71,11 @@ export async function deleteBankAccountAction(): Promise<ActionResult> {
 }
 
 export async function setBankAccountVisibilityAction(isVisible: boolean): Promise<ActionResult> {
+  // Server actions are public endpoints; never trust the argument's type.
+  if (typeof isVisible !== "boolean") {
+    return failure("profile.cardVisibility.failed");
+  }
+
   const ok = await setOwnBankAccountVisibility(isVisible);
   if (!ok) {
     return failure("profile.cardVisibility.failed");
