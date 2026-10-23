@@ -3,6 +3,8 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+/* Wide, landscape viewports: the landing hero uses its 16:9 frames here. */
+@custom-variant land (@media (min-width: 48rem) and (min-aspect-ratio: 11/10));
 
 @theme inline {
   --color-background: var(--background);

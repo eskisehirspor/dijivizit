@@ -79,7 +79,7 @@ export function ScrollSequence({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const portrait = window.matchMedia("(max-aspect-ratio: 4/5)").matches;
+    const portrait = window.matchMedia("(max-aspect-ratio: 11/10)").matches;
     const source = portrait && mobile ? mobile : desktop;
     const frames: (HTMLImageElement | null)[] = new Array(source.count).fill(null);
     // The image currently on the canvas. Repaint whenever the best loaded
@@ -183,7 +183,7 @@ export function ScrollSequence({
         />
         {/* Soft scrims keep copy legible over the brightest frames. */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-white/50 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-white/55 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-white/85 via-white/40 to-transparent land:h-56 land:from-white/55 land:via-transparent" />
 
         {captions.map((caption) => {
           const opacity = fade(progress, caption.start, caption.end);
@@ -198,13 +198,13 @@ export function ScrollSequence({
                 // Hero: above the card on phones, beside it on wide screens
                 // where the card fills the middle of the frame.
                 caption.place === "hero" &&
-                  "inset-x-0 top-24 mx-auto items-center text-center sm:top-28 md:inset-x-auto md:top-1/2 md:left-[5vw] md:max-w-[27vw] md:-translate-y-1/2 md:items-start md:px-0 md:text-left",
+                  "inset-x-0 top-24 mx-auto items-center text-center sm:top-28 land:inset-x-auto land:top-1/2 land:left-[5vw] land:max-w-[27vw] land:-translate-y-1/2 land:items-start land:px-0 land:text-left",
                 caption.place === "bottom" &&
                   "inset-x-0 bottom-16 mx-auto items-center text-center sm:bottom-20",
                 caption.place === "left" &&
-                  "inset-x-0 bottom-16 mx-auto items-center text-center md:inset-x-auto md:top-1/2 md:bottom-auto md:left-[6vw] md:-translate-y-1/2 md:items-start md:text-left",
+                  "inset-x-0 bottom-16 mx-auto items-center text-center land:inset-x-auto land:top-1/2 land:bottom-auto land:left-[6vw] land:-translate-y-1/2 land:items-start land:text-left",
                 caption.place === "right" &&
-                  "inset-x-0 bottom-16 mx-auto items-center text-center md:inset-x-auto md:top-1/2 md:right-[6vw] md:bottom-auto md:-translate-y-1/2 md:items-start md:text-left",
+                  "inset-x-0 bottom-16 mx-auto items-center text-center land:inset-x-auto land:top-1/2 land:right-[6vw] land:bottom-auto land:-translate-y-1/2 land:items-start land:text-left",
               )}
               style={{
                 opacity,
@@ -218,7 +218,7 @@ export function ScrollSequence({
                       {caption.kicker}
                     </span>
                   ) : null}
-                  <span className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 sm:text-6xl">
+                  <span className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 land:text-6xl">
                     {caption.title}
                   </span>
                 </h1>
@@ -229,7 +229,7 @@ export function ScrollSequence({
                       {caption.kicker}
                     </p>
                   ) : null}
-                  <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 sm:text-6xl">
+                  <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 land:text-6xl">
                     {caption.title}
                   </h2>
                 </>
