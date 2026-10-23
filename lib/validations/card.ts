@@ -40,7 +40,6 @@ export const publicCardDocumentSchema = z.object({
   title: z.string(),
   description: z.string().nullable(),
   fileName: z.string(),
-  storagePath: z.string(),
 });
 
 export const publicCardSchema = z.object({

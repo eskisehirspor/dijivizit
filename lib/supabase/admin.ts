@@ -7,8 +7,9 @@ import { clientEnv } from "@/lib/env/client";
 import { serverEnv } from "@/lib/env/server";
 
 /**
- * Service-role client. Bypasses RLS. Only for invitation writes/lookups that
- * cannot be expressed as a policy for anon or authenticated.
+ * Service-role client. Bypasses RLS. Only for server code that has already
+ * authorized the request: invitation lookups, owner-only admin reads, and
+ * signed URLs / metadata for private storage objects.
  */
 export function createAdminClient() {
   return createClient<Database>(clientEnv.NEXT_PUBLIC_SUPABASE_URL, serverEnv.SUPABASE_SECRET_KEY, {

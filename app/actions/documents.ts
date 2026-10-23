@@ -5,13 +5,15 @@ import { z } from "zod";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
 import {
-  createOwnDocument,
   deleteOwnDocument,
+  finalizeOwnDocument,
+  reserveOwnDocumentUpload,
   setOwnDocumentVisibility,
   updateOwnDocument,
   type OwnDocument,
 } from "@/lib/dal/documents";
 import { getOwnProfile } from "@/lib/dal/profile";
+import type { DocumentType } from "@/lib/profile/documents";
 import { routes } from "@/lib/routes";
 import {
   createDocumentSchema,
@@ -50,42 +52,83 @@ async function revalidateDocumentPaths(documentId?: string) {
   }
 }
 
-export async function createDocumentAction(
-  _previous: ActionResult<DocumentActionData> | null,
-  formData: FormData,
-): Promise<ActionResult<DocumentActionData>> {
-  const file = formData.get("file");
+export type DocumentUploadMeta = {
+  fileName: string;
+  fileType: string;
+  fileSize: number;
+  type: string;
+  title: string;
+  description: string;
+};
 
-  if (!(file instanceof File)) {
-    return failure("profile.documents.errors.typeInvalid");
-  }
+function validateUploadMeta(
+  meta: DocumentUploadMeta,
+):
+  | { ok: true; data: { type: DocumentType; title: string; description: string | null } }
+  | { ok: false; result: ActionResult<never> } {
+  const validatedFile = validateDocumentFile({
+    name: meta.fileName,
+    type: meta.fileType,
+    size: meta.fileSize,
+  });
 
-  const validatedFile = validateDocumentFile(file);
   if (!validatedFile.ok) {
-    if (validatedFile.code === "size") {
-      return failure("profile.documents.errors.tooLarge");
-    }
-    if (validatedFile.code === "empty") {
-      return failure("profile.documents.errors.empty");
-    }
-    return failure("profile.documents.errors.typeInvalid");
+    const code =
+      validatedFile.code === "size"
+        ? "profile.documents.errors.tooLarge"
+        : validatedFile.code === "empty"
+          ? "profile.documents.errors.empty"
+          : "profile.documents.errors.typeInvalid";
+    return { ok: false, result: failure(code) };
   }
 
   const parsed = createDocumentSchema.safeParse({
-    type: formData.get("type"),
-    title: formData.get("title"),
-    description: formData.get("description")?.toString() ?? "",
+    type: meta.type,
+    title: meta.title,
+    description: meta.description,
   });
 
   if (!parsed.success) {
-    return failure("profile.documents.errors.uploadFailed", fieldErrorsOf(parsed.error));
+    return {
+      ok: false,
+      result: failure("profile.documents.errors.uploadFailed", fieldErrorsOf(parsed.error)),
+    };
   }
 
-  const result = await createOwnDocument({
-    file,
-    type: parsed.data.type,
-    title: parsed.data.title,
-    description: parsed.data.description,
+  return { ok: true, data: parsed.data };
+}
+
+/** Step 1 of an upload: validate the form and reserve a storage path. */
+export async function reserveDocumentUploadAction(
+  meta: DocumentUploadMeta,
+): Promise<ActionResult<{ path: string }>> {
+  const validated = validateUploadMeta(meta);
+  if (!validated.ok) {
+    return validated.result;
+  }
+
+  const slot = await reserveOwnDocumentUpload();
+  if (!slot.ok) {
+    return failure("profile.documents.errors.limitReached");
+  }
+
+  return success({ path: slot.path });
+}
+
+/** Step 3 of an upload: the browser has stored the file; record it. */
+export async function finalizeDocumentUploadAction(
+  path: string,
+  meta: DocumentUploadMeta,
+): Promise<ActionResult<DocumentActionData>> {
+  const validated = validateUploadMeta(meta);
+  if (!validated.ok) {
+    return validated.result;
+  }
+
+  const result = await finalizeOwnDocument({
+    path,
+    fileName: meta.fileName,
+    ...validated.data,
   });
 
   if (!result.ok) {

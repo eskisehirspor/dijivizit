@@ -1,50 +1,39 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { recordCardEvent } from "@/lib/dal/analytics";
-import { getPublicCard } from "@/lib/dal/public-card";
-import { DOCUMENTS_BUCKET, inlinePdfContentDisposition } from "@/lib/profile/documents";
-import { createClient } from "@/lib/supabase/server";
+import { createDocumentSignedUrl, getPublishedDocumentPath } from "@/lib/dal/documents";
 
 type RouteContext = {
   params: Promise<{ publicId: string; documentId: string }>;
 };
 
+const ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 /**
- * Serves a published document PDF with Content-Disposition: inline so browsers
- * preview in a new tab instead of forcing a download.
- * Reuses the previous public CV streaming pattern.
+ * Opens a visible document on a published card. The documents bucket is
+ * private, so visitors get a short-lived signed URL rather than a permanent
+ * public one: hiding the document or unpublishing the card cuts access off.
+ * Redirecting (instead of proxying the bytes) keeps large PDFs clear of the
+ * hosting platform's response-size limit.
  */
 export async function GET(_request: Request, context: RouteContext) {
   const { publicId, documentId } = await context.params;
-  const card = await getPublicCard(publicId);
-  if (!card) {
+
+  if (!ID_PATTERN.test(documentId)) {
     notFound();
   }
 
-  const document = card.documents.find((item) => item.id === documentId);
-  if (!document?.storagePath) {
+  const storagePath = await getPublishedDocumentPath(publicId, documentId);
+  if (!storagePath) {
     notFound();
   }
 
-  const supabase = await createClient();
-  const { data, error } = await supabase.storage
-    .from(DOCUMENTS_BUCKET)
-    .download(document.storagePath);
-
-  if (error || !data) {
+  const signedUrl = await createDocumentSignedUrl(storagePath);
+  if (!signedUrl) {
     notFound();
   }
 
-  const bytes = await data.arrayBuffer();
+  await recordCardEvent({ publicId, eventType: "document_open" });
 
-  await recordCardEvent({ publicId: card.publicId, eventType: "document_open" });
-
-  return new Response(bytes, {
-    status: 200,
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": inlinePdfContentDisposition(document.fileName),
-      "Cache-Control": "private, max-age=300",
-    },
-  });
+  redirect(signedUrl);
 }

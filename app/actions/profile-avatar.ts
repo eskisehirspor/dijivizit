@@ -4,7 +4,11 @@ import { revalidatePath } from "next/cache";
 
 import { type ActionResult, failure, success } from "@/lib/action-result";
 import { getOwnProfile } from "@/lib/dal/profile";
-import { removeOwnAvatar, uploadOwnAvatar } from "@/lib/dal/profile-avatar";
+import {
+  finalizeOwnAvatar,
+  removeOwnAvatar,
+  reserveOwnAvatarUpload,
+} from "@/lib/dal/profile-avatar";
 import { getAvatarUrl } from "@/lib/dal/public-card";
 import { routes } from "@/lib/routes";
 import { validateAvatarFile } from "@/lib/validations/profile-avatar";
@@ -24,15 +28,11 @@ async function revalidateAvatar() {
   }
 }
 
-export async function uploadAvatarAction(
-  formData: FormData,
-): Promise<ActionResult<AvatarActionData>> {
-  const file = formData.get("avatar");
-
-  if (!(file instanceof File)) {
-    return failure("profile.avatar.errors.typeInvalid");
-  }
-
+/** Step 1: validate the file's declared type/size and reserve a storage path. */
+export async function reserveAvatarUploadAction(file: {
+  type: string;
+  size: number;
+}): Promise<ActionResult<{ path: string }>> {
   const validated = validateAvatarFile(file);
 
   if (!validated.ok) {
@@ -45,14 +45,19 @@ export async function uploadAvatarAction(
     return failure("profile.avatar.errors.typeInvalid");
   }
 
-  const result = await uploadOwnAvatar(file, validated.mime);
+  return success({ path: await reserveOwnAvatarUpload(validated.mime) });
+}
+
+/** Step 3: the browser has stored the file; make it the profile photo. */
+export async function finalizeAvatarUploadAction(
+  path: string,
+): Promise<ActionResult<AvatarActionData>> {
+  const result = await finalizeOwnAvatar(path);
 
   if (!result.ok) {
     return failure("profile.avatar.errors.uploadFailed");
   }
 
-  // Resolve from the path returned by the DAL — do not re-read getOwnProfile()
-  // here, because React cache() may still hold the pre-upload row in this request.
   const avatarUrl = await getAvatarUrl(result.path);
 
   await revalidateAvatar();

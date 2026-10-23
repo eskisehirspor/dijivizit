@@ -12,10 +12,7 @@ import {
 } from "@/lib/dal/invitations";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
-import {
-  createInvitationSchema,
-  parseInvitationExpiry,
-} from "@/lib/validations/invitations";
+import { createInvitationSchema, parseInvitationExpiry } from "@/lib/validations/invitations";
 
 export type CreateInvitationData = {
   plaintext: string;
@@ -73,10 +70,7 @@ export async function createInvitationAction(
   if (parsed.data.email) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const registerUrl = new URL(
-      routes.register,
-      clientEnv.NEXT_PUBLIC_SITE_URL,
-    );
+    const registerUrl = new URL(routes.register, clientEnv.NEXT_PUBLIC_SITE_URL);
 
     registerUrl.searchParams.set("invite", result.plaintext);
 
@@ -183,9 +177,7 @@ export async function createInvitationAction(
   });
 }
 
-export async function revokeInvitationAction(
-  invitationId: string,
-): Promise<ActionResult> {
+export async function revokeInvitationAction(invitationId: string): Promise<ActionResult> {
   await requireInviteOwner();
 
   const result = await revokeInvitationCode(invitationId);

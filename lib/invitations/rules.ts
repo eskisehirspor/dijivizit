@@ -10,9 +10,7 @@ export type InvitationRecord = {
 
 export type InvitationFailure = "invalid" | "expired" | "exhausted" | "email_mismatch";
 
-export type InvitationDecision =
-  | { ok: true }
-  | { ok: false; reason: InvitationFailure };
+export type InvitationDecision = { ok: true } | { ok: false; reason: InvitationFailure };
 
 function isExpired(record: InvitationRecord, now: Date): boolean {
   return record.expiresAt !== null && record.expiresAt.getTime() <= now.getTime();

@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import { type ChangeEvent, useRef, useState, useTransition } from "react";
 import { toast } from "sonner";
 
-import { removeAvatarAction, uploadAvatarAction } from "@/app/actions/profile-avatar";
+import {
+  finalizeAvatarUploadAction,
+  removeAvatarAction,
+  reserveAvatarUploadAction,
+} from "@/app/actions/profile-avatar";
 import { AvatarPreview } from "@/components/profile/avatar-preview";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +20,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { AVATAR_MIME_TYPES } from "@/lib/profile/avatar";
+import { AVATAR_BUCKET, AVATAR_MIME_TYPES } from "@/lib/profile/avatar";
+import { createClient } from "@/lib/supabase/client";
+import { validateAvatarFile } from "@/lib/validations/profile-avatar";
 
 export function AvatarManager({ avatarUrl, alt }: { avatarUrl: string | null; alt: string }) {
   const t = useTranslations();
@@ -52,21 +58,58 @@ export function AvatarManager({ avatarUrl, alt }: { avatarUrl: string | null; al
       return;
     }
 
-    const formData = new FormData();
-    formData.set("avatar", file);
+    const local = validateAvatarFile(file);
+    if (!local.ok) {
+      toast.error(
+        t(
+          local.code === "size"
+            ? "profile.avatar.errors.tooLarge"
+            : local.code === "empty"
+              ? "profile.avatar.errors.empty"
+              : "profile.avatar.errors.typeInvalid",
+        ),
+      );
+      return;
+    }
+
     const hadAvatar = Boolean(previewUrl);
 
     startUpload(async () => {
-      const result = await uploadAvatarAction(formData);
-      if (!result.ok) {
-        toast.error(t(result.code));
+      try {
+        const reserved = await reserveAvatarUploadAction({ type: file.type, size: file.size });
+        if (!reserved.ok) {
+          toast.error(t(reserved.code));
+          return;
+        }
+
+        const { error: uploadError } = await createClient()
+          .storage.from(AVATAR_BUCKET)
+          .upload(reserved.data.path, file, {
+            contentType: file.type,
+            upsert: false,
+            cacheControl: "3600",
+          });
+
+        if (uploadError) {
+          toast.error(t("profile.avatar.errors.uploadFailed"));
+          return;
+        }
+
+        const result = await finalizeAvatarUploadAction(reserved.data.path);
+        if (!result.ok) {
+          toast.error(t(result.code));
+          return;
+        }
+
+        const nextUrl = result.data.avatarUrl;
+        if (nextUrl) {
+          setPreviewUrl(nextUrl);
+        }
+      } catch {
+        toast.error(t("profile.avatar.errors.uploadFailed"));
         return;
       }
 
-      const nextUrl = result.data.avatarUrl;
-      if (nextUrl) {
-        setPreviewUrl(nextUrl);
-      }
       router.refresh();
       toast.success(hadAvatar ? t("profile.avatar.replaced") : t("profile.avatar.uploaded"));
     });

@@ -5,10 +5,12 @@ import { cache } from "react";
 import type { DocumentRow } from "@/lib/db/tables";
 import {
   DOCUMENT_LIMIT,
+  DOCUMENT_MAX_BYTES,
   DOCUMENT_MIME_TYPE,
   DOCUMENTS_BUCKET,
   type DocumentType,
 } from "@/lib/profile/documents";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 import { requireUser } from "./auth";
@@ -73,51 +75,117 @@ export const getOwnDocumentById = cache(async (id: string): Promise<OwnDocument 
   return data;
 });
 
-/** Public URL for a document stored in the documents bucket. */
-export async function getDocumentPublicUrl(storagePath: string | null): Promise<string | null> {
-  if (!storagePath) {
+const SIGNED_URL_TTL_SECONDS = 120;
+
+/**
+ * Short-lived URL for a document object. The bucket is private, so this is the
+ * only way a file leaves storage; callers must authorize the request first.
+ */
+export async function createDocumentSignedUrl(storagePath: string): Promise<string | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.storage
+    .from(DOCUMENTS_BUCKET)
+    .createSignedUrl(storagePath, SIGNED_URL_TTL_SECONDS);
+
+  return error || !data ? null : data.signedUrl;
+}
+
+/** Storage path of a visible document on a published card, or null. */
+export async function getPublishedDocumentPath(
+  publicId: string,
+  documentId: string,
+): Promise<string | null> {
+  const supabase = createAdminClient();
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("public_id", publicId)
+    .eq("is_published", true)
+    .maybeSingle();
+
+  if (!profile) {
     return null;
   }
 
-  const supabase = await createClient();
-  const { data } = supabase.storage.from(DOCUMENTS_BUCKET).getPublicUrl(storagePath);
-  return data.publicUrl;
+  const { data } = await supabase
+    .from("documents")
+    .select("storage_path")
+    .eq("id", documentId)
+    .eq("user_id", profile.id)
+    .eq("is_visible", true)
+    .maybeSingle();
+
+  return data?.storage_path ?? null;
 }
 
+const UPLOAD_PATH_PATTERN =
+  /^([0-9a-f-]{36})\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.pdf$/;
+
+export type DocumentUploadSlot = { ok: true; path: string } | { ok: false; code: "limit" };
+
 /**
- * Uploads a PDF and inserts a documents row.
- * Reuses the same storage path / MIME / size conventions as the previous CV upload.
+ * Reserves a storage path for a browser-side upload. Files go straight from the
+ * browser to Storage (owner-folder RLS) so they never pass through a server
+ * function's request-size limit.
  */
-export async function createOwnDocument(input: {
-  file: File;
-  type: DocumentType;
-  title: string;
-  description: string | null;
-}): Promise<DocumentMutationResult> {
+export async function reserveOwnDocumentUpload(): Promise<DocumentUploadSlot> {
   const user = await requireUser();
-  const supabase = await createClient();
   const existing = await getOwnDocuments();
 
   if (existing.length >= DOCUMENT_LIMIT) {
     return { ok: false, code: "limit" };
   }
 
-  const nextPath = `${user.id}/${crypto.randomUUID()}.pdf`;
-  const fileName = input.file.name.trim() || "belge.pdf";
-  const nextOrder =
-    existing.length === 0 ? 0 : Math.max(...existing.map((doc) => doc.display_order)) + 1;
+  return { ok: true, path: `${user.id}/${crypto.randomUUID()}.pdf` };
+}
 
-  const { error: uploadError } = await supabase.storage
-    .from(DOCUMENTS_BUCKET)
-    .upload(nextPath, input.file, {
-      contentType: DOCUMENT_MIME_TYPE,
-      upsert: false,
-      cacheControl: "3600",
-    });
+/**
+ * Registers an object the browser already uploaded. Size and type are read back
+ * from Storage rather than trusted from the client.
+ */
+export async function finalizeOwnDocument(input: {
+  path: string;
+  fileName: string;
+  type: DocumentType;
+  title: string;
+  description: string | null;
+}): Promise<DocumentMutationResult> {
+  const user = await requireUser();
+  const admin = createAdminClient();
 
-  if (uploadError) {
+  const match = UPLOAD_PATH_PATTERN.exec(input.path);
+  if (!match || match[1] !== user.id) {
     return { ok: false, code: "upload" };
   }
+
+  const discard = async () => {
+    await admin.storage.from(DOCUMENTS_BUCKET).remove([input.path]);
+  };
+
+  const { data: object, error: infoError } = await admin.storage
+    .from(DOCUMENTS_BUCKET)
+    .info(input.path);
+
+  if (infoError || !object) {
+    return { ok: false, code: "upload" };
+  }
+
+  const size = object.size ?? 0;
+  if (size <= 0 || size > DOCUMENT_MAX_BYTES || object.contentType !== DOCUMENT_MIME_TYPE) {
+    await discard();
+    return { ok: false, code: "upload" };
+  }
+
+  const existing = await getOwnDocuments();
+  if (existing.length >= DOCUMENT_LIMIT) {
+    await discard();
+    return { ok: false, code: "limit" };
+  }
+
+  const supabase = await createClient();
+  const nextOrder =
+    existing.length === 0 ? 0 : Math.max(...existing.map((doc) => doc.display_order)) + 1;
 
   const { data, error: insertError } = await supabase
     .from("documents")
@@ -126,10 +194,10 @@ export async function createOwnDocument(input: {
       type: input.type,
       title: input.title,
       description: input.description,
-      storage_path: nextPath,
-      file_name: fileName,
+      storage_path: input.path,
+      file_name: input.fileName.trim().slice(0, 255) || "belge.pdf",
       mime_type: DOCUMENT_MIME_TYPE,
-      file_size: input.file.size,
+      file_size: size,
       is_visible: true,
       display_order: nextOrder,
     })
@@ -137,7 +205,7 @@ export async function createOwnDocument(input: {
     .single();
 
   if (insertError || !data) {
-    await supabase.storage.from(DOCUMENTS_BUCKET).remove([nextPath]);
+    await discard();
     return { ok: false, code: "db" };
   }
 

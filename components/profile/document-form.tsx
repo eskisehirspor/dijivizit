@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import { useRef, useState, useTransition, type ChangeEvent, type FormEvent } from "react";
 import { toast } from "sonner";
 
-import { createDocumentAction } from "@/app/actions/documents";
+import {
+  finalizeDocumentUploadAction,
+  reserveDocumentUploadAction,
+  type DocumentUploadMeta,
+} from "@/app/actions/documents";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,8 +19,11 @@ import {
   DOCUMENT_LIMIT,
   DOCUMENT_MIME_TYPE,
   DOCUMENT_TYPES,
+  DOCUMENTS_BUCKET,
   type DocumentType,
 } from "@/lib/profile/documents";
+import { createClient } from "@/lib/supabase/client";
+import { validateDocumentFile } from "@/lib/validations/documents";
 import { cn } from "@/lib/utils";
 
 export function DocumentForm({ documentCount }: { documentCount: number }) {
@@ -52,13 +59,62 @@ export function DocumentForm({ documentCount }: { documentCount: number }) {
     }
 
     const formData = new FormData(event.currentTarget);
-    formData.set("file", file);
+    const meta: DocumentUploadMeta = {
+      fileName: file.name,
+      fileType: file.type,
+      fileSize: file.size,
+      type: String(formData.get("type") ?? ""),
+      title: String(formData.get("title") ?? ""),
+      description: String(formData.get("description") ?? ""),
+    };
+
+    // Checked here first so an oversized or non-PDF file fails instantly with a
+    // clear message instead of after a long upload.
+    const local = validateDocumentFile({ name: file.name, type: file.type, size: file.size });
+    if (!local.ok) {
+      setErrorCode(
+        local.code === "size"
+          ? "profile.documents.errors.tooLarge"
+          : local.code === "empty"
+            ? "profile.documents.errors.empty"
+            : "profile.documents.errors.typeInvalid",
+      );
+      setFieldErrors(null);
+      return;
+    }
 
     startTransition(async () => {
-      const result = await createDocumentAction(null, formData);
-      if (!result.ok) {
-        setErrorCode(result.code);
-        setFieldErrors(result.fieldErrors ?? null);
+      try {
+        const reserved = await reserveDocumentUploadAction(meta);
+        if (!reserved.ok) {
+          setErrorCode(reserved.code);
+          setFieldErrors(reserved.fieldErrors ?? null);
+          return;
+        }
+
+        const { error: uploadError } = await createClient()
+          .storage.from(DOCUMENTS_BUCKET)
+          .upload(reserved.data.path, file, {
+            contentType: DOCUMENT_MIME_TYPE,
+            upsert: false,
+            cacheControl: "3600",
+          });
+
+        if (uploadError) {
+          setErrorCode("profile.documents.errors.uploadFailed");
+          setFieldErrors(null);
+          return;
+        }
+
+        const result = await finalizeDocumentUploadAction(reserved.data.path, meta);
+        if (!result.ok) {
+          setErrorCode(result.code);
+          setFieldErrors(result.fieldErrors ?? null);
+          return;
+        }
+      } catch {
+        setErrorCode("profile.documents.errors.uploadFailed");
+        setFieldErrors(null);
         return;
       }
 

@@ -1,41 +1,29 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
-import { getOwnDocumentById } from "@/lib/dal/documents";
-import { DOCUMENTS_BUCKET, inlinePdfContentDisposition } from "@/lib/profile/documents";
-import { createClient } from "@/lib/supabase/server";
+import { createDocumentSignedUrl, getOwnDocumentById } from "@/lib/dal/documents";
 
 type RouteContext = {
   params: Promise<{ documentId: string }>;
 };
 
-/**
- * Owner-only document preview. Streams with Content-Disposition: inline.
- * Reuses the CV file-serving pattern.
- */
+const ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** Owner-only document preview via a short-lived signed URL. */
 export async function GET(_request: Request, context: RouteContext) {
   const { documentId } = await context.params;
+  if (!ID_PATTERN.test(documentId)) {
+    notFound();
+  }
+
   const document = await getOwnDocumentById(documentId);
   if (!document) {
     notFound();
   }
 
-  const supabase = await createClient();
-  const { data, error } = await supabase.storage
-    .from(DOCUMENTS_BUCKET)
-    .download(document.storage_path);
-
-  if (error || !data) {
+  const signedUrl = await createDocumentSignedUrl(document.storage_path);
+  if (!signedUrl) {
     notFound();
   }
 
-  const bytes = await data.arrayBuffer();
-
-  return new Response(bytes, {
-    status: 200,
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": inlinePdfContentDisposition(document.file_name),
-      "Cache-Control": "private, no-store",
-    },
-  });
+  redirect(signedUrl);
 }

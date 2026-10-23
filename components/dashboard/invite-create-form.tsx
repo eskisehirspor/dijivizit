@@ -60,14 +60,10 @@ export function InviteCreateForm() {
           aria-invalid={Boolean(failed?.fieldErrors?.email)}
         />
 
-        <p className="text-xs text-muted-foreground">
-          {t("dashboard.invites.fields.emailHint")}
-        </p>
+        <p className="text-xs text-muted-foreground">{t("dashboard.invites.fields.emailHint")}</p>
 
         {failed?.fieldErrors?.email ? (
-          <p className="text-xs text-destructive">
-            {t(failed.fieldErrors.email)}
-          </p>
+          <p className="text-xs text-destructive">{t(failed.fieldErrors.email)}</p>
         ) : null}
       </div>
 
@@ -103,9 +99,7 @@ export function InviteCreateForm() {
         </p>
 
         {failed?.fieldErrors?.expiresAt ? (
-          <p className="text-xs text-destructive">
-            {t(failed.fieldErrors.expiresAt)}
-          </p>
+          <p className="text-xs text-destructive">{t(failed.fieldErrors.expiresAt)}</p>
         ) : null}
       </div>
 

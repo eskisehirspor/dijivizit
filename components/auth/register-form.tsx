@@ -9,11 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import type { ActionResult } from "@/lib/action-result";
 
-export function RegisterForm({
-  invitationCode = "",
-}: {
-  invitationCode?: string;
-}) {
+export function RegisterForm({ invitationCode = "" }: { invitationCode?: string }) {
   const t = useTranslations();
   const [state, formAction, isPending] = useActionState<ActionResult | null, FormData>(
     registerAction,
