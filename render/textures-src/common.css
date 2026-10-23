@@ -1,0 +1,5 @@
+@font-face{font-family:Geist;src:url(Geist-Variable.woff2);font-weight:100 900}
+@font-face{font-family:GeistMono;src:url(GeistMono-Variable.woff2);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%}
+body{font-family:Geist;-webkit-font-smoothing:antialiased}

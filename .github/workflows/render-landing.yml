@@ -1,0 +1,114 @@
+name: Render landing hero
+
+# Manual only: renders the Blender scene in render/ across parallel runners,
+# converts frames to WebP, commits them to public/landing and redeploys.
+on:
+  workflow_dispatch:
+    inputs:
+      samples:
+        description: "Cycles samples per pixel"
+        default: "64"
+      variants:
+        description: "desktop, mobile or both"
+        default: both
+        type: choice
+        options: [both, desktop, mobile]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: render-landing
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [desktop, mobile]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - name: Skip unrequested variant
+        id: gate
+        run: |
+          want="${{ github.event.inputs.variants }}"
+          if [ "$want" = "both" ] || [ "$want" = "${{ matrix.variant }}" ]; then echo "run=1" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == '1'
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == '1'
+        with:
+          python-version: "3.13"
+
+      - name: Install Blender (bpy) and Pillow
+        if: steps.gate.outputs.run == '1'
+        run: pip install bpy==5.2.3 pillow
+
+      - name: Render shard
+        if: steps.gate.outputs.run == '1'
+        run: |
+          frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 192, 16)))")
+          if [ "${{ matrix.variant }}" = "desktop" ]; then
+            python3 render/scene.py --out out/png --res 1600x900 --samples ${{ github.event.inputs.samples }} --frames "$frames"
+          else
+            python3 render/scene.py --out out/png --res 900x1600 --samples ${{ github.event.inputs.samples }} --frames "$frames" --portrait
+          fi
+
+      - name: Convert to WebP
+        if: steps.gate.outputs.run == '1'
+        run: |
+          python3 - <<'PY'
+          import glob, os
+          from PIL import Image
+          os.makedirs("out/webp", exist_ok=True)
+          for p in sorted(glob.glob("out/png/*.png")):
+              Image.open(p).convert("RGB").save(
+                  os.path.join("out/webp", os.path.basename(p)[:-4] + ".webp"),
+                  "WEBP", quality=78, method=6)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: steps.gate.outputs.run == '1'
+        with:
+          name: ${{ matrix.variant }}-${{ matrix.shard }}
+          path: out/webp/*.webp
+          retention-days: 3
+
+  publish:
+    needs: render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Collect frames
+        run: |
+          for v in desktop mobile; do
+            if ls artifacts/$v-*/ >/dev/null 2>&1; then
+              rm -rf public/landing/$v && mkdir -p public/landing/$v
+              cp artifacts/$v-*/*.webp public/landing/$v/
+              echo "$v: $(ls public/landing/$v | wc -l) frames, $(du -sh public/landing/$v | cut -f1)"
+            fi
+          done
+
+      - name: Commit frames
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/landing
+          git commit -m "Update rendered landing hero frames" || exit 0
+          git push
+
+      - name: Redeploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-cloudflare.yml --ref main -f target=production
