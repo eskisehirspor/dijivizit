@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { FinishPicker } from "@/components/marketing/finish-picker";
 import { ScrollSequence, type SequenceCaption } from "@/components/marketing/scroll-sequence";
 import { APP_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
@@ -18,7 +19,7 @@ const CAPTIONS: SequenceCaption[] = [
     end: 0.42,
     kicker: "Kart",
     title: "Metal. NFC. QR.",
-    body: "Fırçalanmış metal gövde, içinde NFC çip ve dinamik QR. Elinde ağırlığını hissedersin.",
+    body: "Siyah metal, gümüş, gold ya da ahşap. İçinde NFC çip, üstünde dinamik QR.",
     place: "left",
   },
   {
@@ -106,6 +107,16 @@ export default function HomePage() {
         mobile={{ base: "/landing/mobile", count: 192, width: 900, height: 1600 }}
         captions={CAPTIONS}
       />
+
+      <section className="mx-auto w-full max-w-6xl px-6 pt-28 sm:pt-36">
+        <div className="mb-12 flex max-w-2xl flex-col gap-4">
+          <p className="text-sm font-medium tracking-wide text-muted-foreground">Kaplamalar</p>
+          <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
+            Dört kaplama. Tek dokunuş.
+          </h2>
+        </div>
+        <FinishPicker />
+      </section>
 
       <section className="mx-auto w-full max-w-6xl px-6 py-28 sm:py-36">
         <div className="flex max-w-2xl flex-col gap-4">
