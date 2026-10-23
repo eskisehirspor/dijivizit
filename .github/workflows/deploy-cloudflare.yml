@@ -1,10 +1,10 @@
 name: Deploy to Cloudflare
 
-# Staging deploys on every push to the migration branch; production only runs
-# when started by hand (Actions → Deploy to Cloudflare → Run workflow).
+# Production deploys on every push to main (after tests pass). Staging is
+# deployed by hand: Actions → Deploy to Cloudflare → Run workflow → staging.
 on:
   push:
-    branches: [feat/cloudflare]
+    branches: [main]
   workflow_dispatch:
     inputs:
       target:
@@ -15,22 +15,22 @@ on:
         options: [staging, production]
 
 concurrency:
-  group: deploy-cloudflare-${{ github.event.inputs.target || 'staging' }}
+  group: deploy-cloudflare-${{ github.event.inputs.target || 'production' }}
   cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.target || 'staging' }}
+    environment: ${{ github.event.inputs.target || 'production' }}
 
     env:
-      TARGET: ${{ github.event.inputs.target || 'staging' }}
+      TARGET: ${{ github.event.inputs.target || 'production' }}
       NEXT_TELEMETRY_DISABLED: "1"
       # Public values: they ship to every browser anyway.
       NEXT_PUBLIC_SUPABASE_URL: https://mtspxgxgtvivkrbvlbuq.supabase.co
       NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_RTt4fno6MJ0GwqFgq4FarQ_cI2GKiFK
       # Inlined at build time: auth redirects and email links point here.
-      NEXT_PUBLIC_SITE_URL: ${{ (github.event.inputs.target || 'staging') == 'production' && 'https://app.dijivizit.com' || 'https://dijivizit-staging.bizimtribun.workers.dev' }}
+      NEXT_PUBLIC_SITE_URL: ${{ (github.event.inputs.target || 'production') == 'production' && 'https://app.dijivizit.com' || 'https://dijivizit-staging.bizimtribun.workers.dev' }}
       # Needed by the build's env validation; the real value is a Worker secret.
       SUPABASE_SECRET_KEY: build-placeholder
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
