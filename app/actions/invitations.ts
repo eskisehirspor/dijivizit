@@ -10,9 +10,9 @@ import {
   requireInviteOwner,
   revokeInvitationCode,
 } from "@/lib/dal/invitations";
-import { clientEnv } from "@/lib/env/client";
 import { buildInvitationEmail, EMAIL_FROM, EMAIL_REPLY_TO } from "@/lib/email/invitation";
 import { serverEnv } from "@/lib/env/server";
+import { APP_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
 import { createInvitationSchema, parseInvitationExpiry } from "@/lib/validations/invitations";
 
@@ -107,14 +107,16 @@ async function sendInvitationEmail(input: {
     return false;
   }
 
-  const registerUrl = new URL(routes.register, clientEnv.NEXT_PUBLIC_SITE_URL);
+  // Always the production app, whichever deployment sends the mail: invitees
+  // must land on the real site, never on a staging or preview URL.
+  const registerUrl = new URL(routes.register, APP_ORIGIN);
   registerUrl.searchParams.set("invite", input.plaintext);
 
   const email = buildInvitationEmail({
     code: input.plaintext,
     registerUrl: registerUrl.toString(),
     expiresAt: input.expiresAt ? EXPIRY_FORMAT.format(new Date(input.expiresAt)) : null,
-    assetOrigin: clientEnv.NEXT_PUBLIC_SITE_URL,
+    assetOrigin: APP_ORIGIN,
   });
 
   try {
