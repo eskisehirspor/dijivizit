@@ -403,7 +403,19 @@ def build(portrait, finish="black", hide_phone=False):
     track.track_axis = "TRACK_NEGATIVE_Z"
     track.up_axis = "UP_Y"
 
+    extras = []
+    if finish == "black" and not hide_phone:
+        # The rest of the collection, shown briefly behind the hero card.
+        for fin in ("silver", "gold", "wood", "wood-light"):
+            e = slab(f"Extra-{fin}", 0.856, 0.54, 0.032, 0.012)
+            bevel(e, 0.0025, 3)
+            e.data.materials.append(card_edge_material(fin))
+            e.data.materials.append(card_face_material(f"ExF-{fin}", "card-front.png", fin))
+            e.data.materials.append(card_face_material(f"ExB-{fin}", "card-back.png", fin))
+            extras.append(e)
+
     animate(card, phone, cam, target, mix_profile, mix_saved, portrait)
+    animate_extras(extras, portrait)
     return scene
 
 
@@ -421,6 +433,27 @@ def key(obj, frame, loc=None, rot=None):
 def key_value(socket, frame, value):
     socket.default_value = value
     socket.keyframe_insert("default_value", frame=frame)
+
+
+def animate_extras(extras, portrait):
+    """Silver, gold and the two woods rise in behind the hero card while it
+    flips, hover in a soft arc (out of focus), then float up and away before
+    the phone arrives."""
+    if not extras:
+        return
+    # Landscape copy sits on the left, so the collection gathers on the right;
+    # portrait copy sits at the bottom, so it gathers above the hero card.
+    slots = [(0.75, 2.3, 0.85, -14), (1.65, 2.8, 0.35, 18), (1.15, 2.5, -0.5, -8), (2.2, 3.0, -0.25, 26)]
+    if portrait:
+        slots = [(-0.55, 2.4, 1.15, -18), (0.55, 2.7, 1.35, 14), (-0.85, 2.9, 0.35, 10), (0.9, 2.6, 0.45, -22)]
+    for i, (e, (x, y, z, yaw)) in enumerate(zip(extras, slots)):
+        d = i * 3
+        key(e, 0, (x, y, z - 3.2), (100, -8, yaw - 30))
+        key(e, 22 + d, (x, y, z - 3.2), (100, -8, yaw - 30))
+        key(e, 46 + d, (x, y, z), (98, -4, yaw))
+        key(e, 76 + d, (x * 1.04, y, z + 0.08), (96, 2, yaw + 10))
+        key(e, 98 + d, (x * 1.3, y + 0.6, z + 3.0), (92, 8, yaw + 40))
+        key(e, 191, (x * 1.3, y + 0.6, z + 3.0), (92, 8, yaw + 40))
 
 
 def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
