@@ -148,8 +148,8 @@ export default function HomePage() {
       />
 
       <ScrollSequence
-        desktop={{ base: "/landing/desktop", count: 192, width: 1600, height: 900 }}
-        mobile={{ base: "/landing/mobile", count: 192, width: 900, height: 1600 }}
+        desktop={{ base: "/landing/desktop", count: 192, width: 2560, height: 1440 }}
+        mobile={{ base: "/landing/mobile", count: 192, width: 1170, height: 2080 }}
         captions={CAPTIONS}
       />
 

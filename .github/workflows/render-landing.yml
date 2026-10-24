@@ -25,7 +25,7 @@ concurrency:
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 300
     strategy:
       fail-fast: false
       matrix:
@@ -55,9 +55,9 @@ jobs:
         run: |
           frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 192, 16)))")
           if [ "${{ matrix.variant }}" = "desktop" ]; then
-            python3 render/scene.py --out out/png --res 1600x900 --samples ${{ github.event.inputs.samples }} --frames "$frames"
+            python3 render/scene.py --out out/png --res 2560x1440 --samples ${{ github.event.inputs.samples }} --frames "$frames"
           else
-            python3 render/scene.py --out out/png --res 900x1600 --samples ${{ github.event.inputs.samples }} --frames "$frames" --portrait
+            python3 render/scene.py --out out/png --res 1170x2080 --samples ${{ github.event.inputs.samples }} --frames "$frames" --portrait
           fi
 
       - name: Convert to WebP
@@ -70,7 +70,7 @@ jobs:
           for p in sorted(glob.glob("out/png/*.png")):
               Image.open(p).convert("RGB").save(
                   os.path.join("out/webp", os.path.basename(p)[:-4] + ".webp"),
-                  "WEBP", quality=90, method=6)
+                  "WEBP", quality=86, method=6)
           PY
 
       - uses: actions/upload-artifact@v4
@@ -94,7 +94,7 @@ jobs:
       - run: pip install bpy==5.2.3 pillow
       - name: Render still
         run: |
-          python3 render/scene.py --out out/png --res 1600x900 --samples 128 --frames 24 --finish ${{ matrix.finish }} --hide-phone
+          python3 render/scene.py --out out/png --res 2560x1440 --samples 128 --frames 24 --finish ${{ matrix.finish }} --hide-phone
           python3 -c "from PIL import Image; Image.open('out/png/0024.png').convert('RGB').save('out/${{ matrix.finish }}.webp','WEBP',quality=82,method=6)"
       - uses: actions/upload-artifact@v4
         with:
