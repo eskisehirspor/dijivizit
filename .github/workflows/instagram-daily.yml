@@ -1,0 +1,52 @@
+name: Instagram daily post
+
+# Every day at 19:00 Istanbul time: publish the next post and story from
+# marketing/instagram/schedule.json. Weekly: refresh the long-lived token.
+on:
+  schedule:
+    - cron: "0 16 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only print what would be published"
+        type: boolean
+        default: true
+      force_index:
+        description: "Publish this entry number instead of today's (optional)"
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: instagram-daily
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Refresh access token (Sundays)
+        if: github.event_name == 'schedule' && (github.event.schedule == '0 16 * * *')
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+        run: |
+          if [ "$(TZ=Europe/Istanbul date +%u)" != "7" ] || [ -z "$GH_TOKEN" ]; then exit 0; fi
+          new=$(curl -fsS "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=$IG_ACCESS_TOKEN" | python3 -c "import sys,json;print(json.load(sys.stdin)['access_token'])")
+          echo "::add-mask::$new"
+          gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY" --body "$new"
+          echo "token refreshed"
+
+      - name: Publish
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '' }}
+          FORCE_INDEX: ${{ inputs.force_index }}
+        run: node scripts/instagram-publish.mjs
