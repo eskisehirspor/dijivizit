@@ -177,9 +177,10 @@ def camera(loc, target, lens=85, fstop=4.0, focus=None):
 def hero(fin):
     """Card lying on stone, low three-quarter view, copy space above."""
     def f():
-        stage(warm=0.4 if fin in ("gold", "wood", "wood-light") else 0.0)
-        lying("C", fin, (0, 0), 16)
-        camera((0.0, -2.05, 0.78), (-0.12, 0.16, 0.0), lens=70, fstop=3.5, focus=(0, 0, 0))
+        stage(warm=0.4 if fin in ("gold", "wood", "wood-light") else 0.0, key=0.8, strip=0.12, rim=1.6)
+        bpy.data.objects["Top"].hide_render = True
+        lying("C", fin, (0, 0), 14)
+        camera((0.05, -2.45, 0.95), (0.0, 0.12, 0.0), lens=70, fstop=4.0, focus=(0, 0, 0))
     return f
 
 
