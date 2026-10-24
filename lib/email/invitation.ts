@@ -7,7 +7,7 @@
 export const EMAIL_FROM = "Dijivizit <merhaba@dijivizit.com>";
 export const EMAIL_REPLY_TO = "merhaba@dijivizit.com";
 
-const COLORS = {
+export const COLORS = {
   background: "#ffffff",
   canvas: "#f5f5f5",
   foreground: "#0a0a0a",
@@ -17,10 +17,10 @@ const COLORS = {
   subtle: "#fafafa",
 } as const;
 
-const FONT = `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif`;
+export const FONT = `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif`;
 const MONO = `ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
 
-function escapeHtml(value: string): string {
+export function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

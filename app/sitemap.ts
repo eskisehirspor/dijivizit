@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       images: [`${MARKETING_ORIGIN}/landing/finishes/black.webp`],
     },
+    {
+      url: `${MARKETING_ORIGIN}/siparis`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     ...LEGAL_SLUGS.map((slug) => ({
       url: `${MARKETING_ORIGIN}/yasal/${slug}`,
       lastModified: new Date(LEGAL_VERSION),

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { ContactDetails } from "@/components/marketing/contact-details";
 import { FinishPicker } from "@/components/marketing/finish-picker";
 import { ScrollSequence, type SequenceCaption } from "@/components/marketing/scroll-sequence";
 import { COMPARISON, FAQ, KEYWORDS, USE_CASES } from "@/components/marketing/seo-content";
+import { CONTACT } from "@/lib/contact";
 import { APP_ORIGIN, MARKETING_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
 
@@ -28,12 +30,21 @@ const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": ["Organization", "LocalBusiness"],
       "@id": `${MARKETING_ORIGIN}/#organization`,
       name: "Dijivizit",
       url: MARKETING_ORIGIN,
       logo: `${MARKETING_ORIGIN}/email/logomark.png`,
-      email: "merhaba@dijivizit.com",
+      image: `${MARKETING_ORIGIN}/landing/finishes/black.webp`,
+      email: CONTACT.orderEmail,
+      telephone: CONTACT.phoneE164,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: CONTACT.street,
+        addressLocality: CONTACT.district,
+        addressRegion: CONTACT.city,
+        addressCountry: CONTACT.country,
+      },
     },
     {
       "@type": "WebSite",
@@ -126,7 +137,6 @@ const STEPS = [
 ];
 
 export default function HomePage() {
-  const loginHref = `${APP_ORIGIN}${routes.login}`;
   const registerHref = `${APP_ORIGIN}${routes.register}`;
 
   return (
@@ -136,35 +146,6 @@ export default function HomePage() {
         // JSON.stringify output is safe here: all values are static strings.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD).replace(/</g, "\\u003c") }}
       />
-      <header className="fixed inset-x-0 top-0 z-30">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-70">
-            <svg viewBox="0 0 24 24" className="size-7" aria-hidden="true">
-              <rect x="2" y="2" width="20" height="20" rx="6" fill="currentColor" />
-              <circle cx="8.6" cy="12" r="1.35" fill="white" />
-              <g fill="none" stroke="white" strokeWidth="1.6" strokeLinecap="round">
-                <path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4" />
-                <path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2" />
-              </g>
-            </svg>
-            <span className="text-lg font-semibold tracking-[-0.03em]">Dijivizit</span>
-          </Link>
-          <nav className="flex items-center gap-2">
-            <a
-              href={loginHref}
-              className="rounded-full px-4 py-2 text-sm font-medium text-neutral-800 transition-colors hover:bg-white/50"
-            >
-              Giriş yap
-            </a>
-            <a
-              href={registerHref}
-              className="rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
-            >
-              Başla
-            </a>
-          </nav>
-        </div>
-      </header>
 
       <ScrollSequence
         desktop={{ base: "/landing/desktop", count: 192, width: 1600, height: 900 }}
@@ -301,23 +282,38 @@ export default function HomePage() {
             Kartvizit bitti.
           </h2>
           <p className="max-w-xl text-lg leading-relaxed text-pretty text-muted-foreground">
-            Dijivizit şu an davetle açılıyor. Davet kodun varsa hemen başla; yoksa bize yaz, sırana
-            ekleyelim.
+            Kaplamanı seç, bilgilerini bırak; seni arayıp kartını birlikte hazırlayalım. Davet kodun
+            varsa hemen hesabını da oluşturabilirsin.
           </p>
           <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/siparis"
+              className="inline-flex h-12 items-center rounded-full bg-neutral-950 px-6 text-base font-medium text-white transition-colors hover:bg-neutral-800"
+            >
+              Talep oluştur
+            </Link>
             <a
               href={registerHref}
-              className="inline-flex h-12 items-center rounded-full bg-neutral-950 px-6 text-base font-medium text-white transition-colors hover:bg-neutral-800"
+              className="inline-flex h-12 items-center rounded-full border border-border px-6 text-base font-medium transition-colors hover:bg-muted"
             >
               Davet koduyla başla
             </a>
-            <a
-              href="mailto:merhaba@dijivizit.com?subject=Dijivizit%20davet%20talebi"
-              className="inline-flex h-12 items-center rounded-full border border-border px-6 text-base font-medium transition-colors hover:bg-muted"
-            >
-              Davet iste
-            </a>
           </div>
+        </div>
+      </section>
+      <section id="iletisim" className="scroll-mt-20 border-t border-border/60">
+        <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-28 sm:py-36 lg:grid-cols-[1fr_1.4fr]">
+          <div className="flex flex-col gap-4">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">İletişim</p>
+            <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
+              Bize ulaş.
+            </h2>
+            <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
+              Kurumsal siparişler, numune kart ya da aklına takılan her şey için ara, yaz ya da
+              Eskişehir&rsquo;deki atölyemize uğra.
+            </p>
+          </div>
+          <ContactDetails />
         </div>
       </section>
     </>

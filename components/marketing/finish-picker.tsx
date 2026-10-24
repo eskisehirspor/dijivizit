@@ -2,17 +2,10 @@
 
 import { useState } from "react";
 
+import Link from "next/link";
+
+import { FINISHES, type FinishId } from "@/lib/orders/finishes";
 import { cn } from "@/lib/utils";
-
-const FINISHES = [
-  { id: "black", label: "Siyah metal", note: "Mat grafit, açık gri lazer kazıma." },
-  { id: "silver", label: "Gümüş", note: "Mat fırçalanmış gümüş, koyu lazer kazıma." },
-  { id: "gold", label: "Gold", note: "Mat fırçalanmış gold, koyu lazer kazıma." },
-  { id: "wood", label: "Koyu ahşap", note: "Ceviz, lazerle yakılmış yazı." },
-  { id: "wood-light", label: "Açık ahşap", note: "Meşe, lazerle yakılmış yazı." },
-] as const;
-
-type FinishId = (typeof FINISHES)[number]["id"];
 
 /** Rendered stills of the card in each finish, crossfaded by a segmented control. */
 export function FinishPicker() {
@@ -67,6 +60,12 @@ export function FinishPicker() {
         <p className="text-sm text-muted-foreground" aria-live="polite">
           {current.note}
         </p>
+        <Link
+          href={`/siparis?kaplama=${current.id}`}
+          className="inline-flex h-11 items-center rounded-full bg-neutral-950 px-6 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
+        >
+          {current.label} sipariş ver
+        </Link>
       </div>
     </div>
   );

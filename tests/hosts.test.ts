@@ -27,6 +27,8 @@ describe("host split", () => {
     expect(shouldPassThroughOnMarketingHost("/auth/confirm")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/p/AbCdEfGh123")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/p/AbCdEfGh123/vcard")).toBe(true);
+    expect(shouldPassThroughOnMarketingHost("/siparis")).toBe(true);
+    expect(shouldPassThroughOnMarketingHost("/yasal/kvkk")).toBe(true);
 
     expect(shouldPassThroughOnMarketingHost("/login")).toBe(false);
     expect(shouldPassThroughOnMarketingHost("/register")).toBe(false);

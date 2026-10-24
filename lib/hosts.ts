@@ -41,6 +41,10 @@ export function shouldPassThroughOnMarketingHost(pathname: string): boolean {
     return true;
   }
 
+  if (pathname === "/siparis") {
+    return true;
+  }
+
   return false;
 }
 
