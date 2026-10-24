@@ -64,9 +64,9 @@ body.ivory{background:#f1ece3;color:#141312}
 .num{font-family:Corm;font-size:340px;line-height:.8;font-weight:400;color:transparent;-webkit-text-stroke:1.2px ${GOLD}aa}
 `;
 
-function page({ img, ivory = false, pos = "center", scale = 1, vt = true, vb = true, frame = false, num, body, grade = false }) {
+function page({ img, ivory = false, pos = "center", scale = 1, vt = true, vb = true, frame = false, num, body, grade = false, fx = "" }) {
   const bg = img
-    ? `<div class="bg" style="background-image:url('${A(img)}');background-position:${pos};transform:scale(${scale});${grade ? "filter:grayscale(1) sepia(.18) contrast(1.12) brightness(.72)" : ""}"></div>`
+    ? `<div class="bg" style="background-image:url('${A(img)}');background-position:${pos};transform:scale(${scale});${fx}${grade ? "filter:grayscale(1) sepia(.18) contrast(1.12) brightness(.72)" : ""}"></div>`
     : "";
   const markFg = ivory ? "#141312" : "#efe9df";
   const markCut = ivory ? "#f1ece3" : "#0a0a0b";
@@ -95,12 +95,8 @@ const FIN = {
 };
 
 const P = {};
-let n = 0;
-const add = (id, fn) => {
-  n += 1;
-  const num = String(n).padStart(2, "0");
-  P[`${num}-${id}`] = () => fn(num);
-};
+const LIST = [];
+const add = (id, fn) => LIST.push([id, fn]);
 
 // 1 — opening statement
 add("kagit-eskir", (num) =>
@@ -160,9 +156,6 @@ add("kaydedildi", (num) =>
   page({ num, img: "lux-phone-gold-saved", pos: "50% 60%", body: top("Tek dokunuşla", "Rehbere kaydedildi.<br><span class='it g'>Siz hatırlandınız.</span>", "", "h2") }),
 );
 
-add("sessiz-luks", (num) =>
-  page({ num, ivory: true, body: `<div class="abs" style="top:260px"><div class="label">Dijivizit</div><div class="h1" style="margin-top:34px;font-size:150px">Sessiz lüks,<br><span class="it">cebinizde.</span></div></div>` }),
-);
 
 add("bes-kaplama", (num) =>
   page({ num, img: "lux-stack", pos: "50% 60%", body: top("Koleksiyon", "Beş kaplama.<br><span class='it g'>Tek imza.</span>", "Siyah metal, gümüş, gold, koyu ve açık ahşap.") }),
@@ -213,9 +206,6 @@ add("nfc-nedir", (num) =>
   page({ num, ivory: true, frame: true, body: `<div class="abs" style="top:200px"><div class="label">Sık sorulan</div><div class="h2" style="margin-top:30px">NFC nedir?</div><div class="rule" style="margin:44px 0 34px"></div><div class="body" style="font-size:31px;line-height:1.6;max-width:820px">Telefonların temassız ödemede kullandığı yakın alan iletişimi. Dijivizit kartın içindeki küçük çip, telefona dokunduğunda profilinizi açar. Pil yok, şarj yok, uygulama yok.</div></div>` }),
 );
 
-add("fircalanmis", (num) =>
-  page({ num, img: "lux-macro-silver", vt: false, body: bottom("Mat Fırçalanmış Gümüş", "Fırçalanmış yüzey.<br><span class='it g'>Keskin detay.</span>") }),
-);
 
 add("kaydedilen-aranir", (num) =>
   page({ num, img: "life-woman-phone", grade: true, pos: "50% 30%", vt: false, body: bottom("Hatırlanmak", "Kaydedilen<br><span class='it g'>aranır.</span>") }),
@@ -225,21 +215,15 @@ add("ahsabin-iki-tonu", (num) =>
   page({ num, img: "lux-duo-wood", pos: "50% 60%", body: top("Ahşap koleksiyonu", "Ahşabın<br><span class='it g'>iki tonu.</span>", "Koyu ve açık; ikisi de gerçek ahşap, ikisi de NFC.") }),
 );
 
-add("kendinizi-anlatmanin", (num) =>
-  page({ num, frame: true, body: `<div class="abs center" style="top:430px"><div class="label">Dijivizit</div><div class="h1" style="margin-top:40px">Kendinizi anlatmanın<br><span class="it g">en zarif yolu.</span></div></div>` }),
-);
 
 add("baglanti", (num) =>
   page({ num, img: "life-hands-dark", grade: true, vt: false, body: bottom("Bağlantı", "Bir dokunuş<br><span class='it g'>uzağınızda.</span>") }),
 );
 
 // Detail macros with a second treatment
-add("siyah-detay", (num) =>
-  page({ num, img: "lux-macro-black", vt: false, body: bottom("Mat Siyah Metal", "Kusursuz<br><span class='it g'>kazıma.</span>") }),
-);
 
 // Second takes on the heroes, ivory caption band
-for (const f of ["gold", "black", "wood", "silver", "wood-light"]) {
+for (const f of ["gold", "black", "wood"]) {
   add(`edisyon-${f}`, (num) =>
     page({
       num,
@@ -291,15 +275,7 @@ add("kurumsal", (num) =>
   page({ num, img: "lux-stack", pos: "50% 45%", scale: 1.15, vt: false, body: bottom("Kurumsal", "Tüm ekip,<br><span class='it g'>tek imza.</span>", "Ekibiniz için aynı tasarım; biri ayrıldığında kart değil, profil değişir.") }),
 );
 
-add("ivory-gold", (num) =>
-  page({ num, ivory: true, body: `<div class="abs center" style="top:180px"><div class="label">Mat Fırçalanmış Gold</div><div class="h2" style="margin-top:26px">Gösterişsiz<br><span class="it">bir ayrıcalık.</span></div></div>
-    <div style="position:absolute;left:150px;right:150px;top:560px;height:560px;background:url('${A("lux-float-gold")}') center/cover;border-radius:4px;box-shadow:0 40px 80px -30px rgba(0,0,0,.45)"></div>` }),
-);
 
-add("ivory-black", (num) =>
-  page({ num, ivory: true, body: `<div class="abs center" style="top:180px"><div class="label">Mat Siyah Metal</div><div class="h2" style="margin-top:26px">Siyahın<br><span class="it">en sade hali.</span></div></div>
-    <div style="position:absolute;left:150px;right:150px;top:560px;height:560px;background:url('${A("lux-float-black")}') center/cover;border-radius:4px;box-shadow:0 40px 80px -30px rgba(0,0,0,.45)"></div>` }),
-);
 
 add("atolye", (num) =>
   page({ num, frame: true, body: `<div class="abs" style="top:300px"><div class="label">Atölye</div><div class="h1" style="margin-top:36px">Eskişehir'den,<br><span class="it g">özenle.</span></div><div class="rule" style="margin:54px 0 34px"></div>
@@ -310,6 +286,68 @@ add("siparis", (num) =>
   page({ num, img: "lux-hero-gold", pos: "50% 65%", body: `<div class="abs center" style="top:130px"><div class="label">Sipariş</div><div class="h1" style="margin-top:30px">Kartınızı<br><span class="it g">seçin.</span></div><div class="rule c" style="margin:44px auto 34px"></div><div class="body" style="letter-spacing:.24em;text-transform:uppercase;font-size:20px;color:#efe9df">dijivizit.com/siparis</div></div>` }),
 );
 
+// ---- How it works: tap and on-screen profile
+add("dokundurun", (num) =>
+  page({ num, img: "lux-tap-black", fx: "transform:translateY(190px) scale(.8);-webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 50%,#000 70%,transparent 100%);", body: top("Nasıl çalışır", "Dokundurun.<br><span class='it g'>Profiliniz açılsın.</span>", "", "h2") }),
+);
+add("yaklastirin", (num) =>
+  page({ num, img: "lux-tap-gold-idle", pos: "50% 60%", body: bottom("NFC", "Yaklaştırın.<br><span class='it g'>Gerisi kendiliğinden.</span>", "Kartınız telefonun üst kısmına değdiği an bağlantı kurulur.") }),
+);
+add("profil-boyle-gorunur", (num) =>
+  page({
+    num,
+    img: "lux-ui-profile",
+    pos: "50% 50%",
+    vt: true,
+    vb: false,
+    body: `<div class="abs" style="top:110px"><div class="label">Arayüz</div><div class="h2" style="margin-top:26px">Profiliniz,<br><span class="it g">onun ekranında.</span></div></div>
+      <div class="abs" style="bottom:120px;right:auto;width:420px"><div style="background:#0a0a0bd9;border:1px solid ${GOLD}55;padding:30px 34px">
+      ${["Fotoğraf, ad ve unvan", "Rehbere Kaydet", "Telefon ve WhatsApp", "LinkedIn, e-posta, web", "IBAN ve belgeler"].map((t) => `<div style="display:flex;gap:16px;align-items:center;padding:9px 0;font-size:24px"><span style="width:8px;height:8px;border-radius:50%;background:${GOLD}"></span>${t}</div>`).join("")}</div></div>`,
+  }),
+);
+add("rehberde", (num) =>
+  page({ num, img: "lux-ui-saved", pos: "50% 50%", vt: true, vb: false, body: top("Tek dokunuşla", "Rehbere<br><span class='it g'>kaydedildi.</span>", "", "h2") }),
+);
+add("kilit-ekrani", (num) =>
+  page({ num, img: "lux-ui-idle", pos: "50% 50%", vt: true, vb: false, body: top("Uygulama gerekmez", "Telefonun kilidi açık,<br><span class='it g'>bu kadar.</span>", "", "h2") }),
+);
+add("rehbere-kaydet", (num) =>
+  page({ num, img: "lux-ui-macro", vt: false, fx: "-webkit-mask-image:linear-gradient(#000 50%,transparent 70%);", body: bottom("Arayüz", "Rehbere Kaydet.<br><span class='it g'>Hepsi bu.</span>") }),
+);
+add("ahsapta-da-ayni", (num) =>
+  page({ num, img: "lux-tap-wood", fx: "transform:translateY(190px) scale(.8);-webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 50%,#000 70%,transparent 100%);", body: top("Ceviz", "Ahşapta da<br><span class='it g'>aynı tek dokunuş.</span>", "", "h2") }),
+);
+add("uc-adim", (num) =>
+  page({
+    num,
+    body: `<div class="abs center" style="top:110px"><div class="label">Nasıl çalışır</div><div class="h2" style="margin-top:22px">Üç adımda<br><span class="it g">tanışın.</span></div></div>
+      <div style="position:absolute;left:60px;right:60px;top:470px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      ${[
+        ["lux-tap-gold-idle", "01", "Yaklaştırın"],
+        ["lux-tap-black", "02", "Profil açılır"],
+        ["lux-ui-saved", "03", "Rehbere kaydedin"],
+      ]
+        .map(
+          ([img, n, t]) =>
+            `<div><div style="height:520px;background:url('${A(img)}') center/cover;border:1px solid ${GOLD}40"></div><div class="serif g" style="font-size:44px;margin-top:22px">${n}</div><div style="font-size:24px;margin-top:4px">${t}</div></div>`,
+        )
+        .join("")}</div>`,
+  }),
+);
+
+// Weave the "how it works" posts through the series so the feed never
+// goes long without showing the tap and the screen.
+const HOW = ["dokundurun", "profil-boyle-gorunur", "yaklastirin", "rehberde", "uc-adim", "kilit-ekrani", "ahsapta-da-ayni", "rehbere-kaydet"];
+const AT = [3, 7, 11, 15, 20, 26, 32, 38];
+const base = LIST.filter(([id]) => !HOW.includes(id));
+const last = base.pop(); // keep the order call-to-action at the end
+HOW.forEach((id, i) => base.splice(AT[i] - 1, 0, LIST.find(([x]) => x === id)));
+base.push(last);
+base.forEach(([id, fn], i) => {
+  const num = String(i + 1).padStart(2, "0");
+  P[`${num}-${id}`] = () => fn(num);
+});
+console.log(Object.keys(P).join(" "));
 const ids = ONLY ? ONLY.split(",") : Object.keys(P);
 fs.mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({
