@@ -1,0 +1,77 @@
+name: Render Instagram stills
+
+# Manual only: renders render/posts.py shots in parallel and commits the PNGs
+# to the instagram-assets branch (never main, so nothing is deployed).
+on:
+  workflow_dispatch:
+    inputs:
+      samples:
+        description: "Cycles samples per pixel"
+        default: "160"
+      only:
+        description: "Comma-separated shot ids (empty = all)"
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      shots: ${{ steps.list.outputs.shots }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install bpy==5.2.3
+      - id: list
+        run: |
+          if [ -n "${{ github.event.inputs.only }}" ]; then ids="${{ github.event.inputs.only }}"; else ids=$(python3 render/posts.py --out /tmp/x --list | tail -1 | tr ' ' ','); fi
+          echo "shots=$(python3 -c "import json,sys; print(json.dumps(sys.argv[1].split(',')))" "$ids")" >> "$GITHUB_OUTPUT"
+
+  render:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shot: ${{ fromJson(needs.plan.outputs.shots) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install bpy==5.2.3
+      - run: python3 render/posts.py --out out --samples ${{ github.event.inputs.samples }} --only ${{ matrix.shot }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: post-${{ matrix.shot }}
+          path: out/*.png
+          retention-days: 3
+
+  publish:
+    needs: render
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Commit to instagram-assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code origin instagram-assets >/dev/null; then
+            git fetch origin instagram-assets && git checkout instagram-assets
+          else
+            git checkout --orphan instagram-assets && git rm -rf . >/dev/null
+          fi
+          mkdir -p renders && cp artifacts/post-*/*.png renders/
+          git add renders && git commit -m "Instagram stills" || exit 0
+          git push origin instagram-assets
