@@ -1,0 +1,48 @@
+name: Publish landing frames from a render run
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Render landing hero run id"
+        required: true
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+      - name: Collect frames
+        run: |
+          set -x
+          ls artifacts | head -50
+          for v in desktop mobile; do
+            if ls artifacts/$v-*/ >/dev/null 2>&1; then
+              rm -rf public/landing/$v && mkdir -p public/landing/$v
+              cp artifacts/$v-*/*.webp public/landing/$v/
+              echo "::notice::$v $(ls public/landing/$v | wc -l) frames $(du -sh public/landing/$v | cut -f1) largest $(ls -S public/landing/$v | head -1) $(du -h public/landing/$v/$(ls -S public/landing/$v | head -1) | cut -f1)"
+            fi
+          done
+          mkdir -p public/landing/finishes
+          cp artifacts/finish-*/*.webp public/landing/finishes/ 2>/dev/null || true
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/landing
+          git commit -m "Update rendered landing hero frames" || { echo "::notice::nothing to commit"; exit 0; }
+          git push 2>&1 | tail -5 | while read l; do echo "::notice::$l"; done
+          git log origin/main -1 --oneline | sed 's/^/::notice::/'
+      - name: Redeploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-cloudflare.yml --ref main -f target=production
