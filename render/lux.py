@@ -261,6 +261,73 @@ def phone(fin, screen="profile"):
     return f
 
 
+def nfc_rings(center, normal, n=3, base=0.09, gap=0.07, strength=6.0, color=(0.75, 0.85, 1.0)):
+    """Glowing concentric rings at the tap point (NFC field visualisation)."""
+    for i in range(n):
+        r = base + i * gap
+        bpy.ops.mesh.primitive_torus_add(major_radius=r, minor_radius=0.0035 - i * 0.0006, major_segments=96, minor_segments=8)
+        t = bpy.context.active_object
+        t.name = f"Ring{i}"
+        t.location = center
+        t.rotation_euler = Vector(normal).to_track_quat("Z", "Y").to_euler()
+        m = bpy.data.materials.new(f"Ring{i}")
+        m.use_nodes = True
+        nt = m.node_tree
+        nt.nodes.remove(nt.nodes["Principled BSDF"])
+        e = nt.nodes.new("ShaderNodeEmission")
+        e.inputs["Strength"].default_value = strength * (1 - i * 0.28)
+        e.inputs["Color"].default_value = (*color, 1)
+        nt.links.new(e.outputs["Emission"], nt.nodes["Material Output"].inputs["Surface"])
+        t.data.materials.append(m)
+        t.visible_shadow = False
+
+
+def tap(fin, screen="profile", rings=True):
+    """Phone standing on the stone, screen to camera; the card touches the
+    back of its top edge. Rings mark the NFC tap."""
+    def f():
+        stage(warm=0.25, key=0.8, rim=1.4, strip=0.5)
+        ph = make_phone((0, 0.1, 0.0), (0, 0, 0), screen)
+        # stand upright, leaning back 12 degrees, bottom edge on the floor
+        lean = math.radians(12)
+        ph.rotation_euler = Euler((math.radians(90) - lean, 0, math.radians(-24)))
+        ph.location = (0.05, 0.15, 0.735 * math.cos(lean) + 0.04 * math.sin(lean))
+        bpy.context.view_layer.update()
+        mw = ph.matrix_world
+        # card behind the phone, its edge resting on the back near the top
+        back_top = mw @ Vector((-0.06, 0.6, -0.045))
+        c = make_card("C", fin, (0, 0, 0), (0, 0, 0))
+        c.rotation_euler = (mw.to_3x3() @ Euler((math.radians(-28), math.radians(10), math.radians(18))).to_matrix()).to_euler()
+        bpy.context.view_layer.update()
+        off = c.matrix_world.to_3x3() @ Vector((0.0, -CARD_H / 2 + 0.02, -CARD_T))
+        c.location = back_top - off + mw.to_3x3() @ Vector((0, 0, -0.012))
+        if rings:
+            nfc_rings(back_top + mw.to_3x3() @ Vector((0, 0.06, -0.01)), mw.to_3x3() @ Vector((0, 0, -1)), base=0.07, gap=0.055, strength=4.0)
+        camera((0.95, -2.9, 1.05), (0.0, 0.2, 0.92), lens=55, fstop=4.0, focus=tuple(back_top))
+    return f
+
+
+def ui_flat(fin, screen="profile"):
+    """Phone face up on the stone, screen readable, card beside it."""
+    def f():
+        stage(warm=0.3, key=0.7, strip=0.15)
+        make_phone((0.12, 0.05, 0.039), (0, 0, -6), screen)
+        lying("C", fin, (-0.5, -0.32), 28)
+        camera((0.0, -1.7, 2.6), (-0.08, -0.08, 0.0), lens=50, fstop=5.6, focus=(0.12, 0.05, 0.05))
+    return f
+
+
+def ui_macro(screen="profile"):
+    def f():
+        stage(warm=0.3, key=0.6, strip=0.15)
+        ph = make_phone((0.0, 0.0, 0.039), (0, 0, -4), screen)
+        lying("C", "gold", (-0.42, -0.62), 32, lift=0.0)
+        bpy.context.view_layer.update()
+        t = ph.matrix_world @ Vector((0, 0.18, 0.04))
+        camera((t.x + 0.05, t.y - 0.95, 1.05), tuple(t), lens=70, fstop=2.8)
+    return f
+
+
 SHOTS = {}
 for fin in FINISHES:
     SHOTS[f"lux-hero-{fin}"] = hero(fin)
@@ -279,6 +346,13 @@ SHOTS["lux-float-black"] = float_("black")
 SHOTS["lux-float-gold"] = float_("gold")
 SHOTS["lux-phone-black"] = phone("black")
 SHOTS["lux-phone-gold-saved"] = phone("gold", "saved")
+SHOTS["lux-tap-black"] = tap("black", "profile")
+SHOTS["lux-tap-gold-idle"] = tap("gold", "idle")
+SHOTS["lux-tap-wood"] = tap("wood", "profile")
+SHOTS["lux-ui-profile"] = ui_flat("black", "profile")
+SHOTS["lux-ui-saved"] = ui_flat("silver", "saved")
+SHOTS["lux-ui-idle"] = ui_flat("wood-light", "idle")
+SHOTS["lux-ui-macro"] = ui_macro("profile")
 
 
 def main():
