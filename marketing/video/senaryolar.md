@@ -18,3 +18,23 @@ Size en çok yakışanı seçebilmeniz için beş kaplamamız var. Mat siyah met
 
 ## 5 · Kurumsal
 Ekibinizin hepsi için de hazırlıyoruz. Herkesin kartı aynı tasarımda olur; biri ayrıldığında ya da unvanı değiştiğinde kart değil, profil değişir. Tek yapmanız gereken bizimle iletişime geçmek: dijivizit.com ya da 0540 626 19 65. Görüşmek üzere!
+
+---
+
+# Üretim planı (Magnific: görsel + Kling/Higgsfield video + Türkçe ses)
+
+## Banu — karakter tarifi (her üretimde aynısı)
+Türk kadın, 30-34 yaş, sıcak ve samimi gülümseme, doğal makyaj, omuz hizasında koyu kumral dalgalı saç, kahverengi gözler.
+Krem rengi yapılandırılmış blazer, altında siyah ince triko; yakada küçük siyah yaka mikrofonu (lavalier) ve kablosu görünür.
+Ortam: sıcak ışıklı, sade ve şık bir ofis/atölye; arka planda bulanık ahşap raf ve bitki, sığ alan derinliği.
+Işık: pencereden yumuşak gün ışığı + sıcak dolgu; doğal ten dokusu, gerçekçi gözenekler. Kamera: telefon/vlog hissi değil, 50mm, göz hizası, dikey 9:16, hafif el kamerası hareketi.
+Negatif: plastik cilt, aşırı pürüzsüzlük, yapay gülümseme, bozuk eller, fazla parmak, metin, logo bozulması.
+
+## Akış
+1. Karakter: Magnific görsel üretici (Mystic/Flux) ile yukarıdaki tariften 4-6 deneme; en doğal yüzü seç, bu görseli tüm videolar için referans tut.
+2. Ses: Türkçe, sıcak, 30'lu yaşlarda kadın sesi; senaryoyu doğal tempoda okut (her video ~20-25 sn).
+3. Konuşan video: referans görsel + ses ile dudak senkronlu dikey video (Kling lip-sync ya da Higgsfield Speak). Her video 2-3 parçada üretilebilir.
+4. Ürün araları: kartı tutup gösteren eller için ayrı kısa klipler (Kling image-to-video), ayrıca dijivizit.com animasyonundan ve render görsellerinden kesitler.
+5. Kurgu: alt yazı (beyaz, sade), sonda logo ve "dijivizit.com · 0540 626 19 65", hafif müzik. Paylaşırken Instagram'da "Yapay zeka bilgisi" etiketi açılmalı.
+
+Ürün görselleri: github.com/eskisehirspor/dijivizit → public/landing (animasyon kareleri), public/ig (postlar).
