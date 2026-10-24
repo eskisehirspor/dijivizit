@@ -31,6 +31,22 @@ function supabaseImagePatterns(): NonNullable<NextConfig["images"]>["remotePatte
 }
 
 const nextConfig: NextConfig = {
+  // Browsers that have seen dijivizit.com once always go straight to HTTPS, so
+  // networks that hijack plain-HTTP requests can no longer redirect visitors.
+  // Long max-age + includeSubDomains + preload qualify for hstspreload.org.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: supabaseImagePatterns(),
     // The local Supabase stack serves storage from 127.0.0.1, which Next.js 16
