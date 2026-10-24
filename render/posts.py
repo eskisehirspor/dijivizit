@@ -170,6 +170,22 @@ def anim_frame(frame, cam_loc, target, lens=70):
     return f
 
 
+def cutout(finish, rot=(98, -10, -20), side="front"):
+    """Card alone on a transparent background, for compositing over photos."""
+    def f():
+        base(finish)
+        sc = bpy.context.scene
+        sc.render.film_transparent = True
+        obj("Wall").hide_render = True
+        obj("Gobo").hide_render = True
+        r = list(rot)
+        if side == "back":
+            r[2] += 180
+        place(obj("Card"), (0, 0, 0), tuple(r))
+        camera((0.0, -3.6, 0.2), (0, 0, 0), lens=85, fstop=8)
+    return f
+
+
 SHOTS = {}
 for fin in FINISHES:
     SHOTS[f"hero-{fin}"] = hero(fin)
@@ -186,6 +202,10 @@ SHOTS["flatlay"] = flatlay
 SHOTS["tap"] = anim_frame(118, (-0.05, -3.9, 0.4), (0.1, 0.38, 0.18), lens=58)
 SHOTS["profile"] = anim_frame(150, (0.15, -3.6, 0.25), (0.22, 0.38, 0.12), lens=75)
 SHOTS["saved"] = anim_frame(185, (0.2, -3.5, 0.1), (0.25, 0.38, -0.02), lens=75)
+for fin in FINISHES:
+    SHOTS[f"cut-{fin}"] = cutout(fin)
+SHOTS["cut-gold-tilt"] = cutout("gold", rot=(112, 18, 28))
+SHOTS["cut-black-back"] = cutout("black", rot=(100, 8, 14), side="back")
 
 
 def main():

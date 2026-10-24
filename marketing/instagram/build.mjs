@@ -389,20 +389,261 @@ for (const f of ["black", "silver", "gold", "wood", "wood-light"]) {
     });
 }
 
-// Clean product shots: brand pill and URL only.
-for (const name of [
-  "hero-black",
-  "hero-silver",
-  "hero-gold",
-  "hero-wood",
-  "hero-wood-light",
-  "flatlay",
-  "fan",
-  "macro-wood-light",
-]) {
-  POSTS[`50-${name}`] = () =>
-    page({ bgName: name, dark: false, top: false, bottom: false, body: "" });
+// ---------------------------------------------------------------- creative set
+// Photo composites (real hands and people, licensed Unsplash photos with the
+// Dijivizit card fitted in) and graphic layouts over the renders.
+
+const NOTIF_CSS = `
+.notif{display:flex;gap:22px;align-items:center;padding:24px 28px;border-radius:36px;width:760px}
+.notif .app{width:76px;height:76px;border-radius:20px;flex:none;overflow:hidden}
+.notif .t{font-size:27px;font-weight:600;display:flex;justify-content:space-between;gap:20px}
+.notif .t span{font-weight:450;opacity:.55}
+.notif .b{font-size:30px;line-height:1.3;margin-top:4px;font-weight:450}
+.ring{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.55);box-shadow:inset 0 0 40px rgba(255,255,255,.15),0 0 30px rgba(255,255,255,.12)}
+.mesh{position:absolute;inset:0}
+.outline{color:transparent;-webkit-text-stroke:2.5px rgba(10,10,10,.85)}
+.dark .outline{-webkit-text-stroke-color:rgba(255,255,255,.85)}
+.big{font-size:210px;line-height:.9;font-weight:700;letter-spacing:-.07em}
+.stat{display:flex;align-items:baseline;gap:28px;padding:30px 0;border-top:1.5px solid rgba(255,255,255,.18)}
+.stat .n{font-size:150px;font-weight:650;letter-spacing:-.06em;line-height:.9;width:220px}
+.stat .l{font-size:40px;font-weight:520;letter-spacing:-.02em}
+.stat .s{font-size:28px;opacity:.6}
+.steps{display:flex;gap:14px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:14px;border-radius:999px;padding:16px 26px 16px 16px;font-size:30px;font-weight:560}
+.step b{width:44px;height:44px;border-radius:50%;background:#0a0a0a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}
+.dark .step b{background:#fff;color:#0a0a0a}
+.cut{position:absolute;filter:drop-shadow(0 50px 50px rgba(0,0,0,.35)) drop-shadow(0 10px 14px rgba(0,0,0,.22))}
+`;
+
+const notif = (title, body, dark = false, when = "şimdi") =>
+  `<div class="glass notif ${dark ? "dark" : ""}"><div class="app">${MARK("#0a0a0a", "#fff")}</div><div style="flex:1"><div class="t">${title}<span>${when}</span></div><div class="b">${body}</div></div></div>`;
+
+const asset = (name) => bg(name);
+
+function photo({
+  name,
+  dark = false,
+  pos = "center",
+  top = true,
+  bottom = true,
+  body,
+  extraCss = "",
+}) {
+  return page({ bgName: name, dark, pos, top, bottom, body, extraCss: NOTIF_CSS + extraCss });
 }
+
+function canvas({ dark = false, gradient, body, extraCss = "" }) {
+  return `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}${NOTIF_CSS}${extraCss}</style></head>
+<body class="${dark ? "dark" : ""}"><div class="mesh" style="background:${gradient}"></div>
+${brand(dark)}<div class="url">dijivizit.com</div>${body}</body></html>`;
+}
+
+const MESH = {
+  pearl:
+    "radial-gradient(60% 50% at 20% 15%,#ffffff 0%,transparent 60%),radial-gradient(70% 60% at 85% 30%,#dfe3ea 0%,transparent 65%),radial-gradient(80% 70% at 50% 100%,#cfc8bd 0%,transparent 70%),#e9e6e1",
+  night:
+    "radial-gradient(60% 45% at 25% 20%,#2b3140 0%,transparent 60%),radial-gradient(70% 60% at 90% 80%,#3a2f22 0%,transparent 65%),radial-gradient(60% 50% at 10% 95%,#15181f 0%,transparent 70%),#0b0c10",
+  gold: "radial-gradient(60% 50% at 80% 10%,#fff3d6 0%,transparent 60%),radial-gradient(70% 60% at 10% 70%,#e9cf9c 0%,transparent 65%),radial-gradient(70% 60% at 90% 100%,#b8925a 0%,transparent 70%),#efe2c8",
+  forest:
+    "radial-gradient(60% 50% at 20% 20%,#3d4a3a 0%,transparent 60%),radial-gradient(70% 60% at 90% 70%,#5b4330 0%,transparent 65%),#1a1c17",
+};
+
+Object.assign(POSTS, {
+  // ---- photos: people and hands
+  "40-elinde-her-zaman-guncel": () =>
+    photo({
+      name: "p-hand-black-front",
+      bottom: false,
+      body: `<div class="abs" style="top:170px">${notif("Dijivizit", "Ayşe Demir'in profili güncellendi. Kartın aynı kaldı.")}</div>
+      <div class="abs" style="bottom:70px"><h1 style="color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.35)">Elinde.<br>Her zaman güncel.</h1></div>`,
+      extraCss: ".scrim-bot{display:block!important}",
+    }),
+  "41-siyahin-en-sade-hali": () =>
+    photo({
+      name: "p-hand-black-back",
+      top: false,
+      body: `<div class="abs" style="bottom:72px;left:auto;width:560px"><div class="glass" style="padding:40px 44px"><div class="kicker">Siyah metal</div><div style="font-size:66px;line-height:1;font-weight:650;letter-spacing:-.045em;margin-top:12px">Siyahın<br>en sade hali.</div></div></div>`,
+    }),
+  "42-toplantida-paylas": () =>
+    photo({
+      name: "p-office-black",
+      body: `<div class="abs" style="bottom:72px"><div class="glass" style="padding:48px 52px">
+        <h1 class="s">Toplantı bitmeden<br>rehberindeyim.</h1>
+        <div class="steps" style="margin-top:30px">${["Dokun", "Aç", "Kaydet"].map((t, i) => `<div class="glass step"><b>${i + 1}</b>${t}</div>`).join("")}</div></div></div>`,
+    }),
+  "43-ahsap-ofis": () =>
+    photo({
+      name: "p-office-wood",
+      body: `<div class="abs" style="bottom:72px"><div class="glass" style="padding:48px 52px">
+        <div class="kicker" style="margin-bottom:14px">Koyu ahşap</div>
+        <h1 class="s">Sıcak bir ilk izlenim.</h1>
+        <div class="lead" style="margin-top:18px">Gerçek ahşap, lazerle yakılmış isim. İçinde NFC çip.</div></div></div>`,
+    }),
+  "44-sehrin-her-kosesinde": () =>
+    photo({
+      name: "p-street-black",
+      top: false,
+      body: `<div class="abs" style="bottom:72px"><div class="glass" style="padding:46px 52px">
+        <h1 class="s">Şehrin her köşesinde,<br>tek dokunuş.</h1></div></div>`,
+    }),
+  "45-gumus-sokak": () =>
+    photo({
+      name: "p-street-silver",
+      top: false,
+      body: `<div class="abs" style="bottom:72px;display:flex;justify-content:space-between;align-items:flex-end">
+        <div class="glass" style="padding:40px 46px"><div class="kicker">Gümüş</div><div style="font-size:64px;font-weight:640;letter-spacing:-.045em;margin-top:8px">Mat. Fırçalanmış.<br>Zamansız.</div></div></div>`,
+    }),
+  "46-gold-ilk-izlenim": () =>
+    photo({
+      name: "p-purple-gold",
+      dark: true,
+      top: false,
+      bottom: false,
+      body: `<div class="abs" style="top:170px;color:#fff"><h1 style="font-size:104px">İlk izlenim<br>tekrar edilmez.</h1>
+        <div class="lead" style="margin-top:22px;opacity:.85">Mat fırçalanmış gold Dijivizit.</div></div>`,
+    }),
+  "47-dogadan-dokunusa": () =>
+    photo({
+      name: "p-peach-wood",
+      top: false,
+      bottom: false,
+      body: `<div class="abs" style="top:170px"><h1 class="m">Doğadan<br>dokunuşa.</h1>
+        <div class="lead" style="margin-top:20px;max-width:640px">Ahşap kartvizit, akıllı kartvizitle buluştu.</div></div>`,
+    }),
+  "48-baglanti-kur": () =>
+    photo({
+      name: "p-exchange-silver",
+      body: `<div class="abs" style="bottom:72px"><div class="glass" style="padding:48px 52px">
+        <h1 class="s">Kartvizit verme.<br>Bağlantı kur.</h1>
+        <div class="lead" style="margin-top:18px">Telefonuna dokunduğu an, sen onun rehberindesin.</div></div></div>`,
+    }),
+  "49-dokundu-acildi": () =>
+    photo({
+      name: "p-phone-gold",
+      top: false,
+      body: `<div class="abs" style="bottom:72px"><div class="glass" style="padding:46px 52px">
+        <h1 class="s">Dokundu. Açıldı.<br>Kaydedildi.</h1>
+        <div class="sub" style="margin-top:16px;font-size:30px">Uygulama yok, bekleme yok.</div></div></div>`,
+    }),
+  "50-profilin-ekraninda": () =>
+    photo({
+      name: "p-phone-profile",
+      top: false,
+      bottom: false,
+      body: `<div class="abs" style="bottom:72px;right:auto;width:560px"><div class="glass" style="padding:42px 46px">
+        <div style="font-size:56px;line-height:1.02;font-weight:650;letter-spacing:-.045em">Profilin,<br>onun ekranında.</div></div></div>`,
+    }),
+  "51-bir-dokunus-uzaginda": () =>
+    photo({
+      name: "p-hands-dark",
+      dark: true,
+      top: false,
+      body: `<div class="abs" style="bottom:72px;text-align:center"><h1 style="font-size:100px">Bağlantı,<br>bir dokunuş uzağında.</h1>
+        <div class="lead" style="margin-top:22px">Dijivizit NFC akıllı kartvizit</div></div>`,
+    }),
+  "52-tanistiniz-simdi-kaydedin": () =>
+    photo({
+      name: "p-handshake",
+      top: false,
+      body: `<div class="abs" style="top:170px">${notif("Rehber", "Ayşe Demir kişilerinize eklendi.", false, "şimdi")}</div>
+      <div class="abs" style="bottom:72px"><div class="glass" style="padding:46px 52px"><h1 class="s">Tanıştınız.<br>Şimdi hatırlanın.</h1></div></div>`,
+    }),
+  "53-arandiginda-hatirlanirsin": () =>
+    photo({
+      name: "p-woman-phone",
+      top: false,
+      bottom: false,
+      body: `<div class="abs" style="top:190px;right:auto;width:540px"><div class="glass" style="padding:36px 40px">
+        <div class="row"><img src="file://${AVATAR}" style="width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:50% 30%"><div><div class="li">Ayşe Demir</div><div class="sub">Rehberden arıyor…</div></div></div></div>
+        <div style="margin-top:34px;font-size:80px;line-height:.98;font-weight:650;letter-spacing:-.05em">Kaydedilen<br>aranır.</div></div>`,
+    }),
+
+  // ---- graphic layouts over renders and cut-outs
+  "60-yaklastir-yeter": () =>
+    canvas({
+      dark: true,
+      gradient: MESH.night,
+      body: `${[560, 760, 960].map((d, i) => `<div class="ring" style="width:${d}px;height:${d}px;left:${540 - d / 2}px;top:${560 - d / 2}px;opacity:${0.9 - i * 0.25}"></div>`).join("")}
+      <img class="cut" src="${asset("cut-black")}" style="width:640px;left:220px;top:330px">
+      <div class="abs" style="bottom:80px;text-align:center"><h1 style="font-size:110px">Yaklaştır.<br>Yeter.</h1></div>`,
+    }),
+  "61-sifir-bir-sonsuz": () =>
+    canvas({
+      dark: true,
+      gradient: MESH.night,
+      body: `<div class="abs" style="top:200px"><div class="kicker" style="margin-bottom:30px">Dijivizit ile</div>
+        <div class="stat"><div class="n">0</div><div><div class="l">kağıt</div><div class="s">Baskı, kesim, atık yok</div></div></div>
+        <div class="stat"><div class="n">1</div><div><div class="l">dokunuş</div><div class="s">Profilin anında açılır</div></div></div>
+        <div class="stat"><div class="n">∞</div><div><div class="l">güncelleme</div><div class="s">Kart aynı, bilgilerin hep güncel</div></div></div></div>`,
+    }),
+  "62-hangisi-sen": () =>
+    canvas({
+      gradient: MESH.pearl,
+      body: `<img class="cut" src="${asset("cut-wood-light")}" style="width:520px;left:520px;top:180px;transform:rotate(14deg)">
+      <img class="cut" src="${asset("cut-wood")}" style="width:520px;left:40px;top:300px;transform:rotate(-12deg)">
+      <img class="cut" src="${asset("cut-silver")}" style="width:540px;left:500px;top:470px;transform:rotate(6deg)">
+      <img class="cut" src="${asset("cut-gold")}" style="width:540px;left:60px;top:560px;transform:rotate(-4deg)">
+      <img class="cut" src="${asset("cut-black")}" style="width:560px;left:260px;top:700px;transform:rotate(-1deg)">
+      <div class="abs" style="top:170px"><h1 class="m">Hangisi sen?</h1></div>`,
+    }),
+  "63-yeni-nesil": () =>
+    canvas({
+      gradient: MESH.gold,
+      body: `<img class="cut" src="${asset("cut-gold-tilt")}" style="width:860px;left:110px;top:250px">
+      <div class="abs" style="bottom:72px"><div class="glass" style="padding:48px 52px">
+        <div class="kicker" style="margin-bottom:14px">Yeni nesil kartvizit</div>
+        <h1 class="s">Bir kart.<br>Tüm iletişim bilgilerin.</h1></div></div>`,
+    }),
+  "64-dokun-outline": () =>
+    canvas({
+      gradient: MESH.pearl,
+      body: `<div class="abs" style="top:190px"><div class="big outline">DOKUN</div><div class="big outline" style="opacity:.45">DOKUN</div><div class="big outline" style="opacity:.2">DOKUN</div></div>
+      <img class="cut" src="${asset("cut-black")}" style="width:780px;left:150px;top:520px;transform:rotate(-8deg)">
+      <div class="abs" style="bottom:72px;text-align:right"><div class="lead">Paylaşmanın en kısa yolu.</div></div>`,
+    }),
+  "65-bildirim": () =>
+    canvas({
+      dark: true,
+      gradient: MESH.forest,
+      body: `<img class="cut" src="${asset("cut-wood")}" style="width:720px;left:180px;top:560px;transform:rotate(-10deg)">
+      <div class="abs" style="top:180px;display:grid;gap:18px">${notif("Dijivizit", "Kartın bugün 12 kez açıldı.", true, "09:41")}${notif("Rehber", "Mert Kaya seni kişilerine ekledi.", true, "09:44")}</div>
+      <div class="abs" style="bottom:72px"><h1 class="s">Kartın çalışıyor.<br>Sen işine bak.</h1></div>`,
+    }),
+  "66-kaybolan-kartvizit": () =>
+    canvas({
+      gradient: MESH.pearl,
+      body: `<img class="cut" src="${asset("cut-silver")}" style="width:800px;left:140px;top:430px;transform:rotate(-6deg)">
+      <div class="abs" style="top:180px"><h1 class="m">Kaybolan<br>kartvizit yok.</h1>
+        <div class="lead" style="margin-top:18px">Bilgilerin, karşındakinin rehberinde.</div></div>`,
+    }),
+  "67-tek-kart-her-yerde": () =>
+    canvas({
+      dark: true,
+      gradient: MESH.night,
+      body: `<div class="abs" style="top:180px;display:flex;flex-wrap:wrap;gap:14px">${["Fuarda", "Toplantıda", "Kafede", "Etkinlikte", "Mağazada", "Sahada"].map((t) => `<span class="glass chip">${t}</span>`).join("")}</div>
+      <img class="cut" src="${asset("cut-black-back")}" style="width:760px;left:160px;top:470px;transform:rotate(7deg)">
+      <div class="abs" style="bottom:72px"><h1 class="s">Tek kart.<br>Her yerde.</h1></div>`,
+    }),
+  "68-siparis-cta": () =>
+    canvas({
+      gradient: MESH.gold,
+      body: `<img class="cut" src="${asset("cut-gold")}" style="width:620px;left:420px;top:230px;transform:rotate(16deg)">
+      <img class="cut" src="${asset("cut-black")}" style="width:620px;left:40px;top:380px;transform:rotate(-10deg)">
+      <div class="abs" style="bottom:72px"><div class="glass" style="padding:48px 52px">
+        <h1 class="s">Kartını seç,<br>gerisini biz yapalım.</h1>
+        <div class="cta" style="margin-top:30px">dijivizit.com/siparis ${ICON.arrow}</div></div></div>`,
+    }),
+  "69-eskisehir": () =>
+    canvas({
+      dark: true,
+      gradient: MESH.forest,
+      body: `<img class="cut" src="${asset("cut-wood-light")}" style="width:700px;left:190px;top:300px;transform:rotate(-7deg)">
+      <div class="abs" style="bottom:72px"><div class="glass" style="padding:46px 52px">
+        <div class="kicker" style="margin-bottom:12px">Eskişehir'den</div>
+        <h1 class="s">Atölyemize uğra,<br>kartına dokun.</h1>
+        <div class="sub" style="margin-top:16px">Osmangazi Mah. Basın Şehitleri Cad. No:174 · Odunpazarı</div></div></div>`,
+    }),
+});
 
 const ids = ONLY ? ONLY.split(",") : Object.keys(POSTS);
 fs.mkdirSync(OUT_DIR, { recursive: true });
