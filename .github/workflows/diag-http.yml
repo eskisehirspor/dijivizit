@@ -6,6 +6,7 @@ jobs:
     steps:
       - run: |
           for u in http://www.dijivizit.com/ http://dijivizit.com/ https://www.dijivizit.com/ http://app.dijivizit.com/; do
-            echo "=== $u"; curl -sS -m 20 -o /dev/null -D - "$u" | grep -iE "^(HTTP|location|server|cf-ray)" || true
+            h=$(curl -sS -m 20 -o /dev/null -D - "$u" | grep -iE "^(HTTP|location|server)" | tr -d '\r' | tr '\n' ' ')
+            echo "::notice::$u => $h"
           done
-          echo "=== DNS"; dig +short www.dijivizit.com A; dig +short www.dijivizit.com AAAA; dig +short dijivizit.com A
+          echo "::notice::DNS www A=$(dig +short www.dijivizit.com A | tr '\n' ' ') AAAA=$(dig +short www.dijivizit.com AAAA | tr '\n' ' ')"
