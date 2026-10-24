@@ -1,0 +1,11 @@
+name: Diagnose HTTP redirect
+on: workflow_dispatch
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in http://www.dijivizit.com/ http://dijivizit.com/ https://www.dijivizit.com/ http://app.dijivizit.com/; do
+            echo "=== $u"; curl -sS -m 20 -o /dev/null -D - "$u" | grep -iE "^(HTTP|location|server|cf-ray)" || true
+          done
+          echo "=== DNS"; dig +short www.dijivizit.com A; dig +short www.dijivizit.com AAAA; dig +short dijivizit.com A
