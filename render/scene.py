@@ -149,10 +149,11 @@ def principled(name, **inputs):
 
 FINISHES = {
     # base, etched artwork, base roughness, etch roughness, edge
-    "black": ((0.09, 0.09, 0.1), (0.62, 0.62, 0.63), 0.28, 0.6, (0.5, 0.5, 0.52)),
+    # Deep matte black metal: dark, high roughness, almost no anisotropy.
+    "black": ((0.032, 0.032, 0.035), (0.5, 0.5, 0.52), 0.62, 0.85, (0.09, 0.09, 0.1)),
     # Matte brushed metals: high base roughness, strong directional streaks.
-    "silver": ((0.6, 0.6, 0.62), (0.1, 0.1, 0.11), 0.34, 0.7, (0.62, 0.62, 0.64)),
-    "gold": ((0.74, 0.5, 0.2), (0.16, 0.1, 0.035), 0.34, 0.7, (0.76, 0.52, 0.21)),
+    "silver": ((0.62, 0.62, 0.64), (0.1, 0.1, 0.11), 0.3, 0.75, (0.62, 0.62, 0.64)),
+    "gold": ((0.76, 0.52, 0.21), (0.16, 0.1, 0.035), 0.3, 0.75, (0.76, 0.52, 0.21)),
 }
 
 
@@ -200,14 +201,15 @@ def card_face_material(name, mask_path, finish="black"):
     # Fine brushed streaks: stretched noise into roughness.
     tc = node(nt, "ShaderNodeTexCoord", (-1300, -300))
     mp = node(nt, "ShaderNodeMapping", (-1100, -300))
-    mp.inputs["Scale"].default_value = (1.5, 140.0, 1.0)
+    brushed = finish != "black"
+    mp.inputs["Scale"].default_value = (3.0, 320.0, 1.0) if brushed else (1.5, 140.0, 1.0)
     nt.links.new(tc.outputs["UV"], mp.inputs["Vector"])
     noise = node(nt, "ShaderNodeTexNoise", (-900, -300))
-    noise.inputs["Scale"].default_value = 6.0
-    noise.inputs["Detail"].default_value = 4.0
+    noise.inputs["Scale"].default_value = 8.0 if brushed else 6.0
+    noise.inputs["Detail"].default_value = 8.0 if brushed else 4.0
     nt.links.new(mp.outputs["Vector"], noise.inputs["Vector"])
     streak = node(nt, "ShaderNodeMapRange", (-650, -300))
-    amp = 0.05 if finish == "black" else 0.12
+    amp = 0.02 if finish == "black" else 0.16
     streak.inputs["To Min"].default_value = -amp
     streak.inputs["To Max"].default_value = amp
     nt.links.new(noise.outputs["Fac"], streak.inputs["Value"])
@@ -216,7 +218,20 @@ def card_face_material(name, mask_path, finish="black"):
     nt.links.new(rough.outputs["Result"], add.inputs[0])
     nt.links.new(streak.outputs["Result"], add.inputs[1])
     nt.links.new(add.outputs["Value"], bsdf.inputs["Roughness"])
-    bsdf.inputs["Anisotropic"].default_value = 0.6 if finish == "black" else 0.85
+    bsdf.inputs["Anisotropic"].default_value = 0.1 if finish == "black" else 0.95
+    if brushed:
+        # Visible brush lines: the same streaks also modulate brightness a little.
+        tint = node(nt, "ShaderNodeMapRange", (-650, 150))
+        tint.inputs["To Min"].default_value = 0.78
+        tint.inputs["To Max"].default_value = 1.14
+        nt.links.new(noise.outputs["Fac"], tint.inputs["Value"])
+        mul = node(nt, "ShaderNodeMix", (-200, 250))
+        mul.data_type = "RGBA"
+        mul.blend_type = "MULTIPLY"
+        mul.inputs["Factor"].default_value = 1.0
+        nt.links.new(base.outputs["Result"], mul.inputs["A"])
+        nt.links.new(tint.outputs["Result"], mul.inputs["B"])
+        nt.links.new(mul.outputs["Result"], bsdf.inputs["Base Color"])
     tangent = node(nt, "ShaderNodeTangent", (-400, -400))
     tangent.direction_type = "UV_MAP"
     nt.links.new(tangent.outputs["Tangent"], bsdf.inputs["Tangent"])
