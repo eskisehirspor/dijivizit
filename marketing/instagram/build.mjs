@@ -127,8 +127,7 @@ const POSTS = {
   "01-tanismanin-yeni-hali": () =>
     page({
       bgName: "hero-black",
-      pos: "50% 62%",
-      scale: 1.05,
+      pos: "50% 50%",
       body: `<div class="abs" style="bottom:72px"><div class="glass" style="padding:56px 56px 52px">
         <div class="kicker" style="margin-bottom:22px">NFC akıllı kartvizit</div>
         <h1>Tanışmanın<br>yeni hali.</h1>
@@ -145,8 +144,8 @@ const POSTS = {
   "03-uygulama-gerekmez": () =>
     page({
       bgName: "profile",
-      pos: "62% 50%",
-      body: `<div class="abs" style="top:190px;right:auto;width:600px"><div class="glass" style="padding:48px 48px 50px">
+      pos: "60% 20%",
+      body: `<div class="abs" style="bottom:72px"><div class="glass" style="padding:48px 48px 50px">
         <h1 class="s">Uygulama<br>gerekmez.</h1>
         <div style="display:grid;gap:26px;margin-top:40px">${list([
           ["check", "iPhone ve Android"],
