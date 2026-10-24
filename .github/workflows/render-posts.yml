@@ -11,6 +11,9 @@ on:
       only:
         description: "Comma-separated shot ids (empty = all)"
         default: ""
+      script:
+        description: "posts or lux"
+        default: "lux"
 
 permissions:
   contents: write
@@ -28,7 +31,7 @@ jobs:
       - run: pip install bpy==5.2.3
       - id: list
         run: |
-          if [ -n "${{ github.event.inputs.only }}" ]; then ids="${{ github.event.inputs.only }}"; else ids=$(python3 render/posts.py --out /tmp/x --list | tail -1 | tr ' ' ','); fi
+          if [ -n "${{ github.event.inputs.only }}" ]; then ids="${{ github.event.inputs.only }}"; else ids=$(python3 render/${{ github.event.inputs.script }}.py --out /tmp/x --list | tail -1 | tr ' ' ','); fi
           echo "shots=$(python3 -c "import json,sys; print(json.dumps(sys.argv[1].split(',')))" "$ids")" >> "$GITHUB_OUTPUT"
 
   render:
@@ -45,7 +48,7 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install bpy==5.2.3
-      - run: python3 render/posts.py --out out --samples ${{ github.event.inputs.samples }} --only ${{ matrix.shot }}
+      - run: python3 render/${{ github.event.inputs.script }}.py --out out --samples ${{ github.event.inputs.samples }} --only ${{ matrix.shot }}
       - uses: actions/upload-artifact@v4
         with:
           name: post-${{ matrix.shot }}
