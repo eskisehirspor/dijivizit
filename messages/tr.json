@@ -843,7 +843,11 @@
       "dialogBody": "Onaylamak için aşağıya SİL yaz.",
       "placeholder": "SİL",
       "confirm": "Kalıcı olarak sil",
-      "confirmMismatch": "Onaylamak için SİL yazmalısın."
+      "confirmMismatch": "Onaylamak için SİL yazmalısın.",
+      "passwordLabel": "Şifren",
+      "passwordHint": "Güvenliğin için şifreni de gir.",
+      "passwordRequired": "Hesabı silmek için şifreni girmelisin.",
+      "reauthRequired": "Güvenliğin için çıkış yapıp Google ile yeniden giriş yap, sonra hesabını sil."
     },
     "errors": {
       "wrongPassword": "Mevcut şifre yanlış.",

@@ -16,18 +16,20 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-export function DeleteAccount() {
+export function DeleteAccount({ hasPassword }: { hasPassword: boolean }) {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
   const [confirmation, setConfirmation] = useState("");
+  const [password, setPassword] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const confirmed = confirmation.trim().toLocaleUpperCase("tr-TR") === "SİL";
+  const confirmed =
+    confirmation.trim().toLocaleUpperCase("tr-TR") === "SİL" && (!hasPassword || password !== "");
 
   function handleDelete() {
     startTransition(async () => {
       // On success the action redirects, so only failures come back here.
-      const result = await deleteAccountAction(confirmation);
+      const result = await deleteAccountAction(confirmation, password);
       if (result && !result.ok) {
         toast.error(t(result.code));
       }
@@ -51,6 +53,7 @@ export function DeleteAccount() {
           if (!isPending) {
             setOpen(next);
             setConfirmation("");
+            setPassword("");
           }
         }}
       >
@@ -70,6 +73,18 @@ export function DeleteAccount() {
             className="h-10"
             disabled={isPending}
           />
+          {hasPassword ? (
+            <Input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder={t("settings.delete.passwordLabel")}
+              aria-label={t("settings.delete.passwordHint")}
+              autoComplete="current-password"
+              className="h-10"
+              disabled={isPending}
+            />
+          ) : null}
           <DialogFooter>
             <Button
               type="button"

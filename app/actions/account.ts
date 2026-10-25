@@ -81,14 +81,19 @@ export async function changeEmailAction(
   return success();
 }
 
-export async function deleteAccountAction(confirmation: string): Promise<ActionResult> {
+export async function deleteAccountAction(
+  confirmation: string,
+  password = "",
+): Promise<ActionResult> {
   if (confirmation.trim().toLocaleUpperCase("tr-TR") !== "SİL") {
     return failure("settings.delete.confirmMismatch");
   }
 
-  const result = await deleteOwnAccount();
+  const result = await deleteOwnAccount(String(password).slice(0, 72));
   if (!result.ok) {
-    return failure(ERROR_KEYS.failed);
+    if (result.code === "reauth_required") return failure("settings.delete.reauthRequired");
+    if (result.code === "wrong_password") return failure(ERROR_KEYS.wrong_password);
+    return failure(ERROR_KEYS[result.code]);
   }
 
   redirect(`${routes.login}?deleted=1`);

@@ -7,9 +7,11 @@
  * company details in LEGAL_ENTITY.
  */
 
+import { CONTACT } from "@/lib/contact";
+
 export const LEGAL_ENTITY = {
   name: "Dijivizit",
-  address: "İstanbul, Türkiye",
+  address: `${CONTACT.street}, ${CONTACT.district} / ${CONTACT.city}`,
   email: "merhaba@dijivizit.com",
 } as const;
 
@@ -55,6 +57,13 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
         heading: "Kart ziyaretçileri için",
         paragraphs: [
           "Bir Dijivizit kartını görüntüleyen ziyaretçilerin adı veya iletişim bilgisi alınmaz. Kart sahibine istatistik sunmak için tarayıcıda rastgele bir ziyaretçi kimliği saklanır ve görüntüleme ile tıklama (ör. telefon, WhatsApp, rehbere kaydet) olayları bu kimlikle kaydedilir.",
+          'Ziyaretçi kartta "Bilgilerimi bırak" formunu kendi isteğiyle doldurursa; ad soyad, telefon ve/veya e-posta, varsa şirket ve mesaj yalnızca o kartın sahibine iletilir ve sahibinin kişi listesinde saklanır. Bu verilerin veri sorumlusu kart sahibidir; Dijivizit bu verileri kart sahibi adına barındıran veri işleyendir.',
+        ],
+      },
+      {
+        heading: "Sipariş talebi gönderenler için",
+        paragraphs: [
+          "dijivizit.com üzerindeki sipariş formunda ad soyad, telefon, e-posta, seçtiğiniz kaplama, adet ve notunuz alınır. Bu bilgiler talebinize dönüş yapmak, teklif ve sipariş sürecini yürütmek için kullanılır.",
         ],
       },
       {
@@ -64,25 +73,33 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
           "Kartınızı sizin seçtiğiniz bilgilerle herkese açık yayınlamak — sözleşmenin ifası ve bilgileri bizzat alenileştirmeniz (m. 5/2-c, 5/2-d)",
           "Hesap güvenliği, kötüye kullanımın önlenmesi, davet sisteminin işletilmesi — meşru menfaat (m. 5/2-f)",
           "Kart görüntüleme istatistikleri — meşru menfaat (m. 5/2-f)",
+          "Sipariş talebinize dönüş yapmak ve satış öncesi görüşme — bir sözleşmenin kurulması (m. 5/2-c)",
+          "Tanıtım sitesinde ölçüm ve reklam performansı — yalnızca çerez bildiriminde verdiğiniz açık rıza (m. 5/1)",
           "Yasal yükümlülükler ve olası uyuşmazlıklar — hukuki yükümlülük ve hakkın tesisi (m. 5/2-ç, 5/2-e)",
         ],
       },
       {
         heading: "Aktarım ve yurt dışı",
         paragraphs: [
-          "Hizmeti sunabilmek için verileriniz aşağıdaki altyapı sağlayıcılarında barındırılır ve işlenir. Bu sağlayıcıların sunucuları yurt dışında bulunduğundan, verileriniz KVKK m. 9 kapsamında yurt dışına aktarılmaktadır:",
+          "Hizmeti sunabilmek için verileriniz aşağıdaki altyapı sağlayıcılarında barındırılır ve işlenir. Bu sağlayıcıların sunucuları yurt dışında bulunduğundan, verileriniz KVKK m. 9 kapsamında, sağlayıcılarla imzalanan ve Kişisel Verileri Koruma Kurulu'na bildirilen standart sözleşmeler çerçevesinde yurt dışına aktarılmaktadır:",
         ],
         items: [
           "Supabase (veritabanı, dosya depolama, kimlik doğrulama) — Singapur",
-          "Vercel (web sunucusu) — ABD ve AB",
-          "Resend (davet e-postaları) — ABD",
-          "Google (yalnızca Google ile giriş yaparsanız)",
+          "Cloudflare (web sunucusu, güvenlik ve kötüye kullanım önleme) — küresel ağ, ABD merkezli",
+          "Resend (davet, sipariş ve bildirim e-postaları) — ABD",
+          "Google (Google ile giriş yaparsanız; tanıtım sitesinde yalnızca onay verirseniz Google Analytics ve Google Ads)",
         ],
       },
       {
         heading: "Saklama süresi",
         paragraphs: [
-          "Verileriniz hesabınız açık olduğu sürece saklanır. Hesabınızı Ayarlar sayfasından sildiğinizde profiliniz, bağlantılarınız, belgeleriniz, banka ve fatura bilgileriniz ile kartınıza ait istatistikler kalıcı olarak silinir.",
+          "Verileriniz hesabınız açık olduğu sürece saklanır. Hesabınızı Ayarlar sayfasından sildiğinizde profiliniz, bağlantılarınız, belgeleriniz, banka ve fatura bilgileriniz, kişi listeniz ile kartınıza ait istatistikler kalıcı olarak silinir.",
+        ],
+        items: [
+          "Kart görüntüleme ve tıklama kayıtları: en fazla 13 ay, sonra otomatik silinir.",
+          "Kart sahibine bırakılan iletişim bilgileri: kart sahibi silene veya hesabını kapatana kadar.",
+          "Sipariş talepleri: talep sonuçlandıktan sonra en fazla 2 yıl; satışa dönüşen talepler için kanuni saklama süreleri (ör. Türk Ticaret Kanunu ve Vergi Usul Kanunu kapsamında 10 yıl).",
+          "Güvenlik amaçlı sunucu kayıtları: en fazla 30 gün.",
         ],
       },
       {
@@ -108,7 +125,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
         items: [
           "Kartınızda yalnızca sizin eklediğiniz ve yayınladığınız bilgiler görünür.",
           "Verilerinizi satmayız, reklam için kullanmayız.",
-          "Kart ziyaretçilerinin kimliğini toplamayız; yalnızca anonim görüntüleme ve tıklama sayıları tutulur.",
+          "Kart ziyaretçilerinin kimliğini toplamayız; yalnızca anonim görüntüleme ve tıklama sayıları tutulur. Ziyaretçi bilgilerini yalnızca kendi isteğiyle formu doldurursa kart sahibine bırakır.",
           "Gizli olarak işaretlediğiniz bağlantı ve belgeler ile yayında olmayan kartlar herkese açık değildir.",
         ],
       },

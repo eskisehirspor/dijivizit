@@ -91,7 +91,7 @@ const CAPTIONS: SequenceCaption[] = [
     end: 0.42,
     kicker: "Kart",
     title: "Metal. NFC. QR.",
-    body: "Siyah metal, gümüş, gold ya da ahşap. İçinde NFC çip, üstünde dinamik QR.",
+    body: "Siyah metal, gümüş, gold ya da ahşap. İçinde NFC çip, üstünde QR kod.",
     place: "left",
   },
   {

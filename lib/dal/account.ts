@@ -12,6 +12,8 @@ import { createClient } from "@/lib/supabase/server";
 
 import { requireUser } from "./auth";
 
+const REAUTH_WINDOW_MS = 15 * 60 * 1000;
+
 export type AccountSummary = {
   email: string | null;
   pendingEmail: string | null;
@@ -181,7 +183,26 @@ async function removeFolder(bucket: string, folder: string): Promise<boolean> {
  * with the service role; leftovers are logged for manual cleanup rather than
  * leaving the account half-deleted.
  */
-export async function deleteOwnAccount(): Promise<AccountResult> {
+export async function deleteOwnAccount(
+  password: string,
+): Promise<AccountResult | { ok: false; code: "reauth_required" }> {
+  // A stolen session alone must not be enough to wipe the account: password
+  // accounts confirm the password, Google-only accounts need a fresh sign-in.
+  const account = await getOwnAccount();
+  if (account.hasPassword) {
+    if (!account.email || !password) return { ok: false, code: "wrong_password" };
+    const check = await checkPassword(account.email, password);
+    if (check === "wrong") return { ok: false, code: "wrong_password" };
+    if (check === "unavailable") return { ok: false, code: "rate_limited" };
+  } else {
+    const supabase = await createClient();
+    const {
+      data: { user: current },
+    } = await supabase.auth.getUser();
+    const lastSignIn = current?.last_sign_in_at ? Date.parse(current.last_sign_in_at) : 0;
+    if (Date.now() - lastSignIn > REAUTH_WINDOW_MS) return { ok: false, code: "reauth_required" };
+  }
+
   const user = await requireUser();
   const admin = createAdminClient();
 

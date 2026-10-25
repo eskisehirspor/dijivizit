@@ -45,10 +45,15 @@ function Field({
 const inputClass =
   "h-12 w-full rounded-xl border border-input bg-background px-4 text-base outline-none transition-[color,box-shadow] placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive";
 
-export function OrderForm({ initialFinish }: { initialFinish: FinishId }) {
+export function OrderForm({
+  initialFinish,
+  formToken,
+}: {
+  initialFinish: FinishId;
+  formToken: string;
+}) {
   const [state, formAction, isPending] = useActionState(submitOrderRequestAction, INITIAL);
   const [finish, setFinish] = useState<FinishId>(initialFinish);
-  const [startedAt] = useState(() => Date.now());
   const errors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
 
   useEffect(() => {
@@ -82,7 +87,7 @@ export function OrderForm({ initialFinish }: { initialFinish: FinishId }) {
 
   return (
     <form action={formAction} className="flex flex-col gap-12" noValidate>
-      <input type="hidden" name="started_at" value={startedAt} />
+      <input type="hidden" name="form_token" value={formToken} />
       {/* Honeypot: hidden from people, filled by bots. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>

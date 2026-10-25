@@ -11,6 +11,9 @@ import {
 import { serverEnv } from "@/lib/env/server";
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { orderRequestSchema } from "@/lib/orders/validation";
+import { verifyFormToken } from "@/lib/security/form-token";
+import { allowRequest, clientIp } from "@/lib/security/rate-limit";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export type OrderFormState =
   | { status: "idle" }
@@ -29,13 +32,23 @@ export async function submitOrderRequestAction(
   _prev: OrderFormState,
   formData: FormData,
 ): Promise<OrderFormState> {
-  // Spam guards: a hidden field people never fill, and a minimum time on page.
+  // Spam guards: a hidden field people never fill, a server-signed token that
+  // proves the page was loaded (and not too quickly submitted), and a per-IP
+  // rate limit at the edge.
   if (String(formData.get("website") ?? "") !== "") {
     return { status: "success", firstName: "" };
   }
-  const startedAt = Number(formData.get("started_at") ?? 0);
-  if (!startedAt || Date.now() - startedAt < 3000) {
-    return { status: "error", message: "Lütfen formu kontrol edip tekrar gönder." };
+  if (!(await verifyFormToken(String(formData.get("form_token") ?? ""), "order"))) {
+    return {
+      status: "error",
+      message: "Form süresi doldu ya da çok hızlı gönderildi. Sayfayı yenileyip tekrar dene.",
+    };
+  }
+  if (!(await allowRequest("FORM_LIMITER", `order:${await clientIp()}`))) {
+    return {
+      status: "error",
+      message: "Çok fazla deneme yapıldı. Lütfen bir dakika sonra tekrar dene.",
+    };
   }
 
   const parsed = orderRequestSchema.safeParse({
@@ -58,6 +71,32 @@ export async function submitOrderRequestAction(
   }
 
   const order = parsed.data;
+
+  // Keep a record of every request (the email may fail) and cap repeats from
+  // the same address so the form can't be used to flood someone's inbox.
+  const admin = createAdminClient();
+  const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const { count } = await admin
+    .from("order_requests")
+    .select("id", { count: "exact", head: true })
+    .eq("email", order.email.toLowerCase())
+    .gte("created_at", since);
+  if ((count ?? 0) >= 3) {
+    return {
+      status: "error",
+      message: `Bu adresten bugün yeterince talep aldık. Acil ise ${CONTACT.phoneDisplay} numarasını ara.`,
+    };
+  }
+  const { error: insertError } = await admin.from("order_requests").insert({
+    finish: order.finish,
+    quantity: order.quantity,
+    full_name: order.fullName,
+    phone: order.phone,
+    email: order.email.toLowerCase(),
+    note: order.note || null,
+    consent_at: new Date().toISOString(),
+  });
+  if (insertError) console.error("Order request insert failed:", insertError.message);
 
   if (!serverEnv.RESEND_API_KEY) {
     console.error("Order request: RESEND_API_KEY is not set");

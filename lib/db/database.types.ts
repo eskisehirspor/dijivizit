@@ -39,6 +39,191 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_notes: {
+        Row: {
+          body: string
+          contact_id: string
+          created_at: string
+          id: string
+          profile_id: string
+        }
+        Insert: {
+          body: string
+          contact_id: string
+          created_at?: string
+          id?: string
+          profile_id: string
+        }
+        Update: {
+          body?: string
+          contact_id?: string
+          created_at?: string
+          id?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_notes_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_notes_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contacts: {
+        Row: {
+          company: string | null
+          consent_at: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          message: string | null
+          met_where: string | null
+          phone: string | null
+          profile_id: string
+          source: string
+          tags: string[]
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          company?: string | null
+          consent_at?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          message?: string | null
+          met_where?: string | null
+          phone?: string | null
+          profile_id: string
+          source?: string
+          tags?: string[]
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          company?: string | null
+          consent_at?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          message?: string | null
+          met_where?: string | null
+          phone?: string | null
+          profile_id?: string
+          source?: string
+          tags?: string[]
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contacts_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      follow_ups: {
+        Row: {
+          contact_id: string
+          created_at: string
+          done_at: string | null
+          due_on: string
+          id: string
+          note: string | null
+          profile_id: string
+          reminded_at: string | null
+        }
+        Insert: {
+          contact_id: string
+          created_at?: string
+          done_at?: string | null
+          due_on: string
+          id?: string
+          note?: string | null
+          profile_id: string
+          reminded_at?: string | null
+        }
+        Update: {
+          contact_id?: string
+          created_at?: string
+          done_at?: string | null
+          due_on?: string
+          id?: string
+          note?: string | null
+          profile_id?: string
+          reminded_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "follow_ups_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "follow_ups_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_requests: {
+        Row: {
+          consent_at: string
+          created_at: string
+          email: string
+          finish: string
+          full_name: string
+          id: string
+          note: string | null
+          phone: string
+          quantity: number
+          status: string
+        }
+        Insert: {
+          consent_at: string
+          created_at?: string
+          email: string
+          finish: string
+          full_name: string
+          id?: string
+          note?: string | null
+          phone: string
+          quantity: number
+          status?: string
+        }
+        Update: {
+          consent_at?: string
+          created_at?: string
+          email?: string
+          finish?: string
+          full_name?: string
+          id?: string
+          note?: string | null
+          phone?: string
+          quantity?: number
+          status?: string
+        }
+        Relationships: []
+      }
       analytics_events: {
         Row: {
           city: string | null
@@ -422,6 +607,17 @@ export type Database = {
           p_user_id: string
         }
         Returns: undefined
+      }
+      submit_card_contact: {
+        Args: {
+          p_company: string
+          p_email: string
+          p_full_name: string
+          p_message: string
+          p_phone: string
+          p_public_id: string
+        }
+        Returns: boolean
       }
     }
     Enums: {

@@ -77,7 +77,7 @@ export default async function SettingsPage({
           <h2 className="text-sm font-medium">{t("delete.title")}</h2>
           <p className="text-sm text-pretty text-muted-foreground">{t("delete.body")}</p>
         </div>
-        <DeleteAccount />
+        <DeleteAccount hasPassword={account.hasPassword} />
       </section>
     </div>
   );

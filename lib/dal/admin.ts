@@ -153,6 +153,9 @@ export const getAdminData = cache(async (): Promise<AdminData> => {
         supabase
           .from("analytics_events")
           .select("profile_id, event_type, created_at")
+          // Events older than 13 months are pruned by record_card_event, so
+          // this matches what is kept and bounds the scan as data grows.
+          .gte("created_at", new Date(now.getTime() - 396 * 24 * 60 * 60 * 1000).toISOString())
           .range(from, to),
       ),
       fetchAll((from, to) =>
