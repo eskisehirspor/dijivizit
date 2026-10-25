@@ -1,8 +1,8 @@
-"""Vertical promo film (1080x1920, 30 fps, 15 s) for Dijivizit sponsored ads.
+"""Vertical promo film (1080x1920, 30 fps, 22 s) for Dijivizit sponsored ads.
 
-Fast-cut 3D product spots on a soft grey studio: macro sweeps across the card,
-a spin, a fan of all five finishes, the NFC tap on a phone, the profile and
-"saved" screens, a duo and an end card. Captions are composited afterwards
+Dark luxury studio: a gold macro reveal, a black card turning, a light wood card
+tapping a phone, the profile and "saved" screens, a fan of all five finishes
+and a wood end card. Captions are composited afterwards
 (marketing/film/compose.py), so these frames carry no text.
 
 python3 render/film.py --out DIR [--frames 0-449] [--samples 48] [--res 1080x1920]
@@ -24,16 +24,14 @@ CARD_W, CARD_H, CARD_T = L.CARD_W, L.CARD_H, L.CARD_T
 
 # (name, first frame, length)
 SHOTS = [
-    ("macro_black", 0, 45),
-    ("macro_gold", 45, 45),
-    ("spin", 90, 45),
-    ("fan", 135, 60),
-    ("tap", 195, 90),
-    ("screen", 285, 60),
-    ("duo", 345, 60),
-    ("end", 405, 45),
+    ("hook", 0, 105),
+    ("spin", 105, 90),
+    ("tap", 195, 135),
+    ("screen", 330, 105),
+    ("fan", 435, 105),
+    ("end", 540, 120),
 ]
-TOTAL = 450
+TOTAL = 660
 
 
 def parse():
@@ -76,9 +74,10 @@ def ease_all(kind="BEZIER"):
 
 # ------------------------------------------------------------------ studio
 
-def studio(bg=0.42, key_e=1.0, warm=0.0):
-    """Soft grey seamless studio like a product film: no floor, a large diffuse
-    backdrop that follows the camera, big soft key, fill and two rims."""
+def studio(bg=1.0, key_e=1.0, warm=0.3):
+    """Dark luxury studio: near-black backdrop with a soft warm glow behind the
+    subject (bg scales it), soft key, warm and cool rims, and camera-invisible
+    strip lights that draw clean highlights on metal."""
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
@@ -94,13 +93,14 @@ def studio(bg=0.42, key_e=1.0, warm=0.0):
     sc.world = w
     w.use_nodes = True
     bgn = w.node_tree.nodes["Background"]
-    bgn.inputs["Color"].default_value = (0.8, 0.8, 0.82, 1)
-    bgn.inputs["Strength"].default_value = 0.35
-    wc = (1.0, 0.95 - 0.08 * warm, 0.9 - 0.18 * warm)
-    L.area("Key", (3.0, 2.0), (-2.6, -2.4, 2.4), (0, 0, 0), 520 * key_e, wc)
-    L.area("Fill", (3.0, 3.0), (3.0, -2.6, 0.2), (0, 0, 0), 160 * key_e, (0.92, 0.95, 1.0))
-    L.area("RimL", (0.4, 3.5), (-2.2, 2.0, 0.6), (0, 0, 0), 300 * key_e, wc)
-    L.area("RimR", (0.4, 3.5), (2.2, 2.0, 1.0), (0, 0, 0), 260 * key_e, (0.9, 0.94, 1.0))
+    bgn.inputs["Color"].default_value = (0.02, 0.019, 0.018, 1)
+    bgn.inputs["Strength"].default_value = 1.0
+    wc = (1.0, 0.9 - 0.08 * warm, 0.76 - 0.14 * warm)
+    L.area("Key", (2.4, 1.6), (-2.2, -2.4, 2.6), (0, 0, 0), 300 * key_e, wc)
+    L.area("RimL", (0.3, 3.5), (-2.4, 1.8, 0.6), (0, 0, 0), 520 * key_e, (1.0, 0.82, 0.6))
+    L.area("RimR", (0.3, 3.5), (2.4, 1.6, 0.9), (0, 0, 0), 420 * key_e, (0.8, 0.88, 1.0))
+    L.emission_plane("StripTop", (4.0, 0.25), (0, -1.6, 2.4), (0, 0, 0), 4 * key_e, wc)
+    L.emission_plane("StripSide", (0.2, 3.0), (2.0, -2.0, 0.2), (0, 0, 0), 2.5 * key_e, (0.9, 0.94, 1.0))
     sc["bg"] = bg
     return sc
 
@@ -123,13 +123,35 @@ def cam_rig(loc, target, lens=50, fstop=4.0):
     c.up_axis = "UP_Y"
     cd.dof.focus_object = tgt
     bpy.context.scene.camera = cam
-    # Backdrop: a big grey card far behind the subject, locked to the camera.
+    # Backdrop: near-black card far behind the subject, locked to the camera,
+    # with a soft warm radial glow in the middle.
     bd = S.flat("Backdrop", 60, 60, 0.01, seg=1)
-    m, b = S.principled("Backdrop", **{"Base Color": (bpy.context.scene["bg"],) * 3 + (1,), "Roughness": 1.0})
+    m = bpy.data.materials.new("Backdrop")
+    m.use_nodes = True
+    nt = m.node_tree
+    nt.nodes.remove(nt.nodes["Principled BSDF"])
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Scale"].default_value = (0.11, 0.075, 1)
+    nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+    gr = nt.nodes.new("ShaderNodeTexGradient")
+    gr.gradient_type = "SPHERICAL"
+    nt.links.new(mp.outputs["Vector"], gr.inputs["Vector"])
+    ramp = nt.nodes.new("ShaderNodeValToRGB")
+    ramp.color_ramp.elements[0].color = (0.006, 0.006, 0.006, 1)
+    ramp.color_ramp.elements[1].position = 0.9
+    ramp.color_ramp.elements[1].color = (0.045, 0.034, 0.024, 1)
+    nt.links.new(gr.outputs["Fac"], ramp.inputs["Fac"])
+    em = nt.nodes.new("ShaderNodeEmission")
+    em.inputs["Strength"].default_value = bpy.context.scene["bg"]
+    nt.links.new(ramp.outputs["Color"], em.inputs["Color"])
+    nt.links.new(em.outputs["Emission"], nt.nodes["Material Output"].inputs["Surface"])
     bd.data.materials.append(m)
     bd.parent = cam
     bd.location = (0, 0, -14)
     bd.visible_shadow = False
+    bd.visible_diffuse = False
+    bd.visible_glossy = False
     return cam, tgt
 
 
@@ -186,36 +208,27 @@ def ring_set(center, normal, n=3):
 # ------------------------------------------------------------------ shots
 # Each builder keys its animation in local frames 0..len-1.
 
-def macro_black(n):
-    studio(bg=0.3, key_e=0.9)
-    c = card("C", "black", (0, 0, 0), (90, 0, 0))
-    key(c, 0, rot=(90, 0, -8))
-    key(c, n, rot=(90, 0, 6))
-    cam, t = cam_rig((-0.55, -0.42, 0.22), (-0.3, 0, 0.12), lens=60, fstop=2.0)
-    key(cam, 0, loc=(-0.6, -0.42, 0.26))
-    key(cam, n, loc=(0.35, -0.5, 0.05))
-    key(t, 0, loc=(-0.32, 0, 0.12))
-    key(t, n, loc=(0.25, 0, -0.08))
-    # light sweep across the face
-    sweep = L.area("Sweep", (0.15, 2.0), (-1.6, -1.2, 0.3), (0, 0, 0), 900, (1, 0.98, 0.95))
-    key(sweep, 0, loc=(-1.8, -1.0, 0.3))
-    key(sweep, n, loc=(1.8, -1.0, 0.3))
-
-
-def macro_gold(n):
-    studio(bg=0.36, key_e=1.0, warm=0.5)
+def hook(n):
+    """Gold card emerging from the dark: slow macro slide with a light sweep."""
+    studio(bg=0.8, key_e=0.45, warm=0.6)
+    # the top strip mirrors straight into the lens at this angle; drop it
+    bpy.data.objects.remove(bpy.data.objects["StripTop"])
+    bpy.data.objects["Key"].data.energy *= 0.5
     c = card("C", "gold", (0, 0, 0), (62, 0, 18))
-    key(c, 0, rot=(62, 0, 24))
-    key(c, n, rot=(70, 0, 6))
+    key(c, 0, rot=(62, 0, 26))
+    key(c, n, rot=(72, 0, 4))
     cam, t = cam_rig((0.5, -0.6, 0.5), (0.1, 0, 0.0), lens=70, fstop=2.2)
-    key(cam, 0, loc=(0.75, -0.65, 0.45))
-    key(cam, n, loc=(-0.35, -0.72, 0.3))
-    key(t, 0, loc=(0.25, 0.02, 0.05))
-    key(t, n, loc=(-0.2, 0.02, -0.05))
+    key(cam, 0, loc=(1.3, -1.45, 0.85))
+    key(cam, n, loc=(-0.55, -1.75, 0.6))
+    key(t, 0, loc=(0.12, 0.02, 0.06))
+    key(t, n, loc=(-0.2, 0.02, 0.0))
+    sweep = L.area("Sweep", (0.25, 2.4), (-1.6, -1.2, 0.6), (0, 0, 0), 30, (1, 0.9, 0.75))
+    key(sweep, 0, loc=(-2.2, -1.2, 0.6))
+    key(sweep, n, loc=(2.2, -1.2, 0.6))
 
 
 def spin(n):
-    studio(bg=0.42)
+    studio(bg=1.0)
     c = card("C", "black", (0, 0, 0), (90, 0, 0))
     key(c, 0, loc=(0, 0, -0.25), rot=(98, -10, -40))
     key(c, int(n * 0.75), loc=(0, 0, 0.05), rot=(90, 0, 360 + 180))
@@ -226,7 +239,7 @@ def spin(n):
 
 
 def fan(n):
-    studio(bg=0.4, warm=0.2)
+    studio(bg=1.0, warm=0.4)
     fins = ["wood-light", "wood", "silver", "gold", "black"]
     pivot_world = Vector((-0.3, 0, -0.5))
     for i, fin in enumerate(fins):
@@ -249,12 +262,12 @@ def fan(n):
 
 
 def tap(n):
-    studio(bg=0.45)
+    studio(bg=1.0)
     ph, mixes = phone("idle")
     key(ph, 0, loc=(0.1, 0, -0.2), rot=(90, 0, -14))
     key(ph, n, loc=(0.1, 0, -0.18), rot=(90, 0, -20))
-    c = card("C", "black")
-    contact = int(n * 0.42)
+    c = card("C", "wood-light")
+    contact = int(n * 0.36)
     bpy.context.scene.frame_set(0)
 
     def behind(f, local, tilt=(0, 0, 0)):
@@ -299,7 +312,7 @@ def tap(n):
 
 
 def screen(n):
-    studio(bg=0.45)
+    studio(bg=1.0)
     ph, mixes = phone("profile")
     key(ph, 0, loc=(0, 0, 0), rot=(90, 0, -6))
     key(ph, n, loc=(0, 0, 0), rot=(90, 0, 4))
@@ -316,24 +329,9 @@ def screen(n):
     key(t, n, loc=(0, 0, 0.2))
 
 
-def duo(n):
-    studio(bg=0.42, warm=0.3)
-    p = bpy.data.objects.new("Duo", None)
-    bpy.context.collection.objects.link(p)
-    g = card("G", "gold", (0.16, 0.06, 0.1), (90, 0, 10))
-    b = card("B", "black", (-0.12, -0.04, -0.06), (90, 0, -6))
-    for c in (g, b):
-        c.parent = p
-    key(p, 0, rot=(-14, 18, -28))
-    key(p, n, rot=(-6, -8, 22))
-    cam, t = cam_rig((0, -1.6, 0.1), (0, 0, 0), lens=50, fstop=5.6)
-    key(cam, 0, loc=(0, -2.5, 0.05))
-    key(cam, n, loc=(0, -2.15, 0.12))
-
-
 def end(n):
-    studio(bg=0.38)
-    c = card("C", "black", (0, 0, 0.5), (90, 0, 0))
+    studio(bg=1.1, warm=0.5)
+    c = card("C", "wood", (0, 0, 0.5), (90, 0, 0))
     key(c, 0, loc=(0, 0, 0.42), rot=(96, -4, -22))
     key(c, n, loc=(0, 0, 0.5), rot=(92, 0, 8))
     cam, t = cam_rig((0, -2.6, 0.1), (0, 0, 0.1), lens=50, fstop=5.6)
@@ -343,7 +341,7 @@ BUILDERS = {name: globals()[name] for name, _, _ in SHOTS}
 
 # Raise the camera and its aim so the subject sits lower in frame, leaving the
 # upper third (inside the Reels safe zone) clear for captions.
-LIFT = {"spin": 0.3, "fan": 0.3, "tap": 0.4, "screen": 0.3, "duo": 0.3, "end": 0.45}
+LIFT = {"hook": 0.12, "spin": 0.3, "fan": 0.3, "tap": 0.4, "screen": 0.3, "end": 0.45}
 
 
 def lift_view(dz):

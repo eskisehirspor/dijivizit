@@ -62,7 +62,7 @@ jobs:
       - name: Render frames
         run: |
           # interleave so every shard gets a mix of cheap and expensive shots
-          frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 450, 30)))")
+          frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 660, 30)))")
           python3 render/film.py --out out --samples ${{ github.event.inputs.samples }} --frames "$frames"
       - uses: actions/upload-artifact@v4
         with:
