@@ -90,7 +90,7 @@ if (DRY_RUN) {
   if (IG_ACCESS_TOKEN) {
     const me = await call("GET", "/me", { fields: "user_id,username" });
     console.log(
-      `token ok: @${me.username} (user_id ${me.user_id}, secret IG_USER_ID ${me.user_id === IG_USER_ID ? "matches" : "DOES NOT MATCH"})`,
+      `::notice::token ok: @${me.username} (user_id ${me.user_id}, secret IG_USER_ID ${me.user_id === IG_USER_ID ? "matches" : "DOES NOT MATCH"})`,
     );
   } else {
     console.log("::notice::no IG_ACCESS_TOKEN set");
