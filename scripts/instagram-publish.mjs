@@ -87,6 +87,14 @@ console.log(`day ${index}: ${entry.id}\n${imageUrl}\n---\n${caption}\n---`);
 if (DRY_RUN) {
   const res = await fetch(imageUrl, { method: "HEAD" });
   console.log(`image reachable: ${res.status}`);
+  if (IG_ACCESS_TOKEN) {
+    const me = await call("GET", "/me", { fields: "user_id,username" });
+    console.log(
+      `token ok: @${me.username} (user_id ${me.user_id}, secret IG_USER_ID ${me.user_id === IG_USER_ID ? "matches" : "DOES NOT MATCH"})`,
+    );
+  } else {
+    console.log("no IG_ACCESS_TOKEN set");
+  }
   process.exit(res.ok ? 0 : 1);
 }
 if (!IG_USER_ID || !IG_ACCESS_TOKEN) {
