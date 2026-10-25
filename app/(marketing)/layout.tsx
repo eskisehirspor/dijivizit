@@ -3,6 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { LegalLinks } from "@/components/legal/legal-links";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { CONTACT } from "@/lib/contact";
+import { GUIDES } from "@/lib/marketing/guides";
+import Link from "next/link";
 
 export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
   const t = await getTranslations();
@@ -30,7 +32,19 @@ export default async function MarketingLayout({ children }: { children: React.Re
               © {new Date().getFullYear()} {t("app.name")}
             </p>
           </div>
-          <LegalLinks className="justify-start" />
+          <div className="flex flex-col gap-4">
+            <nav
+              aria-label="Rehber"
+              className="flex flex-wrap gap-x-4 gap-y-2 text-muted-foreground"
+            >
+              {GUIDES.map((g) => (
+                <Link key={g.slug} href={`/rehber/${g.slug}`} className="hover:text-foreground">
+                  {g.label}
+                </Link>
+              ))}
+            </nav>
+            <LegalLinks className="justify-start" />
+          </div>
         </div>
       </footer>
     </div>
