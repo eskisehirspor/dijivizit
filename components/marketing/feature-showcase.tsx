@@ -3,15 +3,11 @@ import type { ReactNode } from "react";
 
 /* Small, static recreations of the real screens. Names and numbers are fictional. */
 
-function Frame({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
+function Frame({ children }: { children: ReactNode; dark?: boolean }) {
   return (
     <div
       aria-hidden="true"
-      className={
-        dark
-          ? "flex h-72 items-center justify-center overflow-hidden rounded-3xl bg-neutral-950 p-6"
-          : "flex h-72 items-center justify-center overflow-hidden rounded-3xl bg-neutral-100 p-6"
-      }
+      className="flex h-full min-h-52 items-center justify-center overflow-hidden px-6 pb-8"
     >
       {children}
     </div>
@@ -71,7 +67,7 @@ function ContactsMock() {
 function FollowUpMock() {
   return (
     <Frame>
-      <div className="w-full max-w-[16rem] rounded-2xl bg-white p-4 shadow-[0_20px_40px_-24px_rgba(0,0,0,0.35)]">
+      <div className="w-full max-w-[16rem] rounded-2xl bg-white p-4 shadow-[0_20px_40px_-24px_rgba(0,0,0,0.35)] lg:scale-[1.3]">
         <p className="text-[10px] text-neutral-500">Bugün 08:00 · Dijivizit</p>
         <p className="mt-1 text-[13px] font-semibold">Günaydın Elif,</p>
         <p className="mt-0.5 text-[11px] leading-snug text-neutral-600">
@@ -116,7 +112,7 @@ function Check() {
 function ScanMock() {
   return (
     <Frame>
-      <div className="flex items-center gap-4 self-start">
+      <div className="flex origin-top items-center gap-4 self-start lg:scale-[1.3]">
         <Phone>
           {/* Camera view: a printed card on a desk, framed by scan guides. */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_35%,#8b7b68,#4a3f33_70%)]" />
@@ -211,9 +207,9 @@ function WalletMock() {
   return (
     <div
       aria-hidden="true"
-      className="relative h-72 overflow-hidden rounded-3xl bg-[radial-gradient(120%_90%_at_50%_0%,#2b2b31,#0a0a0b_70%)]"
+      className="relative h-[27rem] overflow-hidden lg:h-full lg:min-h-[33rem]"
     >
-      <div className="absolute top-5 left-1/2 h-[31rem] w-[14.6rem] -translate-x-1/2 rounded-[2.6rem] bg-[#1c1c1e] p-[6px] shadow-[0_0_0_1px_rgba(255,255,255,0.14),0_30px_60px_-10px_rgba(0,0,0,0.8)]">
+      <div className="absolute top-1 left-1/2 h-[31rem] w-[14.6rem] origin-top -translate-x-1/2 rounded-[2.6rem] bg-[#1c1c1e] p-[6px] shadow-[0_0_0_1px_rgba(255,255,255,0.14),0_30px_60px_-10px_rgba(0,0,0,0.8)] lg:scale-[1.32]">
         <div className="relative h-full w-full overflow-hidden rounded-[2.25rem] bg-black">
           {/* Status bar + Dynamic Island */}
           <div className="absolute inset-x-0 top-0 flex items-center justify-between px-6 pt-[13px] text-[10px] font-semibold text-white">
@@ -242,7 +238,7 @@ function WalletMock() {
           </div>
 
           {/* Poster-style pass */}
-          <div className="absolute inset-x-[10px] top-[76px] h-[12.6rem] overflow-hidden rounded-[20px] shadow-[0_14px_30px_rgba(0,0,0,0.6)]">
+          <div className="absolute inset-x-[10px] top-[76px] h-[17.5rem] overflow-hidden rounded-[20px] shadow-[0_14px_30px_rgba(0,0,0,0.6)]">
             <div className="absolute inset-0 bg-[linear-gradient(140deg,#3b3b40_0%,#17171a_42%,#29292d_68%,#0e0e10_100%)]" />
             <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.045)_0px,rgba(255,255,255,0.045)_1px,transparent_1px,transparent_3px)]" />
             <div className="absolute inset-0 bg-[radial-gradient(80%_45%_at_25%_5%,rgba(255,255,255,0.2),transparent_70%)]" />
@@ -266,13 +262,13 @@ function WalletMock() {
                   <span className="block text-[9px] tracking-normal text-white">Dijital</span>
                 </span>
               </div>
-              <p className="mt-3 text-[21px] leading-none font-semibold tracking-tight">
+              <p className="mt-4 text-[21px] leading-none font-semibold tracking-tight">
                 Elif Kaya
               </p>
               <p className="mt-1.5 text-[9px] text-white/70">İç Mimar · Kaya Tasarım</p>
               <div className="mt-auto flex flex-col items-center gap-1.5">
                 <span className="rounded-[10px] bg-white p-[5px]">
-                  <Qr text="https://dijivizit.com" className="size-[4.6rem]" />
+                  <Qr text="https://dijivizit.com" className="size-[5.4rem]" />
                 </span>
                 <span className="text-[7.5px] text-white/60">Okutun, kartım açılsın</span>
               </div>
@@ -280,7 +276,7 @@ function WalletMock() {
           </div>
 
           {/* Featured actions (cropped by the frame on small tiles) */}
-          <div className="absolute inset-x-[10px] top-[286px] grid grid-cols-2 gap-2">
+          <div className="absolute inset-x-[10px] top-[372px] grid grid-cols-2 gap-2">
             {["Profili aç", "Rehbere kaydet"].map((label) => (
               <Glass key={label} className="h-[34px] rounded-[14px] text-[9px] font-medium">
                 {label}
@@ -320,49 +316,86 @@ function TeamMock() {
   );
 }
 
-const FEATURES = [
+type Feature = {
+  eyebrow: string;
+  title: string;
+  body: string;
+  mock: ReactNode;
+  className?: string;
+  dark?: boolean;
+};
+
+const FEATURES: Feature[] = [
   {
-    title: "Karşı taraf da bilgisini bırakır",
-    body: 'Kartınızı açan kişi "Bilgilerimi bırak"a dokunur; adı ve numarası anında size gelir. Tanışma tek yönlü kalmaz.',
+    eyebrow: "Apple Cüzdan",
+    title: "Kartınız iPhone'unuzda.",
+    body: "Cüzdan'a ekleyin; fiziksel kart yanınızda değilken QR'ı gösterin, karşınızdaki okutsun.",
+    mock: <WalletMock />,
+    className: "lg:row-span-2",
+    dark: true,
+  },
+  {
+    eyebrow: "Kartvizit tarama",
+    title: "Kâğıt kartvizit, saniyede kişi.",
+    body: "Size verilen kartın fotoğrafını çekin; ad, unvan, şirket ve telefon kendiliğinden dolsun.",
+    mock: <ScanMock />,
+    className: "lg:col-span-2",
+  },
+  {
+    eyebrow: "Karşılıklı tanışma",
+    title: "O da bilgisini bırakır.",
+    body: '"Bilgilerimi bırak" ile adı ve numarası anında size gelir.',
     mock: <LeaveMock />,
   },
   {
-    title: "Kişi listesi ve notlar",
-    body: "Kimle nerede tanıştığınızı unutmayın. Not alın, etiketleyin, arayın; listeyi Excel'e aktarın.",
+    eyebrow: "Kişiler",
+    title: "Kimi nerede tanıdınız.",
+    body: "Not alın, etiketleyin, arayın; listeyi Excel'e aktarın.",
     mock: <ContactsMock />,
   },
   {
-    title: "Takip hatırlatması",
-    body: '"Bir hafta sonra hatırlat" deyin. Günü gelince sabah e-postanıza düşer; WhatsApp mesajı hazır yazılmış olur.',
+    eyebrow: "Takip",
+    title: "Hiçbir tanışma unutulmaz.",
+    body: '"Bir hafta sonra hatırlat" deyin. Günü gelince sabah e-postanıza düşer, WhatsApp mesajı hazır yazılmış olur.',
     mock: <FollowUpMock />,
+    className: "lg:col-span-2",
   },
   {
-    title: "Kâğıt kartvizit tarama",
-    body: "Size verilen kâğıt kartın fotoğrafını çekin; ad, unvan, şirket ve telefon kendiliğinden doldurulsun.",
-    mock: <ScanMock />,
-  },
-  {
-    title: "Apple Cüzdan'da kartınız",
-    body: "Kartınızı iPhone Cüzdan'a ekleyin. Fiziksel kart yanınızda değilken QR'ı gösterin, karşınızdaki okutsun.",
-    mock: <WalletMock />,
-  },
-  {
-    title: "Ekip paneli ve kart devri",
-    body: "Şirket kartlarını tek yerden yönetin. Çalışan ayrılınca kartı yenisine atayın; fiziksel kart aynı kalır.",
+    eyebrow: "Ekip",
+    title: "Kart şirkette kalır.",
+    body: "Çalışan ayrılınca kartı yenisine atayın; fiziksel kart aynı kalır.",
     mock: <TeamMock />,
   },
 ];
 
 export function FeatureShowcase() {
   return (
-    <ul className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {FEATURES.map((f) => (
-        <li key={f.title} className="flex flex-col gap-5">
-          {f.mock}
-          <div className="flex flex-col gap-2 px-1">
-            <h3 className="text-xl font-semibold tracking-tight">{f.title}</h3>
-            <p className="text-base leading-relaxed text-pretty text-muted-foreground">{f.body}</p>
+        <li
+          key={f.title}
+          className={`flex flex-col overflow-hidden rounded-3xl ${
+            f.dark
+              ? "bg-[radial-gradient(120%_70%_at_50%_100%,#2b2b31,#0a0a0b_70%)] text-white"
+              : "bg-neutral-100"
+          } ${f.className ?? ""}`}
+        >
+          <div className="flex flex-col gap-2 p-7 sm:p-8">
+            <p
+              className={`text-sm font-medium tracking-wide ${f.dark ? "text-white/55" : "text-muted-foreground"}`}
+            >
+              {f.eyebrow}
+            </p>
+            <h3 className="text-2xl leading-tight font-semibold tracking-tight text-balance">
+              {f.title}
+            </h3>
+            <p
+              className={`max-w-md text-base leading-relaxed text-pretty ${f.dark ? "text-white/65" : "text-muted-foreground"}`}
+            >
+              {f.body}
+            </p>
           </div>
+          <div className="relative flex-1">{f.mock}</div>
         </li>
       ))}
     </ul>
