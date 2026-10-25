@@ -380,6 +380,8 @@ def build(portrait, finish="black", hide_phone=False):
     # Phone: titanium body, black front, inset screen and island.
     phone = bpy.data.objects.new("Phone", None)
     bpy.context.collection.objects.link(phone)
+    # Pro Max sized (77.6 x 161 mm) so the card reads in true proportion.
+    phone.scale = (1.09, 1.09, 1.09)
     body = slab("PhoneBody", 0.715, 1.47, 0.11, 0.078, seg=16)
     bevel(body, 0.018, 6)
     body.parent = phone
@@ -483,12 +485,18 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     key(phone, 0, (1.6, 0.6, -3.2), (80, 0, -30))
     key(phone, 64, (1.6, 0.6, -3.2), (80, 0, -30))
     key(phone, 100, (0.28, 0.35, -0.05), (90, 0, -12))
+    # Turn a little during the tap so the card is seen sitting behind the
+    # phone instead of vanishing into it.
+    key(phone, 116, (0.26, 0.35, -0.05), (90, 0, -24))
+    key(phone, 130, (0.26, 0.35, -0.05), (90, 0, -24))
     key(phone, 150, (0.25, 0.35, -0.05), (90, 0, -8))
     key(phone, 191, (0.25, 0.35, -0.05), (90, 0, -6))
 
     # From here the card is keyed in the phone's local space (x right, y up,
     # z out of the screen; the back glass is at z = -0.039) so it goes over
-    # the top, drops in behind and lies flat against the back - never through.
+    # the top-left corner and lies flat against the back - never through.
+    # At contact it stays offset up and to the left, turned in-plane, so more
+    # than half of it stays visible.
     scene = bpy.context.scene
 
     def behind(frame, local, tilt=(0, 0, 0)):
@@ -497,13 +505,13 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
         pz = math.degrees(phone.rotation_euler.z)
         key(card, frame, tuple(mw @ Vector(local)), (90 + tilt[0], tilt[1], 360 + pz + tilt[2]))
 
-    behind(101, (-0.95, 0.95, -0.3), (8, 2, 2))
-    behind(106, (-0.25, 1.1, -0.24), (6, 0, 4))
-    behind(112, (-0.08, 0.7, -0.14), (2, 0, 1))
-    behind(118, (-0.08, 0.64, -0.0485))  # contact
-    behind(126, (-0.08, 0.64, -0.0485))
-    behind(134, (-0.14, 0.7, -0.22), (4, 0, 6))
-    behind(150, (-1.2, 0.95, -0.55), (10, 12, 20))
+    behind(101, (-1.0, 0.95, -0.35), (8, 14, 2))
+    behind(106, (-0.75, 0.98, -0.26), (6, 16, 3))
+    behind(112, (-0.52, 0.86, -0.14), (2, 18, 1))
+    behind(118, (-0.46, 0.8, -0.0447), (0, 18, 0))  # contact
+    behind(128, (-0.46, 0.8, -0.0447), (0, 18, 0))
+    behind(136, (-0.6, 0.86, -0.22), (4, 16, 6))
+    behind(150, (-1.25, 0.95, -0.55), (10, 14, 20))
     behind(191, (-2.5, 1.3, -0.95), (18, 22, 40))
     scene.frame_set(0)
 
@@ -530,9 +538,9 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     u = 1.0 - s
     key(target, 0, (0.0, 0.0, 0.08 + 0.2 * u))
     key(target, 50, (0.0, 0.0, 0.03 - 0.15 * u))
-    key(target, 100, (-0.05 - 0.35 * s, 0.25, 0.1 - 0.22 * u))
-    key(target, 120, (0.0 - 0.35 * s, 0.38, 0.3 - 0.22 * u))
-    key(target, 150, (0.25 - 0.55 * s, 0.4, 0.22 - 0.22 * u))
+    key(target, 100, (-0.05 - 0.35 * s, 0.25, 0.1 + 0.2 * s - 0.22 * u))
+    key(target, 120, (0.0 - 0.35 * s, 0.38, 0.3 + 0.2 * s - 0.22 * u))
+    key(target, 150, (0.25 - 0.55 * s, 0.4, 0.22 + 0.1 * s - 0.22 * u))
     key(target, 172, (0.25 - 0.55 * s, 0.4, 0.05 - 0.22 * u))
     key(target, 191, (0.25 - 0.55 * s, 0.4, 0.02 - 0.22 * u))
 
