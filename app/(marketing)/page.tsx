@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { AppScreens } from "@/components/marketing/app-screens";
 import { ContactDetails } from "@/components/marketing/contact-details";
 import { FinishPicker } from "@/components/marketing/finish-picker";
 import { LifestyleImage } from "@/components/marketing/lifestyle-image";
@@ -188,6 +189,22 @@ export default function HomePage() {
           src="/landing/lifestyle/tap.webp"
           alt="Siyah Dijivizit NFC kartvizit telefona dokunduruluyor, ekranda dijital profil açılmış"
         />
+      </section>
+
+      <section className="border-t border-border/60 bg-neutral-50">
+        <div className="mx-auto w-full max-w-6xl px-6 py-28 sm:py-36">
+          <div className="flex max-w-2xl flex-col gap-4">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">Arayüz</p>
+            <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
+              Kartınız telefonda böyle açılır.
+            </h2>
+            <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
+              Karşınızdaki kişi uygulama indirmez. Kartı telefonuna yaklaştırır, profiliniz
+              tarayıcıda açılır; sizi tek dokunuşla arar, yazar ya da rehberine kaydeder.
+            </p>
+          </div>
+          <AppScreens />
+        </div>
       </section>
 
       <section className="border-t border-border/60">
