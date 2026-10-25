@@ -1,3 +1,4 @@
+import QRCode from "qrcode";
 import type { ReactNode } from "react";
 
 /* Small, static recreations of the real screens. Names and numbers are fictional. */
@@ -8,8 +9,8 @@ function Frame({ children, dark = false }: { children: ReactNode; dark?: boolean
       aria-hidden="true"
       className={
         dark
-          ? "flex h-64 items-center justify-center overflow-hidden rounded-3xl bg-neutral-950 p-6"
-          : "flex h-64 items-center justify-center overflow-hidden rounded-3xl bg-neutral-100 p-6"
+          ? "flex h-72 items-center justify-center overflow-hidden rounded-3xl bg-neutral-950 p-6"
+          : "flex h-72 items-center justify-center overflow-hidden rounded-3xl bg-neutral-100 p-6"
       }
     >
       {children}
@@ -88,47 +89,108 @@ function FollowUpMock() {
   );
 }
 
+function Phone({ children }: { children: ReactNode }) {
+  return (
+    <div className="relative h-[15.5rem] w-[8.6rem] shrink-0 rounded-[1.6rem] bg-neutral-950 p-[5px] shadow-[0_24px_40px_-18px_rgba(0,0,0,0.55)]">
+      <div className="relative h-full w-full overflow-hidden rounded-[1.3rem]">{children}</div>
+      <span className="absolute top-[9px] left-1/2 h-[9px] w-10 -translate-x-1/2 rounded-full bg-neutral-950" />
+    </div>
+  );
+}
+
+function Check() {
+  return (
+    <svg viewBox="0 0 12 12" className="size-2.5 shrink-0 text-emerald-600">
+      <path
+        d="M2.5 6.2 5 8.5l4.5-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function ScanMock() {
   return (
-    <Frame dark>
-      <div className="flex w-full max-w-[17rem] items-center gap-3">
-        <div className="relative aspect-[1.75] w-28 shrink-0 rotate-[-4deg] rounded-md bg-[#f4efe6] p-2 shadow-lg">
-          <div className="h-1.5 w-12 rounded bg-neutral-800" />
-          <div className="mt-1 h-1 w-9 rounded bg-neutral-400" />
-          <div className="mt-3 h-1 w-14 rounded bg-neutral-500" />
-          <div className="mt-1 h-1 w-16 rounded bg-neutral-500" />
-          <span className="absolute -inset-1.5 rounded-lg border-2 border-white/80" />
-        </div>
-        <div className="flex-1 rounded-xl bg-white p-3 text-[10px] leading-relaxed">
-          <p className="font-semibold">Selin Yıldız</p>
-          <p className="text-neutral-500">Satın Alma Müdürü</p>
-          <p className="text-neutral-500">Kuzey Tekstil</p>
-          <p className="mt-1">0533 702 14 88</p>
+    <Frame>
+      <div className="flex items-center gap-4">
+        <Phone>
+          {/* Camera view: a printed card on a desk, framed by scan guides. */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_35%,#8b7b68,#4a3f33_70%)]" />
+          <div className="absolute inset-x-0 top-0 flex justify-between px-3 pt-6 text-[7px] font-medium text-white/80">
+            <span>Kartvizit tara</span>
+            <span>Otomatik</span>
+          </div>
+          <div className="absolute top-[34%] left-1/2 w-[86%] -translate-x-1/2 rotate-[-3deg]">
+            <div className="aspect-[1.75] rounded-[3px] bg-[#fbfaf6] p-[7px] shadow-[0_6px_14px_rgba(0,0,0,0.45)]">
+              <div className="flex items-center justify-between">
+                <span className="text-[7px] font-bold tracking-wide text-[#1d3557]">KUZEY</span>
+                <span className="size-2.5 rounded-sm bg-[#1d3557]" />
+              </div>
+              <p className="mt-[6px] text-[8px] leading-none font-semibold text-neutral-900">
+                Selin Yıldız
+              </p>
+              <p className="mt-[2px] text-[5.5px] text-neutral-500">Satın Alma Müdürü</p>
+              <div className="mt-[5px] space-y-[1.5px] text-[5px] text-neutral-700">
+                <p>+90 533 702 14 88</p>
+                <p>selin@kuzeytekstil.com</p>
+              </div>
+            </div>
+            {[
+              "top-[-5px] left-[-5px] border-t-2 border-l-2 rounded-tl-md",
+              "top-[-5px] right-[-5px] border-t-2 border-r-2 rounded-tr-md",
+              "bottom-[-5px] left-[-5px] border-b-2 border-l-2 rounded-bl-md",
+              "bottom-[-5px] right-[-5px] border-b-2 border-r-2 rounded-br-md",
+            ].map((c) => (
+              <span key={c} className={`absolute size-3 border-white ${c}`} />
+            ))}
+            <span className="absolute inset-x-1 top-[88%] h-px bg-white/80 shadow-[0_0_6px_1px_rgba(255,255,255,0.6)]" />
+          </div>
+          <div className="absolute inset-x-0 bottom-3 flex justify-center">
+            <span className="size-8 rounded-full border-2 border-white/90 p-[3px]">
+              <span className="block size-full rounded-full bg-white" />
+            </span>
+          </div>
+        </Phone>
+        <div className="w-[9.6rem] rounded-xl bg-white p-3 shadow-[0_20px_40px_-24px_rgba(0,0,0,0.35)]">
+          <p className="text-[9px] font-semibold">Okunan bilgiler</p>
+          <div className="mt-2 space-y-1.5 text-[8.5px]">
+            {[
+              ["Ad", "Selin Yıldız"],
+              ["Unvan", "Satın Alma Müdürü"],
+              ["Şirket", "Kuzey Tekstil"],
+              ["Telefon", "0533 702 14 88"],
+            ].map(([k, v]) => (
+              <div key={k} className="flex items-center gap-1.5">
+                <Check />
+                <span className="w-8 shrink-0 text-neutral-400">{k}</span>
+                <span className="truncate text-neutral-900">{v}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-2.5 rounded-md bg-neutral-950 py-1.5 text-center text-[8.5px] font-medium text-white">
+            Kişilere kaydet
+          </div>
         </div>
       </div>
     </Frame>
   );
 }
 
-function QrGlyph() {
-  // A decorative, non-scannable pattern.
-  const cells = Array.from({ length: 81 }, (_, i) => ((i * 37 + (i % 7) * 11) % 5 < 2 ? 1 : 0));
+function Qr({ text, className }: { text: string; className?: string }) {
+  // A real, scannable QR code drawn as one SVG path.
+  const qr = QRCode.create(text, { errorCorrectionLevel: "M" });
+  const n = qr.modules.size;
+  let d = "";
+  for (let y = 0; y < n; y++)
+    for (let x = 0; x < n; x++) if (qr.modules.get(x, y)) d += `M${x} ${y}h1v1h-1z`;
   return (
-    <svg viewBox="0 0 9 9" className="size-16 rounded bg-white p-1">
-      {cells.map((on, i) =>
-        on ? <rect key={i} x={i % 9} y={Math.floor(i / 9)} width="1" height="1" /> : null,
-      )}
-      {[
-        [0, 0],
-        [6, 0],
-        [0, 6],
-      ].map(([x, y]) => (
-        <g key={`${x}-${y}`}>
-          <rect x={x} y={y} width="3" height="3" fill="black" />
-          <rect x={x! + 0.6} y={y! + 0.6} width="1.8" height="1.8" fill="white" />
-          <rect x={x! + 1.1} y={y! + 1.1} width="0.8" height="0.8" fill="black" />
-        </g>
-      ))}
+    <svg viewBox={`-2 -2 ${n + 4} ${n + 4}`} className={className} shapeRendering="crispEdges">
+      <rect x="-2" y="-2" width={n + 4} height={n + 4} fill="#fff" />
+      <path d={d} fill="#0a0a0a" />
     </svg>
   );
 }
@@ -136,17 +198,47 @@ function QrGlyph() {
 function WalletMock() {
   return (
     <Frame>
-      <div className="w-full max-w-[14rem] rounded-2xl bg-[#111] p-4 text-white shadow-[0_24px_44px_-20px_rgba(0,0,0,0.6)]">
-        <div className="flex items-center justify-between text-[11px] font-semibold">
-          <span>Dijivizit</span>
-          <span className="text-[9px] font-normal text-neutral-400">Cüzdan</span>
+      <Phone>
+        <div className="absolute inset-0 bg-neutral-100" />
+        <div className="absolute inset-x-0 top-0 px-2.5 pt-6">
+          <p className="text-[11px] font-bold tracking-tight">Cüzdan</p>
         </div>
-        <p className="mt-4 text-[17px] font-semibold">Elif Kaya</p>
-        <p className="text-[10px] text-neutral-400">İç Mimar · Kaya Tasarım</p>
-        <div className="mt-4 flex justify-center">
-          <QrGlyph />
+        {/* Other cards peeking behind the pass. */}
+        <div className="absolute inset-x-2 top-[2.6rem] h-10 rounded-[7px] bg-gradient-to-br from-[#2b5876] to-[#4e4376]" />
+        <div className="absolute inset-x-2 top-[3.6rem] h-10 rounded-[7px] bg-gradient-to-br from-[#c0392b] to-[#8e2a20]" />
+        <div className="absolute inset-x-2 top-[4.6rem] bottom-2 rounded-[8px] bg-[#111] p-2 text-white shadow-[0_-4px_12px_rgba(0,0,0,0.25)]">
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-1 text-[7.5px] font-semibold">
+              <span className="size-2.5">
+                <svg viewBox="0 0 24 24" width="100%" height="100%">
+                  <rect x="2" y="2" width="20" height="20" rx="6" fill="#fff" />
+                  <circle cx="8.6" cy="12" r="1.35" fill="#111" />
+                  <g fill="none" stroke="#111" strokeWidth="1.6" strokeLinecap="round">
+                    <path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4" />
+                    <path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2" />
+                  </g>
+                </svg>
+              </span>
+              Dijivizit
+            </span>
+          </div>
+          <p className="mt-2 text-[11px] leading-tight font-semibold">Elif Kaya</p>
+          <div className="mt-1.5 grid grid-cols-2 gap-1 text-[5.5px] leading-tight">
+            <div>
+              <p className="tracking-wider text-neutral-400">UNVAN</p>
+              <p className="text-[6.5px]">İç Mimar</p>
+            </div>
+            <div>
+              <p className="tracking-wider text-neutral-400">ŞİRKET</p>
+              <p className="text-[6.5px]">Kaya Tasarım</p>
+            </div>
+          </div>
+          <div className="mt-2 flex flex-col items-center gap-1">
+            <Qr text="https://dijivizit.com" className="size-[4.3rem] rounded-[3px]" />
+            <p className="text-[5.5px] text-neutral-400">Okutun, kartım açılsın</p>
+          </div>
         </div>
-      </div>
+      </Phone>
     </Frame>
   );
 }
