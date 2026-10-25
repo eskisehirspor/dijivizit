@@ -14,7 +14,7 @@ export const LEGAL_ENTITY = {
 } as const;
 
 /** Bump when a text changes materially; stored with each signup's consent. */
-export const LEGAL_VERSION = "2026-10-23";
+export const LEGAL_VERSION = "2026-10-25";
 
 export type LegalSlug = "kvkk" | "gizlilik" | "kullanim-kosullari";
 
@@ -129,7 +129,8 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
         items: [
           "Oturum çerezleri: giriş yaptığınızda oturumunuzu sürdürmek için zorunlu çerezler kullanılır. Bunlar olmadan panel çalışmaz.",
           "Ziyaretçi kimliği: kart sayfasında, aynı ziyaretçinin tekrar eden görüntülemelerini ayırt etmek için tarayıcı depolamasında rastgele bir kimlik saklanır. Kişisel bilgi içermez ve tarayıcınızdan silebilirsiniz.",
-          "Reklam, yeniden hedefleme veya üçüncü taraf takip çerezi kullanılmaz.",
+          "Tanıtım sitesi (dijivizit.com): yalnızca çerez bildiriminde onay verirseniz Google Analytics ve Google Ads ölçüm çerezleri kullanılır. Ziyaret ettiğiniz sayfalar ve sipariş talebi gibi işlemler anonim olarak ölçülür. Onay vermezseniz bu çerezler yüklenmez; tercihinizi tarayıcı depolamasını silerek değiştirebilirsiniz.",
+          "Kart sayfalarında ve panelde reklam, yeniden hedefleme veya üçüncü taraf takip çerezi kullanılmaz.",
         ],
       },
       {

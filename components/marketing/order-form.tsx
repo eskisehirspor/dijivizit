@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { Check, Loader2 } from "lucide-react";
 
+import { trackLead } from "@/lib/analytics";
 import { submitOrderRequestAction, type OrderFormState } from "@/app/actions/order-request";
 import { CONTACT } from "@/lib/contact";
 import { FINISHES, type FinishId } from "@/lib/orders/finishes";
@@ -49,6 +50,10 @@ export function OrderForm({ initialFinish }: { initialFinish: FinishId }) {
   const [finish, setFinish] = useState<FinishId>(initialFinish);
   const [startedAt] = useState(() => Date.now());
   const errors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
+
+  useEffect(() => {
+    if (state.status === "success") trackLead(finish);
+  }, [state.status, finish]);
 
   if (state.status === "success") {
     return (
