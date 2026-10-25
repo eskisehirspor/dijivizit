@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { AppScreens } from "@/components/marketing/app-screens";
+import { FeatureShowcase } from "@/components/marketing/feature-showcase";
 import { ContactDetails } from "@/components/marketing/contact-details";
 import { FinishPicker } from "@/components/marketing/finish-picker";
 import { LifestyleImage } from "@/components/marketing/lifestyle-image";
@@ -204,6 +205,24 @@ export default function HomePage() {
             </p>
           </div>
           <AppScreens />
+        </div>
+      </section>
+
+      <section id="ozellikler" className="scroll-mt-20 border-t border-border/60">
+        <div className="mx-auto w-full max-w-6xl px-6 py-28 sm:py-36">
+          <div className="flex max-w-2xl flex-col gap-4">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">
+              Kart verildikten sonra
+            </p>
+            <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
+              Tanışma kartla bitmez.
+            </h2>
+            <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
+              Dijivizit yalnızca bilginizi vermez. Karşınızdakinin bilgisini de alır, hatırlatır ve
+              ekibinizle birlikte yönetmenizi sağlar.
+            </p>
+          </div>
+          <FeatureShowcase />
         </div>
       </section>
 

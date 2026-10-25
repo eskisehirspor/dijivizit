@@ -4,7 +4,7 @@
 export const USE_CASES = [
   {
     title: "Kurumsal ekipler",
-    body: "Tüm ekibe aynı tasarımda kurumsal NFC kartvizit. Biri ayrıldığında ya da unvanı değiştiğinde kart değil, profil güncellenir.",
+    body: "Tüm ekibe aynı tasarımda kurumsal NFC kartvizit. Ekip panelinden kartları yönetin; biri ayrıldığında kartı yeni çalışana devredin, kart değişmez.",
   },
   {
     title: "Satış ve emlak",
@@ -25,6 +25,8 @@ export const COMPARISON = [
   ["Paylaşım", "Elden ele, kaybolur", "NFC dokunuş veya QR kod"],
   ["İçerik", "Ad, telefon, e-posta", "Telefon, WhatsApp, sosyal, IBAN, belgeler"],
   ["Rehbere kayıt", "Elle yazılır", "Tek dokunuşla"],
+  ["Karşı tarafın bilgisi", "Siz de kart istersiniz", "Bilgisini kartınıza bırakır"],
+  ["Takip", "Unutulur", "Hatırlatma ve hazır WhatsApp mesajı"],
   ["Ömür", "Bir baskı dönemi", "Yıllarca aynı kart"],
 ] as const;
 
@@ -58,8 +60,16 @@ export const FAQ = [
     a: "Siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Hepsinde adın ve logon lazerle kazınır, NFC ve QR aynı şekilde çalışır.",
   },
   {
+    q: "Karşımdakinin bilgilerini de alabilir miyim?",
+    a: 'Evet. Kartını açan kişi "Bilgilerimi bırak" ile adını, telefonunu ve e-postasını sana bırakır; kişi listene düşer ve sana e-posta gelir. Kâğıt kartvizit verenlerinkini de fotoğrafını çekerek tarayabilirsin.',
+  },
+  {
+    q: "Tanıştığım kişileri takip etmemi hatırlatır mı?",
+    a: "Evet. Her kişiye not ve takip tarihi ekleyebilirsin. Günü gelince sabah e-postana hatırlatma gelir; tek dokunuşla hazır yazılmış WhatsApp mesajını gönderirsin.",
+  },
+  {
     q: "Ekibim için toplu kartvizit alabilir miyim?",
-    a: "Evet. Kurumsal NFC kartvizit siparişleri için merhaba@dijivizit.com adresine yaz; ekibinin sayısına ve kaplama tercihine göre dönüş yapalım.",
+    a: "Evet. Ekip panelinden şirket kartlarını yönetir, çalışanlarına atarsın; biri ayrılınca kartı yeni kişiye devredersin. Kurumsal siparişler için merhaba@dijivizit.com adresine yaz.",
   },
 ] as const;
 

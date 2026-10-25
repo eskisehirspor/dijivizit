@@ -26,6 +26,12 @@ export function SiteHeader() {
             Giriş yap
           </a>
           <Link
+            href="/#ozellikler"
+            className="hidden rounded-full px-4 py-2 text-sm font-medium text-neutral-800 transition-colors hover:bg-white/50 sm:inline-flex"
+          >
+            Özellikler
+          </Link>
+          <Link
             href="/rehber"
             className="hidden rounded-full px-4 py-2 text-sm font-medium text-neutral-800 transition-colors hover:bg-white/50 sm:inline-flex"
           >
