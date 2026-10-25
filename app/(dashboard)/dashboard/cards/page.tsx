@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import { AppleWalletButton } from "@/components/cards/apple-wallet-button";
 import { CardList, NewCardForm } from "@/components/cards/card-list";
 import { CopyUrlButton } from "@/components/dashboard/copy-url-button";
 import { listOwnCards } from "@/lib/dal/cards";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
+import { getAppleWalletConfig } from "@/lib/wallet/apple";
 
 export async function generateMetadata() {
   const t = await getTranslations("cards");
@@ -14,11 +16,13 @@ export async function generateMetadata() {
 }
 
 export default async function CardsPage() {
-  const [t, profile, cards] = await Promise.all([
+  const [t, profile, cards, wallet] = await Promise.all([
     getTranslations("cards"),
     getOwnProfile(),
     listOwnCards(),
+    getAppleWalletConfig(),
   ]);
+  const walletEnabled = Boolean(wallet) && Boolean(profile?.is_published);
   const base = clientEnv.NEXT_PUBLIC_SITE_URL;
   const mainUrl = profile ? `${base}${routes.publicCard(profile.public_id)}` : null;
 
@@ -41,9 +45,17 @@ export default async function CardsPage() {
         <section className="flex flex-col gap-3 rounded-lg border border-border/60 p-6">
           <h2 className="text-sm font-medium">{t("mainTitle")}</h2>
           <p className="text-xs text-pretty text-muted-foreground">{t("mainBody")}</p>
+          {walletEnabled ? (
+            <p className="text-xs text-pretty text-muted-foreground">{t("walletHint")}</p>
+          ) : null}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="font-mono text-sm break-all">{mainUrl}</p>
-            <CopyUrlButton url={mainUrl} />
+            <div className="flex flex-wrap items-center gap-2">
+              {walletEnabled && profile ? (
+                <AppleWalletButton slug={profile.public_id} label={t("wallet")} className="h-10" />
+              ) : null}
+              <CopyUrlButton url={mainUrl} />
+            </div>
           </div>
         </section>
       ) : null}
@@ -54,7 +66,12 @@ export default async function CardsPage() {
           <p className="text-xs text-pretty text-muted-foreground">{t("personalBody")}</p>
         </div>
         <NewCardForm />
-        <CardList cards={cards.personal} baseUrl={base} mode="personal" />
+        <CardList
+          cards={cards.personal}
+          baseUrl={base}
+          mode="personal"
+          walletEnabled={walletEnabled}
+        />
       </section>
 
       {cards.team.length > 0 ? (
@@ -63,7 +80,12 @@ export default async function CardsPage() {
             <h2 className="text-sm font-medium">{t("teamTitle")}</h2>
             <p className="text-xs text-pretty text-muted-foreground">{t("teamBody")}</p>
           </div>
-          <CardList cards={cards.team} baseUrl={base} mode="assigned" />
+          <CardList
+            cards={cards.team}
+            baseUrl={base}
+            mode="assigned"
+            walletEnabled={walletEnabled}
+          />
         </section>
       ) : null}
     </div>

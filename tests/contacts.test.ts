@@ -96,3 +96,18 @@ describe("format helpers", () => {
     expect(addDays("2026-10-31", 1)).toBe("2026-11-01");
   });
 });
+
+describe("card scan parsing", async () => {
+  const { parseScanResponse } = await import("@/lib/contacts/scan");
+  it("reads the JSON even with extra text and picks the first phone", () => {
+    const r = parseScanResponse(
+      'Sonuç:\n{"fullName":"Ayşe Yılmaz","title":"Satış Müdürü","company":"Acme","phones":["0532 111 22 33","0212 000 00 00"],"emails":["AYSE@ACME.COM"],"website":"","address":""}',
+    );
+    expect(r.fullName).toBe("Ayşe Yılmaz");
+    expect(r.phone).toBe("0532 111 22 33");
+    expect(r.email).toBe("ayse@acme.com");
+  });
+  it("returns empty fields on garbage", () => {
+    expect(parseScanResponse("no json").fullName).toBe("");
+  });
+});

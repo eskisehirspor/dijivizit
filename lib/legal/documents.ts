@@ -87,6 +87,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
           "Supabase (veritabanı, dosya depolama, kimlik doğrulama) — Singapur",
           "Cloudflare (web sunucusu, güvenlik ve kötüye kullanım önleme) — küresel ağ, ABD merkezli",
           "Resend (davet, sipariş ve bildirim e-postaları) — ABD",
+          "Anthropic (yalnızca kartvizit tarama özelliğini kullandığınızda, fotoğraftaki bilgileri okumak için; fotoğraf saklanmaz) — ABD",
           "Google (Google ile giriş yaparsanız; tanıtım sitesinde yalnızca onay verirseniz Google Analytics ve Google Ads)",
         ],
       },
@@ -110,6 +111,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
         items: [
           `Başvurularınızı ${LEGAL_ENTITY.email} adresine iletebilirsiniz. Talebiniz en geç 30 gün içinde ücretsiz olarak yanıtlanır.`,
           "Profil bilgilerinizi istediğiniz zaman panelden düzenleyebilir, hesabınızı Ayarlar sayfasından silebilirsiniz.",
+          "Bir ekibe katıldığınızda ekip yöneticileri adınızı, e-posta adresinizi, size atanan şirket kartlarının görüntülenme sayılarını ve bu kartlardan bırakılan iletişim bilgilerini görebilir. Kişisel kartlarınızın verilerini göremez.",
         ],
       },
     ],

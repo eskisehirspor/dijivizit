@@ -1,4 +1,4 @@
-import { Download, Plus, Search } from "lucide-react";
+import { Camera, Download, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
@@ -47,6 +47,12 @@ export default async function ContactsPage({
             <Link href={routes.contactNew}>
               <Plus aria-hidden="true" className="size-4" />
               {t("new")}
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="h-10">
+            <Link href={routes.scanCard}>
+              <Camera aria-hidden="true" className="size-4" />
+              {t("scan")}
             </Link>
           </Button>
           <Button asChild variant="outline" className="h-10">

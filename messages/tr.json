@@ -975,7 +975,8 @@
       "noteEmpty": "Not boş olamaz.",
       "date": "Geçerli bir tarih seçin."
     },
-    "edit": "Bilgileri düzenle"
+    "edit": "Bilgileri düzenle",
+    "scan": "Kartvizit tara"
   },
   "cards": {
     "title": "Kartlarım",
@@ -1010,7 +1011,9 @@
       "count": "Tek seferde en fazla 50 kart oluşturabilirsiniz.",
       "limit": "Kart oluşturulamadı. En fazla 10 ek kart ekleyebilirsiniz.",
       "failed": "İşlem yapılamadı. Lütfen tekrar deneyin."
-    }
+    },
+    "wallet": "Apple Cüzdan'a ekle",
+    "walletHint": "Kartınızı iPhone'unuzdaki Cüzdan'a ekleyin: fiziksel kart yanınızda değilken QR'ı gösterin, karşınızdaki okutsun."
   },
   "team": {
     "title": "Ekip",
@@ -1063,6 +1066,27 @@
       "inviteInvalid": "Davet geçersiz veya süresi dolmuş.",
       "lastOwner": "İşlem yapılamadı. Ekipte en az bir sahip kalmalı.",
       "failed": "İşlem yapılamadı. Lütfen tekrar deneyin."
+    }
+  },
+  "scan": {
+    "title": "Kartvizit tara",
+    "subtitle": "Aldığınız kâğıt kartvizitin fotoğrafını çekin; ad, unvan, şirket, telefon ve e-posta otomatik doldurulsun. Kontrol edip kaydedin.",
+    "back": "Tüm kişiler",
+    "pickTitle": "Kartvizitin fotoğrafını çekin",
+    "pickBody": "Kartı düz bir zemine koyun, ışık yansımasın, yazılar okunur olsun.",
+    "pick": "Fotoğraf çek veya seç",
+    "again": "Başka kart tara",
+    "reading": "Okunuyor…",
+    "previewAlt": "Taranan kartvizit",
+    "privacy": "Fotoğraf yalnızca okunmak için işlenir, saklanmaz.",
+    "checkTitle": "Bilgileri kontrol edin",
+    "checkBody": "Okunan bilgileri düzeltin, isterseniz nerede tanıştığınızı ve etiket ekleyin.",
+    "errors": {
+      "unavailable": "Kartvizit tarama henüz açık değil.",
+      "rateLimited": "Çok hızlı tarama yapıldı. Bir dakika sonra tekrar deneyin.",
+      "image": "Fotoğraf okunamadı. Başka bir fotoğraf deneyin.",
+      "nothing": "Bu fotoğrafta kartvizit bilgisi bulunamadı. Daha yakından ve net çekmeyi deneyin.",
+      "failed": "Kart şu an okunamadı. Lütfen tekrar deneyin."
     }
   }
 }

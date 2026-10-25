@@ -71,12 +71,24 @@ jobs:
           SUPABASE_SECRET_KEY_VALUE: ${{ secrets.SUPABASE_SECRET_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           INVITE_OWNER_EMAILS: ${{ secrets.INVITE_OWNER_EMAILS }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          APPLE_PASS_TYPE_ID: ${{ secrets.APPLE_PASS_TYPE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_PASS_CERT: ${{ secrets.APPLE_PASS_CERT }}
+          APPLE_PASS_KEY: ${{ secrets.APPLE_PASS_KEY }}
+          APPLE_WWDR_CERT: ${{ secrets.APPLE_WWDR_CERT }}
         run: |
           node -e '
             const out = {
               SUPABASE_SECRET_KEY: process.env.SUPABASE_SECRET_KEY_VALUE,
               RESEND_API_KEY: process.env.RESEND_API_KEY,
               INVITE_OWNER_EMAILS: process.env.INVITE_OWNER_EMAILS,
+              ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+              APPLE_PASS_TYPE_ID: process.env.APPLE_PASS_TYPE_ID,
+              APPLE_TEAM_ID: process.env.APPLE_TEAM_ID,
+              APPLE_PASS_CERT: process.env.APPLE_PASS_CERT,
+              APPLE_PASS_KEY: process.env.APPLE_PASS_KEY,
+              APPLE_WWDR_CERT: process.env.APPLE_WWDR_CERT,
             };
             for (const k of Object.keys(out)) if (!out[k]) delete out[k];
             require("fs").writeFileSync("secrets.json", JSON.stringify(out));

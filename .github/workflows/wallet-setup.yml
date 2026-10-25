@@ -1,0 +1,50 @@
+name: Apple Wallet setup
+
+# One-time: creates the pass-signing private key inside the runner, stores it
+# (service-role only) in Supabase integration_tokens together with Apple's WWDR
+# G4 certificate, and saves a CSR there for upload to Apple Developer. The key
+# is never printed. Re-running keeps an existing key.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 5
+    env:
+      SUPABASE_URL: https://mtspxgxgtvivkrbvlbuq.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+    steps:
+      - name: Create key, CSR and WWDR certificate
+        run: |
+          set -euo pipefail
+          api() { curl -fsS "$SUPABASE_URL/rest/v1/$1" -H "apikey: $SUPABASE_SECRET_KEY" -H "Content-Type: application/json" "${@:2}"; }
+          existing=$(api "integration_tokens?name=eq.apple_pass_key&select=name")
+          umask 077
+          if [ "$existing" = "[]" ]; then
+            openssl genrsa -out key.pem 2048 2>/dev/null
+            echo "new key created"
+          else
+            echo "key already exists; reusing it for the CSR"
+            api "integration_tokens?name=eq.apple_pass_key&select=token" | python3 -c "import sys,json;print(json.load(sys.stdin)[0]['token'])" > key.pem
+          fi
+          openssl req -new -key key.pem -out pass.csr -subj "/emailAddress=darbum26@gmail.com/CN=Dijivizit Wallet/C=TR"
+          curl -fsSL https://www.apple.com/certificateauthority/AppleWWDRCAG4.cer -o wwdr.cer
+          openssl x509 -inform DER -in wwdr.cer -out wwdr.pem
+          python3 - <<'PY'
+          import json
+          rows = [
+            {"name": "apple_pass_key", "token": open("key.pem").read()},
+            {"name": "apple_pass_csr", "token": open("pass.csr").read()},
+            {"name": "apple_wwdr_cert", "token": open("wwdr.pem").read()},
+          ]
+          open("rows.json", "w").write(json.dumps(rows))
+          PY
+          api "integration_tokens?on_conflict=name" -X POST \
+            -H "Prefer: resolution=merge-duplicates,return=minimal" --data @rows.json
+          rm -f key.pem rows.json
+          echo "stored key, CSR and WWDR certificate"

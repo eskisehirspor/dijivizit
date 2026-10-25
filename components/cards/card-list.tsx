@@ -14,6 +14,7 @@ import {
   renameCardAction,
   setCardActiveAction,
 } from "@/app/actions/cards";
+import { AppleWalletButton } from "@/components/cards/apple-wallet-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -70,11 +71,13 @@ export function CardList({
   baseUrl,
   mode,
   members = [],
+  walletEnabled = false,
 }: {
   cards: CardListItem[];
   baseUrl: string;
   mode: "personal" | "team" | "assigned";
   members?: Member[];
+  walletEnabled?: boolean;
 }) {
   const t = useTranslations("cards");
   if (cards.length === 0) {
@@ -83,7 +86,14 @@ export function CardList({
   return (
     <ul className="flex flex-col gap-3">
       {cards.map((card) => (
-        <CardRow key={card.id} card={card} baseUrl={baseUrl} mode={mode} members={members} />
+        <CardRow
+          key={card.id}
+          card={card}
+          baseUrl={baseUrl}
+          mode={mode}
+          members={members}
+          walletEnabled={walletEnabled && mode !== "team" && card.is_active}
+        />
       ))}
     </ul>
   );
@@ -94,11 +104,13 @@ function CardRow({
   baseUrl,
   mode,
   members,
+  walletEnabled,
 }: {
   card: CardListItem;
   baseUrl: string;
   mode: "personal" | "team" | "assigned";
   members: Member[];
+  walletEnabled: boolean;
 }) {
   const t = useTranslations("cards");
   const { run, isPending } = useRun();
@@ -177,6 +189,7 @@ function CardRow({
           {t("stats", { views: card.views30d, contacts: card.contacts })}
         </p>
         <div className="flex flex-wrap items-center gap-2">
+          {walletEnabled ? <AppleWalletButton slug={card.slug} label={t("wallet")} /> : null}
           <Button
             type="button"
             variant="outline"

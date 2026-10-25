@@ -11,6 +11,7 @@ export const routes = {
   cardPreview: "/dashboard/preview",
   invites: "/dashboard/invites",
   cards: "/dashboard/cards",
+  appleWallet: (slug: string) => `/dashboard/wallet/${slug}`,
   team: "/dashboard/team",
   scanCard: "/dashboard/contacts/scan",
   contacts: "/dashboard/contacts",
