@@ -185,7 +185,9 @@
       "viewPublicDescription": "Kartınızın ziyaretçilere nasıl göründüğünü görün.",
       "viewPublicDisabled": "Profil yayında değil. Yayınladıktan sonra görüntüleyebilirsiniz.",
       "share": "Paylaş",
-      "shareDescription": "Bağlantı ve QR kod ile paylaşın."
+      "shareDescription": "Bağlantı ve QR kod ile paylaşın.",
+      "contacts": "Kişiler",
+      "contactsDescription": "Kartınızdan bilgi bırakanlar, notlar ve takip hatırlatmaları."
     },
     "invites": {
       "nav": "Davet kodları",
@@ -407,6 +409,12 @@
       "publishedTitle": "Önizleme",
       "publishedBody": "Kartın yayında. Ziyaretçiler tam olarak bunu görüyor; bu sayfada görüntüleme sayılmaz.",
       "back": "Panele dön"
+    },
+    "due": {
+      "title": "Bugün takip edilecekler",
+      "overdue": "Gecikti",
+      "today": "Bugün",
+      "all": "Tüm kişiler"
     }
   },
   "card": {
@@ -461,7 +469,32 @@
         "skills": "Yetenekler"
       }
     },
-    "footer": "<brand>Dijivizit</brand> ile oluşturuldu · <privacy>Gizlilik</privacy>"
+    "footer": "<brand>Dijivizit</brand> ile oluşturuldu · <privacy>Gizlilik</privacy>",
+    "leave": {
+      "trigger": "Bilgilerimi bırak",
+      "title": "Bilgilerinizi bırakın",
+      "description": "{name} sizi geri arasın ya da size yazsın. Bilgileriniz yalnızca kart sahibine iletilir.",
+      "descriptionNoName": "Kart sahibi sizi geri arasın ya da size yazsın. Bilgileriniz yalnızca kart sahibine iletilir.",
+      "fullName": "Ad soyad",
+      "phone": "Telefon",
+      "email": "E-posta",
+      "company": "Şirket (isteğe bağlı)",
+      "message": "Not (isteğe bağlı)",
+      "messagePlaceholder": "Örn. Fuarda tanıştık, teklif almak istiyorum.",
+      "reachableHint": "Telefon veya e-postadan en az birini yazın.",
+      "consent": "Bilgilerimin bu kartın sahibiyle paylaşılmasını ve onun kişi listesinde saklanmasını kabul ediyorum. <link>Aydınlatma metni</link>",
+      "submit": "Gönder",
+      "sending": "Gönderiliyor…",
+      "successTitle": "Bilgileriniz iletildi",
+      "successBody": "Kart sahibi en kısa sürede sizinle iletişime geçecek. Dilerseniz kartı rehberinize de kaydedin.",
+      "close": "Kapat",
+      "errors": {
+        "expired": "Form süresi doldu ya da çok hızlı gönderildi. Lütfen tekrar deneyin.",
+        "rateLimited": "Çok fazla deneme yapıldı. Lütfen bir dakika sonra tekrar deneyin.",
+        "form": "Lütfen işaretli alanları kontrol edin.",
+        "failed": "Bilgileriniz şu an iletilemedi. Lütfen daha sonra tekrar deneyin."
+      }
+    }
   },
   "profile": {
     "edit": {
@@ -857,5 +890,87 @@
       "weak": "Bu şifre çok zayıf ya da daha önce sızdırılmış. Başka bir şifre seç.",
       "failed": "İşlem tamamlanamadı. Lütfen tekrar dene."
     }
+  },
+  "contacts": {
+    "title": "Kişiler",
+    "subtitle": "Kartınızdan bilgi bırakanlar ve elle eklediğiniz kişiler. Not alın, takip hatırlatması kurun.",
+    "new": "Kişi ekle",
+    "export": "CSV indir",
+    "search": "İsim, şirket, telefon veya e-posta ara",
+    "searchSubmit": "Ara",
+    "allTags": "Tümü",
+    "empty": "Henüz kişi yok. Kartınızı paylaştığınızda ziyaretçiler \"Bilgilerimi bırak\" ile size ulaşabilir; tanıştığınız birini de elle ekleyebilirsiniz.",
+    "emptySearch": "Aramanızla eşleşen kişi yok.",
+    "count": "{count} kişi",
+    "fromCard": "Karttan",
+    "next": "Takip: {date}",
+    "back": "Tüm kişiler",
+    "newTitle": "Yeni kişi",
+    "newSubtitle": "Tanıştığınız birini ekleyin. Telefon veya e-postadan en az biri gerekli.",
+    "fields": {
+      "fullName": "Ad soyad",
+      "phone": "Telefon",
+      "email": "E-posta",
+      "company": "Şirket",
+      "title": "Unvan",
+      "metWhere": "Nerede tanıştınız",
+      "metWherePlaceholder": "Örn. İstanbul Mobilya Fuarı",
+      "tags": "Etiketler",
+      "tagsPlaceholder": "müşteri, tedarikçi, fuar",
+      "tagsHint": "Virgülle ayırın, en fazla 10."
+    },
+    "save": "Kaydet",
+    "saved": "Kaydedildi",
+    "create": "Kişiyi ekle",
+    "delete": "Kişiyi sil",
+    "deleteConfirm": "Bu kişi, notları ve hatırlatmaları kalıcı olarak silinsin mi?",
+    "deleteYes": "Sil",
+    "message": "Bıraktığı not",
+    "source": {
+      "card_form": "Kartınızdan bilgi bıraktı",
+      "manual": "Elle eklendi"
+    },
+    "actions": {
+      "call": "Ara",
+      "whatsapp": "WhatsApp'tan yaz",
+      "email": "E-posta gönder"
+    },
+    "notes": {
+      "title": "Notlar",
+      "placeholder": "Görüşmede ne konuştunuz, neye ihtiyacı var?",
+      "add": "Not ekle",
+      "empty": "Henüz not yok.",
+      "delete": "Notu sil"
+    },
+    "followUps": {
+      "title": "Takip hatırlatmaları",
+      "hint": "Seçtiğiniz gün sabah e-postanıza hatırlatma gelir.",
+      "dueOn": "Tarih",
+      "note": "Ne yapılacak (isteğe bağlı)",
+      "notePlaceholder": "Teklifi gönder",
+      "add": "Hatırlatma kur",
+      "empty": "Kurulu hatırlatma yok.",
+      "done": "Tamamlandı",
+      "undo": "Geri al",
+      "delete": "Sil",
+      "quick": {
+        "tomorrow": "Yarın",
+        "week": "1 hafta",
+        "month": "1 ay"
+      }
+    },
+    "errors": {
+      "form": "Lütfen işaretli alanları kontrol edin.",
+      "saveFailed": "Kaydedilemedi. Lütfen tekrar deneyin.",
+      "name": "Ad soyad en az 2 karakter olmalı.",
+      "phone": "Geçerli bir telefon numarası yazın.",
+      "email": "Geçerli bir e-posta adresi yazın.",
+      "reachable": "Telefon veya e-postadan en az birini yazın.",
+      "consent": "Devam etmek için onay vermelisiniz.",
+      "tooLong": "Bu alan çok uzun.",
+      "noteEmpty": "Not boş olamaz.",
+      "date": "Geçerli bir tarih seçin."
+    },
+    "edit": "Bilgileri düzenle"
   }
 }

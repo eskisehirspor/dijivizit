@@ -34,3 +34,7 @@ export type DocumentUpdate = TablesUpdate<"documents">;
 
 export type AnalyticsEventRow = Tables<"analytics_events">;
 export type AnalyticsEventInsert = TablesInsert<"analytics_events">;
+
+export type ContactRow = Tables<"contacts">;
+export type ContactNoteRow = Tables<"contact_notes">;
+export type FollowUpRow = Tables<"follow_ups">;

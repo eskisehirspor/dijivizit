@@ -11,7 +11,7 @@ function formatPhone(e164: string): string {
   return `0${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6, 8)} ${d.slice(8)}`;
 }
 
-function layout(input: { title: string; preheader: string; body: string; logoUrl: string }) {
+export function layout(input: { title: string; preheader: string; body: string; logoUrl: string }) {
   return `<!doctype html>
 <html lang="tr">
 <head>
@@ -45,7 +45,7 @@ function layout(input: { title: string; preheader: string; body: string; logoUrl
 </html>`;
 }
 
-function rows(pairs: [string, string][]): string {
+export function rows(pairs: [string, string][]): string {
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid ${COLORS.border};">
 ${pairs
   .map(

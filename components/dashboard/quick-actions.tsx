@@ -9,6 +9,7 @@ import {
   Share2,
   Sparkles,
   UserRound,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
@@ -33,6 +34,7 @@ export async function QuickActions({
   documentsHref,
   analyticsHref,
   shareHref,
+  contactsHref,
   publicHref,
 }: {
   editHref: string;
@@ -44,11 +46,19 @@ export async function QuickActions({
   documentsHref: string;
   analyticsHref: string;
   shareHref: string;
+  contactsHref: string;
   publicHref: string | null;
 }) {
   const t = await getTranslations("dashboard.actions");
 
   const actions: QuickAction[] = [
+    {
+      key: "contacts",
+      title: t("contacts"),
+      description: t("contactsDescription"),
+      icon: <Users aria-hidden="true" className="size-4" />,
+      href: contactsHref,
+    },
     {
       key: "edit",
       title: t("editProfile"),

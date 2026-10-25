@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { User } from "lucide-react";
 
+import { LeaveContact } from "@/components/card/leave-contact";
 import { iconForLinkPlatform } from "@/components/card/platform-icons";
 import { PublicBankCard } from "@/components/card/public-bank-card";
 import { PublicBillingCard } from "@/components/card/public-billing-card";
@@ -114,14 +115,17 @@ export async function PublicCardView({
             </p>
           ) : null}
 
-          <Button asChild className="h-14 w-full rounded-lg px-6 text-base">
-            <a
-              href={preview ? undefined : routes.publicVcard(card.publicId)}
-              aria-disabled={preview || undefined}
-            >
-              {t("saveContact")}
-            </a>
-          </Button>
+          <div className="flex w-full flex-col gap-3">
+            <Button asChild className="h-14 w-full rounded-lg px-6 text-base">
+              <a
+                href={preview ? undefined : routes.publicVcard(card.publicId)}
+                aria-disabled={preview || undefined}
+              >
+                {t("saveContact")}
+              </a>
+            </Button>
+            {preview ? null : <LeaveContact publicId={card.publicId} ownerName={card.fullName} />}
+          </div>
         </div>
 
         {contactLinks.length > 0 ? (

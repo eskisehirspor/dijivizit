@@ -1,0 +1,37 @@
+name: Follow-up reminders
+
+# Every morning at 08:00 Istanbul (05:00 UTC), email card owners the contacts
+# they planned to follow up with today.
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only log, send nothing"
+        type: boolean
+        default: true
+
+concurrency:
+  group: follow-up-reminders
+  cancel-in-progress: false
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Send reminders
+        env:
+          SUPABASE_URL: https://mtspxgxgtvivkrbvlbuq.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: node scripts/follow-up-reminders.mjs

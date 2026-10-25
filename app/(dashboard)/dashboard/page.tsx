@@ -5,7 +5,9 @@ import { CopyUrlButton } from "@/components/dashboard/copy-url-button";
 import { PublishToggle } from "@/components/dashboard/publish-toggle";
 import { QuickActions } from "@/components/dashboard/quick-actions";
 import { Badge } from "@/components/ui/badge";
+import { formatDay, istanbulToday } from "@/lib/contacts/format";
 import { getAuthenticatedUser } from "@/lib/dal/auth";
+import { listOwnDueFollowUps } from "@/lib/dal/contacts";
 import { viewerIsInviteOwner } from "@/lib/dal/invitations";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { clientEnv } from "@/lib/env/client";
@@ -17,10 +19,12 @@ export async function generateMetadata() {
 }
 
 export default async function DashboardPage() {
-  const [t, profile, user] = await Promise.all([
+  const today = istanbulToday();
+  const [t, profile, user, due] = await Promise.all([
     getTranslations(),
     getOwnProfile(),
     getAuthenticatedUser(),
+    listOwnDueFollowUps(today),
   ]);
 
   const publicPath = profile ? routes.publicCard(profile.public_id) : null;
@@ -82,6 +86,42 @@ export default async function DashboardPage() {
         )}
       </section>
 
+      {due.length > 0 ? (
+        <section className="flex flex-col gap-4 rounded-lg border border-border/60 p-6">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="text-sm font-medium">{t("dashboard.due.title")}</h2>
+            <Link
+              href={routes.contacts}
+              className="text-xs text-muted-foreground underline-offset-4 hover:underline"
+            >
+              {t("dashboard.due.all")}
+            </Link>
+          </div>
+          <ul className="flex flex-col gap-2">
+            {due.map((item) => (
+              <li key={item.id}>
+                <Link
+                  href={routes.contact(item.contactId)}
+                  className="flex items-center justify-between gap-4 rounded-lg px-3 py-2 transition-colors hover:bg-muted/40"
+                >
+                  <span className="min-w-0 truncate text-sm">
+                    <span className="font-medium">{item.contactName}</span>
+                    {item.note ? (
+                      <span className="text-muted-foreground"> · {item.note}</span>
+                    ) : null}
+                  </span>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {item.dueOn < today
+                      ? `${t("dashboard.due.overdue")} · ${formatDay(item.dueOn, today)}`
+                      : t("dashboard.due.today")}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       <QuickActions
         editHref={routes.profileEdit}
         avatarHref={routes.profileAvatar}
@@ -92,6 +132,7 @@ export default async function DashboardPage() {
         documentsHref={routes.profileDocuments}
         analyticsHref={routes.analytics}
         shareHref={routes.share}
+        contactsHref={routes.contacts}
         publicHref={isPublished ? publicPath : profile ? routes.cardPreview : null}
       />
     </div>
