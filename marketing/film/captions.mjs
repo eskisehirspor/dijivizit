@@ -47,7 +47,10 @@ const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
 for (const [id, body] of Object.entries(CAPS)) {
   const tmp = path.join(FONTS, `_cap.html`);
-  fs.writeFileSync(tmp, `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body><div class="wrap">${body}</div></body></html>`);
+  fs.writeFileSync(
+    tmp,
+    `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body><div class="wrap">${body}</div></body></html>`,
+  );
   await p.goto(`file://${tmp}`);
   await p.evaluate(() => document.fonts.ready);
   await p.screenshot({ path: path.join(OUT, `${id}.png`), omitBackground: true });
