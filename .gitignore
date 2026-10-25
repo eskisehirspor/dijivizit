@@ -47,3 +47,4 @@ next-env.d.ts
 .dev.vars
 __pycache__/
 marketing/instagram/node_modules/
+marketing/instagram/out/
