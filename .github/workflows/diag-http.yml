@@ -1,12 +1,21 @@
-name: Diagnose HTTP redirect
+name: Diagnose live site
 on: workflow_dispatch
 jobs:
   curl:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
-          for u in http://www.dijivizit.com/ https://dijivizit.com/rehber https://dijivizit.com/rehber/metal-kartvizit https://dijivizit.com/rehber/ahsap-kartvizit.jpg https://dijivizit.com/rehber/ahsap-kartvizit https://dijivizit.com/sitemap.xml; do
-            h=$(curl -sS -m 20 -o /dev/null -D - "$u" | grep -iE "^(HTTP|location|server)" | tr -d '\r' | tr '\n' ' ')
-            echo "::notice::$u => $h"
+          home=$(curl -sS -m 30 https://dijivizit.com/)
+          for t in "Tanışma kartla bitmez" "Kartınız iPhone" "Kâğıt kartvizit, saniyede kişi" "Özellikler"; do
+            if grep -q "$t" <<<"$home"; then echo "::notice::found: $t"; else echo "::error::missing: $t"; fi
           done
-          echo "::notice::DNS www A=$(dig +short www.dijivizit.com A | tr '\n' ' ') AAAA=$(dig +short www.dijivizit.com AAAA | tr '\n' ' ')"
+          for f in public/landing/lifestyle/hand.webp public/landing/finishes/black.webp public/landing/desktop/0100.webp public/rehber/metal-kartvizit.jpg public/ig/posts/04-koleksiyon-black.jpg; do
+            u="https://dijivizit.com/${f#public/}"
+            live=$(curl -sS -m 30 "$u" | sha256sum | cut -c1-12); repo=$(sha256sum "$f" | cut -c1-12)
+            [ "$live" = "$repo" ] && echo "::notice::same: $u" || echo "::error::differs: $u ($live vs $repo)"
+          done
+          h=$(curl -sS -m 20 -o /dev/null -D - https://dijivizit.com/ | grep -iE "^(content-security-policy|x-frame-options|referrer-policy)" | tr -d '\r' | tr '\n' ' ')
+          echo "::notice::headers: $h"
+          c=$(curl -sS -m 20 -o /dev/null -w "%{http_code}" https://app.dijivizit.com/p/cuRuTp81gnM)
+          echo "::notice::public card status: $c"
