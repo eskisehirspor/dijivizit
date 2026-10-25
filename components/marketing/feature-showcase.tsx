@@ -195,50 +195,118 @@ function Qr({ text, className }: { text: string; className?: string }) {
   );
 }
 
+function Glass({ children, className = "" }: { children: ReactNode; className?: string }) {
+  // iOS "Liquid Glass" control: translucent fill, blur, bright rim.
+  return (
+    <span
+      className={`flex items-center justify-center border border-white/25 bg-white/12 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-md ${className}`}
+    >
+      {children}
+    </span>
+  );
+}
+
 function WalletMock() {
   return (
-    <Frame>
-      <Phone>
-        <div className="absolute inset-0 bg-neutral-100" />
-        <div className="absolute inset-x-0 top-0 px-2.5 pt-6">
-          <p className="text-[11px] font-bold tracking-tight">Cüzdan</p>
-        </div>
-        {/* Other cards peeking behind the pass. */}
-        <div className="absolute inset-x-2 top-[2.6rem] h-10 rounded-[7px] bg-gradient-to-br from-[#2b5876] to-[#4e4376]" />
-        <div className="absolute inset-x-2 top-[3.6rem] h-10 rounded-[7px] bg-gradient-to-br from-[#c0392b] to-[#8e2a20]" />
-        <div className="absolute inset-x-2 top-[4.6rem] bottom-2 rounded-[8px] bg-[#111] p-2 text-white shadow-[0_-4px_12px_rgba(0,0,0,0.25)]">
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1 text-[7.5px] font-semibold">
-              <span className="size-2.5">
-                <svg viewBox="0 0 24 24" width="100%" height="100%">
-                  <rect x="2" y="2" width="20" height="20" rx="6" fill="#fff" />
-                  <circle cx="8.6" cy="12" r="1.35" fill="#111" />
-                  <g fill="none" stroke="#111" strokeWidth="1.6" strokeLinecap="round">
-                    <path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4" />
-                    <path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2" />
-                  </g>
-                </svg>
+    <Frame dark>
+      <div className="relative h-[17rem] w-[9.4rem] shrink-0 rounded-[1.9rem] bg-neutral-800 p-[4px] shadow-[0_30px_50px_-20px_rgba(0,0,0,0.8),inset_0_0_0_1px_rgba(255,255,255,0.12)]">
+        <div className="relative h-full w-full overflow-hidden rounded-[1.65rem] bg-[radial-gradient(120%_70%_at_50%_0%,#2a2a30,#0b0b0d_60%)]">
+          {/* Status bar and Dynamic Island */}
+          <div className="absolute inset-x-0 top-0 flex items-center justify-between px-3.5 pt-[7px] text-[6.5px] font-semibold text-white">
+            <span>9:41</span>
+            <span className="flex items-center gap-[3px]">
+              <span className="flex items-end gap-[1px]">
+                {[3, 4, 5, 6].map((h) => (
+                  <span
+                    key={h}
+                    className="w-[1.5px] rounded-[1px] bg-white"
+                    style={{ height: h }}
+                  />
+                ))}
               </span>
-              Dijivizit
+              <span className="h-[5px] w-[10px] rounded-[2px] border border-white/70 p-[1px]">
+                <span className="block h-full w-3/4 rounded-[1px] bg-white" />
+              </span>
             </span>
           </div>
-          <p className="mt-2 text-[11px] leading-tight font-semibold">Elif Kaya</p>
-          <div className="mt-1.5 grid grid-cols-2 gap-1 text-[5.5px] leading-tight">
-            <div>
-              <p className="tracking-wider text-neutral-400">UNVAN</p>
-              <p className="text-[6.5px]">İç Mimar</p>
-            </div>
-            <div>
-              <p className="tracking-wider text-neutral-400">ŞİRKET</p>
-              <p className="text-[6.5px]">Kaya Tasarım</p>
+          <span className="absolute top-[6px] left-1/2 h-[10px] w-[34px] -translate-x-1/2 rounded-full bg-black" />
+
+          {/* Glass navigation */}
+          <div className="absolute inset-x-2.5 top-[22px] flex items-center justify-between">
+            <Glass className="h-[15px] rounded-full px-2 text-[6.5px] font-semibold">Bitti</Glass>
+            <Glass className="size-[15px] rounded-full text-[8px] leading-none">⋯</Glass>
+          </div>
+
+          {/* Poster-style pass */}
+          <div className="absolute inset-x-2 top-[44px] h-[9.6rem] overflow-hidden rounded-[13px] shadow-[0_10px_24px_rgba(0,0,0,0.55)]">
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,#3a3a3f_0%,#151517_45%,#26262a_70%,#0e0e10_100%)]" />
+            <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.05)_0px,rgba(255,255,255,0.05)_1px,transparent_1px,transparent_3px)] opacity-40" />
+            <div className="absolute inset-0 bg-[radial-gradient(80%_50%_at_30%_10%,rgba(255,255,255,0.18),transparent_70%)]" />
+            <div className="relative flex h-full flex-col p-2.5 text-white">
+              <div className="flex items-start justify-between">
+                <span className="flex items-center gap-1 text-[8px] font-semibold tracking-tight">
+                  <span className="size-3">
+                    <svg viewBox="0 0 24 24" width="100%" height="100%">
+                      <rect x="2" y="2" width="20" height="20" rx="6" fill="#fff" />
+                      <circle cx="8.6" cy="12" r="1.35" fill="#151517" />
+                      <g fill="none" stroke="#151517" strokeWidth="1.6" strokeLinecap="round">
+                        <path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4" />
+                        <path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2" />
+                      </g>
+                    </svg>
+                  </span>
+                  Dijivizit
+                </span>
+                <span className="text-right text-[4.5px] leading-tight tracking-wider text-white/60">
+                  KARTVİZİT
+                  <span className="block text-[6px] tracking-normal text-white">Dijital</span>
+                </span>
+              </div>
+              <p className="mt-2.5 text-[13px] leading-none font-semibold tracking-tight">
+                Elif Kaya
+              </p>
+              <p className="mt-1 text-[6px] text-white/70">İç Mimar · Kaya Tasarım</p>
+              <div className="mt-auto flex flex-col items-center gap-[3px]">
+                <span className="rounded-[6px] bg-white p-[3px]">
+                  <Qr text="https://dijivizit.com" className="size-[3.6rem]" />
+                </span>
+                <span className="text-[5px] text-white/60">Okutun, kartım açılsın</span>
+              </div>
             </div>
           </div>
-          <div className="mt-2 flex flex-col items-center gap-1">
-            <Qr text="https://dijivizit.com" className="size-[4.3rem] rounded-[3px]" />
-            <p className="text-[5.5px] text-neutral-400">Okutun, kartım açılsın</p>
+
+          {/* Featured actions under the pass */}
+          <div className="absolute inset-x-2 top-[202px] grid grid-cols-2 gap-1.5">
+            {[
+              ["Profili aç", "M2 8h12M8 2a9 9 0 0 1 0 12M8 2a9 9 0 0 0 0 12"],
+              [
+                "Rehbere kaydet",
+                "M6 7a2.5 2.5 0 1 0 0-.01M1.5 13c.6-2.4 2.3-3.5 4.5-3.5s3.9 1.1 4.5 3.5M12.5 5v4M10.5 7h4",
+              ],
+            ].map(([label, d]) => (
+              <Glass key={label} className="h-[22px] gap-[3px] rounded-[9px] text-[5.6px] font-medium">
+                <svg
+                  viewBox="0 0 16 16"
+                  className="size-[8px]"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                >
+                  {label === "Profili aç" ? <circle cx="8" cy="8" r="6" /> : null}
+                  <path d={d} />
+                </svg>
+                {label}
+              </Glass>
+            ))}
           </div>
+
+          {/* Other passes stacked at the bottom */}
+          <div className="absolute inset-x-3 bottom-[10px] h-3 rounded-t-[9px] bg-gradient-to-r from-[#1f4e79] to-[#2e6aa3]" />
+          <div className="absolute inset-x-2 bottom-[-4px] h-3 rounded-t-[9px] bg-gradient-to-r from-[#b23b2e] to-[#d8603f]" />
+          <span className="absolute bottom-[3px] left-1/2 h-[3px] w-12 -translate-x-1/2 rounded-full bg-white/80" />
         </div>
-      </Phone>
+      </div>
     </Frame>
   );
 }
