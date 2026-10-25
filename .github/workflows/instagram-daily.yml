@@ -13,6 +13,10 @@ on:
         description: "Only print what would be published"
         type: boolean
         default: true
+      skip_story:
+        description: "Publish the feed post only"
+        type: boolean
+        default: false
       force_index:
         description: "Publish this entry number instead of today's (optional)"
         default: ""
@@ -52,4 +56,5 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
           FORCE_INDEX: ${{ inputs.force_index }}
+          SKIP_STORY: ${{ inputs.skip_story && '1' || '' }}
         run: node scripts/instagram-publish.mjs
