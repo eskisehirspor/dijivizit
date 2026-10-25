@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          for u in http://www.dijivizit.com/ http://dijivizit.com/ https://www.dijivizit.com/ http://app.dijivizit.com/; do
+          for u in http://www.dijivizit.com/ https://dijivizit.com/rehber https://dijivizit.com/rehber/metal-kartvizit https://dijivizit.com/rehber/ahsap-kartvizit.jpg https://dijivizit.com/rehber/ahsap-kartvizit https://dijivizit.com/sitemap.xml; do
             h=$(curl -sS -m 20 -o /dev/null -D - "$u" | grep -iE "^(HTTP|location|server)" | tr -d '\r' | tr '\n' ' ')
             echo "::notice::$u => $h"
           done
