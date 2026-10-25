@@ -3,7 +3,7 @@ name: Instagram daily post
 # Publishing is manual: a daily Claude scheduled task shows the owner the next
 # post on their phone and dispatches this workflow (dry_run=false,
 # force_index=N) only after they approve it. The weekly schedule only
-# refreshes the long-lived token.
+# refreshes the long-lived token, which lives in Supabase (integration_tokens).
 on:
   schedule:
     - cron: "0 16 * * 0"
@@ -15,6 +15,10 @@ on:
         default: true
       skip_story:
         description: "Publish the feed post only"
+        type: boolean
+        default: false
+      refresh_token:
+        description: "Refresh the Instagram token now"
         type: boolean
         default: false
       force_index:
@@ -30,6 +34,7 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -37,23 +42,17 @@ jobs:
         with:
           node-version: 22
 
-      - name: Refresh access token (Sundays)
-        if: github.event_name == 'schedule'
+      - name: Load or refresh access token
         env:
+          SUPABASE_URL: https://mtspxgxgtvivkrbvlbuq.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
-        run: |
-          if [ -z "$GH_TOKEN" ]; then echo "::warning::GH_ADMIN_TOKEN missing; token not refreshed"; exit 0; fi
-          new=$(curl -fsS "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=$IG_ACCESS_TOKEN" | python3 -c "import sys,json;print(json.load(sys.stdin)['access_token'])")
-          echo "::add-mask::$new"
-          gh secret set IG_ACCESS_TOKEN --repo "$GITHUB_REPOSITORY" --body "$new"
-          echo "token refreshed"
+        run: node scripts/ig-token.mjs ${{ (github.event_name == 'schedule' || inputs.refresh_token) && 'refresh' || 'load' }}
 
       - name: Publish
         if: github.event_name == 'workflow_dispatch'
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
           FORCE_INDEX: ${{ inputs.force_index }}
           SKIP_STORY: ${{ inputs.skip_story && '1' || '' }}
