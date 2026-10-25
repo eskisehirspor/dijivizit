@@ -91,7 +91,7 @@ function FollowUpMock() {
 
 function Phone({ children }: { children: ReactNode }) {
   return (
-    <div className="relative h-[15.5rem] w-[8.6rem] shrink-0 rounded-[1.6rem] bg-neutral-950 p-[5px] shadow-[0_24px_40px_-18px_rgba(0,0,0,0.55)]">
+    <div className="relative h-[18.6rem] w-[8.6rem] shrink-0 self-start rounded-[1.6rem] bg-neutral-950 p-[5px] shadow-[0_24px_40px_-18px_rgba(0,0,0,0.55)]">
       <div className="relative h-full w-full overflow-hidden rounded-[1.3rem]">{children}</div>
       <span className="absolute top-[9px] left-1/2 h-[9px] w-10 -translate-x-1/2 rounded-full bg-neutral-950" />
     </div>
@@ -116,7 +116,7 @@ function Check() {
 function ScanMock() {
   return (
     <Frame>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 self-start">
         <Phone>
           {/* Camera view: a printed card on a desk, framed by scan guides. */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_35%,#8b7b68,#4a3f33_70%)]" />
@@ -124,7 +124,7 @@ function ScanMock() {
             <span>Kartvizit tara</span>
             <span>Otomatik</span>
           </div>
-          <div className="absolute top-[34%] left-1/2 w-[86%] -translate-x-1/2 rotate-[-3deg]">
+          <div className="absolute top-[24%] left-1/2 w-[86%] -translate-x-1/2 rotate-[-3deg]">
             <div className="aspect-[1.75] rounded-[3px] bg-[#fbfaf6] p-[7px] shadow-[0_6px_14px_rgba(0,0,0,0.45)]">
               <div className="flex items-center justify-between">
                 <span className="text-[7px] font-bold tracking-wide text-[#1d3557]">KUZEY</span>
@@ -149,7 +149,7 @@ function ScanMock() {
             ))}
             <span className="absolute inset-x-1 top-[88%] h-px bg-white/80 shadow-[0_0_6px_1px_rgba(255,255,255,0.6)]" />
           </div>
-          <div className="absolute inset-x-0 bottom-3 flex justify-center">
+          <div className="absolute inset-x-0 bottom-4 flex justify-center">
             <span className="size-8 rounded-full border-2 border-white/90 p-[3px]">
               <span className="block size-full rounded-full bg-white" />
             </span>
@@ -207,49 +207,53 @@ function Glass({ children, className = "" }: { children: ReactNode; className?: 
 }
 
 function WalletMock() {
+  // A real iPhone proportion (≈ 9:19.5) at ~0.6 pt scale, cropped by the frame.
   return (
-    <Frame dark>
-      <div className="relative h-[17rem] w-[9.4rem] shrink-0 rounded-[1.9rem] bg-neutral-800 p-[4px] shadow-[0_30px_50px_-20px_rgba(0,0,0,0.8),inset_0_0_0_1px_rgba(255,255,255,0.12)]">
-        <div className="relative h-full w-full overflow-hidden rounded-[1.65rem] bg-[radial-gradient(120%_70%_at_50%_0%,#2a2a30,#0b0b0d_60%)]">
-          {/* Status bar and Dynamic Island */}
-          <div className="absolute inset-x-0 top-0 flex items-center justify-between px-3.5 pt-[7px] text-[6.5px] font-semibold text-white">
+    <div
+      aria-hidden="true"
+      className="relative h-72 overflow-hidden rounded-3xl bg-[radial-gradient(120%_90%_at_50%_0%,#2b2b31,#0a0a0b_70%)]"
+    >
+      <div className="absolute top-5 left-1/2 h-[31rem] w-[14.6rem] -translate-x-1/2 rounded-[2.6rem] bg-[#1c1c1e] p-[6px] shadow-[0_0_0_1px_rgba(255,255,255,0.14),0_30px_60px_-10px_rgba(0,0,0,0.8)]">
+        <div className="relative h-full w-full overflow-hidden rounded-[2.25rem] bg-black">
+          {/* Status bar + Dynamic Island */}
+          <div className="absolute inset-x-0 top-0 flex items-center justify-between px-6 pt-[13px] text-[10px] font-semibold text-white">
             <span>9:41</span>
-            <span className="flex items-center gap-[3px]">
-              <span className="flex items-end gap-[1px]">
-                {[3, 4, 5, 6].map((h) => (
+            <span className="flex items-center gap-1">
+              <span className="flex items-end gap-[1.5px]">
+                {[4, 5.5, 7, 8.5].map((h) => (
                   <span
                     key={h}
-                    className="w-[1.5px] rounded-[1px] bg-white"
+                    className="w-[2.5px] rounded-[1px] bg-white"
                     style={{ height: h }}
                   />
                 ))}
               </span>
-              <span className="h-[5px] w-[10px] rounded-[2px] border border-white/70 p-[1px]">
-                <span className="block h-full w-3/4 rounded-[1px] bg-white" />
+              <span className="h-[8px] w-[16px] rounded-[3px] border border-white/60 p-[1px]">
+                <span className="block h-full w-[78%] rounded-[1.5px] bg-white" />
               </span>
             </span>
           </div>
-          <span className="absolute top-[6px] left-1/2 h-[10px] w-[34px] -translate-x-1/2 rounded-full bg-black" />
+          <span className="absolute top-[10px] left-1/2 h-[17px] w-[56px] -translate-x-1/2 rounded-full bg-[#050505]" />
 
-          {/* Glass navigation */}
-          <div className="absolute inset-x-2.5 top-[22px] flex items-center justify-between">
-            <Glass className="h-[15px] rounded-full px-2 text-[6.5px] font-semibold">Bitti</Glass>
-            <Glass className="size-[15px] rounded-full text-[8px] leading-none">⋯</Glass>
+          {/* Liquid Glass navigation */}
+          <div className="absolute inset-x-3 top-[40px] flex items-center justify-between">
+            <Glass className="h-[26px] rounded-full px-3 text-[10px] font-semibold">Bitti</Glass>
+            <Glass className="size-[26px] rounded-full text-[13px] leading-none">⋯</Glass>
           </div>
 
           {/* Poster-style pass */}
-          <div className="absolute inset-x-2 top-[44px] h-[9.6rem] overflow-hidden rounded-[13px] shadow-[0_10px_24px_rgba(0,0,0,0.55)]">
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,#3a3a3f_0%,#151517_45%,#26262a_70%,#0e0e10_100%)]" />
-            <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.05)_0px,rgba(255,255,255,0.05)_1px,transparent_1px,transparent_3px)] opacity-40" />
-            <div className="absolute inset-0 bg-[radial-gradient(80%_50%_at_30%_10%,rgba(255,255,255,0.18),transparent_70%)]" />
-            <div className="relative flex h-full flex-col p-2.5 text-white">
+          <div className="absolute inset-x-[10px] top-[76px] h-[12.6rem] overflow-hidden rounded-[20px] shadow-[0_14px_30px_rgba(0,0,0,0.6)]">
+            <div className="absolute inset-0 bg-[linear-gradient(140deg,#3b3b40_0%,#17171a_42%,#29292d_68%,#0e0e10_100%)]" />
+            <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.045)_0px,rgba(255,255,255,0.045)_1px,transparent_1px,transparent_3px)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(80%_45%_at_25%_5%,rgba(255,255,255,0.2),transparent_70%)]" />
+            <div className="relative flex h-full flex-col p-3.5 text-white">
               <div className="flex items-start justify-between">
-                <span className="flex items-center gap-1 text-[8px] font-semibold tracking-tight">
-                  <span className="size-3">
+                <span className="flex items-center gap-1.5 text-[12px] font-semibold tracking-tight">
+                  <span className="size-[18px]">
                     <svg viewBox="0 0 24 24" width="100%" height="100%">
                       <rect x="2" y="2" width="20" height="20" rx="6" fill="#fff" />
-                      <circle cx="8.6" cy="12" r="1.35" fill="#151517" />
-                      <g fill="none" stroke="#151517" strokeWidth="1.6" strokeLinecap="round">
+                      <circle cx="8.6" cy="12" r="1.35" fill="#17171a" />
+                      <g fill="none" stroke="#17171a" strokeWidth="1.6" strokeLinecap="round">
                         <path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4" />
                         <path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2" />
                       </g>
@@ -257,57 +261,35 @@ function WalletMock() {
                   </span>
                   Dijivizit
                 </span>
-                <span className="text-right text-[4.5px] leading-tight tracking-wider text-white/60">
+                <span className="text-right text-[6.5px] leading-tight tracking-wider text-white/60">
                   KARTVİZİT
-                  <span className="block text-[6px] tracking-normal text-white">Dijital</span>
+                  <span className="block text-[9px] tracking-normal text-white">Dijital</span>
                 </span>
               </div>
-              <p className="mt-2.5 text-[13px] leading-none font-semibold tracking-tight">
+              <p className="mt-3 text-[21px] leading-none font-semibold tracking-tight">
                 Elif Kaya
               </p>
-              <p className="mt-1 text-[6px] text-white/70">İç Mimar · Kaya Tasarım</p>
-              <div className="mt-auto flex flex-col items-center gap-[3px]">
-                <span className="rounded-[6px] bg-white p-[3px]">
-                  <Qr text="https://dijivizit.com" className="size-[3.6rem]" />
+              <p className="mt-1.5 text-[9px] text-white/70">İç Mimar · Kaya Tasarım</p>
+              <div className="mt-auto flex flex-col items-center gap-1.5">
+                <span className="rounded-[10px] bg-white p-[5px]">
+                  <Qr text="https://dijivizit.com" className="size-[4.6rem]" />
                 </span>
-                <span className="text-[5px] text-white/60">Okutun, kartım açılsın</span>
+                <span className="text-[7.5px] text-white/60">Okutun, kartım açılsın</span>
               </div>
             </div>
           </div>
 
-          {/* Featured actions under the pass */}
-          <div className="absolute inset-x-2 top-[202px] grid grid-cols-2 gap-1.5">
-            {[
-              ["Profili aç", "M2 8h12M8 2a9 9 0 0 1 0 12M8 2a9 9 0 0 0 0 12"],
-              [
-                "Rehbere kaydet",
-                "M6 7a2.5 2.5 0 1 0 0-.01M1.5 13c.6-2.4 2.3-3.5 4.5-3.5s3.9 1.1 4.5 3.5M12.5 5v4M10.5 7h4",
-              ],
-            ].map(([label, d]) => (
-              <Glass key={label} className="h-[22px] gap-[3px] rounded-[9px] text-[5.6px] font-medium">
-                <svg
-                  viewBox="0 0 16 16"
-                  className="size-[8px]"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                >
-                  {label === "Profili aç" ? <circle cx="8" cy="8" r="6" /> : null}
-                  <path d={d} />
-                </svg>
+          {/* Featured actions (cropped by the frame on small tiles) */}
+          <div className="absolute inset-x-[10px] top-[286px] grid grid-cols-2 gap-2">
+            {["Profili aç", "Rehbere kaydet"].map((label) => (
+              <Glass key={label} className="h-[34px] rounded-[14px] text-[9px] font-medium">
                 {label}
               </Glass>
             ))}
           </div>
-
-          {/* Other passes stacked at the bottom */}
-          <div className="absolute inset-x-3 bottom-[10px] h-3 rounded-t-[9px] bg-gradient-to-r from-[#1f4e79] to-[#2e6aa3]" />
-          <div className="absolute inset-x-2 bottom-[-4px] h-3 rounded-t-[9px] bg-gradient-to-r from-[#b23b2e] to-[#d8603f]" />
-          <span className="absolute bottom-[3px] left-1/2 h-[3px] w-12 -translate-x-1/2 rounded-full bg-white/80" />
         </div>
       </div>
-    </Frame>
+    </div>
   );
 }
 
