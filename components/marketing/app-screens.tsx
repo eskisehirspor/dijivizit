@@ -28,7 +28,7 @@ const SCREENS = [
 /** Real screens of the app inside simple phone frames. */
 export function AppScreens() {
   return (
-    <ul className="-mx-6 mt-16 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 scroll-pl-6 pb-4 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
+    <ul className="-mx-6 mt-16 flex snap-x snap-mandatory scroll-pl-6 gap-6 overflow-x-auto px-6 pb-4 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
       {SCREENS.map((s) => (
         <li key={s.src} className="flex w-[15.5rem] shrink-0 snap-start flex-col gap-5 lg:w-auto">
           <div className="rounded-[2.6rem] bg-neutral-950 p-2.5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.45)]">
