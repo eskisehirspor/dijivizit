@@ -38,3 +38,6 @@ export type AnalyticsEventInsert = TablesInsert<"analytics_events">;
 export type ContactRow = Tables<"contacts">;
 export type ContactNoteRow = Tables<"contact_notes">;
 export type FollowUpRow = Tables<"follow_ups">;
+export type CardRow = Tables<"cards">;
+export type OrganizationRow = Tables<"organizations">;
+export type OrganizationInviteRow = Tables<"organization_invites">;

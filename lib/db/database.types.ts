@@ -39,6 +39,201 @@ export type Database = {
   }
   public: {
     Tables: {
+      cards: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          label: string | null
+          org_id: string | null
+          owner_id: string | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          org_id?: string | null
+          owner_id?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          org_id?: string | null
+          owner_id?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cards_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cards_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cards_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      integration_tokens: {
+        Row: {
+          name: string
+          refreshed_at: string
+          token: string
+        }
+        Insert: {
+          name: string
+          refreshed_at?: string
+          token: string
+        }
+        Update: {
+          name?: string
+          refreshed_at?: string
+          token?: string
+        }
+        Relationships: []
+      }
+      organization_invites: {
+        Row: {
+          accepted_at: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string | null
+          org_id: string
+          revoked_at: string | null
+          role: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          id?: string
+          invited_by?: string | null
+          org_id: string
+          revoked_at?: string | null
+          role?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string | null
+          org_id?: string
+          revoked_at?: string | null
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_invites_invited_by_fkey"
+            columns: ["invited_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_invites_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organization_members: {
+        Row: {
+          joined_at: string
+          org_id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          joined_at?: string
+          org_id: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          joined_at?: string
+          org_id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_members_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organizations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_notes: {
         Row: {
           body: string
@@ -80,6 +275,8 @@ export type Database = {
       }
       contacts: {
         Row: {
+          org_id: string | null
+          card_id: string | null
           company: string | null
           consent_at: string | null
           created_at: string
@@ -96,6 +293,8 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          org_id?: string | null
+          card_id?: string | null
           company?: string | null
           consent_at?: string | null
           created_at?: string
@@ -112,6 +311,8 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          org_id?: string | null
+          card_id?: string | null
           company?: string | null
           consent_at?: string | null
           created_at?: string
@@ -128,6 +329,20 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "contacts_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contacts_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "contacts_profile_id_fkey"
             columns: ["profile_id"]
@@ -226,6 +441,7 @@ export type Database = {
       }
       analytics_events: {
         Row: {
+          card_id: string | null
           city: string | null
           country: string | null
           created_at: string
@@ -238,6 +454,7 @@ export type Database = {
           visitor_id: string | null
         }
         Insert: {
+          card_id?: string | null
           city?: string | null
           country?: string | null
           created_at?: string
@@ -250,6 +467,7 @@ export type Database = {
           visitor_id?: string | null
         }
         Update: {
+          card_id?: string | null
           city?: string | null
           country?: string | null
           created_at?: string
@@ -262,6 +480,13 @@ export type Database = {
           visitor_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "analytics_events_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "cards"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "analytics_events_profile_id_fkey"
             columns: ["profile_id"]
@@ -588,6 +813,41 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_my_org_invites: {
+        Args: never
+        Returns: {
+          created_at: string
+          id: string
+          org_id: string
+          org_name: string
+          role: string
+        }[]
+      }
+      accept_org_invite: { Args: { p_invite_id: string }; Returns: string }
+      email_has_account: { Args: { p_email: string }; Returns: boolean }
+      get_org_members: {
+        Args: { p_org: string }
+        Returns: {
+          email: string
+          full_name: string
+          is_published: boolean
+          joined_at: string
+          public_id: string
+          role: string
+          title: string
+          user_id: string
+        }[]
+      }
+      is_org_admin: { Args: { p_org: string }; Returns: boolean }
+      is_org_member: { Args: { p_org: string }; Returns: boolean }
+      resolve_card: {
+        Args: { p_slug: string }
+        Returns: {
+          card_id: string
+          org_id: string
+          profile_id: string
+        }[]
+      }
       generate_public_id: { Args: { id_length?: number }; Returns: string }
       get_own_analytics_summary: { Args: never; Returns: Json }
       get_public_card: { Args: { p_public_id: string }; Returns: Json }

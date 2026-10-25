@@ -2,6 +2,7 @@
 
 import { Resend } from "resend";
 
+import { resolvePublicSlug } from "@/lib/dal/resolve-card";
 import { cardContactSchema } from "@/lib/contacts/validation";
 import { buildNewContactEmail, CONTACT_EMAIL_FROM } from "@/lib/email/contact";
 import { serverEnv } from "@/lib/env/server";
@@ -74,11 +75,14 @@ export async function submitCardContactAction(
   try {
     if (serverEnv.RESEND_API_KEY) {
       const admin = createAdminClient();
-      const { data: profile } = await admin
-        .from("profiles")
-        .select("id, full_name")
-        .eq("public_id", publicId)
-        .maybeSingle();
+      const resolved = await resolvePublicSlug(publicId);
+      const { data: profile } = resolved
+        ? await admin
+            .from("profiles")
+            .select("id, full_name")
+            .eq("id", resolved.profileId)
+            .maybeSingle()
+        : { data: null };
       const owner = profile ? (await admin.auth.admin.getUserById(profile.id)).data.user : null;
       if (owner?.email) {
         const mail = buildNewContactEmail({

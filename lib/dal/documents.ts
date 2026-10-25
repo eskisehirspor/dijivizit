@@ -1,5 +1,7 @@
 import "server-only";
 
+import { resolvePublicSlug } from "@/lib/dal/resolve-card";
+
 import { cache } from "react";
 
 import type { DocumentRow } from "@/lib/db/tables";
@@ -97,16 +99,12 @@ export async function getPublishedDocumentPath(
 ): Promise<string | null> {
   const supabase = createAdminClient();
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("id")
-    .eq("public_id", publicId)
-    .eq("is_published", true)
-    .maybeSingle();
+  const resolved = await resolvePublicSlug(publicId);
 
-  if (!profile) {
+  if (!resolved) {
     return null;
   }
+  const profile = { id: resolved.profileId };
 
   const { data } = await supabase
     .from("documents")

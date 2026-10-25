@@ -133,6 +133,8 @@ export default async function DashboardPage() {
         analyticsHref={routes.analytics}
         shareHref={routes.share}
         contactsHref={routes.contacts}
+        cardsHref={routes.cards}
+        teamHref={routes.team}
         publicHref={isPublished ? publicPath : profile ? routes.cardPreview : null}
       />
     </div>

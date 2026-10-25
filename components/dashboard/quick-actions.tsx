@@ -1,5 +1,7 @@
 import {
   Building2,
+  CreditCard,
+  UsersRound,
   ChartColumn,
   Eye,
   FileText,
@@ -35,6 +37,8 @@ export async function QuickActions({
   analyticsHref,
   shareHref,
   contactsHref,
+  cardsHref,
+  teamHref,
   publicHref,
 }: {
   editHref: string;
@@ -47,6 +51,8 @@ export async function QuickActions({
   analyticsHref: string;
   shareHref: string;
   contactsHref: string;
+  cardsHref: string;
+  teamHref: string;
   publicHref: string | null;
 }) {
   const t = await getTranslations("dashboard.actions");
@@ -58,6 +64,20 @@ export async function QuickActions({
       description: t("contactsDescription"),
       icon: <Users aria-hidden="true" className="size-4" />,
       href: contactsHref,
+    },
+    {
+      key: "cards",
+      title: t("cards"),
+      description: t("cardsDescription"),
+      icon: <CreditCard aria-hidden="true" className="size-4" />,
+      href: cardsHref,
+    },
+    {
+      key: "team",
+      title: t("team"),
+      description: t("teamDescription"),
+      icon: <UsersRound aria-hidden="true" className="size-4" />,
+      href: teamHref,
     },
     {
       key: "edit",
