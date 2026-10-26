@@ -44,8 +44,8 @@ Collection index (edition numeral), Statement (type + arcs), Photo (lifestyle,
 full bleed above, message below), Interface (real screenshot in a device
 outline, numbered notes), FAQ, Spec table, Steps, Numbers, Contact, Order.
 
-## Open facts to confirm
+## Confirmed facts
 
-- "Her kartın arkasında yedek bir QR kod bulunur" (post _qr-yedegi_, _teknik_)
-  is existing copy, kept as is; the rendered card back has no QR. Confirm the
-  physical card before posting.
+- Every card has a backup QR on the back (confirmed by Görkem, 2026-10-26).
+  Posts _qr-yedegi_ and _teknik_ say so in copy; the card renders stay as they
+  are and are not changed to show the QR.
