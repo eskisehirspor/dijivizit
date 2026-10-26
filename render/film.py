@@ -247,7 +247,7 @@ BUILDERS = {name: globals()[name] for name, _, _ in SHOTS}
 
 # Raise the camera and its aim so the subject sits lower in frame, leaving the
 # upper third (inside the Reels safe zone) clear for captions.
-LIFT = {"hook": 0.12, "spin": 0.12, "fan": 0.3, "tap": 0.5, "screen": 0.3, "end": 0.58}
+LIFT = {"hook": 0.12, "spin": 0.12, "fan": 0.0, "tap": 0.5, "screen": 0.3, "end": 0.58}
 
 
 def lift_view(dz):

@@ -9,9 +9,19 @@ on:
       samples:
         description: "Cycles samples per pixel"
         default: "64"
+      first:
+        description: "First frame to render (re-render part of the film)"
+        default: "0"
+      last:
+        description: "Last frame to render"
+        default: "659"
+      reuse_run:
+        description: "Run id whose frames fill in everything not rendered now (optional)"
+        default: ""
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   render:
@@ -31,12 +41,17 @@ jobs:
       - name: Render frames
         run: |
           # interleave so every shard gets a mix of cheap and expensive shots
-          frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 660, 16)))")
-          python3 render/film.py --out out --samples ${{ github.event.inputs.samples }} --frames "$frames"
+          frames=$(python3 -c "a,b=${{ inputs.first }},${{ inputs.last }}; print(','.join(str(f) for f in range(a + (${{ matrix.shard }} - a) % 16, b + 1, 16)))")
+          mkdir -p out
+          if [ -n "$frames" ]; then
+            python3 render/film.py --out out --samples ${{ inputs.samples }} --frames "$frames"
+          fi
+          touch out/.keep
       - uses: actions/upload-artifact@v4
         with:
           name: film-${{ matrix.shard }}
-          path: out/*.png
+          path: out/
+          include-hidden-files: true
           retention-days: 3
 
   publish:
@@ -46,16 +61,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Frames from an earlier run
+        if: inputs.reuse_run != ''
+        uses: actions/download-artifact@v4
+        with:
+          path: previous
+          pattern: film-*
+          run-id: ${{ inputs.reuse_run }}
+          github-token: ${{ github.token }}
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
       - name: Compose and encode
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          pip install pillow
-          mkdir -p frames && cp artifacts/film-*/*.png frames/
+          pip install pillow numpy scipy
+          mkdir -p frames
+          if [ -d previous ]; then cp previous/film-*/*.png frames/; fi
+          cp artifacts/film-*/*.png frames/ 2>/dev/null || true
           ls frames | wc -l
-          python3 marketing/film/compose.py frames dijivizit-reklam.mp4
+          python3 marketing/film/music.py music.wav
+          python3 marketing/film/compose.py frames dijivizit-reklam.mp4 --audio music.wav
           echo "::notice::$(ls -la dijivizit-reklam.mp4)"
       - name: Commit to instagram-assets
         run: |

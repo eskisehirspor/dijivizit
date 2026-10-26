@@ -4,7 +4,7 @@ Frames from render/film.py are transparent. Each one is laid on the paper
 ground (#F3F2EE) with a soft shadow, the signal rings are drawn at the tap
 point (render/film.py --project tap.json) and the type overlays are faded in.
 
-python3 marketing/film/compose.py FRAMES_DIR OUT.mp4 [--preview f,f,...]
+python3 marketing/film/compose.py FRAMES_DIR OUT.mp4 [--audio music.wav] [--preview f,f,...]
 """
 import json
 import os
@@ -99,7 +99,7 @@ def compose(f, src, caps, tap):
     return out.convert("RGB")
 
 
-def main(src, out, preview=None):
+def main(src, out, preview=None, audio=None):
     caps = {k: Image.open(os.path.join(HERE, "captions", f"{k}.png")).convert("RGBA") for k in CUES}
     tap = json.load(open(os.path.join(HERE, "tap.json")))
     if preview:
@@ -110,9 +110,10 @@ def main(src, out, preview=None):
     with tempfile.TemporaryDirectory() as tmp:
         for f in range(LAST + 1):
             compose(f, src, caps, tap).save(os.path.join(tmp, f"{f:04d}.png"))
+        sound = ["-i", audio, "-c:a", "aac", "-b:a", "192k", "-shortest"] if audio else []
         subprocess.run(
             [
-                "ffmpeg", "-y", "-framerate", str(FPS), "-i", os.path.join(tmp, "%04d.png"),
+                "ffmpeg", "-y", "-framerate", str(FPS), "-i", os.path.join(tmp, "%04d.png"), *sound,
                 "-c:v", "libx264", "-preset", "slow", "-crf", "16", "-pix_fmt", "yuv420p",
                 "-profile:v", "high", "-movflags", "+faststart", out,
             ],
@@ -125,4 +126,5 @@ if __name__ == "__main__":
         i = sys.argv.index("--preview")
         main(sys.argv[1], sys.argv[2], [int(v) for v in sys.argv[i + 1].split(",")])
     else:
-        main(sys.argv[1], sys.argv[2])
+        a = sys.argv.index("--audio") + 1 if "--audio" in sys.argv else None
+        main(sys.argv[1], sys.argv[2], audio=sys.argv[a] if a else None)
