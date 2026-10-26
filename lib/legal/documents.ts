@@ -56,7 +56,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
       {
         heading: "Kart ziyaretçileri için",
         paragraphs: [
-          "Bir Dijivizit kartını görüntüleyen ziyaretçilerin adı veya iletişim bilgisi alınmaz. Kart sahibine istatistik sunmak için tarayıcıda rastgele bir ziyaretçi kimliği saklanır ve görüntüleme ile tıklama (ör. telefon, WhatsApp, rehbere kaydet) olayları bu kimlikle kaydedilir.",
+          "Bir Dijivizit kartını görüntüleyen ziyaretçilerin adı veya iletişim bilgisi alınmaz. Kart sahibine istatistik sunmak için tarayıcıda rastgele bir ziyaretçi kimliği saklanır ve görüntüleme ile tıklama (ör. telefon, WhatsApp, rehbere kaydet) olayları bu kimlikle kaydedilir. Bu olaylarla birlikte IP adresinden yaklaşık olarak bulunan ülke ve şehir, cihaz türü (iPhone, Android, bilgisayar) ve kartın hangi siteden açıldığı da kaydedilir; IP adresinin kendisi saklanmaz.",
           'Ziyaretçi kartta "Bilgilerimi bırak" formunu kendi isteğiyle doldurursa; ad soyad, telefon ve/veya e-posta, varsa şirket ve mesaj yalnızca o kartın sahibine iletilir ve sahibinin kişi listesinde saklanır. Bu verilerin veri sorumlusu kart sahibidir; Dijivizit bu verileri kart sahibi adına barındıran veri işleyendir.',
         ],
       },

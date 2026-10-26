@@ -849,12 +849,17 @@ export type Database = {
         }[]
       }
       generate_public_id: { Args: { id_length?: number }; Returns: string }
+      get_own_analytics_detail: { Args: { p_days?: number }; Returns: Json }
       get_own_analytics_summary: { Args: never; Returns: Json }
       get_public_card: { Args: { p_public_id: string }; Returns: Json }
       record_card_event: {
         Args: {
+          p_city?: string
+          p_country?: string
+          p_device?: string
           p_event_type: string
           p_public_id: string
+          p_source?: string
           p_visitor_id?: string
         }
         Returns: boolean

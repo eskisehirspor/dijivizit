@@ -26,6 +26,7 @@ export const trackAnalyticsEventSchema = z.object({
   publicId: z.string().refine(isValidPublicId, { message: "invalid_public_id" }),
   eventType: analyticsEventTypeSchema,
   visitorId: z.string().trim().min(1).max(64).nullable().optional(),
+  referrerHost: z.string().trim().max(253).nullable().optional(),
 });
 
 export type TrackAnalyticsEventInput = z.infer<typeof trackAnalyticsEventSchema>;
@@ -76,3 +77,31 @@ export const EMPTY_ANALYTICS_SUMMARY: AnalyticsSummary = {
   profileViewsMonth: 0,
   byType: {},
 };
+
+const n = z.number().int().nonnegative();
+const keyCount = z.object({ k: z.string(), n });
+
+export const analyticsDetailSchema = z.object({
+  days: n,
+  totals: z.object({
+    views: n,
+    visitors: n,
+    prevViews: n,
+    taps: n,
+    saves: n,
+    contacts: n,
+  }),
+  daily: z.array(z.object({ d: z.string(), v: n, u: n })),
+  heat: z.array(
+    z.object({ w: z.number().int().min(0).max(6), h: z.number().int().min(0).max(23), n }),
+  ),
+  cities: z.array(z.object({ city: z.string(), country: z.string().nullable(), n })),
+  countries: z.array(z.object({ country: z.string(), n })),
+  devices: z.array(keyCount),
+  sources: z.array(keyCount),
+  tracked: n,
+  actions: z.record(z.string(), n),
+  cards: z.array(z.object({ label: z.string().nullable(), slug: z.string(), n })),
+});
+
+export type AnalyticsDetail = z.infer<typeof analyticsDetailSchema>;

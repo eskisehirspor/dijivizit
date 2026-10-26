@@ -11,6 +11,7 @@ export async function trackAnalyticsEventAction(input: {
   publicId: string;
   eventType: string;
   visitorId?: string | null;
+  referrerHost?: string | null;
 }): Promise<void> {
   const parsed = trackAnalyticsEventSchema.safeParse(input);
   if (!parsed.success) {
@@ -22,6 +23,7 @@ export async function trackAnalyticsEventAction(input: {
       publicId: parsed.data.publicId,
       eventType: parsed.data.eventType,
       visitorId: parsed.data.visitorId ?? null,
+      referrerHost: parsed.data.referrerHost ?? null,
     });
   } catch {
     // Intentionally ignored — analytics must not surface errors in the UI.

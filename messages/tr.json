@@ -238,7 +238,7 @@
     },
     "analytics": {
       "title": "Analitik",
-      "subtitle": "Herkese açık kartınızdaki görüntülenme ve etkileşim özeti.",
+      "subtitle": "Kartınızı kimin, ne zaman, nereden açtığı ve ne yaptığı.",
       "backToDashboard": "Panele dön",
       "views": {
         "title": "Görüntülenmeler",
@@ -258,12 +258,86 @@
           "linkedin_click": "LinkedIn",
           "cv_open": "Özgeçmiş",
           "document_open": "Belge görüntüleme",
-          "vcard_download": "vCard indirme",
+          "vcard_download": "Rehbere kaydetme",
           "address_open": "Adres / harita",
           "share": "Paylaş menüsü",
           "copy_link": "Bağlantı kopyalama",
-          "qr_open": "QR kod"
+          "qr_open": "QR kod",
+          "wallet_add": "Cüzdan'a ekleme",
+          "contact_left": "Bilgi bırakma"
         }
+      },
+      "period": {
+        "label": "Dönem",
+        "days": "{days} gün"
+      },
+      "kpi": {
+        "views": "Görüntülenme",
+        "visitors": "Tekil ziyaretçi",
+        "saves": "Rehbere kaydeden",
+        "contacts": "Bilgi bırakan",
+        "vsPrev": "önceki {days} güne göre",
+        "noPrev": "önceki dönemde veri yok",
+        "ofVisitors": "ziyaretçilerin %{pct}'i",
+        "allTime": "Tüm zamanlar: {count} görüntülenme"
+      },
+      "daily": {
+        "title": "Günlük görüntülenme",
+        "tooltip": "{views} görüntülenme · {visitors} ziyaretçi",
+        "empty": "Bu dönemde görüntülenme yok."
+      },
+      "heat": {
+        "title": "Ne zaman bakıyorlar?",
+        "peak": "En yoğun saat: {day} {hour}:00",
+        "days": ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"],
+        "daysLong": ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"],
+        "cell": "{day} {hour}:00 · {count} görüntülenme",
+        "legendLow": "Az",
+        "legendHigh": "Çok"
+      },
+      "where": {
+        "title": "Nereden açıldı?",
+        "cities": "Şehirler",
+        "countries": "Ülkeler",
+        "empty": "Konum bilgisi 26 Ekim 2026'dan itibaren toplanıyor; yeni görüntülenmelerle burası dolacak.",
+        "note": "Konum, IP adresinden yaklaşık olarak bulunur; IP adresi saklanmaz."
+      },
+      "devices": {
+        "title": "Hangi telefonla?",
+        "ios": "iPhone",
+        "android": "Android",
+        "desktop": "Bilgisayar",
+        "other": "Diğer",
+        "empty": "Cihaz bilgisi yeni görüntülenmelerle toplanacak."
+      },
+      "sources": {
+        "title": "Nasıl geldiler?",
+        "direct": "Kart, QR veya bağlantı",
+        "instagram": "Instagram",
+        "whatsapp": "WhatsApp",
+        "linkedin": "LinkedIn",
+        "facebook": "Facebook",
+        "x": "X",
+        "google": "Google",
+        "telegram": "Telegram",
+        "email": "E-posta",
+        "empty": "Kaynak bilgisi yeni görüntülenmelerle toplanacak."
+      },
+      "funnel": {
+        "title": "Karttan müşteriye",
+        "views": "Kartı açtı",
+        "taps": "Bir bağlantıya dokundu",
+        "saves": "Rehbere kaydetti",
+        "contacts": "Bilgisini bıraktı",
+        "hint": "Görüntülenmelere oranla"
+      },
+      "actions": {
+        "title": "Neye dokundular?",
+        "empty": "Bu dönemde etkileşim yok."
+      },
+      "cards": {
+        "title": "Kartlara göre",
+        "unnamed": "Adsız kart"
       }
     },
     "share": {
