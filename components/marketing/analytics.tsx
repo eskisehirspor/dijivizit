@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-import { CONSENT_KEY, GA_MEASUREMENT_ID, setConsent } from "@/lib/analytics";
+import { CONSENT_KEY, GA_MEASUREMENT_ID, setConsent, trackPageView } from "@/lib/analytics";
 
 /**
  * GA4 with Google Consent Mode v2: everything starts denied, so no analytics
@@ -12,6 +13,18 @@ import { CONSENT_KEY, GA_MEASUREMENT_ID, setConsent } from "@/lib/analytics";
  */
 export function Analytics() {
   const [choice, setChoice] = useState<"granted" | "denied" | "unset" | null>(null);
+  const pathname = usePathname();
+  const firstPath = useRef(true);
+
+  // Meta Pixel page views on client-side navigation (the first is sent on load).
+  useEffect(() => {
+    if (firstPath.current) {
+      firstPath.current = false;
+      return;
+    }
+    if (choice === "granted") trackPageView();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only on navigation
+  }, [pathname]);
 
   useEffect(() => {
     let stored: string | null = null;
@@ -50,8 +63,8 @@ gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
           className="fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-xl flex-col gap-4 rounded-2xl border border-border/60 bg-background/95 p-5 text-sm shadow-lg backdrop-blur sm:flex-row sm:items-center"
         >
           <p className="flex-1 leading-relaxed text-muted-foreground">
-            Siteyi geliştirmek ve reklamlarımızın sonucunu ölçmek için Google Analytics çerezleri
-            kullanmak istiyoruz.{" "}
+            Siteyi geliştirmek ve reklamlarımızın sonucunu ölçmek için Google Analytics ve Meta
+            (Facebook, Instagram) çerezleri kullanmak istiyoruz.{" "}
             <Link
               href="/yasal/gizlilik"
               className="underline underline-offset-2 hover:text-foreground"

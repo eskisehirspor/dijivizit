@@ -89,6 +89,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
           "Resend (davet, sipariş ve bildirim e-postaları) — ABD",
           "Anthropic (yalnızca kartvizit tarama özelliğini kullandığınızda, fotoğraftaki bilgileri okumak için; fotoğraf saklanmaz) — ABD",
           "Google (Google ile giriş yaparsanız; tanıtım sitesinde yalnızca onay verirseniz Google Analytics ve Google Ads)",
+          "Meta Platforms (tanıtım sitesinde yalnızca onay verirseniz Meta Pikseli; Facebook ve Instagram reklamlarının sonucunu ölçmek için)",
         ],
       },
       {
@@ -148,7 +149,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
         items: [
           "Oturum çerezleri: giriş yaptığınızda oturumunuzu sürdürmek için zorunlu çerezler kullanılır. Bunlar olmadan panel çalışmaz.",
           "Ziyaretçi kimliği: kart sayfasında, aynı ziyaretçinin tekrar eden görüntülemelerini ayırt etmek için tarayıcı depolamasında rastgele bir kimlik saklanır. Kişisel bilgi içermez ve tarayıcınızdan silebilirsiniz.",
-          "Tanıtım sitesi (dijivizit.com): yalnızca çerez bildiriminde onay verirseniz Google Analytics ve Google Ads ölçüm çerezleri kullanılır. Ziyaret ettiğiniz sayfalar ve sipariş talebi gibi işlemler anonim olarak ölçülür. Onay vermezseniz bu çerezler yüklenmez; tercihinizi tarayıcı depolamasını silerek değiştirebilirsiniz.",
+          "Tanıtım sitesi (dijivizit.com): yalnızca çerez bildiriminde onay verirseniz Google Analytics, Google Ads ve Meta Pikseli (Facebook, Instagram) ölçüm çerezleri kullanılır. Ziyaret ettiğiniz sayfalar ve sipariş talebi gibi işlemler anonim olarak ölçülür. Onay vermezseniz bu çerezler yüklenmez; tercihinizi tarayıcı depolamasını silerek değiştirebilirsiniz.",
           "Kart sayfalarında ve panelde reklam, yeniden hedefleme veya üçüncü taraf takip çerezi kullanılmaz.",
         ],
       },
