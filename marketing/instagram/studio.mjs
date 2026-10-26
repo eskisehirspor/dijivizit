@@ -45,6 +45,18 @@ const MARK = (fg, cut) =>
 const ARCS = (color, w = 2) =>
   `<svg viewBox="0 0 200 200" width="100%" height="100%" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round"><path d="M52 70a42 42 0 0 1 0 60"/><path d="M86 40a84 84 0 0 1 0 120"/><path d="M120 10a126 126 0 0 1 0 180"/></svg>`;
 
+// Signal rings at the tap point: where card meets phone, the field spreads out.
+const SIGNAL = (x, y, { r = 300, color = C.brass, rings = 4 } = {}) =>
+  `<div class="abs" style="left:${x - r}px;top:${y - r}px;width:${r * 2}px;height:${r * 2}px;pointer-events:none;z-index:3">
+<div class="abs" style="inset:0;border-radius:50%;background:radial-gradient(circle,${color}38 0%,${color}14 35%,${color}00 70%)"></div>
+<svg viewBox="0 0 200 200" width="100%" height="100%" style="position:absolute;inset:0">${Array.from(
+    { length: rings },
+    (_, i) => {
+      const rr = 18 + i * (78 / rings);
+      return `<circle cx="100" cy="100" r="${rr.toFixed(1)}" fill="none" stroke="${color}" stroke-width="${(1.6 - i * 0.25).toFixed(2)}" opacity="${(0.95 - i * 0.2).toFixed(2)}"/>`;
+    },
+  ).join("")}<circle cx="100" cy="100" r="6" fill="${color}"/></svg></div>`;
+
 const CSS = `
 @font-face{font-family:Geist;src:url(${F("Geist-Variable.woff2")}) format("woff2");font-weight:100 900}
 @font-face{font-family:GeistMono;src:url(${F("GeistMono-Variable.woff2")}) format("woff2");font-weight:100 900}
