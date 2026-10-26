@@ -5,6 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: SEO
+        run: |
+          home=$(curl -sS -m 30 https://dijivizit.com/)
+          legal=$(curl -sS -m 30 https://dijivizit.com/yasal/kullanim-kosullari)
+          grep -q 'name="robots" content="noindex' <<<"$legal" && echo "::notice::legal noindex: yes" || echo "::error::legal noindex: no"
+          sm=$(curl -sS -m 30 https://dijivizit.com/sitemap.xml)
+          grep -q "/yasal/" <<<"$sm" && echo "::error::sitemap still lists /yasal/" || echo "::notice::sitemap without /yasal/"
+          grep -o "<title>[^<]*" <<<"$home" | head -1 | sed 's/^/::notice::home /'
       - run: |
           home=$(curl -sS -m 30 https://dijivizit.com/)
           for t in "Tanışma kartla bitmez" "Kartınız iPhone" "Kâğıt kartvizit, saniyede kişi" "Özellikler"; do
@@ -15,11 +23,6 @@ jobs:
             live=$(curl -sS -m 30 "$u" | sha256sum | cut -c1-12); repo=$(sha256sum "$f" | cut -c1-12)
             [ "$live" = "$repo" ] && echo "::notice::same: $u" || echo "::error::differs: $u ($live vs $repo)"
           done
-          legal=$(curl -sS -m 30 https://dijivizit.com/yasal/kullanim-kosullari)
-          grep -q 'name="robots" content="noindex' <<<"$legal" && echo "::notice::legal noindex: yes" || echo "::error::legal noindex: no"
-          sm=$(curl -sS -m 30 https://dijivizit.com/sitemap.xml)
-          grep -q "/yasal/" <<<"$sm" && echo "::error::sitemap still lists /yasal/" || echo "::notice::sitemap without /yasal/"
-          grep -o "<title>[^<]*" <<<"$home" | head -1 | sed 's/^/::notice::home /'
           h=$(curl -sS -m 20 -o /dev/null -D - https://dijivizit.com/ | grep -iE "^(content-security-policy|x-frame-options|referrer-policy)" | tr -d '\r' | tr '\n' ' ')
           echo "::notice::headers: $h"
           c=$(curl -sS -m 20 -o /dev/null -w "%{http_code}" https://app.dijivizit.com/p/cuRuTp81gnM)
