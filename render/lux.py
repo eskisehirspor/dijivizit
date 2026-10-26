@@ -146,9 +146,13 @@ def stage(warm=0.0, floor=True, key=1.0, rim=1.0, strip=1.0, haze=0.0):
         sc.view_settings.look = "AgX - Base Contrast"
         w.node_tree.nodes["Background"].inputs["Color"].default_value = (0.93, 0.92, 0.9, 1)
         w.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.3
+        # Transparent film + shadow-catcher floor: the subject and its soft
+        # shadow sit directly on the post's paper colour, no horizon line.
+        sc.render.film_transparent = True
         if floor:
             f = S.flat("Floor", 60, 60, 0.01, seg=1)
             f.data.materials.append(stone_material(tint=(0.78, 0.74, 0.67), rough=(0.4, 0.65)))
+            f.is_shadow_catcher = True
         warmc = (1.0, 0.95 - 0.05 * warm, 0.88 - 0.1 * warm)
         # Big soft window light from the left and a broad fill from above.
         area("Window", (1.6, 1.2), (-2.6, -1.6, 2.4), (0, 0, 0), 700 * key, warmc)

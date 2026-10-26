@@ -625,6 +625,14 @@ const ids = ONLY ? ONLY.split(",") : Object.keys(P);
 function theme(html) {
   if (process.env.THEME !== "light") return html;
   return html
+    .replace(
+      ".vt{position:absolute;inset:0 0 auto 0;height:560px;background:linear-gradient(#0a0a0bee,#0a0a0b00)}",
+      ".vt{position:absolute;inset:0 0 auto 0;height:600px;background:linear-gradient(#f5f3ef 0%,#f5f3efe6 45%,#f5f3ef00)}",
+    )
+    .replace(
+      ".vb{position:absolute;inset:auto 0 0 0;height:620px;background:linear-gradient(#0a0a0b00,#0a0a0bf2)}",
+      ".vb{position:absolute;inset:auto 0 0 0;height:680px;background:linear-gradient(#f5f3ef00,#f5f3efb3 65%,#f5f3ef)}",
+    )
     .replace(/#0a0a0b/g, "#f5f3ef")
     .replace(/#efe9df/g, "#161514")
     .replace(/rgba\(239,233,223/g, "rgba(22,21,20")
