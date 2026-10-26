@@ -81,18 +81,7 @@ body{background:${C.paper};color:${C.ink};font-family:Geist;-webkit-font-smoothi
 .ph{position:absolute;background-size:cover;background-repeat:no-repeat}
 `;
 
-function page({
-  theme = "paper",
-  bg,
-  fg,
-  label = "",
-  num,
-  body,
-  mute,
-  metaColor,
-  footColor,
-  footBg,
-}) {
+function page({ theme = "paper", bg, fg, label = "", body, mute, metaColor, footColor, footBg }) {
   const dark = theme === "dark";
   const B = bg || (dark ? C.graphite : C.paper);
   const T = fg || (dark ? C.paper : C.ink);
@@ -108,37 +97,7 @@ ${body}
 
 const head = (h, cls = "d2") => `<div class="${cls}">${h}</div>`;
 const lines = (a, b) => `${a}<br><span class="m">${b}</span>`;
-const img = (
-  src,
-  { x = 0, y = 0, w = 1080, h = 1350, size = "contain", pos = "center", extra = "" } = {},
-) =>
-  `<div class="img" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;background-image:url('${src}');background-size:${size};background-position:${pos};${extra}"></div>`;
-
 // ------------------------------------------------------------------ layouts
-
-// Product on paper, headline above it. The render owns the lower two thirds.
-function hero({ num, label, h, b, src, box, theme, cls = "d2", textTop = 168 }) {
-  return page({
-    num,
-    label,
-    theme,
-    body: `${img(src, box)}
-<div class="abs" style="left:72px;right:72px;top:${textTop}px">${head(h, cls)}${b ? `<p class="t" style="margin-top:32px;max-width:640px">${b}</p>` : ""}</div>`,
-  });
-}
-
-// Finish colour field over the top; the card crosses the edge of the field.
-function material({ num, fin, h, b, src, box }) {
-  const m = MAT[fin];
-  return page({
-    num,
-    label: m.name,
-    metaColor: m.fg,
-    body: `<div class="abs" style="left:0;top:0;width:1080px;height:760px;background:${m.bg}"></div>
-${img(src, box)}
-<div class="abs" style="left:72px;right:72px;top:930px">${head(h, "d3")}<p class="t" style="margin-top:26px;max-width:760px">${b}</p></div>`,
-  });
-}
 
 // Type only; the arcs carry the image.
 function statement({ num, label, h, b, theme = "paper", cls = "d1", arcs = true, top = 360 }) {
@@ -203,7 +162,10 @@ function rimg(name, { left, top, width, fade = FOOT_FADE, filter = "", z = 1 }) 
   const h = width * 1.25;
   const f0 = fade[0] - top;
   const f1 = fade[1] - top;
-  const mask = top + h > fade[0] ? `-webkit-mask-image:linear-gradient(#000 ${f0}px,transparent ${f1}px);` : "";
+  const mask =
+    top + h > fade[0]
+      ? `-webkit-mask-image:linear-gradient(#000 ${f0}px,transparent ${f1}px);`
+      : "";
   return `<img src="${R(name)}" style="position:absolute;left:${left}px;top:${top}px;width:${width}px;${mask}${filter ? `filter:${filter};` : ""}z-index:${z}">`;
 }
 const at = ({ left, top, width }, fx, fy) => [left + fx * width, top + fy * width * 1.25];
@@ -230,9 +192,18 @@ ${card("black", { left: 150, top: 610, width: 780 })}`,
 const FINCOPY = {
   black: [lines("Siyah.", "Sessiz bir güç."), "Mat siyah yüzey, ince açık gri lazer kazıma."],
   gold: [lines("Altının", "sakin hali."), "Parlamaz, ışıldar. Gösterişsiz bir ayrıcalık."],
-  silver: [lines("Işıkla", "konuşan metal."), "İnce fırça izleri, ışığın açısıyla değişen bir yüzey."],
-  wood: [lines("Doğanın", "imzası."), "Gerçek ahşap, lazerle yakılmış logo. Her kartın dokusu kendine özgü."],
-  "wood-light": [lines("Sade. Sıcak.", "Doğal."), "Açık tonlu ahşap; yumuşak, davetkâr bir ilk izlenim."],
+  silver: [
+    lines("Işıkla", "konuşan metal."),
+    "İnce fırça izleri, ışığın açısıyla değişen bir yüzey.",
+  ],
+  wood: [
+    lines("Doğanın", "imzası."),
+    "Gerçek ahşap, lazerle yakılmış logo. Her kartın dokusu kendine özgü.",
+  ],
+  "wood-light": [
+    lines("Sade. Sıcak.", "Doğal."),
+    "Açık tonlu ahşap; yumuşak, davetkâr bir ilk izlenim.",
+  ],
 };
 
 // Material: the finish's colour field; the card lies across its edge.
@@ -261,7 +232,14 @@ ${rimg(`lux-lean-${fin}`, { left: -40, top: 260, width: 1160, fade: [1060, 1120]
     });
 });
 
-P["az-soz"] = (num) => statement({ num, label: "Felsefemiz", h: lines("Az söz.", "Kalıcı etki."), theme: "dark", top: 420 });
+P["az-soz"] = (num) =>
+  statement({
+    num,
+    label: "Felsefemiz",
+    h: lines("Az söz.", "Kalıcı etki."),
+    theme: "dark",
+    top: 420,
+  });
 
 P["bir-isim"] = (num) =>
   page({
@@ -318,7 +296,13 @@ ${rimg("lux-ui-profile", { left: 30, top: 110, width: 1100 })}`,
   });
 
 P["kaydedildi"] = (num) =>
-  photo({ num, label: "Tek dokunuşla", h: lines("Rehbere kaydedildi.", "Siz hatırlandınız."), src: LIFE("tap"), pos: "50% 46%" });
+  photo({
+    num,
+    label: "Tek dokunuşla",
+    h: lines("Rehbere kaydedildi.", "Siz hatırlandınız."),
+    src: LIFE("tap"),
+    pos: "50% 46%",
+  });
 
 P["bes-kaplama"] = (num) =>
   page({
@@ -349,7 +333,13 @@ ${headBlock(lines("Kenarına kadar", "özen."), "", { cls: "d3", top: 960 })}`,
   });
 
 P["tanismak"] = (num) =>
-  photo({ num, label: "Bağlantı", h: lines("Tanışmak bir an.", "Hatırlanmak, bir tercih."), src: LIFE("handover"), pos: "50% 50%" });
+  photo({
+    num,
+    label: "Bağlantı",
+    h: lines("Tanışmak bir an.", "Hatırlanmak, bir tercih."),
+    src: LIFE("handover"),
+    pos: "50% 50%",
+  });
 
 P["koleksiyon-liste"] = (num) =>
   page({
@@ -411,7 +401,13 @@ P["nfc-nedir"] = (num) =>
   });
 
 P["kaydedilen-aranir"] = (num) =>
-  photo({ num, label: "Hatırlanmak", h: lines("Kaydedilen", "aranır."), src: LIFE("hand"), pos: "50% 52%" });
+  photo({
+    num,
+    label: "Hatırlanmak",
+    h: lines("Kaydedilen", "aranır."),
+    src: LIFE("hand"),
+    pos: "50% 52%",
+  });
 
 P["ahsabin-iki-tonu"] = (num) =>
   page({
@@ -425,7 +421,13 @@ ${headBlock(lines("Ahşabın", "iki tonu."), "Koyu ve açık; ikisi de gerçek a
   });
 
 P["baglanti"] = (num) =>
-  photo({ num, label: "Bağlantı", h: lines("Bir dokunuş", "uzağınızda."), src: LIFE("wallet"), pos: "50% 38%" });
+  photo({
+    num,
+    label: "Bağlantı",
+    h: lines("Bir dokunuş", "uzağınızda."),
+    src: LIFE("wallet"),
+    pos: "50% 38%",
+  });
 
 for (const fin of ["gold", "black", "wood"]) {
   P[`edisyon-${fin}`] = (num) =>
@@ -494,7 +496,14 @@ ${[
   });
 
 P["ilk-izlenim"] = (num) =>
-  statement({ num, label: "İlk izlenim", h: lines("İkinci bir şansı", "yoktur."), b: "O yüzden ilk dokunuşu özenle tasarladık.", theme: "dark", top: 400 });
+  statement({
+    num,
+    label: "İlk izlenim",
+    h: lines("İkinci bir şansı", "yoktur."),
+    b: "O yüzden ilk dokunuşu özenle tasarladık.",
+    theme: "dark",
+    top: 400,
+  });
 
 P["kurumsal"] = (num) =>
   page({
@@ -534,7 +543,16 @@ ${card("gold", { left: 330, top: 470, width: 700, rot: -8, filter: `${GOLD} drop
   });
 
 // Tap moments: the phone big, the real profile on screen, rings at the touch.
-function tapPost({ num, label, h, b, shot, ring = [0.6, 0.235], box = { left: -150, top: 250, width: 1300 }, cls = "d2" }) {
+function tapPost({
+  num,
+  label,
+  h,
+  b,
+  shot,
+  ring = [0.6, 0.235],
+  box = { left: -150, top: 250, width: 1300 },
+  cls = "d2",
+}) {
   const [x, y] = at(box, ring[0], ring[1]);
   return page({
     num,
@@ -546,10 +564,20 @@ ${SIGNAL(x, y, { r: 230 })}`,
 }
 
 P["dokundurun"] = (num) =>
-  tapPost({ num, label: "Nasıl çalışır", h: lines("Dokundurun.", "Profiliniz açılsın."), shot: "lux-tap-black" });
+  tapPost({
+    num,
+    label: "Nasıl çalışır",
+    h: lines("Dokundurun.", "Profiliniz açılsın."),
+    shot: "lux-tap-black",
+  });
 
 P["ahsapta-da-ayni"] = (num) =>
-  tapPost({ num, label: "Ceviz", h: lines("Ahşapta da", "aynı tek dokunuş."), shot: "lux-tap-wood" });
+  tapPost({
+    num,
+    label: "Ceviz",
+    h: lines("Ahşapta da", "aynı tek dokunuş."),
+    shot: "lux-tap-wood",
+  });
 
 P["yaklastirin"] = (num) => {
   const box = { left: -40, top: 120, width: 1160 };
@@ -569,7 +597,13 @@ P["profil-boyle-gorunur"] = (num) =>
     label: "Arayüz",
     h: lines("Profiliniz,", "onun ekranında."),
     shot: "profil",
-    notes: ["Fotoğraf, ad ve unvan", "Rehbere Kaydet", "Telefon ve WhatsApp", "LinkedIn, e-posta, web", "IBAN ve belgeler"],
+    notes: [
+      "Fotoğraf, ad ve unvan",
+      "Rehbere Kaydet",
+      "Telefon ve WhatsApp",
+      "LinkedIn, e-posta, web",
+      "IBAN ve belgeler",
+    ],
   });
 
 P["rehberde"] = (num) =>
