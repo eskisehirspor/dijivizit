@@ -89,7 +89,7 @@ function page({
   return `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
 <body style="background:${B};color:${T};--mute:${M}">
 ${body}
-<div class="meta" style="color:${metaColor || T}"><span>${label}</span><span>No. ${num}</span></div>
+<div class="meta" style="color:${metaColor || T}"><span>${label}</span></div>
 <div class="foot" style="color:${FT}"><div class="lock">${MARK(FT, footBg || B)}Dijivizit</div><div class="url">dijivizit.com</div></div>
 </body></html>`;
 }
