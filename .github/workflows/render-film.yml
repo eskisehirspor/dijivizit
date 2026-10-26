@@ -20,39 +20,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard:
-          [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            29,
-          ]
+        # 16 shards: leaves runner slots free for deploys and the daily post
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -62,7 +31,7 @@ jobs:
       - name: Render frames
         run: |
           # interleave so every shard gets a mix of cheap and expensive shots
-          frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 660, 30)))")
+          frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 660, 16)))")
           python3 render/film.py --out out --samples ${{ github.event.inputs.samples }} --frames "$frames"
       - uses: actions/upload-artifact@v4
         with:
