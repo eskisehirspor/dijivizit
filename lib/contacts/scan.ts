@@ -20,9 +20,15 @@ const EMPTY: ScannedCard = {
   address: "",
 };
 
-export const SCAN_PROMPT = `Bu bir kartvizit fotoğrafı. Üzerindeki bilgileri oku ve YALNIZCA şu JSON nesnesini döndür, başka hiçbir şey yazma:
+export const SCAN_PROMPT = `This is a phone photo of a paper business card (it may be small in the frame, slightly tilted, or in low contrast). Read every line of printed text on the card carefully, including small print.
+Return ONLY this JSON object, nothing else:
 {"fullName":"","title":"","company":"","phones":[],"emails":[],"website":"","address":""}
-Kurallar: Kartta olmayan alanı boş bırak, tahmin etme. Türkçe karakterleri (ç, ğ, ı, İ, ö, ş, ü) koru. Telefonları kartta yazdığı gibi, cep telefonu varsa önce onu yaz. Fotoğraf bir kartvizit değilse tüm alanları boş döndür.`;
+Rules:
+- fullName is the person's name (not the company). title is their job title. company is the company or brand name (a logo wordmark counts).
+- phones: every number on the card as printed, mobile ("M", "GSM", "Cep", +90 5xx) first.
+- Keep Turkish characters exactly (ç, ğ, ı, İ, ö, ş, ü); keep the person's capitalisation sensible ("Ayşe Demir", not "AYŞE DEMİR").
+- Leave a field empty only if it is truly not on the card. Do not invent anything.
+- If the photo shows no business card at all, return all fields empty.`;
 
 function str(v: unknown, max: number): string {
   return typeof v === "string" ? v.trim().slice(0, max) : "";

@@ -6,7 +6,8 @@ import { requireUser } from "@/lib/dal/auth";
 import { serverEnv } from "@/lib/env/server";
 import { allowRequest } from "@/lib/security/rate-limit";
 
-const MODEL = "claude-haiku-5-5";
+// Sonnet reads small, low-contrast print on real phone photos far more reliably.
+const MODEL = "claude-sonnet-5-5";
 const MAX_BASE64 = 950_000; // server actions accept ~1 MB; the client downsizes to 1400px JPEG
 
 /** Reads a business card photo. The image is sent to the model and not stored. */
@@ -30,7 +31,7 @@ export async function scanCardAction(dataUrl: string): Promise<ActionResult<Scan
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 600,
+        max_tokens: 800,
         messages: [
           {
             role: "user",
@@ -46,10 +47,17 @@ export async function scanCardAction(dataUrl: string): Promise<ActionResult<Scan
       console.error("Card scan failed:", res.status);
       return failure("scan.errors.failed");
     }
-    const body = (await res.json()) as { content?: { type: string; text?: string }[] };
+    const body = (await res.json()) as {
+      content?: { type: string; text?: string }[];
+      stop_reason?: string;
+    };
     const text = body.content?.find((c) => c.type === "text")?.text ?? "";
     const card = parseScanResponse(text);
-    if (!card.fullName && !card.phone && !card.email) return failure("scan.errors.nothing");
+    if (!card.fullName && !card.phone && !card.email) {
+      // Shape only, never the card's contents.
+      console.error("Card scan read nothing:", body.stop_reason, text.length, /\{/.test(text));
+      return failure("scan.errors.nothing");
+    }
     return success(card);
   } catch (error) {
     console.error("Card scan failed:", error);
