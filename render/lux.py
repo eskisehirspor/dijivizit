@@ -129,7 +129,10 @@ def make_phone(loc, rot, screen="profile"):
                         "screen-idle.png": "screen-off.png"}.get(name)
                 if repl:
                     n.image = bpy.data.images.load(os.path.join(S.TEX, repl))
-        # Big soft sources would sit in the screen as a grey veil.
+        # Big soft sources and a bright world would sit in the screen as a grey veil.
+        wn = bpy.context.scene.world.node_tree
+        if "GlossMix" in wn.nodes:
+            wn.nodes["GlossMix"].inputs["B"].default_value = 0.04
         for name in ("Window", "Top", "Fill"):
             if name in bpy.data.objects:
                 bpy.data.objects[name].visible_glossy = False
@@ -169,7 +172,8 @@ def stage(warm=0.0, floor=True, key=1.0, rim=1.0, strip=1.0, haze=0.0):
         mx = wn.nodes.new("ShaderNodeMix")
         mx.data_type = "FLOAT"
         mx.inputs["A"].default_value = 0.3
-        mx.inputs["B"].default_value = 0.04
+        mx.inputs["B"].default_value = 0.3  # make_phone dims this for screens
+        mx.name = "GlossMix"
         wn.links.new(lp.outputs["Is Glossy Ray"], mx.inputs["Factor"])
         wn.links.new(mx.outputs["Result"], wn.nodes["Background"].inputs["Strength"])
         # Transparent film + shadow-catcher floor: the subject and its soft
