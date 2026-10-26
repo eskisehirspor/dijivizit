@@ -13,6 +13,10 @@ jobs:
           sm=$(curl -sS -m 30 https://dijivizit.com/sitemap.xml)
           grep -q "/yasal/" <<<"$sm" && echo "::error::sitemap still lists /yasal/" || echo "::notice::sitemap without /yasal/"
           grep -o "<title>[^<]*" <<<"$home" | head -1 | sed 's/^/::notice::home /'
+          for u in https://dijivizit.com/sitemap.xml https://www.dijivizit.com/ https://dijivizit.com/robots.txt; do
+            r=$(curl -sS -m 30 -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" -o /tmp/b -D - "$u" | tr -d '\r' | grep -iE "^HTTP|^content-type|^location" | tr '\n' ' ')
+            echo "::notice::$u -> $r bytes=$(wc -c </tmp/b) head=$(head -c 90 /tmp/b | tr -d '\n')"
+          done
       - run: |
           home=$(curl -sS -m 30 https://dijivizit.com/)
           for t in "Tanışma kartla bitmez" "Kartınız iPhone" "Kâğıt kartvizit, saniyede kişi" "Özellikler"; do
