@@ -174,6 +174,8 @@ const at = ({ left, top, width }, fx, fy) => [left + fx * width, top + fy * widt
 const card = (fin, { left, top, width, rot = 0, filter = "" }) =>
   `<img src="${R(`card-${fin}`)}" style="position:absolute;left:${left}px;top:${top}px;width:${width}px;transform:rotate(${rot}deg);${filter ? `filter:${filter};` : ""}z-index:1">`;
 const GOLD = "brightness(1.08) saturate(1.06)";
+// Black metal on light paper picks up the bright room; bring it back to black.
+const BLACK = "brightness(.78) contrast(1.08)";
 
 function headBlock(h, b, { cls = "d2", top = 168, width = 936, left = 72 } = {}) {
   return `<div class="abs" style="left:${left}px;width:${width}px;top:${top}px;z-index:4">${head(h, cls)}${b ? `<p class="t" style="margin-top:28px;max-width:700px">${b}</p>` : ""}</div>`;
@@ -227,7 +229,7 @@ ORDER.forEach((fin, i) => {
       label: "Koleksiyon",
       body: `<div class="abs" style="left:58px;top:150px;font:620 360px/0.78 Geist;letter-spacing:-.07em;color:${MAT[fin].bg}">0${i + 1}</div>
 <div class="abs k" style="right:72px;top:160px;color:${C.ink2}">0${i + 1} / 05</div>
-${rimg(`lux-lean-${fin}`, { left: -40, top: 260, width: 1160, fade: [1060, 1120], filter: fin === "gold" ? GOLD : "" })}
+${rimg(`lux-lean-${fin}`, { left: -40, top: 260, width: 1160, fade: [1060, 1120], filter: fin === "gold" ? GOLD : fin === "black" ? BLACK : "" })}
 <div class="abs" style="left:72px;right:72px;top:1110px">${head(MAT[fin].name, "d4")}</div>`,
     });
 });
@@ -246,7 +248,7 @@ P["bir-isim"] = (num) =>
     num,
     label: "Dijivizit",
     body: `${headBlock(lines("Bir isim. Bir dokunuş.", "Bir bağlantı."), "", { cls: "d3" })}
-${rimg("lux-float-black", { left: 70, top: 190, width: 900 })}`,
+${rimg("lux-float-black", { left: 70, top: 190, width: 900, filter: BLACK })}`,
   });
 
 P["detay-her-seydir"] = (num) =>
@@ -321,6 +323,7 @@ P["masaya-birakilan"] = (num) =>
     label: "İlk izlenim",
     metaColor: C.paper,
     body: `${rimg("lux-edge-black", { left: 0, top: -120, width: 1080, fade: [820, 940] })}
+<div class="abs" style="left:0;top:0;width:1080px;height:260px;background:linear-gradient(rgba(20,20,22,.85),rgba(20,20,22,0));z-index:2"></div>
 ${headBlock(lines("Masaya bırakılan", "ilk imza."), "", { cls: "d3", top: 960 })}`,
   });
 
@@ -390,7 +393,7 @@ P["isigi-yakalayan"] = (num) =>
     label: "Mat Fırçalanmış Gold",
     bg: "#EDE6DA",
     body: `${headBlock(lines("Işığı yakalayan", "bir kartvizit."))}
-${rimg("lux-float-gold", { left: 0, top: 230, width: 1080, filter: GOLD })}`,
+${card("gold", { left: 150, top: 500, width: 780, rot: -8, filter: `${GOLD} drop-shadow(0 40px 50px rgba(60,40,10,.22))` })}`,
   });
 
 P["nfc-nedir"] = (num) =>
