@@ -25,10 +25,6 @@ export const metadata: Metadata = {
   twitter: { title: TITLE, description: DESCRIPTION },
 };
 
-const FINISH_IMAGES = ["black", "silver", "gold", "wood", "wood-light"].map(
-  (f) => `${MARKETING_ORIGIN}/landing/finishes/${f}.webp`,
-);
-
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -57,15 +53,6 @@ const JSON_LD = {
       alternateName: ["Dijivizit NFC Kartvizit", "dijivizit.com"],
       inLanguage: "tr-TR",
       publisher: { "@id": `${MARKETING_ORIGIN}/#organization` },
-    },
-    {
-      "@type": "Product",
-      name: "Dijivizit NFC Akıllı Kartvizit",
-      description: DESCRIPTION,
-      brand: { "@type": "Brand", name: "Dijivizit" },
-      category: "NFC kartvizit",
-      image: FINISH_IMAGES,
-      material: "Metal, ahşap",
     },
     {
       "@type": "FAQPage",
