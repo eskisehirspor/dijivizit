@@ -140,16 +140,14 @@ const QR_SVG = await QRCode.toString("https://dijivizit.com", {
   errorCorrectionLevel: "M",
   color: { dark: "#EEEDE8", light: "#0000" },
 });
-// Back of the card: the backup QR on the left, the mark and wordmark on the
-// right. W is the card width in px.
+// Back of the card: only the backup QR, centred, at a modest size.
+// W is the card width in px.
+const QR_ON_BACK = 0.26; // QR side as a share of the card width
 function cardBack(W) {
   const u = W / 100;
+  const q = QR_ON_BACK * W;
   return `<div style="position:relative;width:${W}px;height:${W / 1.586}px;border-radius:${4.5 * u}px;background:linear-gradient(155deg,#2a2a2e 0%,#1b1b1e 40%,#121214 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);overflow:hidden">
-<div style="position:absolute;left:${8 * u}px;top:50%;width:${38 * u}px;height:${38 * u}px;transform:translateY(-50%)">${QR_SVG.replace("<svg ", '<svg width="100%" height="100%" ')}</div>
-<div style="position:absolute;left:${56 * u}px;top:50%;transform:translateY(-50%);color:#EEEDE8">
-<div style="width:${11 * u}px;height:${11 * u}px">${MARK("#EEEDE8", "#1b1b1e").replace("<svg ", '<svg width="100%" height="100%" ')}</div>
-<div style="margin-top:${4 * u}px;font:500 ${5.2 * u}px/1 Geist;letter-spacing:.32em">DIJIVIZIT</div>
-<div style="margin-top:${2.4 * u}px;font:400 ${3 * u}px/1 Geist;letter-spacing:.04em;color:rgba(238,237,232,.6)">Dokun · Paylaş · Kaydet</div></div></div>`;
+<div style="position:absolute;left:50%;top:50%;width:${q}px;height:${q}px;transform:translate(-50%,-50%)">${QR_SVG.replace("<svg ", '<svg width="100%" height="100%" ')}</div></div>`;
 }
 
 // Phone camera pointed at the back of the card: the system camera's scan
@@ -158,9 +156,9 @@ function cameraScreen(w, { qy = 36 } = {}) {
   const u = w / 100; // 1% of the screen width
   const cw = 92 * u;
   const ch = cw / 1.586;
-  const q = 0.38 * cw;
-  const qx = 50 - 46 + 0.08 * 92 + 0.19 * 92; // QR centre, % of width
-  const side = q + 8 * u;
+  const q = QR_ON_BACK * cw;
+  const qx = 50; // QR centre, % of width
+  const side = q + 10 * u;
   const L = 8 * u;
   const brackets = [
     [0, 0],
