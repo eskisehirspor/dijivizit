@@ -1,1440 +1,311 @@
-<!doctype html>
-<html lang="tr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Dijivizit Kullanım ve Doldurma Kılavuzu</title>
-    <style>
-      @font-face {
-        font-family: Geist;
-        src: url(../instagram/fonts/Geist-Variable.woff2) format("woff2");
-        font-weight: 100 900;
-      }
-      @font-face {
-        font-family: GeistMono;
-        src: url(../instagram/fonts/GeistMono-Variable.woff2) format("woff2");
-        font-weight: 100 900;
-      }
-      @page {
-        size: A4;
-        margin: 20mm 18mm 22mm;
-      }
-      @page :first {
-        margin: 0;
-      }
-      :root {
-        --ink: #121213;
-        --ink2: #5e5d59;
-        --line: #dedcd6;
-        --paper: #f3f2ee;
-        --brass: #9a7743;
-        --soft: #f7f6f3;
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        font-family: Geist;
-        color: var(--ink);
-        font-size: 10.4pt;
-        line-height: 1.5;
-        -webkit-font-smoothing: antialiased;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      body {
-        counter-reset: sec;
-      }
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Dijivizit Kullanım Kılavuzu</title><style>
+@font-face{font-family:Geist;src:url(../instagram/fonts/Geist-Variable.woff2) format("woff2");font-weight:100 900}
+@font-face{font-family:GeistMono;src:url(../instagram/fonts/GeistMono-Variable.woff2) format("woff2");font-weight:100 900}
+@page{size:A4;margin:0}
+:root{--ink:#121213;--ink2:#5E5D59;--line:#DEDCD6;--paper:#F3F2EE;--brass:#9A7743}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-family:Geist;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+section{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;padding:18mm 18mm 16mm}
+section:last-child{page-break-after:auto}
+.foot{position:absolute;left:18mm;right:18mm;bottom:10mm;display:flex;justify-content:space-between;align-items:center;font:500 7.5pt GeistMono;letter-spacing:.08em;color:var(--ink2)}
+.foot .lk{display:flex;align-items:center;gap:6px;font:560 10pt Geist;letter-spacing:-.02em;color:var(--ink)}
+.foot svg{width:14px;height:14px}
+.k{font:500 8.5pt GeistMono;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.k b{color:var(--brass);font-weight:500;margin-right:10px}
+h2{font-weight:620;font-size:30pt;line-height:1.02;letter-spacing:-.04em;margin:4mm 0 7mm}
+h2 span{color:var(--ink2)}
+ol{list-style:none;counter-reset:n}
+ol li{counter-increment:n;display:grid;grid-template-columns:9mm 1fr;font-size:12.5pt;line-height:1.42;padding:3.2mm 0;border-top:1px solid var(--line)}
+ol li:last-child{border-bottom:1px solid var(--line)}
+ol li::before{content:counter(n);display:flex;align-items:center;justify-content:center;width:6.4mm;height:6.4mm;border-radius:50%;background:var(--ink);color:#fff;font:600 8.5pt Geist;margin-top:.6mm}
+ol li b{font-weight:620}
+.note{margin-top:5mm;font-size:10.5pt;color:var(--ink2)}
+/* one phone: text left, phone right */
+.step.one{display:grid;grid-template-columns:1fr 92mm;gap:10mm;align-items:center;background:linear-gradient(to right,#fff calc(100% - 92mm),var(--paper) 0)}
+.step.one .media{display:flex;align-items:center;justify-content:center}
+/* two phones: text on top, phones below on paper */
+.step.two{display:flex;flex-direction:column;gap:8mm}
+.step.two .txt{max-width:150mm}
+.step.two h2{margin-bottom:5mm}
+.step.two .media{flex:1;display:flex;gap:10mm;justify-content:center;align-items:flex-start;background:var(--paper);margin:0 -18mm -16mm;padding:9mm 18mm 18mm}
+.phone{width:76mm;border-radius:10mm;background:#0e0e10;padding:2.1mm;box-shadow:0 8mm 14mm -8mm rgba(30,25,20,.45),inset 0 0 0 .4mm #2b2b2f}
+.step.two .phone{width:64mm}
+.scr{position:relative;border-radius:8mm;overflow:hidden;background:#fff;padding-top:9%}
+.scr img{display:block;width:100%}
+.scr i{position:absolute;top:2mm;left:50%;transform:translateX(-50%);width:16mm;height:4.6mm;border-radius:99px;background:#0e0e10}
+.photo{width:72mm;border-radius:6mm;overflow:hidden;box-shadow:0 6mm 12mm -8mm rgba(30,25,20,.4)}
+.photo img{display:block;width:100%}
+/* cover */
+.cover{background:var(--paper)}
+.cover .lock{display:flex;align-items:center;gap:10px;font-weight:560;font-size:17pt;letter-spacing:-.03em}
+.cover .lock svg{width:30px;height:30px}
+.cover h1{position:absolute;left:18mm;right:18mm;top:62mm;font-weight:620;font-size:50pt;line-height:.98;letter-spacing:-.045em}
+.cover h1 span{color:var(--ink2)}
+.cover .lead{position:absolute;left:18mm;width:100mm;top:112mm;font-size:13pt;line-height:1.5;color:var(--ink2)}
+.cover .arcs{position:absolute;right:-60mm;bottom:-40mm;width:190mm;height:190mm}
+.cover .phones{position:absolute;left:34mm;top:150mm;display:flex;gap:10mm;transform:rotate(-8deg)}
+.cover .phone{width:62mm}
+/* overview */
+.ov h2{margin-bottom:6mm}
+.ov .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7mm 8mm}
+.ov .it{display:flex;flex-direction:column;gap:3mm}
+.ov .it .phone{width:100%;border-radius:7mm;padding:1.5mm}
+.ov .it .scr{border-radius:5.6mm;height:96mm;padding-top:0}
+.ov .it .scr img{object-fit:cover;object-position:top;height:100%}
+.ov .it .scr i{width:11mm;height:3.2mm;top:1.4mm}
+.ov .it p{font-size:11pt;font-weight:560;letter-spacing:-.01em;display:flex;gap:7px}
+.ov .it p b{color:var(--brass);font:500 9pt GeistMono;padding-top:2px}
+/* help */
+table{width:100%;border-collapse:collapse;margin-top:2mm}
+td{padding:4mm 6mm 4mm 0;border-top:1px solid var(--line);vertical-align:top;font-size:11.5pt;line-height:1.4}
+td:first-child{font-weight:600;width:42%}
+tr:last-child td{border-bottom:1px solid var(--line)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:12mm}
+.contact div{background:var(--paper);border-radius:4mm;padding:6mm}
+.contact h4{font:500 8pt GeistMono;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:2mm}
+.contact p{font-size:12pt;line-height:1.5}
+</style></head><body>
 
-      /* cover */
-      .cover {
-        height: 297mm;
-        width: 210mm;
-        background: var(--paper);
-        position: relative;
-        page-break-after: always;
-        overflow: hidden;
-      }
-      .cover .lock {
-        position: absolute;
-        left: 20mm;
-        top: 20mm;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 560;
-        font-size: 17pt;
-        letter-spacing: -0.03em;
-      }
-      .cover .lock svg {
-        width: 30px;
-        height: 30px;
-      }
-      .cover .k {
-        position: absolute;
-        left: 20mm;
-        top: 96mm;
-        font: 500 9pt GeistMono;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--ink2);
-      }
-      .cover h1 {
-        position: absolute;
-        left: 20mm;
-        right: 20mm;
-        top: 104mm;
-        font-weight: 620;
-        font-size: 46pt;
-        line-height: 0.98;
-        letter-spacing: -0.045em;
-      }
-      .cover h1 span {
-        color: var(--ink2);
-      }
-      .cover .lead {
-        position: absolute;
-        left: 20mm;
-        width: 120mm;
-        top: 160mm;
-        font-size: 12pt;
-        line-height: 1.5;
-        color: var(--ink2);
-      }
-      .cover .arcs {
-        position: absolute;
-        right: -60mm;
-        bottom: -40mm;
-        width: 190mm;
-        height: 190mm;
-      }
-      .cover .foot {
-        position: absolute;
-        left: 20mm;
-        right: 20mm;
-        bottom: 18mm;
-        display: flex;
-        justify-content: space-between;
-        font: 500 8.5pt GeistMono;
-        letter-spacing: 0.08em;
-        color: var(--ink2);
-      }
+<section class="cover">
+  <div class="lock"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#F3F2EE"/><g fill="none" stroke="#F3F2EE" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</div>
+  <div class="phones"><div class="phone"><div class="scr"><img src="img/card-top.jpg"><i></i></div></div><div class="phone"><div class="scr"><img src="img/dash-status.jpg"><i></i></div></div></div>
+  <h1>Kullanım<br><span>kılavuzu.</span></h1>
+  <p class="lead">Kartınızı adım adım hazırlayın. Her sayfada bir adım ve o adımın ekran görüntüsü var.</p>
+  <div class="arcs"><svg viewBox="0 0 200 200" fill="none" stroke="#CBC8C0" stroke-width="1.2" stroke-linecap="round"><path d="M52 70a42 42 0 0 1 0 60"/><path d="M86 40a84 84 0 0 1 0 120"/><path d="M120 10a126 126 0 0 1 0 180"/></svg></div>
+</section>
 
-      /* contents */
-      .toc {
-        page-break-after: always;
-      }
-      .toc h2 {
-        margin-bottom: 8mm;
-      }
-      .toc ol {
-        list-style: none;
-        columns: 2;
-        column-gap: 12mm;
-      }
-      .toc li {
-        display: flex;
-        gap: 10px;
-        padding: 7px 0;
-        border-bottom: 1px solid var(--line);
-        break-inside: avoid;
-        font-size: 10.5pt;
-      }
-      .toc li b {
-        font: 500 9pt GeistMono;
-        color: var(--brass);
-        width: 22px;
-        padding-top: 2px;
-      }
+<section class="ov">
+  <div class="k">Özet</div>
+  <h2>6 adımda<br><span>hazır kart.</span></h2>
+  <div class="grid">
+  <div class="it"><div class="phone"><div class="scr"><img src="img/register.jpg"><i></i></div></div><p><b>01</b>Hesabınızı açın</p></div><div class="it"><div class="phone"><div class="scr"><img src="img/edit.jpg"><i></i></div></div><p><b>02</b>Bilgilerinizi yazın</p></div><div class="it"><div class="phone"><div class="scr"><img src="img/avatar.jpg"><i></i></div></div><p><b>03</b>Fotoğrafınızı ekleyin</p></div><div class="it"><div class="phone"><div class="scr"><img src="img/links-add.jpg"><i></i></div></div><p><b>04</b>Telefon ve bağlantılar</p></div><div class="it"><div class="phone"><div class="scr"><img src="img/dash-status.jpg"><i></i></div></div><p><b>05</b>Kartı yayınlayın</p></div><div class="it"><div class="phone"><div class="scr"><img src="img/card-top.jpg"><i></i></div></div><p><b>06</b>Okutun ve test edin</p></div>
+  </div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
 
-      /* type */
-      .k {
-        font: 500 8.5pt GeistMono;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--ink2);
-      }
-      h2 {
-        font-weight: 620;
-        font-size: 24pt;
-        line-height: 1.05;
-        letter-spacing: -0.035em;
-        margin: 2mm 0 4mm;
-      }
-      h2 span {
-        color: var(--ink2);
-      }
-      h3 {
-        font-weight: 600;
-        font-size: 12.5pt;
-        letter-spacing: -0.015em;
-        margin: 7mm 0 2.5mm;
-      }
-      p {
-        margin: 0 0 3mm;
-      }
-      p.lead {
-        font-size: 11.5pt;
-        color: var(--ink2);
-        max-width: 150mm;
-      }
-      section {
-        page-break-before: always;
-        counter-increment: sec;
-      }
-      section.cont {
-        page-break-before: auto;
-        margin-top: 10mm;
-      }
-      .sec-head {
-        display: flex;
-        align-items: baseline;
-        gap: 12px;
-        border-top: 2px solid var(--ink);
-        padding-top: 3mm;
-        margin-bottom: 2mm;
-      }
-      .sec-head .n {
-        font: 500 9pt GeistMono;
-        color: var(--brass);
-      }
-      ul,
-      ol.steps {
-        margin: 0 0 3mm 0;
-        padding-left: 5mm;
-      }
-      li {
-        margin: 0 0 1.4mm;
-      }
-      code,
-      .mono {
-        font-family: GeistMono;
-        font-size: 9pt;
-        background: var(--soft);
-        padding: 1px 5px;
-        border-radius: 4px;
-      }
-      .path {
-        font: 500 8.5pt GeistMono;
-        color: var(--ink2);
-        margin-bottom: 3mm;
-      }
-      b.ui {
-        font-weight: 600;
-      }
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>01</b>Başlarken</div>
+  <h2>Hesabınızı<br><span>açın.</span></h2>
+  <ol><li><span><b>app.dijivizit.com</b> adresine girin, <b>Kayıt olun</b>’a dokunun.</span></li><li><span>Adınızı, e-postanızı ve size gönderilen <b>davet kodunu</b> yazın. Bağlantıyla geldiyseniz kod hazır gelir.</span></li><li><span>En az 8 karakterlik bir parola belirleyin, kutucuğu işaretleyin, <b>Hesap oluştur</b>.</span></li><li><span>E-postanıza gelen bağlantıya tıklayın. Hesabınız açıldı.</span></li></ol>
+  <p class="note">Kodunuz yoksa: merhaba@dijivizit.com</p>
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/register.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>02</b>Başlarken</div>
+  <h2>Giriş<br><span>yapın.</span></h2>
+  <ol><li><span>E-posta ve parolanızla <b>Giriş yap</b>.</span></li><li><span>Parolanızı unuttuysanız <b>Parolamı unuttum</b>’a dokunun, e-postanıza gelen bağlantıdan yenisini belirleyin.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/login.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>03</b>Panel</div>
+  <h2>Her şey<br><span>tek ekranda.</span></h2>
+  <ol><li><span>Giriş yapınca <b>Panel</b> açılır.</span></li><li><span>Aşağıdaki kutuların her biri bir ayar sayfasıdır: bilgiler, fotoğraf, bağlantılar, belgeler, kişiler…</span></li><li><span>Kaybolursanız sayfanın üstündeki <b>Panele dön</b>’e dokunun.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/dash-actions.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>04</b>Profil</div>
+  <h2>Bilgilerinizi<br><span>yazın.</span></h2>
+  <ol><li><span><b>Profili düzenle</b> kutusuna dokunun.</span></li><li><span><b>Ad soyad</b>, <b>Unvan</b>, <b>Şirket</b> ve <b>Adres</b>i yazın.</span></li><li><span><b>Hakkımda</b>: kendinizi 1–2 cümleyle anlatın.</span></li><li><span><b>Kaydet</b>.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/edit.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>05</b>Profil</div>
+  <h2>Fotoğrafınızı<br><span>ekleyin.</span></h2>
+  <ol><li><span><b>Profil fotoğrafı</b> → <b>Fotoğraf yükle</b>.</span></li><li><span>JPEG, PNG veya WebP; en fazla 2 MB.</span></li><li><span>Yüzünüzün ortada olduğu kare bir fotoğraf en iyisidir.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/avatar.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>06</b>Bağlantılar</div>
+  <h2>Telefon ve sosyal<br><span>medyanızı ekleyin.</span></h2>
+  <ol><li><span><b>Bağlantılar</b> → aşağıdaki <b>Bağlantı ekle</b> bölümü.</span></li><li><span><b>Platform</b> seçin: Telefon, WhatsApp, E-posta, Web sitesi, LinkedIn, Instagram, X.</span></li><li><span>Numaranızı ya da kullanıcı adınızı yazın. İsterseniz etiket ekleyin: <i>Cep</i>, <i>İş</i>…</span></li><li><span><b>Bağlantı ekle</b>. En fazla 20 bağlantı.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/links-add.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>07</b>Bağlantılar</div>
+  <h2>Sıralayın,<br><span>gizleyin.</span></h2>
+  <ol><li><span>Oklarla sırayı değiştirin; kartınızda bu sırayla görünür.</span></li><li><span><b>Kartta göster</b> kapalıysa bağlantı kayıtlı kalır ama kartta görünmez.</span></li><li><span>Bir şeyi değiştirdiyseniz satırdaki <b>Kaydet</b>’e basın.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/links-row.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>08</b>Profil</div>
+  <h2>Uzmanlık<br><span>alanlarınız.</span></h2>
+  <ol><li><span><b>Uzmanlık ve yetenekler</b> → türü seçin, kısa bir ad yazın, <b>Ekle</b>.</span></li><li><span>Kartınızın altında etiket olarak görünür. En fazla 20.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/skills.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>09</b>Ödeme</div>
+  <h2>IBAN<br><span>ekleyin.</span></h2>
+  <ol><li><span><b>Banka bilgileri</b> → <b>Hesap sahibi</b> ve <b>IBAN</b>. Banka kendiliğinden bulunur.</span></li><li><span><b>Kaydet</b>.</span></li><li><span><b>Kartımda göster</b>’i açın. Açmazsanız IBAN kartınızda görünmez.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/bank.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>10</b>Ödeme</div>
+  <h2>Fatura<br><span>bilgileri.</span></h2>
+  <ol><li><span><b>Fatura bilgileri</b> → Şirket ünvanı, adresi, vergi numarası (10 veya 11 hane), vergi dairesi.</span></li><li><span><b>Kaydet</b>, sonra <b>Kartımda göster</b>’i açın.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/billing.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step two">
+<div class="txt">
+  <div class="k"><b>11</b>Belgeler</div>
+  <h2>Katalog, fiyat listesi,<br><span>özgeçmiş ekleyin.</span></h2>
+  <ol><li><span><b>Belgeler</b> → türü seçin, başlık yazın, <b>Dosya seç</b> ile PDF’inizi seçin, <b>Belgeyi yükle</b>.</span></li><li><span>Yalnızca PDF, en fazla 10 MB. En fazla 10 belge.</span></li><li><span><b>Aktif</b> / <b>Pasif</b> anahtarıyla kartta gösterip gizleyin.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/docs-add.jpg"><i></i></div></div><div class="phone"><div class="scr"><img src="img/docs-list.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>12</b>Yayın</div>
+  <h2>Kartınızı<br><span>yayınlayın.</span></h2>
+  <ol><li><span>Panelde <b>Herkese açık profil</b> anahtarını açın.</span></li><li><span>Açmazsanız kartınız okutulduğunda “Kart bulunamadı” görünür.</span></li><li><span><b>Kopyala</b> ile kartınızın bağlantısını alabilirsiniz.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/dash-status.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>13</b>Yayın</div>
+  <h2>Nasıl göründüğüne<br><span>bakın.</span></h2>
+  <ol><li><span><b>Profili aç</b> kutusu kartınızı ziyaretçinin gördüğü gibi gösterir.</span></li><li><span>Bir şey eksikse ilgili sayfaya dönüp düzeltin.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/preview.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step two">
+<div class="txt">
+  <div class="k"><b>14</b>Kullanım</div>
+  <h2>Kartınızı<br><span>okutun.</span></h2>
+  <ol><li><span>Karşınızdakinin telefonunun kilidi açık olsun. Uygulama gerekmez.</span></li><li><span><b>iPhone</b>: kartı telefonun <b>üst kenarına</b> yaklaştırın.</span></li><li><span><b>Android</b>: kartı telefonun <b>arkasının ortasına</b> yaklaştırın (NFC açık olmalı).</span></li><li><span>NFC yoksa kartın arkasındaki <b>QR</b>’ı kamerayla okutun.</span></li></ol>
+  
+</div>
+<div class="media"><div class="photo"><img src="img/nfc.jpg"></div><div class="photo"><img src="img/qr.jpg"></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>15</b>Kullanım</div>
+  <h2>Bağlantı ve QR<br><span>ile paylaşın.</span></h2>
+  <ol><li><span><b>Paylaş</b> → <b>Bağlantıyı kopyala</b>: WhatsApp’tan, e-postayla gönderin.</span></li><li><span><b>PNG indir</b> / <b>SVG indir</b>: QR kodunuzu broşüre, sunuma, e-posta imzasına koyun.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/share.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step two">
+<div class="txt">
+  <div class="k"><b>16</b>Ziyaretçi</div>
+  <h2>Karşınızdaki<br><span>bunu görür.</span></h2>
+  <ol><li><span>Fotoğrafınız, adınız, unvanınız.</span></li><li><span><b>Rehberime Kaydet</b>: bilgileriniz tek dokunuşla telefonuna kaydedilir.</span></li><li><span>Aşağıda telefon, WhatsApp, e-posta, IBAN, belgeler.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/card-top.jpg"><i></i></div></div><div class="phone"><div class="scr"><img src="img/card-bottom.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>17</b>Ziyaretçi</div>
+  <h2>Size bilgisini<br><span>bırakabilir.</span></h2>
+  <ol><li><span>Ziyaretçi <b>Bilgilerimi bırak</b>’a dokunup adını ve numarasını bırakır.</span></li><li><span>Size e-posta gelir, kişi <b>Kişiler</b> listenize düşer.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/leave.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step two">
+<div class="txt">
+  <div class="k"><b>18</b>Kişiler</div>
+  <h2>Tanıştığınız herkes<br><span>tek listede.</span></h2>
+  <ol><li><span><b>Kişiler</b>: kartınızdan gelenler <b>Karttan</b> etiketiyle görünür.</span></li><li><span><b>Kişi ekle</b> ile tanıştığınız birini elle ekleyin. Telefon ya da e-postadan biri yeter.</span></li><li><span>Etiketlerle süzün, <b>CSV indir</b> ile Excel’e alın.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/contacts.jpg"><i></i></div></div><div class="phone"><div class="scr"><img src="img/contact-new.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step two">
+<div class="txt">
+  <div class="k"><b>19</b>Kişiler</div>
+  <h2>Not alın,<br><span>hatırlatma kurun.</span></h2>
+  <ol><li><span>Kişiye dokunun: <b>WhatsApp’tan yaz</b>, <b>Ara</b>, <b>E-posta gönder</b>.</span></li><li><span><b>Takip hatırlatmaları</b>: Yarın, 1 hafta, 1 ay ya da bir tarih seçin, <b>Hatırlatma kur</b>. O sabah e-posta gelir.</span></li><li><span><b>Notlar</b>: görüşmede konuştuklarınızı yazın.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/contact-top.jpg"><i></i></div></div><div class="phone"><div class="scr"><img src="img/contact-follow.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>20</b>Kişiler</div>
+  <h2>Kâğıt kartviziti<br><span>tarayın.</span></h2>
+  <ol><li><span><b>Kişiler</b> → <b>Kartvizit tara</b> → <b>Fotoğraf çek veya seç</b>.</span></li><li><span>Ad, unvan, şirket, telefon ve e-posta kendiliğinden dolar. Kontrol edip kaydedin.</span></li><li><span>Kartı düz bir yere koyun, ışık yansımasın.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/scan.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>21</b>Analitik</div>
+  <h2>Kartınız kaç kez<br><span>açıldı?</span></h2>
+  <ol><li><span><b>Analitik</b>: bugün, bu hafta, bu ay kaç kişi kartınızı açtı.</span></li><li><span>Hangi düğmeye dokunuldu: telefon, WhatsApp, rehbere kaydetme, belge…</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/analytics.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>22</b>Kartlarım</div>
+  <h2>Kartınızı kaybettiniz mi?<br><span>Kapatın.</span></h2>
+  <ol><li><span><b>Kartlarım</b>: ofis kartı, yedek kart, fuar standı için ayrı kartlar ekleyin.</span></li><li><span>Kaybolan kartın anahtarını <b>Kapalı</b> yapın; o kart artık açılmaz, diğerleri çalışır.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/cards.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step two">
+<div class="txt">
+  <div class="k"><b>23</b>Ekip</div>
+  <h2>Şirket kartlarını<br><span>yönetin.</span></h2>
+  <ol><li><span><b>Ekip</b> → ekip adını yazın, <b>Ekibi oluştur</b>.</span></li><li><span><b>Üye davet et</b>: çalışanın e-postasını yazın, <b>Davet et</b>.</span></li><li><span><b>Şirket kartları</b>: her karta <b>Kimin profilini açsın</b>’dan bir çalışan seçin.</span></li><li><span>Çalışan ayrılınca kartı yeni kişiye atayın; fiziksel kart aynı kalır.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/team-members.jpg"><i></i></div></div><div class="phone"><div class="scr"><img src="img/team-cards.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+<section class="step one">
+<div class="txt">
+  <div class="k"><b>24</b>Hesap</div>
+  <h2>E-posta, şifre<br><span>ve hesap.</span></h2>
+  <ol><li><span>Sağ üstte <b>Ayarlar</b>.</span></li><li><span>E-postanızı ya da şifrenizi buradan değiştirin.</span></li><li><span><b>Hesabı sil</b> her şeyi kalıcı olarak siler; kartınız artık açılmaz.</span></li></ol>
+  
+</div>
+<div class="media"><div class="phone"><div class="scr"><img src="img/settings.jpg"><i></i></div></div></div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
 
-      /* tables */
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 2mm 0 4mm;
-        font-size: 9.6pt;
-        break-inside: auto;
-      }
-      th {
-        text-align: left;
-        font: 500 8pt GeistMono;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--ink2);
-        padding: 6px 8px 6px 0;
-        border-bottom: 1.5px solid var(--ink);
-      }
-      td {
-        padding: 6px 8px 6px 0;
-        border-bottom: 1px solid var(--line);
-        vertical-align: top;
-      }
-      tr {
-        break-inside: avoid;
-      }
-      td:first-child {
-        font-weight: 560;
-        width: 30%;
-      }
-      table.half td {
-        width: 50%;
-      }
-      .req {
-        font: 500 7.5pt GeistMono;
-        letter-spacing: 0.06em;
-        color: var(--brass);
-        white-space: nowrap;
-      }
-
-      /* boxes */
-      .tip,
-      .warn {
-        border-radius: 10px;
-        padding: 4mm 5mm;
-        margin: 3mm 0 4mm;
-        break-inside: avoid;
-        font-size: 9.8pt;
-      }
-      .tip {
-        background: var(--soft);
-        border: 1px solid var(--line);
-      }
-      .warn {
-        background: #fbf4e8;
-        border: 1px solid #e9d6b4;
-      }
-      .tip b.t,
-      .warn b.t {
-        display: block;
-        font: 500 8pt GeistMono;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin-bottom: 1.5mm;
-        color: var(--brass);
-      }
-
-      /* checklist */
-      .check {
-        list-style: none;
-        padding: 0;
-        counter-reset: c;
-      }
-      .check li {
-        counter-increment: c;
-        display: grid;
-        grid-template-columns: 26px 1fr;
-        gap: 8px;
-        padding: 3.2mm 0;
-        border-bottom: 1px solid var(--line);
-        margin: 0;
-        break-inside: avoid;
-      }
-      .check li::before {
-        content: counter(c, decimal-leading-zero);
-        font: 500 9pt GeistMono;
-        color: var(--brass);
-        padding-top: 1px;
-      }
-
-      /* figure */
-      .split {
-        display: grid;
-        grid-template-columns: 1fr 62mm;
-        gap: 9mm;
-        align-items: start;
-      }
-      .phone {
-        width: 62mm;
-        border-radius: 9mm;
-        background: #0d0d0f;
-        padding: 1.8mm;
-        box-shadow: 0 6mm 12mm -6mm rgba(0, 0, 0, 0.35);
-      }
-      .phone div {
-        border-radius: 7.3mm;
-        overflow: hidden;
-        background: #fff;
-        position: relative;
-      }
-      .phone img {
-        display: block;
-        width: 100%;
-      }
-      .phone span {
-        position: absolute;
-        top: 2mm;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 17mm;
-        height: 4.6mm;
-        border-radius: 99px;
-        background: #0d0d0f;
-      }
-      .cap {
-        font: 500 8pt GeistMono;
-        color: var(--ink2);
-        margin-top: 3mm;
-        text-align: center;
-      }
-      .grid2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 6mm;
-      }
-      .card {
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        padding: 4mm 5mm;
-        break-inside: avoid;
-      }
-      .card h4 {
-        font-size: 10.5pt;
-        font-weight: 600;
-        margin-bottom: 1.5mm;
-      }
-      .card p {
-        font-size: 9.6pt;
-        color: var(--ink2);
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- COVER -->
-    <div class="cover">
-      <div class="lock">
-        <svg viewBox="0 0 24 24">
-          <rect x="2" y="2" width="20" height="20" rx="6" fill="#121213" />
-          <circle cx="8.6" cy="12" r="1.35" fill="#F3F2EE" />
-          <g fill="none" stroke="#F3F2EE" stroke-width="1.6" stroke-linecap="round">
-            <path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4" />
-            <path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2" />
-          </g></svg
-        >Dijivizit
-      </div>
-      <div class="k">Müşteri kılavuzu</div>
-      <h1>Kullanım ve<br /><span>doldurma kılavuzu.</span></h1>
-      <p class="lead">
-        Hesabınızı açmaktan kartınızı ilk kez okutmaya kadar, panelde doldurduğunuz her alanın ne
-        işe yaradığı ve nasıl doldurulacağı.
-      </p>
-      <svg
-        class="arcs"
-        viewBox="0 0 200 200"
-        fill="none"
-        stroke="#CBC8C0"
-        stroke-width="1.2"
-        stroke-linecap="round"
-      >
-        <path d="M52 70a42 42 0 0 1 0 60" />
-        <path d="M86 40a84 84 0 0 1 0 120" />
-        <path d="M120 10a126 126 0 0 1 0 180" />
-      </svg>
-      <div class="foot"><span>app.dijivizit.com</span><span>Ekim 2026</span></div>
-    </div>
-
-    <!-- CONTENTS -->
-    <div class="toc">
-      <div class="k">İçindekiler</div>
-      <h2>Bu kılavuzda</h2>
-      <ol>
-        <li><b>01</b>Hızlı başlangıç: 6 adımda hazır kart</li>
-        <li><b>02</b>Hesap açma ve giriş</li>
-        <li><b>03</b>Panelim ve kartı yayınlama</li>
-        <li><b>04</b>Profili düzenle (temel bilgiler)</li>
-        <li><b>05</b>Profil fotoğrafı</li>
-        <li><b>06</b>Bağlantılar: telefon, e-posta, sosyal medya</li>
-        <li><b>07</b>Uzmanlık ve yetenekler</li>
-        <li><b>08</b>Banka bilgileri (IBAN)</li>
-        <li><b>09</b>Fatura bilgileri</li>
-        <li><b>10</b>Belgeler (PDF)</li>
-        <li><b>11</b>Önizleme: kartınız nasıl görünüyor</li>
-        <li><b>12</b>Paylaşma: NFC kart, QR kod, bağlantı</li>
-        <li><b>13</b>Karşınızdaki ne görür, “Rehberime Kaydet”</li>
-        <li><b>14</b>Kişiler: gelen bilgiler, notlar, hatırlatmalar</li>
-        <li><b>15</b>Kâğıt kartvizit tarama</li>
-        <li><b>16</b>Analitik</li>
-        <li><b>17</b>Kartlarım: ek kartlar, kayıp kart</li>
-        <li><b>18</b>Ekip: şirket kartları ve kart devri</li>
-        <li><b>19</b>Ayarlar: e-posta, şifre, hesap silme</li>
-        <li><b>20</b>Sorun giderme</li>
-        <li><b>21</b>Sınırlar ve destek</li>
-      </ol>
-    </div>
-
-    <!-- 01 -->
-    <section>
-      <div class="sec-head"><span class="n">01</span><span class="k">Hızlı başlangıç</span></div>
-      <h2>6 adımda<br /><span>hazır kart.</span></h2>
-      <p class="lead">
-        Kartınızın çalışması için gereken en kısa yol. Ayrıntılar sonraki bölümlerde.
-      </p>
-      <ol class="check">
-        <li>
-          <div>
-            <b>Hesabınızı açın.</b> <span class="mono">app.dijivizit.com</span> adresinde size
-            verilen davet koduyla kayıt olun, e-postanıza gelen bağlantıyla adresinizi doğrulayın.
-            <i>(Bölüm 02)</i>
-          </div>
-        </li>
-        <li>
-          <div>
-            <b>Temel bilgilerinizi yazın.</b> Panelde <b class="ui">Profili düzenle</b>: ad soyad,
-            unvan, şirket, kısa bir “Hakkımda”. <i>(Bölüm 04)</i>
-          </div>
-        </li>
-        <li>
-          <div>
-            <b>Fotoğrafınızı yükleyin.</b> Kare, yüzünüzün net göründüğü bir fotoğraf.
-            <i>(Bölüm 05)</i>
-          </div>
-        </li>
-        <li>
-          <div>
-            <b>İletişim bağlantılarınızı ekleyin.</b> En az bir telefon ve bir e-posta; varsa
-            WhatsApp, web sitesi, LinkedIn, Instagram. <i>(Bölüm 06)</i>
-          </div>
-        </li>
-        <li>
-          <div>
-            <b>Kartınızı yayınlayın.</b> Panelde <b class="ui">Herkese açık profil</b> anahtarını
-            açın. Yayınlanmamış kart okutulduğunda “Kart bulunamadı” görünür. <i>(Bölüm 03)</i>
-          </div>
-        </li>
-        <li>
-          <div>
-            <b>Test edin.</b> Fiziksel kartınızı kendi telefonunuza dokundurun ya da QR’ı okutun;
-            profiliniz açılıyor ve <b class="ui">Rehberime Kaydet</b> doğru bilgileri ekliyorsa
-            hazırsınız. <i>(Bölüm 12–13)</i>
-          </div>
-        </li>
-      </ol>
-      <div class="tip">
-        <b class="t">İsteğe bağlı</b>IBAN, fatura bilgileri, PDF belgeler (katalog, fiyat listesi,
-        özgeçmiş) ve uzmanlık alanları kartı zenginleştirir ama zorunlu değildir. Banka ve fatura
-        bilgileri, siz <b class="ui">Kartımda göster</b>i açana kadar kartta görünmez.
-      </div>
-    </section>
-
-    <!-- 02 -->
-    <section>
-      <div class="sec-head"><span class="n">02</span><span class="k">Hesap</span></div>
-      <h2>Hesap açma<br /><span>ve giriş.</span></h2>
-      <div class="path">app.dijivizit.com/register</div>
-      <p>
-        Dijivizit hesabı davetle açılır. Kart siparişinizle birlikte size
-        <span class="mono">DIJI-XXXX-XXXX-XXXX</span> biçiminde bir davet kodu ya da kodun içine
-        işlendiği bir kayıt bağlantısı gönderilir.
-      </p>
-      <h3>Kayıt formu</h3>
-      <table>
-        <tr>
-          <th>Alan</th>
-          <th>Ne yazılır</th>
-          <th>Kural</th>
-        </tr>
-        <tr>
-          <td>Ad soyad</td>
-          <td>Kartınızda görünecek adınız. Sonradan değiştirebilirsiniz.</td>
-          <td><span class="req">ZORUNLU</span> 2–120 karakter</td>
-        </tr>
-        <tr>
-          <td>E-posta</td>
-          <td>Giriş ve bildirimler için kullanacağınız adres.</td>
-          <td><span class="req">ZORUNLU</span> geçerli e-posta</td>
-        </tr>
-        <tr>
-          <td>Davet kodu</td>
-          <td>Size gönderilen kod. Kayıt bağlantısıyla geldiyseniz otomatik dolar.</td>
-          <td><span class="req">ZORUNLU</span> büyük/küçük harf fark etmez</td>
-        </tr>
-        <tr>
-          <td>Parola</td>
-          <td>En az 8 karakter. Harf, rakam ve işaret karıştırın.</td>
-          <td><span class="req">ZORUNLU</span> 8–72 karakter</td>
-        </tr>
-        <tr>
-          <td>Onay kutusu</td>
-          <td>KVKK Aydınlatma Metni ve Kullanım Koşulları onayı.</td>
-          <td><span class="req">ZORUNLU</span></td>
-        </tr>
-      </table>
-      <p>
-        Ardından <b class="ui">Hesap oluştur</b>’a basın. E-postanıza bir doğrulama bağlantısı
-        gelir; tıklayınca hesabınız açılır. Gelmezse spam klasörüne bakın ya da
-        <b class="ui">Doğrulama e-postasını yeniden gönder</b>’e basın. Adresi yanlış yazdıysanız
-        <b class="ui">E-postayı değiştir</b> ile düzeltebilirsiniz.
-      </p>
-      <div class="tip">
-        <b class="t">Google ile giriş</b><b class="ui">Google ile Devam Et</b> ile de kayıt
-        olabilirsiniz; ancak davet kodunuzun o Google e-posta adresine tanımlı olması gerekir. Emin
-        değilseniz e-posta ile kayıt olun.
-      </div>
-      <h3>Giriş ve parola sıfırlama</h3>
-      <ul>
-        <li>
-          <b class="ui">Giriş yap</b>: e-posta ve parolanızla
-          <span class="mono">app.dijivizit.com/login</span>.
-        </li>
-        <li>
-          Parolanızı unuttuysanız <b class="ui">Parolamı unuttum</b> → e-postanızı yazın → gelen
-          bağlantıdan <b class="ui">Yeni parola</b> ve <b class="ui">Parolayı doğrula</b> alanlarını
-          doldurup <b class="ui">Parolayı güncelle</b>’ye basın.
-        </li>
-        <li>
-          “Lütfen önce e-posta adresinizi doğrulayın” uyarısı alırsanız doğrulama e-postasındaki
-          bağlantıya henüz tıklamamışsınız demektir.
-        </li>
-      </ul>
-      <p>
-        Davet kodunuz yoksa ya da çalışmıyorsa: <span class="mono">merhaba@dijivizit.com</span>.
-      </p>
-    </section>
-
-    <!-- 03 -->
-    <section>
-      <div class="sec-head"><span class="n">03</span><span class="k">Panelim</span></div>
-      <div class="split">
-        <div>
-          <h2>Panelim ve<br /><span>kartı yayınlama.</span></h2>
-          <p>
-            Giriş yaptığınızda açılan ana sayfa. Kartınızla ilgili her şeye buradan ulaşırsınız.
-          </p>
-          <h3>Kart durumu</h3>
-          <ul>
-            <li>
-              <b class="ui">Taslak</b> / <b class="ui">Yayında</b> etiketi kartınızın durumunu
-              gösterir.
-            </li>
-            <li>
-              <b class="ui">Herkese açık profil</b> anahtarı kartı yayınlar.
-              <b>Yeni hesaplar taslak olarak başlar</b>; anahtarı açmadan kartınız okutulduğunda
-              ziyaretçi “Kart bulunamadı” görür.
-            </li>
-            <li>
-              Anahtarı kapatırsanız bağlantınız aynı kalır, yalnızca profiliniz geçici olarak
-              gizlenir. Fiziksel kartınız yeniden yayınladığınızda tekrar çalışır.
-            </li>
-            <li>
-              <b class="ui">Herkese açık bağlantı</b>: kartınızın kalıcı adresi (<span class="mono"
-                >dijivizit.com/p/…</span
-              >). Kopyala düğmesiyle alıp e-posta imzanıza, web sitenize ekleyebilirsiniz.
-            </li>
-          </ul>
-          <h3>Hızlı işlemler</h3>
-          <p>
-            Panelin altındaki kutular sizi ilgili sayfaya götürür: Kişiler, Kartlarım, Ekip, Profili
-            düzenle, Profil fotoğrafı, Bağlantılar, Uzmanlık ve yetenekler, Banka bilgileri, Fatura
-            bilgileri, Belgeler, Analitik, Paylaş, Profili aç.
-          </p>
-          <p>
-            <b class="ui">Bugün takip edilecekler</b> kutusu yalnızca hatırlatma tarihi gelen
-            kişiler varsa görünür (Bölüm 14).
-          </p>
-        </div>
-        <div>
-          <div class="phone">
-            <div><span></span><img src="../../public/landing/ui/panel.webp" /></div>
-          </div>
-          <div class="cap">Panelim, hızlı işlemler</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04 -->
-    <section>
-      <div class="sec-head"><span class="n">04</span><span class="k">Profili düzenle</span></div>
-      <h2>Temel<br /><span>bilgiler.</span></h2>
-      <div class="path">Panelim → Profili düzenle</div>
-      <p>
-        Kartınızın üst kısmında görünen bilgiler. Kaydet düğmesi yalnızca bir değişiklik
-        yaptığınızda etkinleşir.
-      </p>
-      <table>
-        <tr>
-          <th>Alan</th>
-          <th>Ne yazılır, nerede görünür</th>
-          <th>Kural</th>
-        </tr>
-        <tr>
-          <td>Ad soyad</td>
-          <td>
-            Kartta büyük başlık olarak, rehbere kaydedilirken ad ve soyad olarak. Örn.
-            <i>Ayşe Demir</i>.
-          </td>
-          <td><span class="req">ZORUNLU</span> 2–120</td>
-        </tr>
-        <tr>
-          <td>Unvan</td>
-          <td>
-            Adınızın altında. Örn. <i>Kurucu Ortak</i>, <i>Satış Müdürü</i>. Rehbere “iş unvanı”
-            olarak geçer.
-          </td>
-          <td>en fazla 120</td>
-        </tr>
-        <tr>
-          <td>Şirket</td>
-          <td>Unvanın yanında “Unvan · Şirket” olarak. Rehbere “şirket” olarak geçer.</td>
-          <td>en fazla 120</td>
-        </tr>
-        <tr>
-          <td>Adres</td>
-          <td>
-            Kartta “Adres” satırı olarak görünür; dokununca harita açılır. Rehbere de eklenir.
-            Sokak, mahalle, ilçe/şehir, ülke sırasıyla yazın.
-          </td>
-          <td>en fazla 500</td>
-        </tr>
-        <tr>
-          <td>Hakkımda</td>
-          <td>
-            Adınızın altındaki kısa tanıtım. 1–3 cümle idealdir. Örn.
-            <i>Konut ve ticari projelerde 15 yıllık deneyimle mimari tasarım.</i>
-          </td>
-          <td>en fazla 5000</td>
-        </tr>
-        <tr>
-          <td>Bölüm başlığı</td>
-          <td>
-            Uzmanlık listenizin kartta hangi başlıkla görüneceği:
-            <b class="ui">Uzmanlık Alanları</b> ya da <b class="ui">Yetenekler</b>.
-          </td>
-          <td>varsayılan: Uzmanlık Alanları</td>
-        </tr>
-      </table>
-      <div class="tip">
-        <b class="t">İpucu</b>Hakkımda metnini kısa tutun; karşınızdaki kartı telefonda, ayakta ve
-        birkaç saniyede okur. Uzun anlatımı PDF belge olarak ekleyin (Bölüm 10).
-      </div>
-      <p>
-        Sayfanın üstündeki bağlantılarla fotoğraf, iletişim bağlantıları ve uzmanlık sayfalarına
-        geçebilirsiniz.
-      </p>
-    </section>
-    <section>
-      <div class="sec-head"><span class="n">05</span><span class="k">Profil fotoğrafı</span></div>
-      <h2>Profil<br /><span>fotoğrafı.</span></h2>
-      <div class="path">Panelim → Profil fotoğrafı</div>
-      <ul>
-        <li>
-          <b class="ui">Fotoğraf yükle</b> ile seçin; fotoğrafınız varsa düğme
-          <b class="ui">Değiştir</b> olur. <b class="ui">Kaldır</b> fotoğrafı siler.
-        </li>
-        <li>Biçim: <b>JPEG, PNG veya WebP</b>, en fazla <b>2 MB</b>.</li>
-        <li>
-          Fotoğraf kartta yuvarlak bir çerçevede, kare olarak kırpılarak gösterilir. Yüzünüz ortada
-          ve çerçevenin yaklaşık yarısını kaplıyorsa en iyi sonucu verir.
-        </li>
-        <li>Fotoğraf yüklemezseniz kartta adınızın baş harfleri görünür.</li>
-      </ul>
-      <div class="tip">
-        <b class="t">İpucu</b>Telefon fotoğrafları çoğu zaman 2 MB’ı geçer. Telefonunuzda “Paylaş →
-        Boyut: Orta/Küçük” ya da ekran görüntüsü alarak küçültebilirsiniz. Logo kullanacaksanız kare
-        ve beyaz/açık zeminli olsun.
-      </div>
-    </section>
-
-    <!-- 06 -->
-    <section>
-      <div class="sec-head"><span class="n">06</span><span class="k">Bağlantılar</span></div>
-      <h2>Telefon, e-posta,<br /><span>sosyal medya.</span></h2>
-      <div class="path">Panelim → Bağlantılar</div>
-      <p>
-        Kartınızdaki dokunulabilir iletişim satırları. En fazla <b>20</b> bağlantı ekleyebilirsiniz.
-        Önce <b class="ui">Platform</b>’u seçin; değer alanının adı ve örneği seçtiğiniz platforma
-        göre değişir.
-      </p>
-      <table>
-        <tr>
-          <th>Platform</th>
-          <th>Ne yazılır</th>
-          <th>Kartta dokununca</th>
-        </tr>
-        <tr>
-          <td>Telefon</td>
-          <td>
-            Numaranız. Örn. <span class="mono">+90 532 000 00 00</span>. Boşluk ve tire
-            kullanabilirsiniz.
-          </td>
-          <td>Arama başlar</td>
-        </tr>
-        <tr>
-          <td>WhatsApp</td>
-          <td>
-            WhatsApp’ta kullandığınız numara, ülke koduyla. Örn.
-            <span class="mono">+90 532 000 00 00</span>.
-          </td>
-          <td>WhatsApp sohbeti açılır</td>
-        </tr>
-        <tr>
-          <td>E-posta</td>
-          <td>E-posta adresiniz.</td>
-          <td>Yeni e-posta açılır</td>
-        </tr>
-        <tr>
-          <td>Web sitesi</td>
-          <td>Adresiniz. <span class="mono">https://</span> yazmasanız da eklenir.</td>
-          <td>Site açılır</td>
-        </tr>
-        <tr>
-          <td>LinkedIn</td>
-          <td>
-            Yalnızca kullanıcı adınız (<span class="mono">linkedin.com/in/</span> sonrası). Tam
-            bağlantıyı yapıştırırsanız da tanınır.
-          </td>
-          <td>Profiliniz açılır</td>
-        </tr>
-        <tr>
-          <td>Instagram</td>
-          <td>Kullanıcı adınız (@ olmadan da olur) ya da profil bağlantınız.</td>
-          <td>Profiliniz açılır</td>
-        </tr>
-        <tr>
-          <td>X</td>
-          <td>Kullanıcı adınız ya da profil bağlantınız.</td>
-          <td>Profiliniz açılır</td>
-        </tr>
-      </table>
-      <h3>Etiket (isteğe bağlı)</h3>
-      <p>
-        Satırda platform adı yerine görünecek kısa ad. Örn. <i>Cep</i>, <i>İş</i>, <i>Ofis</i>,
-        <i>Kişisel</i>. Birden fazla telefon ya da e-posta eklediğinizde hangisinin ne olduğunu
-        ayırt etmeyi sağlar ve rehbere de bu etiketle kaydedilir. En fazla 60 karakter.
-      </p>
-      <h3>Sıralama, gizleme, silme</h3>
-      <ul>
-        <li>
-          <b class="ui">Yukarı taşı</b> / <b class="ui">Aşağı taşı</b> okları kartınızdaki sırayı
-          belirler. En çok kullanılmasını istediğinizi en üste koyun.
-        </li>
-        <li>
-          <b class="ui">Kartta göster</b> işaretini kaldırırsanız bağlantı kayıtlı kalır ama kartta
-          ve rehber kaydında görünmez.
-        </li>
-        <li>
-          Değeri ya da etiketi değiştirdikten sonra satırdaki <b class="ui">Kaydet</b>’e basın. Çöp
-          kutusu simgesi bağlantıyı kalıcı olarak siler.
-        </li>
-      </ul>
-      <p style="color: var(--ink2); font-size: 9.6pt">
-        Yalnızca WhatsApp ekleyip telefon eklemezseniz, rehbere kaydederken WhatsApp numaranız
-        telefon olarak kullanılır. Adres bir bağlantı değildir;
-        <b class="ui">Profili düzenle</b>’deki Adres alanından gelir.
-      </p>
-    </section>
-
-    <!-- 07-09 -->
-    <section>
-      <div class="sec-head">
-        <span class="n">07</span><span class="k">Uzmanlık ve yetenekler</span>
-      </div>
-      <h2>Uzmanlık<br /><span>ve yetenekler.</span></h2>
-      <div class="path">Panelim → Uzmanlık ve yetenekler</div>
-      <p>Kartın alt kısmında etiketler halinde görünen kısa liste. En fazla <b>20</b> öğe.</p>
-      <table>
-        <tr>
-          <th>Alan</th>
-          <th>Ne yazılır</th>
-          <th>Kural</th>
-        </tr>
-        <tr>
-          <td>Tür</td>
-          <td><b class="ui">Uzmanlık Alanı</b> ya da <b class="ui">Yetenek</b>.</td>
-          <td><span class="req">ZORUNLU</span></td>
-        </tr>
-        <tr>
-          <td>Ad</td>
-          <td>Kısa ifade. Örn. <i>Ürün Yönetimi</i>, <i>İç Mimari</i>, <i>Restorasyon</i>.</td>
-          <td><span class="req">ZORUNLU</span> en fazla 60; aynı türde tekrar edemez</td>
-        </tr>
-      </table>
-      <p>
-        Satırlardaki oklarla sıralayın, <b class="ui">Düzenle</b> ile adını değiştirin. Kartta hangi
-        başlıkla görüneceğini <b class="ui">Profili düzenle → Bölüm başlığı</b> belirler.
-      </p>
-
-      <section class="cont">
-        <div class="sec-head"><span class="n">08</span><span class="k">Banka bilgileri</span></div>
-        <div class="split">
-          <div>
-            <h2>Banka bilgileri<br /><span>(IBAN).</span></h2>
-            <div class="path">Panelim → Banka bilgileri</div>
-            <p>
-              Ödeme alacağınız hesabı kartınızda, kopyalanabilir şekilde göstermek için. Bir hesap
-              eklenebilir.
-            </p>
-            <table>
-              <tr>
-                <th>Alan</th>
-                <th>Ne yazılır</th>
-              </tr>
-              <tr>
-                <td>Hesap sahibi <span class="req">ZORUNLU</span></td>
-                <td>Hesabın adına kayıtlı olduğu kişi ya da şirket, bankadaki yazımıyla.</td>
-              </tr>
-              <tr>
-                <td>IBAN <span class="req">ZORUNLU</span></td>
-                <td>TR ile başlayan 26 karakter. Boşluklu yazabilirsiniz; sistem düzenler.</td>
-              </tr>
-              <tr>
-                <td>Banka adı</td>
-                <td>Türk IBAN’larında otomatik bulunur. Bulunamazsa listeden seçin.</td>
-              </tr>
-            </table>
-            <div class="warn">
-              <b class="t">Önemli</b>Kaydettikten sonra <b class="ui">Kartımda göster</b> anahtarını
-              açmadıkça bilgiler kartınızda <b>görünmez</b>. Bu, yanlışlıkla paylaşmayı önlemek için
-              böyledir.
-            </div>
-          </div>
-          <div>
-            <div class="phone">
-              <div><span></span><img src="../../public/landing/ui/banka.webp" /></div>
-            </div>
-            <div class="cap">Kartta banka ve fatura bilgileri</div>
-          </div>
-        </div>
-      </section>
-    </section>
-
-    <section>
-      <div class="sec-head"><span class="n">09</span><span class="k">Fatura bilgileri</span></div>
-      <h2>Fatura<br /><span>bilgileri.</span></h2>
-      <div class="path">Panelim → Fatura bilgileri</div>
-      <p>
-        Size fatura kesecek ya da sizinle çalışacak kişilerin istediği vergi bilgileri. Dört alanın
-        hepsi zorunludur.
-      </p>
-      <table>
-        <tr>
-          <th>Alan</th>
-          <th>Ne yazılır</th>
-          <th>Kural</th>
-        </tr>
-        <tr>
-          <td>Şirket Ünvanı</td>
-          <td>Vergi levhasındaki tam ünvan. Örn. <i>Demir Mimarlık Ltd. Şti.</i></td>
-          <td>2–200</td>
-        </tr>
-        <tr>
-          <td>Şirket Adresi</td>
-          <td>Fatura adresi, levhadaki gibi.</td>
-          <td>2–500</td>
-        </tr>
-        <tr>
-          <td>Vergi Numarası</td>
-          <td>
-            Şirketler için 10 haneli VKN, şahıs şirketleri için 11 haneli TCKN. Yalnızca rakam.
-          </td>
-          <td>10 ya da 11 hane</td>
-        </tr>
-        <tr>
-          <td>Vergi Dairesi</td>
-          <td>Bağlı olduğunuz vergi dairesi. Örn. <i>Kadıköy</i>.</td>
-          <td>2–120</td>
-        </tr>
-      </table>
-      <p>
-        Banka bilgilerinde olduğu gibi, kartta görünmesi için kaydettikten sonra
-        <b class="ui">Kartımda göster</b>’i açın. Ziyaretçi her satırı tek dokunuşla kopyalayabilir.
-      </p>
-    </section>
-    <section>
-      <div class="sec-head"><span class="n">10</span><span class="k">Belgeler</span></div>
-      <h2>Belgeler<br /><span>(PDF).</span></h2>
-      <div class="path">Panelim → Belgeler</div>
-      <p>
-        Katalog, fiyat listesi, özgeçmiş, sunum gibi dosyaları kartınıza ekleyin; ziyaretçi
-        dokununca telefonunda açılır. En fazla <b>10</b> belge.
-      </p>
-      <table>
-        <tr>
-          <th>Alan</th>
-          <th>Ne yazılır</th>
-          <th>Kural</th>
-        </tr>
-        <tr>
-          <td>Belge türü</td>
-          <td>Özgeçmiş, Ürün Kataloğu, Fiyat Listesi, Broşür, Sunum, Teknik Doküman, Diğer.</td>
-          <td><span class="req">ZORUNLU</span></td>
-        </tr>
-        <tr>
-          <td>Başlık</td>
-          <td>Kartta görünecek ad. Örn. <i>Proje Kataloğu 2026</i>.</td>
-          <td><span class="req">ZORUNLU</span> en fazla 200</td>
-        </tr>
-        <tr>
-          <td>Açıklama</td>
-          <td>Başlığın altında kısa not. Örn. <i>Seçili konut ve ofis projeleri</i>.</td>
-          <td>en fazla 500</td>
-        </tr>
-        <tr>
-          <td>PDF dosyası</td>
-          <td><b class="ui">Dosya seç</b> ile seçin, <b class="ui">Belgeyi yükle</b>’ye basın.</td>
-          <td><span class="req">ZORUNLU</span> yalnızca PDF, en fazla 10 MB</td>
-        </tr>
-      </table>
-      <ul>
-        <li>
-          Her belgenin <b class="ui">Aktif</b> / <b class="ui">Pasif</b> anahtarı vardır; pasif
-          belge kartta görünmez.
-        </li>
-        <li>
-          Tür, başlık ve açıklamayı değiştirip <b class="ui">Kaydet</b>’e basabilirsiniz.
-          <b class="ui">Görüntüle</b> dosyayı açar.
-        </li>
-        <li>
-          Dosyanın kendisi değiştirilemez: yeni sürüm için eskisini <b class="ui">Sil</b>ip yenisini
-          yükleyin.
-        </li>
-      </ul>
-      <div class="tip">
-        <b class="t">İpucu</b>Telefonda hızlı açılması için PDF’i 5 MB’ın altında tutun. Word ya da
-        PowerPoint dosyanızı “PDF olarak kaydet” ile dönüştürebilirsiniz.
-      </div>
-    </section>
-
-    <!-- 11-12 -->
-    <section>
-      <div class="sec-head"><span class="n">11</span><span class="k">Önizleme</span></div>
-      <h2>Kartınız<br /><span>nasıl görünüyor.</span></h2>
-      <p>
-        <b class="ui">Profili aç</b> kutusu, kartınız taslaktayken sizi <b>önizleme</b> sayfasına
-        götürür: ziyaretçilerin yayından sonra göreceği görünüm. Önizlemede görüntülenme sayılmaz;
-        “Rehberime Kaydet” ve paylaş menüsü devre dışıdır. Kart yayındayken aynı kutu gerçek
-        kartınızı açar.
-      </p>
-
-      <section class="cont">
-        <div class="sec-head"><span class="n">12</span><span class="k">Paylaşma</span></div>
-        <h2>NFC kart, QR kod,<br /><span>bağlantı.</span></h2>
-        <h3>Fiziksel kartla (NFC)</h3>
-        <ol class="steps">
-          <li>Karşınızdakinin telefonunun kilidi açık olsun. Uygulama gerekmez.</li>
-          <li>
-            <b>iPhone:</b> kartı telefonun <b>üst kenarına</b>, kameranın olduğu bölgenin arkasına
-            yaklaştırın.<br /><b>Android:</b> kartı telefonun
-            <b>arka yüzünün ortasına</b> yaklaştırın; NFC ayarı açık olmalı (Ayarlar → Bağlantılar →
-            NFC).
-          </li>
-          <li>
-            1–2 saniye bekleyin; ekranda bir bildirim çıkar, dokununca profiliniz tarayıcıda açılır.
-          </li>
-        </ol>
-        <h3>QR kodla</h3>
-        <p>
-          NFC’si olmayan ya da kapalı telefonlarda kartın arkasındaki QR kodu kamerayla okutun.
-          Ayrıca <b class="ui">Paylaş</b> sayfasından QR kodunuzu <b class="ui">PNG indir</b> /
-          <b class="ui">SVG indir</b> ile indirip broşür, sunum, fuar standı ya da e-posta imzasında
-          kullanabilirsiniz. SVG baskı için, PNG ekran için uygundur.
-        </p>
-        <h3>Bağlantıyla</h3>
-        <p>
-          <b class="ui">Paylaş → Bağlantıyı kopyala</b> ile kartınızın adresini WhatsApp, e-posta ya
-          da sosyal medyada gönderin. Bu adres hiç değişmez; bilgilerinizi güncellediğinizde aynı
-          bağlantı yeni bilgileri gösterir.
-        </p>
-        <h3>Apple Cüzdan</h3>
-        <p>
-          <b class="ui">Kartlarım</b> sayfasında <b class="ui">Apple Cüzdan’a ekle</b> düğmesi
-          görünüyorsa kartınızı iPhone’unuzun Cüzdan uygulamasına ekleyebilirsiniz. Fiziksel kart
-          yanınızda değilken Cüzdan’daki QR’ı gösterin, karşınızdaki okutsun.
-        </p>
-      </section>
-    </section>
-
-    <!-- 13 -->
-    <section>
-      <div class="sec-head"><span class="n">13</span><span class="k">Ziyaretçi görünümü</span></div>
-      <div class="split">
-        <div>
-          <h2>Karşınızdaki<br /><span>ne görür.</span></h2>
-          <p>Kartınız okutulduğunda yukarıdan aşağıya:</p>
-          <ol class="steps">
-            <li>
-              Sağ üstte <b class="ui">Paylaş</b> menüsü (WhatsApp, Telegram, e-posta, bağlantıyı
-              kopyala, QR kod).
-            </li>
-            <li>Fotoğrafınız, adınız, “Unvan · Şirket”, Hakkımda metni.</li>
-            <li><b class="ui">Rehberime Kaydet</b> düğmesi.</li>
-            <li><b class="ui">Bilgilerimi bırak</b> düğmesi (Bölüm 14).</li>
-            <li>
-              İletişim satırlarınız, sizin belirlediğiniz sırayla; Adres satırı haritayı açar.
-            </li>
-            <li>Banka ve Fatura Bilgileri (yalnızca “Kartımda göster” açıksa).</li>
-            <li>Belgeler (yalnızca aktif olanlar).</li>
-            <li>Uzmanlık Alanları / Yetenekler.</li>
-          </ol>
-          <h3>“Rehberime Kaydet” neleri kaydeder</h3>
-          <table class="half">
-            <tr>
-              <th>Kaydedilir</th>
-              <th>Kaydedilmez</th>
-            </tr>
-            <tr>
-              <td style="font-weight: 420">
-                Ad soyad, şirket, unvan; tüm telefonlar ve e-postalar (etiketleriyle); adres; web
-                siteleri; LinkedIn, Instagram, X, WhatsApp bağlantıları; kartınızın Dijivizit
-                bağlantısı
-              </td>
-              <td>
-                Fotoğraf, Hakkımda, uzmanlıklar, banka ve fatura bilgileri, belgeler, gizlediğiniz
-                bağlantılar
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div>
-          <div class="phone">
-            <div><span></span><img src="../../public/landing/ui/profil.webp" /></div>
-          </div>
-          <div class="cap">Ziyaretçinin gördüğü kart</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 14 -->
-    <section>
-      <div class="sec-head"><span class="n">14</span><span class="k">Kişiler</span></div>
-      <h2>Gelen bilgiler, notlar,<br /><span>hatırlatmalar.</span></h2>
-      <div class="path">Panelim → Kişiler</div>
-      <h3>“Bilgilerimi bırak”</h3>
-      <p>
-        Kartınızı okutan kişi <b class="ui">Bilgilerimi bırak</b>’a basıp adını, telefonunu ve/veya
-        e-postasını, isterse şirketini ve bir not bırakabilir (paylaşım onayı zorunludur). Bu kişi
-        Kişiler listenize <b class="ui">Karttan</b> etiketiyle düşer ve size e-posta gelir;
-        e-postayı yanıtlarsanız doğrudan o kişiye gider.
-      </p>
-      <h3>Kişi ekle</h3>
-      <table>
-        <tr>
-          <th>Alan</th>
-          <th>Ne yazılır</th>
-          <th>Kural</th>
-        </tr>
-        <tr>
-          <td>Ad soyad</td>
-          <td>Kişinin adı.</td>
-          <td><span class="req">ZORUNLU</span> 2–120</td>
-        </tr>
-        <tr>
-          <td>Telefon / E-posta</td>
-          <td>
-            En az biri. Türk numaraları otomatik +90 biçimine çevrilir; yurt dışı numaraları + ile
-            başlatın.
-          </td>
-          <td><span class="req">EN AZ BİRİ</span></td>
-        </tr>
-        <tr>
-          <td>Şirket, Unvan</td>
-          <td>Kişinin çalıştığı yer ve görevi.</td>
-          <td>en fazla 120</td>
-        </tr>
-        <tr>
-          <td>Nerede tanıştınız</td>
-          <td>Örn. <i>İstanbul Mobilya Fuarı</i>. Aylar sonra hatırlamanızı sağlar.</td>
-          <td>en fazla 120</td>
-        </tr>
-        <tr>
-          <td>Etiketler</td>
-          <td>
-            Virgülle ayırın: <i>müşteri, tedarikçi, fuar</i>. Listede bu etiketlerle
-            filtreleyebilirsiniz.
-          </td>
-          <td>en fazla 10 etiket</td>
-        </tr>
-      </table>
-      <h3>Kişi sayfası</h3>
-      <ul>
-        <li>
-          <b class="ui">WhatsApp’tan yaz</b>, <b class="ui">Ara</b>,
-          <b class="ui">E-posta gönder</b> düğmeleri.
-        </li>
-        <li>
-          <b class="ui">Takip hatırlatmaları</b>: <b class="ui">Yarın</b>,
-          <b class="ui">1 hafta</b>, <b class="ui">1 ay</b> ya da bir tarih seçin, isterseniz ne
-          yapacağınızı yazın (örn. <i>Teklifi gönder</i>), <b class="ui">Hatırlatma kur</b>’a basın.
-          O gün sabah e-postanıza hatırlatma gelir ve Panelim’de “Bugün takip edilecekler” altında
-          görünür. İşi yapınca <b class="ui">Tamamlandı</b>.
-        </li>
-        <li>
-          <b class="ui">Notlar</b>: görüşmede konuştuklarınızı yazın (en fazla 2000 karakter).
-        </li>
-        <li>
-          <b class="ui">Bilgileri düzenle</b> ve <b class="ui">Kişiyi sil</b> (notları ve
-          hatırlatmalarıyla birlikte kalıcı olarak siler).
-        </li>
-      </ul>
-      <h3>Arama ve dışa aktarma</h3>
-      <p>
-        Listede isim, şirket, telefon ya da e-postayla arayın, etiketlere göre süzün.
-        <b class="ui">CSV indir</b> tüm kişileri Excel’de açılan bir dosya olarak indirir.
-      </p>
-    </section>
-
-    <!-- 15-17 -->
-    <section>
-      <div class="sec-head"><span class="n">15</span><span class="k">Kartvizit tarama</span></div>
-      <h2>Kâğıt kartvizit<br /><span>tarama.</span></h2>
-      <div class="path">Kişiler → Kartvizit tara</div>
-      <ol class="steps">
-        <li>
-          <b class="ui">Fotoğraf çek veya seç</b>’e basın, aldığınız kâğıt kartvizitin fotoğrafını
-          çekin.
-        </li>
-        <li>Kartı düz bir zemine koyun; ışık yansımasın, yazılar okunur olsun.</li>
-        <li>
-          Ad, unvan, şirket, telefon ve e-posta otomatik doldurulur.
-          <b class="ui">Bilgileri kontrol edin</b> ekranında düzeltin, isterseniz “Nerede
-          tanıştınız” ve etiket ekleyip kaydedin.
-        </li>
-      </ol>
-      <p>
-        Fotoğraf yalnızca okunmak için işlenir, saklanmaz. “Bilgi bulunamadı” uyarısı alırsanız daha
-        yakından ve net çekin.
-      </p>
-
-      <section class="cont">
-        <div class="sec-head"><span class="n">16</span><span class="k">Analitik</span></div>
-        <h2>Analitik.</h2>
-        <div class="path">Panelim → Analitik</div>
-        <p>
-          Kartınızın kaç kez açıldığını (toplam, bugün, bu hafta, bu ay) ve ziyaretçilerin neye
-          dokunduğunu gösterir: telefon, WhatsApp, e-posta, web sitesi, LinkedIn, belge görüntüleme,
-          rehbere kaydetme (vCard indirme), adres/harita, paylaş menüsü, bağlantı kopyalama, QR kod.
-          Aynı kişinin 30 dakika içindeki tekrarları bir kez sayılır. Veriler 13 ay saklanır.
-        </p>
-      </section>
-
-      <section class="cont">
-        <div class="sec-head"><span class="n">17</span><span class="k">Kartlarım</span></div>
-        <h2>Ek kartlar,<br /><span>kayıp kart.</span></h2>
-        <div class="path">Panelim → Kartlarım</div>
-        <p>
-          <b class="ui">Ana bağlantınız</b> her zaman profilinizi açar ve değişmez. Bunun yanında
-          ofis kartı, yedek kart, fuar standı QR’ı gibi
-          <b>en fazla 10 ek kart</b> oluşturabilirsiniz; her birinin ayrı bağlantısı ve ayrı
-          istatistiği olur.
-        </p>
-        <ul>
-          <li>
-            <b class="ui">Kart adı</b> yazıp (isteğe bağlı, örn. <i>Ofis kartı</i>)
-            <b class="ui">Kart ekle</b>’ye basın.
-          </li>
-          <li>
-            <b class="ui">Açık</b> / <b class="ui">Kapalı</b> anahtarı:
-            <b>kartınızı kaybederseniz kapatın</b>; o bağlantı artık açılmaz, diğer kartlarınız
-            çalışmaya devam eder.
-          </li>
-          <li>
-            Her satırda son 30 günün görüntülenme ve bırakılan kişi sayısı,
-            <b class="ui">Bağlantı</b> (kopyala), <b class="ui">QR indir</b> ve
-            <b class="ui">Kartı sil</b> bulunur.
-          </li>
-        </ul>
-        <p>
-          Şirketinizin size verdiği kartlar ayrı bir başlık altında görünür; bunları ekip
-          yöneticiniz yönetir.
-        </p>
-      </section>
-    </section>
-
-    <!-- 18 -->
-    <section>
-      <div class="sec-head"><span class="n">18</span><span class="k">Ekip</span></div>
-      <h2>Şirket kartları<br /><span>ve kart devri.</span></h2>
-      <div class="path">Panelim → Ekip</div>
-      <p>
-        Şirketler için: tüm çalışan kartlarını tek yerden yönetin. Çalışan ayrıldığında fiziksel
-        kart aynı kalır; yalnızca kartın kimin profilini açacağını değiştirirsiniz.
-      </p>
-      <h3>Kurulum</h3>
-      <ol class="steps">
-        <li>
-          <b class="ui">Ekip adı</b> yazıp (örn. <i>Acme Mobilya</i>)
-          <b class="ui">Ekibi oluştur</b>.
-        </li>
-        <li>
-          <b class="ui">Üye davet et</b>: çalışanın e-postasını ve rolünü (<b class="ui">Üye</b> /
-          <b class="ui">Yönetici</b>) seçip <b class="ui">Davet et</b>. Hesabı olmayan kişiye kayıt
-          bağlantısı da gider. Davet 14 gün geçerlidir; kişi panelinde <b class="ui">Katıl</b>’a
-          basar.
-        </li>
-        <li>
-          <b class="ui">Şirket kartları</b>: <b class="ui">Kart adı</b> ve
-          <b class="ui">Adet</b> (tek seferde en fazla 50) girip <b class="ui">Kart ekle</b>.
-        </li>
-        <li>
-          Her kartta <b class="ui">Kimin profilini açsın</b> listesinden bir üye seçin. Atanmamış
-          kart açılmaz.
-        </li>
-      </ol>
-      <h3>Kart devri</h3>
-      <p>
-        Çalışan ayrıldığında ilgili kartta <b class="ui">Kimin profilini açsın</b> seçimini yeni
-        kişiyle değiştirin. Kart anında yeni kişinin profilini açar. Ekipten çıkarılan ya da ayrılan
-        kişinin şirket kartları otomatik olarak boşa düşer.
-      </p>
-      <h3>Roller</h3>
-      <table>
-        <tr>
-          <th>Yetki</th>
-          <th>Sahip</th>
-          <th>Yönetici</th>
-          <th>Üye</th>
-        </tr>
-        <tr>
-          <td>Üye davet etme, rol değiştirme, üye çıkarma, ekip adını değiştirme</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>–</td>
-        </tr>
-        <tr>
-          <td>Şirket kartı oluşturma, atama, açma/kapama, silme</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>–</td>
-        </tr>
-        <tr>
-          <td>Şirket kartlarından gelen kişileri ve üye istatistiklerini görme</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>–</td>
-        </tr>
-        <tr>
-          <td>Ekibi silme</td>
-          <td>✓</td>
-          <td>–</td>
-          <td>–</td>
-        </tr>
-        <tr>
-          <td>Üye listesini görme, kendisine atanan kartı kullanma, ekipten ayrılma</td>
-          <td>✓</td>
-          <td>✓</td>
-          <td>✓</td>
-        </tr>
-      </table>
-      <p>
-        Ekipte her zaman en az bir <b>Sahip</b> kalmalıdır. Şirket kartına bırakılan kişileri hem
-        kartı taşıyan üye hem de yöneticiler görür.
-      </p>
-    </section>
-
-    <!-- 19-20 -->
-    <section>
-      <div class="sec-head"><span class="n">19</span><span class="k">Ayarlar</span></div>
-      <h2>E-posta, şifre,<br /><span>hesap silme.</span></h2>
-      <div class="path">Sağ üst → Ayarlar</div>
-      <ul>
-        <li>
-          <b class="ui">E-posta adresi</b>: <b class="ui">Yeni e-posta</b> yazıp
-          <b class="ui">Onay bağlantısı gönder</b>. Yeni adrese gelen bağlantıya tıklayana kadar
-          eski adresiniz geçerlidir.
-        </li>
-        <li>
-          <b class="ui">Şifre</b>: <b class="ui">Mevcut şifre</b>, <b class="ui">Yeni şifre</b> ve
-          tekrarı (en az 8 karakter). Google ile giriş yapıyorsanız buradan ayrıca bir şifre
-          belirleyebilirsiniz.
-        </li>
-        <li>
-          <b class="ui">Hesabı sil</b>: hesabınız, kartınız, belgeleriniz, banka ve fatura
-          bilgileriniz ve tüm istatistikler kalıcı olarak silinir. Onay için <b>SİL</b> yazmanız ve
-          şifrenizi girmeniz istenir. Fiziksel kartınız bundan sonra açılmaz.
-        </li>
-      </ul>
-
-      <section class="cont">
-        <div class="sec-head"><span class="n">20</span><span class="k">Sorun giderme</span></div>
-        <h2>Bir şey<br /><span>çalışmıyorsa.</span></h2>
-        <table>
-          <tr>
-            <th>Durum</th>
-            <th>Çözüm</th>
-          </tr>
-          <tr>
-            <td>Kart okutulunca “Kart bulunamadı” çıkıyor</td>
-            <td>
-              Panelim’de <b class="ui">Herkese açık profil</b> anahtarını açın. Ek kart
-              kullanıyorsanız Kartlarım’da kartın <b class="ui">Açık</b> olduğundan, şirket kartıysa
-              birine atandığından emin olun.
-            </td>
-          </tr>
-          <tr>
-            <td>Telefon kartı okumuyor</td>
-            <td>
-              Telefonun kilidini açın. iPhone’da kartı üst kenara, Android’de arka yüzün ortasına
-              tutun ve NFC’nin açık olduğundan emin olun. Kalın ya da metal kılıf okumayı
-              engelleyebilir. Olmazsa QR’ı okutun.
-            </td>
-          </tr>
-          <tr>
-            <td>IBAN veya fatura bilgileri kartta yok</td>
-            <td>İlgili sayfada <b class="ui">Kartımda göster</b>’i açın.</td>
-          </tr>
-          <tr>
-            <td>Bir bağlantı kartta görünmüyor</td>
-            <td>
-              Bağlantılar’da <b class="ui">Kartta göster</b> işaretli mi, değişiklikten sonra
-              <b class="ui">Kaydet</b>’e basıldı mı kontrol edin.
-            </td>
-          </tr>
-          <tr>
-            <td>Belge kartta yok</td>
-            <td>Belgeler’de anahtarın <b class="ui">Aktif</b> olduğunu kontrol edin.</td>
-          </tr>
-          <tr>
-            <td>Fotoğraf yüklenmiyor</td>
-            <td>Dosya JPEG, PNG ya da WebP ve 2 MB’dan küçük olmalı.</td>
-          </tr>
-          <tr>
-            <td>Doğrulama ya da sıfırlama e-postası gelmedi</td>
-            <td>Spam klasörüne bakın; birkaç dakika sonra yeniden gönderin.</td>
-          </tr>
-          <tr>
-            <td>Bilgileri değiştirdim, kartta eskisi görünüyor</td>
-            <td>
-              Kaydettiğinizden emin olun ve sayfayı yenileyin. Daha önce rehbere kaydedilmiş
-              bilgiler kişinin telefonunda kendiliğinden güncellenmez; yeniden kaydetmesi gerekir.
-            </td>
-          </tr>
-        </table>
-      </section>
-    </section>
-
-    <!-- 21 -->
-    <section>
-      <div class="sec-head"><span class="n">21</span><span class="k">Sınırlar ve destek</span></div>
-      <h2>Sınırlar<br /><span>ve destek.</span></h2>
-      <table>
-        <tr>
-          <th>Öğe</th>
-          <th>Sınır</th>
-        </tr>
-        <tr>
-          <td>Bağlantılar</td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td>Uzmanlık ve yetenekler</td>
-          <td>20 öğe, her biri en fazla 60 karakter</td>
-        </tr>
-        <tr>
-          <td>Belgeler</td>
-          <td>10 adet, yalnızca PDF, her biri en fazla 10 MB</td>
-        </tr>
-        <tr>
-          <td>Profil fotoğrafı</td>
-          <td>JPEG, PNG veya WebP, en fazla 2 MB</td>
-        </tr>
-        <tr>
-          <td>Ek kişisel kart</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>Şirket kartı</td>
-          <td>Ekip başına 500, tek seferde 50</td>
-        </tr>
-        <tr>
-          <td>Kurulabilecek ekip</td>
-          <td>Kişi başına 3</td>
-        </tr>
-        <tr>
-          <td>Kişiler</td>
-          <td>5000; kişi başına 10 etiket</td>
-        </tr>
-        <tr>
-          <td>Ekip daveti</td>
-          <td>14 gün geçerli</td>
-        </tr>
-      </table>
-      <div class="grid2" style="margin-top: 8mm">
-        <div class="card">
-          <h4>Destek ve sipariş</h4>
-          <p>talep@dijivizit.com<br />0540 626 19 65 (telefon ve WhatsApp)</p>
-        </div>
-        <div class="card">
-          <h4>Adres</h4>
-          <p>Osmangazi Mah. Basın Şehitleri Cad. No:174<br />Odunpazarı / Eskişehir</p>
-        </div>
-      </div>
-      <p style="margin-top: 8mm; color: var(--ink2)">dijivizit.com · app.dijivizit.com</p>
-    </section>
-  </body>
-</html>
+<section class="help">
+  <div class="k">Yardım</div>
+  <h2>Bir sorun<br><span>mu var?</span></h2>
+  <table><tr><td>“Kart bulunamadı” çıkıyor</td><td>Panelde <b>Herkese açık profil</b>’i açın. Kartlarım’da kartın <b>Açık</b> olduğuna bakın.</td></tr><tr><td>Telefon kartı okumuyor</td><td>Kilidi açın; iPhone’da üst kenara, Android’de arkanın ortasına tutun. Kalın kılıfı çıkarın. Olmazsa QR’ı okutun.</td></tr><tr><td>IBAN kartta yok</td><td>Banka bilgilerinde <b>Kartımda göster</b>’i açın.</td></tr><tr><td>Bir bağlantı görünmüyor</td><td><b>Kartta göster</b> açık mı, <b>Kaydet</b>’e basıldı mı?</td></tr><tr><td>Fotoğraf yüklenmiyor</td><td>JPEG, PNG veya WebP olsun ve 2 MB’ı geçmesin.</td></tr><tr><td>E-posta gelmedi</td><td>Spam klasörüne bakın, birkaç dakika sonra yeniden gönderin.</td></tr></table>
+  <div class="contact">
+    <div><h4>Bize ulaşın</h4><p>talep@dijivizit.com<br>0540 626 19 65 · WhatsApp</p></div>
+    <div><h4>Adres</h4><p>Osmangazi Mah. Basın Şehitleri Cad. No:174<br>Odunpazarı / Eskişehir</p></div>
+  </div>
+<div class="foot"><span class="lk"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#121213"/><circle cx="8.6" cy="12" r="1.35" fill="#fff"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>Dijivizit</span><span>KULLANIM KILAVUZU</span></div></section>
+</body></html>
