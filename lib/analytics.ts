@@ -5,7 +5,7 @@ export const GA_MEASUREMENT_ID = "G-1VTQZXXCP3";
  * Meta Pixel (Facebook / Instagram ads). Loaded on the marketing site only,
  * and only after the visitor accepts the cookie banner. Empty = off.
  */
-export const META_PIXEL_ID = "";
+export const META_PIXEL_ID = "1670397451141495"; // "Dijivizit Yayinci" dataset
 
 // Bumped when the list of tools changes, so earlier answers are asked again.
 export const CONSENT_KEY = "dv-consent-2";
