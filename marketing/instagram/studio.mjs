@@ -492,8 +492,8 @@ P["baglanti"] = (num) =>
     num,
     label: "Bağlantı",
     h: lines("Bir dokunuş", "uzağınızda."),
-    src: LIFE("wallet"),
-    pos: "50% 38%",
+    src: LIFE("handover"),
+    pos: "50% 62%",
   });
 
 for (const fin of ["gold", "black", "wood"]) {
@@ -553,7 +553,7 @@ P["her-yerde"] = (num) =>
 ${[
   ["handover", "50% 50%"],
   ["tap", "50% 40%"],
-  ["wallet", "50% 35%"],
+  ["hand", "50% 45%"],
 ]
   .map(
     ([n, pos], i) =>

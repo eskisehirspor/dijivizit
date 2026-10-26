@@ -294,8 +294,8 @@ export default function HomePage() {
             </div>
           </div>
           <LifestyleImage
-            src="/landing/lifestyle/wallet.webp"
-            alt="Deri kartlıktan çıkarılan siyah metal Dijivizit NFC kartvizit"
+            src="/landing/lifestyle/collection.webp"
+            alt="Dijivizit NFC kartvizit kaplamaları: açık ve koyu ahşap, gold, gümüş ve siyah metal"
           />
         </div>
       </section>
