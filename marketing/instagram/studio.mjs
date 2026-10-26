@@ -133,40 +133,61 @@ function device(src, { x, y, w = 430, pos = "top" }) {
 <span style="position:absolute;top:${w * 0.03}px;left:50%;transform:translateX(-50%);width:${w * 0.27}px;height:${w * 0.075}px;border-radius:99px;background:#0d0d0f"></span></div></div>`;
 }
 
-// Phone camera pointed at the QR on the back of a black card: the system
-// camera's scan frame and link pill, as the person on the other side sees it.
+// The backup QR printed on the back of the card (a real, scannable code).
 const QR_SVG = await QRCode.toString("https://dijivizit.com", {
   type: "svg",
   margin: 0,
   errorCorrectionLevel: "M",
   color: { dark: "#EEEDE8", light: "#0000" },
 });
-function cameraScreen(w, { qy = 44, py = 70 } = {}) {
-  const u = w / 100; // 1% of the device width
-  const q = 40 * u;
-  return `<div style="position:absolute;inset:0;background:radial-gradient(130% 70% at 50% 44%,#2b2b2e 0%,#151517 55%,#09090a 100%)">
-<div style="position:absolute;left:50%;top:${qy}%;width:${88 * u}px;height:${56 * u}px;transform:translate(-50%,-50%) rotate(-4deg);border-radius:${4 * u}px;background:linear-gradient(160deg,#26262a 0%,#19191c 45%,#121214 100%);box-shadow:0 ${3 * u}px ${8 * u}px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08)">
-<div style="position:absolute;left:50%;top:50%;width:${q}px;height:${q}px;transform:translate(-50%,-50%)">${QR_SVG.replace("<svg ", '<svg width="100%" height="100%" ')}</div></div>
-${[
-  [0, 0],
-  [1, 0],
-  [0, 1],
-  [1, 1],
-]
-  .map(([cx, cy]) => {
-    const side = q + 10 * u;
-    const L = 8 * u;
-    const pos = `left:calc(50% ${cx ? "+" : "-"} ${side / 2}px ${cx ? `- ${L}px` : ""});top:calc(${qy}% ${cy ? "+" : "-"} ${side / 2}px ${cy ? `- ${L}px` : ""})`;
-    const bd = `${cy ? "border-bottom" : "border-top"}:${0.9 * u}px solid #FFD60A;${cx ? "border-right" : "border-left"}:${0.9 * u}px solid #FFD60A;border-${cy ? "bottom" : "top"}-${cx ? "right" : "left"}-radius:${3 * u}px`;
-    return `<span style="position:absolute;${pos};width:${L}px;height:${L}px;${bd}"></span>`;
-  })
-  .join("")}
-<div style="position:absolute;left:50%;top:${py}%;transform:translateX(-50%);display:flex;align-items:center;gap:${2 * u}px;background:#FFD60A;color:#111;border-radius:99px;padding:${2.2 * u}px ${4.5 * u}px;font:600 ${4.6 * u}px/1 Geist;letter-spacing:-.01em;white-space:nowrap">
+// Back of the card: the backup QR on the left, the mark and wordmark on the
+// right. W is the card width in px.
+function cardBack(W) {
+  const u = W / 100;
+  return `<div style="position:relative;width:${W}px;height:${W / 1.586}px;border-radius:${4.5 * u}px;background:linear-gradient(155deg,#2a2a2e 0%,#1b1b1e 40%,#121214 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);overflow:hidden">
+<div style="position:absolute;left:${8 * u}px;top:50%;width:${38 * u}px;height:${38 * u}px;transform:translateY(-50%)">${QR_SVG.replace("<svg ", '<svg width="100%" height="100%" ')}</div>
+<div style="position:absolute;left:${56 * u}px;top:50%;transform:translateY(-50%);color:#EEEDE8">
+<div style="width:${11 * u}px;height:${11 * u}px">${MARK("#EEEDE8", "#1b1b1e").replace("<svg ", '<svg width="100%" height="100%" ')}</div>
+<div style="margin-top:${4 * u}px;font:500 ${5.2 * u}px/1 Geist;letter-spacing:.32em">DIJIVIZIT</div>
+<div style="margin-top:${2.4 * u}px;font:400 ${3 * u}px/1 Geist;letter-spacing:.04em;color:rgba(238,237,232,.6)">Dokun · Paylaş · Kaydet</div></div></div>`;
+}
+
+// Phone camera pointed at the back of the card: the system camera's scan
+// frame around the QR and its link pill, as the person on the other side sees it.
+function cameraScreen(w, { qy = 36 } = {}) {
+  const u = w / 100; // 1% of the screen width
+  const cw = 92 * u;
+  const ch = cw / 1.586;
+  const q = 0.38 * cw;
+  const qx = 50 - 46 + 0.08 * 92 + 0.19 * 92; // QR centre, % of width
+  const side = q + 8 * u;
+  const L = 8 * u;
+  const brackets = [
+    [0, 0],
+    [1, 0],
+    [0, 1],
+    [1, 1],
+  ]
+    .map(([cx, cy]) => {
+      const left = `calc(${qx}% ${cx ? "+" : "-"} ${side / 2}px ${cx ? `- ${L}px` : ""})`;
+      const top = `calc(${qy}% ${cy ? "+" : "-"} ${side / 2}px ${cy ? `- ${L}px` : ""})`;
+      const bd = `${cy ? "border-bottom" : "border-top"}:${0.9 * u}px solid #FFD60A;${cx ? "border-right" : "border-left"}:${0.9 * u}px solid #FFD60A;border-${cy ? "bottom" : "top"}-${cx ? "right" : "left"}-radius:${3 * u}px`;
+      return `<span style="position:absolute;left:${left};top:${top};width:${L}px;height:${L}px;${bd}"></span>`;
+    })
+    .join("");
+  return `<div style="position:absolute;inset:0;background:radial-gradient(120% 70% at 50% 40%,#d6d3cc 0%,#bfbbb3 60%,#a9a59d 100%)">
+<div style="position:absolute;left:50%;top:${qy}%;transform:translate(-50%,-50%);box-shadow:0 ${3 * u}px ${9 * u}px rgba(30,25,20,.35);border-radius:${4.5 * (cw / 100)}px">${cardBack(cw)}</div>
+${brackets}
+<div style="position:absolute;left:50%;top:calc(${qy}% + ${ch / 2 + 7 * u}px);transform:translateX(-50%);display:flex;align-items:center;gap:${2 * u}px;background:#FFD60A;color:#111;border-radius:99px;padding:${2.4 * u}px ${4.8 * u}px;font:600 ${4.8 * u}px/1 Geist;letter-spacing:-.01em;white-space:nowrap;box-shadow:0 ${1 * u}px ${4 * u}px rgba(0,0,0,.18)">
 <svg viewBox="0 0 24 24" width="${5 * u}" height="${5 * u}"><circle cx="12" cy="12" r="10" fill="none" stroke="#111" stroke-width="2"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="#111"/></svg>dijivizit.com</div>
-<div style="position:absolute;left:50%;bottom:${7 * u}px;transform:translateX(-50%);width:${17 * u}px;height:${17 * u}px;border-radius:50%;border:${1.2 * u}px solid #fff;padding:${1.4 * u}px"><div style="width:100%;height:100%;border-radius:50%;background:#fff"></div></div>
-<div style="position:absolute;left:50%;bottom:${29 * u}px;transform:translateX(-50%);font:600 ${3.4 * u}px/1 Geist;letter-spacing:.06em;color:#FFD60A">FOTOĞRAF</div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:${34 * u}px;background:#000"></div>
+<div style="position:absolute;left:50%;bottom:${27 * u}px;transform:translateX(-50%);font:600 ${3.4 * u}px/1 Geist;letter-spacing:.06em;color:#FFD60A">FOTOĞRAF</div>
+<div style="position:absolute;left:50%;bottom:${6 * u}px;transform:translateX(-50%);width:${17 * u}px;height:${17 * u}px;border-radius:50%;border:${1.2 * u}px solid #fff;padding:${1.4 * u}px"><div style="width:100%;height:100%;border-radius:50%;background:#fff"></div></div>
 </div>`;
 }
+const lyingBack = ({ left, top, width, rz = -14 }) =>
+  `<div class="abs" style="left:${left}px;top:${top}px;z-index:1;transform:perspective(1600px) rotateX(46deg) rotateZ(${rz}deg);transform-origin:50% 50%;filter:drop-shadow(0 34px 30px rgba(30,25,20,.28))">${cardBack(width)}</div>`;
+
 function phoneHtml(inner, { x, y, w }) {
   const h = Math.round(w * 2.164);
   return `<div class="abs" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-radius:${w * 0.13}px;background:#0d0d0f;padding:${w * 0.03}px;box-shadow:0 40px 80px -30px rgba(18,18,19,.45),inset 0 0 0 2px #2a2a2e">
@@ -175,7 +196,7 @@ function phoneHtml(inner, { x, y, w }) {
 }
 // Device cropped by the footer fade, like a phone running off the post.
 const cropped = (html) =>
-  `<div class="abs" style="left:0;top:0;width:1080px;height:1180px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 1060px,transparent 1170px)">${html}</div>`;
+  `<div class="abs" style="left:0;top:0;width:1080px;height:1180px;overflow:hidden;z-index:2;-webkit-mask-image:linear-gradient(#000 1060px,transparent 1170px)">${html}</div>`;
 
 function ui({ num, label, h, b, shot, notes = [], x = 578, y = 230, w = 430 }) {
   return page({
@@ -410,8 +431,8 @@ P["uygulama-yok"] = (num) =>
     label: "Deneyim",
     body: `${headBlock(lines("Uygulama yok.<br>Bekleme yok.", "Sadece dokunuş."), "", { cls: "d3" })}
 <p class="t abs" style="left:72px;top:470px;width:400px;z-index:4">Profil tarayıcıda açılır. NFC olmayan telefonlarda kartın arkasındaki QR yeterli.</p>
-${cropped(phoneHtml(cameraScreen(430, { qy: 30, py: 50 }), { x: 580, y: 450, w: 430 }))}
-${card("black", { left: 50, top: 820, width: 520, rot: -10, filter: "drop-shadow(0 30px 40px rgba(18,18,19,.25))" })}`,
+${lyingBack({ left: 40, top: 800, width: 580, rz: -10 })}
+${cropped(phoneHtml(cameraScreen(400), { x: 600, y: 430, w: 420 }))}`,
   });
 
 P["dogal-doku"] = (num) =>
@@ -495,7 +516,8 @@ P["qr-yedegi"] = (num) =>
     num,
     label: "Her telefonda",
     body: `${headBlock(lines("NFC yoksa,", "QR var."), "Her kartın arkasında yedek bir QR kod bulunur. Kamera yeterli.", { cls: "d2" })}
-${cropped(phoneHtml(cameraScreen(480, { qy: 27, py: 45 }), { x: 300, y: 560, w: 480 }))}`,
+${lyingBack({ left: 30, top: 830, width: 560, rz: -8 })}
+${cropped(phoneHtml(cameraScreen(440), { x: 590, y: 520, w: 440 }))}`,
   });
 
 P["dijital-kartvizit-nedir"] = (num) =>
