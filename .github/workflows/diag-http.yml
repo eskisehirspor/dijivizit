@@ -10,8 +10,8 @@ jobs:
           for t in "Tanışma kartla bitmez" "Kartınız iPhone" "Kâğıt kartvizit, saniyede kişi" "Özellikler"; do
             if grep -q "$t" <<<"$home"; then echo "::notice::found: $t"; else echo "::error::missing: $t"; fi
           done
-          for f in public/ig/posts/09-uygulama-yok.jpg public/landing/lifestyle/hand.webp public/landing/finishes/black.webp public/landing/desktop/0100.webp public/rehber/metal-kartvizit.jpg public/rehber/kurumsal-dijital-kartvizit.jpg public/ig/posts/04-koleksiyon-black.jpg public/ig/posts/34-isigi-yakalayan.jpg public/ig/stories/06-dokun.jpg; do
-            u="https://dijivizit.com/${f#public/}"
+          for f in app/favicon.ico public/ig/posts/09-uygulama-yok.jpg public/landing/lifestyle/hand.webp public/landing/finishes/black.webp public/landing/desktop/0100.webp public/rehber/metal-kartvizit.jpg public/rehber/kurumsal-dijital-kartvizit.jpg public/ig/posts/04-koleksiyon-black.jpg public/ig/posts/34-isigi-yakalayan.jpg public/ig/stories/06-dokun.jpg; do
+            u="https://dijivizit.com/${f#public/}"; u="${u/app\//}"
             live=$(curl -sS -m 30 "$u" | sha256sum | cut -c1-12); repo=$(sha256sum "$f" | cut -c1-12)
             [ "$live" = "$repo" ] && echo "::notice::same: $u" || echo "::error::differs: $u ($live vs $repo)"
           done
