@@ -119,7 +119,24 @@ def make_phone(loc, rot, screen="profile"):
     smat, m1, m2 = S.screen_material()
     m1.inputs["Factor"].default_value = 1.0 if screen in ("profile", "saved") else 0.0
     m2.inputs["Factor"].default_value = 1.0 if screen == "saved" else 0.0
-    smat.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"].default_value = 0.85 if THEME == "light" else 1.6
+    if THEME == "light":
+        # Real app screenshot instead of the drawn screens; "idle" is simply off.
+        for n in smat.node_tree.nodes:
+            if n.type == "TEX_IMAGE" and n.image:
+                name = os.path.basename(n.image.filepath)
+                repl = {"screen-profile.png": "screen-real-profile.png",
+                        "screen-saved.png": "screen-real-profile.png",
+                        "screen-idle.png": "screen-off.png"}.get(name)
+                if repl:
+                    n.image = bpy.data.images.load(os.path.join(S.TEX, repl))
+        # Big soft sources would sit in the screen as a grey veil.
+        for name in ("Window", "Top", "Fill"):
+            if name in bpy.data.objects:
+                bpy.data.objects[name].visible_glossy = False
+        b = smat.node_tree.nodes["Principled BSDF"]
+        b.inputs["Specular IOR Level"].default_value = 0.08
+        b.inputs["Coat Weight"].default_value = 0.12
+    smat.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"].default_value = 1.25 if THEME == "light" else 1.6
     sc.data.materials.append(smat)
     isl = S.flat("Island", 0.125, 0.036, 0.018, seg=8)
     isl.parent = ph
@@ -146,6 +163,15 @@ def stage(warm=0.0, floor=True, key=1.0, rim=1.0, strip=1.0, haze=0.0):
         sc.view_settings.look = "AgX - Base Contrast"
         w.node_tree.nodes["Background"].inputs["Color"].default_value = (0.93, 0.92, 0.9, 1)
         w.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.3
+        # Glossy rays see a dim world, so screens and metal keep their contrast.
+        wn = w.node_tree
+        lp = wn.nodes.new("ShaderNodeLightPath")
+        mx = wn.nodes.new("ShaderNodeMix")
+        mx.data_type = "FLOAT"
+        mx.inputs["A"].default_value = 0.3
+        mx.inputs["B"].default_value = 0.04
+        wn.links.new(lp.outputs["Is Glossy Ray"], mx.inputs["Factor"])
+        wn.links.new(mx.outputs["Result"], wn.nodes["Background"].inputs["Strength"])
         # Transparent film + shadow-catcher floor: the subject and its soft
         # shadow sit directly on the post's paper colour, no horizon line.
         sc.render.film_transparent = True
@@ -153,10 +179,12 @@ def stage(warm=0.0, floor=True, key=1.0, rim=1.0, strip=1.0, haze=0.0):
             f = S.flat("Floor", 60, 60, 0.01, seg=1)
             f.data.materials.append(stone_material(tint=(0.78, 0.74, 0.67), rough=(0.4, 0.65)))
             f.is_shadow_catcher = True
+            f.visible_glossy = False  # keep the pale floor out of screen and metal reflections
         warmc = (1.0, 0.95 - 0.05 * warm, 0.88 - 0.1 * warm)
         # Big soft window light from the left and a broad fill from above.
         area("Window", (1.6, 1.2), (-2.6, -1.6, 2.4), (0, 0, 0), 700 * key, warmc)
-        area("Fill", (5.0, 5.0), (0.5, -0.5, 5.0), (0, 0, 0), 120, (1.0, 0.98, 0.95))
+        fill = area("Fill", (5.0, 5.0), (0.5, -0.5, 5.0), (0, 0, 0), 120, (1.0, 0.98, 0.95))
+        fill.visible_glossy = False
         area("Rim", (0.4, 3.0), (2.6, 1.2, 0.8), (0, 0, 0.05), 120 * rim, (0.95, 0.97, 1.0))
         emission_plane("Top", (3, 1.2), (0, -0.4, 4.2), (0, 0, 0), 0.6, warmc)
         return sc
@@ -231,6 +259,15 @@ def edge(fin):
         bpy.context.view_layer.update()
         t = c.matrix_world @ Vector((CARD_W / 2 - 0.12, -CARD_H / 2 + 0.1, 0))
         camera((t.x + 0.35, t.y - 0.75, 0.32), tuple(t), lens=100, fstop=2.8)
+    return f
+
+
+def top(fin):
+    """Card seen from straight above on paper, soft window shadow (light theme)."""
+    def f():
+        stage(warm=0.2, key=0.9, rim=0.0)
+        lying("C", fin, (0, 0), -6)
+        camera((0, -0.001, 3.2), (0, 0, 0), lens=60, fstop=16)
     return f
 
 
@@ -373,6 +410,8 @@ SHOTS["lux-ui-profile"] = ui_flat("black", "profile")
 SHOTS["lux-ui-saved"] = ui_flat("silver", "saved")
 SHOTS["lux-ui-idle"] = ui_flat("wood-light", "idle")
 SHOTS["lux-ui-macro"] = ui_macro("profile")
+for fin in FINISHES:
+    SHOTS[f"lux-top-{fin}"] = top(fin)
 
 
 def main():

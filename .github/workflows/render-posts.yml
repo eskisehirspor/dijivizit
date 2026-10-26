@@ -17,6 +17,9 @@ on:
       theme:
         description: "dark or light (lux only)"
         default: "dark"
+      res:
+        description: "Render size (lux only)"
+        default: "1080x1350"
 
 permissions:
   contents: write
@@ -51,7 +54,7 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install bpy==5.2.3
-      - run: python3 render/${{ github.event.inputs.script }}.py --out out --samples ${{ github.event.inputs.samples }} --only ${{ matrix.shot }} ${{ github.event.inputs.script == 'lux' && format('--theme {0}', github.event.inputs.theme) || '' }}
+      - run: python3 render/${{ github.event.inputs.script }}.py --out out --samples ${{ github.event.inputs.samples }} --only ${{ matrix.shot }} ${{ github.event.inputs.script == 'lux' && format('--theme {0} --res {1}', github.event.inputs.theme, github.event.inputs.res) || '' }}
       - uses: actions/upload-artifact@v4
         with:
           name: post-${{ matrix.shot }}
