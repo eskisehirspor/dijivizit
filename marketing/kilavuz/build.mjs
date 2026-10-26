@@ -220,10 +220,33 @@ const STEPS = [
     "Analitik",
     ["Kartınız kaç kez", "açıldı?"],
     [
-      "<b>Analitik</b>: bugün, bu hafta, bu ay kaç kişi kartınızı açtı.",
-      "Hangi düğmeye dokunuldu: telefon, WhatsApp, rehbere kaydetme, belge…",
+      "<b>Analitik</b> → üstten dönemi seçin: <b>7</b>, <b>30</b> veya <b>90 gün</b>.",
+      "Siyah kutu: kaç kez açıldı ve önceki döneme göre artış.",
+      "Tekil ziyaretçi, rehbere kaydeden ve bilgi bırakan sayıları.",
+      "Grafikte her çubuk bir gün; üstüne dokununca o günün sayısı çıkar.",
     ],
-    ["analytics"],
+    ["an-top", "an-daily"],
+  ],
+  [
+    "Analitik",
+    ["Kim, nereden,", "hangi telefonla?"],
+    [
+      "<b>Ne zaman bakıyorlar?</b>: haftanın günü ve saati; koyu kare en yoğun saat.",
+      "<b>Nereden açıldı?</b>: şehirler ve ülkeler.",
+      "<b>Hangi telefonla?</b>: iPhone, Android, bilgisayar oranı.",
+      "<b>Nasıl geldiler?</b>: kart/QR, WhatsApp, Instagram, LinkedIn…",
+    ],
+    ["an-where", "an-devices"],
+  ],
+  [
+    "Analitik",
+    ["Karttan", "müşteriye."],
+    [
+      "Kartı açanların kaçı bir bağlantıya dokundu, kaçı sizi rehbere kaydetti, kaçı bilgisini bıraktı.",
+      "<b>Neye dokundular?</b>: WhatsApp, telefon, rehber, belge… en çok kullanılandan aza.",
+      "Birden fazla kartınız varsa <b>Kartlara göre</b> hangisinin daha çok okunduğunu görürsünüz.",
+    ],
+    ["an-funnel"],
   ],
   [
     "Kartlarım",
@@ -274,7 +297,7 @@ const PROBLEMS = [
 
 const MARK = (fg, cut) =>
   `<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="${fg}"/><circle cx="8.6" cy="12" r="1.35" fill="${cut}"/><g fill="none" stroke="${cut}" stroke-width="1.6" stroke-linecap="round"><path d="M12.1 8.3a4.6 4.6 0 0 1 0 7.4"/><path d="M15.4 5.9a8.6 8.6 0 0 1 0 12.2"/></g></svg>`;
-const ARCS = `<svg viewBox="0 0 200 200" fill="none" stroke="#CBC8C0" stroke-width="1.2" stroke-linecap="round"><path d="M52 70a42 42 0 0 1 0 60"/><path d="M86 40a84 84 0 0 1 0 120"/><path d="M120 10a126 126 0 0 1 0 180"/></svg>`;
+const ARCS = `<svg viewBox="0 0 200 200" fill="none" stroke="#E4E4E7" stroke-width="1.2" stroke-linecap="round"><path d="M52 70a42 42 0 0 1 0 60"/><path d="M86 40a84 84 0 0 1 0 120"/><path d="M120 10a126 126 0 0 1 0 180"/></svg>`;
 
 const phone = (src) =>
   `<div class="phone"><div class="scr"><img src="${IMG(src)}"><i></i></div></div>`;
@@ -298,7 +321,7 @@ const html = `<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>
 @font-face{font-family:Geist;src:url(../instagram/fonts/Geist-Variable.woff2) format("woff2");font-weight:100 900}
 @font-face{font-family:GeistMono;src:url(../instagram/fonts/GeistMono-Variable.woff2) format("woff2");font-weight:100 900}
 @page{size:A4;margin:0}
-:root{--ink:#121213;--ink2:#5E5D59;--line:#DEDCD6;--paper:#F3F2EE;--brass:#9A7743}
+:root{--ink:#121213;--ink2:#5E5D59;--line:#E4E4E7;--paper:#FFFFFF;--brass:#9A7743}
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-family:Geist;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 section{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;padding:18mm 18mm 16mm}
@@ -317,9 +340,9 @@ ol li::before{content:counter(n);display:flex;align-items:center;justify-content
 ol li b{font-weight:620}
 .note{margin-top:5mm;font-size:10.5pt;color:var(--ink2)}
 /* one phone: text left, phone right */
-.step.one{display:grid;grid-template-columns:1fr 92mm;gap:10mm;align-items:center;background:linear-gradient(to right,#fff calc(100% - 92mm),var(--paper) 0)}
+.step.one{display:grid;grid-template-columns:1fr 92mm;gap:10mm;align-items:center;background:#fff}
 .step.one .media{display:flex;align-items:center;justify-content:center}
-/* two phones: text on top, phones below on paper */
+/* two phones: text on top, phones below */
 .step.two{display:flex;flex-direction:column;gap:8mm}
 .step.two .txt{max-width:150mm}
 .step.two h2{margin-bottom:5mm}
@@ -329,7 +352,7 @@ ol li b{font-weight:620}
 .scr{position:relative;border-radius:8mm;overflow:hidden;background:#fff;padding-top:9%}
 .scr img{display:block;width:100%}
 .scr i{position:absolute;top:2mm;left:50%;transform:translateX(-50%);width:16mm;height:4.6mm;border-radius:99px;background:#0e0e10}
-.photo{width:72mm;border-radius:6mm;overflow:hidden;border:.3mm solid #DEDCD6}
+.photo{width:72mm;border-radius:6mm;overflow:hidden;border:.3mm solid #E4E4E7}
 .photo img{display:block;width:100%}
 /* cover */
 .cover{background:var(--paper)}
@@ -357,13 +380,13 @@ td{padding:4mm 6mm 4mm 0;border-top:1px solid var(--line);vertical-align:top;fon
 td:first-child{font-weight:600;width:42%}
 tr:last-child td{border-bottom:1px solid var(--line)}
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:12mm}
-.contact div{background:var(--paper);border-radius:4mm;padding:6mm}
+.contact div{background:#F4F4F5;border-radius:4mm;padding:6mm}
 .contact h4{font:500 8pt GeistMono;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:2mm}
 .contact p{font-size:12pt;line-height:1.5}
 </style></head><body>
 
 <section class="cover">
-  <div class="lock">${MARK("#121213", "#F3F2EE")}Dijivizit</div>
+  <div class="lock">${MARK("#121213", "#FFFFFF")}Dijivizit</div>
   <div class="phones">${phone("card-top")}${phone("dash-status")}</div>
   <h1>Kullanım<br><span>kılavuzu.</span></h1>
   <p class="lead">Kartınızı adım adım hazırlayın. Her sayfada bir adım ve o adımın ekran görüntüsü var.</p>
