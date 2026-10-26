@@ -148,7 +148,7 @@ function statement({ num, label, h, b, theme = "paper", cls = "d1", arcs = true,
     num,
     label,
     theme,
-    body: `${arcs ? `<div class="abs" style="right:-260px;bottom:-200px;width:900px;height:900px">${ARCS(stroke, 1.6)}</div>` : ""}
+    body: `${arcs ? `<div class="abs" style="left:0;top:0;width:1080px;height:1170px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 1040px,transparent 1150px)"><div class="abs" style="right:-340px;top:500px;width:900px;height:900px">${ARCS(stroke, 1.6)}</div></div>` : ""}
 <div class="abs" style="left:72px;right:72px;top:${top}px">${head(h, cls)}${b ? `<div class="rule" style="margin:56px 0 34px"></div><p class="t" style="max-width:700px">${b}</p>` : ""}</div>`,
   });
 }
@@ -195,44 +195,56 @@ function faq({ num, q, a, label = "Sık sorulan" }) {
 
 // ------------------------------------------------------------------ posts
 
+// Renders are placed as <img> at an exact width so tap points can be located
+// (fx, fy are fractions of the render). Anything reaching the footer fades out
+// above it: the lock-up and the URL always sit on clean ground.
+const FOOT_FADE = [1150, 1212];
+function rimg(name, { left, top, width, fade = FOOT_FADE, filter = "", z = 1 }) {
+  const h = width * 1.25;
+  const f0 = fade[0] - top;
+  const f1 = fade[1] - top;
+  const mask = top + h > fade[0] ? `-webkit-mask-image:linear-gradient(#000 ${f0}px,transparent ${f1}px);` : "";
+  return `<img src="${R(name)}" style="position:absolute;left:${left}px;top:${top}px;width:${width}px;${mask}${filter ? `filter:${filter};` : ""}z-index:${z}">`;
+}
+const at = ({ left, top, width }, fx, fy) => [left + fx * width, top + fy * width * 1.25];
+
+// A tight card crop (prep.py), placed by width; ratio of the crop is ~1.367.
+const card = (fin, { left, top, width, rot = 0, filter = "" }) =>
+  `<img src="${R(`card-${fin}`)}" style="position:absolute;left:${left}px;top:${top}px;width:${width}px;transform:rotate(${rot}deg);${filter ? `filter:${filter};` : ""}z-index:1">`;
+const GOLD = "brightness(1.08) saturate(1.06)";
+
+function headBlock(h, b, { cls = "d2", top = 168, width = 936, left = 72 } = {}) {
+  return `<div class="abs" style="left:${left}px;width:${width}px;top:${top}px;z-index:4">${head(h, cls)}${b ? `<p class="t" style="margin-top:28px;max-width:700px">${b}</p>` : ""}</div>`;
+}
+
 const P = {};
 
 P["kagit-eskir"] = (num) =>
-  hero({
+  page({
     num,
     label: "Dijivizit",
-    h: lines("Kâğıt eskir.", "İzlenim kalır."),
-    b: "NFC ve QR ile çalışan, her zaman güncel kalan akıllı kartvizit.",
-    src: R("lux-top-black"),
-    box: { x: 40, y: 560, w: 1000, h: 760, size: "118%", pos: "50% 52%" },
-    cls: "d1",
+    body: `${headBlock(lines("Kâğıt eskir.", "İzlenim kalır."), "NFC ve QR ile çalışan, her zaman güncel kalan akıllı kartvizit.", { cls: "d1" })}
+${card("black", { left: 150, top: 610, width: 780 })}`,
   });
 
 const FINCOPY = {
   black: [lines("Siyah.", "Sessiz bir güç."), "Mat siyah yüzey, ince açık gri lazer kazıma."],
   gold: [lines("Altının", "sakin hali."), "Parlamaz, ışıldar. Gösterişsiz bir ayrıcalık."],
-  silver: [
-    lines("Işıkla", "konuşan metal."),
-    "İnce fırça izleri, ışığın açısıyla değişen bir yüzey.",
-  ],
-  wood: [
-    lines("Doğanın", "imzası."),
-    "Gerçek ahşap, lazerle yakılmış logo. Her kartın dokusu kendine özgü.",
-  ],
-  "wood-light": [
-    lines("Sade. Sıcak.", "Doğal."),
-    "Açık tonlu ahşap; yumuşak, davetkâr bir ilk izlenim.",
-  ],
+  silver: [lines("Işıkla", "konuşan metal."), "İnce fırça izleri, ışığın açısıyla değişen bir yüzey."],
+  wood: [lines("Doğanın", "imzası."), "Gerçek ahşap, lazerle yakılmış logo. Her kartın dokusu kendine özgü."],
+  "wood-light": [lines("Sade. Sıcak.", "Doğal."), "Açık tonlu ahşap; yumuşak, davetkâr bir ilk izlenim."],
 };
+
+// Material: the finish's colour field; the card lies across its edge.
 for (const fin of ORDER) {
   P[`koleksiyon-${fin}`] = (num) =>
-    material({
+    page({
       num,
-      fin,
-      h: FINCOPY[fin][0],
-      b: FINCOPY[fin][1],
-      src: R(`lux-hero-${fin}`),
-      box: { x: -60, y: 200, w: 1200, h: 820, size: "150%", pos: "50% 58%" },
+      label: MAT[fin].name,
+      metaColor: MAT[fin].fg,
+      body: `<div class="abs" style="left:0;top:0;width:1080px;height:640px;background:${MAT[fin].bg}"></div>
+${card(fin, { left: 150, top: 300, width: 780, filter: fin === "gold" ? GOLD : "" })}
+${headBlock(FINCOPY[fin][0], FINCOPY[fin][1], { cls: "d3", top: 940 })}`,
     });
 }
 
@@ -244,46 +256,37 @@ ORDER.forEach((fin, i) => {
       label: "Koleksiyon",
       body: `<div class="abs" style="left:58px;top:150px;font:620 360px/0.78 Geist;letter-spacing:-.07em;color:${MAT[fin].bg}">0${i + 1}</div>
 <div class="abs k" style="right:72px;top:160px;color:${C.ink2}">0${i + 1} / 05</div>
-${img(R(`lux-lean-${fin}`), { x: 0, y: 470, w: 1080, h: 720, size: "104%", pos: "50% 60%" })}
-<div class="abs" style="left:72px;right:72px;top:1140px">${head(MAT[fin].name, "d4")}</div>`,
+${rimg(`lux-lean-${fin}`, { left: -40, top: 260, width: 1160, fade: [1060, 1120], filter: fin === "gold" ? GOLD : "" })}
+<div class="abs" style="left:72px;right:72px;top:1110px">${head(MAT[fin].name, "d4")}</div>`,
     });
 });
 
-P["az-soz"] = (num) =>
-  statement({
-    num,
-    label: "Felsefemiz",
-    h: lines("Az söz.", "Kalıcı etki."),
-    theme: "dark",
-    top: 420,
-  });
+P["az-soz"] = (num) => statement({ num, label: "Felsefemiz", h: lines("Az söz.", "Kalıcı etki."), theme: "dark", top: 420 });
 
 P["bir-isim"] = (num) =>
-  hero({
+  page({
     num,
     label: "Dijivizit",
-    h: lines("Bir isim. Bir dokunuş.", "Bir bağlantı."),
-    src: R("lux-float-black"),
-    box: { x: 0, y: 420, w: 1080, h: 900, size: "112%", pos: "50% 45%" },
-    cls: "d3",
+    body: `${headBlock(lines("Bir isim. Bir dokunuş.", "Bir bağlantı."), "", { cls: "d3" })}
+${rimg("lux-float-black", { left: 70, top: 190, width: 900 })}`,
   });
 
 P["detay-her-seydir"] = (num) =>
   page({
     num,
     label: "Lazer kazıma",
-    body: `${img(R("lux-macro-gold"), { x: 0, y: 0, w: 1080, h: 900, size: "cover", pos: "50% 50%" })}
-<div class="abs" style="left:0;top:0;width:1080px;height:900px;background:linear-gradient(${C.paper}00 70%,${C.paper})"></div>
-<div class="abs" style="left:72px;right:72px;top:930px">${head(lines("Detay,", "her şeydir."), "d3")}<p class="t" style="margin-top:24px">Her harf, her çizgi lazerle yüzeye işlenir.</p></div>`,
+    metaColor: C.paper,
+    body: `${rimg("lux-macro-black", { left: 0, top: -380, width: 1080, fade: [860, 960] })}
+${headBlock(lines("Detay,", "her şeydir."), "Her harf, her çizgi lazerle yüzeye işlenir.", { cls: "d3", top: 960 })}`,
   });
 
 P["teknik"] = (num) =>
   page({
     num,
     label: "Teknik özellikler",
-    body: `${img(R("lux-top-silver"), { x: 520, y: 120, w: 600, h: 520, size: "150%", pos: "45% 50%" })}
-<div class="abs" style="left:72px;width:560px;top:200px">${head(lines("Küçük bir kart.", "Büyük bir sistem."), "d3")}</div>
-<div class="abs" style="left:72px;right:72px;top:680px;border-top:3px solid ${C.ink}">
+    body: `${headBlock(lines("Küçük bir kart.", "Büyük bir sistem."), "", { cls: "d3", width: 560 })}
+${card("silver", { left: 600, top: 170, width: 420, rot: 4 })}
+<div class="abs" style="left:72px;right:72px;top:560px;border-top:3px solid ${C.ink}">
 ${[
   ["Bağlantı", "NFC çip ve yedek QR"],
   ["Uyumluluk", "iPhone ve Android, uygulama gerekmez"],
@@ -292,7 +295,7 @@ ${[
 ]
   .map(
     ([k, v]) =>
-      `<div style="display:grid;grid-template-columns:260px 1fr;padding:30px 0;border-bottom:1px solid ${C.line};align-items:baseline"><span class="k" style="color:${C.ink2}">${k}</span><span style="font-size:36px;letter-spacing:-.02em;font-weight:500">${v}</span></div>`,
+      `<div style="display:grid;grid-template-columns:260px 1fr;padding:40px 0;border-bottom:1px solid ${C.line};align-items:baseline"><span class="k" style="color:${C.ink2}">${k}</span><span style="font-size:38px;letter-spacing:-.02em;font-weight:500">${v}</span></div>`,
   )
   .join("")}</div>`,
   });
@@ -307,73 +310,59 @@ P["bilgilerin-degisir"] = (num) =>
   });
 
 P["dokun"] = (num) =>
-  hero({
+  page({
     num,
     label: "Paylaşım",
-    h: lines("Dokunun.", "Profiliniz açılsın."),
-    src: R("lux-phone-black"),
-    box: { x: -40, y: 400, w: 1160, h: 950, size: "118%", pos: "50% 62%" },
+    body: `${headBlock(lines("Dokunun.", "Profiliniz açılsın."))}
+${rimg("lux-ui-profile", { left: 30, top: 110, width: 1100 })}`,
   });
 
 P["kaydedildi"] = (num) =>
-  photo({
-    num,
-    label: "Tek dokunuşla",
-    h: lines("Rehbere kaydedildi.", "Siz hatırlandınız."),
-    src: LIFE("tap"),
-    pos: "50% 46%",
-  });
+  photo({ num, label: "Tek dokunuşla", h: lines("Rehbere kaydedildi.", "Siz hatırlandınız."), src: LIFE("tap"), pos: "50% 46%" });
 
 P["bes-kaplama"] = (num) =>
   page({
     num,
     label: "Koleksiyon",
-    body: `<div class="abs" style="left:72px;right:72px;top:168px">${head(lines("Beş kaplama.", "Tek imza."), "d2")}</div>
-${img(R("lux-stack"), { x: -40, y: 470, w: 1160, h: 700, size: "122%", pos: "50% 55%" })}
-<div class="abs" style="left:72px;right:72px;top:1150px;display:flex;gap:14px;align-items:center">
+    body: `${headBlock(lines("Beş kaplama.", "Tek imza."), "")}
+<div class="abs" style="left:72px;right:72px;top:400px;display:flex;gap:14px;align-items:center;z-index:4">
 ${ORDER.map((f) => `<span style="width:30px;height:30px;border-radius:99px;background:${MAT[f].bg};box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)"></span>`).join("")}
-<span class="t" style="font-size:26px;margin-left:12px">Siyah metal, gümüş, gold, koyu ve açık ahşap.</span></div>`,
+<span class="t" style="font-size:28px;margin-left:12px">Siyah metal, gümüş, gold, koyu ve açık ahşap.</span></div>
+${rimg("lux-stack", { left: -20, top: 300, width: 1120 })}`,
   });
 
 P["masaya-birakilan"] = (num) =>
   page({
     num,
     label: "İlk izlenim",
-    body: `${img(R("lux-edge-black"), { x: 0, y: 0, w: 1080, h: 1350, size: "cover", pos: "50% 50%" })}
-<div class="abs" style="left:0;right:0;bottom:0;height:520px;background:linear-gradient(${C.paper}00,${C.paper} 55%)"></div>
-<div class="abs" style="left:72px;right:72px;top:960px">${head(lines("Masaya bırakılan", "ilk imza."), "d3")}</div>`,
+    metaColor: C.paper,
+    body: `${rimg("lux-edge-black", { left: 0, top: -120, width: 1080, fade: [820, 940] })}
+${headBlock(lines("Masaya bırakılan", "ilk imza."), "", { cls: "d3", top: 960 })}`,
   });
 
 P["kenarina-kadar"] = (num) =>
   page({
     num,
     label: "Kenar işçiliği",
-    body: `${img(R("lux-edge-gold"), { x: 0, y: 0, w: 1080, h: 1350, size: "cover", pos: "50% 50%" })}
-<div class="abs" style="left:0;right:0;bottom:0;height:520px;background:linear-gradient(${C.paper}00,${C.paper} 55%)"></div>
-<div class="abs" style="left:72px;right:72px;top:960px">${head(lines("Kenarına kadar", "özen."), "d3")}</div>`,
+    body: `${rimg("lux-edge-gold", { left: 0, top: -120, width: 1080, fade: [820, 940], filter: GOLD })}
+${headBlock(lines("Kenarına kadar", "özen."), "", { cls: "d3", top: 960 })}`,
   });
 
 P["tanismak"] = (num) =>
-  photo({
-    num,
-    label: "Bağlantı",
-    h: lines("Tanışmak bir an.", "Hatırlanmak, bir tercih."),
-    src: LIFE("handover"),
-    pos: "50% 50%",
-  });
+  photo({ num, label: "Bağlantı", h: lines("Tanışmak bir an.", "Hatırlanmak, bir tercih."), src: LIFE("handover"), pos: "50% 50%" });
 
 P["koleksiyon-liste"] = (num) =>
   page({
     num,
     label: "Koleksiyon",
-    body: `<div class="abs" style="left:72px;right:72px;top:168px">${head(lines("Size yakışanı", "seçin."), "d2")}</div>
-<div class="abs" style="left:72px;right:72px;top:470px;border-top:3px solid ${C.ink}">
+    body: `${headBlock(lines("Size yakışanı", "seçin."), "")}
+<div class="abs" style="left:72px;right:72px;top:440px;border-top:3px solid ${C.ink}">
 ${ORDER.map(
   (f, i) =>
-    `<div style="display:flex;align-items:center;gap:30px;height:132px;border-bottom:1px solid ${C.line}">
-<span class="k" style="width:60px;color:${C.ink2}">0${i + 1}</span>
-<span style="width:178px;height:112px;background:url('${R(`lux-top-${f}`)}') 50% 50%/240% no-repeat"></span>
-<span style="font-size:40px;letter-spacing:-.025em;font-weight:520">${MAT[f].name}</span></div>`,
+    `<div style="display:flex;align-items:center;gap:34px;height:142px;border-bottom:1px solid ${C.line}">
+<span class="k" style="width:44px;color:${C.ink2}">0${i + 1}</span>
+<span style="width:170px;height:120px;background:url('${R(`card-${f}`)}') center/contain no-repeat;${f === "gold" ? `filter:${GOLD}` : ""}"></span>
+<span style="font-size:42px;letter-spacing:-.028em;font-weight:540">${MAT[f].name}</span></div>`,
 ).join("")}</div>`,
   });
 
@@ -393,18 +382,16 @@ P["dogal-doku"] = (num) =>
     label: "Koyu Ahşap",
     theme: "dark",
     bg: MAT.wood.bg,
-    body: `${img(R("lux-macro-wood"), { x: 0, y: 0, w: 1080, h: 1350, size: "cover", pos: "50% 40%" })}
-<div class="abs" style="left:0;right:0;bottom:0;height:640px;background:linear-gradient(${MAT.wood.bg}00,${MAT.wood.bg}f2 60%)"></div>
-<div class="abs" style="left:72px;right:72px;top:960px">${head(lines("Her kartın dokusu", "kendine özgü."), "d3")}</div>`,
+    body: `${rimg("lux-macro-wood", { left: 0, top: -200, width: 1080, fade: [760, 920] })}
+${headBlock(lines("Her kartın dokusu", "kendine özgü."), "", { cls: "d3", top: 960 })}`,
   });
 
 P["on-yuz-arka-yuz"] = (num) =>
-  hero({
+  page({
     num,
     label: "İki yüz",
-    h: lines("Önde dokunuş.", "Arkada imzamız."),
-    src: R("lux-duo-black-gold"),
-    box: { x: -40, y: 420, w: 1160, h: 900, size: "118%", pos: "50% 55%" },
+    body: `${headBlock(lines("Önde dokunuş.", "Arkada imzamız."))}
+${rimg("lux-duo-black-gold", { left: -10, top: 260, width: 1100, filter: GOLD })}`,
   });
 
 P["isigi-yakalayan"] = (num) =>
@@ -412,8 +399,8 @@ P["isigi-yakalayan"] = (num) =>
     num,
     label: "Mat Fırçalanmış Gold",
     bg: "#EDE6DA",
-    body: `${img(R("lux-float-gold"), { x: 0, y: 260, w: 1080, h: 1000, size: "112%", pos: "50% 45%" })}
-<div class="abs" style="left:72px;right:72px;top:168px">${head(lines("Işığı yakalayan", "bir kartvizit."), "d2")}</div>`,
+    body: `${headBlock(lines("Işığı yakalayan", "bir kartvizit."))}
+${rimg("lux-float-gold", { left: 0, top: 230, width: 1080, filter: GOLD })}`,
   });
 
 P["nfc-nedir"] = (num) =>
@@ -424,33 +411,21 @@ P["nfc-nedir"] = (num) =>
   });
 
 P["kaydedilen-aranir"] = (num) =>
-  photo({
-    num,
-    label: "Hatırlanmak",
-    h: lines("Kaydedilen", "aranır."),
-    src: LIFE("hand"),
-    pos: "50% 52%",
-  });
+  photo({ num, label: "Hatırlanmak", h: lines("Kaydedilen", "aranır."), src: LIFE("hand"), pos: "50% 52%" });
 
 P["ahsabin-iki-tonu"] = (num) =>
   page({
     num,
     label: "Ahşap koleksiyonu",
-    body: `<div class="abs" style="left:0;top:0;width:540px;height:760px;background:${MAT.wood.bg}"></div>
-<div class="abs" style="left:540px;top:0;width:540px;height:760px;background:${MAT["wood-light"].bg}"></div>
-${img(R("lux-duo-wood"), { x: -60, y: 180, w: 1200, h: 820, size: "140%", pos: "50% 55%" })}
-<div class="abs" style="left:72px;right:72px;top:960px">${head(lines("Ahşabın", "iki tonu."), "d3")}<p class="t" style="margin-top:24px">Koyu ve açık; ikisi de gerçek ahşap, ikisi de NFC.</p></div>`,
     metaColor: C.paper,
+    body: `<div class="abs" style="left:0;top:0;width:540px;height:640px;background:${MAT.wood.bg}"></div>
+<div class="abs" style="left:540px;top:0;width:540px;height:640px;background:${MAT["wood-light"].bg}"></div>
+${rimg("lux-duo-wood", { left: 0, top: 120, width: 1080, fade: [900, 960] })}
+${headBlock(lines("Ahşabın", "iki tonu."), "Koyu ve açık; ikisi de gerçek ahşap, ikisi de NFC.", { cls: "d3", top: 960 })}`,
   });
 
 P["baglanti"] = (num) =>
-  photo({
-    num,
-    label: "Bağlantı",
-    h: lines("Bir dokunuş", "uzağınızda."),
-    src: LIFE("wallet"),
-    pos: "50% 38%",
-  });
+  photo({ num, label: "Bağlantı", h: lines("Bir dokunuş", "uzağınızda."), src: LIFE("wallet"), pos: "50% 38%" });
 
 for (const fin of ["gold", "black", "wood"]) {
   P[`edisyon-${fin}`] = (num) =>
@@ -460,8 +435,8 @@ for (const fin of ["gold", "black", "wood"]) {
       bg: MAT[fin].bg,
       fg: MAT[fin].fg,
       mute: fin === "gold" ? "rgba(18,18,19,.62)" : "rgba(243,242,238,.7)",
-      body: `${img(R(`lux-top-${fin}`), { x: -120, y: 200, w: 1320, h: 900, size: "120%", pos: "50% 50%", extra: "filter:drop-shadow(0 30px 40px rgba(0,0,0,.25))" })}
-<div class="abs" style="left:72px;right:72px;top:1000px">${head(FINCOPY[fin][0], "d3")}</div>`,
+      body: `${card(fin, { left: 110, top: 230, width: 860, rot: -4, filter: `${fin === "gold" ? GOLD : ""} drop-shadow(0 40px 50px rgba(0,0,0,.28))` })}
+${headBlock(FINCOPY[fin][0], "", { cls: "d3", top: 1000 })}`,
     });
 }
 
@@ -486,7 +461,7 @@ P["sayilarla"] = (num) =>
     num,
     label: "Sayılarla Dijivizit",
     theme: "dark",
-    body: `<div class="abs" style="left:72px;right:72px;top:190px">
+    body: `<div class="abs" style="left:72px;right:72px;top:200px">
 ${[
   ["0", "kâğıt", "Baskı, kesim, atık yok."],
   ["1", "dokunuş", "Profiliniz anında açılır."],
@@ -494,9 +469,9 @@ ${[
 ]
   .map(
     ([a, b, c], i) =>
-      `<div style="display:grid;grid-template-columns:300px 1fr;align-items:end;padding:${i ? 40 : 0}px 0 40px;border-bottom:1px solid rgba(243,242,238,.18)">
-<span style="font:600 230px/0.8 Geist;letter-spacing:-.06em;color:${i === 2 ? C.brass : C.paper}">${a}</span>
-<span><span style="display:block;font-size:56px;font-weight:600;letter-spacing:-.035em">${b}</span><span class="t" style="display:block;margin-top:10px;font-size:30px">${c}</span></span></div>`,
+      `<div style="display:grid;grid-template-columns:300px 1fr;align-items:end;padding:${i ? 44 : 0}px 0 44px;border-bottom:1px solid rgba(243,242,238,.18)">
+<span style="font:600 230px/0.8 Geist;letter-spacing:-.06em;color:${i === 2 ? "#C7A877" : C.paper}">${a}</span>
+<span><span style="display:block;font-size:58px;font-weight:600;letter-spacing:-.035em">${b}</span><span class="t" style="display:block;margin-top:10px;font-size:30px">${c}</span></span></div>`,
   )
   .join("")}</div>`,
   });
@@ -505,7 +480,7 @@ P["her-yerde"] = (num) =>
   page({
     num,
     label: "Her an, her yerde",
-    body: `<div class="abs" style="left:72px;right:72px;top:168px">${head(lines("Toplantıda. Fuarda.<br>Kafede.", "Yolda."), "d3")}</div>
+    body: `${headBlock(lines("Toplantıda. Fuarda.<br>Kafede.", "Yolda."), "", { cls: "d3" })}
 ${[
   ["handover", "50% 50%"],
   ["tap", "50% 40%"],
@@ -513,29 +488,20 @@ ${[
 ]
   .map(
     ([n, pos], i) =>
-      `<div class="ph" style="left:${72 + i * 320}px;top:520px;width:296px;height:640px;background-image:url('${LIFE(n)}');background-position:${pos}"></div>`,
+      `<div class="ph" style="left:${72 + i * 320}px;top:500px;width:296px;height:660px;background-image:url('${LIFE(n)}');background-position:${pos}"></div>`,
   )
   .join("")}`,
   });
 
 P["ilk-izlenim"] = (num) =>
-  statement({
-    num,
-    label: "İlk izlenim",
-    h: lines("İkinci bir şansı", "yoktur."),
-    b: "O yüzden ilk dokunuşu özenle tasarladık.",
-    theme: "dark",
-    top: 400,
-  });
+  statement({ num, label: "İlk izlenim", h: lines("İkinci bir şansı", "yoktur."), b: "O yüzden ilk dokunuşu özenle tasarladık.", theme: "dark", top: 400 });
 
 P["kurumsal"] = (num) =>
-  hero({
+  page({
     num,
     label: "Kurumsal",
-    h: lines("Tüm ekip,", "tek imza."),
-    b: "Ekibiniz için aynı tasarım; biri ayrıldığında kart değil, profil değişir.",
-    src: R("lux-stack"),
-    box: { x: -40, y: 560, w: 1160, h: 700, size: "122%", pos: "50% 55%" },
+    body: `${headBlock(lines("Tüm ekip,", "tek imza."), "Ekibiniz için aynı tasarım; biri ayrıldığında kart değil, profil değişir.")}
+${rimg("lux-stack", { left: -40, top: 0, width: 1160 })}`,
   });
 
 P["atolye"] = (num) =>
@@ -543,7 +509,7 @@ P["atolye"] = (num) =>
     num,
     label: "Atölye",
     body: `<div class="abs" style="right:-260px;top:-180px;width:900px;height:900px">${ARCS("#CBC8C0", 1.6)}</div>
-<div class="abs" style="left:72px;right:72px;top:400px">${head(lines("Eskişehir'den,", "özenle."), "d2")}</div>
+${headBlock(lines("Eskişehir'den,", "özenle."), "", { top: 400 })}
 <div class="abs" style="left:72px;right:72px;top:820px;border-top:3px solid ${C.ink}">
 ${[
   ["Adres", "Osmangazi Mah. Basın Şehitleri Cad. No:174<br>Odunpazarı / Eskişehir"],
@@ -562,28 +528,40 @@ P["siparis"] = (num) =>
     num,
     label: "Sipariş",
     theme: "dark",
-    body: `${img(R("lux-hero-gold"), { x: -80, y: 400, w: 1240, h: 820, size: "140%", pos: "50% 58%" })}
-<div class="abs" style="left:72px;right:72px;top:168px">${head(lines("Kartınızı", "seçin."), "d1")}</div>
-<div class="abs" style="left:72px;top:1090px;display:inline-flex;align-items:center;gap:16px;background:${C.paper};color:${C.ink};border-radius:99px;padding:22px 34px;font-size:32px;font-weight:560;letter-spacing:-.02em">dijivizit.com/siparis <span style="font-size:30px">→</span></div>`,
+    body: `${headBlock(lines("Kartınızı", "seçin."), "", { cls: "d1" })}
+${card("gold", { left: 330, top: 470, width: 700, rot: -8, filter: `${GOLD} drop-shadow(0 40px 50px rgba(0,0,0,.5))` })}
+<div class="abs" style="left:72px;top:1080px;display:inline-flex;align-items:center;gap:16px;background:${C.paper};color:${C.ink};border-radius:99px;padding:24px 36px;font-size:34px;font-weight:560;letter-spacing:-.02em;z-index:4">dijivizit.com/siparis <span>→</span></div>`,
   });
+
+// Tap moments: the phone big, the real profile on screen, rings at the touch.
+function tapPost({ num, label, h, b, shot, ring = [0.6, 0.235], box = { left: -150, top: 250, width: 1300 }, cls = "d2" }) {
+  const [x, y] = at(box, ring[0], ring[1]);
+  return page({
+    num,
+    label,
+    body: `${headBlock(h, b, { cls })}
+${rimg(shot, box)}
+${SIGNAL(x, y, { r: 230 })}`,
+  });
+}
 
 P["dokundurun"] = (num) =>
-  hero({
-    num,
-    label: "Nasıl çalışır",
-    h: lines("Dokundurun.", "Profiliniz açılsın."),
-    src: R("lux-tap-black"),
-    box: { x: 260, y: 330, w: 820, h: 1020, size: "128%", pos: "52% 40%" },
-    textTop: 168,
-  });
+  tapPost({ num, label: "Nasıl çalışır", h: lines("Dokundurun.", "Profiliniz açılsın."), shot: "lux-tap-black" });
 
-P["yaklastirin"] = (num) =>
-  page({
+P["ahsapta-da-ayni"] = (num) =>
+  tapPost({ num, label: "Ceviz", h: lines("Ahşapta da", "aynı tek dokunuş."), shot: "lux-tap-wood" });
+
+P["yaklastirin"] = (num) => {
+  const box = { left: -40, top: 120, width: 1160 };
+  const [x, y] = at(box, 0.385, 0.56);
+  return page({
     num,
     label: "NFC",
-    body: `${img(R("lux-tap-gold-idle"), { x: -40, y: 80, w: 760, h: 1270, size: "142%", pos: "52% 34%" })}
-<div class="abs" style="left:620px;right:72px;top:470px">${head(lines("Yaklaştırın.", "Gerisi kendiliğinden."), "d4")}<p class="t" style="margin-top:26px;font-size:30px">Kartınız telefonun üst kısmına değdiği an bağlantı kurulur.</p></div>`,
+    body: `${headBlock(lines("Yaklaştırın.", "Gerisi kendiliğinden."), "Kartınız telefona değdiği an profiliniz açılır.", { cls: "d3" })}
+${rimg("lux-phone-gold-saved", box)}
+${SIGNAL(x, y, { r: 200 })}`,
   });
+};
 
 P["profil-boyle-gorunur"] = (num) =>
   ui({
@@ -591,68 +569,53 @@ P["profil-boyle-gorunur"] = (num) =>
     label: "Arayüz",
     h: lines("Profiliniz,", "onun ekranında."),
     shot: "profil",
-    notes: [
-      "Fotoğraf, ad ve unvan",
-      "Rehbere Kaydet",
-      "Telefon ve WhatsApp",
-      "LinkedIn, e-posta, web",
-      "IBAN ve belgeler",
-    ],
+    notes: ["Fotoğraf, ad ve unvan", "Rehbere Kaydet", "Telefon ve WhatsApp", "LinkedIn, e-posta, web", "IBAN ve belgeler"],
   });
 
 P["rehberde"] = (num) =>
   page({
     num,
     label: "Tek dokunuşla",
-    body: `${device(UI("profil"), { x: 300, y: 560, w: 480 })}
+    body: `${device(UI("profil"), { x: 385, y: 520, w: 310 })}
 <div class="abs" style="left:72px;right:72px;top:168px;text-align:center">${head(lines("Rehbere", "kaydedildi."), "d2")}<p class="t" style="margin:28px auto 0;max-width:640px">Karşınızdaki tek dokunuşla sizi rehberine ekler.</p></div>`,
   });
 
 P["kilit-ekrani"] = (num) =>
-  hero({
+  page({
     num,
     label: "Uygulama gerekmez",
-    h: lines("Telefonun kilidi açık,", "bu kadar."),
-    src: R("lux-ui-idle"),
-    box: { x: -40, y: 440, w: 1160, h: 900, size: "118%", pos: "50% 55%" },
-    cls: "d3",
+    body: `${headBlock(lines("Telefonun kilidi açık,", "bu kadar."), "", { cls: "d3" })}
+${rimg("lux-ui-saved", { left: 30, top: 130, width: 1100 })}`,
   });
 
 P["rehbere-kaydet"] = (num) =>
   page({
     num,
     label: "Arayüz",
-    body: `<div class="abs" style="left:72px;right:72px;top:168px">${head(lines("Rehbere Kaydet.", "Hepsi bu."), "d2")}</div>
-<div class="abs" style="left:72px;right:72px;top:470px;height:700px;border-radius:44px;overflow:hidden;background:#fff url('${UI("profil")}') 50% 22%/118% auto no-repeat;box-shadow:0 0 0 1px ${C.line}"></div>`,
+    body: `${headBlock(lines("Rehbere Kaydet.", "Hepsi bu."))}
+<div class="abs" style="left:0;top:0;width:1080px;height:1180px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 1060px,transparent 1170px)">${device(UI("profil"), { x: 260, y: 400, w: 560 })}</div>`,
   });
 
-P["ahsapta-da-ayni"] = (num) =>
-  hero({
-    num,
-    label: "Ceviz",
-    h: lines("Ahşapta da", "aynı tek dokunuş."),
-    src: R("lux-tap-wood"),
-    box: { x: 260, y: 330, w: 820, h: 1020, size: "128%", pos: "52% 40%" },
-  });
-
-P["uc-adim"] = (num) =>
-  page({
+P["uc-adim"] = (num) => {
+  const panel = (inner, n, t) =>
+    `<div><div style="position:relative;height:540px;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px ${C.line}">${inner}</div>
+<div style="display:flex;gap:14px;align-items:baseline;margin-top:24px"><span class="k" style="color:${C.brass}">${n}</span><span style="font-size:30px;font-weight:540;letter-spacing:-.02em">${t}</span></div></div>`;
+  const tapIn = (shot, ring) => {
+    const box = { left: -190, top: -40, width: 660 };
+    const [x, y] = at(box, ring[0], ring[1]);
+    return `<img src="${R(shot)}" style="position:absolute;left:${box.left}px;top:${box.top}px;width:${box.width}px">${SIGNAL(x, y, { r: 90 })}`;
+  };
+  return page({
     num,
     label: "Nasıl çalışır",
-    body: `<div class="abs" style="left:72px;right:72px;top:168px">${head(lines("Üç adımda", "tanışın."), "d2")}</div>
-<div class="abs" style="left:72px;right:72px;top:520px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
-${[
-  [R("lux-tap-gold-idle"), "50% 30%", "180%", "01", "Yaklaştırın"],
-  [R("lux-tap-black"), "50% 34%", "180%", "02", "Profil açılır"],
-  [UI("profil"), "50% 26%", "150%", "03", "Rehbere kaydedin"],
-]
-  .map(
-    ([src, pos, size, n, t]) =>
-      `<div><div style="height:520px;border-radius:28px;background:#fff url('${src}') ${pos}/${size} no-repeat;box-shadow:0 0 0 1px ${C.line}"></div>
-<div style="display:flex;gap:14px;align-items:baseline;margin-top:24px"><span class="k" style="color:${C.brass}">${n}</span><span style="font-size:30px;font-weight:540;letter-spacing:-.02em">${t}</span></div></div>`,
-  )
-  .join("")}</div>`,
+    body: `${headBlock(lines("Üç adımda", "tanışın."))}
+<div class="abs" style="left:72px;right:72px;top:480px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+${panel(tapIn("lux-tap-wood", [0.6, 0.235]), "01", "Yaklaştırın")}
+${panel(tapIn("lux-tap-black", [0.6, 0.235]), "02", "Profil açılır")}
+${panel(`<img src="${UI("profil")}" style="position:absolute;left:0;top:-20px;width:100%">`, "03", "Rehbere kaydedin")}
+</div>`,
   });
+};
 
 // ------------------------------------------------------------------ build
 
