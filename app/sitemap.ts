@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { GUIDES } from "@/lib/marketing/guides";
-import { LEGAL_SLUGS, LEGAL_VERSION } from "@/lib/legal/documents";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -31,12 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
       images: [`${MARKETING_ORIGIN}${g.image}`],
-    })),
-    ...LEGAL_SLUGS.map((slug) => ({
-      url: `${MARKETING_ORIGIN}/yasal/${slug}`,
-      lastModified: new Date(LEGAL_VERSION),
-      changeFrequency: "yearly" as const,
-      priority: 0.2,
     })),
   ];
 }

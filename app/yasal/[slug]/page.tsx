@@ -28,7 +28,13 @@ export async function generateMetadata({ params }: LegalPageProps): Promise<Meta
     return {};
   }
   const document = LEGAL_DOCUMENTS[slug];
-  return { title: document.title, description: document.summary };
+  // Legal texts stay reachable but out of search results, so a search for
+  // "dijivizit" leads to the product pages rather than the terms.
+  return {
+    title: document.title,
+    description: document.summary,
+    robots: { index: false, follow: true },
+  };
 }
 
 const UPDATED = new Intl.DateTimeFormat("tr-TR", { dateStyle: "long" }).format(

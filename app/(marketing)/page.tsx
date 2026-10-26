@@ -12,7 +12,7 @@ import { CONTACT } from "@/lib/contact";
 import { APP_ORIGIN, MARKETING_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
 
-const TITLE = "NFC Kartvizit ve Akıllı Dijital Kartvizit | Dijivizit";
+const TITLE = "Dijivizit | NFC Kartvizit ve Akıllı Dijital Kartvizit";
 const DESCRIPTION =
   "Dijivizit NFC kartvizit: telefona dokundur, profilin açılsın. Metal, gold, gümüş ve ahşap akıllı kartvizit; QR kod, temassız paylaşım ve anında güncelleme.";
 
@@ -54,6 +54,7 @@ const JSON_LD = {
       "@id": `${MARKETING_ORIGIN}/#website`,
       url: MARKETING_ORIGIN,
       name: "Dijivizit",
+      alternateName: ["Dijivizit NFC Kartvizit", "dijivizit.com"],
       inLanguage: "tr-TR",
       publisher: { "@id": `${MARKETING_ORIGIN}/#organization` },
     },
