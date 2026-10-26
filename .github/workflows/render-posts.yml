@@ -14,6 +14,9 @@ on:
       script:
         description: "posts or lux"
         default: "lux"
+      theme:
+        description: "dark or light (lux only)"
+        default: "dark"
 
 permissions:
   contents: write
@@ -48,7 +51,7 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install bpy==5.2.3
-      - run: python3 render/${{ github.event.inputs.script }}.py --out out --samples ${{ github.event.inputs.samples }} --only ${{ matrix.shot }}
+      - run: python3 render/${{ github.event.inputs.script }}.py --out out --samples ${{ github.event.inputs.samples }} --only ${{ matrix.shot }} ${{ github.event.inputs.script == 'lux' && format('--theme {0}', github.event.inputs.theme) || '' }}
       - uses: actions/upload-artifact@v4
         with:
           name: post-${{ matrix.shot }}
@@ -75,6 +78,7 @@ jobs:
           else
             git checkout --orphan instagram-assets && git rm -rf . >/dev/null
           fi
-          mkdir -p renders && cp artifacts/post-*/*.png renders/
-          git add renders && git commit -m "Instagram stills" || exit 0
+          dir=renders; [ "${{ github.event.inputs.theme }}" = "light" ] && dir=renders-light
+          mkdir -p $dir && cp artifacts/post-*/*.png $dir/
+          git add $dir && git commit -m "Instagram stills ($dir)" || exit 0
           git push origin instagram-assets

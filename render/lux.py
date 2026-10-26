@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene as S  # noqa: E402
 
 FINISHES = ["black", "silver", "gold", "wood", "wood-light"]
+THEME = "dark"  # "light": high-key, warm white stone and soft daylight
 CARD_W, CARD_H, CARD_T = 0.856, 0.54, 0.012
 
 
@@ -25,6 +26,7 @@ def args():
     p.add_argument("--res", default="1080x1350")
     p.add_argument("--only", default="")
     p.add_argument("--list", action="store_true")
+    p.add_argument("--theme", default="dark", choices=["dark", "light"])
     a = sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else sys.argv[1:]
     return p.parse_args(a)
 
@@ -117,7 +119,7 @@ def make_phone(loc, rot, screen="profile"):
     smat, m1, m2 = S.screen_material()
     m1.inputs["Factor"].default_value = 1.0 if screen in ("profile", "saved") else 0.0
     m2.inputs["Factor"].default_value = 1.0 if screen == "saved" else 0.0
-    smat.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"].default_value = 1.6
+    smat.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"].default_value = 0.85 if THEME == "light" else 1.6
     sc.data.materials.append(smat)
     isl = S.flat("Island", 0.125, 0.036, 0.018, seg=8)
     isl.parent = ph
@@ -140,6 +142,20 @@ def stage(warm=0.0, floor=True, key=1.0, rim=1.0, strip=1.0, haze=0.0):
     w = bpy.data.worlds.new("W")
     sc.world = w
     w.use_nodes = True
+    if THEME == "light":
+        sc.view_settings.look = "AgX - Base Contrast"
+        w.node_tree.nodes["Background"].inputs["Color"].default_value = (0.93, 0.92, 0.9, 1)
+        w.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.3
+        if floor:
+            f = S.flat("Floor", 60, 60, 0.01, seg=1)
+            f.data.materials.append(stone_material(tint=(0.78, 0.74, 0.67), rough=(0.4, 0.65)))
+        warmc = (1.0, 0.95 - 0.05 * warm, 0.88 - 0.1 * warm)
+        # Big soft window light from the left and a broad fill from above.
+        area("Window", (1.6, 1.2), (-2.6, -1.6, 2.4), (0, 0, 0), 700 * key, warmc)
+        area("Fill", (5.0, 5.0), (0.5, -0.5, 5.0), (0, 0, 0), 120, (1.0, 0.98, 0.95))
+        area("Rim", (0.4, 3.0), (2.6, 1.2, 0.8), (0, 0, 0.05), 120 * rim, (0.95, 0.97, 1.0))
+        emission_plane("Top", (3, 1.2), (0, -0.4, 4.2), (0, 0, 0), 0.6, warmc)
+        return sc
     w.node_tree.nodes["Background"].inputs["Color"].default_value = (0.0, 0.0, 0.0, 1)
     w.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.0
     if floor:
@@ -356,7 +372,9 @@ SHOTS["lux-ui-macro"] = ui_macro("profile")
 
 
 def main():
+    global THEME
     a = args()
+    THEME = a.theme
     if a.list:
         print(" ".join(SHOTS))
         return

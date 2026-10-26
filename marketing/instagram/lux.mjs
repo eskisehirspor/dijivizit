@@ -117,7 +117,7 @@ const FIN = {
   wood: [
     "Koyu Ahşap",
     "Doğanın<br><span class='it g'>imzası.</span>",
-    "Gerçek ahşap, lazerle yakılmış isim. Her kartın dokusu kendine özgü.",
+    "Gerçek ahşap, lazerle yakılmış logo. Her kartın dokusu kendine özgü.",
   ],
   "wood-light": [
     "Açık Ahşap",
@@ -330,7 +330,7 @@ add("on-yuz-arka-yuz", (num) =>
     num,
     img: "lux-duo-black-gold",
     pos: "50% 60%",
-    body: top("İki yüz", "Ön yüzde siz.<br><span class='it g'>Arkada imzamız.</span>", "", "h2"),
+    body: top("İki yüz", "Önde dokunuş.<br><span class='it g'>Arkada imzamız.</span>", "", "h2"),
   }),
 );
 
@@ -619,6 +619,20 @@ base.forEach(([id, fn], i) => {
 });
 console.log(Object.keys(P).join(" "));
 const ids = ONLY ? ONLY.split(",") : Object.keys(P);
+
+// THEME=light: the same layouts on warm white with dark type and a deeper
+// gold, for a fresher feed. Pair it with renders made by lux.py --theme light.
+function theme(html) {
+  if (process.env.THEME !== "light") return html;
+  return html
+    .replace(/#0a0a0b/g, "#f5f3ef")
+    .replace(/#efe9df/g, "#161514")
+    .replace(/rgba\(239,233,223/g, "rgba(22,21,20")
+    .replace(/rgba\(200,169,126/g, "rgba(138,106,60")
+    .replaceAll(GOLD, "#8a6a3c")
+    .replace("filter:grayscale(1) sepia(.18) contrast(1.12) brightness(.72)", "")
+    .replace("opacity:.07;mix-blend-mode:overlay", "opacity:.035;mix-blend-mode:multiply");
+}
 fs.mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({
   executablePath: process.env.CHROMIUM || "/opt/pw-browsers/chromium-1243/chrome-linux64/chrome",
@@ -628,7 +642,7 @@ const ctx = await browser.newContext({ viewport: { width: 1080, height: 1350 } }
 for (const id of ids) {
   const pg = await ctx.newPage();
   const file = path.join(OUT, `${id}.html`);
-  fs.writeFileSync(file, P[id]());
+  fs.writeFileSync(file, theme(P[id]()));
   await pg.goto(`file://${path.resolve(file)}`);
   await pg.evaluate(() => document.fonts.ready);
   await pg.waitForTimeout(120);
@@ -636,4 +650,5 @@ for (const id of ids) {
   fs.unlinkSync(file);
   await pg.close();
 }
+await browser.close();
 console.log(`built ${ids.length}`);

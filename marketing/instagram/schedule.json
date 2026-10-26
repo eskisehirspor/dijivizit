@@ -78,7 +78,7 @@
     {
       "id": "13-koleksiyon-wood",
       "source": "koleksiyon-wood",
-      "caption": "Koyu ahşap.\n\nGerçek ahşap, lazerle yakılmış isim. Her kartın dokusu yalnızca size ait."
+      "caption": "Koyu ahşap.\n\nGerçek ahşap, lazerle yakılmış logo. Her kartın dokusu yalnızca size ait."
     },
     {
       "id": "14-kaydedildi",
@@ -108,7 +108,7 @@
     {
       "id": "19-detay-her-seydir",
       "source": "detay-her-seydir",
-      "caption": "Detay, her şeydir.\n\nLogonuz, adınız, unvanınız; her harf yüzeye lazerle işlenir."
+      "caption": "Detay, her şeydir.\n\nLogo ve temassız işareti yüzeye lazerle işlenir; çizgiler keskin, yüzey pürüzsüz."
     },
     {
       "id": "20-az-soz",
@@ -203,7 +203,7 @@
     {
       "id": "38-on-yuz-arka-yuz",
       "source": "on-yuz-arka-yuz",
-      "caption": "Ön yüzde siz. Arkada imzamız.\n\nKartın ön yüzünde adınız ve logonuz, arka yüzünde NFC alanı ve yedek QR."
+      "caption": "Önde dokunuş. Arkada imzamız.\n\nKartın ön yüzünde Dijivizit logosu ve temassız işareti, arka yüzünde imzamız. Bilgileriniz kartta değil, her zaman güncel profilinizde."
     },
     {
       "id": "39-kurumsal",
