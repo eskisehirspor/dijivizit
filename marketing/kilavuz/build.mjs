@@ -324,12 +324,12 @@ ol li b{font-weight:620}
 .step.two .txt{max-width:150mm}
 .step.two h2{margin-bottom:5mm}
 .step.two .media{flex:1;display:flex;gap:10mm;justify-content:center;align-items:flex-start;background:var(--paper);margin:0 -18mm -16mm;padding:9mm 18mm 18mm}
-.phone{width:76mm;border-radius:10mm;background:#0e0e10;padding:2.1mm;box-shadow:0 8mm 14mm -8mm rgba(30,25,20,.45),inset 0 0 0 .4mm #2b2b2f}
+.phone{width:76mm;border-radius:10mm;background:#0e0e10;padding:2.1mm;border:.35mm solid #2b2b2f}
 .step.two .phone{width:64mm}
 .scr{position:relative;border-radius:8mm;overflow:hidden;background:#fff;padding-top:9%}
 .scr img{display:block;width:100%}
 .scr i{position:absolute;top:2mm;left:50%;transform:translateX(-50%);width:16mm;height:4.6mm;border-radius:99px;background:#0e0e10}
-.photo{width:72mm;border-radius:6mm;overflow:hidden;box-shadow:0 6mm 12mm -8mm rgba(30,25,20,.4)}
+.photo{width:72mm;border-radius:6mm;overflow:hidden;border:.3mm solid #DEDCD6}
 .photo img{display:block;width:100%}
 /* cover */
 .cover{background:var(--paper)}
