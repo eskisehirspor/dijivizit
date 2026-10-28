@@ -115,6 +115,17 @@ export default async function GuidePage({ params }: Params) {
                   ))}
                 </ul>
               )}
+              {s.link && (
+                <p>
+                  <a
+                    href={s.link.href}
+                    className="font-medium underline underline-offset-4 hover:text-foreground"
+                    {...(s.link.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+                  >
+                    {s.link.label}
+                  </a>
+                </p>
+              )}
             </section>
           ))}
 

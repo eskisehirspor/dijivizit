@@ -4,7 +4,13 @@
  * Each guide targets one search intent ("nfc kartvizit nedir", "metal kartvizit",
  * ...) so the landing page does not have to rank for everything at once.
  */
-export type GuideSection = { heading: string; paragraphs: string[]; list?: string[] };
+export type GuideSection = {
+  heading: string;
+  paragraphs: string[];
+  list?: string[];
+  /** Optional link shown under the section; absolute URLs open as external links. */
+  link?: { href: string; label: string };
+};
 
 export type Guide = {
   slug: string;
@@ -291,6 +297,241 @@ export const GUIDES: Guide[] = [
         paragraphs: [
           "Kurumsal taleplerde önce ekibinizin büyüklüğünü ve tercih ettiğiniz kaplamayı konuşuruz. Logonuz ve kurumsal renklerinize göre kart tasarımını hazırlar, onayınızın ardından üretime geçeriz. Tek yapmanız gereken bizimle iletişime geçmek.",
         ],
+      },
+    ],
+  },
+  {
+    slug: "dijital-kartvizit-nedir",
+    label: "Dijital kartvizit nedir?",
+    title: "Dijital Kartvizit Nedir? Avantajları ve Kullanımı",
+    description:
+      "Dijital kartvizit nedir, kâğıt kartvizitten farkı ne? Bağlantı, QR kod ve NFC kartla paylaşılan, her zaman güncel kalan dijital kartvizitin rehberi.",
+    image: "/rehber/dijital-kartvizit-nedir.jpg",
+    imageAlt: "Siyah NFC kartvizit telefona dokunduruluyor, ekranda dijital kartvizit profili açık",
+    published: "2026-10-28",
+    sections: [
+      {
+        heading: "Kısaca dijital kartvizit",
+        paragraphs: [
+          "Dijital kartvizit, adınızı, unvanınızı, telefonunuzu, e-postanızı ve sosyal medya hesaplarınızı tek bir web sayfasında toplayan kartvizittir. Bu sayfa bir bağlantı, bir QR kod ya da bir NFC kart ile paylaşılır.",
+          "Karşınızdaki kişi sayfayı açtığında sizi tek dokunuşla arayabilir, WhatsApp'tan yazabilir ya da bilgilerinizi rehberine kaydedebilir. Bilgileriniz kartın üzerine basılı olmadığı için değiştiğinde yeniden baskı gerekmez.",
+        ],
+      },
+      {
+        heading: "Dijital kartvizit nasıl paylaşılır?",
+        paragraphs: ["Aynı profil birkaç farklı yolla açılabilir:"],
+        list: [
+          "NFC kart: Kartı telefona yaklaştırırsınız, profil ekranda açılır.",
+          "QR kod: Karşınızdaki kişi kamerasıyla kodu okutur.",
+          "Bağlantı: Profil adresinizi mesaj, e-posta imzası ya da sosyal medya biyografisi üzerinden gönderirsiniz.",
+          "Apple Cüzdan: Kart yanınızda değilken telefonunuzdaki QR'ı gösterirsiniz.",
+        ],
+      },
+      {
+        heading: "Kâğıt kartvizitten farkı",
+        paragraphs: [],
+        list: [
+          "Her zaman günceldir: numara, unvan ya da adres değiştiğinde profili güncellemeniz yeter.",
+          "Bitmez: tek kartla yüzlerce kişiye paylaşırsınız, kutu kutu baskı gerekmez.",
+          "Daha fazla bilgi taşır: sosyal medya, web sitesi, konum ve belgeler aynı sayfadadır.",
+          "Yazım hatası olmaz: karşı taraf bilgilerinizi elle yazmak yerine tek dokunuşla kaydeder.",
+        ],
+      },
+      {
+        heading: "Uygulama gerekir mi?",
+        paragraphs: [
+          "Hayır. Dijital kartvizit profili tarayıcıda açılır; ne sizin ne de karşınızdaki kişinin bir uygulama indirmesi gerekir.",
+        ],
+      },
+      {
+        heading: "Fiziksel kart hâlâ gerekli mi?",
+        paragraphs: [
+          "Dijital profil tek başına da kullanılabilir, ama yüz yüze tanışmalarda elinize alıp uzatabileceğiniz bir kart hâlâ en doğal yoldur. Dijivizit'te profiliniz mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap ve açık ahşap kaplamalı NFC kartlarla birlikte gelir; kartın arkasında NFC'si olmayan telefonlar için QR kod bulunur.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Dijital kartvizit ücretsiz mi?",
+        a: "Dijital profil, Dijivizit NFC kartıyla birlikte gelir. Fiyat, seçtiğiniz kaplamaya ve adede göre sipariş talebinizin ardından netleştirilir.",
+      },
+      {
+        q: "Dijital kartvizitimi kaç kişiyle paylaşabilirim?",
+        a: "Sınır yoktur. Aynı kartı ve aynı profili istediğiniz kadar kişiyle paylaşabilirsiniz.",
+      },
+    ],
+  },
+  {
+    slug: "nfc-kartvizit-mi-kagit-kartvizit-mi",
+    label: "NFC mi kâğıt mı?",
+    title: "NFC Kartvizit mi, Kâğıt Kartvizit mi? Karşılaştırma",
+    description:
+      "NFC kartvizit ile kâğıt kartvizitin farkları: maliyet, güncellik, paylaşım, ilk izlenim ve sürdürülebilirlik. Hangisinin size uygun olduğuna karar verin.",
+    image: "/rehber/nfc-kartvizit-mi-kagit-kartvizit-mi.jpg",
+    imageAlt: "Toplantı masasında siyah NFC kartvizit karşıdaki kişiye uzatılıyor",
+    published: "2026-10-28",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Bilgileriniz sık değişiyorsa, çok sayıda kişiyle tanışıyorsanız ya da akılda kalıcı bir ilk izlenim istiyorsanız NFC kartvizit daha mantıklıdır. Yılda birkaç kartvizit dağıtıyorsanız ve bilgileriniz hiç değişmiyorsa kâğıt kartvizit yeterli olabilir.",
+        ],
+      },
+      {
+        heading: "Güncellik",
+        paragraphs: [
+          "Kâğıt kartvizitte numara, unvan ya da adres değiştiğinde elinizdeki tüm kartlar geçersiz olur. NFC kartvizitte bilgiler profilde durur; profili güncellediğinizde daha önce kart verdiğiniz kişiler de yeni bilgilerinizi görür.",
+        ],
+      },
+      {
+        heading: "Paylaşım ve kayıt",
+        paragraphs: [
+          "Kâğıt kartviziti alan kişi bilgilerinizi telefonuna elle yazmak zorundadır; çoğu kart da bu adıma hiç gelmeden bir çekmecede kaybolur. NFC kartvizitte karşı taraf profilinizi açar ve \"Rehbere Kaydet\" ile bilgilerinizi tek dokunuşla telefonuna kaydeder.",
+        ],
+      },
+      {
+        heading: "Maliyet",
+        paragraphs: [
+          "Kâğıt kartvizitin tanesi ucuzdur ama tükenir ve her değişiklikte yeniden basılır. NFC kartvizit tek seferlik bir alımdır ve yıllarca kullanılır. Hangisinin daha ekonomik olduğu, ne kadar sık kartvizit dağıttığınıza ve bilgilerinizin ne sıklıkla değiştiğine bağlıdır.",
+        ],
+      },
+      {
+        heading: "İlk izlenim",
+        paragraphs: [
+          "Metal ya da ahşap bir NFC kart, elinize alındığı anda fark edilir. Telefona dokundurulduğunda profilin açılması da çoğu zaman sohbeti başlatan bir an olur.",
+        ],
+      },
+      {
+        heading: "Özet tablo",
+        paragraphs: [],
+        list: [
+          "Bilgi değişince: kâğıtta yeniden baskı, NFC'de profil güncellemesi.",
+          "Paylaşılan bilgi: kâğıtta kartın üstüne sığan kadar, NFC'de sosyal medya, web sitesi, konum ve belgeler dahil.",
+          "Kayıt: kâğıtta elle yazma, NFC'de tek dokunuşla rehbere kaydetme.",
+          "Ömür: kâğıtta tükenir, NFC'de tek kart yıllarca kullanılır.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "NFC kartvizit her telefonda açılır mı?",
+        a: "Güncel iPhone'lar ve NFC'si açık Android telefonlar kartı doğrudan okur. NFC'si olmayan telefonlar için Dijivizit kartlarının arkasında aynı profile açılan bir QR kod bulunur.",
+      },
+    ],
+  },
+  {
+    slug: "qr-kod-kartvizit",
+    label: "QR kod kartvizit",
+    title: "QR Kod Kartvizit: Nasıl Çalışır, NFC'den Farkı Ne?",
+    description:
+      "QR kod kartvizit nedir, nasıl kullanılır? QR ve NFC kartvizit arasındaki farklar ve iki yöntemi aynı kartta birleştirmenin avantajları.",
+    image: "/rehber/qr-kod-kartvizit.jpg",
+    imageAlt: "Deri kartlıktan çıkarılan siyah Dijivizit NFC kartvizit",
+    published: "2026-10-28",
+    sections: [
+      {
+        heading: "QR kod kartvizit nedir?",
+        paragraphs: [
+          "QR kod kartvizit, üzerinde dijital profilinize bağlanan bir QR kod bulunan kartvizittir. Karşınızdaki kişi telefonunun kamerasını koda tuttuğunda profiliniz açılır ve bilgilerinizi kaydedebilir.",
+        ],
+      },
+      {
+        heading: "QR ile NFC arasındaki fark",
+        paragraphs: [],
+        list: [
+          "NFC: Kartı telefona yaklaştırmak yeterlidir; kamera açmak gerekmez. Güncel iPhone'lar ve NFC'si açık Android telefonlarda çalışır.",
+          "QR: Kamerası olan hemen her telefonda çalışır, ama kişinin kamerayı açıp kodu çerçevelemesi gerekir.",
+        ],
+      },
+      {
+        heading: "En iyisi: ikisi bir arada",
+        paragraphs: [
+          "Dijivizit kartlarında iki yöntem birlikte kullanılır. Kartın içinde NFC çip, arkasında aynı profile açılan bir QR kod vardır. NFC'si kapalı ya da olmayan bir telefonla karşılaştığınızda QR kod yedek görevi görür.",
+        ],
+      },
+      {
+        heading: "Kart yanınızda değilken",
+        paragraphs: [
+          "Profilinizi Apple Cüzdan'a ekleyebilirsiniz. Fiziksel kart yanınızda değilken telefonunuzdaki QR'ı gösterirsiniz, karşınızdaki kişi okutur.",
+        ],
+      },
+      {
+        heading: "QR kodu nerelerde kullanabilirsiniz?",
+        paragraphs: ["Aynı profil bağlantısı kartın dışında da işe yarar:"],
+        list: [
+          "Fuar standı ve sunum slaytları",
+          "Mağaza, kafe veya ofis girişindeki tabela",
+          "Ürün ambalajı ve broşürler",
+          "E-posta imzası",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "QR kod bir süre sonra çalışmaz hâle gelir mi?",
+        a: "Dijivizit kartındaki QR kod profilinize bağlıdır. Profil bilgilerini değiştirdiğinizde kod değişmez; okutan kişi her zaman güncel profilinizi görür.",
+      },
+    ],
+  },
+  {
+    slug: "yeni-isletme-kontrol-listesi",
+    label: "Yeni işletme kontrol listesi",
+    title: "Yeni İşletme Kurarken Kontrol Listesi: İsimden Kartvizite",
+    description:
+      "Yeni bir işletme kurarken marka ismi, alan adı, marka tescili, sosyal medya, logo ve kartvizit için adım adım kontrol listesi.",
+    image: "/rehber/yeni-isletme-kontrol-listesi.jpg",
+    imageAlt: "Açık ahşap, koyu ahşap, gold, gümüş ve siyah Dijivizit kartvizit kaplamaları üst üste",
+    published: "2026-10-28",
+    sections: [
+      {
+        heading: "Neden bir kontrol listesi?",
+        paragraphs: [
+          "Yeni bir işletme kurarken en çok zaman kaybettiren şeyler, sırası karışan adımlardır: logo bitmiştir ama alan adı alınmamıştır, kartvizit basılmıştır ama isim değişmek zorundadır. Aşağıdaki sıra bu sorunları baştan önler.",
+        ],
+      },
+      {
+        heading: "1. İsim",
+        paragraphs: [
+          "Her şey isimle başlar. Kısa, kolay söylenen ve kolay yazılan bir isim seçin. Seçtiğiniz ismin marka olarak başvurulup başvurulmadığını, .com alan adının ve sosyal medya kullanıcı adlarının boşta olup olmadığını aynı gün kontrol edin.",
+          "Bu araştırmayla uğraşmak istemiyorsanız, .com alan adı ve marka tescil başvurusu hazır isimlere göz atabilirsiniz.",
+        ],
+        link: { href: "https://markapano.com/", label: "Markapano: alan adı ve marka başvurusu hazır isimler" },
+      },
+      {
+        heading: "2. Alan adı ve e-posta",
+        paragraphs: [
+          "İsmin .com alan adını alın ve isim@alanadiniz.com biçiminde kurumsal bir e-posta açın. Kartvizitte ve faturalarda kişisel e-posta yerine kurumsal adres kullanmak güven verir.",
+        ],
+      },
+      {
+        heading: "3. Marka tescili",
+        paragraphs: [
+          "İsmi faaliyet alanınızın sınıflarında TÜRKPATENT'e başvurun. Marka hakkı kural olarak ilk başvurana ait olduğu için bu adımı ertelemeyin.",
+        ],
+      },
+      {
+        heading: "4. Sosyal medya",
+        paragraphs: [
+          "Instagram, LinkedIn ve diğer platformlarda aynı kullanıcı adını alın. Her platformda aynı ad, müşterilerin sizi bulmasını kolaylaştırır.",
+        ],
+      },
+      {
+        heading: "5. Logo ve renkler",
+        paragraphs: [
+          "Logonuzu, kurumsal renklerinizi ve yazı tipinizi belirleyin. Kartvizit, tabela ve web sitesi bu kararlara göre hazırlanacak.",
+        ],
+      },
+      {
+        heading: "6. Kartvizit",
+        paragraphs: [
+          "Son adım, insanlara sizi hatırlatacak karttır. NFC kartvizitte bilgileriniz profilde durduğu için ilk aylarda değişen telefon numarası ya da adres yüzünden kartları çöpe atmazsınız. Dijivizit kartlarında isminiz ve logonuz metal ya da ahşap yüzeye lazerle işlenir; profiliniz tek dokunuşla paylaşılır.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Kartvizit için logonun hazır olması gerekir mi?",
+        a: "Logo kartın tasarımını kolaylaştırır ama şart değildir. Logo olmadan da isim ve unvanla şık bir kart hazırlanabilir; logo hazır olduğunda yeni kart siparişi verebilirsiniz.",
       },
     ],
   },
