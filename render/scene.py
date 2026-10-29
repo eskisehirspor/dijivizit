@@ -554,18 +554,18 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
 
 
 def product_shot(scene, finish):
-    """Replace the animation with one static close-up of the card: tilted back
-    and turned three-quarters so the face, the edge and the thickness read in
-    3D, filling most of a portrait frame."""
+    """Replace the animation with one static close-up of the card: standing
+    upright, turned three-quarters and rolled into a diagonal, seen from eye
+    level so the face, the edge and the thickness read in 3D."""
     card = bpy.data.objects["Card"]
     cam = scene.camera
     target = bpy.data.objects["Target"]
     for obj in (card, cam, target):
         obj.animation_data_clear()
     card.location = (0.0, 0.0, 0.0)
-    card.rotation_euler = tuple(math.radians(a) for a in (112, -9, -36))
+    card.rotation_euler = tuple(math.radians(a) for a in (92, 12, -30))
     target.location = (0.0, 0.0, 0.0)
-    cam.location = (0.2, -2.75, 0.5)
+    cam.location = (0.2, -2.65, 0.05)
     # Highlight: a softbox at the camera's mirror image over the card face,
     # nudged up so the reflection sweeps across the top of the card and the
     # brushed metal gets the bright-to-dark gradient real metal shows.
