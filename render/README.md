@@ -12,6 +12,9 @@
   `python3 render/scene.py --out /tmp/frames --res 640x360 --samples 16 --frames 0,72,120,180`.
 - Card finishes: `--finish black|silver|gold|wood` (`--hide-phone` for the
   finish stills shown on the landing page).
+- Product shots: `--product --res 1600x2000 --frames 0` renders the card alone,
+  close up at a three-quarter angle, for `/kartvizit`; they live in
+  `public/landing/products/<finish>.webp`.
 - Wood finishes: `tex/wood-dark.jpg` is a photo of a real Dijivizit wood card,
   flattened and evened out; `tex/wood-light.jpg` is the same grain re-toned.
 - Profile photo in `textures-src/avatar.jpg`: Unsplash photo

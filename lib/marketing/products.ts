@@ -12,7 +12,7 @@ export function productUrl(finish: Finish): string {
 }
 
 export function productImage(finish: Finish): string {
-  return `/landing/finishes/${finish.id}.webp`;
+  return `/landing/products/${finish.id}.webp`;
 }
 
 export function productDescription(finish: Finish): string {

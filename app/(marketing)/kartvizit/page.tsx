@@ -62,13 +62,13 @@ export default function ProductsPage() {
         {FINISHES.map((f) => (
           <li key={f.id}>
             <Link href={`/kartvizit/${f.slug}`} className="group flex flex-col gap-4">
-              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-[#d9d6d1]">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#d9d6d1]">
                 {/* eslint-disable-next-line @next/next/no-img-element -- static stills; no image optimizer on Workers */}
                 <img
                   src={productImage(f)}
                   alt={f.name}
-                  width={2560}
-                  height={1440}
+                  width={1600}
+                  height={2000}
                   loading="lazy"
                   decoding="async"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"

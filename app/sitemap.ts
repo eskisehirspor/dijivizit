@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.9,
-      images: [`${MARKETING_ORIGIN}/landing/finishes/${f.id}.webp`],
+      images: [`${MARKETING_ORIGIN}/landing/products/${f.id}.webp`],
     })),
     {
       url: `${MARKETING_ORIGIN}/rehber`,

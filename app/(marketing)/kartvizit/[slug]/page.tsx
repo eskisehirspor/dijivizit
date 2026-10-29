@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title,
       description,
       url,
-      images: [{ url: productImage(finish), width: 2560, height: 1440, alt: finish.name }],
+      images: [{ url: productImage(finish), width: 1600, height: 2000, alt: finish.name }],
     },
   };
 }
@@ -77,14 +77,14 @@ export default async function ProductPage({ params }: Params) {
         </Link>
       </nav>
 
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-3xl bg-[#d9d6d1]">
+      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] lg:gap-16">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-[#d9d6d1]">
           {/* eslint-disable-next-line @next/next/no-img-element -- static stills; no image optimizer on Workers */}
           <img
             src={productImage(finish)}
             alt={`${finish.name}, ${finish.note}`}
-            width={2560}
-            height={1440}
+            width={1600}
+            height={2000}
             fetchPriority="high"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
@@ -137,17 +137,17 @@ export default async function ProductPage({ params }: Params) {
 
       <section className="mt-20 flex flex-col gap-6 border-t border-border/60 pt-16">
         <h2 className="text-2xl font-semibold tracking-tight">Diğer kaplamalar</h2>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {others.map((f) => (
             <li key={f.id}>
               <Link href={`/kartvizit/${f.slug}`} className="group flex flex-col gap-3">
-                <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-[#d9d6d1]">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#d9d6d1]">
                   {/* eslint-disable-next-line @next/next/no-img-element -- static stills; no image optimizer on Workers */}
                   <img
                     src={productImage(f)}
                     alt={f.name}
-                    width={2560}
-                    height={1440}
+                    width={1600}
+                    height={2000}
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"

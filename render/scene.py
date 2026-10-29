@@ -32,6 +32,9 @@ def parse_args():
     p.add_argument("--save-blend", default="")
     p.add_argument("--finish", default="black", choices=["black", "silver", "gold", "wood", "wood-light"])
     p.add_argument("--hide-phone", action="store_true")
+    # Product shot: one still of the card alone, close up at a three-quarter
+    # angle, for the product pages (pair with a portrait --res like 1600x2000).
+    p.add_argument("--product", action="store_true")
     return p.parse_args(argv)
 
 
@@ -152,8 +155,8 @@ FINISHES = {
     # Deep matte black metal: dark, high roughness, almost no anisotropy.
     "black": ((0.032, 0.032, 0.035), (0.5, 0.5, 0.52), 0.62, 0.85, (0.09, 0.09, 0.1)),
     # Matte brushed metals: high base roughness, strong directional streaks.
-    "silver": ((0.62, 0.62, 0.64), (0.1, 0.1, 0.11), 0.3, 0.75, (0.62, 0.62, 0.64)),
-    "gold": ((0.76, 0.52, 0.21), (0.16, 0.1, 0.035), 0.3, 0.75, (0.76, 0.52, 0.21)),
+    "silver": ((0.62, 0.62, 0.64), (0.1, 0.1, 0.11), 0.26, 0.75, (0.62, 0.62, 0.64)),
+    "gold": ((0.76, 0.52, 0.21), (0.16, 0.1, 0.035), 0.26, 0.75, (0.76, 0.52, 0.21)),
 }
 
 
@@ -202,14 +205,14 @@ def card_face_material(name, mask_path, finish="black"):
     tc = node(nt, "ShaderNodeTexCoord", (-1300, -300))
     mp = node(nt, "ShaderNodeMapping", (-1100, -300))
     brushed = finish != "black"
-    mp.inputs["Scale"].default_value = (3.0, 320.0, 1.0) if brushed else (1.5, 140.0, 1.0)
+    mp.inputs["Scale"].default_value = (4.0, 420.0, 1.0) if brushed else (1.5, 140.0, 1.0)
     nt.links.new(tc.outputs["UV"], mp.inputs["Vector"])
     noise = node(nt, "ShaderNodeTexNoise", (-900, -300))
-    noise.inputs["Scale"].default_value = 8.0 if brushed else 6.0
-    noise.inputs["Detail"].default_value = 8.0 if brushed else 4.0
+    noise.inputs["Scale"].default_value = 14.0 if brushed else 6.0
+    noise.inputs["Detail"].default_value = 12.0 if brushed else 4.0
     nt.links.new(mp.outputs["Vector"], noise.inputs["Vector"])
     streak = node(nt, "ShaderNodeMapRange", (-650, -300))
-    amp = 0.02 if finish == "black" else 0.16
+    amp = 0.02 if finish == "black" else 0.32
     streak.inputs["To Min"].default_value = -amp
     streak.inputs["To Max"].default_value = amp
     nt.links.new(noise.outputs["Fac"], streak.inputs["Value"])
@@ -218,12 +221,12 @@ def card_face_material(name, mask_path, finish="black"):
     nt.links.new(rough.outputs["Result"], add.inputs[0])
     nt.links.new(streak.outputs["Result"], add.inputs[1])
     nt.links.new(add.outputs["Value"], bsdf.inputs["Roughness"])
-    bsdf.inputs["Anisotropic"].default_value = 0.1 if finish == "black" else 0.95
+    bsdf.inputs["Anisotropic"].default_value = 0.1 if finish == "black" else 1.0
     if brushed:
-        # Visible brush lines: the same streaks also modulate brightness a little.
+        # Visible brush lines: the same streaks also modulate brightness.
         tint = node(nt, "ShaderNodeMapRange", (-650, 150))
-        tint.inputs["To Min"].default_value = 0.78
-        tint.inputs["To Max"].default_value = 1.14
+        tint.inputs["To Min"].default_value = 0.55
+        tint.inputs["To Max"].default_value = 1.35
         nt.links.new(noise.outputs["Fac"], tint.inputs["Value"])
         mul = node(nt, "ShaderNodeMix", (-200, 250))
         mul.data_type = "RGBA"
@@ -550,10 +553,54 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
                 pass
 
 
+def product_shot(scene, finish):
+    """Replace the animation with one static close-up of the card: tilted back
+    and turned three-quarters so the face, the edge and the thickness read in
+    3D, filling most of a portrait frame."""
+    card = bpy.data.objects["Card"]
+    cam = scene.camera
+    target = bpy.data.objects["Target"]
+    for obj in (card, cam, target):
+        obj.animation_data_clear()
+    card.location = (0.0, 0.0, 0.0)
+    card.rotation_euler = tuple(math.radians(a) for a in (112, -9, -36))
+    target.location = (0.0, 0.0, 0.0)
+    cam.location = (0.2, -2.75, 0.5)
+    # Highlight: a softbox at the camera's mirror image over the card face,
+    # nudged up so the reflection sweeps across the top of the card and the
+    # brushed metal gets the bright-to-dark gradient real metal shows.
+    bpy.context.view_layer.update()
+    n = (card.matrix_world.to_3x3() @ Vector((0, 0, 1))).normalized()
+    v = (cam.location - card.location).normalized()
+    r = 2 * n.dot(v) * n - v
+    hl = bpy.data.lights.new("Highlight", "AREA")
+    hl.shape = "RECTANGLE"
+    hl.size, hl.size_y = 2.4, 0.9
+    # Matte black must stay deep black; the brushed finishes want a bright sweep.
+    hl.energy = {"black": 25, "silver": 150, "gold": 190}.get(finish, 70)
+    hl_obj = bpy.data.objects.new("Highlight", hl)
+    bpy.context.collection.objects.link(hl_obj)
+    hl_obj.location = card.location + r * 3.0 + Vector((0.0, 0.0, 0.9))
+    hl_obj.rotation_euler = (card.location - hl_obj.location).to_track_quat("-Z", "Y").to_euler()
+    hl_obj.visible_camera = False
+    hl_obj.visible_diffuse = False
+    # A backdrop just behind the card so it casts a soft, grounded shadow
+    # (the hero wall is too far away to catch one).
+    backdrop = flat("Backdrop", 12, 12, 0.01, seg=1)
+    backdrop.location = (0.0, 0.55, 0.0)
+    backdrop.rotation_euler = (math.radians(90), 0, 0)
+    backdrop.data.materials.append(bpy.data.materials["Wall"])
+    cam.data.lens = 85
+    cam.data.dof.aperture_fstop = 5.6
+    scene.frame_start = scene.frame_end = 0
+
+
 def main():
     args = parse_args()
     portrait = args.portrait
-    scene = build(portrait, args.finish, args.hide_phone)
+    scene = build(portrait, args.finish, args.hide_phone or args.product)
+    if args.product:
+        product_shot(scene, args.finish)
     w, h = (int(v) for v in args.res.split("x"))
     scene.render.resolution_x, scene.render.resolution_y = w, h
     scene.render.resolution_percentage = 100
