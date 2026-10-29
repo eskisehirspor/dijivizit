@@ -7,7 +7,7 @@ import { Check, Loader2 } from "lucide-react";
 import { trackLead } from "@/lib/analytics";
 import { submitOrderRequestAction, type OrderFormState } from "@/app/actions/order-request";
 import { CONTACT } from "@/lib/contact";
-import { FINISHES, type FinishId } from "@/lib/orders/finishes";
+import { FINISHES, PRICING, formatTry, unitPrice, type FinishId } from "@/lib/orders/finishes";
 import { cn } from "@/lib/utils";
 
 const INITIAL: OrderFormState = { status: "idle" };
@@ -54,6 +54,10 @@ export function OrderForm({
 }) {
   const [state, formAction, isPending] = useActionState(submitOrderRequestAction, INITIAL);
   const [finish, setFinish] = useState<FinishId>(initialFinish);
+  const [quantity, setQuantity] = useState(1);
+  const selectedFinish = FINISHES.find((f) => f.id === finish)!;
+  const safeQuantity = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
+  const pricePerCard = unitPrice(selectedFinish, safeQuantity);
   const errors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
 
   useEffect(() => {
@@ -127,8 +131,11 @@ export function OrderForm({
                   height={900}
                   className="aspect-[4/3] w-full scale-[1.6] object-cover transition-transform duration-500 group-hover:scale-[1.7]"
                 />
-                <span className="flex items-center justify-between gap-2 bg-background px-3 py-3 text-sm font-medium">
-                  {f.label}
+                <span className="relative z-10 flex items-center justify-between gap-2 bg-background px-3 py-3 text-sm font-medium">
+                  <span className="flex flex-col">
+                    {f.label}
+                    <span className="text-xs font-normal text-muted-foreground">{formatTry(f.price)}</span>
+                  </span>
                   {selected ? <Check className="size-4" aria-hidden="true" /> : null}
                 </span>
               </label>
@@ -150,11 +157,24 @@ export function OrderForm({
               min={1}
               max={1000}
               defaultValue={1}
+              onChange={(e) => setQuantity(Number(e.target.value))}
               required
               aria-invalid={errors.quantity ? true : undefined}
               className={inputClass}
             />
           </Field>
+        </div>
+        <div className="flex flex-col gap-1" aria-live="polite">
+          <p className="text-lg font-semibold tracking-tight">
+            Toplam: {formatTry(Math.round(pricePerCard * safeQuantity * 100) / 100)}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {safeQuantity >= PRICING.bulkMinQuantity
+              ? `Tanesi ${formatTry(pricePerCard)} (%${PRICING.bulkDiscountPercent} adet indirimi uygulandı).`
+              : `${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim.`}{" "}
+            KDV dahil, kargo ücretsiz. Dijital profil ilk {PRICING.profileFreeYears} yıl ücretsiz, sonrasında
+            aylık {formatTry(PRICING.profileMonthlyFee)}.
+          </p>
         </div>
       </fieldset>
 
@@ -252,7 +272,7 @@ export function OrderForm({
           Talep oluştur
         </button>
         <p className="text-sm text-muted-foreground">
-          Ödeme şimdi alınmaz. Talebini aldıktan sonra seni arayıp tasarım ve fiyatı netleştiririz.
+          Ödeme şimdi alınmaz. Talebini aldıktan sonra seni arayıp kart tasarımını netleştiririz.
         </p>
       </div>
     </form>

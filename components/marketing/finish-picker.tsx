@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Link from "next/link";
 
-import { FINISHES, type FinishId } from "@/lib/orders/finishes";
+import { FINISHES, formatTry, type FinishId } from "@/lib/orders/finishes";
 import { cn } from "@/lib/utils";
 
 /** Rendered stills of the card in each finish, crossfaded by a segmented control. */
@@ -58,14 +58,23 @@ export function FinishPicker() {
           ))}
         </div>
         <p className="text-sm text-muted-foreground" aria-live="polite">
-          {current.note}
+          {current.note} <span className="font-medium text-foreground">{formatTry(current.price)}</span>, KDV
+          dahil, kargo ücretsiz.
         </p>
-        <Link
-          href={`/siparis?kaplama=${current.id}`}
-          className="inline-flex h-11 items-center rounded-full bg-neutral-950 px-6 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
-        >
-          {current.label} sipariş ver
-        </Link>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href={`/siparis?kaplama=${current.id}`}
+            className="inline-flex h-11 items-center rounded-full bg-neutral-950 px-6 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
+          >
+            {current.label} sipariş ver
+          </Link>
+          <Link
+            href={`/kartvizit/${current.slug}`}
+            className="inline-flex h-11 items-center rounded-full px-5 text-sm font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            Ürün detayları
+          </Link>
+        </div>
       </div>
     </div>
   );

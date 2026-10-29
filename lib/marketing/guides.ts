@@ -353,7 +353,7 @@ export const GUIDES: Guide[] = [
     faq: [
       {
         q: "Dijital kartvizit ücretsiz mi?",
-        a: "Dijital profil, Dijivizit NFC kartıyla birlikte gelir. Fiyat, seçtiğiniz kaplamaya ve adede göre sipariş talebinizin ardından netleştirilir.",
+        a: "Dijital profil, Dijivizit NFC kartıyla birlikte gelir ve ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartlar metal kaplamalarda 4.000 TL, ahşap kaplamalarda 2.500 TL'dir (KDV dahil, kargo ücretsiz).",
       },
       {
         q: "Dijital kartvizitimi kaç kişiyle paylaşabilirim?",

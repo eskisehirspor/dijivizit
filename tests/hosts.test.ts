@@ -30,6 +30,8 @@ describe("host split", () => {
     expect(shouldPassThroughOnMarketingHost("/siparis")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/rehber")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/rehber/nfc-kartvizit-nedir")).toBe(true);
+    expect(shouldPassThroughOnMarketingHost("/kartvizit")).toBe(true);
+    expect(shouldPassThroughOnMarketingHost("/kartvizit/siyah-metal")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/yasal/kvkk")).toBe(true);
 
     expect(shouldPassThroughOnMarketingHost("/login")).toBe(false);

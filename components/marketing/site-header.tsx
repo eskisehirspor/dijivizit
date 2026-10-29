@@ -32,6 +32,12 @@ export function SiteHeader() {
             Özellikler
           </Link>
           <Link
+            href="/kartvizit"
+            className="hidden rounded-full px-4 py-2 text-sm font-medium text-neutral-800 transition-colors hover:bg-white/50 sm:inline-flex"
+          >
+            Fiyatlar
+          </Link>
+          <Link
             href="/rehber"
             className="hidden rounded-full px-4 py-2 text-sm font-medium text-neutral-800 transition-colors hover:bg-white/50 sm:inline-flex"
           >

@@ -49,6 +49,10 @@ export function shouldPassThroughOnMarketingHost(pathname: string): boolean {
     return true;
   }
 
+  if (pathname === "/kartvizit" || pathname.startsWith("/kartvizit/")) {
+    return true;
+  }
+
   return false;
 }
 

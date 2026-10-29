@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { GUIDES } from "@/lib/marketing/guides";
+import { FINISHES } from "@/lib/orders/finishes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -18,6 +19,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${MARKETING_ORIGIN}/kartvizit`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    ...FINISHES.map((f) => ({
+      url: `${MARKETING_ORIGIN}/kartvizit/${f.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+      images: [`${MARKETING_ORIGIN}/landing/finishes/${f.id}.webp`],
+    })),
     {
       url: `${MARKETING_ORIGIN}/rehber`,
       lastModified: new Date(),
