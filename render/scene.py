@@ -533,9 +533,11 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     near = 0.88 if portrait else 1.0
     key(cam, 0, (0.0, -6.0 * d * near, 0.15))
     key(cam, 50, (-0.1, -5.6 * d * (near + 1.0) / 2, 0.1))
-    key(cam, 100, (0.1, -7.0 * d, 0.2))
-    key(cam, 150, (0.4, -4.9 * d, 0.2))
-    key(cam, 191, (0.35, -4.6 * d, 0.05))
+    # Phones: a step back once the phone is in, so it fits above the captions.
+    far = 1.08 if portrait else 1.0
+    key(cam, 100, (0.1, -7.0 * d * far, 0.2))
+    key(cam, 150, (0.4, -4.9 * d * far, 0.2))
+    key(cam, 191, (0.35, -4.6 * d * far, 0.05))
 
     # Landscape frames keep the phone in the right third so copy fits on the
     # left; portrait frames centre it (copy sits below on phones).
@@ -545,11 +547,14 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     u = 1.0 - s
     key(target, 0, (0.0, 0.0, 0.08 + 0.2 * u))
     key(target, 50, (0.0, 0.0, 0.03 - 0.15 * u))
-    key(target, 100, (-0.05 - 0.35 * s, 0.25, 0.1 + 0.2 * s - 0.22 * u))
-    key(target, 120, (0.0 - 0.35 * s, 0.38, 0.3 + 0.2 * s - 0.22 * u))
-    key(target, 150, (0.25 - 0.55 * s, 0.4, 0.22 + 0.1 * s - 0.22 * u))
-    key(target, 172, (0.25 - 0.55 * s, 0.4, 0.05 - 0.22 * u))
-    key(target, 191, (0.25 - 0.55 * s, 0.4, 0.02 - 0.22 * u))
+    # Phones: lift the phone high enough that the bottom captions never
+    # overlap it.
+    lift = 0.5 * u
+    key(target, 100, (-0.05 - 0.35 * s, 0.25, 0.1 + 0.2 * s - lift))
+    key(target, 120, (0.0 - 0.35 * s, 0.38, 0.3 + 0.2 * s - lift))
+    key(target, 150, (0.25 - 0.55 * s, 0.4, 0.22 + 0.1 * s - lift))
+    key(target, 172, (0.25 - 0.55 * s, 0.4, 0.05 - lift))
+    key(target, 191, (0.25 - 0.55 * s, 0.4, 0.02 - lift))
 
     for obj in (card, phone, cam, target):
         if obj.animation_data and obj.animation_data.action:
