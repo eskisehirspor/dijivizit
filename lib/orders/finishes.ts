@@ -98,6 +98,8 @@ export const PRICING = {
   freeShipping: true,
   profileFreeYears: 1,
   profileMonthlyFee: 59.9,
+  /** The card-less digital product is billed a year up front. */
+  digitalYearlyFee: 708,
 } as const;
 
 /** Unit price after the bulk discount for the given quantity. */

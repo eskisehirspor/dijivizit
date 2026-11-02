@@ -37,7 +37,7 @@ export const FAQ = [
   },
   {
     q: "Kart olmadan dijital kartvizit alabilir miyim?",
-    a: "Evet. Kartsız dijital kartvizitte profil linkini ve QR kodunu alırsın; aylık 59,90 TL'dir. İstediğin zaman NFC karta geçebilirsin, link ve QR aynı kalır.",
+    a: "Evet. Kartsız dijital kartvizitte profil linkini ve QR kodunu alırsın; aylık 59,90 TL'dir ve yıllık 708 TL olarak peşin ödenir. İstediğin zaman NFC karta geçebilirsin, link ve QR aynı kalır.",
   },
   {
     q: "NFC kartvizit nedir?",

@@ -183,15 +183,17 @@ export function OrderForm({
         </div>
         <div className="flex flex-col gap-1" aria-live="polite">
           <p className="text-lg font-semibold tracking-tight">
-            Toplam: {digital ? "aylık " : ""}
-            {formatTry(Math.round(pricePerCard * safeQuantity * 100) / 100)}
+            Toplam:{" "}
+            {digital
+              ? `yıllık ${formatTry(Math.round(PRICING.digitalYearlyFee * (pricePerCard / selectedFinish.price) * safeQuantity * 100) / 100)}`
+              : formatTry(Math.round(pricePerCard * safeQuantity * 100) / 100)}
           </p>
           <p className="text-sm text-muted-foreground">
             {safeQuantity >= PRICING.bulkMinQuantity
               ? `Tanesi ${formatPrice(selectedFinish, pricePerCard)} (%${PRICING.bulkDiscountPercent} adet indirimi uygulandı).`
               : `${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim.`}{" "}
             {digital
-              ? `KDV dahil. Kart yok; link ve QR kodun ${PROMISES.deliveryHours} saat içinde e-postanda.`
+              ? `Aylık ${formatTry(selectedFinish.price)}, ödeme yıllık peşin alınır. KDV dahil. Kart yok; link ve QR kodun ${PROMISES.deliveryHours} saat içinde e-postanda.`
               : `KDV dahil, kargo ücretsiz, ${PROMISES.deliveryHours} saatte teslim. Kart okunmazsa ücretsiz değişim. Dijital profil ilk ${PRICING.profileFreeYears} yıl ücretsiz, sonrasında aylık ${formatTry(PRICING.profileMonthlyFee)}.`}
           </p>
         </div>

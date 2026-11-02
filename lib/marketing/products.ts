@@ -27,7 +27,7 @@ export function productImage(finish: Finish): string {
 
 export function productDescription(finish: Finish): string {
   if (isDigital(finish)) {
-    return `Kartsız dijital kartvizit: profil linkiniz ve QR kodunuz. Mesajla, e-posta imzasında ya da sosyal medyada paylaşın; QR kodu sunumlara, broşürlere, vitrine koyun. Rehbere kayıt, bilgi bırakma formu ve analitik dahil. Aylık ${formatTry(finish.price)}, KDV dahil.`;
+    return `Kartsız dijital kartvizit: profil linkiniz ve QR kodunuz. Mesajla, e-posta imzasında ya da sosyal medyada paylaşın; QR kodu sunumlara, broşürlere, vitrine koyun. Rehbere kayıt, bilgi bırakma formu ve analitik dahil. Aylık ${formatTry(finish.price)}, yıllık ${formatTry(PRICING.digitalYearlyFee)} olarak peşin ödenir, KDV dahil.`;
   }
   const base =
     finish.material === "metal"
@@ -65,7 +65,8 @@ export function pricingTerms(finish?: Finish): string[] {
   if (finish && isDigital(finish)) {
     return [
       "Fiyata KDV dahildir.",
-      `Aylık ${formatTry(finish.price)}; kart, kargo ya da kurulum ücreti yoktur.`,
+      `Aylık ${formatTry(finish.price)}; ödeme yıllık ${formatTry(PRICING.digitalYearlyFee)} olarak tek seferde alınır.`,
+      "Kart, kargo ya da kurulum ücreti yoktur.",
       `${PRICING.bulkMinQuantity} ve üzeri kişilik ekiplerde %${PRICING.bulkDiscountPercent} indirim uygulanır.`,
       `Link ve QR kodunuz ${PROMISES.deliveryHours} saat içinde e-postanıza gönderilir.`,
     ];
@@ -97,7 +98,7 @@ export function productJsonLd(finish: Finish) {
       "@type": "Offer",
       url: productUrl(finish),
       priceCurrency: "TRY",
-      price: finish.price.toFixed(2),
+      price: (isDigital(finish) ? PRICING.digitalYearlyFee : finish.price).toFixed(2),
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${MARKETING_ORIGIN}/#organization` },
@@ -105,10 +106,10 @@ export function productJsonLd(finish: Finish) {
         ? {
             priceSpecification: {
               "@type": "UnitPriceSpecification",
-              price: finish.price.toFixed(2),
+              price: PRICING.digitalYearlyFee.toFixed(2),
               priceCurrency: "TRY",
-              billingDuration: "P1M",
-              unitText: "ay",
+              billingDuration: "P1Y",
+              unitText: "yıl",
             },
           }
         : PRICING.freeShipping

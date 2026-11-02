@@ -61,7 +61,8 @@ export default function ProductsPage() {
         </h1>
         <p className="text-lg text-muted-foreground">
           Metal ya da ahşap, beş kaplama. Her kartta NFC çip, arkasında QR kod ve dijital profil.
-          Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90 TL.
+          Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90 TL (yıllık 708
+          TL).
         </p>
         <PromiseStrip className="pt-2" />
       </div>

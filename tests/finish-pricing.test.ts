@@ -56,7 +56,7 @@ describe("digital product", () => {
     const ld = productJsonLd(digital) as Record<string, unknown> & {
       offers: Record<string, unknown>;
     };
-    expect(ld.offers.priceSpecification).toMatchObject({ billingDuration: "P1M", price: "59.90" });
+    expect(ld.offers.priceSpecification).toMatchObject({ billingDuration: "P1Y", price: "708.00" });
     expect(ld.offers.shippingDetails).toBeUndefined();
     expect(ld.material).toBeUndefined();
   });
