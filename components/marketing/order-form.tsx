@@ -134,7 +134,9 @@ export function OrderForm({
                 <span className="relative z-10 flex items-center justify-between gap-2 bg-background px-3 py-3 text-sm font-medium">
                   <span className="flex flex-col">
                     {f.label}
-                    <span className="text-xs font-normal text-muted-foreground">{formatTry(f.price)}</span>
+                    <span className="text-xs font-normal text-muted-foreground">
+                      {formatTry(f.price)}
+                    </span>
                   </span>
                   {selected ? <Check className="size-4" aria-hidden="true" /> : null}
                 </span>
@@ -172,8 +174,8 @@ export function OrderForm({
             {safeQuantity >= PRICING.bulkMinQuantity
               ? `Tanesi ${formatTry(pricePerCard)} (%${PRICING.bulkDiscountPercent} adet indirimi uygulandı).`
               : `${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim.`}{" "}
-            KDV dahil, kargo ücretsiz. Dijital profil ilk {PRICING.profileFreeYears} yıl ücretsiz, sonrasında
-            aylık {formatTry(PRICING.profileMonthlyFee)}.
+            KDV dahil, kargo ücretsiz. Dijital profil ilk {PRICING.profileFreeYears} yıl ücretsiz,
+            sonrasında aylık {formatTry(PRICING.profileMonthlyFee)}.
           </p>
         </div>
       </fieldset>

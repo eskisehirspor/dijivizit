@@ -36,7 +36,12 @@ export default function ProductsPage() {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Dijivizit", item: `${MARKETING_ORIGIN}/` },
-          { "@type": "ListItem", position: 2, name: "Kartvizitler", item: `${MARKETING_ORIGIN}/kartvizit` },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Kartvizitler",
+            item: `${MARKETING_ORIGIN}/kartvizit`,
+          },
         ],
       },
     ],
@@ -75,7 +80,9 @@ export default function ProductsPage() {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <h2 className="text-xl font-semibold tracking-tight group-hover:underline">{f.name}</h2>
+                <h2 className="text-xl font-semibold tracking-tight group-hover:underline">
+                  {f.name}
+                </h2>
                 <p className="text-lg font-medium">{formatTry(f.price)}</p>
                 <p className="text-sm text-muted-foreground">{f.note}</p>
               </div>

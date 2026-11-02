@@ -52,7 +52,12 @@ export default async function ProductPage({ params }: Params) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Dijivizit", item: `${MARKETING_ORIGIN}/` },
-          { "@type": "ListItem", position: 2, name: "Kartvizitler", item: `${MARKETING_ORIGIN}/kartvizit` },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Kartvizitler",
+            item: `${MARKETING_ORIGIN}/kartvizit`,
+          },
           { "@type": "ListItem", position: 3, name: finish.name, item: productUrl(finish) },
         ],
       },

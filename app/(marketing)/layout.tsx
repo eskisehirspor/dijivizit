@@ -33,7 +33,10 @@ export default async function MarketingLayout({ children }: { children: React.Re
             <p className="text-xs">
               © {new Date().getFullYear()} {t("app.name")}
               {" · Kardeş site: "}
-              <a href="https://markapano.com/" className="underline underline-offset-2 hover:text-foreground">
+              <a
+                href="https://markapano.com/"
+                className="underline underline-offset-2 hover:text-foreground"
+              >
                 Markapano — satılık marka isimleri
               </a>
             </p>

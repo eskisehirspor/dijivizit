@@ -58,7 +58,8 @@ export function FinishPicker() {
           ))}
         </div>
         <p className="text-sm text-muted-foreground" aria-live="polite">
-          {current.note} <span className="font-medium text-foreground">{formatTry(current.price)}</span>, KDV
+          {current.note}{" "}
+          <span className="font-medium text-foreground">{formatTry(current.price)}</span>, KDV
           dahil, kargo ücretsiz.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">

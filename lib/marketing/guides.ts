@@ -386,7 +386,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Paylaşım ve kayıt",
         paragraphs: [
-          "Kâğıt kartviziti alan kişi bilgilerinizi telefonuna elle yazmak zorundadır; çoğu kart da bu adıma hiç gelmeden bir çekmecede kaybolur. NFC kartvizitte karşı taraf profilinizi açar ve \"Rehbere Kaydet\" ile bilgilerinizi tek dokunuşla telefonuna kaydeder.",
+          'Kâğıt kartviziti alan kişi bilgilerinizi telefonuna elle yazmak zorundadır; çoğu kart da bu adıma hiç gelmeden bir çekmecede kaybolur. NFC kartvizitte karşı taraf profilinizi açar ve "Rehbere Kaydet" ile bilgilerinizi tek dokunuşla telefonuna kaydeder.',
         ],
       },
       {
@@ -480,7 +480,8 @@ export const GUIDES: Guide[] = [
     description:
       "Yeni bir işletme kurarken marka ismi, alan adı, marka tescili, sosyal medya, logo ve kartvizit için adım adım kontrol listesi.",
     image: "/rehber/yeni-isletme-kontrol-listesi.jpg",
-    imageAlt: "Açık ahşap, koyu ahşap, gold, gümüş ve siyah Dijivizit kartvizit kaplamaları üst üste",
+    imageAlt:
+      "Açık ahşap, koyu ahşap, gold, gümüş ve siyah Dijivizit kartvizit kaplamaları üst üste",
     published: "2026-10-28",
     sections: [
       {
@@ -495,7 +496,10 @@ export const GUIDES: Guide[] = [
           "Her şey isimle başlar. Kısa, kolay söylenen ve kolay yazılan bir isim seçin. Seçtiğiniz ismin marka olarak başvurulup başvurulmadığını, .com alan adının ve sosyal medya kullanıcı adlarının boşta olup olmadığını aynı gün kontrol edin.",
           "Bu araştırmayla uğraşmak istemiyorsanız, .com alan adı ve marka tescil başvurusu hazır isimlere göz atabilirsiniz.",
         ],
-        link: { href: "https://markapano.com/", label: "Markapano: alan adı ve marka başvurusu hazır isimler" },
+        link: {
+          href: "https://markapano.com/",
+          label: "Markapano: alan adı ve marka başvurusu hazır isimler",
+        },
       },
       {
         heading: "2. Alan adı ve e-posta",

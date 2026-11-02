@@ -7,6 +7,7 @@ import {
   isMarketingHostname,
   joinOriginPath,
   shouldPassThroughOnMarketingHost,
+  isLegacyCardPath,
 } from "@/lib/hosts";
 
 describe("host split", () => {
@@ -54,5 +55,22 @@ describe("host split", () => {
     expect(joinOriginPath("https://app.dijivizit.com", "/register")).toBe(
       "https://app.dijivizit.com/register",
     );
+  });
+});
+
+describe("legacy card paths", () => {
+  it("treats unknown single-segment paths as the previous service's pages", () => {
+    expect(isLegacyCardPath("/diyetbenimle")).toBe(true);
+    expect(isLegacyCardPath("/suleymanoz/")).toBe(true);
+    expect(shouldPassThroughOnMarketingHost("/diyetbenimle")).toBe(true);
+  });
+
+  it("keeps app pages, files and nested paths out", () => {
+    expect(isLegacyCardPath("/login")).toBe(false);
+    expect(isLegacyCardPath("/dashboard")).toBe(false);
+    expect(isLegacyCardPath("/sitemap.xml")).toBe(false);
+    expect(isLegacyCardPath("/p/abc")).toBe(false);
+    expect(isLegacyCardPath("/")).toBe(false);
+    expect(shouldPassThroughOnMarketingHost("/login")).toBe(false);
   });
 });

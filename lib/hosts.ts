@@ -53,7 +53,33 @@ export function shouldPassThroughOnMarketingHost(pathname: string): boolean {
     return true;
   }
 
+  if (isLegacyCardPath(pathname)) {
+    return true;
+  }
+
   return false;
+}
+
+/** Top-level pages of the app, which the marketing host forwards to app.dijivizit.com. */
+const APP_TOP_SEGMENTS = new Set([
+  "login",
+  "register",
+  "forgot-password",
+  "reset-password",
+  "verify-email",
+  "dashboard",
+  "profile",
+  "settings",
+]);
+
+/**
+ * A single-segment path such as /diyetbenimle or /suleymanoz/: a customer page
+ * of the service that used dijivizit.com before. Answered with 410 Gone by
+ * app/(marketing)/[legacy]/route.ts.
+ */
+export function isLegacyCardPath(pathname: string): boolean {
+  const m = /^\/([^/.]+)\/?$/.exec(pathname);
+  return m !== null && !APP_TOP_SEGMENTS.has(m[1]!);
 }
 
 /** Absolute URL on the application origin, keeping the path and query string. */
