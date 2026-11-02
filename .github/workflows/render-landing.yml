@@ -56,7 +56,7 @@ jobs:
         run: |
           frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 192, 16)))")
           if [ "${{ github.event.inputs.variants }}" = "preview" ]; then
-            frames=$(python3 -c "print([0, 60, 150, 186][${{ matrix.shard }}])")
+            frames=$(python3 -c "print([0, 30, 172, 186][${{ matrix.shard }}])")
           fi
           if [ "${{ matrix.variant }}" = "desktop" ]; then
             python3 render/scene.py --out out/png --res 2560x1440 --samples ${{ github.event.inputs.samples }} --frames "$frames"
