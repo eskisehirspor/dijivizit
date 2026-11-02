@@ -152,8 +152,8 @@ def principled(name, **inputs):
 
 FINISHES = {
     # base, etched artwork, base roughness, etch roughness, edge
-    # Deep matte black metal: dark, high roughness, almost no anisotropy.
-    "black": ((0.032, 0.032, 0.035), (0.5, 0.5, 0.52), 0.62, 0.85, (0.09, 0.09, 0.1)),
+    # Matte black metal with a soft brushed sheen, so it still reads as metal.
+    "black": ((0.04, 0.04, 0.044), (0.5, 0.5, 0.52), 0.42, 0.85, (0.12, 0.12, 0.13)),
     # Matte brushed metals: high base roughness, strong directional streaks.
     "silver": ((0.62, 0.62, 0.64), (0.1, 0.1, 0.11), 0.26, 0.75, (0.62, 0.62, 0.64)),
     "gold": ((0.76, 0.52, 0.21), (0.16, 0.1, 0.035), 0.26, 0.75, (0.76, 0.52, 0.21)),
@@ -212,7 +212,7 @@ def card_face_material(name, mask_path, finish="black"):
     noise.inputs["Detail"].default_value = 12.0 if brushed else 4.0
     nt.links.new(mp.outputs["Vector"], noise.inputs["Vector"])
     streak = node(nt, "ShaderNodeMapRange", (-650, -300))
-    amp = 0.02 if finish == "black" else 0.32
+    amp = 0.07 if finish == "black" else 0.32
     streak.inputs["To Min"].default_value = -amp
     streak.inputs["To Max"].default_value = amp
     nt.links.new(noise.outputs["Fac"], streak.inputs["Value"])
@@ -221,7 +221,7 @@ def card_face_material(name, mask_path, finish="black"):
     nt.links.new(rough.outputs["Result"], add.inputs[0])
     nt.links.new(streak.outputs["Result"], add.inputs[1])
     nt.links.new(add.outputs["Value"], bsdf.inputs["Roughness"])
-    bsdf.inputs["Anisotropic"].default_value = 0.1 if finish == "black" else 1.0
+    bsdf.inputs["Anisotropic"].default_value = 0.45 if finish == "black" else 1.0
     if brushed:
         # Visible brush lines: the same streaks also modulate brightness.
         tint = node(nt, "ShaderNodeMapRange", (-650, 150))
@@ -367,7 +367,7 @@ def build(portrait, finish="black", hide_phone=False):
         nt.nodes.remove(nt.nodes["Principled BSDF"])
         e = nt.nodes.new("ShaderNodeEmission")
         # Dark metal would turn grey under a bright mirror image; keep it subtle.
-        e.inputs["Strength"].default_value = power * (0.25 if finish == "black" else 0.6)
+        e.inputs["Strength"].default_value = power * (0.4 if finish == "black" else 0.6)
         nt.links.new(e.outputs["Emission"], nt.nodes["Material Output"].inputs["Surface"])
         box.data.materials.append(em)
         box.visible_camera = False
