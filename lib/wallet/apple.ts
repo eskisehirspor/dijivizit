@@ -79,10 +79,6 @@ export function buildPassJson(
     card.title ? { key: "title", label: "UNVAN", value: card.title } : null,
     card.company ? { key: "company", label: "ŞİRKET", value: card.company } : null,
   ].filter(Boolean);
-  const auxiliary = [
-    card.phone ? { key: "phone-front", label: "TELEFON", value: card.phone } : null,
-    card.email ? { key: "email-front", label: "E-POSTA", value: card.email } : null,
-  ].filter(Boolean);
   const back = [
     card.phone ? { key: "phone", label: "Telefon", value: card.phone } : null,
     card.email ? { key: "email", label: "E-posta", value: card.email } : null,
@@ -108,10 +104,8 @@ export function buildPassJson(
     labelColor: "rgb(196, 164, 112)",
     sharingProhibited: false,
     generic: {
-      headerFields: [{ key: "kind", label: "", value: "KARTVİZİT" }],
       primaryFields: [{ key: "name", label: "", value: card.fullName }],
       secondaryFields: secondary,
-      auxiliaryFields: auxiliary,
       backFields: back,
     },
     barcodes: [
