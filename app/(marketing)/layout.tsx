@@ -5,6 +5,7 @@ import { Analytics } from "@/components/marketing/analytics";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { CONTACT } from "@/lib/contact";
 import { GUIDES } from "@/lib/marketing/guides";
+import { LANDINGS } from "@/lib/marketing/landings";
 import Link from "next/link";
 
 export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
@@ -42,6 +43,19 @@ export default async function MarketingLayout({ children }: { children: React.Re
             </p>
           </div>
           <div className="flex flex-col gap-4">
+            <nav
+              aria-label="Kartvizit türleri"
+              className="flex flex-wrap gap-x-4 gap-y-2 font-medium text-foreground"
+            >
+              {LANDINGS.map((l) => (
+                <Link key={l.slug} href={`/${l.slug}`} className="hover:underline">
+                  {l.term}
+                </Link>
+              ))}
+              <Link href="/kartvizit" className="hover:underline">
+                NFC kartvizit fiyatları
+              </Link>
+            </nav>
             <nav
               aria-label="Rehber"
               className="flex flex-wrap gap-x-4 gap-y-2 text-muted-foreground"
