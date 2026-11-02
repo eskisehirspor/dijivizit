@@ -45,6 +45,15 @@ export const FINISHES = [
     material: "wood",
     price: 2500,
   },
+  {
+    id: "digital",
+    label: "Dijital (kartsız)",
+    note: "Fiziksel kart yok: profil linki ve QR kod. Mesajla, e-posta imzasında, sosyal medyada paylaşırsın.",
+    slug: "dijital-kartvizit-qr",
+    name: "Kartsız Dijital Kartvizit (Link + QR)",
+    material: "digital",
+    price: 59.9,
+  },
 ] as const;
 
 export type FinishId = (typeof FINISHES)[number]["id"];
@@ -55,6 +64,24 @@ export const FINISH_IDS = FINISHES.map((f) => f.id) as [FinishId, ...FinishId[]]
 export function isFinishId(value: unknown): value is FinishId {
   return typeof value === "string" && (FINISH_IDS as readonly string[]).includes(value);
 }
+
+/** True for the card-less product: a monthly profile with a link and QR code. */
+export function isDigital(finish: Finish): boolean {
+  return finish.material === "digital";
+}
+
+/** Physical cards only, for pickers and renders that show a card. */
+export const CARD_FINISHES = FINISHES.filter((f) => f.material !== "digital");
+
+/** "4.000 TL" for cards, "50 TL/ay" for the monthly digital product. */
+export function formatPrice(finish: Finish, amount: number = finish.price): string {
+  return isDigital(finish) ? `${formatTry(amount)}/ay` : formatTry(amount);
+}
+
+/** Promises shown across the site. */
+export const PROMISES = {
+  deliveryHours: 72,
+} as const;
 
 export function finishLabel(id: FinishId): string {
   return FINISHES.find((f) => f.id === id)!.label;

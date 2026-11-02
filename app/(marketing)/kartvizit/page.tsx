@@ -3,13 +3,14 @@ import Link from "next/link";
 
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { pricingTerms, productImage, productJsonLd, productUrl } from "@/lib/marketing/products";
-import { FINISHES, PRICING, formatTry } from "@/lib/orders/finishes";
+import { PromiseStrip, WhyDijivizit } from "@/components/marketing/why-dijivizit";
+import { FINISHES, PRICING, formatPrice, formatTry } from "@/lib/orders/finishes";
 
 const metalPrice = FINISHES.find((f) => f.material === "metal")!.price;
 const woodPrice = FINISHES.find((f) => f.material === "wood")!.price;
 
 const TITLE = "NFC ve Dijital Kartvizit Fiyatları: Metal ve Ahşap | Dijivizit";
-const DESCRIPTION = `Metal NFC kartvizit ${formatTry(metalPrice)}, ahşap NFC kartvizit ${formatTry(woodPrice)}. KDV dahil, kargo ücretsiz, ${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim. Siyah, gold, gümüş, koyu ve açık ahşap.`;
+const DESCRIPTION = `Metal NFC kartvizit ${formatTry(metalPrice)}, ahşap NFC kartvizit ${formatTry(woodPrice)}, kartsız dijital kartvizit aylık 59,90 TL. KDV dahil, kargo ücretsiz, 72 saatte teslim, ${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim. Siyah, gold, gümüş, koyu ve açık ahşap.`;
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -60,7 +61,9 @@ export default function ProductsPage() {
         </h1>
         <p className="text-lg text-muted-foreground">
           Metal ya da ahşap, beş kaplama. Her kartta NFC çip, arkasında QR kod ve dijital profil.
+          Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90 TL.
         </p>
+        <PromiseStrip className="pt-2" />
       </div>
 
       <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -83,7 +86,7 @@ export default function ProductsPage() {
                 <h2 className="text-xl font-semibold tracking-tight group-hover:underline">
                   {f.name}
                 </h2>
-                <p className="text-lg font-medium">{formatTry(f.price)}</p>
+                <p className="text-lg font-medium">{formatPrice(f)}</p>
                 <p className="text-sm text-muted-foreground">{f.note}</p>
               </div>
             </Link>
@@ -99,6 +102,8 @@ export default function ProductsPage() {
           ))}
         </ul>
       </section>
+
+      <WhyDijivizit className="mt-20 border-t border-border/60 pt-16" />
     </div>
   );
 }

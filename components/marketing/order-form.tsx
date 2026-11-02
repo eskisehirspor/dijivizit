@@ -7,7 +7,16 @@ import { Check, Loader2 } from "lucide-react";
 import { trackLead } from "@/lib/analytics";
 import { submitOrderRequestAction, type OrderFormState } from "@/app/actions/order-request";
 import { CONTACT } from "@/lib/contact";
-import { FINISHES, PRICING, formatTry, unitPrice, type FinishId } from "@/lib/orders/finishes";
+import {
+  FINISHES,
+  PRICING,
+  PROMISES,
+  formatPrice,
+  formatTry,
+  isDigital,
+  unitPrice,
+  type FinishId,
+} from "@/lib/orders/finishes";
 import { cn } from "@/lib/utils";
 
 const INITIAL: OrderFormState = { status: "idle" };
@@ -58,6 +67,7 @@ export function OrderForm({
   const selectedFinish = FINISHES.find((f) => f.id === finish)!;
   const safeQuantity = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
   const pricePerCard = unitPrice(selectedFinish, safeQuantity);
+  const digital = isDigital(selectedFinish);
   const errors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
 
   useEffect(() => {
@@ -101,8 +111,8 @@ export function OrderForm({
       </div>
 
       <fieldset className="flex flex-col gap-5">
-        <legend className="mb-5 text-xl font-semibold tracking-tight">1. Kaplamayı seç</legend>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <legend className="mb-5 text-xl font-semibold tracking-tight">1. Ürünü seç</legend>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {FINISHES.map((f) => {
             const selected = f.id === finish;
             return (
@@ -129,13 +139,18 @@ export function OrderForm({
                   alt=""
                   width={1600}
                   height={900}
-                  className="aspect-[4/3] w-full scale-[1.6] object-cover transition-transform duration-500 group-hover:scale-[1.7]"
+                  className={cn(
+                    "aspect-[4/3] w-full object-cover transition-transform duration-500",
+                    isDigital(f)
+                      ? "group-hover:scale-[1.05]"
+                      : "scale-[1.6] group-hover:scale-[1.7]",
+                  )}
                 />
                 <span className="relative z-10 flex items-center justify-between gap-2 bg-background px-3 py-3 text-sm font-medium">
                   <span className="flex flex-col">
                     {f.label}
                     <span className="text-xs font-normal text-muted-foreground">
-                      {formatTry(f.price)}
+                      {formatPrice(f)}
                     </span>
                   </span>
                   {selected ? <Check className="size-4" aria-hidden="true" /> : null}
@@ -168,14 +183,16 @@ export function OrderForm({
         </div>
         <div className="flex flex-col gap-1" aria-live="polite">
           <p className="text-lg font-semibold tracking-tight">
-            Toplam: {formatTry(Math.round(pricePerCard * safeQuantity * 100) / 100)}
+            Toplam: {digital ? "aylık " : ""}
+            {formatTry(Math.round(pricePerCard * safeQuantity * 100) / 100)}
           </p>
           <p className="text-sm text-muted-foreground">
             {safeQuantity >= PRICING.bulkMinQuantity
-              ? `Tanesi ${formatTry(pricePerCard)} (%${PRICING.bulkDiscountPercent} adet indirimi uygulandı).`
+              ? `Tanesi ${formatPrice(selectedFinish, pricePerCard)} (%${PRICING.bulkDiscountPercent} adet indirimi uygulandı).`
               : `${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim.`}{" "}
-            KDV dahil, kargo ücretsiz. Dijital profil ilk {PRICING.profileFreeYears} yıl ücretsiz,
-            sonrasında aylık {formatTry(PRICING.profileMonthlyFee)}.
+            {digital
+              ? `KDV dahil. Kart yok; link ve QR kodun ${PROMISES.deliveryHours} saat içinde e-postanda.`
+              : `KDV dahil, kargo ücretsiz, ${PROMISES.deliveryHours} saatte teslim. Kart okunmazsa ücretsiz değişim. Dijital profil ilk ${PRICING.profileFreeYears} yıl ücretsiz, sonrasında aylık ${formatTry(PRICING.profileMonthlyFee)}.`}
           </p>
         </div>
       </fieldset>
@@ -228,7 +245,11 @@ export function OrderForm({
               label="Not (isteğe bağlı)"
               name="note"
               error={errors.note}
-              hint="Kartta yer alacak isim/unvan, logo, teslimat şehri gibi detaylar."
+              hint={
+                digital
+                  ? "Profilde yer alacak isim, unvan, şirket gibi detaylar."
+                  : "Kartta yer alacak isim/unvan, logo, teslimat şehri gibi detaylar."
+              }
             >
               <textarea
                 id="note"
@@ -274,7 +295,8 @@ export function OrderForm({
           Talep oluştur
         </button>
         <p className="text-sm text-muted-foreground">
-          Ödeme şimdi alınmaz. Talebini aldıktan sonra seni arayıp kart tasarımını netleştiririz.
+          Ödeme şimdi alınmaz. Talebini aldıktan sonra seni arayıp{" "}
+          {digital ? "profilini" : "kart tasarımını"} netleştiririz.
         </p>
       </div>
     </form>

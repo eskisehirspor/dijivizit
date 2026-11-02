@@ -5,7 +5,8 @@ import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { GUIDES } from "@/lib/marketing/guides";
 import { LANDINGS, type Landing } from "@/lib/marketing/landings";
 import { pricingTerms, productImage, productJsonLd, productUrl } from "@/lib/marketing/products";
-import { FINISHES, formatTry } from "@/lib/orders/finishes";
+import { PromiseStrip, WhyDijivizit } from "@/components/marketing/why-dijivizit";
+import { CARD_FINISHES, FINISHES, formatPrice, formatTry } from "@/lib/orders/finishes";
 
 export function landingMetadata(l: Landing): Metadata {
   const url = `/${l.slug}`;
@@ -68,7 +69,8 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
     ],
   };
 
-  const minPrice = Math.min(...FINISHES.map((f) => f.price));
+  const minPrice = Math.min(...CARD_FINISHES.map((f) => f.price));
+  const digital = FINISHES.find((f) => f.material === "digital")!;
 
   return (
     <article className="mx-auto w-full max-w-6xl px-6 pt-32 pb-28 sm:pt-40">
@@ -105,16 +107,18 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
             Fiyatlar
           </Link>
           <span className="text-sm text-muted-foreground">
-            {formatTry(minPrice)}’den başlayan fiyatlar · KDV dahil · ücretsiz kargo
+            Kartlar {formatTry(minPrice)}’den başlar · kartsız dijital kartvizit{" "}
+            {formatPrice(digital)} · KDV dahil
           </span>
         </div>
+        <PromiseStrip className="pt-4" />
       </header>
 
       <section aria-labelledby="modeller" className="mt-16">
         <h2 id="modeller" className="sr-only">
           {l.term} modelleri
         </h2>
-        <ul className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-5">
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
           {FINISHES.map((f) => (
             <li key={f.id}>
               <Link href={`/kartvizit/${f.slug}`} className="group flex flex-col gap-3">
@@ -131,14 +135,16 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
                   />
                 </div>
                 <span className="text-sm font-medium group-hover:underline">{f.name}</span>
-                <span className="text-sm text-muted-foreground">{formatTry(f.price)}</span>
+                <span className="text-sm text-muted-foreground">{formatPrice(f)}</span>
               </Link>
             </li>
           ))}
         </ul>
       </section>
 
-      <div className="mt-20 grid gap-x-16 gap-y-14 lg:grid-cols-2">
+      <WhyDijivizit className="mt-24 border-t border-border/60 pt-16" />
+
+      <div className="mt-20 grid gap-x-16 gap-y-14 border-t border-border/60 pt-16 lg:grid-cols-2">
         {l.sections.map((s) => (
           <section key={s.heading} className="flex flex-col gap-4">
             <h2 className="text-2xl font-semibold tracking-tight text-balance">{s.heading}</h2>

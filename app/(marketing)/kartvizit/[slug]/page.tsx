@@ -11,7 +11,16 @@ import {
   productJsonLd,
   productUrl,
 } from "@/lib/marketing/products";
-import { FINISHES, PRICING, formatTry, getFinishBySlug, unitPrice } from "@/lib/orders/finishes";
+import { WhyDijivizit } from "@/components/marketing/why-dijivizit";
+import {
+  FINISHES,
+  PRICING,
+  PROMISES,
+  formatPrice,
+  getFinishBySlug,
+  isDigital,
+  unitPrice,
+} from "@/lib/orders/finishes";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -25,7 +34,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const finish = getFinishBySlug((await params).slug);
   if (!finish) return {};
   const url = `/kartvizit/${finish.slug}`;
-  const title = `${finish.name} | ${formatTry(finish.price)} | Dijivizit`;
+  const title = `${finish.name} | ${formatPrice(finish)} | Dijivizit`;
   const description = productDescription(finish);
   return {
     title: { absolute: title },
@@ -65,6 +74,7 @@ export default async function ProductPage({ params }: Params) {
   };
   const others = FINISHES.filter((f) => f.id !== finish.id);
   const bulkPrice = unitPrice(finish, PRICING.bulkMinQuantity);
+  const digital = isDigital(finish);
 
   return (
     <article className="mx-auto w-full max-w-6xl px-6 pt-32 pb-28 sm:pt-40">
@@ -101,12 +111,16 @@ export default async function ProductPage({ params }: Params) {
             {finish.name}
           </h1>
           <p className="text-3xl font-semibold tracking-tight">
-            {formatTry(finish.price)}{" "}
+            {formatPrice(finish)}{" "}
             <span className="text-base font-normal text-muted-foreground">KDV dahil</span>
           </p>
           <p className="text-muted-foreground">
-            {PRICING.bulkMinQuantity} ve üzeri adette tanesi {formatTry(bulkPrice)} (%
-            {PRICING.bulkDiscountPercent} indirim). Kargo ücretsiz.
+            {PRICING.bulkMinQuantity} ve üzeri{" "}
+            {digital ? "kişilik ekipte kişi başı" : "adette tanesi"}{" "}
+            {formatPrice(finish, bulkPrice)} (%{PRICING.bulkDiscountPercent} indirim).{" "}
+            {digital
+              ? `Kart yok, kargo yok; link ve QR kodunuz ${PROMISES.deliveryHours} saat içinde e-postanızda.`
+              : `Kargo ücretsiz, ${PROMISES.deliveryHours} saatte teslim. Kart okunmazsa ücretsiz değişim.`}
           </p>
           <p className="leading-relaxed text-foreground/85">{finish.note}</p>
           <Link
@@ -116,14 +130,17 @@ export default async function ProductPage({ params }: Params) {
             Sipariş talebi oluştur
           </Link>
           <p className="text-sm text-muted-foreground">
-            Talebini aldıktan sonra seni arayıp kart tasarımını birlikte netleştiririz.
+            Talebini aldıktan sonra seni arayıp {digital ? "profilini" : "kart tasarımını"} birlikte
+            netleştiririz.
           </p>
         </div>
       </div>
 
       <div className="mt-20 grid gap-12 lg:grid-cols-2">
         <section className="flex flex-col gap-4">
-          <h2 className="text-2xl font-semibold tracking-tight">Kartta neler var?</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">
+            {digital ? "Neler dahil?" : "Kartta neler var?"}
+          </h2>
           <ul className="flex list-disc flex-col gap-2 pl-5 leading-relaxed text-foreground/85">
             {productFeatures(finish).map((item) => (
               <li key={item}>{item}</li>
@@ -133,7 +150,7 @@ export default async function ProductPage({ params }: Params) {
         <section className="flex flex-col gap-4">
           <h2 className="text-2xl font-semibold tracking-tight">Fiyat ve koşullar</h2>
           <ul className="flex list-disc flex-col gap-2 pl-5 leading-relaxed text-foreground/85">
-            {pricingTerms().map((item) => (
+            {pricingTerms(finish).map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
@@ -141,8 +158,8 @@ export default async function ProductPage({ params }: Params) {
       </div>
 
       <section className="mt-20 flex flex-col gap-6 border-t border-border/60 pt-16">
-        <h2 className="text-2xl font-semibold tracking-tight">Diğer kaplamalar</h2>
-        <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <h2 className="text-2xl font-semibold tracking-tight">Diğer ürünler</h2>
+        <ul className="grid grid-cols-2 gap-4 lg:grid-cols-5">
           {others.map((f) => (
             <li key={f.id}>
               <Link href={`/kartvizit/${f.slug}`} className="group flex flex-col gap-3">
@@ -159,12 +176,14 @@ export default async function ProductPage({ params }: Params) {
                   />
                 </div>
                 <span className="font-medium group-hover:underline">{f.name}</span>
-                <span className="text-sm text-muted-foreground">{formatTry(f.price)}</span>
+                <span className="text-sm text-muted-foreground">{formatPrice(f)}</span>
               </Link>
             </li>
           ))}
         </ul>
       </section>
+
+      <WhyDijivizit className="mt-20 border-t border-border/60 pt-16" />
     </article>
   );
 }

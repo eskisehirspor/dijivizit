@@ -32,6 +32,14 @@ export const COMPARISON = [
 
 export const FAQ = [
   {
+    q: "Kartım ne kadar sürede elime ulaşır?",
+    a: "Siparişin 72 saatte teslim edilir ve kargo ücretsizdir. Kart telefonlarda okunmazsa ücretsiz yenisiyle değiştiririz.",
+  },
+  {
+    q: "Kart olmadan dijital kartvizit alabilir miyim?",
+    a: "Evet. Kartsız dijital kartvizitte profil linkini ve QR kodunu alırsın; aylık 59,90 TL'dir. İstediğin zaman NFC karta geçebilirsin, link ve QR aynı kalır.",
+  },
+  {
     q: "NFC kartvizit nedir?",
     a: "NFC kartvizit, içinde NFC çip bulunan bir akıllı kartvizittir. Kartı bir telefonun arkasına dokundurduğunda dijital kartvizit profilin telefonda açılır; karşı taraf bilgilerini tek dokunuşla rehberine kaydeder.",
   },

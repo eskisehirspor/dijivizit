@@ -5,7 +5,17 @@
  * product pages and the structured data always agree.
  */
 import { MARKETING_ORIGIN } from "@/lib/hosts";
-import { PRICING, formatTry, type Finish } from "@/lib/orders/finishes";
+import {
+  FINISHES,
+  PRICING,
+  PROMISES,
+  formatPrice,
+  formatTry,
+  isDigital,
+  type Finish,
+} from "@/lib/orders/finishes";
+
+const DIGITAL = FINISHES.find((f) => f.material === "digital")!;
 
 export function productUrl(finish: Finish): string {
   return `${MARKETING_ORIGIN}/kartvizit/${finish.slug}`;
@@ -16,6 +26,9 @@ export function productImage(finish: Finish): string {
 }
 
 export function productDescription(finish: Finish): string {
+  if (isDigital(finish)) {
+    return `Kartsız dijital kartvizit: profil linkiniz ve QR kodunuz. Mesajla, e-posta imzasında ya da sosyal medyada paylaşın; QR kodu sunumlara, broşürlere, vitrine koyun. Rehbere kayıt, bilgi bırakma formu ve analitik dahil. Aylık ${formatTry(finish.price)}, KDV dahil.`;
+  }
   const base =
     finish.material === "metal"
       ? `${finish.note} Adınız, unvanınız ve logonuz lazerle kazınır; baskı olmadığı için silinmez.`
@@ -25,6 +38,16 @@ export function productDescription(finish: Finish): string {
 
 /** What every card includes, in the words the rest of the site already uses. */
 export function productFeatures(finish: Finish): string[] {
+  if (isDigital(finish)) {
+    return [
+      "Size özel profil linki ve yüksek çözünürlüklü QR kod.",
+      "Profil adresi isminizi değil rastgele bir kodu içerir; linkiniz tahmin edilemez.",
+      "Karşı taraf tek dokunuşla rehberine kaydeder; uygulama gerekmez.",
+      'Ziyaretçi "Bilgilerimi bırak" ile kendi bilgisini size iletir.',
+      "Kaç kez açıldığını, hangi şehir ve cihazlardan görüntülendiğini görürsünüz.",
+      "İstediğiniz zaman NFC karta geçebilirsiniz; link ve QR aynı kalır.",
+    ];
+  }
   const surface =
     finish.material === "metal"
       ? "İsim, unvan ve logo metal yüzeye lazerle kazınır; silinmez, solmaz."
@@ -38,12 +61,23 @@ export function productFeatures(finish: Finish): string[] {
   ];
 }
 
-export function pricingTerms(): string[] {
+export function pricingTerms(finish?: Finish): string[] {
+  if (finish && isDigital(finish)) {
+    return [
+      "Fiyata KDV dahildir.",
+      `Aylık ${formatTry(finish.price)}; kart, kargo ya da kurulum ücreti yoktur.`,
+      `${PRICING.bulkMinQuantity} ve üzeri kişilik ekiplerde %${PRICING.bulkDiscountPercent} indirim uygulanır.`,
+      `Link ve QR kodunuz ${PROMISES.deliveryHours} saat içinde e-postanıza gönderilir.`,
+    ];
+  }
   return [
     "Fiyatlara KDV dahildir.",
     PRICING.freeShipping ? "Kargo ücretsizdir." : "",
+    `${PROMISES.deliveryHours} saatte teslim.`,
+    "Kart okunmazsa ücretsiz yenisiyle değiştirilir.",
     `${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim uygulanır.`,
     `Dijital profil ilk ${PRICING.profileFreeYears} yıl ücretsizdir; sonrasında aylık ${formatTry(PRICING.profileMonthlyFee)}.`,
+    `Kart istemeyenlere kartsız dijital kartvizit: ${formatPrice(DIGITAL)}.`,
   ].filter(Boolean);
 }
 
@@ -57,8 +91,8 @@ export function productJsonLd(finish: Finish) {
     image: [`${MARKETING_ORIGIN}${productImage(finish)}`],
     sku: `DV-${finish.id.toUpperCase()}`,
     brand: { "@type": "Brand", name: "Dijivizit" },
-    material: finish.material === "metal" ? "Metal" : "Ahşap",
-    category: "NFC kartvizit",
+    ...(isDigital(finish) ? {} : { material: finish.material === "metal" ? "Metal" : "Ahşap" }),
+    category: isDigital(finish) ? "Dijital kartvizit" : "NFC kartvizit",
     offers: {
       "@type": "Offer",
       url: productUrl(finish),
@@ -67,15 +101,40 @@ export function productJsonLd(finish: Finish) {
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${MARKETING_ORIGIN}/#organization` },
-      ...(PRICING.freeShipping
+      ...(isDigital(finish)
         ? {
-            shippingDetails: {
-              "@type": "OfferShippingDetails",
-              shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "TRY" },
-              shippingDestination: { "@type": "DefinedRegion", addressCountry: "TR" },
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: finish.price.toFixed(2),
+              priceCurrency: "TRY",
+              billingDuration: "P1M",
+              unitText: "ay",
             },
           }
-        : {}),
+        : PRICING.freeShipping
+          ? {
+              shippingDetails: {
+                "@type": "OfferShippingDetails",
+                shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "TRY" },
+                shippingDestination: { "@type": "DefinedRegion", addressCountry: "TR" },
+                deliveryTime: {
+                  "@type": "ShippingDeliveryTime",
+                  handlingTime: {
+                    "@type": "QuantitativeValue",
+                    minValue: 0,
+                    maxValue: 1,
+                    unitCode: "DAY",
+                  },
+                  transitTime: {
+                    "@type": "QuantitativeValue",
+                    minValue: 1,
+                    maxValue: 2,
+                    unitCode: "DAY",
+                  },
+                },
+              },
+            }
+          : {}),
     },
   };
 }

@@ -5,6 +5,7 @@ import { AppScreens } from "@/components/marketing/app-screens";
 import { FeatureShowcase } from "@/components/marketing/feature-showcase";
 import { ContactDetails } from "@/components/marketing/contact-details";
 import { FinishPicker } from "@/components/marketing/finish-picker";
+import { WhyDijivizit } from "@/components/marketing/why-dijivizit";
 import { LifestyleImage } from "@/components/marketing/lifestyle-image";
 import { ScrollSequence, type SequenceCaption } from "@/components/marketing/scroll-sequence";
 import { COMPARISON, FAQ, KEYWORDS, USE_CASES } from "@/components/marketing/seo-content";
@@ -144,6 +145,10 @@ export default function HomePage() {
         captions={CAPTIONS}
       />
 
+      <div className="mx-auto w-full max-w-6xl px-6 pt-28 sm:pt-36">
+        <WhyDijivizit />
+      </div>
+
       <section className="mx-auto w-full max-w-6xl px-6 pt-28 sm:pt-36">
         <div className="mb-12 flex max-w-2xl flex-col gap-4">
           <p className="text-sm font-medium tracking-wide text-muted-foreground">Kaplamalar</p>
@@ -152,6 +157,15 @@ export default function HomePage() {
           </h2>
         </div>
         <FinishPicker />
+        <p className="mt-10 text-center text-sm text-muted-foreground">
+          Kart istemiyor musun?{" "}
+          <Link
+            href="/kartvizit/dijital-kartvizit-qr"
+            className="font-medium text-foreground underline underline-offset-4"
+          >
+            Kartsız dijital kartvizit: link + QR, aylık 59,90 TL
+          </Link>
+        </p>
       </section>
 
       <section className="mx-auto grid w-full max-w-6xl gap-14 px-6 py-28 sm:py-36 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-20">

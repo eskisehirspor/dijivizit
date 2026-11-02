@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 
 import { ContactDetails } from "@/components/marketing/contact-details";
 import { OrderForm } from "@/components/marketing/order-form";
+import { PromiseStrip } from "@/components/marketing/why-dijivizit";
 import { isFinishId } from "@/lib/orders/finishes";
 import { issueFormToken } from "@/lib/security/form-token";
 
-const TITLE = "NFC Kartvizit Sipariş | Dijivizit";
+const TITLE = "NFC ve Dijital Kartvizit Sipariş | Dijivizit";
 const DESCRIPTION =
-  "Dijivizit NFC akıllı kartvizit sipariş talebi: siyah metal, gümüş, gold, koyu veya açık ahşap kaplamayı seç, bilgilerini bırak, seni arayalım.";
+  "Dijivizit NFC akıllı kartvizit sipariş talebi: siyah metal, gümüş, gold, koyu veya açık ahşap kaplama ya da kartsız dijital kartvizit (link + QR). 72 saatte teslim.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -33,9 +34,10 @@ export default async function OrderPage({
           Kartını seç. Gerisini biz halledelim.
         </h1>
         <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
-          Kaplamayı seç, iletişim bilgilerini bırak. Talebin bize ulaşır, en kısa sürede arayıp
-          tasarım ve teslimatı birlikte netleştiririz.
+          Kartını ya da kartsız dijital kartviziti seç, iletişim bilgilerini bırak. Talebin bize
+          ulaşır, en kısa sürede arayıp tasarım ve teslimatı birlikte netleştiririz.
         </p>
+        <PromiseStrip className="pt-2" />
       </div>
 
       <OrderForm initialFinish={initialFinish} formToken={formToken} />

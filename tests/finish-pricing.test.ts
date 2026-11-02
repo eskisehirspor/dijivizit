@@ -1,6 +1,14 @@
 import { describe, expect, it } from "vitest";
 
-import { FINISHES, formatTry, getFinishBySlug, unitPrice } from "@/lib/orders/finishes";
+import {
+  CARD_FINISHES,
+  FINISHES,
+  formatPrice,
+  formatTry,
+  getFinishBySlug,
+  isDigital,
+  unitPrice,
+} from "@/lib/orders/finishes";
 import { productJsonLd } from "@/lib/marketing/products";
 
 const black = FINISHES.find((f) => f.id === "black")!;
@@ -31,5 +39,25 @@ describe("finish pricing", () => {
     const ld = productJsonLd(black);
     expect(ld.offers.price).toBe("4000.00");
     expect(ld.offers.priceCurrency).toBe("TRY");
+  });
+});
+
+describe("digital product", () => {
+  const digital = FINISHES.find((f) => f.id === "digital")!;
+
+  it("is a monthly price and stays out of the card picker", () => {
+    expect(formatPrice(digital)).toBe("59,90 TL/ay");
+    expect(formatPrice(black)).toBe("4.000 TL");
+    expect(isDigital(digital)).toBe(true);
+    expect(CARD_FINISHES.some((f) => (f.id as string) === "digital")).toBe(false);
+  });
+
+  it("puts a monthly price specification and no shipping in the structured data", () => {
+    const ld = productJsonLd(digital) as Record<string, unknown> & {
+      offers: Record<string, unknown>;
+    };
+    expect(ld.offers.priceSpecification).toMatchObject({ billingDuration: "P1M", price: "59.90" });
+    expect(ld.offers.shippingDetails).toBeUndefined();
+    expect(ld.material).toBeUndefined();
   });
 });

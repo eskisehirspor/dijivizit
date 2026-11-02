@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Link from "next/link";
 
-import { FINISHES, formatTry, type FinishId } from "@/lib/orders/finishes";
+import { CARD_FINISHES as FINISHES, formatTry, type FinishId } from "@/lib/orders/finishes";
 import { cn } from "@/lib/utils";
 
 /** Rendered stills of the card in each finish, crossfaded by a segmented control. */
