@@ -3,9 +3,11 @@ import { getTranslations } from "next-intl/server";
 
 import { Funnel } from "@/components/admin/funnel";
 import { InvitationList } from "@/components/admin/invitation-list";
+import { OrderRequestList } from "@/components/admin/order-requests";
 import { StatTile } from "@/components/admin/stat-tile";
 import { UserList } from "@/components/admin/user-list";
 import { percentOf } from "@/lib/admin/format";
+import type { AdminOrderRequest } from "@/lib/admin/orders";
 import { ACTIVE_WINDOW_DAYS, buildOverview, type InvitationStatus } from "@/lib/admin/summary";
 import type { AdminData } from "@/lib/dal/admin";
 import { routes } from "@/lib/routes";
@@ -13,7 +15,11 @@ import { routes } from "@/lib/routes";
 const RECENT_INVITATIONS = 5;
 const STATUSES: InvitationStatus[] = ["active", "used", "expired", "revoked"];
 
-export async function AdminOverviewView({ users, invitations }: AdminData) {
+export async function AdminOverviewView({
+  users,
+  invitations,
+  orders,
+}: AdminData & { orders: AdminOrderRequest[] }) {
   const t = await getTranslations("dashboard.admin");
 
   const overview = buildOverview(users);
@@ -86,6 +92,14 @@ export async function AdminOverviewView({ users, invitations }: AdminData) {
             { key: "viewed", label: t("funnel.viewed"), value: overview.funnel.viewed },
           ]}
         />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-sm font-medium">{t("orders.title")}</h2>
+          <p className="text-xs text-muted-foreground">{t("orders.subtitle")}</p>
+        </div>
+        <OrderRequestList orders={orders} />
       </section>
 
       <section className="flex flex-col gap-4">

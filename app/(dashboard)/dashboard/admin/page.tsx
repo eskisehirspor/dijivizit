@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 import { AdminOverviewView } from "@/components/admin/overview";
-import { getAdminData } from "@/lib/dal/admin";
+import { getAdminData, getAdminOrderRequests } from "@/lib/dal/admin";
 import { requireInviteOwner } from "@/lib/dal/invitations";
 
 export async function generateMetadata() {
@@ -12,7 +12,7 @@ export async function generateMetadata() {
 export default async function AdminPage() {
   await requireInviteOwner();
 
-  const data = await getAdminData();
+  const [data, orders] = await Promise.all([getAdminData(), getAdminOrderRequests()]);
 
-  return <AdminOverviewView {...data} />;
+  return <AdminOverviewView {...data} orders={orders} />;
 }

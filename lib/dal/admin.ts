@@ -10,6 +10,7 @@ import {
   type AdminUserRow,
   type InvitationStatus,
 } from "@/lib/admin/summary";
+import { ORDER_STATUSES, type AdminOrderRequest, type OrderStatus } from "@/lib/admin/orders";
 import { requireInviteOwner, viewerIsInviteOwner } from "@/lib/dal/invitations";
 import { AVATAR_BUCKET } from "@/lib/profile/avatar";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -343,4 +344,38 @@ export async function getAdminUserDetail(userId: string): Promise<AdminUserDetai
     eventCounts: Object.fromEntries(countBy(events, (row) => row.event_type)),
     invitation: invitation ?? null,
   };
+}
+
+/** Order requests from dijivizit.com/siparis, newest first. Owner only. */
+export async function getAdminOrderRequests(limit = 200): Promise<AdminOrderRequest[]> {
+  await requireInviteOwner();
+  const { data, error } = await createAdminClient()
+    .from("order_requests")
+    .select("id, created_at, full_name, phone, email, finish, quantity, note, status")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error(`order_requests: ${error.message}`);
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    createdAt: r.created_at,
+    fullName: r.full_name,
+    phone: r.phone,
+    email: r.email,
+    finish: r.finish,
+    quantity: r.quantity,
+    note: r.note,
+    status: (ORDER_STATUSES as readonly string[]).includes(r.status)
+      ? (r.status as OrderStatus)
+      : "new",
+  }));
+}
+
+/** Moves an order request along the follow-up pipeline. Owner only. */
+export async function setOrderRequestStatus(id: string, status: OrderStatus): Promise<void> {
+  await requireInviteOwner();
+  const { error } = await createAdminClient()
+    .from("order_requests")
+    .update({ status })
+    .eq("id", id);
+  if (error) throw new Error(`order_requests: ${error.message}`);
 }
