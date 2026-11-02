@@ -104,6 +104,30 @@ export function ScrollSequence({
       return null;
     };
 
+    // Backdrop colour of a frame: its bottom corners, averaged, sampled once.
+    const probe = document.createElement("canvas");
+    probe.width = probe.height = 1;
+    const probeCtx = probe.getContext("2d", { willReadFrequently: true });
+    const backdrops = new WeakMap<HTMLImageElement, string>();
+    const backdrop = (img: HTMLImageElement) => {
+      const cached = backdrops.get(img);
+      if (cached) return cached;
+      let color = "rgb(233, 232, 230)";
+      if (probeCtx) {
+        const sw = img.naturalWidth;
+        const sh = img.naturalHeight;
+        const px = (sx: number) => {
+          probeCtx.drawImage(img, sx, sh - 24, 24, 24, 0, 0, 1, 1);
+          return probeCtx.getImageData(0, 0, 1, 1).data;
+        };
+        const a = px(0);
+        const b = px(sw - 24);
+        color = `rgb(${(a[0]! + b[0]!) >> 1}, ${(a[1]! + b[1]!) >> 1}, ${(a[2]! + b[2]!) >> 1})`;
+      }
+      backdrops.set(img, color);
+      return color;
+    };
+
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(canvas.clientWidth * dpr);
@@ -122,9 +146,7 @@ export function ScrollSequence({
         return;
       }
       // Phones: draw the frame a little smaller and from the top, so the phone
-      // in the render ends above the captions at the bottom of the screen. The
-      // strips left around it are filled by stretching the frame's outermost
-      // pixels, which are plain backdrop.
+      // in the render ends above the captions at the bottom of the screen.
       const cw = canvas.width;
       const ch = canvas.height;
       const cover = Math.max(cw / source.width, ch / source.height);
@@ -137,31 +159,31 @@ export function ScrollSequence({
       const h = source.height * scale;
       const x = (cw - w) / 2;
       const y = Math.min(0, (ch - h) / 2);
-      const sw = img.naturalWidth;
-      const sh = img.naturalHeight;
-      const edge = 2;
+      // Fill the screen with the frame's backdrop colour, then fade the frame's
+      // edges into it, so objects cut by the frame edge (a card coming into
+      // view) melt away instead of being smeared.
+      const bg = backdrop(img);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, cw, ch);
       ctx.drawImage(img, x, y, w, h);
-      if (x > 0) {
-        ctx.drawImage(img, 0, 0, edge, sh, 0, y, x + 1, h);
-        ctx.drawImage(img, sw - edge, 0, edge, sh, x + w - 1, y, x + 1, h);
+      const clear = bg.replace("rgb(", "rgba(").replace(")", ", 0)");
+      const fade = (x0: number, y0: number, x1: number, y1: number) => {
+        const g = ctx.createLinearGradient(x0, y0, x1, y1);
+        g.addColorStop(0, clear);
+        g.addColorStop(1, bg);
+        return g;
+      };
+      if (y + h < ch) {
+        const f = h * 0.18;
+        ctx.fillStyle = fade(0, y + h - f, 0, y + h);
+        ctx.fillRect(0, y + h - f, cw, f + 1);
       }
-      const gap = ch - (y + h);
-      if (gap > 0) {
-        ctx.drawImage(img, 0, sh - edge, sw, edge, x, y + h - 1, w, gap + 1);
-        if (x > 0) {
-          ctx.drawImage(img, 0, sh - edge, edge, edge, 0, y + h - 1, x + 1, gap + 1);
-          ctx.drawImage(
-            img,
-            sw - edge,
-            sh - edge,
-            edge,
-            edge,
-            x + w - 1,
-            y + h - 1,
-            x + 1,
-            gap + 1,
-          );
-        }
+      if (x > 0) {
+        const f = w * 0.08;
+        ctx.fillStyle = fade(x + f, 0, x, 0);
+        ctx.fillRect(x - 1, 0, f + 1, ch);
+        ctx.fillStyle = fade(x + w - f, 0, x + w, 0);
+        ctx.fillRect(x + w - f, 0, f + 1, ch);
       }
     };
 
