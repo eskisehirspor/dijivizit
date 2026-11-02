@@ -79,10 +79,20 @@ export function buildPassJson(
     card.title ? { key: "title", label: "UNVAN", value: card.title } : null,
     card.company ? { key: "company", label: "ŞİRKET", value: card.company } : null,
   ].filter(Boolean);
+  const auxiliary = [
+    card.phone ? { key: "phone-front", label: "TELEFON", value: card.phone } : null,
+    card.email ? { key: "email-front", label: "E-POSTA", value: card.email } : null,
+  ].filter(Boolean);
   const back = [
     card.phone ? { key: "phone", label: "Telefon", value: card.phone } : null,
     card.email ? { key: "email", label: "E-posta", value: card.email } : null,
     { key: "url", label: "Dijital kartvizit", value: card.url },
+    {
+      key: "about",
+      label: "Dijivizit",
+      value:
+        "Ön yüzdeki QR kodu okutan kişi profilinizi açar ve sizi tek dokunuşla rehberine kaydeder.",
+    },
   ].filter(Boolean);
 
   return {
@@ -92,14 +102,16 @@ export function buildPassJson(
     serialNumber: `dijivizit-${card.slug}`,
     organizationName: "Dijivizit",
     description: `${card.fullName} — dijital kartvizit`,
-    logoText: "Dijivizit",
-    backgroundColor: "rgb(17, 17, 17)",
+    // Same palette as the black metal card: near-black, white type, brass labels.
+    backgroundColor: "rgb(18, 18, 19)",
     foregroundColor: "rgb(255, 255, 255)",
-    labelColor: "rgb(170, 170, 170)",
+    labelColor: "rgb(196, 164, 112)",
     sharingProhibited: false,
     generic: {
+      headerFields: [{ key: "kind", label: "", value: "KARTVİZİT" }],
       primaryFields: [{ key: "name", label: "", value: card.fullName }],
       secondaryFields: secondary,
+      auxiliaryFields: auxiliary,
       backFields: back,
     },
     barcodes: [
@@ -107,7 +119,7 @@ export function buildPassJson(
         format: "PKBarcodeFormatQR",
         message: card.url,
         messageEncoding: "iso-8859-1",
-        altText: "Okutun, kartım açılsın",
+        altText: "Okut, rehberine kaydet",
       },
     ],
   };
