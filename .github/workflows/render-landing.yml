@@ -136,6 +136,8 @@ jobs:
           cp artifacts/finish-*/*.webp public/landing/finishes/ 2>/dev/null || true
           git add public/landing
           git commit -m "Update rendered landing hero frames" || exit 0
+          # main may have moved during the render; frames only touch public/landing.
+          git pull --rebase origin main
           git push
 
       - name: Redeploy
