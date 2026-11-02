@@ -539,6 +539,215 @@ export const GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    slug: "telefonda-nfc-nasil-acilir",
+    label: "Telefonda NFC nasıl açılır?",
+    title: "Telefonda NFC Nasıl Açılır? iPhone, Samsung, Xiaomi, Huawei",
+    description:
+      "Telefonda NFC nasıl açılır, NFC kartvizit nasıl okutulur? iPhone ve Android (Samsung, Xiaomi, Huawei, Oppo) için adım adım NFC açma rehberi.",
+    image: "/rehber/telefonda-nfc-nasil-acilir.jpg",
+    imageAlt:
+      "Siyah NFC kartvizit telefonun arkasına yaklaştırılmış, ekranda dijital kartvizit profili açık",
+    published: "2026-11-02",
+    sections: [
+      {
+        heading: "Kısaca",
+        paragraphs: [
+          "NFC kartvizitin açılması için telefonun NFC özelliğinin olması ve açık olması gerekir. iPhone'larda NFC her zaman açıktır, bir ayar yoktur. Android telefonlarda NFC ayarlardan ya da hızlı ayarlar panelinden açılıp kapatılır.",
+          "NFC açıldıktan sonra kartı telefonun arkasına 1-2 saniye tutmanız yeterlidir; ekranda bir bildirim çıkar ve dokununca profil tarayıcıda açılır. Uygulama indirmeye gerek yoktur.",
+        ],
+      },
+      {
+        heading: "iPhone'da NFC",
+        paragraphs: [
+          "iPhone XS ve sonraki modeller NFC etiketlerini arka planda kendiliğinden okur. Ekran açıkken kartı telefonun üst arka kısmına, kameraların yakınına tutun; ekranın üstünde çıkan bildirime dokunun.",
+          'iPhone 7, 8 ve X modellerinde Denetim Merkezi\'ne "NFC Etiketi Okuyucu" düğmesini ekleyip ona dokunarak kartı okutabilirsiniz: Ayarlar > Denetim Merkezi > NFC Etiketi Okuyucu.',
+        ],
+      },
+      {
+        heading: "Samsung'da NFC",
+        paragraphs: [],
+        list: [
+          "Ayarlar'ı açın.",
+          "Bağlantılar bölümüne girin.",
+          '"NFC ve temassız ödemeler" seçeneğini açın.',
+          "Daha hızlısı: ekranın üstünden iki kez aşağı kaydırıp hızlı ayarlardaki NFC düğmesine dokunun.",
+        ],
+      },
+      {
+        heading: "Xiaomi, Redmi ve Poco'da NFC",
+        paragraphs: [],
+        list: [
+          "Ayarlar'ı açın.",
+          '"Bağlantı ve paylaşım" bölümüne girin.',
+          "NFC'yi açın.",
+          "Kontrol merkezinde de NFC düğmesi bulunur.",
+        ],
+      },
+      {
+        heading: "Huawei, Honor, Oppo ve diğer Android telefonlarda",
+        paragraphs: [
+          'Menü adları markaya göre biraz değişir ama NFC ayarı hep bağlantı ayarlarının içindedir. Ayarlar içinde "Bağlı cihazlar", "Daha fazla bağlantı" ya da "Bağlantı ve paylaşım" bölümüne bakın veya ayarların arama kutusuna NFC yazın.',
+        ],
+      },
+      {
+        heading: "Kart nereye tutulur?",
+        paragraphs: [
+          "NFC anteni iPhone'da üst arka kısımda, çoğu Android telefonda arka yüzün ortasındadır. Kartı yavaşça bu bölgeye yaklaştırın ve 1-2 saniye sabit tutun. Kalın, metal plakalı ya da mıknatıslı kılıflar okumayı zorlaştırabilir.",
+        ],
+      },
+      {
+        heading: "Telefonumda NFC yoksa?",
+        paragraphs: [
+          "Sorun değil. Dijivizit kartlarının arkasında aynı profile açılan bir QR kod bulunur. Kamerayı açıp kodu okutmanız yeterlidir; NFC'si olmayan eski telefonlar dahil her telefon profili açar.",
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modellerine bakın" },
+      },
+    ],
+    faq: [
+      {
+        q: "Telefonumda NFC olup olmadığını nasıl anlarım?",
+        a: "Ayarların arama kutusuna NFC yazın. Sonuç çıkıyorsa telefonunuzda NFC vardır. iPhone XS ve sonraki tüm iPhone'larda NFC okuma vardır.",
+      },
+      {
+        q: "NFC açık kalırsa pil tüketir mi?",
+        a: "Çok az. NFC yalnızca birkaç santimetre mesafede ve ekran açıkken çalışır; günlük pil kullanımında fark edilmez.",
+      },
+      {
+        q: "NFC açıkken biri bilgilerimi çalabilir mi?",
+        a: "NFC kartvizit okumak telefonunuzdaki bilgileri paylaşmaz; yalnızca karttaki bağlantı okunur ve açmak için bildirime sizin dokunmanız gerekir.",
+      },
+    ],
+  },
+  {
+    slug: "nfc-kartvizit-nereden-alinir",
+    label: "NFC kartvizit nereden alınır?",
+    title: "NFC Kartvizit Nereden Alınır? Satın Almadan Önce 8 Soru",
+    description:
+      "NFC kartvizit nereden alınır, nelere dikkat edilir? Abonelik, QR yedeği, malzeme, kart kaybı ve kurumsal kullanım için satın almadan önce sorulacak 8 soru.",
+    image: "/rehber/nfc-kartvizit-nereden-alinir.jpg",
+    imageAlt: "İş toplantısında siyah metal NFC kartvizit karşı tarafa uzatılıyor",
+    published: "2026-11-02",
+    sections: [
+      {
+        heading: "NFC kartvizit nereden alınır?",
+        paragraphs: [
+          "NFC kartvizit üç yerden alınabilir: kartı ve dijital profili birlikte sunan markaların kendi sitelerinden, pazar yerlerindeki satıcılardan ve NFC baskı yapan matbaalardan. Kartın kendisi küçük bir çipli plakadır; asıl farkı, kartın açtığı dijital profili kimin barındırdığı ve ne kadar süre çalışacağı yaratır.",
+          "Boş bir NFC etiketi ucuzdur ama profili sizin hazırlamanız, barındırmanız ve güncel tutmanız gerekir. Profil, panel ve kartı birlikte veren bir hizmet ise kurulumla uğraşmadan kullanmaya başlamanızı sağlar.",
+        ],
+      },
+      {
+        heading: "Satın almadan önce sorulacak 8 soru",
+        paragraphs: [],
+        list: [
+          "Profil ücretsiz mi, abonelik var mı? Varsa ilk yıldan sonra ne kadar?",
+          "Bilgilerimi istediğim zaman kendim güncelleyebiliyor muyum?",
+          "Kartın arkasında NFC'si olmayan telefonlar için QR kod var mı?",
+          "Karşı taraf bilgilerimi tek dokunuşla rehberine kaydedebiliyor mu?",
+          "Kart kaybolursa kapatabiliyor muyum, yenisini aynı profile bağlayabiliyor muyum?",
+          "Kartın malzemesi ne: PVC, metal mi, ahşap mı? Yazı baskı mı, lazer mi?",
+          "Profilim kaç kez görüntülendi, hangi şehirlerden açıldı, görebiliyor muyum?",
+          "Ekip için toplu sipariş ve çalışan değişince kartı devretme mümkün mü?",
+        ],
+      },
+      {
+        heading: "Malzeme: PVC, metal, ahşap",
+        paragraphs: [
+          "PVC kartlar en ucuz seçenektir ve baskıyla renklendirilir. Metal kartlar ağırlığı ve dokusuyla ilk izlenimde fark yaratır; yazı lazerle kazındığı için silinmez. Ahşap kartlar doğal bir görünüm sunar ve her kartın damarı farklıdır.",
+        ],
+        link: { href: "/rehber/metal-kartvizit", label: "Metal kartvizit rehberi" },
+      },
+      {
+        heading: "Dijivizit'te neler dahil?",
+        paragraphs: [
+          "Dijivizit kartları siyah, gold ve gümüş metal ile koyu ve açık ahşap kaplamalarda üretilir; isim ve logo lazerle işlenir, arkada QR kod bulunur. Fiyatlara KDV ve kargo dahildir, dijital profil ilk yıl ücretsizdir. Panelden profilinizi güncellersiniz, kayıp kartı kapatırsınız ve kartınızın kaç kez, hangi şehirlerden açıldığını görürsünüz.",
+        ],
+        link: { href: "/kartvizit", label: "Fiyatları görün" },
+      },
+    ],
+    faq: [
+      {
+        q: "NFC kartvizit kaç günde gelir?",
+        a: "Dijivizit'te tasarım onayından sonra kart üretilir ve ücretsiz kargoyla gönderilir. Kesin süre sipariş sırasında bildirilir.",
+      },
+      {
+        q: "Boş NFC etiketi alıp kendim yapabilir miyim?",
+        a: "Evet, boş bir etikete telefonla bağlantı yazdırabilirsiniz. Ancak profil sayfasını sizin hazırlamanız ve barındırmanız gerekir; bağlantı değişirse etiketi yeniden yazmanız gerekir.",
+      },
+    ],
+  },
+  {
+    slug: "en-iyi-dijital-kartvizit-nasil-secilir",
+    label: "En iyi dijital kartvizit nasıl seçilir?",
+    title: "En İyi Dijital Kartvizit Nasıl Seçilir? 7 Kriter",
+    description:
+      "En iyi dijital kartvizit hangisi? Profil özellikleri, rehbere kayıt, analitik, gizlilik, kart malzemesi ve fiyat açısından dijital kartvizit seçerken bakılacak 7 kriter.",
+    image: "/rehber/en-iyi-dijital-kartvizit-nasil-secilir.jpg",
+    imageAlt: "Elde tutulan mat siyah Dijivizit NFC kartvizit",
+    published: "2026-11-02",
+    sections: [
+      {
+        heading: 'Herkes için tek bir "en iyi" yok',
+        paragraphs: [
+          "En iyi dijital kartvizit, kartı nasıl kullanacağınıza göre değişir. Tek başına çalışan bir serbest meslek sahibi için profilin güzel görünmesi ve kolay güncellenmesi öndedir; bir şirket için ise kartları tek panelden yönetmek ve çalışan değişince kartı devretmek. Aşağıdaki 7 kriter karşılaştırma yaparken işinizi kolaylaştırır.",
+        ],
+      },
+      {
+        heading: "1. Karşı tarafta uygulama gerekmemeli",
+        paragraphs: [
+          "Profil telefonun tarayıcısında açılmalı. Karşınızdaki kişiden uygulama indirmesini istemek tanışmayı yavaşlatır.",
+        ],
+      },
+      {
+        heading: "2. Tek dokunuşla rehbere kayıt",
+        paragraphs: [
+          'Kartvizitin asıl amacı karşı tarafın sizi kaydetmesidir. "Rehbere kaydet" düğmesi adınızı, unvanınızı, telefonunuzu, e-postanızı ve fotoğrafınızı tek seferde aktarmalı.',
+        ],
+      },
+      {
+        heading: "3. NFC ile birlikte QR kod",
+        paragraphs: [
+          "Her telefonda NFC açık değildir. Kartın arkasında QR kod olması, kartın her telefonda açılmasını garanti eder.",
+        ],
+        link: { href: "/rehber/qr-kod-kartvizit", label: "QR kod kartvizit rehberi" },
+      },
+      {
+        heading: "4. Kolay güncelleme ve zengin profil",
+        paragraphs: [
+          "Telefon, WhatsApp, e-posta, sosyal medya, web sitesi, konum, IBAN ve belgeler tek profilde olmalı; değişiklikler panelden anında yayına girmeli.",
+        ],
+      },
+      {
+        heading: "5. Analitik ve geri dönüş",
+        paragraphs: [
+          "Kartınızın kaç kez açıldığını, hangi şehirlerden ve cihazlardan görüntülendiğini görmek, hangi etkinliğin işe yaradığını anlamanızı sağlar. Ziyaretçinin size bilgilerini bırakabileceği bir form da tanışmayı iki yönlü yapar.",
+        ],
+      },
+      {
+        heading: "6. Gizlilik ve kart kaybı",
+        paragraphs: [
+          "Hangi bilginin herkese açık olacağına siz karar vermelisiniz. Kart kaybolduğunda panelden kapatılabilmeli; verilerin KVKK'ya uygun işlendiği açıkça yazmalı.",
+        ],
+      },
+      {
+        heading: "7. Kartın kendisi ve toplam maliyet",
+        paragraphs: [
+          "Kart elden ele geçen bir nesnedir; malzemesi ve işçiliği ilk izlenimi belirler. Fiyata bakarken kartın ücretiyle birlikte profil aboneliğini, kargo ve KDV'yi de hesaba katın.",
+        ],
+        link: { href: "/kartvizit", label: "Dijivizit fiyatları" },
+      },
+    ],
+    faq: [
+      {
+        q: "Ücretsiz dijital kartvizit yeterli mi?",
+        a: "Ücretsiz profiller bağlantı paylaşmak için yeterli olabilir. Fiziksel NFC kart, rehbere kayıt, analitik, kart kapatma ve ekip yönetimi gerektiğinde genellikle ücretli bir hizmet gerekir.",
+      },
+      {
+        q: "Metal mi ahşap mı daha iyi?",
+        a: "İkisi de dayanıklıdır. Metal daha ağır ve kurumsal bir his verir; ahşap daha sıcak ve doğal görünür. Seçim tamamen tarzınıza bağlıdır.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {

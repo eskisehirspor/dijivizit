@@ -95,6 +95,14 @@ export const LANDINGS: Landing[] = [
         a: "Panelde Kartlarım sayfasından o kartı kapatırsınız; kart artık açılmaz, diğer kartlarınız çalışmaya devam eder.",
       },
       {
+        q: "Telefonda NFC nasıl açılır?",
+        a: "iPhone'da NFC her zaman açıktır. Android'de Ayarlar > Bağlantılar (Samsung) ya da Bağlantı ve paylaşım (Xiaomi) içinden NFC'yi açarsınız; hızlı ayarlar panelinde de NFC düğmesi bulunur.",
+      },
+      {
+        q: "NFC kartvizit nereden alınır?",
+        a: "Kartı ve dijital profili birlikte sunan markalardan alabilirsiniz. Dijivizit'te sipariş bu sitedeki formdan verilir; profil ilk yıl ücretsizdir, kargo ve KDV fiyata dahildir.",
+      },
+      {
         q: "NFC kartvizit fiyatları ne kadar?",
         a: "Güncel fiyatlar bu sayfada ve Fiyatlar sayfasında yazar; KDV dahil, kargo ücretsizdir. 10 ve üzeri adette indirim uygulanır.",
       },
@@ -102,6 +110,8 @@ export const LANDINGS: Landing[] = [
     guides: [
       "nfc-kartvizit-nedir",
       "nfc-kartvizit-hangi-telefonlarda-calisir",
+      "telefonda-nfc-nasil-acilir",
+      "nfc-kartvizit-nereden-alinir",
       "metal-kartvizit",
       "ahsap-kartvizit",
       "nfc-kartvizit-mi-kagit-kartvizit-mi",
@@ -178,6 +188,10 @@ export const LANDINGS: Landing[] = [
         a: "Hesabınızı açar, adınızı, fotoğrafınızı ve iletişim bağlantılarınızı eklersiniz, sonra profili yayınlarsınız. Bütün adımlar birkaç dakika sürer.",
       },
       {
+        q: "En iyi dijital kartvizit hangisi?",
+        a: "Karşı tarafta uygulama istemeyen, tek dokunuşla rehbere kaydeden, NFC'nin yanında QR kodu olan, analitik sunan ve kayıp kartı kapatmaya izin veren bir hizmet seçin. Rehberde 7 kriteri tek tek anlattık.",
+      },
+      {
         q: "Kişisel verilerim güvende mi?",
         a: "Banka ve fatura bilgileri siz açmadıkça profilde görünmez. Ziyaretçilerin IP adresi saklanmaz; ayrıntılar KVKK aydınlatma metnindedir.",
       },
@@ -185,6 +199,7 @@ export const LANDINGS: Landing[] = [
     guides: [
       "dijital-kartvizit-nedir",
       "dijital-kartvizit-nasil-olusturulur",
+      "en-iyi-dijital-kartvizit-nasil-secilir",
       "qr-kod-kartvizit",
       "kurumsal-dijital-kartvizit",
       "yeni-isletme-kontrol-listesi",
@@ -257,6 +272,7 @@ export const LANDINGS: Landing[] = [
       "nfc-kartvizit-nedir",
       "dijital-kartvizit-nedir",
       "kurumsal-dijital-kartvizit",
+      "en-iyi-dijital-kartvizit-nasil-secilir",
       "nfc-kartvizit-mi-kagit-kartvizit-mi",
     ],
     siblings: ["nfc-kartvizit", "dijital-kartvizit"],

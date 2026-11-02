@@ -297,6 +297,38 @@ export default function HomePage() {
             <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
               NFC kartvizit hakkında.
             </h2>
+            <p className="max-w-sm text-base leading-relaxed text-pretty text-muted-foreground">
+              Ayrıntılar için{" "}
+              <Link href="/nfc-kartvizit" className="text-foreground underline underline-offset-4">
+                NFC kartvizit
+              </Link>
+              ,{" "}
+              <Link
+                href="/dijital-kartvizit"
+                className="text-foreground underline underline-offset-4"
+              >
+                dijital kartvizit
+              </Link>{" "}
+              ve{" "}
+              <Link
+                href="/akilli-kartvizit"
+                className="text-foreground underline underline-offset-4"
+              >
+                akıllı kartvizit
+              </Link>{" "}
+              sayfalarına,{" "}
+              <Link href="/kartvizit" className="text-foreground underline underline-offset-4">
+                kartvizit fiyatlarına
+              </Link>{" "}
+              ve{" "}
+              <Link
+                href="/rehber/telefonda-nfc-nasil-acilir"
+                className="text-foreground underline underline-offset-4"
+              >
+                telefonda NFC açma rehberine
+              </Link>{" "}
+              bakabilirsin.
+            </p>
           </div>
           <div className="divide-y divide-border/60 border-y border-border/60">
             {FAQ.map(({ q, a }) => (

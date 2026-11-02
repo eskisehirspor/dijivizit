@@ -8,7 +8,7 @@ import { FINISHES, PRICING, formatTry } from "@/lib/orders/finishes";
 const metalPrice = FINISHES.find((f) => f.material === "metal")!.price;
 const woodPrice = FINISHES.find((f) => f.material === "wood")!.price;
 
-const TITLE = "NFC Kartvizit Fiyatları: Metal ve Ahşap Akıllı Kartvizit | Dijivizit";
+const TITLE = "NFC ve Dijital Kartvizit Fiyatları: Metal ve Ahşap | Dijivizit";
 const DESCRIPTION = `Metal NFC kartvizit ${formatTry(metalPrice)}, ahşap NFC kartvizit ${formatTry(woodPrice)}. KDV dahil, kargo ücretsiz, ${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim. Siyah, gold, gümüş, koyu ve açık ahşap.`;
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default function ProductsPage() {
       <div className="mb-14 flex max-w-2xl flex-col gap-4">
         <p className="text-sm font-medium tracking-wide text-muted-foreground">Kartvizitler</p>
         <h1 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl">
-          NFC kartvizit fiyatları
+          NFC ve dijital kartvizit fiyatları
         </h1>
         <p className="text-lg text-muted-foreground">
           Metal ya da ahşap, beş kaplama. Her kartta NFC çip, arkasında QR kod ve dijital profil.
