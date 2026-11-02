@@ -165,6 +165,14 @@ export default function HomePage() {
           >
             Kartsız dijital kartvizit: link + QR, aylık 59,90 TL (yıllık 718,80 TL)
           </Link>
+          <br />
+          Önce denemek mi istiyorsun?{" "}
+          <Link
+            href="/dijital-kartvizit-olustur"
+            className="font-medium text-foreground underline underline-offset-4"
+          >
+            Ücretsiz dijital kartvizit oluştur
+          </Link>
         </p>
       </section>
 

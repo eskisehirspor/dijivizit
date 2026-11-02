@@ -11,11 +11,13 @@ import {
   productJsonLd,
   productUrl,
 } from "@/lib/marketing/products";
+import { TrackViewItem } from "@/components/marketing/track-view-item";
 import { WhyDijivizit } from "@/components/marketing/why-dijivizit";
 import {
   FINISHES,
   PRICING,
   PROMISES,
+  analyticsItem,
   formatPrice,
   formatTry,
   getFinishBySlug,
@@ -83,6 +85,7 @@ export default async function ProductPage({ params }: Params) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
+      <TrackViewItem {...analyticsItem(finish)} />
       <nav aria-label="Konum" className="mb-8 text-sm text-muted-foreground">
         <Link href="/" className="hover:text-foreground">
           Dijivizit

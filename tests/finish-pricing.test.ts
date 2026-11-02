@@ -7,6 +7,7 @@ import {
   formatTry,
   getFinishBySlug,
   isDigital,
+  orderTotal,
   unitPrice,
 } from "@/lib/orders/finishes";
 import { productJsonLd } from "@/lib/marketing/products";
@@ -59,5 +60,15 @@ describe("digital product", () => {
     expect(ld.offers.priceSpecification).toMatchObject({ billingDuration: "P1Y", price: "718.80" });
     expect(ld.offers.shippingDetails).toBeUndefined();
     expect(ld.material).toBeUndefined();
+  });
+});
+
+describe("order totals", () => {
+  it("charges cards per piece and the digital card a year up front", () => {
+    const digital = FINISHES.find((f) => f.id === "digital")!;
+    expect(orderTotal(black, 2)).toBe(8000);
+    expect(orderTotal(black, 10)).toBe(32000);
+    expect(orderTotal(digital, 1)).toBe(718.8);
+    expect(orderTotal(digital, 10)).toBe(5750.4);
   });
 });

@@ -42,6 +42,11 @@ function loadOrder(count: number): number[] {
   return order;
 }
 
+/** Share of the screen height the mobile frames fill on phones (see paint). */
+const PORTRAIT_SCALE = 0.86;
+/** Room the bottom captions need on phones, in CSS pixels. */
+const CAPTION_PX = 200;
+
 function fade(progress: number, start: number, end: number, edge = 0.04): number {
   if (progress < start - edge || progress > end + edge) return 0;
   const fadeIn = Math.min(1, (progress - (start - edge)) / edge);
@@ -108,11 +113,56 @@ export function ScrollSequence({
 
     const paint = (img: HTMLImageElement) => {
       drawn = img;
-      // object-fit: cover
-      const scale = Math.max(canvas.width / source.width, canvas.height / source.height);
+      if (!portrait || !mobile) {
+        // object-fit: cover
+        const scale = Math.max(canvas.width / source.width, canvas.height / source.height);
+        const w = source.width * scale;
+        const h = source.height * scale;
+        ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+        return;
+      }
+      // Phones: draw the frame a little smaller and from the top, so the phone
+      // in the render ends above the captions at the bottom of the screen. The
+      // strips left around it are filled by stretching the frame's outermost
+      // pixels, which are plain backdrop.
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const cover = Math.max(cw / source.width, ch / source.height);
+      // Keep the bottom of the rendered phone (at most about 78% down the frame) above
+      // the caption block, whose height is fixed in CSS pixels.
+      const dpr = cw / Math.max(1, canvas.clientWidth);
+      const fit = (ch - CAPTION_PX * dpr) / 0.78;
+      const scale = Math.min(cover, (PORTRAIT_SCALE * ch) / source.height, fit / source.height);
       const w = source.width * scale;
       const h = source.height * scale;
-      ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+      const x = (cw - w) / 2;
+      const y = Math.min(0, (ch - h) / 2);
+      const sw = img.naturalWidth;
+      const sh = img.naturalHeight;
+      const edge = 2;
+      ctx.drawImage(img, x, y, w, h);
+      if (x > 0) {
+        ctx.drawImage(img, 0, 0, edge, sh, 0, y, x + 1, h);
+        ctx.drawImage(img, sw - edge, 0, edge, sh, x + w - 1, y, x + 1, h);
+      }
+      const gap = ch - (y + h);
+      if (gap > 0) {
+        ctx.drawImage(img, 0, sh - edge, sw, edge, x, y + h - 1, w, gap + 1);
+        if (x > 0) {
+          ctx.drawImage(img, 0, sh - edge, edge, edge, 0, y + h - 1, x + 1, gap + 1);
+          ctx.drawImage(
+            img,
+            sw - edge,
+            sh - edge,
+            edge,
+            edge,
+            x + w - 1,
+            y + h - 1,
+            x + 1,
+            gap + 1,
+          );
+        }
+      }
     };
 
     const tick = () => {
@@ -198,13 +248,13 @@ export function ScrollSequence({
                 // Hero: above the card on phones, beside it on wide screens
                 // where the card fills the middle of the frame.
                 caption.place === "hero" &&
-                  "inset-x-0 top-24 mx-auto items-center text-center sm:top-28 land:inset-x-auto land:top-1/2 land:left-[5vw] land:max-w-[27vw] land:-translate-y-1/2 land:items-start land:px-0 land:text-left",
+                  "inset-x-0 top-24 mx-auto items-center text-center sm:top-28 land:inset-x-auto land:top-1/2 land:left-[5vw] land:max-w-[27vw] land:-translate-y-1/2 land:items-start land:px-0 land:text-left [@media(max-height:640px)]:top-20",
                 caption.place === "bottom" &&
-                  "inset-x-0 bottom-16 mx-auto items-center text-center sm:bottom-20",
+                  "inset-x-0 bottom-10 mx-auto items-center text-center sm:bottom-20",
                 caption.place === "left" &&
-                  "inset-x-0 bottom-16 mx-auto items-center text-center land:inset-x-auto land:top-1/2 land:bottom-auto land:left-[6vw] land:-translate-y-1/2 land:items-start land:text-left",
+                  "inset-x-0 bottom-10 mx-auto items-center text-center land:inset-x-auto land:top-1/2 land:bottom-auto land:left-[6vw] land:-translate-y-1/2 land:items-start land:text-left",
                 caption.place === "right" &&
-                  "inset-x-0 bottom-16 mx-auto items-center text-center land:inset-x-auto land:top-1/2 land:right-[6vw] land:bottom-auto land:-translate-y-1/2 land:items-start land:text-left",
+                  "inset-x-0 bottom-10 mx-auto items-center text-center land:inset-x-auto land:top-1/2 land:right-[6vw] land:bottom-auto land:-translate-y-1/2 land:items-start land:text-left",
               )}
               style={{
                 opacity,
@@ -218,7 +268,7 @@ export function ScrollSequence({
                       {caption.kicker}
                     </span>
                   ) : null}
-                  <span className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 land:text-6xl">
+                  <span className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 land:text-6xl [@media(max-height:640px)]:text-3xl">
                     {caption.title}
                   </span>
                 </h1>
@@ -229,13 +279,13 @@ export function ScrollSequence({
                       {caption.kicker}
                     </p>
                   ) : null}
-                  <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 land:text-6xl">
+                  <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-neutral-950 land:text-6xl [@media(max-height:640px)]:text-3xl">
                     {caption.title}
                   </h2>
                 </>
               )}
               {caption.body ? (
-                <p className="max-w-md text-base leading-relaxed text-pretty text-neutral-700 sm:text-lg">
+                <p className="max-w-md text-base leading-relaxed text-pretty text-neutral-700 sm:text-lg [@media(max-height:640px)]:text-sm">
                   {caption.body}
                 </p>
               ) : null}

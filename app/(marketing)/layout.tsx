@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/marketing/site-header";
 import { CONTACT } from "@/lib/contact";
 import { GUIDES } from "@/lib/marketing/guides";
 import { LANDINGS } from "@/lib/marketing/landings";
+import { TOOLS } from "@/lib/marketing/tools";
 import Link from "next/link";
 
 export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
@@ -55,6 +56,16 @@ export default async function MarketingLayout({ children }: { children: React.Re
               <Link href="/kartvizit" className="hover:underline">
                 NFC kartvizit fiyatları
               </Link>
+            </nav>
+            <nav
+              aria-label="Ücretsiz araçlar"
+              className="flex flex-wrap gap-x-4 gap-y-2 font-medium text-foreground"
+            >
+              {TOOLS.map((t) => (
+                <Link key={t.slug} href={`/${t.slug}`} className="hover:underline">
+                  {t.term}
+                </Link>
+              ))}
             </nav>
             <nav
               aria-label="Rehber"

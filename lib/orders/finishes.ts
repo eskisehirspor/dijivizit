@@ -78,6 +78,22 @@ export function formatPrice(finish: Finish, amount: number = finish.price): stri
   return isDigital(finish) ? `${formatTry(amount)}/ay` : formatTry(amount);
 }
 
+/** Amount actually charged for one unit: the card price, or a year up front for digital. */
+export function chargePerUnit(finish: Finish): number {
+  return isDigital(finish) ? PRICING.digitalYearlyFee : finish.price;
+}
+
+/** Order total in TRY, after the bulk discount. */
+export function orderTotal(finish: Finish, quantity: number): number {
+  const discount = quantity >= PRICING.bulkMinQuantity ? PRICING.bulkDiscountPercent / 100 : 0;
+  return Math.round(chargePerUnit(finish) * (1 - discount) * quantity * 100) / 100;
+}
+
+/** Product shape for analytics events. */
+export function analyticsItem(finish: Finish) {
+  return { id: finish.id, name: finish.name, price: chargePerUnit(finish) };
+}
+
 /** Promises shown across the site. */
 export const PROMISES = {
   deliveryHours: 72,

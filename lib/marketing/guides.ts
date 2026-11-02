@@ -185,6 +185,13 @@ export const GUIDES: Guide[] = [
     published: "2026-10-25",
     sections: [
       {
+        heading: "Hemen dene",
+        paragraphs: [
+          "Ücretsiz aracımızla bilgilerini yaz, önizlemeyi gör ve rehbere kaydeden QR kodunu indir. Üyelik gerekmez.",
+        ],
+        link: { href: "/dijital-kartvizit-olustur", label: "Ücretsiz dijital kartvizit oluştur" },
+      },
+      {
         heading: "Dijital kartvizit nedir?",
         paragraphs: [
           "Dijital kartvizit, iletişim bilgilerinizi tek bir web sayfasında toplayan ve bağlantı, QR kod ya da NFC kart ile paylaşılan modern kartvizittir. Karşınızdaki kişi sayfayı açtığında sizi tek dokunuşla arayabilir, WhatsApp'tan yazabilir veya rehberine kaydedebilir.",
@@ -429,6 +436,13 @@ export const GUIDES: Guide[] = [
     imageAlt: "Deri kartlıktan çıkarılan siyah Dijivizit NFC kartvizit",
     published: "2026-10-28",
     sections: [
+      {
+        heading: "Hemen dene",
+        paragraphs: [
+          "Ücretsiz aracımızla bilgilerini yaz, önizlemeyi gör ve rehbere kaydeden QR kodunu indir. Üyelik gerekmez.",
+        ],
+        link: { href: "/qr-kartvizit-olustur", label: "Ücretsiz QR kartvizit oluştur" },
+      },
       {
         heading: "QR kod kartvizit nedir?",
         paragraphs: [

@@ -24,10 +24,49 @@ function fbq(...args: unknown[]) {
   w.fbq?.(...args);
 }
 
-/** Order request submitted: the Google Ads and Meta conversion. */
-export function trackLead(finish: string) {
-  gtag("event", "generate_lead", { finish, currency: "TRY" });
-  fbq("track", "Lead", { content_name: finish });
+type Item = { id: string; name: string; price: number };
+
+function ga4Items(item: Item, quantity = 1) {
+  return [{ item_id: item.id, item_name: item.name, price: item.price, quantity }];
+}
+
+/** A product page was viewed. */
+export function trackViewItem(item: Item) {
+  gtag("event", "view_item", { currency: "TRY", value: item.price, items: ga4Items(item) });
+  fbq("track", "ViewContent", {
+    content_ids: [item.id],
+    content_name: item.name,
+    content_type: "product",
+    value: item.price,
+    currency: "TRY",
+  });
+}
+
+/** The visitor started filling in the order form. */
+export function trackBeginCheckout(item: Item) {
+  gtag("event", "begin_checkout", { currency: "TRY", value: item.price, items: ga4Items(item) });
+  fbq("track", "InitiateCheckout", {
+    content_ids: [item.id],
+    value: item.price,
+    currency: "TRY",
+  });
+}
+
+/** Order request submitted: the Google Ads and Meta conversion. `value` is the order total. */
+export function trackLead(item: Item, quantity: number, value: number) {
+  gtag("event", "generate_lead", {
+    finish: item.id,
+    currency: "TRY",
+    value,
+    items: ga4Items(item, quantity),
+  });
+  fbq("track", "Lead", { content_name: item.id, value, currency: "TRY" });
+}
+
+/** Free tool funnel: started typing, downloaded the QR, clicked the paid offer. */
+export function trackTool(tool: string, step: "tool_start" | "qr_download" | "tool_offer_click") {
+  gtag("event", step, { tool });
+  fbq("trackCustom", step, { tool });
 }
 
 /** Loads the Meta Pixel and records the page view; a no-op without an ID. */

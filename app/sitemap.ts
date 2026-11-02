@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { GUIDES } from "@/lib/marketing/guides";
 import { LANDINGS } from "@/lib/marketing/landings";
+import { TOOLS } from "@/lib/marketing/tools";
 import { FINISHES } from "@/lib/orders/finishes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${MARKETING_ORIGIN}/${l.slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
+      priority: 0.9,
+    })),
+    ...TOOLS.map((t) => ({
+      url: `${MARKETING_ORIGIN}/${t.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
     {

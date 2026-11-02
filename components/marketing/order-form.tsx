@@ -1,19 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { Check, Loader2 } from "lucide-react";
 
-import { trackLead } from "@/lib/analytics";
+import { trackBeginCheckout, trackLead } from "@/lib/analytics";
+import { takePrefill } from "@/lib/marketing/prefill";
 import { submitOrderRequestAction, type OrderFormState } from "@/app/actions/order-request";
 import { CONTACT } from "@/lib/contact";
 import {
   FINISHES,
   PRICING,
   PROMISES,
+  analyticsItem,
   formatPrice,
   formatTry,
   isDigital,
+  orderTotal,
   unitPrice,
   type FinishId,
 } from "@/lib/orders/finishes";
@@ -70,9 +73,30 @@ export function OrderForm({
   const digital = isDigital(selectedFinish);
   const errors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
 
+  const total = orderTotal(selectedFinish, safeQuantity);
+  const checkoutTracked = useRef(false);
+
   useEffect(() => {
-    if (state.status === "success") trackLead(finish);
-  }, [state.status, finish]);
+    if (state.status === "success") trackLead(analyticsItem(selectedFinish), safeQuantity, total);
+    // Fire once per successful submission.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.status]);
+
+  // Details typed into a free tool (QR / dijital kartvizit oluştur) carry over.
+  useEffect(() => {
+    const prefill = takePrefill();
+    if (!prefill) return;
+    for (const [id, value] of Object.entries(prefill)) {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+      if (el && !el.value && value) el.value = value;
+    }
+  }, []);
+
+  function onFirstInput() {
+    if (checkoutTracked.current) return;
+    checkoutTracked.current = true;
+    trackBeginCheckout(analyticsItem(selectedFinish));
+  }
 
   if (state.status === "success") {
     return (
@@ -100,7 +124,13 @@ export function OrderForm({
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-12" noValidate>
+    <form
+      action={formAction}
+      onFocus={onFirstInput}
+      className="flex scroll-mt-28 flex-col gap-12"
+      id="siparis-formu"
+      noValidate
+    >
       <input type="hidden" name="form_token" value={formToken} />
       {/* Honeypot: hidden from people, filled by bots. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
@@ -183,10 +213,7 @@ export function OrderForm({
         </div>
         <div className="flex flex-col gap-1" aria-live="polite">
           <p className="text-lg font-semibold tracking-tight">
-            Toplam:{" "}
-            {digital
-              ? `yıllık ${formatTry(Math.round(PRICING.digitalYearlyFee * (pricePerCard / selectedFinish.price) * safeQuantity * 100) / 100)}`
-              : formatTry(Math.round(pricePerCard * safeQuantity * 100) / 100)}
+            Toplam: {digital ? `yıllık ${formatTry(total)}` : formatTry(total)}
           </p>
           <p className="text-sm text-muted-foreground">
             {safeQuantity >= PRICING.bulkMinQuantity
