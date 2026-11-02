@@ -9,10 +9,10 @@ on:
         description: "Cycles samples per pixel"
         default: "64"
       variants:
-        description: "desktop, mobile, both (also renders finishes) or finishes only"
+        description: "desktop, mobile, both (also renders finishes), finishes only, or preview (a few mobile frames, nothing published)"
         default: both
         type: choice
-        options: [both, desktop, mobile, finishes]
+        options: [both, desktop, mobile, finishes, preview]
 
 permissions:
   contents: write
@@ -37,6 +37,7 @@ jobs:
         run: |
           want="${{ github.event.inputs.variants }}"
           if [ "$want" = "both" ] || [ "$want" = "${{ matrix.variant }}" ]; then echo "run=1" >> "$GITHUB_OUTPUT"; fi
+          if [ "$want" = "preview" ] && [ "${{ matrix.variant }}" = "mobile" ] && [ "${{ matrix.shard }}" -lt 4 ]; then echo "run=1" >> "$GITHUB_OUTPUT"; fi
 
       - uses: actions/checkout@v4
         if: steps.gate.outputs.run == '1'
@@ -54,6 +55,9 @@ jobs:
         if: steps.gate.outputs.run == '1'
         run: |
           frames=$(python3 -c "print(','.join(str(f) for f in range(${{ matrix.shard }}, 192, 16)))")
+          if [ "${{ github.event.inputs.variants }}" = "preview" ]; then
+            frames=$(python3 -c "print([0, 24, 60, 120][${{ matrix.shard }}])")
+          fi
           if [ "${{ matrix.variant }}" = "desktop" ]; then
             python3 render/scene.py --out out/png --res 2560x1440 --samples ${{ github.event.inputs.samples }} --frames "$frames"
           else
@@ -81,6 +85,7 @@ jobs:
           retention-days: 3
 
   finishes:
+    if: github.event.inputs.variants != 'preview'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
@@ -104,6 +109,7 @@ jobs:
 
   publish:
     needs: [render, finishes]
+    if: github.event.inputs.variants != 'preview'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

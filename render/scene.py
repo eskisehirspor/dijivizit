@@ -285,7 +285,8 @@ def build(portrait, finish="black", hide_phone=False):
     scene.cycles.use_denoising = True
     scene.cycles.denoiser = "OPENIMAGEDENOISE"
     scene.view_settings.view_transform = "AgX"
-    scene.view_settings.look = "AgX - Base Contrast"
+    # Crisper, more metallic read than Base Contrast (which looked hazy).
+    scene.view_settings.look = "AgX - Medium High Contrast"
     scene.frame_start, scene.frame_end = 0, FRAMES - 1
     scene.render.fps = 30
 
@@ -414,7 +415,8 @@ def build(portrait, finish="black", hide_phone=False):
     cam_data.sensor_width = 36
     cam_data.dof.use_dof = True
     cam_data.dof.focus_object = target
-    cam_data.dof.aperture_fstop = 1.6
+    # f/2.8: the tilted hero card stays sharp edge to edge, the backdrop stays soft.
+    cam_data.dof.aperture_fstop = 2.8
     cam = bpy.data.objects.new("Camera", cam_data)
     bpy.context.collection.objects.link(cam)
     scene.camera = cam
@@ -527,8 +529,10 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
     key_value(mix_saved.inputs["Factor"], 172, 1.0)
 
     d = 0.78 if portrait else 1.0
-    key(cam, 0, (0.0, -6.0 * d, 0.15))
-    key(cam, 50, (-0.1, -5.6 * d, 0.1))
+    # Phones: come a little closer for the hero card so it reads larger.
+    near = 0.88 if portrait else 1.0
+    key(cam, 0, (0.0, -6.0 * d * near, 0.15))
+    key(cam, 50, (-0.1, -5.6 * d * (near + 1.0) / 2, 0.1))
     key(cam, 100, (0.1, -7.0 * d, 0.2))
     key(cam, 150, (0.4, -4.9 * d, 0.2))
     key(cam, 191, (0.35, -4.6 * d, 0.05))
