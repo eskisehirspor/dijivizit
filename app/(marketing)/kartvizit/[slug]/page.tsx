@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: Params) {
             {digital ? "kişilik ekipte kişi başı" : "adette tanesi"}{" "}
             {formatPrice(finish, bulkPrice)} (%{PRICING.bulkDiscountPercent} indirim).{" "}
             {digital
-              ? `Ödeme yıllık ${formatTry(PRICING.digitalYearlyFee)} olarak peşin alınır. Kart yok, kargo yok; link ve QR kodunuz ${PROMISES.deliveryHours} saat içinde e-postanızda.`
+              ? `Ödeme yıllık ${formatTry(PRICING.digitalYearlyFee)} olarak peşin alınır. Kart yok, kargo yok; hemen teslim: link ve QR kodunuz ${PROMISES.digitalDeliveryHours} saat içinde e-postanızda.`
               : `Kargo ücretsiz, ${PROMISES.deliveryHours} saatte teslim. Kart okunmazsa ücretsiz değişim.`}
           </p>
           <p className="leading-relaxed text-foreground/85">{finish.note}</p>

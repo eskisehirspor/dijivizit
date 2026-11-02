@@ -193,7 +193,7 @@ export function OrderForm({
               ? `Tanesi ${formatPrice(selectedFinish, pricePerCard)} (%${PRICING.bulkDiscountPercent} adet indirimi uygulandı).`
               : `${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim.`}{" "}
             {digital
-              ? `Aylık ${formatTry(selectedFinish.price)}, ödeme yıllık peşin alınır. KDV dahil. Kart yok; link ve QR kodun ${PROMISES.deliveryHours} saat içinde e-postanda.`
+              ? `Aylık ${formatTry(selectedFinish.price)}, ödeme yıllık peşin alınır. KDV dahil. Kart yok; hemen teslim: link ve QR kodun ${PROMISES.digitalDeliveryHours} saat içinde e-postanda.`
               : `KDV dahil, kargo ücretsiz, ${PROMISES.deliveryHours} saatte teslim. Kart okunmazsa ücretsiz değişim. Dijital profil ilk ${PRICING.profileFreeYears} yıl ücretsiz, sonrasında aylık ${formatTry(PRICING.profileMonthlyFee)}.`}
           </p>
         </div>

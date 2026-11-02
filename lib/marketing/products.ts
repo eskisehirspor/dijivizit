@@ -68,7 +68,7 @@ export function pricingTerms(finish?: Finish): string[] {
       `Aylık ${formatTry(finish.price)}; ödeme yıllık ${formatTry(PRICING.digitalYearlyFee)} olarak tek seferde alınır.`,
       "Kart, kargo ya da kurulum ücreti yoktur.",
       `${PRICING.bulkMinQuantity} ve üzeri kişilik ekiplerde %${PRICING.bulkDiscountPercent} indirim uygulanır.`,
-      `Link ve QR kodunuz ${PROMISES.deliveryHours} saat içinde e-postanıza gönderilir.`,
+      `Hemen teslim: link ve QR kodunuz ${PROMISES.digitalDeliveryHours} saat içinde e-postanızda.`,
     ];
   }
   return [

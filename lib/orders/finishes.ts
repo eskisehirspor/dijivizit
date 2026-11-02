@@ -81,6 +81,8 @@ export function formatPrice(finish: Finish, amount: number = finish.price): stri
 /** Promises shown across the site. */
 export const PROMISES = {
   deliveryHours: 72,
+  /** Card-less digital product: link and QR by e-mail. */
+  digitalDeliveryHours: 2,
 } as const;
 
 export function finishLabel(id: FinishId): string {
