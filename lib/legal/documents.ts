@@ -8,6 +8,7 @@
  */
 
 import { CONTACT } from "@/lib/contact";
+import { PROMISES } from "@/lib/orders/finishes";
 
 export const LEGAL_ENTITY = {
   name: "Dijivizit",
@@ -18,7 +19,7 @@ export const LEGAL_ENTITY = {
 /** Bump when a text changes materially; stored with each signup's consent. */
 export const LEGAL_VERSION = "2026-10-25";
 
-export type LegalSlug = "kvkk" | "gizlilik" | "kullanim-kosullari";
+export type LegalSlug = "kvkk" | "gizlilik" | "kullanim-kosullari" | "teslimat-ve-iade";
 
 export type LegalSection = { heading: string; paragraphs?: string[]; items?: string[] };
 
@@ -209,6 +210,71 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
       {
         heading: "Uygulanacak hukuk",
         paragraphs: [`Bu koşullar Türkiye Cumhuriyeti hukukuna tabidir. İletişim: ${contact}.`],
+      },
+    ],
+  },
+  "teslimat-ve-iade": {
+    slug: "teslimat-ve-iade",
+    title: "Teslimat ve İade Koşulları",
+    summary:
+      "Kart ve kartsız dijital kartvizit siparişlerinde teslimat süresi, değişim, cayma hakkı ve iade. 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği'ne göre hazırlanmıştır.",
+    sections: [
+      {
+        heading: "Satıcı",
+        paragraphs: [
+          `${LEGAL_ENTITY.name}, ${LEGAL_ENTITY.address}. Telefon: ${CONTACT.phoneDisplay}. E-posta: ${CONTACT.orderEmail}.`,
+          "Online ödemeler Shopier üzerinden alınır. Ön bilgilendirme formu ve mesafeli satış sözleşmesi ödeme sırasında size sunulur; bu sayfa o metinleri tamamlar.",
+        ],
+      },
+      {
+        heading: "Teslimat",
+        items: [
+          `Kartlar siparişten itibaren ${PROMISES.deliveryHours} saat içinde Türkiye'nin her yerine ücretsiz kargoyla teslim edilir. Kargo takip bilgisi e-posta ya da WhatsApp ile iletilir.`,
+          `Kartsız dijital kartvizitte kayıt bağlantınız ödemeden sonra ${PROMISES.digitalDeliveryHours} saat içinde e-posta adresinize gönderilir.`,
+          "Resmî tatiller, kargo firmasından kaynaklanan gecikmeler ve mücbir sebepler bu süreleri uzatabilir; böyle bir durumda sizi hemen bilgilendiririz. Teslimat yasal olarak en geç 30 gün içinde yapılır.",
+          "Paket hasarlı geldiyse kargo görevlisine tutanak tutturun ve bize fotoğrafıyla yazın; yenisini ücretsiz göndeririz.",
+        ],
+      },
+      {
+        heading: "Kart okunmazsa ücretsiz değişim",
+        paragraphs: [
+          "Kartınız NFC ya da QR ile okunmuyorsa bize yazın. Sorunu birlikte kontrol ederiz; karttan kaynaklanıyorsa kargo dahil ücretsiz yenisini göndeririz.",
+        ],
+      },
+      {
+        heading: "Cayma hakkı (14 gün)",
+        items: [
+          "Kart siparişlerinde, kartı teslim aldığınız günden itibaren 14 gün içinde hiçbir gerekçe göstermeden ve cezai şart ödemeden sözleşmeden cayabilirsiniz.",
+          "Kartsız dijital kartvizitte cayma süresi ödeme gününden itibaren 14 gündür.",
+          `Cayma bildiriminizi ${CONTACT.orderEmail} adresine e-postayla ya da ${CONTACT.phoneDisplay} numarasına WhatsApp'tan yazılı olarak iletmeniz yeterlidir. Sipariş numaranızı eklemeniz işlemi hızlandırır.`,
+          "Kartı, cayma bildiriminizden itibaren 10 gün içinde size ileteceğimiz anlaşmalı kargo koduyla geri gönderin; bu yolla yapılan iadelerde kargo ücretini biz öderiz.",
+          "Kart, kullanım ve inceleme için olağan olanın dışında hasar görmüşse değer kaybı oranında kesinti yapılabilir.",
+        ],
+      },
+      {
+        heading: "Ücret iadesi",
+        paragraphs: [
+          "Cayma bildiriminiz bize ulaştıktan sonra en geç 14 gün içinde ödediğiniz tutarın tamamını, ödemeyi yaptığınız yöntemle iade ederiz. Kartınıza yansıma süresi bankanıza göre değişebilir.",
+        ],
+      },
+      {
+        heading: "Cayma hakkının kullanılamadığı durumlar",
+        items: [
+          "Firma logonuzla kişiye özel üretilen kurumsal kartlar, Mesafeli Sözleşmeler Yönetmeliği'nin 15. maddesi uyarınca tüketicinin istekleri doğrultusunda hazırlanan mal olduğundan cayma hakkı kapsamında değildir. Bu kartlarda da okunmama ve üretim hatası durumunda ücretsiz değişim geçerlidir.",
+          "Standart Dijivizit kartları kişiye özel üretilmez; bu kartlarda cayma hakkı her zaman geçerlidir.",
+        ],
+      },
+      {
+        heading: "Abonelik ve yenileme",
+        paragraphs: [
+          "Kartsız dijital kartvizit yıllık olarak peşin ödenir; otomatik yenileme ve otomatik çekim yapılmaz. Kartla birlikte gelen dijital profil ilk yıl ücretsizdir.",
+        ],
+      },
+      {
+        heading: "Şikâyet ve uyuşmazlık",
+        paragraphs: [
+          `Her türlü talep ve şikâyetiniz için ${CONTACT.orderEmail} adresine yazabilirsiniz. Uyuşmazlıklarda, Ticaret Bakanlığı'nca her yıl ilan edilen parasal sınırlar içinde yerleşim yerinizdeki ya da işlemi yaptığınız yerdeki Tüketici Hakem Heyeti'ne, bu sınırların üzerinde Tüketici Mahkemesi'ne başvurabilirsiniz.`,
+        ],
       },
     ],
   },
