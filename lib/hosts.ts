@@ -53,6 +53,11 @@ export function shouldPassThroughOnMarketingHost(pathname: string): boolean {
     return true;
   }
 
+  // First-party site analytics beacon and the Shopier webhook.
+  if (pathname === "/api/t") {
+    return true;
+  }
+
   if (isLegacyCardPath(pathname)) {
     return true;
   }

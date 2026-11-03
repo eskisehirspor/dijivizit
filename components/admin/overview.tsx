@@ -19,7 +19,8 @@ export async function AdminOverviewView({
   users,
   invitations,
   orders,
-}: AdminData & { orders: AdminOrderRequest[] }) {
+  site,
+}: AdminData & { orders: AdminOrderRequest[]; site?: React.ReactNode }) {
   const t = await getTranslations("dashboard.admin");
 
   const overview = buildOverview(users);
@@ -43,6 +44,8 @@ export async function AdminOverviewView({
           </Link>
         </p>
       </div>
+
+      {site}
 
       <section aria-label={t("title")}>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">

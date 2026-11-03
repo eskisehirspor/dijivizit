@@ -5,7 +5,13 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import { CONSENT_KEY, GA_MEASUREMENT_ID, setConsent, trackPageView } from "@/lib/analytics";
+import {
+  CONSENT_KEY,
+  GA_MEASUREMENT_ID,
+  setConsent,
+  siteEvent,
+  trackPageView,
+} from "@/lib/analytics";
 
 /**
  * GA4 with Google Consent Mode v2: everything starts denied, so no analytics
@@ -15,6 +21,11 @@ export function Analytics() {
   const [choice, setChoice] = useState<"granted" | "denied" | "unset" | null>(null);
   const pathname = usePathname();
   const firstPath = useRef(true);
+
+  // Cookie-free first-party page view for the owner dashboard, every page.
+  useEffect(() => {
+    siteEvent("pageview");
+  }, [pathname]);
 
   // Meta Pixel page views on client-side navigation (the first is sent on load).
   useEffect(() => {

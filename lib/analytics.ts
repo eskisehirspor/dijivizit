@@ -24,6 +24,50 @@ function fbq(...args: unknown[]) {
   w.fbq?.(...args);
 }
 
+type SiteEvent =
+  | "pageview"
+  | "view_item"
+  | "begin_checkout"
+  | "generate_lead"
+  | "tool_start"
+  | "qr_download"
+  | "tool_offer_click";
+
+/** Random per-tab id (sessionStorage), so the dashboard can count visits. */
+function sessionId(): string | undefined {
+  try {
+    let id = sessionStorage.getItem("dv-s");
+    if (!id) {
+      id = Math.random().toString(36).slice(2, 12) + Date.now().toString(36);
+      sessionStorage.setItem("dv-s", id);
+    }
+    return id;
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * First-party, cookie-free event for the owner dashboard (/api/t). Sent for
+ * every visitor; holds no personal data.
+ */
+export function siteEvent(type: SiteEvent, item?: string) {
+  try {
+    const body = JSON.stringify({
+      type,
+      path: location.pathname,
+      item,
+      ref: type === "pageview" && document.referrer ? document.referrer : undefined,
+      session: sessionId(),
+    });
+    if (!navigator.sendBeacon?.("/api/t", body)) {
+      void fetch("/api/t", { method: "POST", body, keepalive: true });
+    }
+  } catch {
+    // never break the page
+  }
+}
+
 type Item = { id: string; name: string; price: number };
 
 function ga4Items(item: Item, quantity = 1) {
@@ -32,6 +76,7 @@ function ga4Items(item: Item, quantity = 1) {
 
 /** A product page was viewed. */
 export function trackViewItem(item: Item) {
+  siteEvent("view_item", item.id);
   gtag("event", "view_item", { currency: "TRY", value: item.price, items: ga4Items(item) });
   fbq("track", "ViewContent", {
     content_ids: [item.id],
@@ -44,6 +89,7 @@ export function trackViewItem(item: Item) {
 
 /** The visitor started filling in the order form. */
 export function trackBeginCheckout(item: Item) {
+  siteEvent("begin_checkout", item.id);
   gtag("event", "begin_checkout", { currency: "TRY", value: item.price, items: ga4Items(item) });
   fbq("track", "InitiateCheckout", {
     content_ids: [item.id],
@@ -54,6 +100,7 @@ export function trackBeginCheckout(item: Item) {
 
 /** Order request submitted: the Google Ads and Meta conversion. `value` is the order total. */
 export function trackLead(item: Item, quantity: number, value: number) {
+  siteEvent("generate_lead", item.id);
   gtag("event", "generate_lead", {
     finish: item.id,
     currency: "TRY",
@@ -65,6 +112,7 @@ export function trackLead(item: Item, quantity: number, value: number) {
 
 /** Free tool funnel: started typing, downloaded the QR, clicked the paid offer. */
 export function trackTool(tool: string, step: "tool_start" | "qr_download" | "tool_offer_click") {
+  siteEvent(step, tool.slice(0, 40));
   gtag("event", step, { tool });
   fbq("trackCustom", step, { tool });
 }

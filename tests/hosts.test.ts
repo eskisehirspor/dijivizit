@@ -26,6 +26,7 @@ describe("host split", () => {
     expect(shouldPassThroughOnMarketingHost("/")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/auth/callback")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/auth/confirm")).toBe(true);
+    expect(shouldPassThroughOnMarketingHost("/api/t")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/p/AbCdEfGh123")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/p/AbCdEfGh123/vcard")).toBe(true);
     expect(shouldPassThroughOnMarketingHost("/siparis")).toBe(true);

@@ -383,3 +383,53 @@ export async function setOrderRequestStatus(id: string, status: OrderStatus): Pr
     .eq("id", id);
   if (error) throw new Error(`order_requests: ${error.message}`);
 }
+
+export type SiteSummary = {
+  days: number;
+  pageviews: number;
+  sessions: number;
+  funnel: Partial<Record<string, number>>;
+  daily: { d: string; views: number; sessions: number; orders: number }[];
+  topPaths: { path: string; n: number }[];
+  topRefs: { host: string; n: number }[];
+  devices: Record<string, number>;
+  countries: { c: string; n: number }[];
+  products: { item: string; views: number; clicks: number }[];
+  paidOrders: number;
+  revenue: number;
+  requests: number;
+  cardViews: number;
+};
+
+/** Site traffic, sales funnel and sales for the owner dashboard. Owner only. */
+export async function getSiteSummary(days: number): Promise<SiteSummary> {
+  await requireInviteOwner();
+  const supabase = createAdminClient();
+  const since = new Date(Date.now() - days * 86400_000).toISOString();
+  const [{ data, error }, { count }] = await Promise.all([
+    supabase.rpc("admin_site_summary", { p_days: days }),
+    supabase
+      .from("analytics_events")
+      .select("id", { count: "exact", head: true })
+      .eq("event_type", "profile_view")
+      .gte("created_at", since),
+  ]);
+  if (error) throw new Error(`admin_site_summary: ${error.message}`);
+  const s = (data ?? {}) as Record<string, unknown>;
+  return {
+    days,
+    pageviews: Number(s.pageviews ?? 0),
+    sessions: Number(s.sessions ?? 0),
+    funnel: (s.funnel ?? {}) as Record<string, number>,
+    daily: (s.daily ?? []) as SiteSummary["daily"],
+    topPaths: (s.top_paths ?? []) as SiteSummary["topPaths"],
+    topRefs: (s.top_refs ?? []) as SiteSummary["topRefs"],
+    devices: (s.devices ?? {}) as Record<string, number>,
+    countries: (s.countries ?? []) as SiteSummary["countries"],
+    products: (s.products ?? []) as SiteSummary["products"],
+    paidOrders: Number(s.paid_orders ?? 0),
+    revenue: Number(s.revenue ?? 0),
+    requests: Number(s.requests ?? 0),
+    cardViews: count ?? 0,
+  };
+}

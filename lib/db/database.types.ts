@@ -400,6 +400,42 @@ export type Database = {
           },
         ]
       }
+      site_events: {
+        Row: {
+          country: string | null
+          created_at: string
+          device: string | null
+          id: number
+          item: string | null
+          path: string
+          ref_host: string | null
+          session: string | null
+          type: string
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          device?: string | null
+          id?: never
+          item?: string | null
+          path: string
+          ref_host?: string | null
+          session?: string | null
+          type: string
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          device?: string | null
+          id?: never
+          item?: string | null
+          path?: string
+          ref_host?: string | null
+          session?: string | null
+          type?: string
+        }
+        Relationships: []
+      }
       order_requests: {
         Row: {
           consent_at: string
@@ -884,6 +920,10 @@ export type Database = {
           p_user_id: string
         }
         Returns: undefined
+      }
+      admin_site_summary: {
+        Args: { p_days: number }
+        Returns: Json
       }
       submit_card_contact: {
         Args: {
