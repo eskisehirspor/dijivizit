@@ -67,7 +67,11 @@ const list = (body) => (Array.isArray(body) ? body : (body?.data ?? body?.items 
 
 // 1. Products
 const catalog = JSON.parse(fs.readFileSync("scripts/shopier-catalog.json", "utf8"));
-const existing = await shopier("/products?limit=50");
+let existing = await shopier("/products");
+if (existing.status === 403) {
+  notice("GET /products 403, trying page/limit params");
+  existing = await shopier("/products?page=1&limit=10");
+}
 if (!existing.ok) {
   notice(`GET /products -> ${existing.status} ${JSON.stringify(existing.body).slice(0, 400)}`);
   // Diagnostics without revealing the token.

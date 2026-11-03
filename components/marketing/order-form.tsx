@@ -6,6 +6,8 @@ import { Check, Loader2 } from "lucide-react";
 
 import { trackBeginCheckout, trackLead } from "@/lib/analytics";
 import { takePrefill } from "@/lib/marketing/prefill";
+import { shopierUrl } from "@/lib/shopier/products";
+import { BuyButton } from "@/components/marketing/buy-button";
 import { submitOrderRequestAction, type OrderFormState } from "@/app/actions/order-request";
 import { CONTACT } from "@/lib/contact";
 import {
@@ -13,6 +15,7 @@ import {
   PRICING,
   PROMISES,
   analyticsItem,
+  chargePerUnit,
   formatPrice,
   formatTry,
   isDigital,
@@ -71,6 +74,7 @@ export function OrderForm({
   const safeQuantity = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
   const pricePerCard = unitPrice(selectedFinish, safeQuantity);
   const digital = isDigital(selectedFinish);
+  const buyUrl = shopierUrl(selectedFinish.id);
   const errors = state.status === "error" ? (state.fieldErrors ?? {}) : {};
 
   const total = orderTotal(selectedFinish, safeQuantity);
@@ -224,11 +228,29 @@ export function OrderForm({
               : `KDV dahil, kargo ücretsiz, ${PROMISES.deliveryHours} saatte teslim. Kart okunmazsa ücretsiz değişim. Dijital profil ilk ${PRICING.profileFreeYears} yıl ücretsiz, sonrasında aylık ${formatTry(PRICING.profileMonthlyFee)}.`}
           </p>
         </div>
+        {buyUrl && safeQuantity < PRICING.bulkMinQuantity ? (
+          <div className="flex flex-col gap-3 rounded-2xl border border-border/60 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-1">
+              <p className="font-medium">Hemen satın al</p>
+              <p className="text-sm text-muted-foreground">
+                Güvenli kartla ödeme Shopier üzerinden. Adedi ödeme sayfasında seçebilirsin.
+              </p>
+            </div>
+            <BuyButton
+              href={buyUrl}
+              item={analyticsItem(selectedFinish)}
+              label={`Öde · ${digital ? `${formatTry(chargePerUnit(selectedFinish))}/yıl` : formatTry(selectedFinish.price)}`}
+              className="shrink-0"
+            />
+          </div>
+        ) : null}
       </fieldset>
 
       <fieldset className="flex flex-col gap-5">
         <legend className="mb-5 text-xl font-semibold tracking-tight">
-          2. İletişim bilgilerin
+          {buyUrl && safeQuantity < PRICING.bulkMinQuantity
+            ? "2. Ya da bilgilerini bırak, seni arayalım"
+            : "2. İletişim bilgilerin"}
         </legend>
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="sm:col-span-2">

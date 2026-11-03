@@ -11,13 +11,16 @@ import {
   productJsonLd,
   productUrl,
 } from "@/lib/marketing/products";
+import { BuyButton } from "@/components/marketing/buy-button";
 import { TrackViewItem } from "@/components/marketing/track-view-item";
+import { shopierUrl } from "@/lib/shopier/products";
 import { WhyDijivizit } from "@/components/marketing/why-dijivizit";
 import {
   FINISHES,
   PRICING,
   PROMISES,
   analyticsItem,
+  chargePerUnit,
   formatPrice,
   formatTry,
   getFinishBySlug,
@@ -78,6 +81,7 @@ export default async function ProductPage({ params }: Params) {
   const others = FINISHES.filter((f) => f.id !== finish.id);
   const bulkPrice = unitPrice(finish, PRICING.bulkMinQuantity);
   const digital = isDigital(finish);
+  const buyUrl = shopierUrl(finish.id);
 
   return (
     <article className="mx-auto w-full max-w-6xl px-6 pt-32 pb-28 sm:pt-40">
@@ -127,16 +131,37 @@ export default async function ProductPage({ params }: Params) {
               : `Kargo ücretsiz, ${PROMISES.deliveryHours} saatte teslim. Kart okunmazsa ücretsiz değişim.`}
           </p>
           <p className="leading-relaxed text-foreground/85">{finish.note}</p>
-          <Link
-            href={`/siparis?kaplama=${finish.id}`}
-            className="inline-flex h-12 w-fit items-center rounded-full bg-neutral-950 px-8 text-base font-medium text-white transition-colors hover:bg-neutral-800"
-          >
-            Sipariş talebi oluştur
-          </Link>
-          <p className="text-sm text-muted-foreground">
-            Talebini aldıktan sonra seni arayıp {digital ? "profilini" : "kart tasarımını"} birlikte
-            netleştiririz.
-          </p>
+          {buyUrl ? (
+            <div className="flex flex-col gap-3">
+              <BuyButton
+                href={buyUrl}
+                item={analyticsItem(finish)}
+                label={`Satın al · ${formatTry(chargePerUnit(finish))}${digital ? "/yıl" : ""}`}
+              />
+              <p className="text-sm text-muted-foreground">
+                Güvenli kartla ödeme Shopier üzerinden.{" "}
+                <Link
+                  href={`/siparis?kaplama=${finish.id}`}
+                  className="text-foreground underline underline-offset-4"
+                >
+                  10 ve üzeri adet ya da kurumsal talep
+                </Link>
+              </p>
+            </div>
+          ) : (
+            <>
+              <Link
+                href={`/siparis?kaplama=${finish.id}`}
+                className="inline-flex h-12 w-fit items-center rounded-full bg-neutral-950 px-8 text-base font-medium text-white transition-colors hover:bg-neutral-800"
+              >
+                Sipariş talebi oluştur
+              </Link>
+              <p className="text-sm text-muted-foreground">
+                Talebini aldıktan sonra seni arayıp {digital ? "profilini" : "kart tasarımını"}{" "}
+                birlikte netleştiririz.
+              </p>
+            </>
+          )}
         </div>
       </div>
 
