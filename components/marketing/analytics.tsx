@@ -65,7 +65,9 @@ gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
       </Script>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
+        // Queued gtag() calls in dataLayer are sent once it loads; loading it
+        // when the browser is idle keeps it off the critical path.
+        strategy="lazyOnload"
       />
       {choice === "unset" && (
         <div

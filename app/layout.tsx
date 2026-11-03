@@ -24,6 +24,8 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
   display: "swap",
+  // Only a few code-like labels use it; don't spend first-load bandwidth on it.
+  preload: false,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

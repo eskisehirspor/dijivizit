@@ -144,16 +144,52 @@ export function ScrollSequence({
         img.onerror = () => resolve();
       });
 
-    (async () => {
-      const order = loadOrder(source.count);
-      await load(order[0]!);
-      // A few requests in flight at a time keeps the first frames snappy.
-      const queue = order.slice(1);
-      const worker = async () => {
-        while (queue.length && !cancelled) await load(queue.shift()!);
-      };
-      await Promise.all([worker(), worker(), worker(), worker()]);
-    })();
+    // Loading plan: the first frame right away; a coarse pass (every 8th
+    // frame) once the page is idle; the rest only after the visitor starts
+    // scrolling. Visitors who never scroll download ~1/8 of the frames.
+    const order = loadOrder(source.count);
+    const coarse = order.filter((i) => i % 8 === 0 && i !== order[0]);
+    const fine = order.filter((i) => i % 8 !== 0);
+    const queue: number[] = [];
+    let workers = 0;
+    const pump = () => {
+      while (workers < 4 && queue.length && !cancelled) {
+        workers++;
+        void load(queue.shift()!).then(() => {
+          workers--;
+          pump();
+        });
+      }
+    };
+    let fineQueued = false;
+    const queueFine = () => {
+      if (fineQueued) return;
+      fineQueued = true;
+      queue.push(...fine);
+      pump();
+    };
+    const idle = (fn: () => void) => {
+      if (typeof window.requestIdleCallback === "function") {
+        window.requestIdleCallback(fn, { timeout: 3000 });
+      } else {
+        setTimeout(fn, 1500);
+      }
+    };
+
+    void load(order[0]!).then(() => {
+      const startCoarse = () =>
+        idle(() => {
+          queue.unshift(...coarse);
+          pump();
+        });
+      if (document.readyState === "complete") startCoarse();
+      else window.addEventListener("load", startCoarse, { once: true });
+    });
+    const onFirstScroll = () => {
+      queueFine();
+      window.removeEventListener("scroll", onFirstScroll);
+    };
+    window.addEventListener("scroll", onFirstScroll, { passive: true });
 
     resize();
     tick();
@@ -168,6 +204,7 @@ export function ScrollSequence({
       cancelled = true;
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", schedule);
+      window.removeEventListener("scroll", onFirstScroll);
       window.removeEventListener("resize", onResize);
     };
   }, [desktop, mobile]);
