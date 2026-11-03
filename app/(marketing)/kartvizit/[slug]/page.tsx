@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import {
   pricingTerms,
-  productDescription,
+  productMetaDescription,
   productFeatures,
   productImage,
   productJsonLd,
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!finish) return {};
   const url = `/kartvizit/${finish.slug}`;
   const title = `${finish.name} | ${formatPrice(finish)} | Dijivizit`;
-  const description = productDescription(finish);
+  const description = productMetaDescription(finish);
   return {
     title: { absolute: title },
     description,

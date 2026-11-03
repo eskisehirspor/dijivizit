@@ -4,13 +4,13 @@ import Link from "next/link";
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { pricingTerms, productImage, productJsonLd, productUrl } from "@/lib/marketing/products";
 import { PromiseStrip, WhyDijivizit } from "@/components/marketing/why-dijivizit";
-import { FINISHES, PRICING, formatPrice, formatTry } from "@/lib/orders/finishes";
+import { FINISHES, formatPrice, formatTry } from "@/lib/orders/finishes";
 
 const metalPrice = FINISHES.find((f) => f.material === "metal")!.price;
 const woodPrice = FINISHES.find((f) => f.material === "wood")!.price;
 
 const TITLE = "NFC ve Dijital Kartvizit Fiyatları: Metal ve Ahşap | Dijivizit";
-const DESCRIPTION = `Metal NFC kartvizit ${formatTry(metalPrice)}, ahşap NFC kartvizit ${formatTry(woodPrice)}, kartsız dijital kartvizit aylık 59,90 TL. KDV dahil, kargo ücretsiz, 72 saatte teslim, ${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim. Siyah, gold, gümüş, koyu ve açık ahşap.`;
+const DESCRIPTION = `NFC kartvizit fiyatları: metal ${formatTry(metalPrice)}, ahşap ${formatTry(woodPrice)}, kartsız dijital kartvizit aylık 59,90 TL. KDV dahil, kargo ücretsiz, 72 saatte teslim.`;
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

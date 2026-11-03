@@ -38,9 +38,9 @@ export const LANDINGS: Landing[] = [
   {
     slug: "nfc-kartvizit",
     term: "NFC kartvizit",
-    title: "NFC Kartvizit | Metal ve Ahşap, Telefona Dokundur Paylaş | Dijivizit",
+    title: "NFC Kartvizit | Metal ve Ahşap, Dokundur Paylaş | Dijivizit",
     description:
-      "NFC kartvizit: telefona dokundurunca dijital profiliniz açılır, rehbere tek dokunuşla kaydedilir. Siyah, gümüş, gold metal ve ahşap; arkada QR kod, uygulama gerekmez. Fiyatlar KDV dahil, kargo ücretsiz.",
+      "NFC kartvizit: telefona dokundur, dijital profilin açılsın, rehbere tek dokunuşla kaydedilsin. Metal ve ahşap, arkada QR kod, uygulama gerekmez. Kargo ücretsiz.",
     h1: "NFC kartvizit",
     lead: "İçinde NFC çipi olan, telefona dokundurunca dijital profilinizi açan kartvizit. Metal ya da ahşap; arkasında QR kod, karşı tarafta uygulama gerekmez.",
     sections: [
@@ -127,7 +127,7 @@ export const LANDINGS: Landing[] = [
     term: "Dijital kartvizit",
     title: "Dijital Kartvizit | Profil, QR Kod ve NFC Kart | Dijivizit",
     description:
-      "Dijital kartvizit: telefon, WhatsApp, e-posta, sosyal medya, IBAN ve kataloğunuz tek sayfada. Bağlantı, QR kod ya da NFC kartla paylaşın; bilgileriniz değişince anında güncelleyin. Gelen kişileri ve görüntülenmeleri panelden takip edin.",
+      "Dijital kartvizit: telefon, WhatsApp, e-posta, sosyal medya ve IBAN tek sayfada. Link, QR ya da NFC kartla paylaşın; bilgileriniz değişince anında güncelleyin.",
     h1: "Dijital kartvizit",
     lead: "Bütün iletişim bilgileriniz, sosyal hesaplarınız, IBAN'ınız ve belgeleriniz tek bir sayfada. Bağlantıyla, QR kodla ya da NFC kartla paylaşılır; bilgileriniz değiştiğinde siz güncellersiniz, herkes yenisini görür.",
     sections: [
@@ -213,9 +213,9 @@ export const LANDINGS: Landing[] = [
   {
     slug: "akilli-kartvizit",
     term: "Akıllı kartvizit",
-    title: "Akıllı Kartvizit | NFC + QR + Dijital Profil Bir Arada | Dijivizit",
+    title: "Akıllı Kartvizit | NFC, QR ve Dijital Profil | Dijivizit",
     description:
-      "Akıllı kartvizit: NFC çipli metal ya da ahşap kart, arkasında QR kod ve her zaman güncel dijital profil. Rehbere tek dokunuşla kayıt, gelen kişiler, analitik ve ekip yönetimi. Eskişehir'den Türkiye'ye ücretsiz kargo.",
+      "Akıllı kartvizit: NFC çipli metal ya da ahşap kart, arkasında QR kod ve her zaman güncel dijital profil. Rehbere tek dokunuşla kayıt, analitik ve ekip yönetimi.",
     h1: "Akıllı kartvizit",
     lead: "Akıllı kartvizit üç şeyin birleşimidir: telefona dokundurulan NFC kart, her telefonda çalışan QR kod ve bilgilerinizi taşıyan dijital profil. Dijivizit üçünü birlikte verir.",
     sections: [

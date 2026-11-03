@@ -25,6 +25,14 @@ export function productImage(finish: Finish): string {
   return `/landing/products/${finish.id}.webp`;
 }
 
+/** Short version for the meta description (Google shows ~155 characters). */
+export function productMetaDescription(finish: Finish): string {
+  if (isDigital(finish)) {
+    return `Kartsız dijital kartvizit: profil linki ve QR kod, 2 saatte e-postanızda. Rehbere kayıt, bilgi bırakma formu ve analitik. Aylık ${formatTry(finish.price)}, KDV dahil.`;
+  }
+  return `${finish.name}: telefona dokundur, dijital profilin açılsın; arkada QR kod. ${formatTry(finish.price)}, KDV dahil, kargo ücretsiz, 72 saatte teslim.`;
+}
+
 export function productDescription(finish: Finish): string {
   if (isDigital(finish)) {
     return `Kartsız dijital kartvizit: profil linkiniz ve QR kodunuz. Mesajla, e-posta imzasında ya da sosyal medyada paylaşın; QR kodu sunumlara, broşürlere, vitrine koyun. Rehbere kayıt, bilgi bırakma formu ve analitik dahil. Aylık ${formatTry(finish.price)}, yıllık ${formatTry(PRICING.digitalYearlyFee)} olarak peşin ödenir, KDV dahil.`;

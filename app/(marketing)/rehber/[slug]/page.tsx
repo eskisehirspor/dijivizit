@@ -18,7 +18,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!guide) return {};
   const url = `/rehber/${guide.slug}`;
   return {
-    title: { absolute: `${guide.title} | Dijivizit` },
+    // Google shows ~60 characters; drop the brand suffix rather than cut the title.
+    title: {
+      absolute: guide.title.length > 50 ? guide.title : `${guide.title} | Dijivizit`,
+    },
     description: guide.description,
     alternates: { canonical: url },
     openGraph: {
