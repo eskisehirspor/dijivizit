@@ -65,7 +65,7 @@ export const FAQ = [
   },
   {
     q: "Hangi kaplama seçenekleri var?",
-    a: "Siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Hepsinde adın ve logon lazerle kazınır, NFC ve QR aynı şekilde çalışır.",
+    a: "Siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Hepsinde logo lazerle kazınır ya da yakılır, NFC ve QR aynı şekilde çalışır; 10 ve üzeri kurumsal siparişte firma logon işlenir.",
   },
   {
     q: "Karşımdakinin bilgilerini de alabilir miyim?",

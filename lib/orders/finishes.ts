@@ -30,7 +30,7 @@ export const FINISHES = [
   {
     id: "wood",
     label: "Koyu ahşap",
-    note: "Koyu ahşap, lazerle yakılmış yazı.",
+    note: "Koyu ahşap, lazerle yakılmış logo.",
     slug: "koyu-ahsap",
     name: "Koyu Ahşap NFC Kartvizit",
     material: "wood",
@@ -39,7 +39,7 @@ export const FINISHES = [
   {
     id: "wood-light",
     label: "Açık ahşap",
-    note: "Açık ahşap, lazerle yakılmış yazı.",
+    note: "Açık ahşap, lazerle yakılmış logo.",
     slug: "acik-ahsap",
     name: "Açık Ahşap NFC Kartvizit",
     material: "wood",

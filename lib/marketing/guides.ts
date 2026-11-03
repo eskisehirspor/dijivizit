@@ -103,7 +103,7 @@ const BASE_GUIDES: Guide[] = [
     label: "Metal kartvizit",
     title: "Metal Kartvizit: Siyah, Gold ve Gümüş NFC Kartvizit",
     description:
-      "Mat siyah metal, fırçalanmış gold ve gümüş NFC metal kartvizit. Lazer kazıma isim ve logo, QR kod ve tek dokunuşla paylaşılan dijital profil.",
+      "Mat siyah metal, fırçalanmış gold ve gümüş NFC metal kartvizit. Lazer kazıma, silinmeyen yüzey, QR kod ve tek dokunuşla paylaşılan dijital profil.",
     image: "/rehber/metal-kartvizit.jpg",
     imageAlt: "Mat siyah metal Dijivizit NFC kartvizit",
     published: "2026-10-25",
@@ -124,9 +124,9 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Kazıma ve kişiselleştirme",
+        heading: "Lazer kazıma ve kurumsal logo",
         paragraphs: [
-          "Adınız, unvanınız ve logonuz kartın yüzeyine lazerle kazınır; baskı olmadığı için silinmez, solmaz. Kartın arkasında NFC'si olmayan telefonlar için QR kod yer alır.",
+          "Kartın yüzeyine Dijivizit logosu ve temassız işareti lazerle kazınır; baskı olmadığı için silinmez, solmaz. 10 ve üzeri adetteki kurumsal siparişlerde bunun yerine firma logonuz kazınır; adınız ve unvanınız kartta değil, kart okutulunca açılan profilinizde yer alır. Kartın arkasında NFC'si olmayan telefonlar için QR kod yer alır.",
         ],
       },
       {
@@ -142,7 +142,7 @@ const BASE_GUIDES: Guide[] = [
     label: "Ahşap kartvizit",
     title: "Ahşap Kartvizit: Doğal Dokuda NFC Akıllı Kartvizit",
     description:
-      "Koyu ve açık tonlu gerçek ahşap NFC kartvizit. Lazerle yakılmış isim ve logo, her kartta kendine özgü doku, tek dokunuşla paylaşılan dijital profil.",
+      "Koyu ve açık tonlu gerçek ahşap NFC kartvizit. Lazerle yakılmış logo, her kartta kendine özgü doku, tek dokunuşla paylaşılan dijital profil.",
     image: "/rehber/ahsap-kartvizit.jpg",
     imageAlt: "Koyu ahşap NFC kartvizit telefona dokunuyor",
     published: "2026-10-25",
@@ -163,9 +163,9 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Lazerle yakılmış yazı",
+        heading: "Lazerle yakılmış logo",
         paragraphs: [
-          "İsim, unvan ve logo ahşabın yüzeyine lazerle yakılarak işlenir. Mürekkep kullanılmadığı için yazı silinmez; zamanla ahşapla birlikte olgunlaşır.",
+          "Dijivizit logosu ve temassız işareti ahşabın yüzeyine lazerle yakılarak işlenir; 10 ve üzeri adetteki kurumsal siparişlerde firma logonuz yakılır. Mürekkep kullanılmadığı için silinmez; zamanla ahşapla birlikte olgunlaşır.",
         ],
       },
       {
@@ -304,7 +304,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Nasıl ilerliyoruz?",
         paragraphs: [
-          "Kurumsal taleplerde önce ekibinizin büyüklüğünü ve tercih ettiğiniz kaplamayı konuşuruz. Logonuz ve kurumsal renklerinize göre kart tasarımını hazırlar, onayınızın ardından üretime geçeriz. Tek yapmanız gereken bizimle iletişime geçmek.",
+          "Kurumsal taleplerde önce ekibinizin büyüklüğünü ve tercih ettiğiniz kaplamayı konuşuruz. 10 ve üzeri adetteki siparişlerde firma logonuzu karta işleyecek şekilde tasarımı hazırlar, onayınızın ardından üretime geçeriz. Tek yapmanız gereken bizimle iletişime geçmek.",
         ],
       },
     ],
@@ -539,14 +539,14 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "6. Kartvizit",
         paragraphs: [
-          "Son adım, insanlara sizi hatırlatacak karttır. NFC kartvizitte bilgileriniz profilde durduğu için ilk aylarda değişen telefon numarası ya da adres yüzünden kartları çöpe atmazsınız. Dijivizit kartlarında isminiz ve logonuz metal ya da ahşap yüzeye lazerle işlenir; profiliniz tek dokunuşla paylaşılır.",
+          "Son adım, insanlara sizi hatırlatacak karttır. NFC kartvizitte bilgileriniz profilde durduğu için ilk aylarda değişen telefon numarası ya da adres yüzünden kartları çöpe atmazsınız. Dijivizit kartları metal ya da ahşap yüzeye lazerle işlenir; isminiz ve bilgileriniz profilde durur, tek dokunuşla paylaşılır.",
         ],
       },
     ],
     faq: [
       {
         q: "Kartvizit için logonun hazır olması gerekir mi?",
-        a: "Logo kartın tasarımını kolaylaştırır ama şart değildir. Logo olmadan da isim ve unvanla şık bir kart hazırlanabilir; logo hazır olduğunda yeni kart siparişi verebilirsiniz.",
+        a: "Hayır. Standart Dijivizit kartlarında Dijivizit logosu bulunur, bilgileriniz ise profilde durur; logonuzu hazır olduğunda profilinize eklersiniz. 10 ve üzeri adetteki kurumsal siparişlerde firma logonuz karta kazınır ya da yakılır.",
       },
     ],
   },
@@ -664,14 +664,14 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Malzeme: PVC, metal, ahşap",
         paragraphs: [
-          "PVC kartlar en ucuz seçenektir ve baskıyla renklendirilir. Metal kartlar ağırlığı ve dokusuyla ilk izlenimde fark yaratır; yazı lazerle kazındığı için silinmez. Ahşap kartlar doğal bir görünüm sunar ve her kartın damarı farklıdır.",
+          "PVC kartlar en ucuz seçenektir ve baskıyla renklendirilir. Metal kartlar ağırlığı ve dokusuyla ilk izlenimde fark yaratır; lazerle kazındığı için yüzeydeki işaretler silinmez. Ahşap kartlar doğal bir görünüm sunar ve her kartın damarı farklıdır.",
         ],
         link: { href: "/rehber/metal-kartvizit", label: "Metal kartvizit rehberi" },
       },
       {
         heading: "Dijivizit'te neler dahil?",
         paragraphs: [
-          "Dijivizit kartları siyah, gold ve gümüş metal ile koyu ve açık ahşap kaplamalarda üretilir; isim ve logo lazerle işlenir, arkada QR kod bulunur. Fiyatlara KDV ve kargo dahildir, dijital profil ilk yıl ücretsizdir. Panelden profilinizi güncellersiniz, kayıp kartı kapatırsınız ve kartınızın kaç kez, hangi şehirlerden açıldığını görürsünüz.",
+          "Dijivizit kartları siyah, gold ve gümüş metal ile koyu ve açık ahşap kaplamalarda üretilir; logo lazerle işlenir, arkada QR kod bulunur. Fiyatlara KDV ve kargo dahildir, dijital profil ilk yıl ücretsizdir. Panelden profilinizi güncellersiniz, kayıp kartı kapatırsınız ve kartınızın kaç kez, hangi şehirlerden açıldığını görürsünüz.",
         ],
         link: { href: "/kartvizit", label: "Fiyatları görün" },
       },

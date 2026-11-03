@@ -301,7 +301,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "NFC kartvizitin üzerine ne yazılır?",
         paragraphs: [
-          "NFC kartvizitte iletişim bilgileriniz kartın içindeki bağlantıyla açılan profilde durur. Bu yüzden kartın yüzeyini sade tutabilirsiniz. Dijivizit kartlarında adınız, unvanınız ve logonuz metal yüzeye lazerle kazınır ya da ahşaba lazerle yakılır; kartın arkasında aynı profile açılan QR kod bulunur.",
+          "NFC kartvizitte iletişim bilgileriniz kartın içindeki bağlantıyla açılan profilde durur. Bu yüzden kartın yüzeyini sade tutabilirsiniz. Dijivizit kartlarında adınız yazmaz; Dijivizit logosu ve temassız işareti metal yüzeye lazerle kazınır ya da ahşaba lazerle yakılır (10 ve üzeri kurumsal siparişte firma logonuz). Kartın arkasında aynı profile açılan QR kod bulunur.",
           "Numaranız ya da unvanınız değiştiğinde kartı yeniden bastırmazsınız; profilinizi güncellersiniz.",
         ],
         link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },

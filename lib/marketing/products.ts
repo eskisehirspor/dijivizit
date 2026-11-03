@@ -39,7 +39,7 @@ export function productDescription(finish: Finish): string {
   }
   const base =
     finish.material === "metal"
-      ? `${finish.note} Adınız, unvanınız ve logonuz lazerle kazınır; baskı olmadığı için silinmez.`
+      ? `${finish.note} Logo ve temassız işareti lazerle kazınır; baskı olmadığı için silinmez.`
       : `${finish.note} Gerçek ahşap; her kartın damar dokusu kendine özgüdür.`;
   return `${base} Telefona dokundurunca dijital profiliniz açılır, arkadaki QR kod her telefonda çalışır. ${formatTry(finish.price)}, KDV dahil, kargo ücretsiz.`;
 }
@@ -58,8 +58,8 @@ export function productFeatures(finish: Finish): string[] {
   }
   const surface =
     finish.material === "metal"
-      ? "İsim, unvan ve logo metal yüzeye lazerle kazınır; silinmez, solmaz."
-      : "İsim, unvan ve logo ahşaba lazerle yakılır; mürekkep yoktur, silinmez.";
+      ? "Logo ve temassız işareti metal yüzeye lazerle kazınır; silinmez, solmaz."
+      : "Logo ve temassız işareti ahşaba lazerle yakılır; mürekkep yoktur, silinmez.";
   return [
     surface,
     "İçindeki NFC çip sayesinde telefona dokundurunca dijital profiliniz açılır.",
@@ -110,6 +110,20 @@ export function productJsonLd(finish: Finish) {
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${MARKETING_ORIGIN}/#organization` },
+      // See /yasal/teslimat-ve-iade: 14-day withdrawal, return shipping paid by us.
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "TR",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 14,
+        ...(isDigital(finish)
+          ? {}
+          : {
+              returnMethod: "https://schema.org/ReturnByMail",
+              returnFees: "https://schema.org/FreeReturn",
+            }),
+        merchantReturnLink: `${MARKETING_ORIGIN}/yasal/teslimat-ve-iade`,
+      },
       ...(isDigital(finish)
         ? {
             priceSpecification: {

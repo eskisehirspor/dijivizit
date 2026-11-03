@@ -299,7 +299,7 @@ export function OrderForm({
               hint={
                 digital
                   ? "Profilde yer alacak isim, unvan, şirket gibi detaylar."
-                  : "Kartta yer alacak isim/unvan, logo, teslimat şehri gibi detaylar."
+                  : "Teslimat şehri, adet ya da kurumsal siparişte firma logosu gibi detaylar."
               }
             >
               <textarea

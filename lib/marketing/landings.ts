@@ -67,7 +67,7 @@ export const LANDINGS: Landing[] = [
       {
         heading: "Malzemeler: metal ve ahşap",
         paragraphs: [
-          "Metal kartlarda yazı ve logo yüzeye lazerle kazınır, ahşap kartlarda lazerle yakılır. Baskı ve mürekkep olmadığı için silinmez, solmaz. Beş kaplama var: siyah metal, gümüş, gold, koyu ahşap ve açık ahşap.",
+          "Metal kartlarda logo ve temassız işareti yüzeye lazerle kazınır, ahşap kartlarda lazerle yakılır. Baskı ve mürekkep olmadığı için silinmez, solmaz. Beş kaplama var: siyah metal, gümüş, gold, koyu ahşap ve açık ahşap.",
           "İletişim bilgileriniz dijital profilinizde durur; numaranız ya da unvanınız değiştiğinde kartı yeniden bastırmanız gerekmez, profili güncellemeniz yeter.",
         ],
       },

@@ -131,7 +131,7 @@ export const SEGMENTS: Landing[] = [
       {
         heading: "Hangi kart, nasıl teslim?",
         paragraphs: [
-          "Koyu ve açık ahşap kartlar sıcak bir görünüm verir; mat siyah, gümüş ve gold metal kartlar daha resmîdir. Adınız ve unvanınız lazerle işlenir, baskı olmadığı için silinmez. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
+          "Koyu ve açık ahşap kartlar sıcak bir görünüm verir; mat siyah, gümüş ve gold metal kartlar daha resmîdir. Kartın logosu lazerle işlenir, baskı olmadığı için silinmez; adınız ve unvanınız profilde yer alır. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
           "Yalnızca online çalışıyorsanız kartsız dijital kartvizit yeterli olabilir: link ve QR kod 2 saat içinde e-postanıza gelir; Instagram biyografinize ve e-posta imzanıza eklersiniz. Aylık 59,90 TL'dir, yıllık 718,80 TL olarak peşin ödenir.",
         ],
       },
@@ -292,7 +292,7 @@ export const SEGMENTS: Landing[] = [
         heading: "Klinik ve hastaneler için sipariş",
         paragraphs: [
           "Poliklinik ve özel hastaneler hekim kartlarını ekip panelinden yönetir; bir hekim ayrıldığında kart yeniden basılmaz, yeni hekime atanır. 10 ve üzeri adette %20 indirim uygulanır.",
-          "Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir. Yazı metal kartlara lazerle kazınır, ahşap kartlara lazerle yakılır; silinmez. Kart istemeyen hekimler için kartsız dijital kartvizit, link ve QR kodla 2 saat içinde e-postayla teslim edilir.",
+          "Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir. Logo metal kartlara lazerle kazınır, ahşap kartlara lazerle yakılır; silinmez. Kart istemeyen hekimler için kartsız dijital kartvizit, link ve QR kodla 2 saat içinde e-postayla teslim edilir.",
         ],
       },
     ],
@@ -447,7 +447,7 @@ export const SEGMENTS: Landing[] = [
       {
         heading: "Kart seçimi ve teslimat",
         paragraphs: [
-          "Ahşap kartlar sıcak ve sakin bir görünüm verir, mat siyah metal ise sadedir. Kartın üzerinde ne yazacağını sipariş notunda belirtirsiniz; yalnızca ad ve unvan taşıyan sade bir kart da olur, geri kalan her şey profilde durur. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
+          "Ahşap kartlar sıcak ve sakin bir görünüm verir, mat siyah metal ise sadedir. Kartın üzerinde adınız yazmaz, yalnızca logo ve temassız işareti bulunur; adınız, unvanınız ve geri kalan her şey profilde durur. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
           "Danışmanlık merkezleri psikologların kartlarını ekip panelinden yönetir; 10 ve üzeri adette %20 indirim uygulanır. Yalnızca online çalışıyorsanız kartsız dijital kartvizit (link ve QR kod) 2 saat içinde e-postanıza gelir.",
         ],
       },
@@ -680,7 +680,7 @@ export const SEGMENTS: Landing[] = [
       {
         heading: "Malzeme ve sipariş",
         paragraphs: [
-          "Koyu ve açık ahşap kartlarda yazı ve logo lazerle yakılır; her kartın damar dokusu kendine özgüdür. Mat siyah, gümüş ve gold metal kartlarda yazı lazerle kazınır. Baskı olmadığı için silinmez, solmaz. Logonuzu karta işletebilirsiniz.",
+          "Koyu ve açık ahşap kartlarda logo lazerle yakılır; her kartın damar dokusu kendine özgüdür. Mat siyah, gümüş ve gold metal kartlarda logo lazerle kazınır. Baskı olmadığı için silinmez, solmaz. 10 ve üzeri adetteki ofis siparişlerinde ofisinizin logosunu karta işletebilirsiniz.",
           "Ofisinizde birden fazla mimar varsa kartları ekip panelinden yönetirsiniz; 10 ve üzeri adette %20 indirim uygulanır. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
         ],
       },
@@ -696,7 +696,7 @@ export const SEGMENTS: Landing[] = [
       },
       {
         q: "Logomu karta koyabilir miyim?",
-        a: "Evet. Adınız, unvanınız ve logonuz metalde lazerle kazınır, ahşapta lazerle yakılır.",
+        a: "10 ve üzeri adetteki kurumsal siparişlerde evet; firma logonuz metalde lazerle kazınır, ahşapta lazerle yakılır. Standart kartlarda Dijivizit logosu bulunur, bilgileriniz profilde yer alır.",
       },
       {
         q: "Behance gibi platformları ekleyebilir miyim?",
@@ -758,7 +758,7 @@ export const SEGMENTS: Landing[] = [
       {
         heading: "Kart seçimi ve teslimat",
         paragraphs: [
-          "Mat siyah metal kart çekim günü kıyafetinizle uyumlu ve sadedir; ahşap kartlar daha sıcak bir izlenim bırakır. Logonuz lazerle işlenir, silinmez. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
+          "Mat siyah metal kart çekim günü kıyafetinizle uyumlu ve sadedir; ahşap kartlar daha sıcak bir izlenim bırakır. Kartın logosu lazerle işlenir, silinmez; stüdyonuzun adı ve bilgileri profilde yer alır. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
           "Stüdyo olarak birden fazla fotoğrafçı ve asistanla çalışıyorsanız kartları ekip panelinden yönetirsiniz; 10 ve üzeri adette %20 indirim uygulanır.",
         ],
       },
@@ -1244,7 +1244,7 @@ export const SEGMENTS: Landing[] = [
       },
       {
         q: "Kartlara şirket logomuzu koyabilir miyiz?",
-        a: "Evet. Logo metal kartlarda lazerle kazınır, ahşap kartlarda lazerle yakılır.",
+        a: "Evet, 10 ve üzeri adetteki kurumsal siparişlerde. Firma logonuz metal kartlarda lazerle kazınır, ahşap kartlarda lazerle yakılır.",
       },
     ],
     guides: [
@@ -1540,7 +1540,7 @@ export const SEGMENTS: Landing[] = [
       },
       {
         q: "Şirket logomuz ve kurumsal renklerimiz kullanılabilir mi?",
-        a: "Logonuz kartın yüzeyine lazerle işlenir. Kart rengi beş kaplamadan biridir: mat siyah metal, gümüş, gold, koyu ahşap ya da açık ahşap.",
+        a: "10 ve üzeri adetteki kurumsal siparişlerde logonuz kartın yüzeyine lazerle işlenir. Kart rengi beş kaplamadan biridir: mat siyah metal, gümüş, gold, koyu ahşap ya da açık ahşap.",
       },
       {
         q: "Çalışan ayrıldığında kartı ne yaparız?",
