@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import { LegalLinks } from "@/components/legal/legal-links";
 import { Analytics } from "@/components/marketing/analytics";
+import { CONSENT_KEY } from "@/lib/analytics";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { CONTACT } from "@/lib/contact";
 import { GUIDES } from "@/lib/marketing/guides";
@@ -14,6 +15,13 @@ export default async function MarketingLayout({ children }: { children: React.Re
 
   return (
     <div className="flex min-h-full flex-col">
+      {/* Runs before first paint: visitors who already chose don't see the
+          server-rendered cookie banner flash (see Analytics). */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `try{var c=localStorage.getItem(${JSON.stringify(CONSENT_KEY)});if(c==="granted"||c==="denied")document.documentElement.dataset.dvConsent=c}catch(e){}`,
+        }}
+      />
       <Analytics />
       <SiteHeader />
       <main className="flex-1">{children}</main>

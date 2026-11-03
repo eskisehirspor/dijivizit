@@ -69,11 +69,13 @@ gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
         // when the browser is idle keeps it off the critical path.
         strategy="lazyOnload"
       />
-      {choice === "unset" && (
+      {/* Server-rendered (choice null) so it paints with the page instead of
+          after hydration; hidden before paint when a choice is stored. */}
+      {(choice === "unset" || choice === null) && (
         <div
           role="dialog"
           aria-label="Çerez tercihi"
-          className="fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-xl flex-col gap-4 rounded-2xl border border-border/60 bg-background/95 p-5 text-sm shadow-lg backdrop-blur sm:flex-row sm:items-center"
+          className="fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-xl flex-col gap-4 rounded-2xl border border-border/60 bg-background/95 p-5 text-sm shadow-lg backdrop-blur sm:flex-row sm:items-center [[data-dv-consent]_&]:hidden"
         >
           <p className="flex-1 leading-relaxed text-muted-foreground">
             Siteyi geliştirmek ve reklamlarımızın sonucunu ölçmek için Google Analytics ve Meta
