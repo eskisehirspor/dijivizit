@@ -34,7 +34,6 @@ const JSON_LD = {
       "@id": `${MARKETING_ORIGIN}/#organization`,
       name: "Dijivizit",
       legalName: "ASD Tasarım Ltd. Şti.",
-      taxID: "0860443493",
       url: MARKETING_ORIGIN,
       logo: `${MARKETING_ORIGIN}/email/logomark.png`,
       image: `${MARKETING_ORIGIN}/landing/finishes/black.webp`,

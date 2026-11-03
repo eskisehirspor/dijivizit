@@ -13,7 +13,6 @@ import { PROMISES } from "@/lib/orders/finishes";
 export const LEGAL_ENTITY = {
   /** Dijivizit is a brand of this company (seller and data controller). */
   name: "ASD Tasarım Ltd. Şti. (Dijivizit)",
-  taxNumber: "0860443493",
   address: `${CONTACT.street}, ${CONTACT.district} / ${CONTACT.city}`,
   email: "merhaba@dijivizit.com",
 } as const;
@@ -224,7 +223,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
       {
         heading: "Satıcı",
         paragraphs: [
-          `${LEGAL_ENTITY.name}, ${LEGAL_ENTITY.address}. Vergi numarası: ${LEGAL_ENTITY.taxNumber}. Telefon: ${CONTACT.phoneDisplay}. E-posta: ${CONTACT.orderEmail}.`,
+          `${LEGAL_ENTITY.name}, ${LEGAL_ENTITY.address}. Telefon: ${CONTACT.phoneDisplay}. E-posta: ${CONTACT.orderEmail}.`,
           "Online ödemeler Shopier üzerinden alınır. Ön bilgilendirme formu ve mesafeli satış sözleşmesi ödeme sırasında size sunulur; bu sayfa o metinleri tamamlar.",
         ],
       },
