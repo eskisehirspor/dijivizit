@@ -510,12 +510,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "1. İsim",
         paragraphs: [
           "Her şey isimle başlar. Kısa, kolay söylenen ve kolay yazılan bir isim seçin. Seçtiğiniz ismin marka olarak başvurulup başvurulmadığını, .com alan adının ve sosyal medya kullanıcı adlarının boşta olup olmadığını aynı gün kontrol edin.",
-          "Bu araştırmayla uğraşmak istemiyorsanız, .com alan adı ve marka tescil başvurusu hazır isimlere göz atabilirsiniz.",
         ],
-        link: {
-          href: "https://markapano.com/",
-          label: "Markapano: alan adı ve marka başvurusu hazır isimler",
-        },
       },
       {
         heading: "2. Alan adı ve e-posta",
