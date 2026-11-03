@@ -13,9 +13,9 @@ import { CONTACT } from "@/lib/contact";
 import { APP_ORIGIN, MARKETING_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
 
-const TITLE = "Dijivizit | NFC Kartvizit ve Akıllı Dijital Kartvizit";
+const TITLE = "Dijital Kartvizit ve NFC Kartvizit | Dijivizit";
 const DESCRIPTION =
-  "Dijivizit NFC kartvizit: telefona dokundur, profilin açılsın. Metal, gold, gümüş ve ahşap akıllı kartvizit; QR kod, temassız paylaşım ve anında güncelleme.";
+  "Dijital kartvizit ve NFC kartvizit: telefona dokundur, profilin açılsın. Metal ve ahşap kart, QR kod, rehbere tek dokunuşla kayıt. 72 saatte kargoda.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -70,7 +70,7 @@ const CAPTIONS: SequenceCaption[] = [
   {
     start: 0,
     end: 0.14,
-    kicker: "NFC akıllı kartvizit",
+    kicker: "Dijital kartvizit · NFC kartvizit",
     title: "Tanışmanın yeni hali.",
     heading: "h1",
     body: "Kartvizitini bir kez tasarla. Bir dokunuşla paylaş, sonsuza dek güncel kalsın.",

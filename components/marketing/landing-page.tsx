@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { GUIDES } from "@/lib/marketing/guides";
 import { LANDINGS, type Landing } from "@/lib/marketing/landings";
+import { SEGMENTS } from "@/lib/marketing/segments";
 import { TOOLS } from "@/lib/marketing/tools";
 import { pricingTerms, productImage, productJsonLd, productUrl } from "@/lib/marketing/products";
 import { PromiseStrip, WhyDijivizit } from "@/components/marketing/why-dijivizit";
@@ -27,8 +28,9 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
     .map((slug) => GUIDES.find((g) => g.slug === slug))
     .filter((g): g is (typeof GUIDES)[number] => Boolean(g));
   const siblings = l.siblings
-    .map((slug) => LANDINGS.find((x) => x.slug === slug))
+    .map((slug) => [...LANDINGS, ...SEGMENTS].find((x) => x.slug === slug))
     .filter((x): x is Landing => Boolean(x));
+  const children = SEGMENTS.filter((x) => x.parent?.href === `/${l.slug}`);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -56,7 +58,17 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Dijivizit", item: `${MARKETING_ORIGIN}/` },
-          { "@type": "ListItem", position: 2, name: l.term, item: url },
+          ...(l.parent
+            ? [
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: l.parent.name,
+                  item: `${MARKETING_ORIGIN}${l.parent.href}`,
+                },
+              ]
+            : []),
+          { "@type": "ListItem", position: l.parent ? 3 : 2, name: l.term, item: url },
         ],
       },
       {
@@ -84,6 +96,14 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
           Dijivizit
         </Link>
         {" / "}
+        {l.parent ? (
+          <>
+            <Link href={l.parent.href} className="hover:text-foreground">
+              {l.parent.name}
+            </Link>
+            {" / "}
+          </>
+        ) : null}
         <span>{l.term}</span>
       </nav>
 
@@ -227,6 +247,35 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
           ))}
         </div>
       </section>
+
+      {children.length > 0 ? (
+        <section className="mt-20 grid gap-10 border-t border-border/60 pt-16 sm:grid-cols-2">
+          {(
+            [
+              ["meslek", "Mesleğinize göre dijital kartvizit"],
+              ["sehir", "Şehrinize göre dijital kartvizit"],
+            ] as const
+          ).map(([kind, title]) => (
+            <div key={kind} className="flex flex-col gap-4">
+              <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+              <ul className="flex flex-wrap gap-2">
+                {children
+                  .filter((c) => c.kind === kind)
+                  .map((c) => (
+                    <li key={c.slug}>
+                      <Link
+                        href={`/${c.slug}`}
+                        className="inline-flex h-9 items-center rounded-full border border-border px-4 text-sm transition-colors hover:bg-muted"
+                      >
+                        {c.term}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+      ) : null}
 
       <section className="mt-20 grid gap-10 border-t border-border/60 pt-16 sm:grid-cols-2">
         <div className="flex flex-col gap-4">

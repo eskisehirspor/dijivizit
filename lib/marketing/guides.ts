@@ -4,6 +4,8 @@
  * Each guide targets one search intent ("nfc kartvizit nedir", "metal kartvizit",
  * ...) so the landing page does not have to rank for everything at once.
  */
+import { NEW_GUIDES } from "@/lib/marketing/guides-new";
+
 export type GuideSection = {
   heading: string;
   paragraphs: string[];
@@ -25,7 +27,7 @@ export type Guide = {
   faq?: { q: string; a: string }[];
 };
 
-export const GUIDES: Guide[] = [
+const BASE_GUIDES: Guide[] = [
   {
     slug: "nfc-kartvizit-nedir",
     label: "NFC kartvizit nedir?",
@@ -715,7 +717,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "2. Tek dokunuşla rehbere kayıt",
         paragraphs: [
-          'Kartvizitin asıl amacı karşı tarafın sizi kaydetmesidir. "Rehbere kaydet" düğmesi adınızı, unvanınızı, telefonunuzu, e-postanızı ve fotoğrafınızı tek seferde aktarmalı.',
+          'Kartvizitin asıl amacı karşı tarafın sizi kaydetmesidir. "Rehbere kaydet" düğmesi adınızı, unvanınızı, şirketinizi, telefonunuzu, e-postanızı ve bağlantılarınızı tek seferde aktarmalı.',
         ],
       },
       {
@@ -763,6 +765,8 @@ export const GUIDES: Guide[] = [
     ],
   },
 ];
+
+export const GUIDES: Guide[] = [...BASE_GUIDES, ...NEW_GUIDES];
 
 export function getGuide(slug: string): Guide | undefined {
   return GUIDES.find((g) => g.slug === slug);

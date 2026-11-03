@@ -73,7 +73,9 @@ export default async function GuidePage({ params }: Params) {
         : []),
     ],
   };
-  const others = GUIDES.filter((g) => g.slug !== guide.slug).slice(0, 3);
+  // The next three guides (wrapping), so internal links spread over every guide.
+  const at = GUIDES.findIndex((g) => g.slug === guide.slug);
+  const others = [1, 2, 3].map((i) => GUIDES[(at + i) % GUIDES.length]!);
 
   return (
     <article className="mx-auto w-full max-w-6xl px-6 pt-32 pb-28 sm:pt-40">

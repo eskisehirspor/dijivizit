@@ -561,7 +561,7 @@
         "skills": "Yetenekler"
       }
     },
-    "footer": "<brand>Dijivizit</brand> ile oluşturuldu · <privacy>Gizlilik</privacy>",
+    "footer": "<brand>Dijivizit</brand> ile oluşturuldu · <create>Sen de dijital kartvizitini oluştur</create> · <privacy>Gizlilik</privacy>",
     "leave": {
       "trigger": "Bilgilerimi bırak",
       "title": "Bilgilerinizi bırakın",

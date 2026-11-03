@@ -26,8 +26,12 @@ export type Landing = {
   compare?: [string, string, string][];
   faq: { q: string; a: string }[];
   guides: string[];
-  /** The other landing pages to link to. */
+  /** The other landing pages to link to (slugs of LANDINGS or SEGMENTS). */
   siblings: string[];
+  /** Parent page for nested pages (/dijital-kartvizit/<meslek|şehir>). */
+  parent?: { name: string; href: string };
+  /** Grouping for nested pages, used for the index list on the parent page. */
+  kind?: "meslek" | "sehir";
 };
 
 export const LANDINGS: Landing[] = [
