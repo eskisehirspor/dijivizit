@@ -70,6 +70,12 @@ const catalog = JSON.parse(fs.readFileSync("scripts/shopier-catalog.json", "utf8
 const existing = await shopier("/products?limit=50");
 if (!existing.ok) {
   notice(`GET /products -> ${existing.status} ${JSON.stringify(existing.body).slice(0, 400)}`);
+  // Diagnostics without revealing the token.
+  notice(`token length ${SHOPIER_PAT.length}, trimmed ${SHOPIER_PAT.trim().length}, dots ${SHOPIER_PAT.split(".").length - 1}, starts-with-bearer ${/^bearer\s/i.test(SHOPIER_PAT)}`);
+  for (const path of ["/orders?limit=1", "/webhooks", "/shop/settings", "/categories"]) {
+    const r = await shopier(path);
+    notice(`GET ${path} -> ${r.status} ${JSON.stringify(r.body).slice(0, 160)}`);
+  }
   process.exit(1);
 }
 const byTitle = new Map(list(existing.body).map((p) => [p.title, p]));
