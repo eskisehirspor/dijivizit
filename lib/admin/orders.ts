@@ -12,6 +12,8 @@ export type AdminOrderRequest = {
   quantity: number;
   note: string | null;
   status: OrderStatus;
+  source: "form" | "shopier";
+  paidTotal: number | null;
 };
 
 /** wa.me link for a Turkish phone number typed in any common form. */

@@ -351,7 +351,9 @@ export async function getAdminOrderRequests(limit = 200): Promise<AdminOrderRequ
   await requireInviteOwner();
   const { data, error } = await createAdminClient()
     .from("order_requests")
-    .select("id, created_at, full_name, phone, email, finish, quantity, note, status")
+    .select(
+      "id, created_at, full_name, phone, email, finish, quantity, note, status, source, paid_total",
+    )
     .order("created_at", { ascending: false })
     .limit(limit);
   if (error) throw new Error(`order_requests: ${error.message}`);
@@ -364,6 +366,8 @@ export async function getAdminOrderRequests(limit = 200): Promise<AdminOrderRequ
     finish: r.finish,
     quantity: r.quantity,
     note: r.note,
+    source: r.source === "shopier" ? "shopier" : "form",
+    paidTotal: r.paid_total === null ? null : Number(r.paid_total),
     status: (ORDER_STATUSES as readonly string[]).includes(r.status)
       ? (r.status as OrderStatus)
       : "new",

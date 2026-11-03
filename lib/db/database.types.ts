@@ -409,8 +409,12 @@ export type Database = {
           full_name: string
           id: string
           note: string | null
+          paid_at: string | null
+          paid_total: number | null
           phone: string
           quantity: number
+          shopier_order_id: string | null
+          source: string
           status: string
         }
         Insert: {
@@ -421,8 +425,12 @@ export type Database = {
           full_name: string
           id?: string
           note?: string | null
+          paid_at?: string | null
+          paid_total?: number | null
           phone: string
           quantity: number
+          shopier_order_id?: string | null
+          source?: string
           status?: string
         }
         Update: {
@@ -433,8 +441,12 @@ export type Database = {
           full_name?: string
           id?: string
           note?: string | null
+          paid_at?: string | null
+          paid_total?: number | null
           phone?: string
           quantity?: number
+          shopier_order_id?: string | null
+          source?: string
           status?: string
         }
         Relationships: []

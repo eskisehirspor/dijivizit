@@ -1,0 +1,28 @@
+name: Shopier setup
+
+# Lists the Dijivizit products on Shopier and subscribes to order.created
+# webhooks. Safe to re-run: existing products (by title) and an existing
+# webhook (when its token is stored) are kept.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Products and webhook
+        env:
+          SHOPIER_PAT: ${{ secrets.SHOPIER_PAT }}
+          SUPABASE_URL: https://mtspxgxgtvivkrbvlbuq.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          WEBHOOK_URL: https://app.dijivizit.com/api/shopier/webhook
+        run: node scripts/shopier-setup.mjs

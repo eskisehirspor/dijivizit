@@ -12,7 +12,7 @@ import {
   type AdminOrderRequest,
   type OrderStatus,
 } from "@/lib/admin/orders";
-import { finishLabel, isFinishId } from "@/lib/orders/finishes";
+import { finishLabel, formatTry, isFinishId } from "@/lib/orders/finishes";
 import { cn } from "@/lib/utils";
 
 const STATUS_TONE: Record<OrderStatus, string> = {
@@ -47,6 +47,11 @@ function Row({ order }: { order: AdminOrderRequest }) {
           <p className="text-sm text-muted-foreground">
             {product} × {order.quantity}
           </p>
+          {order.source === "shopier" ? (
+            <p className="text-xs font-medium text-emerald-700">
+              {t("paid", { total: formatTry(order.paidTotal ?? 0) })}
+            </p>
+          ) : null}
         </div>
         <p
           className="text-xs text-muted-foreground tabular-nums"

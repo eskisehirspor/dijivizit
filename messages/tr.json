@@ -481,7 +481,7 @@
       },
       "orders": {
         "title": "Sipariş talepleri",
-        "subtitle": "dijivizit.com/siparis formundan gelenler. Aradıkça durumunu güncelle.",
+        "subtitle": "Siteden gelen talepler ve Shopier'den ödenen siparişler. Aradıkça durumunu güncelle.",
         "all": "Tümü",
         "statusLabel": "Talep durumu",
         "status": {
@@ -490,7 +490,8 @@
           "won": "Satış oldu",
           "lost": "Olmadı"
         },
-        "empty": "Henüz sipariş talebi yok. Gelen talepler burada ve talep@dijivizit.com adresinde görünür."
+        "empty": "Henüz sipariş talebi yok. Gelen talepler burada ve talep@dijivizit.com adresinde görünür.",
+        "paid": "Shopier'den ödendi · {total}"
       }
     },
     "preview": {
