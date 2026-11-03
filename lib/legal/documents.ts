@@ -11,13 +11,15 @@ import { CONTACT } from "@/lib/contact";
 import { PROMISES } from "@/lib/orders/finishes";
 
 export const LEGAL_ENTITY = {
-  name: "Dijivizit",
+  /** Dijivizit is a brand of this company (seller and data controller). */
+  name: "ASD Tasarım Ltd. Şti. (Dijivizit)",
+  taxNumber: "0860443493",
   address: `${CONTACT.street}, ${CONTACT.district} / ${CONTACT.city}`,
   email: "merhaba@dijivizit.com",
 } as const;
 
 /** Bump when a text changes materially; stored with each signup's consent. */
-export const LEGAL_VERSION = "2026-10-25";
+export const LEGAL_VERSION = "2026-11-03";
 
 export type LegalSlug = "kvkk" | "gizlilik" | "kullanim-kosullari" | "teslimat-ve-iade";
 
@@ -222,7 +224,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
       {
         heading: "Satıcı",
         paragraphs: [
-          `${LEGAL_ENTITY.name}, ${LEGAL_ENTITY.address}. Telefon: ${CONTACT.phoneDisplay}. E-posta: ${CONTACT.orderEmail}.`,
+          `${LEGAL_ENTITY.name}, ${LEGAL_ENTITY.address}. Vergi numarası: ${LEGAL_ENTITY.taxNumber}. Telefon: ${CONTACT.phoneDisplay}. E-posta: ${CONTACT.orderEmail}.`,
           "Online ödemeler Shopier üzerinden alınır. Ön bilgilendirme formu ve mesafeli satış sözleşmesi ödeme sırasında size sunulur; bu sayfa o metinleri tamamlar.",
         ],
       },

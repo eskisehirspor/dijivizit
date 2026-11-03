@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 import { LegalLinks } from "@/components/legal/legal-links";
+import { LEGAL_ENTITY } from "@/lib/legal/documents";
 import { Analytics } from "@/components/marketing/analytics";
 import { CONSENT_KEY } from "@/lib/analytics";
 import { SiteHeader } from "@/components/marketing/site-header";
@@ -41,7 +42,8 @@ export default async function MarketingLayout({ children }: { children: React.Re
               </a>
             </p>
             <p className="text-xs">
-              © {new Date().getFullYear()} {t("app.name")}
+              © {new Date().getFullYear()} {t("app.name")} · ASD Tasarım Ltd. Şti. · VKN{" "}
+              {LEGAL_ENTITY.taxNumber}
             </p>
           </div>
           <div className="flex flex-col gap-4">
