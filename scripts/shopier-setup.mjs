@@ -89,7 +89,9 @@ if (existing.ok) {
       };
       const created = await shopier("/products", { method: "POST", body: JSON.stringify(payload) });
       if (!created.ok) {
-        notice(`POST /products ${item.finish} -> ${created.status} ${JSON.stringify(created.body).slice(0, 600)}`);
+        notice(
+          `POST /products ${item.finish} -> ${created.status} ${JSON.stringify(created.body).slice(0, 600)}`,
+        );
         process.exit(1);
       }
       product = created.body;
@@ -99,7 +101,8 @@ if (existing.ok) {
   }
 } else {
   notice(`GET /products -> ${existing.status}; using ids from the catalog file`);
-  for (const item of catalog) if (item.id) map[item.finish] = { id: String(item.id), url: item.url };
+  for (const item of catalog)
+    if (item.id) map[item.finish] = { id: String(item.id), url: item.url };
 }
 if (Object.keys(map).length) {
   await supabaseUpsert([{ name: "shopier_products", token: JSON.stringify(map) }]);
