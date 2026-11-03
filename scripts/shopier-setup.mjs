@@ -65,55 +65,46 @@ async function supabaseGet(name) {
 
 const list = (body) => (Array.isArray(body) ? body : (body?.data ?? body?.items ?? []));
 
-// 1. Products
+// 1. Products. The products API can be closed for a shop (403); then the
+// products are listed in the Shopier panel and their ids/urls written into
+// scripts/shopier-catalog.json, and only the map is stored here.
 const catalog = JSON.parse(fs.readFileSync("scripts/shopier-catalog.json", "utf8"));
-let existing = await shopier("/products");
-if (existing.status === 403) {
-  notice("GET /products 403, trying page/limit params");
-  existing = await shopier("/products?page=1&limit=10");
-}
-if (!existing.ok) {
-  notice(`GET /products -> ${existing.status} ${JSON.stringify(existing.body).slice(0, 400)}`);
-  // Diagnostics without revealing the token.
-  notice(`token length ${SHOPIER_PAT.length}, trimmed ${SHOPIER_PAT.trim().length}, dots ${SHOPIER_PAT.split(".").length - 1}, starts-with-bearer ${/^bearer\s/i.test(SHOPIER_PAT)}`);
-  for (const path of ["/orders?limit=1", "/webhooks", "/shop/settings", "/categories"]) {
-    const r = await shopier(path);
-    notice(`GET ${path} -> ${r.status} ${JSON.stringify(r.body).slice(0, 160)}`);
-  }
-  process.exit(1);
-}
-const byTitle = new Map(list(existing.body).map((p) => [p.title, p]));
 const map = {};
-for (const item of catalog) {
-  let product = byTitle.get(item.title);
-  if (!product) {
-    const payload = {
-      title: item.title,
-      description: item.description,
-      type: item.type,
-      media: [{ type: "image", url: item.image, placement: 1 }],
-      priceData: { currency: "TRY", price: item.price, shippingPrice: "0.00" },
-      stockQuantity: 500,
-      shippingPayer: "sellerPays",
-      placementScore: item.placementScore,
-      ...(item.type === "physical" ? { dispatchDuration: 1 } : {}),
-    };
-    const created = await shopier("/products", { method: "POST", body: JSON.stringify(payload) });
-    if (!created.ok) {
-      notice(
-        `POST /products ${item.finish} -> ${created.status} ${JSON.stringify(created.body).slice(0, 600)}`,
-      );
-      process.exit(1);
+const existing = await shopier("/products");
+if (existing.ok) {
+  const byTitle = new Map(list(existing.body).map((p) => [p.title, p]));
+  for (const item of catalog) {
+    let product = byTitle.get(item.title);
+    if (!product) {
+      const payload = {
+        title: item.title,
+        description: item.description,
+        type: item.type,
+        media: [{ type: "image", url: item.image, placement: 1 }],
+        priceData: { currency: "TRY", price: item.price, shippingPrice: "0.00" },
+        stockQuantity: 500,
+        shippingPayer: "sellerPays",
+        placementScore: item.placementScore,
+        ...(item.type === "physical" ? { dispatchDuration: 1 } : {}),
+      };
+      const created = await shopier("/products", { method: "POST", body: JSON.stringify(payload) });
+      if (!created.ok) {
+        notice(`POST /products ${item.finish} -> ${created.status} ${JSON.stringify(created.body).slice(0, 600)}`);
+        process.exit(1);
+      }
+      product = created.body;
+      notice(`created ${item.finish}: ${product.id} ${product.url}`);
     }
-    product = created.body;
-    notice(`created ${item.finish}: ${product.id} ${product.url}`);
-  } else {
-    notice(`exists ${item.finish}: ${product.id} ${product.url}`);
+    map[item.finish] = { id: String(product.id), url: product.url };
   }
-  map[item.finish] = { id: String(product.id), url: product.url };
+} else {
+  notice(`GET /products -> ${existing.status}; using ids from the catalog file`);
+  for (const item of catalog) if (item.id) map[item.finish] = { id: String(item.id), url: item.url };
 }
-await supabaseUpsert([{ name: "shopier_products", token: JSON.stringify(map) }]);
-notice(`PRODUCTS ${JSON.stringify(map)}`);
+if (Object.keys(map).length) {
+  await supabaseUpsert([{ name: "shopier_products", token: JSON.stringify(map) }]);
+  notice(`PRODUCTS ${JSON.stringify(map)}`);
+}
 
 // 2. Webhook for paid orders
 const hooks = await shopier("/webhooks");
