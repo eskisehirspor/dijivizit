@@ -75,7 +75,7 @@ function FollowUpMock() {
           gönder
         </p>
         <div className="mt-3 flex gap-2">
-          <div className="flex-1 rounded-lg bg-[#25D366] py-2 text-center text-[11px] font-medium text-white">
+          <div className="flex-1 rounded-lg bg-[#25D366] py-2 text-center text-[11px] font-semibold text-neutral-950">
             WhatsApp&apos;tan yaz
           </div>
           <div className="rounded-lg border border-neutral-200 px-3 py-2 text-[11px]">Ara</div>
@@ -162,7 +162,7 @@ function ScanMock() {
             ].map(([k, v]) => (
               <div key={k} className="flex items-center gap-1.5">
                 <Check />
-                <span className="w-8 shrink-0 text-neutral-400">{k}</span>
+                <span className="w-8 shrink-0 text-neutral-500">{k}</span>
                 <span className="truncate text-neutral-900">{v}</span>
               </div>
             ))}
