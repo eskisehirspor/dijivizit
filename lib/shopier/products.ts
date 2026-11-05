@@ -12,6 +12,7 @@ export const SHOPIER_PRODUCT_URLS: Partial<Record<FinishId, string>> = {
   wood: "https://www.shopier.com/dijivizitcom/52522552",
   "wood-light": "https://www.shopier.com/dijivizitcom/52522592",
   digital: "https://www.shopier.com/dijivizitcom/52522609",
+  "pvc-black": "https://www.shopier.com/dijivizitcom/52609761",
 };
 
 export function shopierUrl(finish: FinishId): string | null {
