@@ -5,7 +5,7 @@ import { GUIDES } from "@/lib/marketing/guides";
 
 const TITLE = "NFC Kartvizit Rehberi | Dijivizit";
 const DESCRIPTION =
-  "NFC kartvizit, metal ve ahşap kartvizit, dijital kartvizit oluşturma ve telefon uyumluluğu hakkında kısa, net rehberler.";
+  "NFC kartvizit, metal, ahşap ve PVC kartvizit, dijital kartvizit oluşturma ve telefon uyumluluğu hakkında kısa, net rehberler.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

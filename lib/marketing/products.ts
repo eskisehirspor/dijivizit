@@ -40,7 +40,9 @@ export function productDescription(finish: Finish): string {
   const base =
     finish.material === "metal"
       ? `${finish.note} Logo ve temassız işareti lazerle kazınır; baskı olmadığı için silinmez.`
-      : `${finish.note} Gerçek ahşap; her kartın damar dokusu kendine özgüdür.`;
+      : finish.material === "pvc"
+        ? `${finish.note} Hafif ve ince; logo ve temassız işareti mat yüzeye işlenir.`
+        : `${finish.note} Gerçek ahşap; her kartın damar dokusu kendine özgüdür.`;
   return `${base} Telefona dokundurunca dijital profiliniz açılır, arkadaki QR kod her telefonda çalışır. ${formatTry(finish.price)}, KDV dahil, kargo ücretsiz.`;
 }
 
@@ -59,7 +61,9 @@ export function productFeatures(finish: Finish): string[] {
   const surface =
     finish.material === "metal"
       ? "Logo ve temassız işareti metal yüzeye lazerle kazınır; silinmez, solmaz."
-      : "Logo ve temassız işareti ahşaba lazerle yakılır; mürekkep yoktur, silinmez.";
+      : finish.material === "pvc"
+        ? "Mat siyah PVC yüzey; logo ve temassız işareti kartın üzerinde, sade ve şık."
+        : "Logo ve temassız işareti ahşaba lazerle yakılır; mürekkep yoktur, silinmez.";
   return [
     surface,
     "İçindeki NFC çip sayesinde telefona dokundurunca dijital profiliniz açılır.",
@@ -100,7 +104,12 @@ export function productJsonLd(finish: Finish) {
     image: [`${MARKETING_ORIGIN}${productImage(finish)}`],
     sku: `DV-${finish.id.toUpperCase()}`,
     brand: { "@type": "Brand", name: "Dijivizit" },
-    ...(isDigital(finish) ? {} : { material: finish.material === "metal" ? "Metal" : "Ahşap" }),
+    ...(isDigital(finish)
+      ? {}
+      : {
+          material:
+            finish.material === "metal" ? "Metal" : finish.material === "pvc" ? "PVC" : "Ahşap",
+        }),
     category: isDigital(finish) ? "Dijital kartvizit" : "NFC kartvizit",
     offers: {
       "@type": "Offer",

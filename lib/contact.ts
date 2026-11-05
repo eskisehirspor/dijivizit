@@ -9,6 +9,9 @@ export const CONTACT = {
   phoneE164: "+905406261965",
   whatsappUrl: "https://wa.me/905406261965",
   orderEmail: "talep@dijivizit.com",
+  /** The verified Google Business Profile (Maps place). */
+  mapsProfileUrl: "https://maps.google.com/?cid=745510845553734082",
+  geo: { lat: 39.769931, lng: 30.4835896 },
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Osmangazi%20Mah.%20Bas%C4%B1n%20%C5%9Eehitleri%20Cad.%20No%3A174%20Odunpazar%C4%B1%20Eski%C5%9Fehir",
 } as const;

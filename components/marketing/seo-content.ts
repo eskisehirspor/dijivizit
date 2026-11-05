@@ -32,6 +32,10 @@ export const COMPARISON = [
 
 export const FAQ = [
   {
+    q: "Dijivizit güvenilir mi?",
+    a: "Dijivizit, Eskişehir'deki ASD Tasarım Ltd. Şti.'nin markasıdır. Ödeme Shopier güvencesiyle alınır, kartlar 72 saatte teslim edilir, okunmayan kart ücretsiz değiştirilir ve 14 gün cayma hakkın vardır.",
+  },
+  {
     q: "Kartım ne kadar sürede elime ulaşır?",
     a: "Siparişin 72 saatte teslim edilir ve kargo ücretsizdir. Kart telefonlarda okunmazsa ücretsiz yenisiyle değiştiririz.",
   },
@@ -65,7 +69,7 @@ export const FAQ = [
   },
   {
     q: "Hangi kaplama seçenekleri var?",
-    a: "Siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Hepsinde logo lazerle kazınır ya da yakılır, NFC ve QR aynı şekilde çalışır; 10 ve üzeri kurumsal siparişte firma logon işlenir.",
+    a: "Mat siyah PVC, siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Metalde logo lazerle kazınır, ahşapta yakılır, PVC'de mat yüzeye işlenir; NFC ve QR hepsinde aynı şekilde çalışır. 10 ve üzeri kurumsal siparişte firma logon işlenir.",
   },
   {
     q: "Karşımdakinin bilgilerini de alabilir miyim?",
@@ -92,6 +96,7 @@ export const KEYWORDS = [
   "metal kartvizit",
   "gold kartvizit",
   "ahşap kartvizit",
+  "PVC kartvizit",
   "kurumsal kartvizit",
   "NFC kart",
   "elektronik kartvizit",

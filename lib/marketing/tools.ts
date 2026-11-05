@@ -100,7 +100,7 @@ export const TOOLS: Tool[] = [
       {
         heading: "Ne kadar?",
         paragraphs: [
-          "Kartsız dijital kartvizit aylık 59,90 TL'dir ve yıllık 718,80 TL olarak peşin ödenir. Kart, kargo ya da kurulum ücreti yoktur. İstediğin zaman metal ya da ahşap NFC karta geçebilirsin; link ve QR kodun aynı kalır.",
+          "Kartsız dijital kartvizit aylık 59,90 TL'dir ve yıllık 718,80 TL olarak peşin ödenir. Kart, kargo ya da kurulum ücreti yoktur. İstediğin zaman PVC, metal ya da ahşap NFC karta geçebilirsin; link ve QR kodun aynı kalır.",
         ],
       },
     ],

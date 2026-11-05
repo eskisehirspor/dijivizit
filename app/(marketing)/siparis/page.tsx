@@ -8,7 +8,7 @@ import { issueFormToken } from "@/lib/security/form-token";
 
 const TITLE = "NFC ve Dijital Kartvizit Sipariş | Dijivizit";
 const DESCRIPTION =
-  "Dijivizit NFC akıllı kartvizit sipariş talebi: siyah metal, gümüş, gold, koyu veya açık ahşap kaplama ya da kartsız dijital kartvizit (link + QR). 72 saatte teslim.";
+  "NFC kartvizit sipariş talebi: mat siyah PVC, siyah, gümüş ya da gold metal, koyu veya açık ahşap ya da kartsız dijital kartvizit (link + QR). 72 saatte teslim.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

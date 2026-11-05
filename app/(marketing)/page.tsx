@@ -15,7 +15,7 @@ import { routes } from "@/lib/routes";
 
 const TITLE = "Dijital Kartvizit ve NFC Kartvizit | Dijivizit";
 const DESCRIPTION =
-  "Dijital kartvizit ve NFC kartvizit: telefona dokundur, profilin açılsın. Metal ve ahşap kart, QR kod, rehbere tek dokunuşla kayıt. 72 saatte kargoda.";
+  "Dijital kartvizit ve NFC kartvizit: telefona dokundur, profilin açılsın. Metal, ahşap ve PVC kart, QR kod, rehbere tek dokunuşla kayıt. 72 saatte kargoda.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -39,6 +39,10 @@ const JSON_LD = {
       image: `${MARKETING_ORIGIN}/landing/finishes/black.webp`,
       email: CONTACT.orderEmail,
       telephone: CONTACT.phoneE164,
+      hasMap: CONTACT.mapsProfileUrl,
+      sameAs: [CONTACT.mapsProfileUrl],
+      geo: { "@type": "GeoCoordinates", latitude: CONTACT.geo.lat, longitude: CONTACT.geo.lng },
+      areaServed: { "@type": "Country", name: "Türkiye" },
       address: {
         "@type": "PostalAddress",
         streetAddress: CONTACT.street,
@@ -82,7 +86,7 @@ const CAPTIONS: SequenceCaption[] = [
     end: 0.42,
     kicker: "Kart",
     title: "Metal. NFC. QR.",
-    body: "Siyah metal, gümüş, gold ya da ahşap. İçinde NFC çip, üstünde QR kod.",
+    body: "Siyah metal, gümüş, gold, ahşap ya da mat PVC. İçinde NFC çip, üstünde QR kod.",
     place: "left",
   },
   {
@@ -154,7 +158,7 @@ export default function HomePage() {
         <div className="mb-12 flex max-w-2xl flex-col gap-4">
           <p className="text-sm font-medium tracking-wide text-muted-foreground">Kaplamalar</p>
           <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
-            Beş kaplama. Tek dokunuş.
+            Altı kaplama. Tek dokunuş.
           </h2>
         </div>
         <FinishPicker />

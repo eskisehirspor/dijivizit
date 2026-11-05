@@ -46,6 +46,15 @@ export const FINISHES = [
     price: 2500,
   },
   {
+    id: "pvc-black",
+    label: "Siyah mat PVC",
+    note: "Mat siyah PVC, kadife dokulu yüzey.",
+    slug: "siyah-mat-pvc",
+    name: "Siyah Mat PVC NFC Kartvizit",
+    material: "pvc",
+    price: 2500,
+  },
+  {
     id: "digital",
     label: "Dijital (kartsız)",
     note: "Fiziksel kart yok: profil linki ve QR kod. Mesajla, e-posta imzasında, sosyal medyada paylaşırsın.",

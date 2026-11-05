@@ -79,7 +79,7 @@ const BASE_GUIDES: Guide[] = [
         heading: "Neden kâğıt kartvizit yerine NFC kartvizit?",
         paragraphs: [
           "Kâğıt kartvizitler çekmecelerde kaybolur, bilgiler değiştikçe çöpe gider ve her baskı yeniden maliyet demektir. NFC kartvizit ise tek bir kartla yıllarca kullanılır, bilgileriniz her zaman günceldir ve karşınızdaki kişi sizi yazım hatası olmadan rehberine kaydeder.",
-          "Dijivizit kartları mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap ve açık ahşap kaplamalarla üretilir; yani hem pratik hem de akılda kalıcı bir ilk izlenim bırakır.",
+          "Dijivizit kartları mat siyah PVC, mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap ve açık ahşap kaplamalarla üretilir; yani hem pratik hem de akılda kalıcı bir ilk izlenim bırakır.",
         ],
       },
     ],
@@ -202,7 +202,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "1. Kaplamanızı seçin",
         paragraphs: [
-          "Dijivizit'te süreç fiziksel kartla başlar. Mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap veya açık ahşap kaplamalardan birini seçip sipariş talebi oluşturursunuz. Ekibimiz sizi arayarak kart üzerindeki isim, unvan ve logo detaylarını netleştirir.",
+          "Dijivizit'te süreç fiziksel kartla başlar. Mat siyah PVC, mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap veya açık ahşap kaplamalardan birini seçip sipariş talebi oluşturursunuz. Ekibimiz sizi arayarak kart üzerindeki isim, unvan ve logo detaylarını netleştirir.",
         ],
       },
       {
@@ -355,7 +355,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Fiziksel kart hâlâ gerekli mi?",
         paragraphs: [
-          "Dijital profil tek başına da kullanılabilir, ama yüz yüze tanışmalarda elinize alıp uzatabileceğiniz bir kart hâlâ en doğal yoldur. Dijivizit'te profiliniz mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap ve açık ahşap kaplamalı NFC kartlarla birlikte gelir; kartın arkasında NFC'si olmayan telefonlar için QR kod bulunur.",
+          "Dijital profil tek başına da kullanılabilir, ama yüz yüze tanışmalarda elinize alıp uzatabileceğiniz bir kart hâlâ en doğal yoldur. Dijivizit'te profiliniz mat siyah PVC, mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap ve açık ahşap kaplamalı NFC kartlarla birlikte gelir; kartın arkasında NFC'si olmayan telefonlar için QR kod bulunur.",
         ],
       },
     ],
@@ -539,7 +539,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "6. Kartvizit",
         paragraphs: [
-          "Son adım, insanlara sizi hatırlatacak karttır. NFC kartvizitte bilgileriniz profilde durduğu için ilk aylarda değişen telefon numarası ya da adres yüzünden kartları çöpe atmazsınız. Dijivizit kartları metal ya da ahşap yüzeye lazerle işlenir; isminiz ve bilgileriniz profilde durur, tek dokunuşla paylaşılır.",
+          "Son adım, insanlara sizi hatırlatacak karttır. NFC kartvizitte bilgileriniz profilde durduğu için ilk aylarda değişen telefon numarası ya da adres yüzünden kartları çöpe atmazsınız. Dijivizit kartlarında logo metale lazerle kazınır, ahşaba lazerle yakılır, mat siyah PVC'de mat yüzeye işlenir; isminiz ve bilgileriniz profilde durur, tek dokunuşla paylaşılır.",
         ],
       },
     ],
@@ -664,14 +664,14 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Malzeme: PVC, metal, ahşap",
         paragraphs: [
-          "PVC kartlar en ucuz seçenektir ve baskıyla renklendirilir. Metal kartlar ağırlığı ve dokusuyla ilk izlenimde fark yaratır; lazerle kazındığı için yüzeydeki işaretler silinmez. Ahşap kartlar doğal bir görünüm sunar ve her kartın damarı farklıdır.",
+          "PVC kartlar en hafif ve en uygun fiyatlı seçenektir; piyasada çoğunlukla baskıyla renklendirilir. Metal kartlar ağırlığı ve dokusuyla ilk izlenimde fark yaratır; lazerle kazındığı için yüzeydeki işaretler silinmez. Ahşap kartlar doğal bir görünüm sunar ve her kartın damarı farklıdır.",
         ],
         link: { href: "/rehber/metal-kartvizit", label: "Metal kartvizit rehberi" },
       },
       {
         heading: "Dijivizit'te neler dahil?",
         paragraphs: [
-          "Dijivizit kartları siyah, gold ve gümüş metal ile koyu ve açık ahşap kaplamalarda üretilir; logo lazerle işlenir, arkada QR kod bulunur. Fiyatlara KDV ve kargo dahildir, dijital profil ilk yıl ücretsizdir. Panelden profilinizi güncellersiniz, kayıp kartı kapatırsınız ve kartınızın kaç kez, hangi şehirlerden açıldığını görürsünüz.",
+          "Dijivizit kartları siyah, gold ve gümüş metal, koyu ve açık ahşap ile mat siyah PVC kaplamalarda üretilir. Metal ve ahşapta logo lazerle işlenir; mat siyah PVC'de logo ve temassız işareti kadife dokulu mat yüzeye işlenir. Her kartın arkasında QR kod bulunur. Fiyatlara KDV ve kargo dahildir, dijital profil ilk yıl ücretsizdir. Panelden profilinizi güncellersiniz, kayıp kartı kapatırsınız ve kartınızın kaç kez, hangi şehirlerden açıldığını görürsünüz.",
         ],
         link: { href: "/kartvizit", label: "Fiyatları görün" },
       },

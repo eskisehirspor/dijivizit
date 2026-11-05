@@ -188,7 +188,7 @@ export default async function ProductPage({ params }: Params) {
 
       <section className="mt-20 flex flex-col gap-6 border-t border-border/60 pt-16">
         <h2 className="text-2xl font-semibold tracking-tight">Diğer ürünler</h2>
-        <ul className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {others.map((f) => (
             <li key={f.id}>
               <Link href={`/kartvizit/${f.slug}`} className="group flex flex-col gap-3">

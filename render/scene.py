@@ -30,7 +30,7 @@ def parse_args():
     p.add_argument("--frames", default="0-191")
     p.add_argument("--portrait", action="store_true")
     p.add_argument("--save-blend", default="")
-    p.add_argument("--finish", default="black", choices=["black", "silver", "gold", "wood", "wood-light"])
+    p.add_argument("--finish", default="black", choices=["black", "silver", "gold", "wood", "wood-light", "pvc-black"])
     p.add_argument("--hide-phone", action="store_true")
     # Product shot: one still of the card alone, close up at a three-quarter
     # angle, for the product pages (pair with a portrait --res like 1600x2000).
@@ -152,6 +152,8 @@ def principled(name, **inputs):
 
 FINISHES = {
     # base, etched artwork, base roughness, etch roughness, edge
+    # Matte black PVC: a soft, velvety plastic (not metal) with a printed logo.
+    "pvc-black": ((0.016, 0.016, 0.018), (0.62, 0.62, 0.64), 0.62, 0.42, (0.02, 0.02, 0.022)),
     # Matte black metal with a soft brushed sheen, so it still reads as metal.
     "black": ((0.04, 0.04, 0.044), (0.5, 0.5, 0.52), 0.42, 0.85, (0.12, 0.12, 0.13)),
     # Matte brushed metals: high base roughness, strong directional streaks.
@@ -179,7 +181,8 @@ def card_face_material(name, mask_path, finish="black"):
     """Card face: brushed metal (black/silver/gold) or walnut, with the artwork
     laser-etched (contrasting, rougher)."""
     wood = finish.startswith("wood")
-    mat, bsdf = principled(name, **{"Metallic": 0.0 if wood else 1.0})
+    plastic = finish.startswith("pvc")
+    mat, bsdf = principled(name, **{"Metallic": 0.0 if wood or plastic else 1.0})
     nt = mat.node_tree
     mask = image(nt, os.path.join(TEX, mask_path), non_color=True, loc=(-900, 0))
     base = node(nt, "ShaderNodeMix", (-400, 200))
@@ -202,6 +205,18 @@ def card_face_material(name, mask_path, finish="black"):
         nt.links.new(rough.outputs["Result"], bsdf.inputs["Roughness"])
         bsdf.inputs["Coat Weight"].default_value = 0.25
         bsdf.inputs["Coat Roughness"].default_value = 0.25
+        return mat
+    if plastic:
+        # Matte PVC: fine, even micro-texture instead of brush lines.
+        grain = node(nt, "ShaderNodeTexNoise", (-900, -300))
+        grain.inputs["Scale"].default_value = 900.0
+        grain.inputs["Detail"].default_value = 2.0
+        bump = node(nt, "ShaderNodeBump", (-400, -400))
+        bump.inputs["Strength"].default_value = 0.04
+        nt.links.new(grain.outputs["Fac"], bump.inputs["Height"])
+        nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+        nt.links.new(rough.outputs["Result"], bsdf.inputs["Roughness"])
+        bsdf.inputs["Specular IOR Level"].default_value = 0.28
         return mat
     # Fine brushed streaks: stretched noise into roughness.
     tc = node(nt, "ShaderNodeTexCoord", (-1300, -300))
@@ -251,6 +266,9 @@ def card_edge_material(finish):
     if finish.startswith("wood"):
         # Laser-cut wood edges come out dark and charred.
         mat, _ = principled("CardEdge", **{"Base Color": (0.03, 0.015, 0.008, 1), "Roughness": 0.8})
+        return mat
+    if finish.startswith("pvc"):
+        mat, _ = principled("CardEdge", **{"Base Color": (*FINISHES[finish][4], 1), "Roughness": 0.55})
         return mat
     mat, _ = principled("CardEdge", **{"Base Color": (*FINISHES[finish][4], 1), "Metallic": 1.0, "Roughness": 0.3})
     return mat
@@ -592,7 +610,7 @@ def product_shot(scene, finish):
     hl.shape = "RECTANGLE"
     hl.size, hl.size_y = 2.4, 0.9
     # Matte black must stay deep black; the brushed finishes want a bright sweep.
-    hl.energy = {"black": 25, "silver": 150, "gold": 190}.get(finish, 70)
+    hl.energy = {"black": 25, "pvc-black": 30, "silver": 150, "gold": 190}.get(finish, 70)
     hl_obj = bpy.data.objects.new("Highlight", hl)
     bpy.context.collection.objects.link(hl_obj)
     hl_obj.location = card.location + r * 3.0 + Vector((0.0, 0.0, 0.9))

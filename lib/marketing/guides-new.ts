@@ -65,7 +65,7 @@ export const NEW_GUIDES: Guide[] = [
         heading: "Ne kadar tutar?",
         paragraphs: [
           "Kartsız dijital kartvizit, yani profil linki ve QR kod, aylık 59,90 TL'dir; ödeme yıllık 718,80 TL olarak tek seferde alınır, KDV dahildir. Kart, kargo ya da kurulum ücreti yoktur ve link ile QR kodunuz siparişten sonra 2 saat içinde e-postanıza gelir.",
-          "Yüz yüze tanışmalar için fiziksel kart isterseniz NFC kartvizitlerde dijital profil ilk yıl ücretsizdir, sonrasında aylık 59,90 TL'dir. Kartsız dijital kartvizitle başlayıp sonradan metal ya da ahşap NFC karta geçebilirsiniz; link ve QR kodunuz aynı kalır.",
+          "Yüz yüze tanışmalar için fiziksel kart isterseniz NFC kartvizitlerde dijital profil ilk yıl ücretsizdir, sonrasında aylık 59,90 TL'dir. Kartsız dijital kartvizitle başlayıp sonradan PVC, metal ya da ahşap NFC karta geçebilirsiniz; link ve QR kodunuz aynı kalır.",
         ],
         link: {
           href: "/kartvizit/dijital-kartvizit-qr",
@@ -379,7 +379,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "NFC kart ve QR kod",
         paragraphs: [
-          "Link-in-bio sayfaları çoğunlukla bir bağlantı olarak paylaşılır. Dijital kartvizitte aynı profil, telefona dokundurulan bir NFC kartla, kamerayla okutulan bir QR kodla ya da bir bağlantıyla açılır. Dijivizit'te metal ve ahşap NFC kartların arkasında aynı profile giden QR kod bulunur; kartsız dijital kartvizitte de profil linki ve QR kod verilir.",
+          "Link-in-bio sayfaları çoğunlukla bir bağlantı olarak paylaşılır. Dijital kartvizitte aynı profil, telefona dokundurulan bir NFC kartla, kamerayla okutulan bir QR kodla ya da bir bağlantıyla açılır. Dijivizit'te PVC, metal ve ahşap NFC kartların arkasında aynı profile giden QR kod bulunur; kartsız dijital kartvizitte de profil linki ve QR kod verilir.",
         ],
         link: { href: "/nfc-kartvizit", label: "NFC kartvizit nasıl çalışır?" },
       },
@@ -484,7 +484,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "Malzeme ve fiyat",
         paragraphs: [
-          "Dijivizit akıllı kartvizitleri mat siyah metal, fırçalanmış gümüş, fırçalanmış gold, koyu ahşap ve açık ahşap kaplamalarda üretilir. Metal kartlar 4.000 TL, ahşap kartlar 2.500 TL'dir; KDV dahil, kargo ücretsizdir. Kartlar 72 saatte teslim edilir, okunmayan kart ücretsiz yenisiyle değiştirilir. Dijital profil ilk yıl ücretsizdir, sonrasında aylık 59,90 TL'dir.",
+          "Dijivizit akıllı kartvizitleri mat siyah PVC, mat siyah metal, fırçalanmış gümüş, fırçalanmış gold, koyu ahşap ve açık ahşap kaplamalarda üretilir. Metal kartlar 4.000 TL, ahşap ve PVC kartlar 2.500 TL'dir; KDV dahil, kargo ücretsizdir. Kartlar 72 saatte teslim edilir, okunmayan kart ücretsiz yenisiyle değiştirilir. Dijital profil ilk yıl ücretsizdir, sonrasında aylık 59,90 TL'dir.",
         ],
         link: { href: "/akilli-kartvizit", label: "Akıllı kartvizit modellerine bakın" },
       },
@@ -574,7 +574,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "Kartlı ya da kartsız başlayın",
         paragraphs: [
-          "Fiziksel karta ihtiyacınız yoksa kartsız dijital kartvizitle başlayabilirsiniz: profil linkiniz ve QR kodunuz 2 saat içinde e-postanıza gelir; aylık 59,90 TL'dir, yıllık 718,80 TL olarak ödenir. Yüz yüze tanışmalar için metal ya da ahşap NFC kartvizite geçtiğinizde link ve QR kodunuz aynı kalır.",
+          "Fiziksel karta ihtiyacınız yoksa kartsız dijital kartvizitle başlayabilirsiniz: profil linkiniz ve QR kodunuz 2 saat içinde e-postanıza gelir; aylık 59,90 TL'dir, yıllık 718,80 TL olarak ödenir. Yüz yüze tanışmalar için PVC, metal ya da ahşap NFC kartvizite geçtiğinizde link ve QR kodunuz aynı kalır.",
           "Önce denemek isterseniz ücretsiz araçla bilgilerinizi rehbere kaydeden bir QR kod oluşturabilirsiniz.",
         ],
         link: {

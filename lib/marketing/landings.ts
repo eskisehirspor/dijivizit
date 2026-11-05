@@ -38,11 +38,11 @@ export const LANDINGS: Landing[] = [
   {
     slug: "nfc-kartvizit",
     term: "NFC kartvizit",
-    title: "NFC Kartvizit | Metal ve Ahşap, Dokundur Paylaş | Dijivizit",
+    title: "NFC Kartvizit | PVC, Metal ve Ahşap, Dokundur Paylaş | Dijivizit",
     description:
-      "NFC kartvizit: telefona dokundur, dijital profilin açılsın, rehbere tek dokunuşla kaydedilsin. Metal ve ahşap, arkada QR kod, uygulama gerekmez. Kargo ücretsiz.",
+      "NFC kartvizit: telefona dokundur, profilin açılsın, rehbere tek dokunuşla kaydedilsin. Metal, ahşap ve PVC, arkada QR kod, uygulama gerekmez. Kargo ücretsiz.",
     h1: "NFC kartvizit",
-    lead: "İçinde NFC çipi olan, telefona dokundurunca dijital profilinizi açan kartvizit. Metal ya da ahşap; arkasında QR kod, karşı tarafta uygulama gerekmez.",
+    lead: "İçinde NFC çipi olan, telefona dokundurunca dijital profilinizi açan kartvizit. Metal, ahşap ya da mat siyah PVC; arkasında QR kod, karşı tarafta uygulama gerekmez.",
     sections: [
       {
         heading: "NFC kartvizit nasıl çalışır?",
@@ -65,9 +65,9 @@ export const LANDINGS: Landing[] = [
         ],
       },
       {
-        heading: "Malzemeler: metal ve ahşap",
+        heading: "Malzemeler: metal, ahşap ve PVC",
         paragraphs: [
-          "Metal kartlarda logo ve temassız işareti yüzeye lazerle kazınır, ahşap kartlarda lazerle yakılır. Baskı ve mürekkep olmadığı için silinmez, solmaz. Beş kaplama var: siyah metal, gümüş, gold, koyu ahşap ve açık ahşap.",
+          "Metal kartlarda logo ve temassız işareti yüzeye lazerle kazınır, ahşap kartlarda lazerle yakılır. Baskı ve mürekkep olmadığı için silinmez, solmaz. Mat siyah PVC kartta logo ve temassız işareti mat yüzeye işlenir; kart hafif, ince ve daha uygun fiyatlıdır. Altı kaplama var: mat siyah PVC, siyah metal, gümüş, gold, koyu ahşap ve açık ahşap.",
           "İletişim bilgileriniz dijital profilinizde durur; numaranız ya da unvanınız değiştiğinde kartı yeniden bastırmanız gerekmez, profili güncellemeniz yeter.",
         ],
       },
@@ -215,7 +215,7 @@ export const LANDINGS: Landing[] = [
     term: "Akıllı kartvizit",
     title: "Akıllı Kartvizit | NFC, QR ve Dijital Profil | Dijivizit",
     description:
-      "Akıllı kartvizit: NFC çipli metal ya da ahşap kart, arkasında QR kod ve her zaman güncel dijital profil. Rehbere tek dokunuşla kayıt, analitik ve ekip yönetimi.",
+      "Akıllı kartvizit: NFC çipli metal, ahşap ya da PVC kart, arkada QR kod ve hep güncel dijital profil. Rehbere tek dokunuşla kayıt, analitik ve ekip yönetimi.",
     h1: "Akıllı kartvizit",
     lead: "Akıllı kartvizit üç şeyin birleşimidir: telefona dokundurulan NFC kart, her telefonda çalışan QR kod ve bilgilerinizi taşıyan dijital profil. Dijivizit üçünü birlikte verir.",
     sections: [

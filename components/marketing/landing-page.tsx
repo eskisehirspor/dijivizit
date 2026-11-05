@@ -139,7 +139,7 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
         <h2 id="modeller" className="sr-only">
           {l.term} modelleri
         </h2>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5 lg:grid-cols-7">
           {FINISHES.map((f) => (
             <li key={f.id}>
               <Link href={`/kartvizit/${f.slug}`} className="group flex flex-col gap-3">

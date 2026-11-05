@@ -131,7 +131,7 @@ export const SEGMENTS: Landing[] = [
       {
         heading: "Hangi kart, nasıl teslim?",
         paragraphs: [
-          "Koyu ve açık ahşap kartlar sıcak bir görünüm verir; mat siyah, gümüş ve gold metal kartlar daha resmîdir. Kartın logosu lazerle işlenir, baskı olmadığı için silinmez; adınız ve unvanınız profilde yer alır. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
+          "Koyu ve açık ahşap kartlar sıcak bir görünüm verir; mat siyah, gümüş ve gold metal kartlar daha resmîdir; mat siyah PVC ise hafif ve sadedir. Metal ve ahşap kartlarda logo lazerle işlenir, baskı olmadığı için silinmez; adınız ve unvanınız profilde yer alır. Kartlar 72 saat içinde ücretsiz kargoyla teslim edilir.",
           "Yalnızca online çalışıyorsanız kartsız dijital kartvizit yeterli olabilir: link ve QR kod 2 saat içinde e-postanıza gelir; Instagram biyografinize ve e-posta imzanıza eklersiniz. Aylık 59,90 TL'dir, yıllık 718,80 TL olarak peşin ödenir.",
         ],
       },
@@ -692,7 +692,7 @@ export const SEGMENTS: Landing[] = [
       },
       {
         q: "Ahşap mı metal mi seçmeliyim?",
-        a: "Ahşap sıcak ve doğal bir izlenim bırakır, metal daha ağır ve resmîdir. İkisinde de NFC çip ve arkada QR kod vardır; işlev aynıdır.",
+        a: "Ahşap sıcak ve doğal bir izlenim bırakır, metal daha ağır ve resmîdir. Daha hafif ve uygun fiyatlı bir seçenek isterseniz mat siyah PVC de var. Hepsinde NFC çip ve arkada QR kod vardır; işlev aynıdır.",
       },
       {
         q: "Logomu karta koyabilir miyim?",
@@ -1387,7 +1387,7 @@ export const SEGMENTS: Landing[] = [
       },
       {
         q: "Öğrenciler için uygun bir seçenek var mı?",
-        a: "Kartsız dijital kartvizit aylık 59,90 TL'dir ve yıllık olarak ödenir; ahşap kartlar metal kartlardan daha uygun fiyatlıdır. Güncel fiyatlar Fiyatlar sayfasında yazar.",
+        a: "Kartsız dijital kartvizit aylık 59,90 TL'dir ve yıllık olarak ödenir; ahşap ve mat siyah PVC kartlar metal kartlardan daha uygun fiyatlıdır. Güncel fiyatlar Fiyatlar sayfasında yazar.",
       },
       {
         q: "Akademik özgeçmişimi ve yayın listemi ekleyebilir miyim?",
@@ -1540,7 +1540,7 @@ export const SEGMENTS: Landing[] = [
       },
       {
         q: "Şirket logomuz ve kurumsal renklerimiz kullanılabilir mi?",
-        a: "10 ve üzeri adetteki kurumsal siparişlerde logonuz kartın yüzeyine lazerle işlenir. Kart rengi beş kaplamadan biridir: mat siyah metal, gümüş, gold, koyu ahşap ya da açık ahşap.",
+        a: "10 ve üzeri adetteki kurumsal siparişlerde logonuz kartın yüzeyine işlenir; metal ve ahşapta bu iş lazerle yapılır. Kart altı kaplamadan biridir: mat siyah PVC, mat siyah metal, gümüş, gold, koyu ahşap ya da açık ahşap.",
       },
       {
         q: "Çalışan ayrıldığında kartı ne yaparız?",

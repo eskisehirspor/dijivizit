@@ -146,7 +146,7 @@ export function OrderForm({
 
       <fieldset className="flex flex-col gap-5">
         <legend className="mb-5 text-xl font-semibold tracking-tight">1. Ürünü seç</legend>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
           {FINISHES.map((f) => {
             const selected = f.id === finish;
             return (

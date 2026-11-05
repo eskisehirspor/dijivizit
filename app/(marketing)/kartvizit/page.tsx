@@ -8,9 +8,10 @@ import { FINISHES, formatPrice, formatTry } from "@/lib/orders/finishes";
 
 const metalPrice = FINISHES.find((f) => f.material === "metal")!.price;
 const woodPrice = FINISHES.find((f) => f.material === "wood")!.price;
+const pvcPrice = FINISHES.find((f) => f.material === "pvc")!.price;
 
-const TITLE = "NFC ve Dijital Kartvizit Fiyatları: Metal ve Ahşap | Dijivizit";
-const DESCRIPTION = `NFC kartvizit fiyatları: metal ${formatTry(metalPrice)}, ahşap ${formatTry(woodPrice)}, kartsız dijital kartvizit aylık 59,90 TL. KDV dahil, kargo ücretsiz, 72 saatte teslim.`;
+const TITLE = "NFC Kartvizit Fiyatları: PVC, Metal ve Ahşap | Dijivizit";
+const DESCRIPTION = `NFC kartvizit fiyatları: metal ${formatTry(metalPrice)}, ahşap ${formatTry(woodPrice)}, PVC ${formatTry(pvcPrice)}, kartsız dijital aylık 59,90 TL. KDV dahil, kargo ücretsiz, 72 saatte teslim.`;
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -60,9 +61,9 @@ export default function ProductsPage() {
           NFC ve dijital kartvizit fiyatları
         </h1>
         <p className="text-lg text-muted-foreground">
-          Metal ya da ahşap, beş kaplama. Her kartta NFC çip, arkasında QR kod ve dijital profil.
-          Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90 TL (yıllık 718,80
-          TL).
+          Metal, ahşap ya da mat siyah PVC: altı seçenek. Her kartta NFC çip, arkasında QR kod ve
+          dijital profil. Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90
+          TL (yıllık 718,80 TL).
         </p>
         <PromiseStrip className="pt-2" />
       </div>
