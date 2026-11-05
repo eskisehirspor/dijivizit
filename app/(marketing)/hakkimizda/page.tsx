@@ -16,7 +16,7 @@ import {
 
 const TITLE = "Dijivizit Hakkında: Kimiz, Ne Yapıyoruz? | Dijivizit";
 const DESCRIPTION =
-  "Dijivizit, Eskişehir'de ASD Tasarım Ltd. Şti. tarafından üretilen PVC, metal ve ahşap NFC kartvizit ile kartsız dijital kartvizit markasıdır. Ürünler, teslimat ve güvence.";
+  "Dijivizit, Eskişehir'de ASD Tasarım Ltd. Şti.'nin PVC, metal ve ahşap NFC kartvizit ile kartsız dijital kartvizit markası. Ürünler, teslimat, güvence.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -97,10 +97,10 @@ export default function AboutPage() {
           Dijivizit, Eskişehir&apos;den dijital ve NFC kartvizit.
         </h1>
         <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
-          Dijivizit, ASD Tasarım Ltd. Şti.&apos;nin markasıdır. PVC, metal ve ahşap NFC kartvizitleri
-          Eskişehir&apos;de üretiyor, dijital profil altyapısını kendimiz geliştiriyoruz. Kartı
-          telefona dokundurduğunuzda ya da arkasındaki QR kodu okuttuğunuzda profiliniz açılır;
-          karşı taraf sizi tek dokunuşla rehberine kaydeder. Uygulama gerekmez.
+          Dijivizit, ASD Tasarım Ltd. Şti.&apos;nin markasıdır. PVC, metal ve ahşap NFC
+          kartvizitleri Eskişehir&apos;de üretiyor, dijital profil altyapısını kendimiz
+          geliştiriyoruz. Kartı telefona dokundurduğunuzda ya da arkasındaki QR kodu okuttuğunuzda
+          profiliniz açılır; karşı taraf sizi tek dokunuşla rehberine kaydeder. Uygulama gerekmez.
         </p>
         <PromiseStrip className="pt-2" />
       </header>
