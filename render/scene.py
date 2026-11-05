@@ -158,7 +158,7 @@ FINISHES = {
     "silver": ((0.62, 0.62, 0.64), (0.1, 0.1, 0.11), 0.26, 0.75, (0.62, 0.62, 0.64)),
     # Brass-yellow, matched to a photo of the real card (sRGB hue ~55°, not
     # the orange champagne of jewellery gold).
-    "gold": ((0.68, 0.63, 0.08), (0.15, 0.13, 0.02), 0.26, 0.75, (0.68, 0.63, 0.08)),
+    "gold": ((0.72, 0.64, 0.085), (0.15, 0.13, 0.02), 0.26, 0.75, (0.72, 0.64, 0.085)),
 }
 
 
@@ -207,14 +207,17 @@ def card_face_material(name, mask_path, finish="black"):
     tc = node(nt, "ShaderNodeTexCoord", (-1300, -300))
     mp = node(nt, "ShaderNodeMapping", (-1100, -300))
     brushed = finish != "black"
-    mp.inputs["Scale"].default_value = (4.0, 420.0, 1.0) if brushed else (1.5, 140.0, 1.0)
+    mp.inputs["Scale"].default_value = (
+        (1.2, 260.0, 1.0) if finish == "gold" else (4.0, 420.0, 1.0) if brushed else (1.5, 140.0, 1.0)
+    )
     nt.links.new(tc.outputs["UV"], mp.inputs["Vector"])
     noise = node(nt, "ShaderNodeTexNoise", (-900, -300))
     noise.inputs["Scale"].default_value = 14.0 if brushed else 6.0
     noise.inputs["Detail"].default_value = 12.0 if brushed else 4.0
     nt.links.new(mp.outputs["Vector"], noise.inputs["Vector"])
     streak = node(nt, "ShaderNodeMapRange", (-650, -300))
-    amp = 0.07 if finish == "black" else 0.32
+    # Gold gets the strongest brushing: the real card shows clear brush lines.
+    amp = {"black": 0.07, "gold": 0.42}.get(finish, 0.32)
     streak.inputs["To Min"].default_value = -amp
     streak.inputs["To Max"].default_value = amp
     nt.links.new(noise.outputs["Fac"], streak.inputs["Value"])
@@ -227,8 +230,9 @@ def card_face_material(name, mask_path, finish="black"):
     if brushed:
         # Visible brush lines: the same streaks also modulate brightness.
         tint = node(nt, "ShaderNodeMapRange", (-650, 150))
-        tint.inputs["To Min"].default_value = 0.55
-        tint.inputs["To Max"].default_value = 1.35
+        lo, hi = (0.5, 1.5) if finish == "gold" else (0.55, 1.35)
+        tint.inputs["To Min"].default_value = lo
+        tint.inputs["To Max"].default_value = hi
         nt.links.new(noise.outputs["Fac"], tint.inputs["Value"])
         mul = node(nt, "ShaderNodeMix", (-200, 250))
         mul.data_type = "RGBA"
