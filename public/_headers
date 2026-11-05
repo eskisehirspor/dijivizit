@@ -1,2 +1,5 @@
 /shopier/*
   Access-Control-Allow-Origin: *
+
+/gbp/*
+  Access-Control-Allow-Origin: *
