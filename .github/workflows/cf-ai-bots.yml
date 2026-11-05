@@ -1,0 +1,39 @@
+name: Cloudflare AI crawler settings
+
+# Manual: lets AI assistants (ChatGPT, Gemini, Claude, Perplexity...) read
+# dijivizit.com by turning off Cloudflare's managed robots.txt AI block and
+# AI-bot blocking for the zone. "show" only prints the current settings.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "show or allow"
+        default: show
+        type: choice
+        options: [show, allow]
+
+permissions:
+  contents: read
+
+jobs:
+  bots:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      CF: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Zone
+        id: zone
+        run: |
+          z=$(curl -s -H "Authorization: Bearer $CF" "https://api.cloudflare.com/client/v4/zones?name=dijivizit.com" | jq -r '.result[0].id // empty')
+          if [ -z "$z" ]; then echo "::error::zone not visible to the token"; curl -s -H "Authorization: Bearer $CF" "https://api.cloudflare.com/client/v4/zones?name=dijivizit.com" | jq '{success,errors}'; exit 1; fi
+          echo "id=$z" >> "$GITHUB_OUTPUT"
+      - name: Current bot settings
+        run: |
+          curl -s -H "Authorization: Bearer $CF" "https://api.cloudflare.com/client/v4/zones/${{ steps.zone.outputs.id }}/bot_management" | jq '{success,errors,result}'
+      - name: Allow AI crawlers
+        if: ${{ github.event.inputs.mode == 'allow' }}
+        run: |
+          curl -s -X PUT -H "Authorization: Bearer $CF" -H "content-type: application/json" \
+            "https://api.cloudflare.com/client/v4/zones/${{ steps.zone.outputs.id }}/bot_management" \
+            -d '{"ai_bots_protection":"disabled","is_robots_txt_managed":false,"crawler_protection":"disabled"}' | jq '{success,errors,result}'
