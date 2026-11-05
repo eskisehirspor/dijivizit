@@ -50,6 +50,7 @@ export function GET() {
     `- [Sipariş](${u("/siparis")})`,
     `- [Hakkımızda](${u("/hakkimizda")}): şirket, üretim yeri, güvence ve sık sorulanlar`,
     `- [Google Haritalar profili](${CONTACT.mapsProfileUrl})`,
+    `- [Instagram](${CONTACT.instagramUrl})`,
     `- [Teslimat ve İade Koşulları](${u("/yasal/teslimat-ve-iade")})`,
     "",
     "## Ücretsiz araçlar",

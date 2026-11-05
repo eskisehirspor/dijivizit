@@ -40,7 +40,7 @@ const JSON_LD = {
       email: CONTACT.orderEmail,
       telephone: CONTACT.phoneE164,
       hasMap: CONTACT.mapsProfileUrl,
-      sameAs: [CONTACT.mapsProfileUrl],
+      sameAs: [CONTACT.mapsProfileUrl, CONTACT.instagramUrl],
       geo: { "@type": "GeoCoordinates", latitude: CONTACT.geo.lat, longitude: CONTACT.geo.lng },
       areaServed: { "@type": "Country", name: "Türkiye" },
       address: {
