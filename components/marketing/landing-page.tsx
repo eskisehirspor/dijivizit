@@ -23,6 +23,7 @@ export function landingMetadata(l: Landing): Metadata {
 
 /** A category page: product grid with prices, explanatory sections, comparison, FAQ. */
 export function LandingPage({ landing: l }: { landing: Landing }) {
+  const products = l.finishes ? FINISHES.filter((f) => l.finishes!.includes(f.id)) : FINISHES;
   const url = `${MARKETING_ORIGIN}/${l.slug}`;
   const guides = l.guides
     .map((slug) => GUIDES.find((g) => g.slug === slug))
@@ -33,8 +34,9 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
   const children = SEGMENTS.filter((x) => x.parent?.href === `/${l.slug}`);
   // The other category pages link to the city pages with their own term, so
   // "Eskişehir NFC kartvizit" and "Eskişehir akıllı kartvizit" have a path too.
-  const cityLinks =
-    children.length === 0 && !l.parent ? SEGMENTS.filter((x) => x.kind === "sehir") : [];
+  const cityLinks = ["nfc-kartvizit", "akilli-kartvizit"].includes(l.slug)
+    ? SEGMENTS.filter((x) => x.kind === "sehir")
+    : [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -50,7 +52,7 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
         about: l.term,
         mainEntity: {
           "@type": "ItemList",
-          itemListElement: FINISHES.map((f, i) => ({
+          itemListElement: products.map((f, i) => ({
             "@type": "ListItem",
             position: i + 1,
             url: productUrl(f),
@@ -143,8 +145,14 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
         <h2 id="modeller" className="sr-only">
           {l.term} modelleri
         </h2>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5 lg:grid-cols-7">
-          {FINISHES.map((f) => (
+        <ul
+          className={
+            products.length > 4
+              ? "grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5 lg:grid-cols-7"
+              : "grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6"
+          }
+        >
+          {products.map((f) => (
             <li key={f.id}>
               <Link href={`/kartvizit/${f.slug}`} className="group flex flex-col gap-3">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#d9d6d1]">

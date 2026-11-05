@@ -32,6 +32,8 @@ export type Landing = {
   parent?: { name: string; href: string };
   /** Grouping for nested pages, used for the index list on the parent page. */
   kind?: "meslek" | "sehir";
+  /** Only these products in the grid and the ItemList (material pages). */
+  finishes?: string[];
 };
 
 export const LANDINGS: Landing[] = [
@@ -280,6 +282,267 @@ export const LANDINGS: Landing[] = [
       "nfc-kartvizit-mi-kagit-kartvizit-mi",
     ],
     siblings: ["nfc-kartvizit", "dijital-kartvizit"],
+  },
+  {
+    slug: "metal-kartvizit",
+    term: "Metal kartvizit",
+    title: "Metal Kartvizit | Siyah, Gold, Gümüş NFC Kartvizit | Dijivizit",
+    description:
+      "Metal kartvizit: mat siyah, fırçalanmış gümüş ve gold NFC kart; logo lazerle kazınır, arkada QR kod. Dokundur, profilin açılsın. 72 saatte teslim, kargo ücretsiz.",
+    h1: "Metal kartvizit",
+    lead: "Ağırlığı ve soğuk dokusuyla elden ele geçtiği anda fark edilen kart. İçinde NFC çip, arkasında QR kod; bilgileriniz kartta değil, her zaman güncel dijital profilinizde.",
+    finishes: ["black", "silver", "gold"],
+    sections: [
+      {
+        heading: "Üç metal kaplama",
+        list: [
+          "Mat siyah metal: açık gri lazer kazıma, en sade ve kurumsal seçenek",
+          "Fırçalanmış gümüş: ince yatay fırça izleri, koyu lazer kazıma",
+          "Fırçalanmış gold: sarı pirinç tonunda, belirgin fırça dokusu",
+        ],
+        paragraphs: [
+          "Üçünde de Dijivizit logosu ve temassız işareti yüzeye lazerle kazınır; baskı olmadığı için silinmez, solmaz. 10 ve üzeri adetteki kurumsal siparişlerde logo yerine firma logonuz işlenir.",
+        ],
+      },
+      {
+        heading: "Metal kartta NFC çalışır mı?",
+        paragraphs: [
+          "Metal, NFC sinyalini zayıflatır; bu yüzden metal NFC kartlarda çip, sinyalin geçeceği şekilde yerleştirilir. Dijivizit metal kartları iPhone XS ve sonrası ile NFC'si açık Android telefonlarda okunur. Kartın arkasındaki QR kod, NFC'si olmayan telefonlarda aynı profili açar.",
+          "Kart okunmazsa ücretsiz yenisiyle değiştiriyoruz.",
+        ],
+      },
+      {
+        heading: "Kimler metal kartı seçiyor?",
+        list: [
+          "Yöneticiler, kurucular ve satış ekipleri: ilk toplantıda iz bırakmak için",
+          "Avukatlar, mali müşavirler, danışmanlar: sade ve ağırbaşlı bir kart için",
+          "Mimarlar ve tasarımcılar: malzemenin kendisi bir tasarım cümlesi olduğu için",
+        ],
+      },
+      {
+        heading: "Fiyat ve teslimat",
+        paragraphs: [
+          "Metal kartların fiyatı KDV dahil sitede yazar; kargo ücretsizdir, kart 72 saat içinde teslim edilir. Kartla birlikte dijital profil ilk yıl ücretsizdir. 14 gün cayma hakkınız vardır.",
+        ],
+      },
+    ],
+    compare: [
+      ["Dayanıklılık", "Kâğıt yıpranır", "Metal, yıllarca aynı"],
+      ["Yazı", "Mürekkep baskı", "Lazer kazıma, silinmez"],
+      ["Bilgi değişince", "Yeniden baskı", "Profili güncellemek yeter"],
+      ["Paylaşım", "Elden", "Dokundur ya da QR okut"],
+    ],
+    faq: [
+      {
+        q: "Metal kartvizit ağır mı?",
+        a: "Kâğıt ve PVC karttan belirgin şekilde ağırdır, cüzdanda bir banka kartı gibi taşınır. Ağırlığı, kartın elde fark edilmesini sağlar.",
+      },
+      {
+        q: "Metal kartvizit çizilir mi?",
+        a: "Günlük kullanımda yüzeyde ince izler oluşabilir; fırçalanmış kaplamalar bu izleri daha az gösterir. Lazer kazıma silinmez.",
+      },
+      {
+        q: "Metal kartın üzerine adım yazılıyor mu?",
+        a: "Standart kartlarda Dijivizit logosu ve temassız işareti bulunur; adınız, unvanınız ve iletişim bilgileriniz profilde durur. 10 ve üzeri kurumsal siparişte firma logonuz işlenir.",
+      },
+      {
+        q: "Metal kartvizit fiyatı ne kadar?",
+        a: "Güncel fiyat bu sayfada ve Fiyatlar sayfasında yazar; KDV dahil, kargo ücretsizdir. 10 ve üzeri adette %20 indirim uygulanır.",
+      },
+    ],
+    guides: [
+      "metal-kartvizit",
+      "nfc-kartvizit-hangi-telefonlarda-calisir",
+      "nfc-kartvizit-nedir",
+      "en-iyi-dijital-kartvizit-nasil-secilir",
+    ],
+    siblings: ["ahsap-kartvizit", "pvc-kartvizit", "nfc-kartvizit"],
+  },
+  {
+    slug: "ahsap-kartvizit",
+    term: "Ahşap kartvizit",
+    title: "Ahşap Kartvizit | Koyu ve Açık Ahşap NFC Kartvizit | Dijivizit",
+    description:
+      "Ahşap kartvizit: gerçek koyu ve açık ahşap NFC kart, logo lazerle yakılır, her kartın damar dokusu farklı. Arkada QR kod, uygulama gerekmez, kargo ücretsiz.",
+    h1: "Ahşap kartvizit",
+    lead: "Gerçek ahşaptan, her biri kendi damar dokusuyla. Sıcak ve doğal bir ilk izlenim; içinde NFC çip, arkasında QR kod.",
+    finishes: ["wood", "wood-light"],
+    sections: [
+      {
+        heading: "İki ahşap tonu",
+        list: [
+          "Koyu ahşap: ceviz tonunda, logo koyu iz olarak yakılır",
+          "Açık ahşap: meşe tonunda, daha aydınlık ve sade",
+        ],
+        paragraphs: [
+          "Logo ve temassız işareti lazerle yakılır; mürekkep yoktur, silinmez. Ahşap doğal bir malzeme olduğu için iki kart birbirinin aynısı olmaz.",
+        ],
+      },
+      {
+        heading: "Ahşap kartvizit dayanıklı mı?",
+        paragraphs: [
+          "Cüzdanda taşınmaya uygundur. Uzun süre suda bırakmamak ve doğrudan ısıya maruz bırakmamak yeterli. NFC çip ve QR kod ahşap kartta da her telefonda çalışır; kart okunmazsa ücretsiz değiştiriyoruz.",
+        ],
+      },
+      {
+        heading: "Kimler ahşap kartı seçiyor?",
+        list: [
+          "Kafe, restoran ve butik işletmeler",
+          "Mimarlar, iç mimarlar ve doğal malzemeyle çalışanlar",
+          "Danışmanlar, terapistler, eğitmenler: sıcak bir izlenim için",
+          "Sürdürülebilirliği önemseyen markalar",
+        ],
+      },
+      {
+        heading: "Fiyat ve teslimat",
+        paragraphs: [
+          "Ahşap kartlar metal kartlardan daha uygun fiyatlıdır; fiyat KDV dahil, kargo ücretsiz, 72 saatte teslim. Kartla birlikte dijital profil ilk yıl ücretsizdir.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Ahşap kartvizitte NFC çalışır mı?",
+        a: "Evet. Ahşap NFC sinyalini engellemez; kart güncel iPhone'larda ve NFC'si açık Android telefonlarda okunur. Arkadaki QR kod her telefonda çalışır.",
+      },
+      {
+        q: "Ahşap kart ıslanırsa ne olur?",
+        a: "Kısa süreli temas sorun olmaz; uzun süre suda bırakmayın. Kart okunmaz hale gelirse bize yazın.",
+      },
+      {
+        q: "Koyu mu açık ahşap mı?",
+        a: "Koyu ahşap daha resmî ve kontrastlı, açık ahşap daha aydınlık ve sade görünür. İkisinin fiyatı aynıdır.",
+      },
+    ],
+    guides: [
+      "ahsap-kartvizit",
+      "nfc-kartvizit-nedir",
+      "nfc-kartvizit-mi-kagit-kartvizit-mi",
+      "en-iyi-dijital-kartvizit-nasil-secilir",
+    ],
+    siblings: ["metal-kartvizit", "pvc-kartvizit", "nfc-kartvizit"],
+  },
+  {
+    slug: "pvc-kartvizit",
+    term: "PVC kartvizit",
+    title: "PVC NFC Kartvizit | Siyah Mat PVC Akıllı Kartvizit | Dijivizit",
+    description:
+      "PVC NFC kartvizit: mat siyah, kadife dokulu, hafif ve ince akıllı kart. Telefona dokundur, profilin açılsın; arkada QR kod. KDV dahil, kargo ücretsiz.",
+    h1: "PVC NFC kartvizit",
+    lead: "Banka kartı inceliğinde, mat siyah ve kadife dokulu. En hafif Dijivizit kartı; içinde NFC çip, arkasında QR kod.",
+    finishes: ["pvc-black"],
+    sections: [
+      {
+        heading: "Siyah mat PVC",
+        paragraphs: [
+          "Mat siyah yüzey parmak izi göstermez, sade ve şık durur. Logo ve temassız işareti kartın mat yüzeyine işlenir. Kart banka kartı ölçüsündedir (85,6 × 54 mm), cüzdanın kart bölmesine girer.",
+        ],
+      },
+      {
+        heading: "PVC mi metal mi?",
+        list: [
+          "PVC: hafif, ince, daha uygun fiyatlı; günlük kullanım ve ekipler için",
+          "Metal: ağır ve gösterişli; ilk izlenimin öne çıktığı yerler için",
+          "İkisinde de NFC, QR ve dijital profil aynı şekilde çalışır",
+        ],
+      },
+      {
+        heading: "Ekipler için",
+        paragraphs: [
+          "PVC kart, kalabalık satış ve saha ekipleri için ekonomik bir seçenektir. 10 ve üzeri adette %20 indirim uygulanır, firma logonuz karta işlenir; kartları ekip panelinden yönetirsiniz.",
+        ],
+      },
+      {
+        heading: "Fiyat ve teslimat",
+        paragraphs: [
+          "Fiyat KDV dahil, kargo ücretsiz, kart 72 saatte teslim edilir. Kartla birlikte dijital profil ilk yıl ücretsizdir; kart okunmazsa ücretsiz değişim.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "PVC NFC kartvizit dayanıklı mı?",
+        a: "Banka kartı ile aynı malzeme ailesindendir; cüzdanda yıllarca taşınabilir. Çok yüksek ısıda bırakmayın.",
+      },
+      {
+        q: "PVC kartta da QR kod var mı?",
+        a: "Evet. Her Dijivizit kartının arkasında NFC'si olmayan telefonlar için QR kod bulunur.",
+      },
+      {
+        q: "PVC kartın fiyatı ne kadar?",
+        a: "Güncel fiyat bu sayfada yazar; ahşap kartlarla aynı fiyattadır ve metal kartlardan daha uygundur.",
+      },
+    ],
+    guides: [
+      "nfc-kartvizit-nedir",
+      "nfc-kartvizit-hangi-telefonlarda-calisir",
+      "kurumsal-dijital-kartvizit",
+      "en-iyi-dijital-kartvizit-nasil-secilir",
+    ],
+    siblings: ["metal-kartvizit", "ahsap-kartvizit", "nfc-kartvizit"],
+  },
+  {
+    slug: "kurumsal-kartvizit",
+    term: "Kurumsal kartvizit",
+    title: "Kurumsal Dijital Kartvizit | Logolu NFC Kartvizit | Dijivizit",
+    description:
+      "Kurumsal dijital kartvizit: firma logolu NFC kartlar, ekip paneli, kart devri ve analitik. 10 ve üzeri adette %20 indirim, KDV dahil, kargo ücretsiz.",
+    h1: "Kurumsal dijital kartvizit",
+    lead: "Bütün ekibin kartları tek panelde: firma logolu NFC kartlar, ortak tasarım, çalışan değişince kartı devretme ve ekip analitiği.",
+    sections: [
+      {
+        heading: "Kurumsal siparişte neler var?",
+        list: [
+          "10 ve üzeri adette %20 indirim",
+          "Firma logonuz karta işlenir (metal ve ahşapta lazerle)",
+          "Ekip paneli: kartları çalışanlara atayın, profilleri tek yerden yönetin",
+          "Kart devri: çalışan ayrılınca kart yeniden basılmaz, yeni kişiye geçer",
+          "Ekip analitiği ve ziyaretçilerin bıraktığı kişiler",
+          "Kaybolan kartı tek tıkla kapatma",
+        ],
+      },
+      {
+        heading: "Nasıl ilerliyoruz?",
+        list: [
+          "Sipariş formundan adet ve kaplama tercihinizi bırakın",
+          "Logonuzla kart görselini hazırlayıp onayınıza sunuyoruz",
+          "Onaydan sonra kartlar üretilip ücretsiz kargoyla gönderilir",
+          "Ekip panelinden çalışanlarınızı davet edersiniz",
+        ],
+      },
+      {
+        heading: "Hangi kart?",
+        paragraphs: [
+          "Kalabalık saha ve satış ekiplerinde mat siyah PVC, yönetim ve temsil kartlarında metal, sıcak bir marka dili için ahşap tercih ediliyor. Aynı ekipte farklı kaplamalar da kullanılabilir.",
+        ],
+      },
+      {
+        heading: "KVKK ve güvenlik",
+        paragraphs: [
+          "Profil adresleri çalışanların adını değil rastgele bir kodu içerir. Ziyaretçi verileri KVKK'ya göre işlenir; kart sahibi yalnızca kendi kişilerini görür.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "En az kaç adet kurumsal sipariş verebilirim?",
+        a: "Her adette sipariş verebilirsiniz; 10 ve üzeri adette %20 indirim ve firma logosu uygulanır.",
+      },
+      {
+        q: "Çalışan işten ayrılırsa kart ne olur?",
+        a: "Ekip panelinden kartı yeni çalışana devredersiniz; kart yeniden basılmaz.",
+      },
+      {
+        q: "Ekipte farklı kaplamalar kullanabilir miyim?",
+        a: "Evet. Aynı siparişte PVC, metal ve ahşap kartları birlikte isteyebilirsiniz; hepsi aynı ekip panelinden yönetilir.",
+      },
+    ],
+    guides: [
+      "kurumsal-dijital-kartvizit",
+      "en-iyi-dijital-kartvizit-nasil-secilir",
+      "nfc-kartvizit-nereden-alinir",
+    ],
+    siblings: ["metal-kartvizit", "pvc-kartvizit", "dijital-kartvizit"],
   },
 ];
 

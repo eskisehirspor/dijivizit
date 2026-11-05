@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import { CardBuilder } from "@/components/marketing/card-builder";
 import { MARKETING_ORIGIN } from "@/lib/hosts";
@@ -18,8 +19,11 @@ export function toolMetadata(t: Tool): Metadata {
   };
 }
 
-/** A free tool page: the builder, how-to sections, FAQ and related links. */
-export function ToolPage({ tool: t }: { tool: Tool }) {
+/**
+ * A free tool page: the tool itself, how-to sections, FAQ and related links.
+ * `children` is the interactive tool; without it the vCard QR builder is shown.
+ */
+export function ToolPage({ tool: t, children }: { tool: Tool; children?: ReactNode }) {
   const url = `${MARKETING_ORIGIN}/${t.slug}`;
   const guides = t.guides
     .map((slug) => GUIDES.find((g) => g.slug === slug))
@@ -86,7 +90,7 @@ export function ToolPage({ tool: t }: { tool: Tool }) {
         </p>
       </header>
 
-      <CardBuilder tool={t.slug} />
+      {children ?? <CardBuilder tool={t.slug} />}
 
       <div className="mt-24 grid gap-x-16 gap-y-14 border-t border-border/60 pt-16 lg:grid-cols-2">
         {t.sections.map((s) => (

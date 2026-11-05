@@ -23,6 +23,8 @@ export type Guide = {
   image: string;
   imageAlt: string;
   published: string;
+  /** Last meaningful content change (YYYY-MM-DD); defaults to published. */
+  updated?: string;
   sections: GuideSection[];
   faq?: { q: string; a: string }[];
 };
@@ -101,12 +103,13 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "metal-kartvizit",
     label: "Metal kartvizit",
-    title: "Metal Kartvizit: Siyah, Gold ve Gümüş NFC Kartvizit",
+    title: "Metal Kartvizit Rehberi: Üretim, Dayanıklılık, Bakım",
     description:
       "Mat siyah metal, fırçalanmış gold ve gümüş NFC metal kartvizit. Lazer kazıma, silinmeyen yüzey, QR kod ve tek dokunuşla paylaşılan dijital profil.",
     image: "/rehber/metal-kartvizit.jpg",
     imageAlt: "Mat siyah metal Dijivizit NFC kartvizit",
     published: "2026-10-25",
+    updated: "2026-11-05",
     sections: [
       {
         heading: "Metal kartvizit neden farklı?",
@@ -140,12 +143,13 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "ahsap-kartvizit",
     label: "Ahşap kartvizit",
-    title: "Ahşap Kartvizit: Doğal Dokuda NFC Akıllı Kartvizit",
+    title: "Ahşap Kartvizit Rehberi: Ahşap Türü, Dayanıklılık, Bakım",
     description:
       "Koyu ve açık tonlu gerçek ahşap NFC kartvizit. Lazerle yakılmış logo, her kartta kendine özgü doku, tek dokunuşla paylaşılan dijital profil.",
     image: "/rehber/ahsap-kartvizit.jpg",
     imageAlt: "Koyu ahşap NFC kartvizit telefona dokunuyor",
     published: "2026-10-25",
+    updated: "2026-11-05",
     sections: [
       {
         heading: "Doğal bir ilk izlenim",
@@ -639,6 +643,7 @@ const BASE_GUIDES: Guide[] = [
     image: "/rehber/nfc-kartvizit-nereden-alinir.jpg",
     imageAlt: "İş toplantısında siyah metal NFC kartvizit karşı tarafa uzatılıyor",
     published: "2026-11-02",
+    updated: "2026-11-05",
     sections: [
       {
         heading: "NFC kartvizit nereden alınır?",
@@ -696,6 +701,7 @@ const BASE_GUIDES: Guide[] = [
     image: "/rehber/en-iyi-dijital-kartvizit-nasil-secilir.jpg",
     imageAlt: "Elde tutulan mat siyah Dijivizit NFC kartvizit",
     published: "2026-11-02",
+    updated: "2026-11-05",
     sections: [
       {
         heading: 'Herkes için tek bir "en iyi" yok',

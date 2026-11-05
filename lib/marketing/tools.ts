@@ -3,6 +3,11 @@
  * something useful for free (a working vCard QR code) and offers the card-less
  * digital business card (59,90 TL a month) as the next step.
  */
+import { FREE_PERIOD, PAPER_PACK_SIZE } from "@/lib/marketing/card-cost";
+import { FINISHES, PRICING, formatTry } from "@/lib/orders/finishes";
+
+const PVC_PRICE = FINISHES.find((f) => f.material === "pvc")!.price;
+
 export type Tool = {
   slug: string;
   /** Short name for links and breadcrumbs. */
@@ -126,6 +131,115 @@ export const TOOLS: Tool[] = [
       "dijital-kartvizit-nasil-olusturulur",
       "dijital-kartvizit-nedir",
       "en-iyi-dijital-kartvizit-nasil-secilir",
+    ],
+  },
+  {
+    slug: "e-posta-imzasi-olustur",
+    term: "E-posta imzası oluştur",
+    title: "E-posta İmzası Oluştur: Ücretsiz HTML İmza | Dijivizit",
+    description:
+      "Ücretsiz e-posta imzası oluşturucu: adını, unvanını ve iletişim bilgilerini yaz, Gmail, Outlook ve Apple Mail'de çalışan HTML imzayı tek tıkla kopyala.",
+    h1: "E-posta imzası oluştur",
+    lead: "Bilgilerini yaz, imzan anında hazır. Kopyala, Gmail, Outlook ya da Apple Mail'in imza alanına yapıştır. Ücretsiz, üyelik yok, bilgilerin bize gönderilmez.",
+    sections: [
+      {
+        heading: "İyi bir e-posta imzasında ne olmalı?",
+        list: [
+          "Ad soyad ve unvan: karşındaki kiminle yazıştığını hemen anlasın.",
+          "Şirket adı ve web sitesi.",
+          "Tek bir telefon numarası; tıklanınca arama başlar.",
+          "İsteğe bağlı bir bağlantı: dijital kartvizitin, randevu sayfan ya da portfolyon.",
+          "Hepsi bu. Uzun yasal metinler, alıntılar ve beş ayrı logo imzayı okunmaz yapar.",
+        ],
+      },
+      {
+        heading: "Bu imza neden her programda düzgün görünür?",
+        paragraphs: [
+          "E-posta programları web sayfalarının kullandığı modern düzenleri desteklemez. Bu araç imzayı tablolarla ve satır içi stillerle kurar; Gmail, Outlook (yeni, klasik ve web) ve Apple Mail bu yapıyı aynı şekilde gösterir.",
+          "İmzada resim yoktur, yalnızca metin ve bağlantı. Bu yüzden alıcının programı görselleri engellese bile imzan eksiksiz görünür ve iletin spam filtresine takılmaz.",
+        ],
+      },
+      {
+        heading: "İmzana dijital kartvizit bağlantısı ekle",
+        paragraphs: [
+          "İmzadaki telefon ve e-posta okunur ama rehbere kaydedilmez. Dijital kartvizit bağlantısına tıklayan kişi ise seni tek dokunuşla rehberine ekler; fotoğrafın, WhatsApp'ın ve sosyal medya hesapların da aynı sayfadadır.",
+          "Numaran ya da unvanın değişince yüzlerce kişiye giden imzayı düzeltmek yerine profilini güncellersin; bağlantı aynı kalır.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "E-posta imzası oluşturmak ücretsiz mi?",
+        a: "Evet. Bu sayfadaki araç ücretsizdir, üyelik istemez ve imzan süresiz kullanılabilir.",
+      },
+      {
+        q: "Kopyaladığım imza yapıştırınca bozuluyor, ne yapmalıyım?",
+        a: 'İmzayı düz metin kutusuna değil, programın imza düzenleyicisine yapıştır. Apple Mail\'de "Her zaman varsayılan yazı tipimle eşleştir" seçeneğini kapat. Tarayıcın kopyalamaya izin vermezse önizlemedeki imzayı fareyle seçip kopyalayabilirsin.',
+      },
+      {
+        q: "İmzaya logo ya da fotoğraf ekleyebilir miyim?",
+        a: "Bu araç bilerek yalnızca metin kullanır, çünkü birçok program imzadaki görselleri ek olarak gönderir ya da engeller. Fotoğrafını ve logonu dijital kartvizit profiline koyup imzaya bağlantısını eklemek daha güvenilir bir yoldur.",
+      },
+      {
+        q: "Telefonda da çalışır mı?",
+        a: "İmza Gmail ve Outlook uygulamalarında, hesabına bilgisayardan eklediğin haliyle görünür. iPhone Mail uygulamasının imza alanı biçimlendirmeyi kısmen korur; en iyi sonuç için imzayı bilgisayardan ekle.",
+      },
+    ],
+    guides: ["dijital-kartvizit-nedir", "kartvizite-ne-yazilir", "qr-kod-kartvizit"],
+  },
+  {
+    slug: "kartvizit-maliyet-hesaplama",
+    term: "Kartvizit maliyet hesaplama",
+    title: "Kartvizit Maliyeti Hesaplama: Kâğıt mı NFC mi? | Dijivizit",
+    description: `Kartvizit maliyeti hesaplama: kişi sayısı, yıllık kart adedi ve matbaa fiyatını gir; kâğıt kartviziti ${formatTry(PVC_PRICE)}'den başlayan NFC kartvizitle yıl yıl kıyasla.`,
+    h1: "Kartvizit maliyet hesaplama",
+    lead: "Kâğıt kartvizit mi daha ucuz, NFC kartvizit mi? Kendi rakamlarını gir, 1 ile 5 yıl arasındaki toplam maliyeti yan yana gör. Kâğıt daha ucuzsa bunu da açıkça söyleriz.",
+    sections: [
+      {
+        heading: "Hesaplama nasıl yapılıyor?",
+        list: [
+          `Kâğıt: girdiğin ${PAPER_PACK_SIZE.toLocaleString("tr-TR")} adetlik paket fiyatı esas alınır. Bilgiler değişmezse artan kartlar sonraki yıla devreder; her değişiklikte elde kalan kartlar kullanılamaz ve yeni paket basılır.`,
+          `NFC kart: kart bedeli bir kez ödenir; ${PRICING.bulkMinQuantity} ve üzeri kişide %${PRICING.bulkDiscountPercent} indirim uygulanır.`,
+          `Profil: ${FREE_PERIOD} ücretsiz, sonrasında kişi başı aylık ${formatTry(PRICING.profileMonthlyFee)}.`,
+          `Kartsız dijital kartvizit: kişi başı yıllık ${formatTry(PRICING.digitalYearlyFee)}.`,
+        ],
+      },
+      {
+        heading: "Kâğıt kartvizit ne zaman daha ucuz?",
+        paragraphs: [
+          "Tek kişiysen, yılda birkaç yüz kart dağıtıyorsan ve bilgilerin yıllarca değişmiyorsa kâğıt kartvizit genellikle daha ucuzdur. Hesaplayıcı bu durumda bunu açıkça gösterir.",
+          "Maliyet ekiplerde ve bilgilerin sık değiştiği işlerde döner: her unvan, numara ya da adres değişikliği herkes için yeni bir baskı demektir. NFC kartta değişiklik panelden yapılır, kart aynı kalır.",
+        ],
+      },
+      {
+        heading: "Rakamın dışında kalanlar",
+        paragraphs: [
+          "Hesaplama yalnızca para maliyetini karşılaştırır. Kâğıt kartvizit çoğunlukla rehbere hiç kaydedilmeden çekmecede kalır; NFC kartı okutan kişi seni tek dokunuşla kaydeder, sen de profilinin kaç kez açıldığını görürsün.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Kartvizit maliyeti nasıl hesaplanır?",
+        a: "Yıllık kart ihtiyacını, baskı fiyatını ve bilgilerin kaç kez değiştiğini çarp: her değişiklik elde kalan kartları çöpe atar ve yeni baskı gerektirir. Bu sayfadaki hesaplayıcı bunu kişi sayısı ve yıl sayısına göre otomatik yapar.",
+      },
+      {
+        q: "NFC kartvizit kâğıt kartvizitten ucuz mu?",
+        a: `Duruma göre. Az kart dağıtan ve bilgileri değişmeyen tek kişi için kâğıt daha ucuz olabilir. Ekiplerde ve sık değişen bilgilerde NFC kart genellikle birkaç yıl içinde kendini çıkarır; ${PRICING.bulkMinQuantity} ve üzeri kişide %${PRICING.bulkDiscountPercent} indirim de uygulanır.`,
+      },
+      {
+        q: "Dijivizit'in yıllık ücreti var mı?",
+        a: `Kart tek seferlik ödenir. Profil ${FREE_PERIOD} ücretsizdir; sonra aylık ${formatTry(PRICING.profileMonthlyFee)} ile devam eder. Otomatik çekim yapılmaz, devam etmek isteyip istemediğine sen karar verirsin.`,
+      },
+      {
+        q: "Hesaplamaya hangi masraflar dahil değil?",
+        a: "Tasarım ücreti, kargo, kaybolan ya da dağıtılmadan eskiyen kartlar hesaba katılmaz. Kendi matbaa fiyatını girdiğinde sonuç gerçeğe en yakın olur.",
+      },
+    ],
+    guides: [
+      "nfc-kartvizit-mi-kagit-kartvizit-mi",
+      "kurumsal-dijital-kartvizit",
+      "dijital-kartvizit-nedir",
     ],
   },
 ];
