@@ -48,7 +48,7 @@ export default async function GuidePage({ params }: Params) {
         description: guide.description,
         image: `${MARKETING_ORIGIN}${guide.image}`,
         datePublished: guide.published,
-        dateModified: guide.published,
+        dateModified: guide.updated ?? guide.published,
         inLanguage: "tr-TR",
         mainEntityOfPage: url,
         author: { "@id": `${MARKETING_ORIGIN}/#organization` },
@@ -103,6 +103,17 @@ export default async function GuidePage({ params }: Params) {
               {guide.title}
             </h1>
             <p className="text-lg text-muted-foreground">{guide.description}</p>
+            <p className="text-sm text-muted-foreground">
+              Dijivizit ·{" "}
+              <time dateTime={guide.updated ?? guide.published}>
+                {new Date(guide.updated ?? guide.published).toLocaleDateString("tr-TR", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </time>
+              {guide.updated ? " tarihinde güncellendi" : ""}
+            </p>
           </header>
 
           {guide.sections.map((s) => (

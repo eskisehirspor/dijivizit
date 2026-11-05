@@ -5,10 +5,12 @@
  * Same rules as landings.ts: every claim must match the product.
  */
 import type { Landing } from "@/lib/marketing/landings";
+import { MORE_MESLEK } from "@/lib/marketing/segments-meslek-2";
+import { MORE_SEHIR } from "@/lib/marketing/segments-sehir-2";
 
 const PARENT = { name: "Dijital kartvizit", href: "/dijital-kartvizit" };
 
-export const SEGMENTS: Landing[] = [
+const BASE_SEGMENTS: Landing[] = [
   // ---------------------------------------------------------------- meslekler
   {
     slug: "dijital-kartvizit/emlakci",
@@ -959,14 +961,14 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "İstanbul",
-    title: "İstanbul'da Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "İstanbul NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "İstanbul'da dijital kartvizit: Tüyap'ta, İstanbul Fuar Merkezi'nde, plaza toplantısında dokundurun, rehbere kaydettirin. NFC kart ücretsiz kargoyla kapınızda.",
-    h1: "İstanbul'da dijital kartvizit",
+      "İstanbul'da NFC kartvizit ve dijital kartvizit: Tüyap'ta, plaza toplantısında dokundurun, rehbere kaydettirin. Akıllı kartvizitiniz ücretsiz kargoyla gelir.",
+    h1: "İstanbul'da NFC ve dijital kartvizit",
     lead: "İstanbul'da bir gün içinde Maslak'ta toplantı, Kadıköy'de müşteri, akşam Harbiye'de bir etkinlik olabilir. Bu tempoda kartvizitin işi hızlı olmaktır: dokundur, rehbere kaydettir, devam et.",
     sections: [
       {
-        heading: "İstanbul iş hayatında kartvizit",
+        heading: "İstanbul iş hayatında akıllı kartvizit",
         paragraphs: [
           "İstanbul'da tanışmaların çoğu kısa sürer: plaza lobisinde beş dakikalık bir görüşme, fuarda stand önünde iki cümle, bir panelin çıkışında el sıkışma. Finans, ticaret, tekstil ve hazır giyim, lojistik, medya ve teknoloji şirketlerinin yoğunlaştığı şehirde aynı gün onlarca kişiyle bilgi değiştirebilirsiniz.",
           "Dijital kartvizit bu hızda işe yarar. Kartı telefona dokundurduğunuzda adınız, şirketiniz, unvanınız ve telefonlarınız karşı tarafın rehberine tek seferde eklenir. Akşam trafikte kartvizit destesini elle rehbere geçirmeye uğraşmazsınız.",
@@ -1001,8 +1003,8 @@ export const SEGMENTS: Landing[] = [
     ],
     faq: [
       {
-        q: "İstanbul'da mağazanız ya da teslim noktanız var mı?",
-        a: "Hayır. Dijivizit online çalışır; siparişler siteden verilir ve İstanbul'a da diğer şehirlere olduğu gibi ücretsiz kargoyla gönderilir.",
+        q: "İstanbul'da NFC kartvizit nereden alınır?",
+        a: "Dijivizit'ten online sipariş verirsiniz. İstanbul'da mağazamız ya da teslim noktamız yoktur; kartlar Eskişehir'den İstanbul'un her ilçesine ücretsiz kargoyla gönderilir.",
       },
       {
         q: "İstanbul'a kaç günde gelir?",
@@ -1035,10 +1037,10 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "Ankara",
-    title: "Ankara'da Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "Ankara NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "Ankara'da dijital kartvizit: kurum ziyaretinde, ATO Congresium'da, teknokentte dokundurun, rehbere kaydettirin. NFC kart ücretsiz kargoyla, dijitali 2 saatte.",
-    h1: "Ankara'da dijital kartvizit",
+      "Ankara'da NFC kartvizit ve dijital kartvizit: kurum ziyaretinde, ATO Congresium'da dokundurun. Unvanınız değişince akıllı kartvizit güncellenir; kargo ücretsiz.",
+    h1: "Ankara'da NFC ve dijital kartvizit",
     lead: "Ankara'da iş, kurum ziyaretleri, toplantılar ve resmî görüşmelerle döner. Unvanların, birimlerin ve numaraların sık değiştiği bu ortamda kartvizitin güncel kalması, bastırılmasından önemlidir.",
     sections: [
       {
@@ -1049,7 +1051,7 @@ export const SEGMENTS: Landing[] = [
         ],
       },
       {
-        heading: "Kurum ziyaretinde ve toplantıda",
+        heading: "Ankara'da kurum ziyaretinde akıllı kartvizit",
         list: [
           "Toplantı sonunda kartı muhatabınızın telefonuna dokundurun; adınız, şirketiniz, unvanınız ve telefonlarınız rehberine tek kayıt olarak eklenir",
           "Sabit hat, dahili ve cep numaralarınızı ayrı satırlarda, etiketleriyle ekleyin",
@@ -1078,8 +1080,8 @@ export const SEGMENTS: Landing[] = [
     ],
     faq: [
       {
-        q: "Ankara'da teslim alabileceğim bir ofisiniz var mı?",
-        a: "Hayır. Dijivizit yalnızca online satış yapar; kartlar Ankara'ya ücretsiz kargoyla gönderilir.",
+        q: "Ankara'da NFC kartvizit nereden alınır?",
+        a: "Siparişi bu siteden online verirsiniz. Dijivizit'in Ankara'da ofisi ya da teslim noktası yoktur; kartlar Ankara'ya ücretsiz kargoyla gönderilir ve 72 saat içinde teslim edilir.",
       },
       {
         q: "Unvanım ya da birimim değişirse ne olur?",
@@ -1112,14 +1114,14 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "İzmir",
-    title: "İzmir'de Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "İzmir NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "İzmir'de dijital kartvizit: Fuar İzmir'de, ihracat görüşmesinde, sahada dokundurun; katalog ve fiyat listesi profilde. NFC kartlar ücretsiz kargoyla gönderilir.",
-    h1: "İzmir'de dijital kartvizit",
+      "İzmir'de NFC kartvizit ve dijital kartvizit: Fuar İzmir'de, ihracat görüşmesinde dokundurun; katalog profilde. Akıllı kartvizit ücretsiz kargoyla gelir.",
+    h1: "İzmir'de NFC ve dijital kartvizit",
     lead: "İzmir'de iş çoğu zaman ihracatla, limanla, fuarla ve turizmle iç içedir. Alıcıyla, acenteyle ya da tedarikçiyle tanıştığınızda kataloğunuz ve iletişim bilgileriniz tek dokunuşla karşı tarafın telefonunda olsun.",
     sections: [
       {
-        heading: "İzmir'in iş hayatı ve kartvizit",
+        heading: "İzmir'in iş hayatında akıllı kartvizit",
         paragraphs: [
           "İzmir; limanı, organize sanayi bölgeleri, tarım ürünleri ve gıda ihracatı, tekstil, turizm ve hizmet sektörüyle Ege'nin ticaret merkezidir. Bu yapıda tanıştığınız kişilerin bir kısmı yurt içinden, bir kısmı yurt dışından gelir; görüşme bir fuarda, bir fabrika ziyaretinde ya da Alsancak'ta bir kahve masasında olabilir.",
           "Dijital kartvizit, görüşme nerede olursa olsun aynı şeyi yapar: karşı taraf kartınızı telefonuna dokundurur ya da QR kodu okutur, sizi rehberine kaydeder, kataloğunuzu açar. Uygulama gerekmez; profil iPhone'da ve Android'de tarayıcıda açılır.",
@@ -1154,8 +1156,8 @@ export const SEGMENTS: Landing[] = [
     ],
     faq: [
       {
-        q: "İzmir'de mağazanız var mı?",
-        a: "Hayır. Dijivizit online çalışır; kartlar İzmir'in her ilçesine ücretsiz kargoyla gönderilir.",
+        q: "İzmir'de NFC kartvizit nereden alınır?",
+        a: "Bu siteden online sipariş verirsiniz. Dijivizit'in İzmir'de mağazası yoktur; kartlar İzmir'in her ilçesine ücretsiz kargoyla gönderilir.",
       },
       {
         q: "Yabancı müşteriler profilimi okuyabilir mi?",
@@ -1188,14 +1190,14 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "Bursa",
-    title: "Bursa'da Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "Bursa NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "Bursa'da dijital kartvizit: otomotiv ve tekstil firmalarında tedarikçi ziyaretinde, Merinos AKKM'deki etkinliklerde dokundurun. NFC kart ücretsiz kargoyla.",
-    h1: "Bursa'da dijital kartvizit",
+      "Bursa'da NFC kartvizit ve dijital kartvizit: otomotiv ve tekstil tedarikçileri için akıllı kartvizit. Fabrika ziyaretinde dokundurun, teknik doküman profilde.",
+    h1: "Bursa'da NFC ve dijital kartvizit",
     lead: "Bursa'da iş çoğu zaman bir fabrika kapısında, bir tedarikçi ziyaretinde ya da bir satın alma toplantısında başlar. Teknik dokümanınız ve iletişim bilgileriniz, kartınızı dokundurduğunuz an karşı tarafın telefonunda olsun.",
     sections: [
       {
-        heading: "Sanayi şehrinde kartvizit",
+        heading: "Bursa sanayisinde akıllı kartvizit",
         paragraphs: [
           "Bursa otomotiv ve otomotiv yan sanayi, tekstil, makine ve mobilya üretimiyle Türkiye'nin önde gelen sanayi şehirlerindendir. Organize sanayi bölgelerinde tedarikçiyle ana sanayi arasında her gün çok sayıda ziyaret, denetim ve teklif görüşmesi yapılır.",
           "Bu görüşmelerde masaya gelen yalnızca isim değildir: teknik föy, ürün kataloğu, kalite belgeleri. Dijital kartvizitte bunları PDF olarak profilinize eklersiniz; satın almacı kartınızı dokundurduğunda sizi rehberine kaydeder ve dokümanlarınıza tek dokunuşla ulaşır.",
@@ -1231,8 +1233,8 @@ export const SEGMENTS: Landing[] = [
     ],
     faq: [
       {
-        q: "Bursa'da teslim noktanız var mı?",
-        a: "Hayır. Dijivizit online çalışır; kartlar Bursa'nın tüm ilçelerine ücretsiz kargoyla gönderilir.",
+        q: "Bursa'da NFC kartvizit nereden alınır?",
+        a: "Siparişi bu siteden online verirsiniz. Dijivizit'in Bursa'da teslim noktası yoktur; kartlar Bursa'nın tüm ilçelerine ücretsiz kargoyla gönderilir.",
       },
       {
         q: "Profilime kaç belge ekleyebilirim?",
@@ -1265,14 +1267,14 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "Antalya",
-    title: "Antalya'da Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "Antalya NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "Antalya'da dijital kartvizit: otel satış ekipleri, acenteler ve emlak danışmanları için. Sezonluk ekipte kart devri, yabancı misafire QR. Ücretsiz kargoyla.",
-    h1: "Antalya'da dijital kartvizit",
+      "Antalya'da NFC kartvizit ve dijital kartvizit: otel satış ekipleri, acenteler ve emlakçılar için. Sezonluk ekipte akıllı kartvizit devri; ücretsiz kargoyla.",
+    h1: "Antalya'da NFC ve dijital kartvizit",
     lead: "Antalya'da iş sezonla döner: ekipler değişir, misafirler farklı ülkelerden gelir, görüşmeler otel lobisinde ve kongre salonunda yapılır. Dijital kartvizit bu değişkenliğe uyar; kart aynı kalır, bilgiler güncellenir.",
     sections: [
       {
-        heading: "Turizm şehrinde kartvizit",
+        heading: "Antalya'da turizm için akıllı kartvizit",
         paragraphs: [
           "Antalya'nın iş hayatında turizm başı çeker: oteller, seyahat acenteleri, transfer ve tur firmaları, kongre ve etkinlik organizatörleri. Bunun yanında seracılık ve tarım, inşaat ve yabancılara konut satışı da şehrin önemli sektörleridir.",
           "Bu sektörlerde tanıştığınız kişilerin bir kısmı Türkçe konuşmaz, bir kısmı telefonunda Türk numaralarını kaydetmeye alışık değildir. Dijital kartvizitte “Rehberime Kaydet” düğmesi adınızı, şirketinizi ve numaralarınızı tek seferde kaydeder; kimse numaranızı elle yazmaz. Numaralarınızı +90 ile başlayarak girerseniz yurt dışı hatlardan da doğrudan aranır.",
@@ -1319,8 +1321,8 @@ export const SEGMENTS: Landing[] = [
         a: "Ad, şirket ve iletişim bilgileri dilden bağımsızdır. “Hakkımda” yazısına ve belgelerinize istediğiniz dilde içerik ekleyebilirsiniz.",
       },
       {
-        q: "Antalya'da teslim alabileceğim bir yer var mı?",
-        a: "Hayır. Dijivizit yalnızca online satış yapar; kartlar Antalya'nın tüm ilçelerine ücretsiz kargoyla gönderilir.",
+        q: "Antalya'da NFC kartvizit nereden alınır?",
+        a: "Siparişi bu siteden online verirsiniz. Dijivizit'in Antalya'da şubesi ya da teslim noktası yoktur; kartlar Antalya'nın tüm ilçelerine ücretsiz kargoyla gönderilir.",
       },
     ],
     guides: [
@@ -1341,14 +1343,14 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "Eskişehir",
-    title: "Eskişehir'de Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "Eskişehir NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "Eskişehir'de dijital kartvizit: kartlarımız Eskişehir'de üretilir. Akademisyen, öğrenci, sanayi ve hizmet sektörü için NFC kart; online sipariş, ücretsiz kargo.",
-    h1: "Eskişehir'de dijital kartvizit",
+      "Eskişehir'de NFC kartvizit ve dijital kartvizit: kartlarımız Eskişehir'de üretilir. Akademisyen, öğrenci ve sanayi için akıllı kartvizit; ücretsiz kargo.",
+    h1: "Eskişehir'de NFC ve dijital kartvizit",
     lead: "Dijivizit kartları Eskişehir'de üretilir. Üniversiteleri, sanayisi ve genç nüfusuyla Eskişehir'de akademisyenden mühendise, esnaftan yeni mezuna kadar herkes için tek profil, tek kart.",
     sections: [
       {
-        heading: "Eskişehir'de kimler kullanır?",
+        heading: "Eskişehir'de akıllı kartviziti kimler kullanır?",
         paragraphs: [
           "Eskişehir; Anadolu Üniversitesi, Eskişehir Osmangazi Üniversitesi ve Eskişehir Teknik Üniversitesi ile bir üniversite şehridir. Aynı zamanda raylı sistemler ve havacılık gibi alanlarda köklü bir sanayi geçmişine, geniş bir organize sanayi bölgesine sahiptir.",
           "Bu iki dünyanın kesiştiği yerde kartvizit ihtiyacı da çeşitlidir: akademisyenler konferanslarda, mühendisler tedarikçi görüşmelerinde, yeni mezunlar kariyer günlerinde, esnaf ve hizmet işletmeleri müşteriyle tanıştığında bilgi paylaşır.",
@@ -1382,8 +1384,8 @@ export const SEGMENTS: Landing[] = [
     ],
     faq: [
       {
-        q: "Kartları Eskişehir'de elden teslim alabilir miyim?",
-        a: "Hayır. Kartlar Eskişehir'de üretilir ancak elden teslim ya da mağaza satışı yoktur; siparişler online verilir ve ücretsiz kargoyla gönderilir.",
+        q: "Eskişehir'de NFC kartvizit nereden alınır?",
+        a: "Bu siteden online sipariş verirsiniz. Dijivizit Odunpazarı'nda, Osmangazi Mah. Basın Şehitleri Cad. No:174 adresindedir ancak mağaza satışı ya da elden teslim yoktur; kartlar Eskişehir'e de ücretsiz kargoyla 72 saat içinde teslim edilir.",
       },
       {
         q: "Öğrenciler için uygun bir seçenek var mı?",
@@ -1416,10 +1418,10 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "Konya",
-    title: "Konya'da Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "Konya NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "Konya'da dijital kartvizit: tarım makineleri, döküm ve gıda firmalarının bayi ve fuar görüşmeleri için NFC kart ve QR. KTO Tüyap'ta dokundurun; ücretsiz kargo.",
-    h1: "Konya'da dijital kartvizit",
+      "Konya'da NFC kartvizit ve dijital kartvizit: tarım makineleri, döküm ve gıda firmalarının bayi ve fuar görüşmeleri için akıllı kartvizit. Kargo ücretsiz.",
+    h1: "Konya'da NFC ve dijital kartvizit",
     lead: "Konya'da satış çoğu zaman bayiye, çiftçiye ve fuara dayanır. Kataloğunuz ve iletişim bilgileriniz, kartınızı dokundurduğunuz ya da QR kodu okuttuğunuz an karşı tarafın telefonunda olsun; telefon eski de olsa.",
     sections: [
       {
@@ -1430,7 +1432,7 @@ export const SEGMENTS: Landing[] = [
         ],
       },
       {
-        heading: "Her telefonda çalışması önemli",
+        heading: "Konya'da akıllı kartvizit her telefonda çalışmalı",
         paragraphs: [
           "Sahada karşılaştığınız herkesin telefonu yeni değildir, herkesin telefonunda NFC açık değildir. Dijivizit kartlarının arkasında yedek QR kod vardır; NFC çalışmazsa kamerayla okutulduğunda aynı profil açılır. Profil tarayıcıda açılır, uygulama indirmek gerekmez.",
           "“Rehberime Kaydet” düğmesi adınızı, firmanızı, bütün telefonlarınızı ve adresinizi tek seferde rehbere ekler. Bayi sahibi numaranızı elle yazmak zorunda kalmaz; servis ve yedek parça hattınızı ayrı, etiketli satırlarda görür.",
@@ -1466,8 +1468,8 @@ export const SEGMENTS: Landing[] = [
         a: "Fiyat listesini PDF olarak profile eklersiniz; fiyat değiştiğinde panelden yeni dosyayı yüklersiniz. Bayilerdeki bağlantı ve QR kod aynı kalır, yeni listeyi açar.",
       },
       {
-        q: "Konya'da teslim noktanız var mı?",
-        a: "Hayır. Dijivizit online satış yapar; kartlar Konya'nın tüm ilçelerine ücretsiz kargoyla gönderilir.",
+        q: "Konya'da NFC kartvizit nereden alınır?",
+        a: "Siparişi bu siteden online verirsiniz. Dijivizit'in Konya'da teslim noktası yoktur; kartlar Konya'nın tüm ilçelerine ücretsiz kargoyla gönderilir.",
       },
       {
         q: "Servis ve satış numaralarını ayrı gösterebilir miyim?",
@@ -1492,14 +1494,14 @@ export const SEGMENTS: Landing[] = [
     parent: PARENT,
     kind: "sehir",
     term: "Kocaeli",
-    title: "Kocaeli'de Dijital Kartvizit | NFC ve QR | Dijivizit",
+    title: "Kocaeli NFC Kartvizit ve Dijital Kartvizit | Dijivizit",
     description:
-      "Kocaeli'de dijital kartvizit: Gebze ve İzmit'teki fabrikalarda, Kocaeli Fuar Merkezi'nde dokundurun; teknik doküman profilde. Ekip paneli, ücretsiz kargo.",
-    h1: "Kocaeli'de dijital kartvizit",
+      "Kocaeli'de NFC kartvizit ve dijital kartvizit: Gebze ve İzmit'teki fabrikalarda dokundurun, teknik doküman profilde. Ekip paneliyle akıllı kartvizit.",
+    h1: "Kocaeli'de NFC ve dijital kartvizit",
     lead: "Kocaeli'de günler fabrika ziyaretleri, tedarikçi denetimleri ve satın alma toplantılarıyla geçer. Güvenlikte kimlik bırakır gibi kolay: kartı dokundurun, bilgileriniz ve teknik dokümanınız karşı tarafın telefonuna geçsin.",
     sections: [
       {
-        heading: "Sanayi yoğun bir şehirde kartvizit",
+        heading: "Kocaeli sanayisinde akıllı kartvizit",
         paragraphs: [
           "Kocaeli; otomotiv, kimya ve petrokimya, metal, lastik ve plastik gibi sektörlerde Türkiye'nin en yoğun sanayi bölgelerindendir. Körfez boyunca sıralanan limanlar lojistiği, Gebze'deki organize sanayi bölgeleri ve teknoloji alanları ise üretimi ve Ar-Ge'yi taşır.",
           "Bu yoğunlukta bir mühendis, satın almacı ya da satış temsilcisi aynı hafta içinde Gebze'de, Dilovası'nda ve İzmit'te farklı tesislere gidebilir. Her ziyarette birkaç yeni kişiyle tanışır; kartvizitin hızlı ve güncel olması bu yüzden önemlidir.",
@@ -1535,8 +1537,8 @@ export const SEGMENTS: Landing[] = [
     ],
     faq: [
       {
-        q: "Kocaeli'de teslim noktanız var mı?",
-        a: "Hayır. Dijivizit online çalışır; kartlar Gebze'den Kandıra'ya Kocaeli'nin tüm ilçelerine ücretsiz kargoyla gönderilir.",
+        q: "Kocaeli'de NFC kartvizit nereden alınır?",
+        a: "Siparişi bu siteden online verirsiniz. Dijivizit'in Kocaeli'de teslim noktası yoktur; kartlar Gebze'den Kandıra'ya Kocaeli'nin tüm ilçelerine ücretsiz kargoyla gönderilir.",
       },
       {
         q: "Şirket logomuz ve kurumsal renklerimiz kullanılabilir mi?",
@@ -1564,6 +1566,13 @@ export const SEGMENTS: Landing[] = [
       "nfc-kartvizit",
     ],
   },
+];
+
+export const SEGMENTS: Landing[] = [
+  ...BASE_SEGMENTS.filter((s) => s.kind === "meslek"),
+  ...MORE_MESLEK,
+  ...BASE_SEGMENTS.filter((s) => s.kind === "sehir"),
+  ...MORE_SEHIR,
 ];
 
 export function getSegment(segment: string): Landing | undefined {

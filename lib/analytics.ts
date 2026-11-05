@@ -110,9 +110,17 @@ export function trackLead(item: Item, quantity: number, value: number) {
   fbq("track", "Lead", { content_name: item.id, value, currency: "TRY" });
 }
 
-/** Free tool funnel: started typing, downloaded the QR, clicked the paid offer. */
-export function trackTool(tool: string, step: "tool_start" | "qr_download" | "tool_offer_click") {
-  siteEvent(step, tool.slice(0, 40));
+type ToolStep = "tool_start" | "qr_download" | "signature_copy" | "tool_offer_click";
+
+/**
+ * Free tool funnel: started typing, took the result (QR download, signature
+ * copy), clicked the paid offer. The first-party log has one "result" type
+ * (qr_download, constrained in the site_events table), so other result steps
+ * are stored under it; the tool slug in `item` tells them apart. GA and Meta
+ * get the real step name.
+ */
+export function trackTool(tool: string, step: ToolStep) {
+  siteEvent(step === "signature_copy" ? "qr_download" : step, tool.slice(0, 40));
   gtag("event", step, { tool });
   fbq("trackCustom", step, { tool });
 }

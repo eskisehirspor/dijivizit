@@ -35,3 +35,10 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
         run: node scripts/follow-up-reminders.mjs
+      - name: Ask paid customers for a Google review
+        env:
+          SUPABASE_URL: https://mtspxgxgtvivkrbvlbuq.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: node scripts/review-requests.mjs

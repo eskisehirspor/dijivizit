@@ -10,6 +10,8 @@ export const CONTACT = {
   whatsappUrl: "https://wa.me/905406261965",
   orderEmail: "talep@dijivizit.com",
   /** The verified Google Business Profile (Maps place). */
+  /** Google "write a review" link for the verified Business Profile. */
+  reviewUrl: "https://g.page/r/CcJxbgUqllgKEBM/review",
   instagramUrl: "https://www.instagram.com/dijivizit",
   mapsProfileUrl: "https://maps.google.com/?cid=745510845553734082",
   geo: { lat: 39.769931, lng: 30.4835896 },

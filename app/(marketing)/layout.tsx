@@ -57,6 +57,9 @@ export default async function MarketingLayout({ children }: { children: React.Re
               <Link href="/kartvizit" className="hover:underline">
                 NFC kartvizit fiyatları
               </Link>
+              <Link href="/dijital-kartvizit-fiyatlari" className="hover:underline">
+                Dijital kartvizit fiyatları 2026
+              </Link>
               <Link href="/hakkimizda" className="hover:underline">
                 Hakkımızda
               </Link>

@@ -46,6 +46,7 @@ export function GET() {
     `- [Ana sayfa](${u("/")}): Dijivizit dijital ve NFC kartvizit`,
     ...LANDINGS.map((l) => `- [${l.h1}](${u(`/${l.slug}`)}): ${l.description}`),
     `- [Fiyatlar](${u("/kartvizit")}): tüm kart ve dijital kartvizit fiyatları`,
+    `- [Dijital kartvizit fiyatları 2026](${u("/dijital-kartvizit-fiyatlari")}): fiyat tablosu, abonelik ve 3 yıllık maliyet`,
     ...FINISHES.map((f) => `- [${f.name}](${u(`/kartvizit/${f.slug}`)})`),
     `- [Sipariş](${u("/siparis")})`,
     `- [Hakkımızda](${u("/hakkimizda")}): şirket, üretim yeri, güvence ve sık sorulanlar`,

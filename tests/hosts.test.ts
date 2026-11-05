@@ -66,6 +66,16 @@ describe("legacy card paths", () => {
     expect(shouldPassThroughOnMarketingHost("/diyetbenimle")).toBe(true);
   });
 
+  it("serves single-segment marketing pages on the marketing host", () => {
+    for (const path of [
+      "/e-posta-imzasi-olustur",
+      "/kartvizit-maliyet-hesaplama",
+      "/dijital-kartvizit-fiyatlari",
+    ]) {
+      expect(shouldPassThroughOnMarketingHost(path)).toBe(true);
+    }
+  });
+
   it("keeps app pages, files and nested paths out", () => {
     expect(isLegacyCardPath("/login")).toBe(false);
     expect(isLegacyCardPath("/dashboard")).toBe(false);
