@@ -156,7 +156,9 @@ FINISHES = {
     "black": ((0.04, 0.04, 0.044), (0.5, 0.5, 0.52), 0.42, 0.85, (0.12, 0.12, 0.13)),
     # Matte brushed metals: high base roughness, strong directional streaks.
     "silver": ((0.62, 0.62, 0.64), (0.1, 0.1, 0.11), 0.26, 0.75, (0.62, 0.62, 0.64)),
-    "gold": ((0.76, 0.52, 0.21), (0.16, 0.1, 0.035), 0.26, 0.75, (0.76, 0.52, 0.21)),
+    # Brass-yellow, matched to a photo of the real card (sRGB hue ~55°, not
+    # the orange champagne of jewellery gold).
+    "gold": ((0.68, 0.63, 0.08), (0.15, 0.13, 0.02), 0.26, 0.75, (0.68, 0.63, 0.08)),
 }
 
 
