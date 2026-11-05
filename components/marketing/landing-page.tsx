@@ -31,6 +31,10 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
     .map((slug) => [...LANDINGS, ...SEGMENTS].find((x) => x.slug === slug))
     .filter((x): x is Landing => Boolean(x));
   const children = SEGMENTS.filter((x) => x.parent?.href === `/${l.slug}`);
+  // The other category pages link to the city pages with their own term, so
+  // "Eskişehir NFC kartvizit" and "Eskişehir akıllı kartvizit" have a path too.
+  const cityLinks =
+    children.length === 0 && !l.parent ? SEGMENTS.filter((x) => x.kind === "sehir") : [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -274,6 +278,26 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
               </ul>
             </div>
           ))}
+        </section>
+      ) : null}
+
+      {cityLinks.length > 0 ? (
+        <section className="mt-20 flex flex-col gap-4 border-t border-border/60 pt-16">
+          <h2 className="text-xl font-semibold tracking-tight">
+            Şehrinize göre {l.term.toLocaleLowerCase("tr-TR")}
+          </h2>
+          <ul className="flex flex-wrap gap-2">
+            {cityLinks.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  href={`/${c.slug}`}
+                  className="inline-flex h-9 items-center rounded-full border border-border px-4 text-sm transition-colors hover:bg-muted"
+                >
+                  {c.term} {l.term.toLocaleLowerCase("tr-TR")}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 
