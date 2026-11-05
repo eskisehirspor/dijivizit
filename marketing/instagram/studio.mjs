@@ -32,7 +32,7 @@ const C = {
 const MAT = {
   black: { bg: "#1C1C1F", fg: "#F3F2EE", name: "Mat Siyah Metal" },
   silver: { bg: "#C9CBCD", fg: "#121213", name: "Mat Fırçalanmış Gümüş" },
-  gold: { bg: "#C7A877", fg: "#121213", name: "Mat Fırçalanmış Gold" },
+  gold: { bg: "#CCB650", fg: "#121213", name: "Mat Fırçalanmış Gold" },
   wood: { bg: "#6E4632", fg: "#F3F2EE", name: "Koyu Ahşap" },
   "wood-light": { bg: "#DCC8A6", fg: "#121213", name: "Açık Ahşap" },
 };
@@ -237,7 +237,7 @@ const at = ({ left, top, width }, fx, fy) => [left + fx * width, top + fy * widt
 // A tight card crop (prep.py), placed by width; ratio of the crop is ~1.367.
 const card = (fin, { left, top, width, rot = 0, filter = "" }) =>
   `<img src="${R(`card-${fin}`)}" style="position:absolute;left:${left}px;top:${top}px;width:${width}px;transform:rotate(${rot}deg);${filter ? `filter:${filter};` : ""}z-index:1">`;
-const GOLD = "brightness(1.08) saturate(1.06)";
+const GOLD = "";
 // Black metal on light paper picks up the bright room; bring it back to black.
 const BLACK = "brightness(.78) contrast(1.08)";
 

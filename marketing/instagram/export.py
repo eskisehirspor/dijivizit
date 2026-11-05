@@ -21,7 +21,11 @@ out_stories = os.path.join(ROOT, "public", "ig", "stories")
 os.makedirs(out_posts, exist_ok=True)
 os.makedirs(out_stories, exist_ok=True)
 
+n = 0
 for e in sched["posts"]:
+    if e["source"] not in by_slug:  # partial rebuilds
+        continue
+    n += 1
     post = Image.open(by_slug[e["source"]]).convert("RGB")
     post.save(os.path.join(out_posts, e["id"] + ".jpg"), "JPEG", quality=90, optimize=True, progressive=False)
     # Story: the post on a blurred, softened copy of itself.
@@ -35,4 +39,4 @@ for e in sched["posts"]:
     p = post.resize((980, 1225), Image.LANCZOS)
     bg.paste(p, (50, 330))
     bg.save(os.path.join(out_stories, e["id"] + ".jpg"), "JPEG", quality=88, optimize=True)
-print("exported", len(sched["posts"]))
+print("exported", n)
