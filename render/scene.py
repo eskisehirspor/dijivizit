@@ -266,19 +266,28 @@ def card_face_material(name, mask_path, finish="black"):
         nt.links.new(grain.outputs["Fac"], bump.inputs["Height"])
         nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
         if mask_path == "card-back.png":
-            disc = image(nt, os.path.join(TEX, "card-back-nfc.png"), non_color=True, loc=(-900, -600))
-            # The NFC disc: a touch smoother and darker, with a hairline edge.
+            tex = image(nt, os.path.join(TEX, "card-back-nfc.png"), non_color=True, loc=(-1100, -600))
+            sep = node(nt, "ShaderNodeSeparateColor", (-900, -600))
+            nt.links.new(tex.outputs["Color"], sep.inputs["Color"])
+            disc, ring = sep.outputs["Red"], sep.outputs["Green"]
+            # The NFC disc is a separate, glossier inlay: clearly visible as a
+            # smoother, slightly lighter circle with a crisp seam around it.
             r = node(nt, "ShaderNodeMapRange", (-400, -100))
             r.inputs["To Min"].default_value = 0.62
-            r.inputs["To Max"].default_value = 0.55
-            nt.links.new(disc.outputs["Color"], r.inputs["Value"])
+            r.inputs["To Max"].default_value = 0.38
+            nt.links.new(disc, r.inputs["Value"])
             nt.links.new(r.outputs["Result"], bsdf.inputs["Roughness"])
             c = node(nt, "ShaderNodeMix", (-200, 250))
             c.data_type = "RGBA"
             c.inputs["A"].default_value = (*FINISHES["black"][0], 1)
-            c.inputs["B"].default_value = (0.017, 0.017, 0.019, 1)
-            nt.links.new(disc.outputs["Color"], c.inputs["Factor"])
-            nt.links.new(c.outputs["Result"], bsdf.inputs["Base Color"])
+            c.inputs["B"].default_value = (0.034, 0.034, 0.038, 1)
+            nt.links.new(disc, c.inputs["Factor"])
+            seam = node(nt, "ShaderNodeMix", (0, 250))
+            seam.data_type = "RGBA"
+            seam.inputs["B"].default_value = (0.004, 0.004, 0.005, 1)
+            nt.links.new(c.outputs["Result"], seam.inputs["A"])
+            nt.links.new(ring, seam.inputs["Factor"])
+            nt.links.new(seam.outputs["Result"], bsdf.inputs["Base Color"])
         else:
             nt.links.new(rough.outputs["Result"], bsdf.inputs["Roughness"])
         bsdf.inputs["Metallic"].default_value = 0.35
