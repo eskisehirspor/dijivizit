@@ -25,6 +25,21 @@ export function productImage(finish: Finish): string {
   return `/landing/products/${finish.id}.webp`;
 }
 
+/**
+ * Real photos of the card in hand (the print composited onto the supplier's
+ * blank card), 1600x2000, shown before the studio render on the product page.
+ */
+const HAND_PHOTOS: Partial<Record<Finish["id"], number>> = { black: 3 };
+
+export function productGallery(finish: Finish): { src: string; alt: string }[] {
+  const n = HAND_PHOTOS[finish.id] ?? 0;
+  const hand = Array.from({ length: n }, (_, i) => ({
+    src: `/landing/products/${finish.id}/el-${i + 1}.webp`,
+    alt: `${finish.name}, elde`,
+  }));
+  return [...hand, { src: productImage(finish), alt: `${finish.name}, ${finish.note}` }];
+}
+
 /** Short version for the meta description (Google shows ~155 characters). */
 export function productMetaDescription(finish: Finish): string {
   if (isDigital(finish)) {
@@ -101,7 +116,7 @@ export function productJsonLd(finish: Finish) {
     "@id": `${productUrl(finish)}#product`,
     name: finish.name,
     description: productDescription(finish),
-    image: [`${MARKETING_ORIGIN}${productImage(finish)}`],
+    image: productGallery(finish).map((g) => `${MARKETING_ORIGIN}${g.src}`),
     sku: `DV-${finish.id.toUpperCase()}`,
     brand: { "@type": "Brand", name: "Dijivizit" },
     ...(isDigital(finish)

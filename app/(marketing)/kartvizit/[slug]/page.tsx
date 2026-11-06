@@ -1,3 +1,4 @@
+import { ProductGallery } from "@/components/marketing/product-gallery";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -7,6 +8,7 @@ import {
   pricingTerms,
   productMetaDescription,
   productFeatures,
+  productGallery,
   productImage,
   productJsonLd,
   productUrl,
@@ -50,7 +52,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title,
       description,
       url,
-      images: [{ url: productImage(finish), width: 1600, height: 2000, alt: finish.name }],
+      images: productGallery(finish).map((g) => ({ url: g.src, width: 1600, height: 2000, alt: g.alt })),
     },
   };
 }
@@ -101,18 +103,7 @@ export default async function ProductPage({ params }: Params) {
       </nav>
 
       <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] lg:gap-16">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-[#d9d6d1]">
-          {/* eslint-disable-next-line @next/next/no-img-element -- static stills; no image optimizer on Workers */}
-          <img
-            src={productImage(finish)}
-            alt={`${finish.name}, ${finish.note}`}
-            width={1600}
-            height={2000}
-            fetchPriority="high"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
+        <ProductGallery images={productGallery(finish)} />
 
         <div className="flex flex-col gap-6">
           <h1 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">

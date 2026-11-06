@@ -154,14 +154,60 @@ FINISHES = {
     # base, etched artwork, base roughness, etch roughness, edge
     # Matte black PVC: a soft, velvety plastic (not metal) with a printed logo.
     "pvc-black": ((0.016, 0.016, 0.018), (0.62, 0.62, 0.64), 0.62, 0.42, (0.02, 0.02, 0.022)),
-    # Matte black metal with a soft brushed sheen, so it still reads as metal.
-    "black": ((0.04, 0.04, 0.044), (0.5, 0.5, 0.52), 0.42, 0.85, (0.12, 0.12, 0.13)),
-    # Matte brushed metals: high base roughness, strong directional streaks.
-    "silver": ((0.62, 0.62, 0.64), (0.1, 0.1, 0.11), 0.26, 0.75, (0.62, 0.62, 0.64)),
-    # Brass-yellow, matched to a photo of the real card (sRGB hue ~55°, not
-    # the orange champagne of jewellery gold).
-    "gold": ((0.72, 0.64, 0.085), (0.15, 0.13, 0.02), 0.26, 0.75, (0.72, 0.64, 0.085)),
+    # Matte black metal, sand-textured like the supplier's card (fine speckled
+    # grain, no brush lines); the back has a slightly smoother NFC disc.
+    "black": ((0.022, 0.022, 0.024), (0.5, 0.5, 0.52), 0.62, 0.85, (0.03, 0.03, 0.032)),
+    # Silver, matched to the supplier's card: a bright, satin-polished front
+    # (logo and NFC mark etched in) and a matte grey back inside a polished
+    # rim (see FRAMED_BACK).
+    "silver": ((0.78, 0.78, 0.8), (0.1, 0.1, 0.11), 0.13, 0.75, (0.78, 0.78, 0.8)),
+    # Gold, matched to the supplier's card: a mirror-polished warm gold front
+    # (etched darker) and a satin gold back inside a polished rim.
+    "gold": ((0.9, 0.62, 0.2), (0.16, 0.11, 0.03), 0.06, 0.75, (0.9, 0.62, 0.2)),
 }
+
+
+# Finishes whose back is a matte, lightly textured grey panel inset in a thin
+# polished rim of the face metal, as on the supplier's cards. Every card is
+# printed on the front only (logo left, NFC mark right); backs stay blank.
+# panel colour, panel metallic, panel roughness
+FRAMED_BACK = {
+    "silver": ((0.5, 0.5, 0.49), 0.0, 0.72),  # matte light-grey coating
+    "gold": ((0.78, 0.52, 0.15), 1.0, 0.42),  # satin (bead-blasted) gold
+}
+
+
+def framed_back_material(name, finish):
+    mat, bsdf = principled(name)
+    nt = mat.node_tree
+    mask = image(nt, os.path.join(TEX, "card-back-frame.png"), non_color=True, loc=(-900, 0))
+    metal = FINISHES[finish][0]
+    col = node(nt, "ShaderNodeMix", (-400, 200))
+    col.data_type = "RGBA"
+    col.inputs["A"].default_value = (*metal, 1)
+    panel, panel_metal, panel_rough = FRAMED_BACK[finish]
+    col.inputs["B"].default_value = (*panel, 1)
+    nt.links.new(mask.outputs["Color"], col.inputs["Factor"])
+    nt.links.new(col.outputs["Result"], bsdf.inputs["Base Color"])
+    for socket, a, b in (("Metallic", 1.0, panel_metal), ("Roughness", 0.08, panel_rough)):
+        m = node(nt, "ShaderNodeMapRange", (-400, -100))
+        m.inputs["To Min"].default_value = a
+        m.inputs["To Max"].default_value = b
+        nt.links.new(mask.outputs["Color"], m.inputs["Value"])
+        nt.links.new(m.outputs["Result"], bsdf.inputs[socket])
+    # Fine woven micro-texture on the panel only.
+    grain = node(nt, "ShaderNodeTexNoise", (-900, -400))
+    grain.inputs["Scale"].default_value = 1400.0
+    grain.inputs["Detail"].default_value = 3.0
+    h = node(nt, "ShaderNodeMath", (-650, -400))
+    h.operation = "MULTIPLY"
+    nt.links.new(grain.outputs["Fac"], h.inputs[0])
+    nt.links.new(mask.outputs["Color"], h.inputs[1])
+    bump = node(nt, "ShaderNodeBump", (-400, -400))
+    bump.inputs["Strength"].default_value = 0.05
+    nt.links.new(h.outputs["Value"], bump.inputs["Height"])
+    nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
 
 
 WOOD_TEXTURES = {
@@ -180,6 +226,8 @@ def wood_color(nt, loc=(-900, 500), finish="wood"):
 def card_face_material(name, mask_path, finish="black"):
     """Card face: brushed metal (black/silver/gold) or walnut, with the artwork
     laser-etched (contrasting, rougher)."""
+    if mask_path == "card-back.png" and finish in FRAMED_BACK:
+        return framed_back_material(name, finish)
     wood = finish.startswith("wood")
     plastic = finish.startswith("pvc")
     mat, bsdf = principled(name, **{"Metallic": 0.0 if wood or plastic else 1.0})
@@ -205,6 +253,34 @@ def card_face_material(name, mask_path, finish="black"):
         nt.links.new(rough.outputs["Result"], bsdf.inputs["Roughness"])
         bsdf.inputs["Coat Weight"].default_value = 0.25
         bsdf.inputs["Coat Roughness"].default_value = 0.25
+        return mat
+    if finish == "black":
+        # Sand-textured matte metal: fine speckled grain, a faint metallic sheen.
+        grain = node(nt, "ShaderNodeTexNoise", (-900, -300))
+        grain.inputs["Scale"].default_value = 1600.0
+        grain.inputs["Detail"].default_value = 4.0
+        bump = node(nt, "ShaderNodeBump", (-400, -400))
+        bump.inputs["Strength"].default_value = 0.08
+        nt.links.new(grain.outputs["Fac"], bump.inputs["Height"])
+        nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+        if mask_path == "card-back.png":
+            disc = image(nt, os.path.join(TEX, "card-back-nfc.png"), non_color=True, loc=(-900, -600))
+            # The NFC disc: a touch smoother and darker, with a hairline edge.
+            r = node(nt, "ShaderNodeMapRange", (-400, -100))
+            r.inputs["To Min"].default_value = 0.62
+            r.inputs["To Max"].default_value = 0.55
+            nt.links.new(disc.outputs["Color"], r.inputs["Value"])
+            nt.links.new(r.outputs["Result"], bsdf.inputs["Roughness"])
+            c = node(nt, "ShaderNodeMix", (-200, 250))
+            c.data_type = "RGBA"
+            c.inputs["A"].default_value = (*FINISHES["black"][0], 1)
+            c.inputs["B"].default_value = (0.017, 0.017, 0.019, 1)
+            nt.links.new(disc.outputs["Color"], c.inputs["Factor"])
+            nt.links.new(c.outputs["Result"], bsdf.inputs["Base Color"])
+        else:
+            nt.links.new(rough.outputs["Result"], bsdf.inputs["Roughness"])
+        bsdf.inputs["Metallic"].default_value = 0.35
+        bsdf.inputs["Specular IOR Level"].default_value = 0.35
         return mat
     if plastic:
         # Matte PVC: fine, even micro-texture instead of brush lines.
@@ -232,7 +308,7 @@ def card_face_material(name, mask_path, finish="black"):
     nt.links.new(mp.outputs["Vector"], noise.inputs["Vector"])
     streak = node(nt, "ShaderNodeMapRange", (-650, -300))
     # Gold gets the strongest brushing: the real card shows clear brush lines.
-    amp = {"black": 0.07, "gold": 0.42}.get(finish, 0.32)
+    amp = {"black": 0.07, "gold": 0.03, "silver": 0.1}.get(finish, 0.32)
     streak.inputs["To Min"].default_value = -amp
     streak.inputs["To Max"].default_value = amp
     nt.links.new(noise.outputs["Fac"], streak.inputs["Value"])
@@ -245,7 +321,7 @@ def card_face_material(name, mask_path, finish="black"):
     if brushed:
         # Visible brush lines: the same streaks also modulate brightness.
         tint = node(nt, "ShaderNodeMapRange", (-650, 150))
-        lo, hi = (0.5, 1.5) if finish == "gold" else (0.55, 1.35)
+        lo, hi = {"gold": (0.97, 1.03), "silver": (0.9, 1.1)}.get(finish, (0.55, 1.35))
         tint.inputs["To Min"].default_value = lo
         tint.inputs["To Max"].default_value = hi
         nt.links.new(noise.outputs["Fac"], tint.inputs["Value"])
