@@ -49,11 +49,11 @@ export const FAQ = [
   },
   {
     q: "Karşı tarafın uygulama indirmesi gerekir mi?",
-    a: "Hayır. Dijivizit profili telefonun tarayıcısında açılır. NFC desteklemeyen telefonlar kartın üzerindeki QR kodu kamerayla okutarak aynı profile ulaşır.",
+    a: "Hayır. Dijivizit profili telefonun tarayıcısında açılır. NFC desteklemeyen telefonlar için profilinin QR kodunu kendi telefonundan okutabilir ya da linkini paylaşabilirsin.",
   },
   {
     q: "Hangi telefonlarla çalışır?",
-    a: "iPhone XS ve sonrası tüm iPhone modelleri ile NFC özelliği olan Android telefonlar kartı doğrudan okur. NFC kapalıysa veya yoksa QR kod her telefonda çalışır.",
+    a: "iPhone XS ve sonrası tüm iPhone modelleri ile NFC özelliği olan Android telefonlar kartı doğrudan okur. NFC kapalıysa veya yoksa profilinin QR kodunu kendi ekranından okutur ya da linkini paylaşırsın.",
   },
   {
     q: "Bilgilerim değişince kartı yeniden bastırmam gerekir mi?",
@@ -69,7 +69,7 @@ export const FAQ = [
   },
   {
     q: "Hangi kaplama seçenekleri var?",
-    a: "Mat siyah PVC, siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Metalde logo lazerle kazınır, ahşapta yakılır, PVC'de mat yüzeye işlenir; NFC ve QR hepsinde aynı şekilde çalışır. 10 ve üzeri kurumsal siparişte firma logon işlenir.",
+    a: "Mat siyah PVC, siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Metalde logo lazerle kazınır, ahşapta yakılır, PVC'de mat yüzeye işlenir; NFC hepsinde aynı şekilde çalışır. 10 ve üzeri kurumsal siparişte firma logon işlenir.",
   },
   {
     q: "Karşımdakinin bilgilerini de alabilir miyim?",

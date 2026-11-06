@@ -58,7 +58,7 @@ export function productMetaDescription(finish: Finish): string {
   if (isDigital(finish)) {
     return `Kartsız dijital kartvizit: profil linki ve QR kod, 2 saatte e-postanızda. Rehbere kayıt, bilgi bırakma formu ve analitik. Aylık ${formatTry(finish.price)}, KDV dahil.`;
   }
-  return `${finish.name}: telefona dokundur, dijital profilin açılsın; arkada QR kod. ${formatTry(finish.price)}, KDV dahil, kargo ücretsiz, 72 saatte teslim.`;
+  return `${finish.name}: telefona dokundur, dijital profilin açılsın; link ve QR kod da sizde. ${formatTry(finish.price)}, KDV dahil, kargo ücretsiz, 72 saatte teslim.`;
 }
 
 export function productDescription(finish: Finish): string {
@@ -71,7 +71,7 @@ export function productDescription(finish: Finish): string {
       : finish.material === "pvc"
         ? `${finish.note} Hafif ve ince; logo ve temassız işareti mat yüzeye işlenir.`
         : `${finish.note} Gerçek ahşap; her kartın damar dokusu kendine özgüdür.`;
-  return `${base} Telefona dokundurunca dijital profiliniz açılır, arkadaki QR kod her telefonda çalışır. ${formatTry(finish.price)}, KDV dahil, kargo ücretsiz.`;
+  return `${base} Telefona dokundurunca dijital profiliniz açılır; NFC'si olmayan telefonlar için profil linkiniz ve QR kodunuz da hazır. ${formatTry(finish.price)}, KDV dahil, kargo ücretsiz.`;
 }
 
 /** What every card includes, in the words the rest of the site already uses. */
@@ -95,7 +95,7 @@ export function productFeatures(finish: Finish): string[] {
   return [
     surface,
     "İçindeki NFC çip sayesinde telefona dokundurunca dijital profiliniz açılır.",
-    "Arkasındaki QR kod, NFC'si olmayan telefonlarda da aynı profili açar.",
+    "NFC'si olmayan telefonlar için profil linkiniz ve QR kodunuz da hazır; ekrandan okutulur.",
     "Uygulama gerekmez; profil tarayıcıda açılır.",
     "Bilgileriniz değiştiğinde kartı değil, profili güncellersiniz.",
   ];

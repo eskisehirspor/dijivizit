@@ -62,7 +62,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Uygulama gerekir mi?",
         paragraphs: [
-          "Hayır. Ne sizin ne de karşınızdaki kişinin bir uygulama indirmesi gerekir. Güncel iPhone modelleri ve NFC özelliği açık Android telefonlar kartı doğrudan okur. NFC'si olmayan ya da kapalı olan telefonlar için Dijivizit kartlarının arkasında QR kod bulunur; kamerayla okutmak yeterlidir.",
+          "Hayır. Ne sizin ne de karşınızdaki kişinin bir uygulama indirmesi gerekir. Güncel iPhone modelleri ve NFC özelliği açık Android telefonlar kartı doğrudan okur. NFC'si olmayan ya da kapalı olan telefonlar için profilinizin QR kodunu kendi ekranınızdan okutmanız ya da linki paylaşmanız yeterlidir.",
         ],
       },
       {
@@ -88,7 +88,7 @@ const BASE_GUIDES: Guide[] = [
     faq: [
       {
         q: "NFC kartvizit iPhone'da çalışır mı?",
-        a: "Evet. Güncel iPhone modelleri NFC etiketlerini arka planda okur; kartı telefonun üst arka kısmına yaklaştırmak yeterlidir. Eski modellerde kartın arkasındaki QR kod kullanılabilir.",
+        a: "Evet. Güncel iPhone modelleri NFC etiketlerini arka planda okur; kartı telefonun üst arka kısmına yaklaştırmak yeterlidir. Eski modellerde profilinizin QR kodunu kendi telefonunuzdan okutabilirsiniz.",
       },
       {
         q: "Kartın pili var mı, şarj etmem gerekir mi?",
@@ -105,7 +105,7 @@ const BASE_GUIDES: Guide[] = [
     label: "Metal kartvizit",
     title: "Metal Kartvizit Rehberi: Üretim, Dayanıklılık, Bakım",
     description:
-      "Mat siyah metal, fırçalanmış gold ve gümüş NFC metal kartvizit. Lazer kazıma, silinmeyen yüzey, QR kod ve tek dokunuşla paylaşılan dijital profil.",
+      "Mat siyah metal, fırçalanmış gold ve gümüş NFC metal kartvizit. Lazer kazıma, silinmeyen yüzey; link, QR kod ve tek dokunuşla açılan dijital profil.",
     image: "/rehber/metal-kartvizit.jpg",
     imageAlt: "Mat siyah metal Dijivizit NFC kartvizit",
     published: "2026-10-25",
@@ -129,13 +129,13 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Lazer kazıma ve kurumsal logo",
         paragraphs: [
-          "Kartın yüzeyine Dijivizit logosu ve temassız işareti lazerle kazınır; baskı olmadığı için silinmez, solmaz. 10 ve üzeri adetteki kurumsal siparişlerde bunun yerine firma logonuz kazınır; adınız ve unvanınız kartta değil, kart okutulunca açılan profilinizde yer alır. Kartın arkasında NFC'si olmayan telefonlar için QR kod yer alır.",
+          "Kartın yüzeyine Dijivizit logosu ve temassız işareti lazerle kazınır; baskı olmadığı için silinmez, solmaz. 10 ve üzeri adetteki kurumsal siparişlerde bunun yerine firma logonuz kazınır; adınız ve unvanınız kartta değil, kart okutulunca açılan profilinizde yer alır. Kartın arka yüzü boştur; NFC'si olmayan telefonlar için profil linkiniz ve QR kodunuz ayrıca verilir.",
         ],
       },
       {
         heading: "Metal kart NFC'yi engellemez mi?",
         paragraphs: [
-          "Metal yüzeyler sıradan NFC etiketlerinin sinyalini zayıflatabilir. Dijivizit metal kartlarında metal yüzey için tasarlanmış NFC yapısı kullanılır; kart telefonun üst arka kısmına yaklaştırıldığında okunur. Her ihtimale karşı kartın arkasındaki QR kod da aynı profile açılır.",
+          "Metal yüzeyler sıradan NFC etiketlerinin sinyalini zayıflatabilir. Dijivizit metal kartlarında metal yüzey için tasarlanmış NFC yapısı kullanılır; kart telefonun üst arka kısmına yaklaştırıldığında okunur. Her ihtimale karşı profilinizin QR kodu da sizdedir; ekranınızdan okutulunca aynı profil açılır.",
         ],
       },
     ],
@@ -223,7 +223,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "3. Kartınızı paylaşmaya başlayın",
         paragraphs: [
-          "Kartınızı karşınızdaki kişinin telefonuna yaklaştırın; profiliniz açılır. NFC'si olmayan telefonlarda kartın arkasındaki QR kodu okutmak yeterlidir. Bilgileriniz değiştiğinde yalnızca profilinizi güncellersiniz; kart aynı kalır.",
+          "Kartınızı karşınızdaki kişinin telefonuna yaklaştırın; profiliniz açılır. NFC'si olmayan telefonlarda profilinizin QR kodunu kendi ekranınızdan okutmanız yeterlidir. Bilgileriniz değiştiğinde yalnızca profilinizi güncellersiniz; kart aynı kalır.",
         ],
       },
       {
@@ -268,13 +268,13 @@ const BASE_GUIDES: Guide[] = [
           "Kartı 1-2 saniye sabit tutun; hızlıca sürtmeyin.",
           "Kalın veya metal içeren telefon kılıfları okumayı zorlaştırabilir.",
           "Android'de NFC'nin açık olduğunu kontrol edin.",
-          "Hiçbiri olmazsa kartın arkasındaki QR kodu kamerayla okutun.",
+          "Hiçbiri olmazsa profilinizin QR kodunu kendi telefonunuzdan okutun ya da linki paylaşın.",
         ],
       },
       {
         heading: "QR kod her zaman yedekte",
         paragraphs: [
-          "Dijivizit kartlarının arkasında aynı profile açılan bir QR kod bulunur. NFC'si olmayan eski telefonlar dahil, kamerası olan her telefon profilinizi açabilir.",
+          "Her Dijivizit kullanıcısı, aynı profile açılan bir QR kod ve link alır. QR kodu kendi telefonunuzun ekranından gösterdiğinizde, NFC'si olmayan eski telefonlar dahil, kamerası olan her telefon profilinizi açabilir.",
         ],
       },
     ],
@@ -359,7 +359,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Fiziksel kart hâlâ gerekli mi?",
         paragraphs: [
-          "Dijital profil tek başına da kullanılabilir, ama yüz yüze tanışmalarda elinize alıp uzatabileceğiniz bir kart hâlâ en doğal yoldur. Dijivizit'te profiliniz mat siyah PVC, mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap ve açık ahşap kaplamalı NFC kartlarla birlikte gelir; kartın arkasında NFC'si olmayan telefonlar için QR kod bulunur.",
+          "Dijital profil tek başına da kullanılabilir, ama yüz yüze tanışmalarda elinize alıp uzatabileceğiniz bir kart hâlâ en doğal yoldur. Dijivizit'te profiliniz mat siyah PVC, mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap ve açık ahşap kaplamalı NFC kartlarla birlikte gelir; NFC'si olmayan telefonlar için profil linkiniz ve QR kodunuz da hazırdır.",
         ],
       },
     ],
@@ -428,7 +428,7 @@ const BASE_GUIDES: Guide[] = [
     faq: [
       {
         q: "NFC kartvizit her telefonda açılır mı?",
-        a: "Güncel iPhone'lar ve NFC'si açık Android telefonlar kartı doğrudan okur. NFC'si olmayan telefonlar için Dijivizit kartlarının arkasında aynı profile açılan bir QR kod bulunur.",
+        a: "Güncel iPhone'lar ve NFC'si açık Android telefonlar kartı doğrudan okur. NFC'si olmayan telefonlar için profilinizin QR kodunu kendi ekranınızdan okutabilir ya da linki paylaşabilirsiniz.",
       },
     ],
   },
@@ -437,7 +437,7 @@ const BASE_GUIDES: Guide[] = [
     label: "QR kod kartvizit",
     title: "QR Kod Kartvizit: Nasıl Çalışır, NFC'den Farkı Ne?",
     description:
-      "QR kod kartvizit nedir, nasıl kullanılır? QR ve NFC kartvizit arasındaki farklar ve iki yöntemi aynı kartta birleştirmenin avantajları.",
+      "QR kod kartvizit nedir, nasıl kullanılır? QR ve NFC kartvizit arasındaki farklar ve iki yöntemi birlikte kullanmanın avantajları.",
     image: "/rehber/qr-kod-kartvizit.jpg",
     imageAlt: "Deri kartlıktan çıkarılan siyah Dijivizit NFC kartvizit",
     published: "2026-10-28",
@@ -466,7 +466,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "En iyisi: ikisi bir arada",
         paragraphs: [
-          "Dijivizit kartlarında iki yöntem birlikte kullanılır. Kartın içinde NFC çip, arkasında aynı profile açılan bir QR kod vardır. NFC'si kapalı ya da olmayan bir telefonla karşılaştığınızda QR kod yedek görevi görür.",
+          "Dijivizit'te iki yöntem birlikte kullanılır. Kartın içinde NFC çip vardır; aynı profile açılan QR kod ise telefonunuzda, e-posta imzanızda ve broşürlerinizde durur. NFC'si kapalı ya da olmayan bir telefonla karşılaştığınızda QR kodu kendi ekranınızdan okutursunuz.",
         ],
       },
       {
@@ -489,7 +489,7 @@ const BASE_GUIDES: Guide[] = [
     faq: [
       {
         q: "QR kod bir süre sonra çalışmaz hâle gelir mi?",
-        a: "Dijivizit kartındaki QR kod profilinize bağlıdır. Profil bilgilerini değiştirdiğinizde kod değişmez; okutan kişi her zaman güncel profilinizi görür.",
+        a: "Dijivizit profil QR kodunuz profilinize bağlıdır. Profil bilgilerini değiştirdiğinizde kod değişmez; okutan kişi her zaman güncel profilinizi görür.",
       },
     ],
   },
@@ -614,7 +614,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Telefonumda NFC yoksa?",
         paragraphs: [
-          "Sorun değil. Dijivizit kartlarının arkasında aynı profile açılan bir QR kod bulunur. Kamerayı açıp kodu okutmanız yeterlidir; NFC'si olmayan eski telefonlar dahil her telefon profili açar.",
+          "Sorun değil. Profilinizin QR kodunu kendi telefonunuzun ekranından gösterirsiniz; karşınızdaki kişi kamerayla okutur. NFC'si olmayan eski telefonlar dahil her telefon profili açar.",
         ],
         link: { href: "/nfc-kartvizit", label: "NFC kartvizit modellerine bakın" },
       },
@@ -658,7 +658,7 @@ const BASE_GUIDES: Guide[] = [
         list: [
           "Profil ücretsiz mi, abonelik var mı? Varsa ilk yıldan sonra ne kadar?",
           "Bilgilerimi istediğim zaman kendim güncelleyebiliyor muyum?",
-          "Kartın arkasında NFC'si olmayan telefonlar için QR kod var mı?",
+          "NFC'si olmayan telefonlar için profil linki ve QR kod da veriliyor mu?",
           "Karşı taraf bilgilerimi tek dokunuşla rehberine kaydedebiliyor mu?",
           "Kart kaybolursa kapatabiliyor muyum, yenisini aynı profile bağlayabiliyor muyum?",
           "Kartın malzemesi ne: PVC, metal mi, ahşap mı? Yazı baskı mı, lazer mi?",
@@ -676,7 +676,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "Dijivizit'te neler dahil?",
         paragraphs: [
-          "Dijivizit kartları siyah, gold ve gümüş metal, koyu ve açık ahşap ile mat siyah PVC kaplamalarda üretilir. Metal ve ahşapta logo lazerle işlenir; mat siyah PVC'de logo ve temassız işareti kadife dokulu mat yüzeye işlenir. Her kartın arkasında QR kod bulunur. Fiyatlara KDV ve kargo dahildir, dijital profil ilk yıl ücretsizdir. Panelden profilinizi güncellersiniz, kayıp kartı kapatırsınız ve kartınızın kaç kez, hangi şehirlerden açıldığını görürsünüz.",
+          "Dijivizit kartları siyah, gold ve gümüş metal, koyu ve açık ahşap ile mat siyah PVC kaplamalarda üretilir. Metal ve ahşapta logo lazerle işlenir; mat siyah PVC'de logo ve temassız işareti kadife dokulu mat yüzeye işlenir. Her kartla birlikte profil linki ve QR kod da verilir. Fiyatlara KDV ve kargo dahildir, dijital profil ilk yıl ücretsizdir. Panelden profilinizi güncellersiniz, kayıp kartı kapatırsınız ve kartınızın kaç kez, hangi şehirlerden açıldığını görürsünüz.",
         ],
         link: { href: "/kartvizit", label: "Fiyatları görün" },
       },
@@ -724,7 +724,7 @@ const BASE_GUIDES: Guide[] = [
       {
         heading: "3. NFC ile birlikte QR kod",
         paragraphs: [
-          "Her telefonda NFC açık değildir. Kartın arkasında QR kod olması, kartın her telefonda açılmasını garanti eder.",
+          "Her telefonda NFC açık değildir. Kartla birlikte profilinize ait bir QR kod ve link de verilmesi, profilinizin her telefonda açılmasını sağlar.",
         ],
         link: { href: "/rehber/qr-kod-kartvizit", label: "QR kod kartvizit rehberi" },
       },

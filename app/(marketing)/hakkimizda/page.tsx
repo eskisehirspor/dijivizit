@@ -49,7 +49,7 @@ const FAQ = [
   },
   {
     q: "Dijivizit kartları hangi malzemeden?",
-    a: "Mat siyah PVC, metal (siyah, gümüş, gold) ve gerçek ahşap (koyu, açık). Hepsinde NFC çip ve arkada QR kod vardır.",
+    a: "Mat siyah PVC, metal (siyah, gümüş, gold) ve gerçek ahşap (koyu, açık). Hepsinde NFC çip vardır; profil linki ve QR kod da her siparişle gelir.",
   },
   {
     q: "Yıllık ücret var mı?",
@@ -99,7 +99,7 @@ export default function AboutPage() {
         <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
           Dijivizit, ASD Tasarım Ltd. Şti.&apos;nin markasıdır. PVC, metal ve ahşap NFC
           kartvizitleri Eskişehir&apos;de üretiyor, dijital profil altyapısını kendimiz
-          geliştiriyoruz. Kartı telefona dokundurduğunuzda ya da arkasındaki QR kodu okuttuğunuzda
+          geliştiriyoruz. Kartı telefona dokundurduğunuzda ya da profilinizin QR kodunu okuttuğunuzda
           profiliniz açılır; karşı taraf sizi tek dokunuşla rehberine kaydeder. Uygulama gerekmez.
         </p>
         <PromiseStrip className="pt-2" />

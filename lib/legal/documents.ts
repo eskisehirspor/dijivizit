@@ -239,7 +239,7 @@ export const LEGAL_DOCUMENTS: Record<LegalSlug, LegalDocument> = {
       {
         heading: "Kart okunmazsa ücretsiz değişim",
         paragraphs: [
-          "Kartınız NFC ya da QR ile okunmuyorsa bize yazın. Sorunu birlikte kontrol ederiz; karttan kaynaklanıyorsa kargo dahil ücretsiz yenisini göndeririz.",
+          "Kartınız NFC ile okunmuyorsa bize yazın. Sorunu birlikte kontrol ederiz; karttan kaynaklanıyorsa kargo dahil ücretsiz yenisini göndeririz.",
         ],
       },
       {

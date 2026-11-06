@@ -26,7 +26,7 @@ export function GET() {
   const lines = [
     "# Dijivizit",
     "",
-    "> Dijivizit, Türkiye'de dijital kartvizit ve NFC kartvizit hizmeti veren bir markadır (ASD Tasarım Ltd. Şti., Eskişehir). Kart telefona dokundurulduğunda ya da arkasındaki QR kod okutulduğunda kişinin dijital profili açılır; karşı taraf tek dokunuşla rehberine kaydeder. Uygulama gerekmez.",
+    "> Dijivizit, Türkiye'de dijital kartvizit ve NFC kartvizit hizmeti veren bir markadır (ASD Tasarım Ltd. Şti., Eskişehir). Kart telefona dokundurulduğunda ya da profilin QR kodu okutulduğunda kişinin dijital profili açılır; karşı taraf tek dokunuşla rehberine kaydeder. Uygulama gerekmez.",
     "",
     "## Öne çıkan bilgiler",
     "",

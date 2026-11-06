@@ -144,7 +144,7 @@ export const MORE_MESLEK: Landing[] = [
       },
       {
         q: "Hastanın uygulama indirmesi gerekir mi?",
-        a: "Hayır. Profil telefonun tarayıcısında açılır. NFC'si kapalı telefonlarda kartın arkasındaki ya da tezgâhtaki QR kod kamerayla okutulur.",
+        a: "Hayır. Profil telefonun tarayıcısında açılır. NFC'si kapalı telefonlarda tezgâhtaki ya da telefonunuzun ekranındaki profil QR kodu kamerayla okutulur.",
       },
       {
         q: "Eczane taşınırsa ne olur?",
@@ -708,7 +708,7 @@ export const MORE_MESLEK: Landing[] = [
       },
       {
         q: "Masa kartlarına koyacağım QR kodu nereden alırım?",
-        a: "Panelden profil QR kodunuzu PNG ya da SVG olarak indirirsiniz. Aynı kod kartınızın arkasındakiyle aynı profili açar; bilgileriniz değişse de geçerli kalır.",
+        a: "Panelden profil QR kodunuzu PNG ya da SVG olarak indirirsiniz. Kod, kartınızla aynı profili açar; bilgileriniz değişse de geçerli kalır.",
       },
       {
         q: "Fuarda toplanan bilgiler kimde kalır?",
@@ -794,7 +794,7 @@ export const MORE_MESLEK: Landing[] = [
       },
       {
         q: "Müşteri uygulama indirmek zorunda mı?",
-        a: "Hayır. Profil tarayıcıda açılır. NFC'si kapalı telefonlarda vitrindeki ya da kartın arkasındaki QR kod okutulur.",
+        a: "Hayır. Profil tarayıcıda açılır. NFC'si kapalı telefonlarda vitrindeki ya da telefonunuzun ekranındaki profil QR kodu okutulur.",
       },
     ],
     guides: [
@@ -1427,7 +1427,7 @@ export const MORE_MESLEK: Landing[] = [
     faq: [
       {
         q: "Kombiye yapıştıracağım QR etiketi nereden alırım?",
-        a: "Panelden profil QR kodunuzu PNG ya da SVG olarak indirir, etiket olarak bastırırsınız. Kartınızın arkasındaki kodla aynı profili açar; numaranız değişse de etiket geçerli kalır.",
+        a: "Panelden profil QR kodunuzu PNG ya da SVG olarak indirir, etiket olarak bastırırsınız. Kod, kartınızla aynı profili açar; numaranız değişse de etiket geçerli kalır.",
       },
       {
         q: "Bakım hatırlatması müşteriye otomatik gider mi?",
@@ -1513,7 +1513,7 @@ export const MORE_MESLEK: Landing[] = [
       },
       {
         q: "Aynaya koyacağım QR kodu nereden alırım?",
-        a: "Panelden profil QR kodunuzu PNG ya da SVG olarak indirip bastırırsınız. Aynı kod kartınızın arkasındakiyle aynı profili açar.",
+        a: "Panelden profil QR kodunuzu PNG ya da SVG olarak indirip bastırırsınız. Kod, kartınızla aynı profili açar.",
       },
       {
         q: "Müşterinin uygulama indirmesi gerekir mi?",

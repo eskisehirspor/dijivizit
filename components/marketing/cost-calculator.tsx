@@ -306,7 +306,7 @@ export function CostCalculator() {
               </>
             ) : (
               <>
-                <li>NFC çip ve QR kod; uygulama gerekmez</li>
+                <li>NFC çip, profil linki ve QR kod; uygulama gerekmez</li>
                 <li>Kargo ücretsiz, {PROMISES.deliveryHours} saatte teslim</li>
                 <li>Okunmazsa ücretsiz değişim</li>
               </>

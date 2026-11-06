@@ -61,8 +61,8 @@ export default function ProductsPage() {
           NFC ve dijital kartvizit fiyatları
         </h1>
         <p className="text-lg text-muted-foreground">
-          Metal, ahşap ya da mat siyah PVC: altı seçenek. Her kartta NFC çip, arkasında QR kod ve
-          dijital profil. Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90
+          Metal, ahşap ya da mat siyah PVC: altı seçenek. Her kartta NFC çip ve dijital profil;
+          profil linki ve QR kod da sizde. Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90
           TL (yıllık 718,80 TL).
         </p>
         <PromiseStrip className="pt-2" />

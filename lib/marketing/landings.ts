@@ -42,9 +42,9 @@ export const LANDINGS: Landing[] = [
     term: "NFC kartvizit",
     title: "NFC Kartvizit | PVC, Metal ve Ahşap, Dokundur Paylaş | Dijivizit",
     description:
-      "NFC kartvizit: telefona dokundur, profilin açılsın, rehbere tek dokunuşla kaydedilsin. Metal, ahşap ve PVC, arkada QR kod, uygulama gerekmez. Kargo ücretsiz.",
+      "NFC kartvizit: telefona dokundur, profilin açılsın, rehbere tek dokunuşla kaydedilsin. Metal, ahşap ve PVC; link ve QR kod da sizde. Kargo ücretsiz.",
     h1: "NFC kartvizit",
-    lead: "İçinde NFC çipi olan, telefona dokundurunca dijital profilinizi açan kartvizit. Metal, ahşap ya da mat siyah PVC; arkasında QR kod, karşı tarafta uygulama gerekmez.",
+    lead: "İçinde NFC çipi olan, telefona dokundurunca dijital profilinizi açan kartvizit. Metal, ahşap ya da mat siyah PVC; profil linki ve QR kod da sizde, karşı tarafta uygulama gerekmez.",
     sections: [
       {
         heading: "NFC kartvizit nasıl çalışır?",
@@ -63,7 +63,7 @@ export const LANDINGS: Landing[] = [
         heading: "Hangi telefonlarda çalışır?",
         paragraphs: [
           "iPhone XS, XR ve sonraki tüm modeller NFC kartvizitleri ek bir ayar gerekmeden okur. Android telefonların büyük çoğunluğunda NFC vardır; ayarlarda açık olması yeterlidir.",
-          "NFC'si olmayan ya da kapalı olan telefonlar için her kartın arkasında yedek bir QR kod bulunur. Kamerayla okutulduğunda aynı profil açılır. Yani kartınız her telefonda çalışır.",
+          "NFC'si olmayan ya da kapalı olan telefonlar için profilinizin QR kodu ve linki de sizde. QR kodu kendi telefonunuzun ekranından okutursunuz, aynı profil açılır. Yani profiliniz her telefonda açılır.",
         ],
       },
       {
@@ -94,7 +94,7 @@ export const LANDINGS: Landing[] = [
       },
       {
         q: "Telefonda NFC yoksa ne olur?",
-        a: "Her kartın arkasında yedek bir QR kod vardır. Kamerayla okutulduğunda aynı profil açılır.",
+        a: "Profilinizin QR kodunu kendi telefonunuzdan okutabilir ya da linki paylaşabilirsiniz. İki yolla da aynı profil açılır.",
       },
       {
         q: "Kartı kaybedersem ne olur?",
@@ -217,7 +217,7 @@ export const LANDINGS: Landing[] = [
     term: "Akıllı kartvizit",
     title: "Akıllı Kartvizit | NFC, QR ve Dijital Profil | Dijivizit",
     description:
-      "Akıllı kartvizit: NFC çipli metal, ahşap ya da PVC kart, arkada QR kod ve hep güncel dijital profil. Rehbere tek dokunuşla kayıt, analitik ve ekip yönetimi.",
+      "Akıllı kartvizit: NFC çipli metal, ahşap ya da PVC kart, link, QR kod ve güncel dijital profil. Rehbere tek dokunuşla kayıt, analitik ve ekip yönetimi.",
     h1: "Akıllı kartvizit",
     lead: "Akıllı kartvizit üç şeyin birleşimidir: telefona dokundurulan NFC kart, her telefonda çalışan QR kod ve bilgilerinizi taşıyan dijital profil. Dijivizit üçünü birlikte verir.",
     sections: [
@@ -250,7 +250,7 @@ export const LANDINGS: Landing[] = [
         heading: "Neden Dijivizit?",
         list: [
           "Metal kartlarda lazer kazıma, ahşapta lazerle yakma; silinmez",
-          "Her kartta yedek QR kod; NFC'si olmayan telefonlarda da çalışır",
+          "Her siparişte profil linki ve QR kod; NFC'si olmayan telefonlarda ekrandan okutulur",
           "Türkçe panel, Türkçe destek; Eskişehir'de üretim",
           "Ekip paneli ve kart devri: çalışan değişince kart yeniden basılmaz",
           "KDV dahil fiyat, ücretsiz kargo, 10 ve üzeri adette indirim",
@@ -267,7 +267,7 @@ export const LANDINGS: Landing[] = [
     faq: [
       {
         q: "Akıllı kartvizit ile NFC kartvizit aynı şey mi?",
-        a: "Genellikle aynı anlamda kullanılır. Dijivizit'te akıllı kartvizit; NFC kart, arkasındaki QR kod ve dijital profilin birlikte sunulmasıdır.",
+        a: "Genellikle aynı anlamda kullanılır. Dijivizit'te akıllı kartvizit; NFC kart, profil QR kodu ve dijital profilin birlikte sunulmasıdır.",
       },
       {
         q: "Ekip için toplu sipariş verebilir miyim?",
@@ -288,9 +288,9 @@ export const LANDINGS: Landing[] = [
     term: "Metal kartvizit",
     title: "Metal Kartvizit | Siyah, Gold, Gümüş NFC Kartvizit | Dijivizit",
     description:
-      "Metal kartvizit: mat siyah, fırçalanmış gümüş ve gold NFC kart; logo lazerle kazınır, arkada QR kod. Dokundur, profilin açılsın. 72 saatte teslim, kargo ücretsiz.",
+      "Metal kartvizit: mat siyah, fırçalanmış gümüş ve gold NFC kart; logo lazerle kazınır. Dokundur, profilin açılsın. 72 saatte teslim, kargo ücretsiz.",
     h1: "Metal kartvizit",
-    lead: "Ağırlığı ve soğuk dokusuyla elden ele geçtiği anda fark edilen kart. İçinde NFC çip, arkasında QR kod; bilgileriniz kartta değil, her zaman güncel dijital profilinizde.",
+    lead: "Ağırlığı ve soğuk dokusuyla elden ele geçtiği anda fark edilen kart. İçinde NFC çip; bilgileriniz kartta değil, her zaman güncel dijital profilinizde.",
     finishes: ["black", "silver", "gold"],
     sections: [
       {
@@ -307,7 +307,7 @@ export const LANDINGS: Landing[] = [
       {
         heading: "Metal kartta NFC çalışır mı?",
         paragraphs: [
-          "Metal, NFC sinyalini zayıflatır; bu yüzden metal NFC kartlarda çip, sinyalin geçeceği şekilde yerleştirilir. Dijivizit metal kartları iPhone XS ve sonrası ile NFC'si açık Android telefonlarda okunur. Kartın arkasındaki QR kod, NFC'si olmayan telefonlarda aynı profili açar.",
+          "Metal, NFC sinyalini zayıflatır; bu yüzden metal NFC kartlarda çip, sinyalin geçeceği şekilde yerleştirilir. Dijivizit metal kartları iPhone XS ve sonrası ile NFC'si açık Android telefonlarda okunur. NFC'si olmayan telefonlar için profilinizin QR kodunu kendi ekranınızdan okutursunuz; aynı profil açılır.",
           "Kart okunmazsa ücretsiz yenisiyle değiştiriyoruz.",
         ],
       },
@@ -363,9 +363,9 @@ export const LANDINGS: Landing[] = [
     term: "Ahşap kartvizit",
     title: "Ahşap Kartvizit | Koyu ve Açık Ahşap NFC Kartvizit | Dijivizit",
     description:
-      "Ahşap kartvizit: gerçek koyu ve açık ahşap NFC kart, logo lazerle yakılır, her kartın damar dokusu farklı. Arkada QR kod, uygulama gerekmez, kargo ücretsiz.",
+      "Ahşap kartvizit: gerçek koyu ve açık ahşap NFC kart, logo lazerle yakılır, her kartın damar dokusu farklı. Link ve QR kod da sizde, uygulama gerekmez.",
     h1: "Ahşap kartvizit",
-    lead: "Gerçek ahşaptan, her biri kendi damar dokusuyla. Sıcak ve doğal bir ilk izlenim; içinde NFC çip, arkasında QR kod.",
+    lead: "Gerçek ahşaptan, her biri kendi damar dokusuyla. Sıcak ve doğal bir ilk izlenim; içinde NFC çip, yanında profil linki ve QR kodunuz.",
     finishes: ["wood", "wood-light"],
     sections: [
       {
@@ -381,7 +381,7 @@ export const LANDINGS: Landing[] = [
       {
         heading: "Ahşap kartvizit dayanıklı mı?",
         paragraphs: [
-          "Cüzdanda taşınmaya uygundur. Uzun süre suda bırakmamak ve doğrudan ısıya maruz bırakmamak yeterli. NFC çip ve QR kod ahşap kartta da her telefonda çalışır; kart okunmazsa ücretsiz değiştiriyoruz.",
+          "Cüzdanda taşınmaya uygundur. Uzun süre suda bırakmamak ve doğrudan ısıya maruz bırakmamak yeterli. NFC çip ahşap kartta da sorunsuz çalışır; kart okunmazsa ücretsiz değiştiriyoruz.",
         ],
       },
       {
@@ -403,7 +403,7 @@ export const LANDINGS: Landing[] = [
     faq: [
       {
         q: "Ahşap kartvizitte NFC çalışır mı?",
-        a: "Evet. Ahşap NFC sinyalini engellemez; kart güncel iPhone'larda ve NFC'si açık Android telefonlarda okunur. Arkadaki QR kod her telefonda çalışır.",
+        a: "Evet. Ahşap NFC sinyalini engellemez; kart güncel iPhone'larda ve NFC'si açık Android telefonlarda okunur. NFC'si olmayan telefonlarda profil QR kodunuzu ekrandan okutursunuz.",
       },
       {
         q: "Ahşap kart ıslanırsa ne olur?",
@@ -427,9 +427,9 @@ export const LANDINGS: Landing[] = [
     term: "PVC kartvizit",
     title: "PVC NFC Kartvizit | Siyah Mat PVC Akıllı Kartvizit | Dijivizit",
     description:
-      "PVC NFC kartvizit: mat siyah, kadife dokulu, hafif ve ince akıllı kart. Telefona dokundur, profilin açılsın; arkada QR kod. KDV dahil, kargo ücretsiz.",
+      "PVC NFC kartvizit: mat siyah, kadife dokulu, hafif ve ince akıllı kart. Dokundur, profilin açılsın; link ve QR kod da sizde. KDV dahil, kargo ücretsiz.",
     h1: "PVC NFC kartvizit",
-    lead: "Banka kartı inceliğinde, mat siyah ve kadife dokulu. En hafif Dijivizit kartı; içinde NFC çip, arkasında QR kod.",
+    lead: "Banka kartı inceliğinde, mat siyah ve kadife dokulu. En hafif Dijivizit kartı; içinde NFC çip, yanında profil linki ve QR kodunuz.",
     finishes: ["pvc-black"],
     sections: [
       {
@@ -443,7 +443,7 @@ export const LANDINGS: Landing[] = [
         list: [
           "PVC: hafif, ince, daha uygun fiyatlı; günlük kullanım ve ekipler için",
           "Metal: ağır ve gösterişli; ilk izlenimin öne çıktığı yerler için",
-          "İkisinde de NFC, QR ve dijital profil aynı şekilde çalışır",
+          "İkisinde de NFC ve dijital profil aynı şekilde çalışır",
         ],
       },
       {
@@ -465,8 +465,8 @@ export const LANDINGS: Landing[] = [
         a: "Banka kartı ile aynı malzeme ailesindendir; cüzdanda yıllarca taşınabilir. Çok yüksek ısıda bırakmayın.",
       },
       {
-        q: "PVC kartta da QR kod var mı?",
-        a: "Evet. Her Dijivizit kartının arkasında NFC'si olmayan telefonlar için QR kod bulunur.",
+        q: "NFC'si olmayan telefonlar PVC kartı okuyabilir mi?",
+        a: "Kartın üzerinde QR kod yoktur; NFC'si olmayan telefonlar için profilinizin QR kodunu kendi ekranınızdan okutur ya da linki paylaşırsınız.",
       },
       {
         q: "PVC kartın fiyatı ne kadar?",
