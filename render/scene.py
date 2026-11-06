@@ -165,7 +165,7 @@ FINISHES = {
     "silver": ((0.78, 0.78, 0.8), (0.1, 0.1, 0.11), 0.13, 0.75, (0.78, 0.78, 0.8)),
     # Gold, matched to the supplier's card: a mirror-polished warm gold front
     # (etched darker) and a satin gold back inside a polished rim.
-    "gold": ((0.9, 0.62, 0.2), (0.16, 0.11, 0.03), 0.06, 0.75, (0.9, 0.62, 0.2)),
+    "gold": ((0.66, 0.36, 0.045), (0.12, 0.06, 0.012), 0.1, 0.75, (0.66, 0.36, 0.045)),
 }
 
 
@@ -175,7 +175,7 @@ FINISHES = {
 # panel colour, panel metallic, panel roughness
 FRAMED_BACK = {
     "silver": ((0.5, 0.5, 0.49), 0.0, 0.72),  # matte light-grey coating
-    "gold": ((0.78, 0.52, 0.15), 1.0, 0.42),  # satin (bead-blasted) gold
+    "gold": ((0.55, 0.27, 0.03), 1.0, 0.42),  # satin (bead-blasted) gold
 }
 
 
