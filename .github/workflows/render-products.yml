@@ -1,0 +1,92 @@
+name: Render product stills
+
+# Manual only: the product-page stills (front and back of each card) from the
+# Blender scene, one runner per image. Fronts also refresh the Shopier JPEGs.
+on:
+  workflow_dispatch:
+    inputs:
+      finishes:
+        description: "Comma-separated finishes (black,silver,gold,wood,wood-light,pvc-black)"
+        default: "black,silver,gold,wood,wood-light,pvc-black"
+      sides:
+        description: "front, back or front,back"
+        default: "front,back"
+      samples:
+        description: "Cycles samples per pixel"
+        default: "128"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: render-products
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        finish: [black, silver, gold, wood, wood-light, pvc-black]
+        side: [front, back]
+    steps:
+      - name: Skip unrequested
+        id: want
+        run: |
+          case ",${{ github.event.inputs.finishes }}," in *",${{ matrix.finish }},"*) ;; *) exit 0;; esac
+          case ",${{ github.event.inputs.sides }}," in *",${{ matrix.side }},"*) echo "run=1" >> "$GITHUB_OUTPUT";; esac
+      - if: steps.want.outputs.run
+        uses: actions/checkout@v4
+      - if: steps.want.outputs.run
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - if: steps.want.outputs.run
+        run: pip install bpy==5.2.3 pillow
+      - if: steps.want.outputs.run
+        name: Render
+        run: |
+          back=""; name="${{ matrix.finish }}"
+          if [ "${{ matrix.side }}" = "back" ]; then back="--back"; name="${{ matrix.finish }}-arka"; fi
+          python3 render/scene.py --out out/png --product $back --res 1600x2000 --samples ${{ github.event.inputs.samples }} --frames 0 --finish ${{ matrix.finish }}
+          mkdir -p out/products out/shopier
+          python3 -c "from PIL import Image; im = Image.open('out/png/0000.png').convert('RGB'); im.save('out/products/$name.webp', 'WEBP', quality=86, method=6); im.save('out/shopier/$name.jpg', 'JPEG', quality=90)"
+          if [ -n "$back" ]; then rm out/shopier/*; fi
+      - if: steps.want.outputs.run
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-${{ matrix.finish }}-${{ matrix.side }}
+          path: out/products
+          retention-days: 3
+      - if: steps.want.outputs.run && matrix.side == 'front'
+        uses: actions/upload-artifact@v4
+        with:
+          name: shopier-${{ matrix.finish }}
+          path: out/shopier
+          retention-days: 3
+
+  publish:
+    needs: render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Commit stills
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp artifacts/product-*/*.webp public/landing/products/ 2>/dev/null || true
+          cp artifacts/shopier-*/*.jpg public/shopier/ 2>/dev/null || true
+          git add public/landing/products public/shopier
+          git commit -m "Update rendered product stills" || exit 0
+          git pull --rebase origin main
+          git push
+      - name: Redeploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-cloudflare.yml --ref main -f target=production

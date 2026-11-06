@@ -35,6 +35,8 @@ def parse_args():
     # Product shot: one still of the card alone, close up at a three-quarter
     # angle, for the product pages (pair with a portrait --res like 1600x2000).
     p.add_argument("--product", action="store_true")
+    # With --product: show the back of the card instead of the front.
+    p.add_argument("--back", action="store_true")
     return p.parse_args(argv)
 
 
@@ -662,7 +664,7 @@ def animate(card, phone, cam, target, mix_profile, mix_saved, portrait):
                 pass
 
 
-def product_shot(scene, finish):
+def product_shot(scene, finish, back=False):
     """Replace the animation with one static close-up of the card: standing
     upright, turned three-quarters and rolled into a diagonal, seen from eye
     level so the face, the edge and the thickness read in 3D."""
@@ -672,14 +674,14 @@ def product_shot(scene, finish):
     for obj in (card, cam, target):
         obj.animation_data_clear()
     card.location = (0.0, 0.0, 0.0)
-    card.rotation_euler = tuple(math.radians(a) for a in (92, 12, -30))
+    card.rotation_euler = tuple(math.radians(a) for a in ((92, 12, 150) if back else (92, 12, -30)))
     target.location = (0.0, 0.0, 0.0)
     cam.location = (0.2, -2.65, 0.05)
     # Highlight: a softbox at the camera's mirror image over the card face,
     # nudged up so the reflection sweeps across the top of the card and the
     # brushed metal gets the bright-to-dark gradient real metal shows.
     bpy.context.view_layer.update()
-    n = (card.matrix_world.to_3x3() @ Vector((0, 0, 1))).normalized()
+    n = (card.matrix_world.to_3x3() @ Vector((0, 0, -1 if back else 1))).normalized()
     v = (cam.location - card.location).normalized()
     r = 2 * n.dot(v) * n - v
     hl = bpy.data.lights.new("Highlight", "AREA")
@@ -709,7 +711,7 @@ def main():
     portrait = args.portrait
     scene = build(portrait, args.finish, args.hide_phone or args.product)
     if args.product:
-        product_shot(scene, args.finish)
+        product_shot(scene, args.finish, args.back)
     w, h = (int(v) for v in args.res.split("x"))
     scene.render.resolution_x, scene.render.resolution_y = w, h
     scene.render.resolution_percentage = 100
