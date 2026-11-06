@@ -274,17 +274,17 @@ def card_face_material(name, mask_path, finish="black"):
             # smoother, slightly lighter circle with a crisp seam around it.
             r = node(nt, "ShaderNodeMapRange", (-400, -100))
             r.inputs["To Min"].default_value = 0.62
-            r.inputs["To Max"].default_value = 0.38
+            r.inputs["To Max"].default_value = 0.5
             nt.links.new(disc, r.inputs["Value"])
             nt.links.new(r.outputs["Result"], bsdf.inputs["Roughness"])
             c = node(nt, "ShaderNodeMix", (-200, 250))
             c.data_type = "RGBA"
             c.inputs["A"].default_value = (*FINISHES["black"][0], 1)
-            c.inputs["B"].default_value = (0.034, 0.034, 0.038, 1)
+            c.inputs["B"].default_value = (0.02, 0.02, 0.022, 1)
             nt.links.new(disc, c.inputs["Factor"])
             seam = node(nt, "ShaderNodeMix", (0, 250))
             seam.data_type = "RGBA"
-            seam.inputs["B"].default_value = (0.004, 0.004, 0.005, 1)
+            seam.inputs["B"].default_value = (0.002, 0.002, 0.0025, 1)
             nt.links.new(c.outputs["Result"], seam.inputs["A"])
             nt.links.new(ring, seam.inputs["Factor"])
             nt.links.new(seam.outputs["Result"], bsdf.inputs["Base Color"])
