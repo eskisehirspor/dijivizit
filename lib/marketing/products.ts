@@ -35,8 +35,6 @@ const HAND_PHOTOS: Partial<Record<Finish["id"], number>> = {
   black: 1,
   silver: 1,
   gold: 1,
-  wood: 1,
-  "wood-light": 1,
   "pvc-black": 1,
 };
 
