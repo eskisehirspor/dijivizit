@@ -6,6 +6,71 @@ import type { Guide } from "@/lib/marketing/guides";
 
 export const NEW_GUIDES: Guide[] = [
   {
+    slug: "cep-kartviziti-nedir",
+    label: "Cep kartviziti nedir?",
+    title: "Cep Kartviziti Nedir? Mobil ve Telefon Kartviziti",
+    description:
+      "Cep kartviziti, mobil kartvizit ve telefon kartviziti nedir, nasıl çalışır? Telefonda taşınan dijital kartvizitin kâğıttan farkı ve nasıl oluşturulduğu.",
+    image: "/rehber/dijital-kartvizit-nedir.jpg",
+    imageAlt: "Telefon ekranında açılmış Dijivizit mobil kartvizit profili",
+    published: "2026-11-07",
+    sections: [
+      {
+        heading: "Kısaca",
+        paragraphs: [
+          "Cep kartviziti, kâğıt yerine telefonda taşınan kartvizittir. Mobil kartvizit, telefon kartviziti, elektronik kartvizit ve dijital kartvizit aynı şeyin farklı adlarıdır: adınız, unvanınız, telefonunuz, e-postanız, adresiniz ve sosyal hesaplarınız tek bir web sayfasında toplanır, bu sayfa bir link, QR kod ya da NFC kartla paylaşılır.",
+          "Karşınızdaki kişinin uygulama indirmesine gerek yoktur; link ya da QR kod telefonun tarayıcısında açılır, tek dokunuşla bilgileriniz rehbere kaydedilir.",
+        ],
+      },
+      {
+        heading: "Cep kartviziti nasıl paylaşılır?",
+        paragraphs: [],
+        list: [
+          "NFC kart: kartı karşınızdakinin telefonuna dokundurursunuz, profil açılır.",
+          "QR kod: kendi telefon ekranınızdaki QR kodu karşınızdaki kişi kamerasıyla okutur.",
+          "Link: WhatsApp, SMS, e-posta veya Instagram üzerinden profil linkinizi gönderirsiniz.",
+          "E-posta imzası ve sunumlar: profil linkiniz ya da QR kodunuz her yazışmada sizinle gider.",
+        ],
+      },
+      {
+        heading: "Kâğıt kartvizitten farkı",
+        paragraphs: [
+          "Kâğıt kartvizit basıldığı anda sabitlenir; telefon, unvan ya da adres değişince yeniden basmanız gerekir. Cep kartvizitinde bilgilerinizi panelden güncellersiniz, daha önce kartınızı alan herkes güncel hâlini görür.",
+          "Kâğıt kartvizit çoğu zaman bir çekmecede kaybolur. Cep kartvizitindeki bilgiler ise tek dokunuşla telefon rehberine kaydedilir; WhatsApp, Instagram, konum ve web siteniz bir dokunuş uzaklıkta olur.",
+        ],
+        link: { href: "/rehber/nfc-kartvizit-mi-kagit-kartvizit-mi", label: "NFC kartvizit mi, kâğıt kartvizit mi?" },
+      },
+      {
+        heading: "Cep kartviziti nasıl oluşturulur?",
+        paragraphs: [
+          "Dijivizit'te profilinizi birkaç dakikada oluşturursunuz: fotoğrafınızı, iletişim bilgilerinizi ve linklerinizi eklersiniz, size özel profil linki ve QR kodunuz hazır olur. İsterseniz telefona dokundurunca profilinizi açan metal, ahşap veya PVC NFC kart da alabilirsiniz.",
+        ],
+        link: { href: "/rehber/dijital-kartvizit-nasil-olusturulur", label: "Dijital kartvizit nasıl oluşturulur?" },
+      },
+      {
+        heading: "Kimler kullanır?",
+        paragraphs: [
+          "Emlak danışmanları, doktorlar ve diyetisyenler, avukatlar, sigortacılar, satış temsilcileri, kuaförler ve fuarlara katılan herkes için cep kartviziti, kartvizit bastırma derdini bitirir. Ekipler için kurumsal panelden tüm çalışanların kartları tek yerden yönetilir.",
+        ],
+        link: { href: "/rehber/e-kartvizit-nedir", label: "E-kartvizit nedir?" },
+      },
+    ],
+    faq: [
+      {
+        q: "Mobil kartvizit ile dijital kartvizit aynı şey mi?",
+        a: "Evet. Mobil kartvizit, cep kartviziti, telefon kartviziti ve elektronik kartvizit aynı şeyi anlatır: telefonda açılan ve link, QR kod ya da NFC ile paylaşılan bir kartvizit.",
+      },
+      {
+        q: "Cep kartviziti için uygulama gerekir mi?",
+        a: "Hayır. Profil telefonun tarayıcısında açılır; ne sizin ne karşı tarafın uygulama indirmesi gerekir.",
+      },
+      {
+        q: "Cep kartviziti ücretli mi?",
+        a: "Dijivizit NFC kart alana dijital profil ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartsız, yalnızca link ve QR kodla kullanmak isterseniz dijital profil aylık 59,90 TL'dir.",
+      },
+    ],
+  },
+  {
     slug: "ucretsiz-dijital-kartvizit",
     label: "Ücretsiz dijital kartvizit",
     title: "Ücretsiz Dijital Kartvizit: Ne Alırsınız, Sınırı Ne?",

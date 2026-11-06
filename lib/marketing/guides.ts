@@ -366,7 +366,7 @@ const BASE_GUIDES: Guide[] = [
     faq: [
       {
         q: "Dijital kartvizit ücretsiz mi?",
-        a: "Dijital profil, Dijivizit NFC kartıyla birlikte gelir ve ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartlar metal kaplamalarda 4.000 TL, ahşap kaplamalarda 2.500 TL'dir (KDV dahil, kargo ücretsiz).",
+        a: "Dijital profil, Dijivizit NFC kartıyla birlikte gelir ve ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartlar metal kaplamalarda 4.000 TL, ahşap ve mat siyah PVC kaplamalarda 2.500 TL'dir (KDV dahil, kargo ücretsiz).",
       },
       {
         q: "Dijital kartvizitimi kaç kişiyle paylaşabilirim?",
@@ -557,13 +557,14 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "telefonda-nfc-nasil-acilir",
     label: "Telefonda NFC nasıl açılır?",
-    title: "Telefonda NFC Nasıl Açılır? iPhone, Samsung, Xiaomi, Huawei",
+    title: "Telefonda NFC Nasıl Açılır? iPhone, Samsung, Xiaomi, Poco, Oppo",
     description:
-      "Telefonda NFC nasıl açılır, NFC kartvizit nasıl okutulur? iPhone ve Android (Samsung, Xiaomi, Huawei, Oppo) için adım adım NFC açma rehberi.",
+      "NFC nasıl açılır? iPhone, Samsung, Xiaomi, Redmi, Poco, Oppo, Realme, Huawei ve yerli Android telefonlarda NFC açma adımları; kart nereye tutulur?",
     image: "/rehber/telefonda-nfc-nasil-acilir.jpg",
     imageAlt:
       "Siyah NFC kartvizit telefonun arkasına yaklaştırılmış, ekranda dijital kartvizit profili açık",
     published: "2026-11-02",
+    updated: "2026-11-07",
     sections: [
       {
         heading: "Kısaca",
@@ -600,9 +601,32 @@ const BASE_GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "Huawei, Honor, Oppo ve diğer Android telefonlarda",
+        heading: "Oppo, Realme ve OnePlus'ta NFC",
         paragraphs: [
-          'Menü adları markaya göre biraz değişir ama NFC ayarı hep bağlantı ayarlarının içindedir. Ayarlar içinde "Bağlı cihazlar", "Daha fazla bağlantı" ya da "Bağlantı ve paylaşım" bölümüne bakın veya ayarların arama kutusuna NFC yazın.',
+          "Bu üç marka aynı ColorOS tabanlı ayar menüsünü kullanır; adlar sürüme göre küçük farklar gösterebilir.",
+        ],
+        list: [
+          "Ayarlar'ı açın.",
+          '"Bağlantı ve paylaşım" bölümüne girin (bazı sürümlerde "Diğer kablosuz bağlantılar").',
+          "NFC'yi açın.",
+          "Hızlı ayarlar panelinde NFC düğmesi yoksa düzenle simgesinden ekleyebilirsiniz.",
+        ],
+      },
+      {
+        heading: "Huawei ve Honor'da NFC",
+        paragraphs: [],
+        list: [
+          "Ayarlar'ı açın.",
+          '"Daha fazla bağlantı" bölümüne girin.',
+          "NFC'yi açın.",
+          "Bildirim panelini aşağı çekip NFC düğmesine de dokunabilirsiniz.",
+        ],
+      },
+      {
+        heading: "Omix, General Mobile, Reeder, TCL ve diğer Android telefonlarda",
+        paragraphs: [
+          'Saf Android\'e yakın arayüz kullanan telefonlarda NFC genellikle Ayarlar > Bağlı cihazlar > Bağlantı tercihleri > NFC yolundadır. Menü adları markaya göre değişse de NFC ayarı hep bağlantı ayarlarının içindedir; en hızlısı ayarların arama kutusuna "NFC" yazmaktır.',
+          "Her modelde NFC bulunmaz; özellikle giriş seviyesi telefonlarda bu özellik olmayabilir. Aramada NFC çıkmıyorsa telefonunuzda NFC yoktur.",
         ],
       },
       {
@@ -623,6 +647,18 @@ const BASE_GUIDES: Guide[] = [
       {
         q: "Telefonumda NFC olup olmadığını nasıl anlarım?",
         a: "Ayarların arama kutusuna NFC yazın. Sonuç çıkıyorsa telefonunuzda NFC vardır. iPhone XS ve sonraki tüm iPhone'larda NFC okuma vardır.",
+      },
+      {
+        q: "iPhone'da NFC nasıl açılır?",
+        a: "iPhone XS ve sonraki modellerde NFC'yi açmanıza gerek yoktur; ekran açıkken etiketleri kendiliğinden okur. Ayarlarda NFC düğmesi aramayın. iPhone 7, 8 ve X'te Denetim Merkezi'ne NFC Etiketi Okuyucu'yu ekleyip ona dokunun.",
+      },
+      {
+        q: "Poco ve Redmi telefonlarda NFC nerede?",
+        a: "Ayarlar > Bağlantı ve paylaşım > NFC yolundadır. Kontrol merkezini aşağı çekip NFC düğmesine dokunarak da açabilirsiniz.",
+      },
+      {
+        q: "Oppo telefonda NFC nasıl açılır?",
+        a: "Ayarlar > Bağlantı ve paylaşım (bazı sürümlerde Diğer kablosuz bağlantılar) > NFC yolundan açılır. Realme ve OnePlus'ta da aynı yoldur.",
       },
       {
         q: "NFC açık kalırsa pil tüketir mi?",
