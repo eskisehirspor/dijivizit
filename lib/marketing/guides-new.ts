@@ -301,7 +301,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "NFC kartvizitin üzerine ne yazılır?",
         paragraphs: [
-          "NFC kartvizitte iletişim bilgileriniz kartın içindeki bağlantıyla açılan profilde durur. Bu yüzden kartın yüzeyini sade tutabilirsiniz. Dijivizit kartlarında adınız yazmaz; Dijivizit logosu ve temassız işareti metal yüzeye lazerle kazınır ya da ahşaba lazerle yakılır (10 ve üzeri kurumsal siparişte firma logonuz). Kartın arkasında aynı profile açılan QR kod bulunur.",
+          "NFC kartvizitte iletişim bilgileriniz kartın içindeki bağlantıyla açılan profilde durur. Bu yüzden kartın yüzeyini sade tutabilirsiniz. Dijivizit kartlarında adınız yazmaz; Dijivizit logosu ve temassız işareti metal yüzeye lazerle kazınır ya da ahşaba lazerle yakılır (10 ve üzeri kurumsal siparişte firma logonuz). Kartın arka yüzü boştur; aynı profile açılan QR kodunuz ise dijital olarak sizdedir.",
           "Numaranız ya da unvanınız değiştiğinde kartı yeniden bastırmazsınız; profilinizi güncellersiniz.",
         ],
         link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
@@ -379,7 +379,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "NFC kart ve QR kod",
         paragraphs: [
-          "Link-in-bio sayfaları çoğunlukla bir bağlantı olarak paylaşılır. Dijital kartvizitte aynı profil, telefona dokundurulan bir NFC kartla, kamerayla okutulan bir QR kodla ya da bir bağlantıyla açılır. Dijivizit'te PVC, metal ve ahşap NFC kartların arkasında aynı profile giden QR kod bulunur; kartsız dijital kartvizitte de profil linki ve QR kod verilir.",
+          "Link-in-bio sayfaları çoğunlukla bir bağlantı olarak paylaşılır. Dijital kartvizitte aynı profil, telefona dokundurulan bir NFC kartla, kamerayla okutulan bir QR kodla ya da bir bağlantıyla açılır. Dijivizit'te PVC, metal ve ahşap NFC kartlarla birlikte aynı profile giden link ve QR kod verilir; kartsız dijital kartvizitte de profil linki ve QR kod verilir.",
         ],
         link: { href: "/nfc-kartvizit", label: "NFC kartvizit nasıl çalışır?" },
       },
@@ -439,7 +439,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [],
         list: [
           "NFC çip: Kartın içindedir, telefona dokundurulunca profilinizi açar. Pili yoktur, şarj edilmez; enerjisini telefondan alır.",
-          "QR kod: Kartın arkasındadır. NFC'si olmayan ya da kapalı olan telefonlar kamerayla okutarak aynı profili açar.",
+          "QR kod: Profilinize aittir ve telefonunuzda durur. NFC'si olmayan ya da kapalı olan telefonlar onu ekranınızdan okutarak aynı profili açar.",
           "Dijital profil: Fotoğrafınız, iletişim bilgileriniz, sosyal medya hesaplarınız, adresiniz ve belgeleriniz bu sayfada durur. Bilgileriniz değişince yalnızca profili güncellersiniz.",
         ],
         link: { href: "/rehber/nfc-kartvizit-nedir", label: "NFC kartvizit nasıl çalışır?" },
@@ -492,7 +492,7 @@ export const NEW_GUIDES: Guide[] = [
     faq: [
       {
         q: "Akıllı kartvizit ile NFC kartvizit aynı şey mi?",
-        a: "Genellikle aynı anlamda kullanılır. Akıllı kartvizit; NFC kart, kartın arkasındaki QR kod ve dijital profilin birlikte sunulmasıdır.",
+        a: "Genellikle aynı anlamda kullanılır. Akıllı kartvizit; NFC kart, profil QR kodu ve dijital profilin birlikte sunulmasıdır.",
       },
       {
         q: "Akıllı kartvizitin pili biter mi?",
@@ -805,7 +805,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "Kısa cevap",
         paragraphs: [
-          "NFC kartvizit okunmuyorsa sorun çoğu zaman karttan değil telefondan kaynaklanır: Android'de NFC kapalıdır, kart telefonun okuma noktasına tutulmamıştır, kalın ya da metal kılıf sinyali keser veya telefon NFC etiketi okumayan eski bir modeldir. Bu sırada kartın arkasındaki QR kodu kamerayla okutarak profili hemen açabilirsiniz.",
+          "NFC kartvizit okunmuyorsa sorun çoğu zaman karttan değil telefondan kaynaklanır: Android'de NFC kapalıdır, kart telefonun okuma noktasına tutulmamıştır, kalın ya da metal kılıf sinyali keser veya telefon NFC etiketi okumayan eski bir modeldir. Bu sırada profilinizin QR kodunu kendi ekranınızdan okutarak profili hemen açabilirsiniz.",
         ],
       },
       {
@@ -851,14 +851,14 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "5. QR kod yedeğini kullanın",
         paragraphs: [
-          "Dijivizit kartlarının arkasında, NFC ile açılan profile giden QR kod bulunur. Telefonun kamerasını açıp koda tutmanız yeterlidir. NFC'si olmayan ya da kapalı olan her telefon, eski modeller dahil, profili bu yolla açar. Tanışma anında vakit kaybetmemek için ilk denemede okumazsa QR'a geçin.",
+          "Her Dijivizit kullanıcısının, NFC ile açılan profile giden bir QR kodu vardır. Kodu kendi telefonunuzun ekranında gösterirsiniz; karşı tarafın kamerayı koda tutması yeterlidir. NFC'si olmayan ya da kapalı olan her telefon, eski modeller dahil, profili bu yolla açar. Tanışma anında vakit kaybetmemek için ilk denemede okumazsa QR'a geçin.",
         ],
         link: { href: "/rehber/qr-kod-kartvizit", label: "QR kod kartvizit rehberi" },
       },
       {
         heading: "Hiçbir telefonda okumuyorsa",
         paragraphs: [
-          "Kartı NFC'si açık iki farklı telefonda denediyseniz ve hiçbiri okumuyorsa sorun kartta olabilir. Kartınız NFC ya da QR ile okunmuyorsa bize yazın; sorunu birlikte kontrol ederiz, karttan kaynaklanıyorsa kargo dahil ücretsiz yenisini göndeririz. Bu sürede profilinizi link ya da QR ile paylaşmaya devam edebilirsiniz.",
+          "Kartı NFC'si açık iki farklı telefonda denediyseniz ve hiçbiri okumuyorsa sorun kartta olabilir. Kartınız NFC ile okunmuyorsa bize yazın; sorunu birlikte kontrol ederiz, karttan kaynaklanıyorsa kargo dahil ücretsiz yenisini göndeririz. Bu sürede profilinizi link ya da QR ile paylaşmaya devam edebilirsiniz.",
         ],
         link: { href: "/yasal/teslimat-ve-iade", label: "Teslimat, değişim ve iade" },
       },
@@ -866,7 +866,7 @@ export const NEW_GUIDES: Guide[] = [
     faq: [
       {
         q: "iPhone NFC kartvizit okumuyor, ne yapmalıyım?",
-        a: "Ekranın açık olduğundan emin olun, kartı arka yüzün üst kısmına, kameraların yakınına tutun ve kılıfı çıkarıp deneyin. iPhone 7, 8 ve X'te Denetim Merkezi'ndeki NFC Etiketi Okuyucu'yu kullanın. Olmazsa kartın arkasındaki QR kodu okutun.",
+        a: "Ekranın açık olduğundan emin olun, kartı arka yüzün üst kısmına, kameraların yakınına tutun ve kılıfı çıkarıp deneyin. iPhone 7, 8 ve X'te Denetim Merkezi'ndeki NFC Etiketi Okuyucu'yu kullanın. Olmazsa profilinizin QR kodunu kendi ekranınızdan okutun.",
       },
       {
         q: "Kart bildirimi çıkıyor ama profil açılmıyorsa?",
@@ -938,7 +938,7 @@ export const NEW_GUIDES: Guide[] = [
         heading: "NFC kartvizitler neden kredi kartı boyutunda?",
         paragraphs: [
           "NFC kartlar, banka ve kimlik kartlarıyla aynı üretim standardını kullanır. Bu ölçü cüzdanların kart bölmelerine, kartlıklara ve telefon kılıflarının kart cebine tam oturur. 85 × 55 mm'lik kâğıt kartvizitten yaklaşık 1 mm daha kısadır; elde aradaki fark hissedilmez.",
-          "Dijivizit'in PVC, metal ve ahşap kartları kredi kartı boyutundadır. Ön yüzde Dijivizit logosu ve temassız işareti, arkada profilinize açılan QR kod bulunur.",
+          "Dijivizit'in PVC, metal ve ahşap kartları kredi kartı boyutundadır. Ön yüzde Dijivizit logosu ve temassız işareti bulunur, arka yüz boştur.",
         ],
         link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
       },
@@ -1300,14 +1300,14 @@ export const NEW_GUIDES: Guide[] = [
         heading: "Kendin yap mı, yönetilen profil mi?",
         paragraphs: [],
         list: [
-          "Kartı kendiniz programlarsanız: Bağlantı değişince kartı yeniden yazarsınız; analitik, rehbere kaydet düğmesi ve kayıp kart kapatma yoktur; kartın arkasında QR kod olması için ayrıca baskı gerekir.",
+          "Kartı kendiniz programlarsanız: Bağlantı değişince kartı yeniden yazarsınız; analitik, rehbere kaydet düğmesi ve kayıp kart kapatma yoktur; profilinize açılan bir QR kodu da kendiniz hazırlamanız gerekir.",
           "Yönetilen profilde: Kart hazır gelir, siz yalnızca profili panelden güncellersiniz; görüntülenmeleri görür, kaybolan kartı tek tıkla kapatırsınız.",
         ],
       },
       {
         heading: "Dijivizit kartlarında programlama gerekmez",
         paragraphs: [
-          "Dijivizit kartları profilinize bağlı olarak 72 saatte kapınıza gelir. Kartın arkasında aynı profile açılan QR kod bulunur. Bilgilerinizi panelden değiştirirsiniz; karta uygulamayla bir şey yazmanız gerekmez. Kart okunmazsa ücretsiz yenisiyle değiştirilir.",
+          "Dijivizit kartları profilinize bağlı olarak 72 saatte kapınıza gelir. Aynı profile açılan link ve QR kod da sizde olur. Bilgilerinizi panelden değiştirirsiniz; karta uygulamayla bir şey yazmanız gerekmez. Kart okunmazsa ücretsiz yenisiyle değiştirilir.",
         ],
         link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
       },
@@ -1581,7 +1581,7 @@ export const NEW_GUIDES: Guide[] = [
       },
       {
         q: "Ziyaretçinin telefonunda NFC yoksa?",
-        a: "Dijivizit kartlarının arkasında aynı profile açılan QR kod bulunur; kamerayla okutmak yeterlidir.",
+        a: "Profilinizin QR kodunu kendi telefonunuzun ekranından gösterirsiniz; karşı tarafın kamerayla okutması yeterlidir.",
       },
       {
         q: "Fuarda aldığım kartvizitleri nasıl saklarım?",
@@ -1628,7 +1628,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "2. QR kod",
         paragraphs: [
-          "Dijivizit kartlarının arkasında aynı profile açılan QR kod bulunur. Panelin Paylaş sayfasından QR kodunuzu indirip sunum slaytına, broşüre, vitrine, menüye ya da kargo paketine koyabilirsiniz.",
+          "Her Dijivizit profilinin, aynı profile açılan bir QR kodu vardır. Panelin Paylaş sayfasından QR kodunuzu indirip sunum slaytına, broşüre, vitrine, menüye ya da kargo paketine koyabilirsiniz.",
         ],
         link: { href: "/rehber/qr-kod-kartvizit", label: "QR kod kartvizit rehberi" },
       },
@@ -1738,7 +1738,7 @@ export const NEW_GUIDES: Guide[] = [
       {
         heading: "Dijivizit kartlarının tasarımı",
         paragraphs: [
-          "Dijivizit kartları standart bir tasarımla üretilir: ön yüzde Dijivizit logosu ve temassız işareti, arkada profilinize açılan QR kod bulunur. Kartın üzerinde adınız yazmaz. Logo metal kartlarda yüzeye lazerle kazınır, ahşap kartlarda lazerle yakılır, mat siyah PVC kartlarda mat yüzeye işlenir.",
+          "Dijivizit kartları standart bir tasarımla üretilir: ön yüzün solunda Dijivizit logosu, sağında temassız işareti bulunur; arka yüz boştur. Kartın üzerinde adınız yazmaz. Logo metal kartlarda yüzeye lazerle kazınır, ahşap kartlarda lazerle yakılır, mat siyah PVC kartlarda mat yüzeye işlenir.",
           "10 ve üzeri kartlık kurumsal siparişlerde Dijivizit logosu yerine firma logonuz işlenir ve %20 indirim uygulanır.",
         ],
         list: [

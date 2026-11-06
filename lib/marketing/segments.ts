@@ -64,7 +64,7 @@ const BASE_SEGMENTS: Landing[] = [
     faq: [
       {
         q: "Alıcının uygulama indirmesi gerekir mi?",
-        a: "Hayır. Profil telefonun tarayıcısında açılır. NFC'si kapalı telefonlarda kartın arkasındaki QR kod kamerayla okutulur.",
+        a: "Hayır. Profil telefonun tarayıcısında açılır. NFC'si kapalı telefonlarda profilinizin QR kodunu kendi telefonunuzdan okutabilir ya da linki paylaşabilirsiniz.",
       },
       {
         q: "Portföyümü kartvizitte gösterebilir miyim?",
@@ -72,7 +72,7 @@ const BASE_SEGMENTS: Landing[] = [
       },
       {
         q: "Tabelada ya da vitrinde hangi QR kodu kullanırım?",
-        a: "Panelden indirdiğiniz profil QR kodunu. Kartınızın arkasındaki kodla aynı profili açar; tabelaya bastırdıktan sonra bilgileriniz değişse de kod geçerli kalır.",
+        a: "Panelden indirdiğiniz profil QR kodunu. Kartınızla aynı profili açar; tabelaya bastırdıktan sonra bilgileriniz değişse de kod geçerli kalır.",
       },
       {
         q: "Ofisten ayrılırsam kartım ne olur?",
@@ -694,7 +694,7 @@ const BASE_SEGMENTS: Landing[] = [
       },
       {
         q: "Ahşap mı metal mi seçmeliyim?",
-        a: "Ahşap sıcak ve doğal bir izlenim bırakır, metal daha ağır ve resmîdir. Daha hafif ve uygun fiyatlı bir seçenek isterseniz mat siyah PVC de var. Hepsinde NFC çip ve arkada QR kod vardır; işlev aynıdır.",
+        a: "Ahşap sıcak ve doğal bir izlenim bırakır, metal daha ağır ve resmîdir. Daha hafif ve uygun fiyatlı bir seçenek isterseniz mat siyah PVC de var. Hepsinde NFC çip vardır ve profil linkiyle QR kod da verilir; işlev aynıdır.",
       },
       {
         q: "Logomu karta koyabilir miyim?",
@@ -1242,7 +1242,7 @@ const BASE_SEGMENTS: Landing[] = [
       },
       {
         q: "Fabrikada NFC'yi açık olmayan telefonlar ne olacak?",
-        a: "Her kartın arkasında yedek QR kod vardır; kamerayla okutulduğunda aynı profil açılır.",
+        a: "Profilinizin QR kodunu kendi telefonunuzun ekranından okutursunuz ya da linki paylaşırsınız; aynı profil açılır.",
       },
       {
         q: "Kartlara şirket logomuzu koyabilir miyiz?",
@@ -1310,7 +1310,7 @@ const BASE_SEGMENTS: Landing[] = [
     faq: [
       {
         q: "Yabancı misafirlerin telefonlarında çalışır mı?",
-        a: "Evet. Profil, NFC'li iPhone ve Android telefonlarda dokundurunca, diğer telefonlarda arkadaki QR kodla tarayıcıda açılır. Uygulama gerekmez.",
+        a: "Evet. Profil, NFC'li iPhone ve Android telefonlarda dokundurunca, diğer telefonlarda sizin ekranınızdaki QR kodla tarayıcıda açılır. Uygulama gerekmez.",
       },
       {
         q: "Sezon bitince ayrılan çalışanın kartı ne olur?",
@@ -1434,7 +1434,7 @@ const BASE_SEGMENTS: Landing[] = [
       {
         heading: "Konya'da akıllı kartvizit her telefonda çalışmalı",
         paragraphs: [
-          "Sahada karşılaştığınız herkesin telefonu yeni değildir, herkesin telefonunda NFC açık değildir. Dijivizit kartlarının arkasında yedek QR kod vardır; NFC çalışmazsa kamerayla okutulduğunda aynı profil açılır. Profil tarayıcıda açılır, uygulama indirmek gerekmez.",
+          "Sahada karşılaştığınız herkesin telefonu yeni değildir, herkesin telefonunda NFC açık değildir. NFC çalışmazsa profilinizin QR kodunu kendi telefonunuzdan okutursunuz ya da linki paylaşırsınız; aynı profil açılır. Profil tarayıcıda açılır, uygulama indirmek gerekmez.",
           "“Rehberime Kaydet” düğmesi adınızı, firmanızı, bütün telefonlarınızı ve adresinizi tek seferde rehbere ekler. Bayi sahibi numaranızı elle yazmak zorunda kalmaz; servis ve yedek parça hattınızı ayrı, etiketli satırlarda görür.",
         ],
       },
@@ -1461,7 +1461,7 @@ const BASE_SEGMENTS: Landing[] = [
     faq: [
       {
         q: "NFC'si olmayan telefonlarda çalışır mı?",
-        a: "Evet. Kartın arkasındaki QR kod kamerayla okutulduğunda aynı profil açılır.",
+        a: "Evet. Profilinizin QR kodunu kendi telefonunuzdan okutabilir ya da linki paylaşabilirsiniz; aynı profil açılır.",
       },
       {
         q: "Bayilerimize fiyat listesini nasıl güncel tutarız?",
@@ -1517,7 +1517,7 @@ const BASE_SEGMENTS: Landing[] = [
           "Denetim sonrası düzeltici faaliyet ya da teklif için tarih seçip hatırlatma kurun",
         ],
         paragraphs: [
-          "Toplantı odasında telefonlar çoğu zaman masadadır; kartı dokundurmak, kartvizit uzatmaktan daha kısa sürer. NFC'si kapalı telefonlarda kartın arkasındaki QR kod aynı profili açar.",
+          "Toplantı odasında telefonlar çoğu zaman masadadır; kartı dokundurmak, kartvizit uzatmaktan daha kısa sürer. NFC'si kapalı telefonlarda profilinizin QR kodunu kendi ekranınızdan okutursunuz.",
         ],
       },
       {

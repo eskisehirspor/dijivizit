@@ -31,7 +31,7 @@ export const MORE_SEHIR: Landing[] = [
           "Size verilen kâğıt kartvizitlerin fotoğrafını çekin; ad, firma ve telefon otomatik okunsun, her birine takip hatırlatması kurun",
         ],
         paragraphs: [
-          "Sahada herkesin telefonunda NFC açık olmayabilir. Kartın arkasındaki QR kod kamerayla okutulduğunda aynı profil açılır; uygulama indirmek gerekmez.",
+          "Sahada herkesin telefonunda NFC açık olmayabilir. Profilinizin QR kodunu kendi telefonunuzdan okutabilir ya da linki paylaşabilirsiniz; uygulama indirmek gerekmez.",
         ],
       },
       {
@@ -56,7 +56,7 @@ export const MORE_SEHIR: Landing[] = [
       },
       {
         q: "Bayinin ya da çiftçinin telefonu eskiyse çalışır mı?",
-        a: "NFC'li telefonlarda kartı dokundurmak yeter; NFC'si olmayan ya da kapalı telefonlarda kartın arkasındaki QR kod kamerayla okutulur. Profil tarayıcıda açılır.",
+        a: "NFC'li telefonlarda kartı dokundurmak yeter; NFC'si olmayan ya da kapalı telefonlarda profilinizin QR kodunu kendi ekranınızdan okutursunuz. Profil tarayıcıda açılır.",
       },
       {
         q: "Fiyat listemiz sık değişiyor, ne yapmalıyız?",
@@ -132,7 +132,7 @@ export const MORE_SEHIR: Landing[] = [
       },
       {
         q: "Yabancı alıcının telefonunda çalışır mı?",
-        a: "Evet. NFC'li iPhone ve Android telefonlarda dokundurunca, diğerlerinde kartın arkasındaki QR kodla profil tarayıcıda açılır. Uygulama gerekmez.",
+        a: "Evet. NFC'li iPhone ve Android telefonlarda dokundurunca, diğerlerinde ekranınızdaki profil QR koduyla tarayıcıda açılır. Uygulama gerekmez.",
       },
       {
         q: "Profilime İngilizce bilgi ekleyebilir miyim?",
@@ -357,7 +357,7 @@ export const MORE_SEHIR: Landing[] = [
       },
       {
         q: "Karşı tarafın telefonunda NFC kapalıysa?",
-        a: "Kartın arkasındaki QR kod kamerayla okutulduğunda aynı profil açılır; uygulama gerekmez.",
+        a: "Profilinizin QR kodunu kendi telefonunuzdan okutur ya da linki paylaşırsınız; uygulama gerekmez.",
       },
       {
         q: "Teknik dokümanlarımızı profile ekleyebilir miyiz?",
@@ -432,7 +432,7 @@ export const MORE_SEHIR: Landing[] = [
       },
       {
         q: "Yabancı turistlerin telefonunda çalışır mı?",
-        a: "Evet. NFC'li telefonlarda dokundurunca, diğerlerinde kartın arkasındaki QR kodla profil tarayıcıda açılır. Uygulama gerekmez.",
+        a: "Evet. NFC'li telefonlarda dokundurunca, diğerlerinde ekranınızdaki profil QR koduyla tarayıcıda açılır. Uygulama gerekmez.",
       },
       {
         q: "Akademisyenler için uygun mu?",
@@ -555,7 +555,7 @@ export const MORE_SEHIR: Landing[] = [
           "Görüşmede aldığınız kâğıt kartvizitler fotoğrafla kaydedilir; ad, unvan, şirket ve telefon otomatik okunur",
         ],
         paragraphs: [
-          "Fabrika toplantı odalarında NFC'si kapalı telefonlar için kartın arkasında yedek QR kod vardır; kamerayla okutulduğunda aynı profil açılır.",
+          "Fabrika toplantı odalarında NFC'si kapalı telefonlar için profilinizin QR kodunu kendi telefonunuzdan okutur ya da linki paylaşırsınız.",
         ],
       },
       {
@@ -588,7 +588,7 @@ export const MORE_SEHIR: Landing[] = [
       },
       {
         q: "NFC'si kapalı telefonlarda çalışır mı?",
-        a: "Evet. Kartın arkasındaki QR kod kamerayla okutulduğunda aynı profil açılır.",
+        a: "Evet. Profilinizin QR kodunu kendi telefonunuzdan okutabilir ya da linki paylaşabilirsiniz; aynı profil açılır.",
       },
     ],
     guides: [
