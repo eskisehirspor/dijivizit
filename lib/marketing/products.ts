@@ -26,8 +26,9 @@ export function productImage(finish: Finish): string {
 }
 
 /**
- * Real photos of the card in hand (the print composited onto the supplier's
- * blank card), 1600x2000, shown before the studio render on the product page.
+ * Product page photos: the studio render of the front (the cover), then the
+ * back, then real photos of the card in hand (the finish and print composited
+ * onto the supplier's blank card), all 1600x2000.
  */
 const HAND_PHOTOS: Partial<Record<Finish["id"], number>> = {
   black: 3,
@@ -39,12 +40,16 @@ const HAND_PHOTOS: Partial<Record<Finish["id"], number>> = {
 };
 
 export function productGallery(finish: Finish): { src: string; alt: string }[] {
+  if (isDigital(finish)) return [{ src: productImage(finish), alt: finish.name }];
   const n = HAND_PHOTOS[finish.id] ?? 0;
-  const hand = Array.from({ length: n }, (_, i) => ({
-    src: `/landing/products/${finish.id}/el-${i + 1}.webp`,
-    alt: `${finish.name}, elde`,
-  }));
-  return [...hand, { src: productImage(finish), alt: `${finish.name}, ${finish.note}` }];
+  return [
+    { src: productImage(finish), alt: `${finish.name}, ön yüz: logo ve NFC işareti` },
+    { src: `/landing/products/${finish.id}-arka.webp`, alt: `${finish.name}, arka yüz` },
+    ...Array.from({ length: n }, (_, i) => ({
+      src: `/landing/products/${finish.id}/el-${i + 1}.webp`,
+      alt: `${finish.name}, elde`,
+    })),
+  ];
 }
 
 /** Short version for the meta description (Google shows ~155 characters). */
