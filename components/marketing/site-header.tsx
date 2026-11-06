@@ -1,9 +1,7 @@
 import Link from "next/link";
 
-import { APP_ORIGIN } from "@/lib/hosts";
 import { productImage } from "@/lib/marketing/products";
 import { FINISHES, PRICING, formatPrice } from "@/lib/orders/finishes";
-import { routes } from "@/lib/routes";
 
 /** "Ürünler": a hover/focus dropdown on desktop, a plain link on phones. */
 function ProductsMenu() {
@@ -79,12 +77,6 @@ export function SiteHeader() {
           <span className="text-lg font-semibold tracking-[-0.03em]">Dijivizit</span>
         </Link>
         <nav className="flex items-center gap-0.5 sm:gap-1 lg:gap-2">
-          <a
-            href={`${APP_ORIGIN}${routes.login}`}
-            className="hidden rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap text-neutral-800 transition-colors hover:bg-white/50 lg:inline-flex"
-          >
-            Giriş yap
-          </a>
           <Link
             href="/#ozellikler"
             className="hidden rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap text-neutral-800 transition-colors hover:bg-white/50 lg:inline-flex"
