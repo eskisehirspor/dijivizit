@@ -30,13 +30,14 @@ export function productImage(finish: Finish): string {
  * back, then real photos of the card in hand (the finish and print composited
  * onto the supplier's blank card), all 1600x2000.
  */
+// One in-hand photo per card (the straight-on shot reads best).
 const HAND_PHOTOS: Partial<Record<Finish["id"], number>> = {
-  black: 3,
-  silver: 3,
-  gold: 3,
-  wood: 3,
-  "wood-light": 3,
-  "pvc-black": 3,
+  black: 1,
+  silver: 1,
+  gold: 1,
+  wood: 1,
+  "wood-light": 1,
+  "pvc-black": 1,
 };
 
 export function productGallery(finish: Finish): { src: string; alt: string }[] {
