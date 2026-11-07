@@ -329,6 +329,7 @@ const BASE_GUIDES: Guide[] = [
           "Dijital kartvizit, adınızı, unvanınızı, telefonunuzu, e-postanızı ve sosyal medya hesaplarınızı tek bir web sayfasında toplayan kartvizittir. Bu sayfa bir bağlantı, bir QR kod ya da bir NFC kart ile paylaşılır.",
           "Karşınızdaki kişi sayfayı açtığında sizi tek dokunuşla arayabilir, WhatsApp'tan yazabilir ya da bilgilerinizi rehberine kaydedebilir. Bilgileriniz kartın üzerine basılı olmadığı için değiştiğinde yeniden baskı gerekmez.",
         ],
+        link: { href: "/dijital-kartvizit", label: "Dijivizit dijital kartvizit: özellikler ve fiyatlar" },
       },
       {
         heading: "Dijital kartvizit nasıl paylaşılır?",

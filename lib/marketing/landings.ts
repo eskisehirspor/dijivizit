@@ -134,6 +134,13 @@ export const LANDINGS: Landing[] = [
     lead: "Bütün iletişim bilgileriniz, sosyal hesaplarınız, IBAN'ınız ve belgeleriniz tek bir sayfada. Bağlantıyla, QR kodla ya da NFC kartla paylaşılır; bilgileriniz değiştiğinde siz güncellersiniz, herkes yenisini görür.",
     sections: [
       {
+        heading: "Dijital kartvizit nedir?",
+        paragraphs: [
+          "Dijital kartvizit, kâğıt kartvizitin telefonda açılan hâlidir: adınız, unvanınız, telefonunuz, WhatsApp'ınız, e-postanız, adresiniz ve sosyal hesaplarınız tek bir web sayfasında durur. Bu sayfa bir bağlantıyla, QR kodla ya da NFC kartla paylaşılır; karşı tarafın uygulama indirmesi gerekmez.",
+          "Kâğıttan farkı, bilgilerin her zaman güncel kalmasıdır. Numaranız ya da unvanınız değişince panelden düzeltirsiniz; daha önce kartınızı alan herkes yeni bilgiyi görür. Mobil kartvizit, elektronik kartvizit, cep kartviziti ve e-kartvizit aynı şeyin farklı adlarıdır.",
+        ],
+      },
+      {
         heading: "Dijital kartvizitte neler olur?",
         paragraphs: [
           "Dijivizit profiliniz, karşınızdakinin telefonunda açılan sade bir sayfadır. Üstte fotoğrafınız, adınız, unvanınız ve şirketiniz; altında dokunulabilir iletişim satırları yer alır.",
@@ -180,10 +187,21 @@ export const LANDINGS: Landing[] = [
         ],
       },
     ],
+    compare: [
+      ["Bilgi değişince", "Yeniden basım gerekir", "Panelden güncellenir, kart aynı kalır"],
+      ["Rehbere kayıt", "Numara elle yazılır", "Tek dokunuşla tüm bilgiler kaydedilir"],
+      ["İçerik", "Ad, telefon, e-posta", "WhatsApp, konum, sosyal hesaplar, IBAN, PDF"],
+      ["Paylaşım", "Yalnızca yüz yüze", "Link, QR kod ve NFC kart"],
+      ["Ölçüm", "Yok", "Kaç kez, nereden açıldığı görünür"],
+    ],
     faq: [
       {
-        q: "Dijital kartvizit ücretli mi?",
-        a: "Dijital profil ilk yıl ücretsizdir; sonrasında aylık küçük bir ücret alınır. Güncel tutarlar Fiyatlar sayfasında yazar. NFC kart bir kez satın alınır.",
+        q: "Dijital kartvizit fiyatları ne kadar?",
+        a: "Dijivizit'te NFC kartla birlikte dijital profil ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartlar ahşap ve mat siyah PVC'de 2.500 TL, metalde 4.000 TL'dir (KDV ve kargo dahil). Kartsız, yalnızca link ve QR kodla kullanım aylık 59,90 TL'dir.",
+      },
+      {
+        q: "Dijital kartvizit hangi telefonlarda açılır?",
+        a: "Link ve QR kod her akıllı telefonda açılır. NFC kart iPhone XS ve sonrası ile NFC'si olan Android telefonlarda dokundurunca açılır; uygulama gerekmez.",
       },
       {
         q: "Bilgilerimi değiştirince yeni kart gerekir mi?",

@@ -34,6 +34,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
+/** The money pages every guide points at, with their exact search terms as anchors. */
+const HUBS = [
+  { label: "Dijital kartvizit", href: "/dijital-kartvizit" },
+  { label: "NFC kartvizit", href: "/nfc-kartvizit" },
+  { label: "Akıllı kartvizit", href: "/akilli-kartvizit" },
+  { label: "Metal kartvizit", href: "/metal-kartvizit" },
+  { label: "Dijital kartvizit fiyatları", href: "/dijital-kartvizit-fiyatlari" },
+];
+
 export default async function GuidePage({ params }: Params) {
   const guide = getGuide((await params).slug);
   if (!guide) notFound();
@@ -188,6 +197,20 @@ export default async function GuidePage({ params }: Params) {
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
+          <nav aria-label="Konular" className="flex flex-col gap-3">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">Konular</p>
+            <div className="flex flex-wrap gap-2">
+              {HUBS.map((h) => (
+                <Link
+                  key={h.href}
+                  href={h.href}
+                  className="rounded-full border border-border px-3 py-1.5 text-sm hover:bg-muted"
+                >
+                  {h.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
           <div className="flex flex-col gap-4">
             <p className="text-sm font-medium tracking-wide text-muted-foreground">
               Diğer rehberler
