@@ -32,6 +32,14 @@ export const COMPARISON = [
 
 export const FAQ = [
   {
+    q: "Dijital kartvizit nedir?",
+    a: "Dijital kartvizit, kâğıt kartvizitin telefonda açılan hâlidir: telefon, WhatsApp, e-posta, adres, sosyal hesaplar ve IBAN tek bir sayfada durur. Link, QR kod ya da NFC kartla paylaşılır; karşı taraf uygulama indirmeden açar ve tek dokunuşla rehberine kaydeder.",
+  },
+  {
+    q: "Dijital kartvizit ücretsiz mi?",
+    a: "NFC kartla birlikte dijital profil ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartlar ahşap ve mat siyah PVC'de 2.500 TL, metalde 4.000 TL'dir; KDV ve kargo dahildir.",
+  },
+  {
     q: "Dijivizit güvenilir mi?",
     a: "Dijivizit, Eskişehir'deki ASD Tasarım Ltd. Şti.'nin markasıdır. Ödeme Shopier güvencesiyle alınır, kartlar 72 saatte teslim edilir, okunmayan kart ücretsiz değiştirilir ve 14 gün cayma hakkın vardır.",
   },
@@ -69,7 +77,7 @@ export const FAQ = [
   },
   {
     q: "Hangi kaplama seçenekleri var?",
-    a: "Mat siyah PVC, siyah metal, mat fırçalanmış gümüş, mat fırçalanmış gold, koyu ceviz ve açık meşe ahşap. Metalde logo lazerle kazınır, ahşapta yakılır, PVC'de mat yüzeye işlenir; NFC hepsinde aynı şekilde çalışır. 10 ve üzeri kurumsal siparişte firma logon işlenir.",
+    a: "Mat siyah PVC, kumlu mat siyah metal, parlak gümüş, ayna parlaklığında gold, koyu ceviz ve açık meşe ahşap. Baskı yalnızca ön yüzdedir: solda logo, sağda NFC işareti. Metalde logo lazerle kazınır, ahşapta yakılır, PVC'de mat yüzeye işlenir; NFC hepsinde aynı şekilde çalışır. 10 ve üzeri kurumsal siparişte firma logon işlenir.",
   },
   {
     q: "Karşımdakinin bilgilerini de alabilir miyim?",
@@ -102,4 +110,38 @@ export const KEYWORDS = [
   "elektronik kartvizit",
   "online kartvizit",
   "kartvizit yerine NFC",
+] as const;
+
+/** Short answers to what people search around "dijital kartvizit". */
+export const GUIDE_BLOCKS = [
+  {
+    title: "Dijital kartvizit nasıl yapılır?",
+    body: "Kaplamanı seçip siparişi verirsin, panelde fotoğrafını, iletişim bilgilerini ve linklerini eklersin, kartın 72 saatte gelir. Kartı telefona dokundurduğunda profilin açılır; link ve QR kodun da hazırdır.",
+    href: "/rehber/dijital-kartvizit-nasil-olusturulur",
+  },
+  {
+    title: "Fiyatlar neye göre değişir?",
+    body: "Fark kartın malzemesindedir: ahşap ve mat siyah PVC 2.500 TL, metal 4.000 TL. Profil ilk yıl ücretsiz, sonra aylık 59,90 TL; içinde analitik, kişi listesi, hatırlatmalar ve sınırsız güncelleme var.",
+    href: "/dijital-kartvizit-fiyatlari",
+  },
+  {
+    title: "NFC mi, QR kod mu?",
+    body: "NFC kart yüz yüze tanışmada en hızlısıdır: dokundurmak yeter. QR kod ve link ise her telefonda çalışır; e-posta imzasında, sunumda ve sosyal medyada paylaşılır. Dijivizit'te üçü birlikte gelir.",
+    href: "/nfc-kartvizit",
+  },
+  {
+    title: "Rehbere kaydetme (vCard)",
+    body: 'Profildeki "Rehberime Kaydet" düğmesi bilgilerini vCard (VCF) dosyası olarak karşı tarafın telefonuna ekler: ad, şirket, unvan, telefonlar, e-posta, adres ve web adresleri tek seferde kaydedilir.',
+    href: "/rehber/vcf-dosyasi-nedir",
+  },
+  {
+    title: "Dijital kartvizit nasıl kullanılır?",
+    body: "Toplantıda kartı dokundur, Instagram biyografine ve WhatsApp durumuna profil linkini koy, e-posta imzana ve sunumlarına QR kodunu ekle. Fuarda kartvizit bitmez, her açılış panelde görünür.",
+    href: "/rehber/dijital-kartvizit-nasil-paylasilir",
+  },
+  {
+    title: "Dijital kartvizit örnekleri",
+    body: "Emlak danışmanından diyetisyene, avukattan kuaföre: mesleğine göre profilde hangi bilgilerin öne çıktığını örneklerle gör.",
+    href: "/rehber/dijital-kartvizit-ornekleri",
+  },
 ] as const;

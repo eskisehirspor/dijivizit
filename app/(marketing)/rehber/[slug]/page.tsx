@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 /** The money pages every guide points at, with their exact search terms as anchors. */
 const HUBS = [
-  { label: "Dijital kartvizit", href: "/dijital-kartvizit" },
+  { label: "Dijital kartvizit", href: "/" },
   { label: "NFC kartvizit", href: "/nfc-kartvizit" },
   { label: "Akıllı kartvizit", href: "/akilli-kartvizit" },
   { label: "Metal kartvizit", href: "/metal-kartvizit" },

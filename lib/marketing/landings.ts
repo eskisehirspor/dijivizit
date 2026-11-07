@@ -126,11 +126,11 @@ export const LANDINGS: Landing[] = [
   },
   {
     slug: "dijital-kartvizit",
-    term: "Dijital kartvizit",
-    title: "Dijital Kartvizit | Profil, QR Kod ve NFC Kart | Dijivizit",
+    term: "Dijital kartvizit özellikleri",
+    title: "Dijital Kartvizit Özellikleri: Profil, QR ve NFC | Dijivizit",
     description:
       "Dijital kartvizit: telefon, WhatsApp, e-posta, sosyal medya ve IBAN tek sayfada. Link, QR ya da NFC kartla paylaşın; bilgileriniz değişince anında güncelleyin.",
-    h1: "Dijital kartvizit",
+    h1: "Dijital kartvizit özellikleri",
     lead: "Bütün iletişim bilgileriniz, sosyal hesaplarınız, IBAN'ınız ve belgeleriniz tek bir sayfada. Bağlantıyla, QR kodla ya da NFC kartla paylaşılır; bilgileriniz değiştiğinde siz güncellersiniz, herkes yenisini görür.",
     sections: [
       {

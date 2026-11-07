@@ -8,12 +8,18 @@ import { FinishPicker } from "@/components/marketing/finish-picker";
 import { WhyDijivizit } from "@/components/marketing/why-dijivizit";
 import { LifestyleImage } from "@/components/marketing/lifestyle-image";
 import { ScrollSequence, type SequenceCaption } from "@/components/marketing/scroll-sequence";
-import { COMPARISON, FAQ, KEYWORDS, USE_CASES } from "@/components/marketing/seo-content";
+import {
+  COMPARISON,
+  FAQ,
+  GUIDE_BLOCKS,
+  KEYWORDS,
+  USE_CASES,
+} from "@/components/marketing/seo-content";
 import { CONTACT } from "@/lib/contact";
 import { APP_ORIGIN, MARKETING_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
 
-const TITLE = "Dijital Kartvizit ve NFC Kartvizit | Dijivizit";
+const TITLE = "Dijital Kartvizit | NFC ve QR Akıllı Kartvizit | Dijivizit";
 const DESCRIPTION =
   "Dijital kartvizit ve NFC kartvizit: telefona dokundur, profilin açılsın. Metal, ahşap ve PVC kart, QR kod, rehbere tek dokunuşla kayıt. 72 saatte kargoda.";
 
@@ -158,7 +164,7 @@ export default function HomePage() {
         <div className="mb-12 flex max-w-2xl flex-col gap-4">
           <p className="text-sm font-medium tracking-wide text-muted-foreground">Kaplamalar</p>
           <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
-            Altı kaplama. Tek dokunuş.
+            Dijital kartvizit modelleri: altı kaplama.
           </h2>
         </div>
         <FinishPicker />
@@ -186,7 +192,7 @@ export default function HomePage() {
           <div className="flex max-w-2xl flex-col gap-4">
             <p className="text-sm font-medium tracking-wide text-muted-foreground">Nasıl çalışır</p>
             <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
-              Üç adım. Bir jest.
+              Dijital kartvizit nasıl yapılır? Üç adım.
             </h2>
           </div>
           <ol className="mt-16 grid gap-10">
@@ -316,13 +322,37 @@ export default function HomePage() {
       </section>
 
       <section className="border-t border-border/60">
+        <div className="mx-auto w-full max-w-6xl px-6 py-28 sm:py-36">
+          <div className="flex max-w-2xl flex-col gap-4">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">Rehber</p>
+            <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
+              Dijital kartvizit, kısaca.
+            </h2>
+          </div>
+          <div className="mt-16 grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {GUIDE_BLOCKS.map((b) => (
+              <article key={b.title} className="flex flex-col gap-3 border-t border-border/60 pt-6">
+                <h3 className="text-xl font-semibold tracking-tight">{b.title}</h3>
+                <p className="text-base leading-relaxed text-pretty text-muted-foreground">
+                  {b.body}
+                </p>
+                <Link href={b.href} className="text-sm font-medium underline underline-offset-4">
+                  Devamını oku
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border/60">
         <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-28 sm:py-36 lg:grid-cols-[1fr_1.4fr]">
           <div className="flex flex-col gap-4">
             <p className="text-sm font-medium tracking-wide text-muted-foreground">
               Sık sorulan sorular
             </p>
             <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
-              NFC kartvizit hakkında.
+              Dijital kartvizit hakkında.
             </h2>
             <p className="max-w-sm text-base leading-relaxed text-pretty text-muted-foreground">
               Ayrıntılar için{" "}
@@ -334,7 +364,7 @@ export default function HomePage() {
                 href="/dijital-kartvizit"
                 className="text-foreground underline underline-offset-4"
               >
-                dijital kartvizit
+                dijital kartvizit özellikleri
               </Link>{" "}
               ve{" "}
               <Link
