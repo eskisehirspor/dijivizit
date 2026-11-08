@@ -267,6 +267,9 @@ def hero(res, finish="black", v=0, back=False):
     spot("Beam", (0.4, 0.6, 6.0), (0, 0, 1.0), 2200, 14, (1.0, 0.95, 0.88), 0.35)
     area("Rim", (-1.8 if v % 2 else 1.8, 1.6, 3.0), (0, 0, 1.15), 380, 0.8, rim)
     area("Fill", (0, -3.5, 1.4), (0, 0, 1.1), 90, 3, (0.9, 0.92, 1.0))
+    # Soft panel up and in front: polished metal mirrors it instead of the
+    # black room, so silver and gold read as metal.
+    area("Panel", (0.6, -2.4, 3.2), (0, 0, 1.15), 160, 3.0, (1.0, 0.97, 0.93))
     particles(60, (0, 0, 1.5), (1.2, 1.0, 1.4), 0.004, emissive("Dust", (1.0, 0.92, 0.8), 3.0), seed=v)
     haze(0.01)
     camera((0.0, -5.4, 1.75), (0, 0, 1.4), lens=62)
@@ -280,15 +283,15 @@ def macro(res, finish="gold", v=0):
     card = load(lib, "Macro")["Macro"]
     card.location = (0, 0, 0.012)
     card.rotation_euler = (0, 0, math.radians(18 + v * 9))
-    area("Key", (-0.9, -0.6, 1.4), (0, 0, 0), 260, 0.9, (1.0, 0.94, 0.86))
-    area("Top", (0.2, 0.6, 1.6), (0, 0, 0), 160, 1.6, (1.0, 1.0, 1.0))
+    spot("Key", (-0.9, -0.6, 1.4), (0, 0, 0), 160, 30, (1.0, 0.94, 0.86), 0.6)
     area("Rim", (0.8, 1.2, 0.5), (0, 0, 0), 120, 0.6, WARM[v % len(WARM)])
     # A big soft panel behind the card: polished metals mirror it, so the
     # material's own colour shows instead of a black reflection.
-    area("Mirror", (-0.7, 1.6, 0.5), (0, 0, 0.05), 140, 2.6, (1.0, 0.96, 0.9))
-    cam = camera((0.62, -0.9, 0.42), (-0.05, 0.05, 0.0), lens=75)
+    area("Mirror", (-0.4, 1.8, 1.2), (0, 0, 0.05), 45, 2.0, (1.0, 0.96, 0.9))
+    cam = camera((0.5, -0.75, 0.62), (-0.04, 0.04, 0.0), lens=70)
     cam.data.dof.use_dof = True
-    cam.data.dof.focus_distance = (Vector((0.62, -0.9, 0.42)) - Vector((0.05, -0.05, 0.0))).length
+    cam.data.dof.focus_distance = (Vector((0.5, -0.75, 0.62)) - Vector((0.0, 0.0, 0.0))).length
+    cam.data.dof.aperture_fstop = 2.8
     cam.data.dof.aperture_fstop = 2.0
 
 
