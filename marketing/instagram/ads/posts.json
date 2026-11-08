@@ -466,5 +466,69 @@
   "eyebrow": "Şimdi",
   "title": "Sıradaki tanışman<br><em>dijital olsun.</em>",
   "body": "dijivizit.com'da kaplamanı seç, kartın 72 saatte gelsin."
+ },
+ {
+  "id": "a51",
+  "photo": "marketing/instagram/ads/people/fuar-siyah.jpg",
+  "low": true,
+  "ghost": "FUAR",
+  "eyebrow": "Fuarda",
+  "title": "Standda kartvizit<br><em>bitmez artık.</em>",
+  "body": "Siyah metal NFC kartvizit. Yüzlerce ziyaretçiye tek kartla rehberlerine kaydol."
+ },
+ {
+  "id": "a52",
+  "photo": "marketing/instagram/ads/people/fuar-gold.jpg",
+  "low": true,
+  "ghost": "GOLD",
+  "eyebrow": "Fuar · Gold metal",
+  "title": "Bir kart,<br><em>bin tanışma.</em>",
+  "body": "Gold metal NFC kartvizit. Telefona dokundurun; bilgileriniz anında karşıda."
+ },
+ {
+  "id": "a53",
+  "photo": "marketing/instagram/ads/people/wood.jpg",
+  "low": true,
+  "ghost": "AHŞAP",
+  "eyebrow": "Emlak · Ahşap",
+  "title": "Anahtarı değil,<br><em>kartı uzat.</em>",
+  "body": "Ceviz ahşap NFC kartvizit. Müşteriniz numaranızı tek dokunuşla kaydeder."
+ },
+ {
+  "id": "a54",
+  "photo": "marketing/instagram/ads/people/kafe.jpg",
+  "low": true,
+  "ghost": "TAK",
+  "eyebrow": "Kahve molasında",
+  "title": "Dokundur,<br><em>kaydet, bitti.</em>",
+  "body": "Uygulama yok, kurulum yok. iPhone ve Android'de çalışır."
+ },
+ {
+  "id": "a55",
+  "photo": "marketing/instagram/ads/people/masa.jpg",
+  "low": true,
+  "ghost": "DEAL",
+  "eyebrow": "Toplantıdan sonra",
+  "title": "Anlaşma bitti,<br><em>kart masada.</em>",
+  "body": "Mat siyah metal NFC kartvizit. Unutulmayan son izlenim.",
+  "right": true
+ },
+ {
+  "id": "a56",
+  "photo": "marketing/instagram/ads/people/silver-tap.jpg",
+  "low": true,
+  "ghost": "GÜMÜŞ",
+  "eyebrow": "Akşam daveti",
+  "title": "Kâğıt kart<br><em>çantada kalır.</em>",
+  "body": "Gümüş metal NFC kartvizit. Tek dokunuşla iletişim bilgileriniz telefonda."
+ },
+ {
+  "id": "a57",
+  "photo": "marketing/instagram/ads/people/klinik.jpg",
+  "low": true,
+  "ghost": "KLİNİK",
+  "eyebrow": "Klinik · Siyah metal",
+  "title": "Hastanız<br><em>sizi kaydetsin.</em>",
+  "body": "Randevu, konum, WhatsApp — hepsi tek kartta. Profilinizi istediğiniz zaman güncelleyin."
  }
 ]

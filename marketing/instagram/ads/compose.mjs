@@ -27,7 +27,11 @@ const html = (ad, img) => `<!doctype html><html><head><meta charset="utf-8"><sty
 body{width:1080px;height:1350px;position:relative;overflow:hidden;background:#0b0a09;font-family:G;color:#f4f1ea}
 .bg{position:absolute;inset:0;background:url(${img}) center/cover}
 .type .bg{filter:blur(28px) brightness(.55) saturate(1.2);transform:scale(1.12)}
-.type h1{top:auto;bottom:250px;font-size:112px}
+.type h1,.low h1{top:auto;bottom:250px;font-size:112px}
+.low h1{font-size:96px;bottom:230px}
+.low .ghost{display:none}
+.right h1{top:150px;bottom:auto;left:auto;right:72px;text-align:right;font-size:88px}
+.low .shade{background:linear-gradient(180deg,rgba(8,7,6,.7) 0%,rgba(8,7,6,0) 16%,rgba(8,7,6,0) 52%,rgba(8,7,6,.88) 100%)}
 .type .ghost{top:auto;bottom:480px;font-size:420px}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,7,6,.82) 0%,rgba(8,7,6,.35) 30%,rgba(8,7,6,0) 48%,rgba(8,7,6,0) 72%,rgba(8,7,6,.75) 100%)}
 .ghost{position:absolute;left:-12px;top:150px;font-weight:900;font-size:300px;letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(244,241,234,.13);white-space:nowrap}
@@ -41,7 +45,7 @@ h1 em{font-style:normal;color:#d9a650}
 .foot p{max-width:560px;font-weight:500;font-size:26px;line-height:1.35;color:rgba(244,241,234,.82)}
 .cta{flex:none;border:1.5px solid rgba(244,241,234,.6);border-radius:999px;padding:18px 30px;font-weight:600;font-size:24px;letter-spacing:-.01em;background:rgba(11,10,9,.35);backdrop-filter:blur(6px)}
 .grain{position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
-</style></head><body class="${ad.bg ? "type" : ""}">
+</style></head><body class="${ad.bg ? "type" : ad.low ? "low" + (ad.right ? " right" : "") : ""}">
 <div class="bg"></div><div class="shade"></div>
 <div class="ghost">${ad.ghost}</div>
 <div class="top"><div class="brand">${MARK}Dijivizit</div><div class="tag">${ad.eyebrow}</div></div>
