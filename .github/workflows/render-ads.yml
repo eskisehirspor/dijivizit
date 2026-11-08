@@ -1,0 +1,98 @@
+name: Render Instagram ads
+
+# Manual only: cinematic ad posts from marketing/instagram/ads/posts.json.
+# One runner per rendered post, then a compose job lays the typography over
+# them and commits the finished JPEGs to the instagram-assets branch (ads/).
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: "Comma-separated post ids to render (empty = all render posts)"
+        default: ""
+      samples:
+        description: "Cycles samples"
+        default: "96"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-ads
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      ids: ${{ steps.ids.outputs.ids }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: ids
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          posts = json.load(open("marketing/instagram/ads/posts.json"))
+          want = [x for x in os.environ["IDS"].split(",") if x]
+          ids = [p["id"] for p in posts if "scene" in p and (not want or p["id"] in want)]
+          print("ids=" + json.dumps(ids))
+          PY
+        env:
+          IDS: ${{ github.event.inputs.ids }}
+
+  render:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        id: ${{ fromJson(needs.plan.outputs.ids) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install bpy==5.2.3
+      - run: python3 render/ads.py --spec marketing/instagram/ads/posts.json --ids ${{ matrix.id }} --out out --samples ${{ github.event.inputs.samples }} --res 1080x1350
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ad-${{ matrix.id }}
+          path: out/*.png
+          retention-days: 3
+
+  compose:
+    needs: render
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install chromium
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Compose
+        run: |
+          mkdir -p renders
+          # Earlier runs' renders first, so partial re-runs still have the
+          # backgrounds the type posts borrow; this run's renders win.
+          git fetch origin instagram-assets
+          git archive origin/instagram-assets ads/renders 2>/dev/null | tar -x --strip-components=2 -C renders || true
+          cp artifacts/ad-*/*.png renders/ 2>/dev/null || true
+          CHROMIUM=$(ls -d ~/.cache/ms-playwright/chromium-*/chrome-linux*/chrome | head -1) \
+            node marketing/instagram/ads/compose.mjs renders composed
+      - name: Commit to instagram-assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin instagram-assets
+          git checkout instagram-assets
+          mkdir -p ads/renders ads/posts
+          cp renders/*.png ads/renders/ 2>/dev/null || true
+          cp composed/*.jpg ads/posts/
+          git add ads
+          git commit -m "Ad posts (${{ github.run_id }})" || exit 0
+          git push origin instagram-assets

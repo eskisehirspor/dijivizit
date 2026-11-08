@@ -148,9 +148,9 @@ def particles(n, center, spread, radius, mat, seed=3):
 # --- concepts ---------------------------------------------------------------
 
 
-def kartvizit_bitti(res):
+def kartvizit_bitti(res, finish="black", v=0):
     """Black metal card floating over a heap of discarded paper business cards."""
-    card_lib = export_assets("black")
+    card_lib = export_assets(finish)
     fresh(res)
     floor(rough=0.55)
     card = load(card_lib, "Hero")["Hero"]
@@ -160,7 +160,7 @@ def kartvizit_bitti(res):
 
     paper, _ = S.principled("Paper", **{"Base Color": (0.86, 0.85, 0.82, 1), "Roughness": 0.85})
     ink, _ = S.principled("Ink", **{"Base Color": (0.05, 0.05, 0.06, 1), "Roughness": 0.6})
-    rnd = random.Random(7)
+    rnd = random.Random(7 + v)
     for i in range(170):
         bpy.ops.mesh.primitive_cube_add(size=1)
         o = bpy.context.object
@@ -194,9 +194,9 @@ def kartvizit_bitti(res):
     camera((0.0, -6.0, 1.4), (0, -0.6, 1.05), lens=58)
 
 
-def tek_dokunus(res):
+def tek_dokunus(res, finish="gold", v=0):
     """Gold card meeting a phone; rings of light spread from the tap."""
-    lib = export_assets("gold", with_phone=True)
+    lib = export_assets(finish, with_phone=True)
     fresh(res)
     floor(color=(0.008, 0.007, 0.006), rough=0.25)
     parts = load(lib, "Gold")
@@ -224,7 +224,7 @@ def tek_dokunus(res):
     camera((0.15, -5.6, 1.6), (-0.08, 0, 1.42), lens=58)
 
 
-def alti_kaplama(res):
+def alti_kaplama(res, finish=None, v=0):
     """All six finishes fanned out on a black mirror floor."""
     order = ["wood-light", "wood", "pvc-black", "silver", "gold", "black"]
     libs = [export_assets(f) for f in order]
@@ -248,7 +248,82 @@ def alti_kaplama(res):
     camera((0.0, -4.6, 0.9), (0, 0, 0.62), lens=44)
 
 
-CONCEPTS = {"kartvizit-bitti": kartvizit_bitti, "tek-dokunus": tek_dokunus, "alti-kaplama": alti_kaplama}
+WARM = [(1.0, 0.78, 0.5), (0.55, 0.7, 1.0), (1.0, 0.55, 0.35), (0.85, 0.85, 1.0)]
+
+
+def hero(res, finish="black", v=0, back=False):
+    """One card floating in a beam of light, haze and dust; angle varies with v."""
+    lib = export_assets(finish)
+    fresh(res)
+    floor(color=(0.012, 0.011, 0.01), rough=0.4)
+    card = load(lib, "Hero")["Hero"]
+    rnd = random.Random(v)
+    card.location = (0, 0, 1.15)
+    tilt = rnd.uniform(-22, 22)
+    card.rotation_euler = (math.radians(rnd.uniform(62, 80)), math.radians(rnd.uniform(-12, 12)),
+                           math.radians(tilt + (180 if back else 0)))
+    card.scale = (1.5, 1.5, 1.5)
+    rim = WARM[v % len(WARM)]
+    spot("Beam", (0.4, 0.6, 6.0), (0, 0, 1.0), 2200, 14, (1.0, 0.95, 0.88), 0.35)
+    area("Rim", (-1.8 if v % 2 else 1.8, 1.6, 3.0), (0, 0, 1.15), 380, 0.8, rim)
+    area("Fill", (0, -3.5, 1.4), (0, 0, 1.1), 90, 3, (0.9, 0.92, 1.0))
+    particles(60, (0, 0, 1.5), (1.2, 1.0, 1.4), 0.004, emissive("Dust", (1.0, 0.92, 0.8), 3.0), seed=v)
+    haze(0.01)
+    camera((0.0, -5.4, 1.75), (0, 0, 1.4), lens=62)
+
+
+def macro(res, finish="gold", v=0):
+    """Low, close, shallow-focus view along the card's face to show the material."""
+    lib = export_assets(finish)
+    fresh(res)
+    floor(color=(0.01, 0.01, 0.01), rough=0.18)
+    card = load(lib, "Macro")["Macro"]
+    card.location = (0, 0, 0.012)
+    card.rotation_euler = (0, 0, math.radians(18 + v * 9))
+    area("Key", (-0.9, -0.6, 1.4), (0, 0, 0), 260, 0.9, (1.0, 0.94, 0.86))
+    area("Top", (0.2, 0.6, 1.6), (0, 0, 0), 160, 1.6, (1.0, 1.0, 1.0))
+    area("Rim", (0.8, 1.2, 0.5), (0, 0, 0), 120, 0.6, WARM[v % len(WARM)])
+    # A big soft panel behind the card: polished metals mirror it, so the
+    # material's own colour shows instead of a black reflection.
+    area("Mirror", (-0.7, 1.6, 0.5), (0, 0, 0.05), 140, 2.6, (1.0, 0.96, 0.9))
+    cam = camera((0.62, -0.9, 0.42), (-0.05, 0.05, 0.0), lens=75)
+    cam.data.dof.use_dof = True
+    cam.data.dof.focus_distance = (Vector((0.62, -0.9, 0.42)) - Vector((0.05, -0.05, 0.0))).length
+    cam.data.dof.aperture_fstop = 2.0
+
+
+def stack(res, finish="black", v=0):
+    """A neat stack of cards (a team's worth) with one lifted off the top."""
+    lib = export_assets(finish)
+    fresh(res)
+    floor(color=(0.014, 0.013, 0.012), rough=0.3)
+    rnd = random.Random(v)
+    for i in range(14):
+        c = load(lib, f"S{i}")[f"S{i}"]
+        c.location = (rnd.uniform(-0.006, 0.006), rnd.uniform(-0.006, 0.006), 0.012 + i * 0.0125)
+        c.rotation_euler = (0, 0, math.radians(rnd.uniform(-2.5, 2.5)))
+    top = load(lib, "Top")["Top"]
+    top.location = (0.05, -0.08, 0.42)
+    top.rotation_euler = (math.radians(28), math.radians(-6), math.radians(14))
+    spot("Key", (0.8, -1.8, 3.2), (0, 0, 0.2), 900, 20, (1.0, 0.95, 0.88), 0.5)
+    area("Rim", (-1.4, 1.6, 1.2), (0, 0, 0.2), 450, 0.9, WARM[v % len(WARM)])
+    haze(0.015, size=6)
+    camera((0.0, -2.6, 1.15), (0, 0, 0.24), lens=70)
+
+
+def back_side(res, finish="black", v=0):
+    hero(res, finish, v, back=True)
+
+
+CONCEPTS = {
+    "kartvizit-bitti": kartvizit_bitti,
+    "tek-dokunus": tek_dokunus,
+    "alti-kaplama": alti_kaplama,
+    "hero": hero,
+    "macro": macro,
+    "stack": stack,
+    "back": back_side,
+}
 
 
 def main():
@@ -258,12 +333,27 @@ def main():
     p.add_argument("--concept", default="all")
     p.add_argument("--samples", type=int, default=96)
     p.add_argument("--res", default="1080x1350")
+    # Posts spec (JSON list of {id, scene, finish, v}); renders only --ids.
+    p.add_argument("--spec")
+    p.add_argument("--ids", default="")
     a = p.parse_args(argv)
     res = tuple(int(v) for v in a.res.split("x"))
     os.makedirs(a.out, exist_ok=True)
-    names = list(CONCEPTS) if a.concept == "all" else a.concept.split(",")
-    for n in names:
-        CONCEPTS[n](res)
+    if a.spec:
+        import json
+
+        posts = [x for x in json.load(open(a.spec)) if x.get("scene") in CONCEPTS]
+        want = set(a.ids.split(",")) if a.ids else None
+        jobs = [(x["id"], x["scene"], x.get("finish"), x.get("v", 0)) for x in posts if not want or x["id"] in want]
+    else:
+        names = list(CONCEPTS) if a.concept == "all" else a.concept.split(",")
+        jobs = [(n, n, None, 0) for n in names]
+    for n, scene_name, finish, v in jobs:
+        fn = CONCEPTS[scene_name]
+        if finish:
+            fn(res, finish, v)
+        else:
+            fn(res)
         sc = bpy.context.scene
         sc.cycles.samples = a.samples
         sc.render.filepath = os.path.join(a.out, f"{n}.png")

@@ -1,0 +1,470 @@
+[
+ {
+  "id": "a01",
+  "scene": "kartvizit-bitti",
+  "finish": "black",
+  "v": 0,
+  "ghost": "BİTTİ",
+  "eyebrow": "Metal NFC kartvizit",
+  "title": "Kartvizit<br>bitti.",
+  "body": "Bir kez al, yıllarca güncelle. Telefona dokundur, bilgilerin tek dokunuşla rehbere kaydedilsin."
+ },
+ {
+  "id": "a02",
+  "scene": "tek-dokunus",
+  "finish": "gold",
+  "v": 0,
+  "ghost": "DOKUN",
+  "eyebrow": "Uygulama gerekmez",
+  "title": "Tek dokunuş.<br><em>Rehberde.</em>",
+  "body": "Kartı telefona yaklaştır; telefon, WhatsApp, konum ve sosyal hesapların karşındakinin rehberinde."
+ },
+ {
+  "id": "a03",
+  "scene": "alti-kaplama",
+  "finish": null,
+  "v": 0,
+  "ghost": "06",
+  "eyebrow": "Metal · Ahşap · Mat PVC",
+  "title": "Altı kaplama.<br><em>Tek dokunuş.</em>",
+  "body": "2.500 TL'den başlayan fiyatlar · KDV dahil · Ücretsiz kargo"
+ },
+ {
+  "id": "a04",
+  "scene": "hero",
+  "finish": "black",
+  "v": 1,
+  "ghost": "SİYAH",
+  "eyebrow": "Siyah metal",
+  "title": "Sessiz.<br><em>Ama akılda kalır.</em>",
+  "body": "Kumlu mat siyah metal, lazer kazıma logo. Dokundur, profilin açılsın."
+ },
+ {
+  "id": "a05",
+  "scene": "hero",
+  "finish": "gold",
+  "v": 2,
+  "ghost": "GOLD",
+  "eyebrow": "Gold metal",
+  "title": "Işığı<br><em>yakalar.</em>",
+  "body": "Ayna parlaklığında gold ön yüz, saten gold arka. Masaya koyduğun an konuşulur."
+ },
+ {
+  "id": "a06",
+  "scene": "hero",
+  "finish": "silver",
+  "v": 3,
+  "ghost": "GÜMÜŞ",
+  "eyebrow": "Gümüş metal",
+  "title": "Parlak bir<br><em>ilk izlenim.</em>",
+  "body": "Parlak gümüş ön yüz, gümüş çerçeveli mat arka yüz. 4.000 TL, KDV ve kargo dahil."
+ },
+ {
+  "id": "a07",
+  "scene": "hero",
+  "finish": "wood",
+  "v": 0,
+  "ghost": "AHŞAP",
+  "eyebrow": "Koyu ahşap",
+  "title": "Doğal.<br><em>Her damar farklı.</em>",
+  "body": "Gerçek ahşap, lazerle yakılmış logo. Her kart kendine özgü. 2.500 TL."
+ },
+ {
+  "id": "a08",
+  "scene": "hero",
+  "finish": "wood-light",
+  "v": 1,
+  "ghost": "MEŞE",
+  "eyebrow": "Açık ahşap",
+  "title": "Sıcak bir<br><em>tanışma.</em>",
+  "body": "Açık ahşap NFC kartvizit. Hafif, doğal, akılda kalıcı."
+ },
+ {
+  "id": "a09",
+  "scene": "hero",
+  "finish": "pvc-black",
+  "v": 2,
+  "ghost": "MAT",
+  "eyebrow": "Mat siyah PVC",
+  "title": "Kadife gibi<br><em>mat siyah.</em>",
+  "body": "İnce, hafif, mat siyah PVC NFC kartvizit. 2.500 TL, kargo bedava."
+ },
+ {
+  "id": "a10",
+  "scene": "back",
+  "finish": "black",
+  "v": 4,
+  "ghost": "ARKA",
+  "eyebrow": "Baskı sadece önde",
+  "title": "Arkası<br><em>sade.</em>",
+  "body": "Ön yüzde logo ve NFC işareti, arkada sadece NFC dairesi. Gerisi senin profilinde."
+ },
+ {
+  "id": "a11",
+  "scene": "back",
+  "finish": "gold",
+  "v": 5,
+  "ghost": "SATEN",
+  "eyebrow": "Gold metal · arka yüz",
+  "title": "Arka yüzü bile<br><em>özenli.</em>",
+  "body": "Parlak gold çerçeve içinde saten gold arka yüz."
+ },
+ {
+  "id": "a12",
+  "scene": "back",
+  "finish": "silver",
+  "v": 6,
+  "ghost": "ÇERÇEVE",
+  "eyebrow": "Gümüş metal · arka yüz",
+  "title": "Detayda<br><em>saklı.</em>",
+  "body": "Gümüş çerçeve, mat gri iç yüzey. Elinde tuttuğunda farkı hissedersin."
+ },
+ {
+  "id": "a13",
+  "scene": "macro",
+  "finish": "wood",
+  "v": 0,
+  "ghost": "DOKU",
+  "eyebrow": "Koyu ahşap · yakın plan",
+  "title": "Gerçek ahşap.<br><em>Gerçek doku.</em>",
+  "body": "Logo lazerle yakılır, baskı silinmez. Her kartın damar deseni tek."
+ },
+ {
+  "id": "a14",
+  "scene": "macro",
+  "finish": "gold",
+  "v": 1,
+  "ghost": "DETAY",
+  "eyebrow": "Gold metal · yakın plan",
+  "title": "Kenarına kadar<br><em>gold.</em>",
+  "body": "Ayna parlaklığında yüzey, lazer kazıma logo."
+ },
+ {
+  "id": "a15",
+  "scene": "macro",
+  "finish": "silver",
+  "v": 2,
+  "ghost": "PARLAK",
+  "eyebrow": "Gümüş metal · yakın plan",
+  "title": "Yakından<br><em>daha güzel.</em>",
+  "body": "Parlak gümüş, koyu lazer kazıma. Silinmez, solmaz."
+ },
+ {
+  "id": "a16",
+  "scene": "macro",
+  "finish": "pvc-black",
+  "v": 3,
+  "ghost": "KADİFE",
+  "eyebrow": "Mat siyah PVC · yakın plan",
+  "title": "Dokunduğun an<br><em>anlarsın.</em>",
+  "body": "Kadife dokulu mat yüzey, hafif ve ince."
+ },
+ {
+  "id": "a17",
+  "scene": "macro",
+  "finish": "black",
+  "v": 0,
+  "ghost": "KUMLU",
+  "eyebrow": "Siyah metal · yakın plan",
+  "title": "Kumlu mat<br><em>siyah metal.</em>",
+  "body": "Ağırlığını hissettiren bir kart. Logo ve NFC işareti lazerle kazınır."
+ },
+ {
+  "id": "a18",
+  "scene": "macro",
+  "finish": "wood-light",
+  "v": 1,
+  "ghost": "MEŞE",
+  "eyebrow": "Açık ahşap · yakın plan",
+  "title": "Doğadan<br><em>masana.</em>",
+  "body": "Açık ahşap, yakılmış logo. Kartvizitin en sıcak hali."
+ },
+ {
+  "id": "a19",
+  "scene": "stack",
+  "finish": "black",
+  "v": 0,
+  "ghost": "EKİP",
+  "eyebrow": "Kurumsal",
+  "title": "Bütün ekip.<br><em>Tek panel.</em>",
+  "body": "10 ve üzeri siparişte firma logonuz işlenir, %20 indirim. Çalışan ayrılınca kart devredilir."
+ },
+ {
+  "id": "a20",
+  "scene": "stack",
+  "finish": "gold",
+  "v": 1,
+  "ghost": "LOGO",
+  "eyebrow": "Kurumsal",
+  "title": "Logonuz<br><em>gold üstünde.</em>",
+  "body": "10+ kartlık kurumsal siparişlerde kartlara firma logosu lazerle kazınır."
+ },
+ {
+  "id": "a21",
+  "scene": "stack",
+  "finish": "silver",
+  "v": 2,
+  "ghost": "FİRMA",
+  "eyebrow": "Kurumsal",
+  "title": "Kartvizit<br><em>siparişine son.</em>",
+  "body": "Numara değişti, unvan değişti: panelden güncelle, kart aynı kalır."
+ },
+ {
+  "id": "a22",
+  "scene": "stack",
+  "finish": "wood",
+  "v": 3,
+  "ghost": "ORMAN",
+  "eyebrow": "Kurumsal · ahşap",
+  "title": "Ekibine<br><em>doğal bir dokunuş.</em>",
+  "body": "Ahşap kurumsal kartlar, firma logolu. Tek panelden yönetim."
+ },
+ {
+  "id": "a23",
+  "scene": "kartvizit-bitti",
+  "finish": "gold",
+  "v": 1,
+  "ghost": "ÇÖPE",
+  "eyebrow": "Gold metal",
+  "title": "Kâğıt<br><em>çöpe.</em>",
+  "body": "Bir yılda dağıttığın kâğıt kartvizitler çekmecelerde kayboluyor. Tek bir gold kart yeter."
+ },
+ {
+  "id": "a24",
+  "scene": "kartvizit-bitti",
+  "finish": "silver",
+  "v": 2,
+  "ghost": "BİTTİ",
+  "eyebrow": "Gümüş metal",
+  "title": "Yeniden<br><em>bastırma.</em>",
+  "body": "Bilgin değişince kartı değil, profili güncellersin."
+ },
+ {
+  "id": "a25",
+  "scene": "tek-dokunus",
+  "finish": "black",
+  "v": 1,
+  "ghost": "NFC",
+  "eyebrow": "Siyah metal",
+  "title": "Dokun.<br><em>O kadar.</em>",
+  "body": "iPhone ve NFC'li Android telefonlarda uygulama olmadan açılır."
+ },
+ {
+  "id": "a26",
+  "scene": "tek-dokunus",
+  "finish": "silver",
+  "v": 2,
+  "ghost": "KAYDET",
+  "eyebrow": "Gümüş metal",
+  "title": "Numara yazdırmak<br><em>tarih oldu.</em>",
+  "body": "Karşındaki tek dokunuşla tüm bilgilerini rehberine kaydeder."
+ },
+ {
+  "id": "a27",
+  "scene": "tek-dokunus",
+  "finish": "wood",
+  "v": 3,
+  "ghost": "TAP",
+  "eyebrow": "Koyu ahşap",
+  "title": "Ahşap kart.<br><em>Dijital profil.</em>",
+  "body": "Telefona dokundur, profilin açılsın. Pili yok, şarjı yok, yıllarca çalışır."
+ },
+ {
+  "id": "a28",
+  "scene": "hero",
+  "finish": "black",
+  "v": 5,
+  "ghost": "FUAR",
+  "eyebrow": "Fuar ve etkinlik",
+  "title": "Kalabalıkta<br><em>tükenmez.</em>",
+  "body": "Fuarda kartvizit bitmez. Dokundur ya da QR'ı okut; her açılış panelinde."
+ },
+ {
+  "id": "a29",
+  "scene": "hero",
+  "finish": "gold",
+  "v": 6,
+  "ghost": "PANEL",
+  "eyebrow": "Analitik",
+  "title": "Kim, ne zaman,<br><em>nereden açtı?</em>",
+  "body": "Kartının kaç kez, hangi şehirden açıldığını panelinde gör."
+ },
+ {
+  "id": "a30",
+  "scene": "hero",
+  "finish": "silver",
+  "v": 7,
+  "ghost": "HATIRLAT",
+  "eyebrow": "Takip",
+  "title": "Tanıştın.<br><em>Unutma.</em>",
+  "body": "Kişiye not ve takip tarihi ekle; günü gelince e-postana hatırlatma gelsin."
+ },
+ {
+  "id": "a31",
+  "scene": "hero",
+  "finish": "wood",
+  "v": 8,
+  "ghost": "72S",
+  "eyebrow": "Hızlı teslim",
+  "title": "72 saatte<br><em>kapında.</em>",
+  "body": "Kargo ücretsiz. Kart okunmazsa yenisini gönderiyoruz."
+ },
+ {
+  "id": "a32",
+  "scene": "hero",
+  "finish": "pvc-black",
+  "v": 9,
+  "ghost": "14",
+  "eyebrow": "Güvence",
+  "title": "14 gün<br><em>cayma hakkı.</em>",
+  "body": "Ödeme Shopier güvencesiyle. Okunmayan kart ücretsiz değişir."
+ },
+ {
+  "id": "a33",
+  "scene": "back",
+  "finish": "wood",
+  "v": 7,
+  "ghost": "SADE",
+  "eyebrow": "Koyu ahşap · arka yüz",
+  "title": "Bir yüzü<br><em>yeter.</em>",
+  "body": "Baskı yalnızca önde: solda logo, sağda NFC işareti."
+ },
+ {
+  "id": "a34",
+  "scene": "macro",
+  "finish": "gold",
+  "v": 4,
+  "ghost": "IŞIK",
+  "eyebrow": "Gold metal",
+  "title": "Detaylar<br><em>fark yaratır.</em>",
+  "body": "Kenardan kenara gold. Lazer kazıma logo, NFC işareti."
+ },
+ {
+  "id": "a35",
+  "photo": "public/landing/products/black/el-1.webp",
+  "ghost": "ELİNDE",
+  "eyebrow": "Gerçek fotoğraf",
+  "title": "Avucunda<br><em>bir tanışma.</em>",
+  "body": "Siyah metal NFC kartvizit. Kartı göster, telefona dokundur, bitti."
+ },
+ {
+  "id": "a36",
+  "photo": "public/landing/products/silver/el-1.webp",
+  "ghost": "GÜMÜŞ",
+  "eyebrow": "Gümüş metal",
+  "title": "Cebinde<br><em>parlıyor.</em>",
+  "body": "Parlak gümüş NFC kartvizit, 4.000 TL. KDV ve kargo dahil."
+ },
+ {
+  "id": "a37",
+  "photo": "public/landing/products/gold/el-1.webp",
+  "ghost": "GOLD",
+  "eyebrow": "Gold metal",
+  "title": "Elinde<br><em>gold.</em>",
+  "body": "Ayna parlaklığında gold NFC kartvizit. Fark edilmemek imkânsız."
+ },
+ {
+  "id": "a38",
+  "photo": "public/landing/products/pvc-black/el-1.webp",
+  "ghost": "MAT",
+  "eyebrow": "Mat siyah PVC",
+  "title": "Hafif.<br><em>Mat. Şık.</em>",
+  "body": "Mat siyah PVC NFC kartvizit, 2.500 TL."
+ },
+ {
+  "id": "a39",
+  "bg": "a04",
+  "ghost": "?",
+  "eyebrow": "Soru",
+  "title": "Kartvizitin<br><em>nerede?</em>",
+  "body": "Çekmecede, cüzdanda, çöpte... Dijital kartvizit hep telefonunda."
+ },
+ {
+  "id": "a40",
+  "bg": "a05",
+  "ghost": "%",
+  "eyebrow": "Biliyor muydun",
+  "title": "Kâğıt kartvizit<br><em>çekmecede kaybolur.</em>",
+  "body": "Kâğıt kartvizitlerin çoğu bir köşede unutulur. Dijital kartvizit ise doğrudan rehbere kaydedilir."
+ },
+ {
+  "id": "a41",
+  "bg": "a06",
+  "ghost": "01",
+  "eyebrow": "Nasıl çalışır · 1",
+  "title": "Kaplamanı<br><em>seç.</em>",
+  "body": "Metal, ahşap ya da mat PVC. 2.500 TL'den başlayan fiyatlar."
+ },
+ {
+  "id": "a42",
+  "bg": "a07",
+  "ghost": "02",
+  "eyebrow": "Nasıl çalışır · 2",
+  "title": "Profilini<br><em>doldur.</em>",
+  "body": "Fotoğraf, telefon, WhatsApp, sosyal hesaplar, IBAN, belgeler. Hepsi tek sayfada."
+ },
+ {
+  "id": "a43",
+  "bg": "a08",
+  "ghost": "03",
+  "eyebrow": "Nasıl çalışır · 3",
+  "title": "Dokundur,<br><em>tanış.</em>",
+  "body": "Kartın 72 saatte kapında. Telefona dokundur, bilgilerin rehbere kaydolsun."
+ },
+ {
+  "id": "a44",
+  "bg": "a09",
+  "ghost": "QR",
+  "eyebrow": "NFC'si olmayanlara",
+  "title": "QR kodun da<br><em>cebinde.</em>",
+  "body": "NFC kapalıysa profilinin QR kodunu kendi ekranından okut ya da linki paylaş."
+ },
+ {
+  "id": "a45",
+  "bg": "a17",
+  "ghost": "∞",
+  "eyebrow": "Güncelleme",
+  "title": "Numaran değişti.<br><em>Kartın değişmedi.</em>",
+  "body": "Panelden güncelle; kartını daha önce alan herkes yeni bilgini görür."
+ },
+ {
+  "id": "a46",
+  "bg": "a13",
+  "ghost": "IBAN",
+  "eyebrow": "Esnaf için",
+  "title": "IBAN'ını<br><em>tek dokunuşla</em> paylaş.",
+  "body": "Fatura ve banka bilgilerin profilinde; karşı taraf tek dokunuşla kopyalar."
+ },
+ {
+  "id": "a47",
+  "bg": "a19",
+  "ghost": "B2B",
+  "eyebrow": "Kurumsal",
+  "title": "Çalışan ayrıldı,<br><em>kart kaldı.</em>",
+  "body": "Kartın hangi profili açacağını panelden değiştir; yeni çalışana devret."
+ },
+ {
+  "id": "a48",
+  "bg": "a25",
+  "ghost": "0",
+  "eyebrow": "Uygulama",
+  "title": "Sıfır uygulama.<br><em>Sıfır zahmet.</em>",
+  "body": "Ne sen ne karşındaki uygulama indirir. Profil tarayıcıda açılır."
+ },
+ {
+  "id": "a49",
+  "bg": "a03",
+  "ghost": "TR",
+  "eyebrow": "Ücretsiz kargo",
+  "title": "Türkiye'nin<br><em>her yerine.</em>",
+  "body": "Eskişehir'den tüm Türkiye'ye ücretsiz kargo, 72 saatte teslim."
+ },
+ {
+  "id": "a50",
+  "bg": "a01",
+  "ghost": "SEN",
+  "eyebrow": "Şimdi",
+  "title": "Sıradaki tanışman<br><em>dijital olsun.</em>",
+  "body": "dijivizit.com'da kaplamanı seç, kartın 72 saatte gelsin."
+ }
+]
