@@ -31,7 +31,11 @@ body{width:1080px;height:1350px;position:relative;overflow:hidden;background:#0b
 .low h1{font-size:96px;bottom:230px}
 .low .ghost{display:none}
 .right h1{top:150px;bottom:auto;left:auto;right:72px;text-align:right;font-size:88px}
-.low .shade{background:linear-gradient(180deg,rgba(8,7,6,.7) 0%,rgba(8,7,6,0) 16%,rgba(8,7,6,0) 52%,rgba(8,7,6,.88) 100%)}
+.low .shade{background:linear-gradient(180deg,rgba(8,7,6,.75) 0%,rgba(8,7,6,0) 15%,rgba(8,7,6,0) 44%,rgba(8,7,6,.78) 64%,rgba(8,7,6,.96) 100%)}
+.low .tag{color:#f4f1ea;text-shadow:0 1px 8px rgba(0,0,0,.9)}
+.low h1{text-shadow:0 4px 34px rgba(0,0,0,.75),0 1px 3px rgba(0,0,0,.6)}
+.low .foot p{font-size:28px;color:#f4f1ea;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.low.right .shade{background:linear-gradient(200deg,rgba(8,7,6,.95) 0%,rgba(8,7,6,.8) 28%,rgba(8,7,6,0) 52%,rgba(8,7,6,0) 66%,rgba(8,7,6,.92) 100%)}
 .type .ghost{top:auto;bottom:480px;font-size:420px}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,7,6,.82) 0%,rgba(8,7,6,.35) 30%,rgba(8,7,6,0) 48%,rgba(8,7,6,0) 72%,rgba(8,7,6,.75) 100%)}
 .ghost{position:absolute;left:-12px;top:150px;font-weight:900;font-size:300px;letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(244,241,234,.13);white-space:nowrap}
