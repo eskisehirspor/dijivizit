@@ -37,7 +37,23 @@ function exportToken(token) {
   if (GITHUB_ENV) appendFileSync(GITHUB_ENV, `IG_ACCESS_TOKEN=${token}\n`);
 }
 
-const row = await stored();
+const valid = async (token) => {
+  if (!token) return false;
+  const res = await fetch(
+    `https://graph.instagram.com/me?fields=id&access_token=${encodeURIComponent(token)}`,
+  );
+  return res.ok;
+};
+
+let row = await stored();
+// A token stored earlier can be invalidated (password change, security reset).
+// When that happens, a freshly pasted IG_ACCESS_TOKEN secret takes over and is
+// stored, so fixing the connection only ever means updating the secret.
+if (row && SEED && SEED !== row.token && !(await valid(row.token)) && (await valid(SEED))) {
+  await save(SEED);
+  console.log("stored token was invalid; switched to the IG_ACCESS_TOKEN secret");
+  row = await stored();
+}
 const current = row?.token || SEED;
 if (!current) throw new Error("no Instagram token in Supabase or secrets");
 console.log(
