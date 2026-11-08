@@ -12,9 +12,13 @@ on:
       samples:
         description: "Cycles samples"
         default: "96"
+      from_run:
+        description: "Skip rendering; compose the renders of this earlier run id"
+        default: ""
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: render-ads
@@ -41,6 +45,7 @@ jobs:
 
   render:
     needs: plan
+    if: github.event.inputs.from_run == ''
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
@@ -69,11 +74,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm ci --ignore-scripts
+      - run: npm ci --ignore-scripts && npm i --no-save playwright
       - run: npx playwright install chromium
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
+          # Set when this workflow is re-run only to compose an earlier run.
+          run-id: ${{ github.event.inputs.from_run || github.run_id }}
+          github-token: ${{ github.token }}
       - name: Compose
         run: |
           mkdir -p renders
