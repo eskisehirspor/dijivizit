@@ -111,159 +111,289 @@
       "caption": "Detay, her şeydir.\n\nLogo ve temassız işareti yüzeye lazerle işlenir; çizgiler keskin, yüzey pürüzsüz."
     },
     {
-      "id": "20-az-soz",
-      "source": "az-soz",
-      "caption": "Az söz. Kalıcı etki.\n\nTanışmanın en kısa hali: kartınızı telefona dokundurun, gerisini Dijivizit anlatsın."
+      "id": "20-a56",
+      "source": "ads/a56",
+      "caption": "Kâğıt kart çantada kalır, Dijivizit telefonda.\n\nGümüş metal NFC kartvizit: davette, toplantıda, fuarda tek dokunuşla tanışın."
     },
     {
-      "id": "21-koleksiyon-no-black",
-      "source": "koleksiyon-no-black",
-      "caption": "Koleksiyon 01/05 · Mat Siyah Metal\n\nDijivizit koleksiyonunun en sade, en güçlü üyesi."
+      "id": "21-a44",
+      "source": "ads/a44",
+      "caption": "QR kodun da cebinde.\n\nNFC kapalıysa profilinin QR kodunu kendi ekranından okut ya da linki paylaş."
     },
     {
-      "id": "22-tanismak",
-      "source": "tanismak",
-      "caption": "Tanışmak bir an. Hatırlanmak bir tercih.\n\nDijivizit ile tanıştığınız herkes, bilgilerinizi tek dokunuşla rehberine kaydeder."
+      "id": "22-a05",
+      "source": "ads/a05",
+      "caption": "Işığı yakalar.\n\nAyna parlaklığında gold ön yüz, saten gold arka. Masaya koyduğun an konuşulur."
     },
     {
-      "id": "23-kilit-ekrani",
-      "source": "kilit-ekrani",
-      "caption": "Uygulama indirmek gerekmez.\n\nKarşınızdaki kişinin telefonunun kilidi açık olsun, yeter. iPhone ve Android cihazlar Dijivizit kartını doğrudan okur. NFC'si olmayan telefonlar için kartın arkasında QR kod var."
+      "id": "23-a11",
+      "source": "ads/a11",
+      "caption": "Arka yüzü bile özenli.\n\nParlak gold çerçeve içinde saten gold arka yüz."
     },
     {
-      "id": "24-koleksiyon-no-silver",
-      "source": "koleksiyon-no-silver",
-      "caption": "Koleksiyon 02/05 · Mat Fırçalanmış Gümüş\n\nSoğuk metalin zarif tonu."
+      "id": "24-a21",
+      "source": "ads/a21",
+      "caption": "Kartvizit siparişine son.\n\nNumara değişti, unvan değişti: panelden güncelle, kart aynı kalır."
     },
     {
-      "id": "25-teknik",
-      "source": "teknik",
-      "caption": "Küçük bir kart, büyük bir sistem.\n\n· NFC çip ve yedek QR kod\n· iPhone ve Android uyumlu, uygulama gerekmez\n· Pil ve şarj gerektirmez\n· Profiliniz dilediğiniz an güncellenir"
+      "id": "25-a39",
+      "source": "ads/a39",
+      "caption": "Kartvizitin nerede?\n\nÇekmecede, cüzdanda, çöpte... Dijital kartvizit hep telefonunda."
     },
     {
-      "id": "26-koleksiyon-no-gold",
-      "source": "koleksiyon-no-gold",
-      "caption": "Koleksiyon 03/05 · Mat Fırçalanmış Gold\n\nIşığı en iyi taşıyan kaplama."
+      "id": "26-a19",
+      "source": "ads/a19",
+      "caption": "Bütün ekip. Tek panel.\n\n10 ve üzeri siparişte firma logonuz işlenir, %20 indirim. Çalışan ayrılınca kart devredilir."
     },
     {
-      "id": "27-qr-yedegi",
-      "source": "qr-yedegi",
-      "caption": "NFC yoksa, QR var.\n\nHer Dijivizit kartın arkasında yedek bir QR kod bulunur. Kamera yeterli; her telefonda çalışır."
+      "id": "27-a28",
+      "source": "ads/a28",
+      "caption": "Kalabalıkta tükenmez.\n\nFuarda kartvizit bitmez. Dokundur ya da QR'ı okut; her açılış panelinde."
     },
     {
-      "id": "28-koleksiyon-no-wood",
-      "source": "koleksiyon-no-wood",
-      "caption": "Koleksiyon 04/05 · Koyu Ahşap\n\nDoğanın imzası, cebinizde."
+      "id": "28-a54",
+      "source": "ads/a54",
+      "caption": "Dokundur, kaydet, bitti.\n\nUygulama yok, kurulum yok. Dijivizit NFC kartvizit iPhone'da ve NFC'li Android telefonlarda kendiliğinden açılır."
     },
     {
-      "id": "29-koleksiyon-no-wood-light",
-      "source": "koleksiyon-no-wood-light",
-      "caption": "Koleksiyon 05/05 · Açık Ahşap\n\nKoleksiyonun en sıcak tonu."
+      "id": "29-a49",
+      "source": "ads/a49",
+      "caption": "Türkiye'nin her yerine.\n\nEskişehir'den tüm Türkiye'ye ücretsiz kargo, 72 saatte teslim."
     },
     {
-      "id": "30-ahsapta-da-ayni",
-      "source": "ahsapta-da-ayni",
-      "caption": "Doğal ahşapta da aynı tek dokunuş.\n\nCeviz tonlu ahşap kartlarımızın içinde de NFC çip var; görünmez, ama her dokunuşta işini yapar. Doğallık ve teknoloji, aynı kartta."
+      "id": "30-a18",
+      "source": "ads/a18",
+      "caption": "Doğadan masana.\n\nAçık ahşap, yakılmış logo. Kartvizitin en sıcak hali."
     },
     {
-      "id": "31-koleksiyon-liste",
-      "source": "koleksiyon-liste",
-      "caption": "Size yakışanı seçin.\n\n01 Mat Siyah Metal\n02 Mat Fırçalanmış Gümüş\n03 Mat Fırçalanmış Gold\n04 Koyu Ahşap\n05 Açık Ahşap"
+      "id": "31-a12",
+      "source": "ads/a12",
+      "caption": "Detayda saklı.\n\nGümüş çerçeve, mat gri iç yüzey. Elinde tuttuğunda farkı hissedersin."
     },
     {
-      "id": "32-masaya-birakilan",
-      "source": "masaya-birakilan",
-      "caption": "Masaya bırakılan ilk imza.\n\nToplantı başlamadan önce bile konuşan bir kartvizit."
+      "id": "32-a10",
+      "source": "ads/a10",
+      "caption": "Arkası sade.\n\nÖn yüzde logo ve NFC işareti, arkada sadece NFC dairesi. Gerisi senin profilinde."
     },
     {
-      "id": "33-kaydedilen-aranir",
-      "source": "kaydedilen-aranir",
-      "caption": "Kaydedilen aranır.\n\nKartvizitiniz çekmecede değil, rehberde olsun."
+      "id": "33-a07",
+      "source": "ads/a07",
+      "caption": "Doğal. Her damar farklı.\n\nGerçek ahşap, lazerle yakılmış logo. Her kart kendine özgü. 2.500 TL."
     },
     {
-      "id": "34-isigi-yakalayan",
-      "source": "isigi-yakalayan",
-      "caption": "Işığı yakalayan bir kartvizit.\n\nMat fırçalanmış gold; her açıda başka bir parıltı."
+      "id": "34-a50",
+      "source": "ads/a50",
+      "caption": "Sıradaki tanışman dijital olsun.\n\ndijivizit.com'da kaplamanı seç, kartın 72 saatte gelsin."
     },
     {
-      "id": "35-dijital-kartvizit-nedir",
-      "source": "dijital-kartvizit-nedir",
-      "caption": "Akıllı kartvizit nedir?\n\nTelefonunuzu, e-postanızı, sosyal hesaplarınızı ve belgelerinizi tek sayfada toplayan; NFC ve QR ile paylaşılan dijital kartvizit. Kâğıt bitmez, bilgi eskimez."
+      "id": "35-a20",
+      "source": "ads/a20",
+      "caption": "Logonuz gold üstünde.\n\n10+ kartlık kurumsal siparişlerde kartlara firma logosu lazerle kazınır."
     },
     {
-      "id": "36-kenarina-kadar",
-      "source": "kenarina-kadar",
-      "caption": "Kenarına kadar özen.\n\nYuvarlatılmış köşeler, pürüzsüz kenarlar. Elinizde tuttuğunuzda farkı hissedersiniz."
+      "id": "36-a53",
+      "source": "ads/a53",
+      "caption": "Anahtarı değil, kartı uzatın.\n\nCeviz ahşap NFC kartvizit. Müşteriniz numaranızı yazmakla uğraşmaz; kartı telefonuna dokundurur, sizi tek dokunuşla rehberine kaydeder."
     },
     {
-      "id": "37-rehbere-kaydet",
-      "source": "rehbere-kaydet",
-      "caption": "Rehbere Kaydet. Hepsi bu.\n\nBilgileriniz değişirse kartınızı yeniden bastırmanız gerekmez; profilinizi güncellersiniz, kartınız hep yeni bilgilerinizi gösterir."
+      "id": "37-a38",
+      "source": "ads/a38",
+      "caption": "Hafif. Mat. Şık.\n\nMat siyah PVC NFC kartvizit, 2.500 TL."
     },
     {
-      "id": "38-on-yuz-arka-yuz",
-      "source": "on-yuz-arka-yuz",
-      "caption": "Önde dokunuş. Arkada imzamız.\n\nKartın ön yüzünde Dijivizit logosu ve temassız işareti, arka yüzünde imzamız. Bilgileriniz kartta değil, her zaman güncel profilinizde."
+      "id": "38-a22",
+      "source": "ads/a22",
+      "caption": "Ekibine doğal bir dokunuş.\n\nAhşap kurumsal kartlar, firma logolu. Tek panelden yönetim."
     },
     {
-      "id": "39-kurumsal",
-      "source": "kurumsal",
-      "caption": "Tüm ekip, tek imza.\n\nEkibiniz için aynı tasarımda Dijivizit kartlar. Biri ayrıldığında ya da unvanı değiştiğinde kart değil, profil değişir.\n\nKurumsal talepler: talep@dijivizit.com"
+      "id": "39-a04",
+      "source": "ads/a04",
+      "caption": "Sessiz. Ama akılda kalır.\n\nKumlu mat siyah metal, lazer kazıma logo. Dokundur, profilin açılsın."
     },
     {
-      "id": "40-dogal-doku",
-      "source": "dogal-doku",
-      "caption": "Her kartın dokusu kendine özgü.\n\nAhşap Dijivizit kartlarda iki kart birbirinin aynısı değildir."
+      "id": "40-a31",
+      "source": "ads/a31",
+      "caption": "72 saatte kapında.\n\nKargo ücretsiz. Kart okunmazsa yenisini gönderiyoruz."
     },
     {
-      "id": "41-sayilarla",
-      "source": "sayilarla",
-      "caption": "Sayılarla Dijivizit.\n\n0 kâğıt\n1 dokunuş\n∞ güncelleme"
+      "id": "41-a35",
+      "source": "ads/a35",
+      "caption": "Avucunda bir tanışma.\n\nSiyah metal NFC kartvizit. Kartı göster, telefona dokundur, bitti."
     },
     {
-      "id": "42-baglanti",
-      "source": "baglanti",
-      "caption": "Bağlantı, bir dokunuş uzağınızda."
+      "id": "42-a40",
+      "source": "ads/a40",
+      "caption": "Kâğıt kartvizit çekmecede kaybolur.\n\nKâğıt kartvizitlerin çoğu bir köşede unutulur. Dijital kartvizit ise doğrudan rehbere kaydedilir."
     },
     {
-      "id": "43-ahsabin-iki-tonu",
-      "source": "ahsabin-iki-tonu",
-      "caption": "Ahşabın iki tonu.\n\nKoyu ve açık; ikisi de gerçek ahşap, ikisi de NFC çipli."
+      "id": "43-a17",
+      "source": "ads/a17",
+      "caption": "Kumlu mat siyah metal.\n\nAğırlığını hissettiren bir kart. Logo ve NFC işareti lazerle kazınır."
     },
     {
-      "id": "44-her-yerde",
-      "source": "her-yerde",
-      "caption": "Toplantıda. Fuarda. Kafede. Yolda.\n\nKartınız her yerde yanınızda; profiliniz her zaman güncel."
+      "id": "44-a51",
+      "source": "ads/a51",
+      "caption": "Fuarda kartvizit bitti mi diye çantayı karıştırmak yok.\n\nSiyah metal NFC kartviziti telefona dokundurun; profiliniz açılsın, ziyaretçi sizi tek dokunuşla rehberine kaydetsin. Uygulama gerekmez."
     },
     {
-      "id": "45-edisyon-gold",
-      "source": "edisyon-gold",
-      "caption": "Altının sakin hali.\n\nMat fırçalanmış gold Dijivizit."
+      "id": "45-a43",
+      "source": "ads/a43",
+      "caption": "Dokundur, tanış.\n\nKartın 72 saatte kapında. Telefona dokundur, bilgilerin rehbere kaydolsun."
     },
     {
-      "id": "46-ilk-izlenim",
-      "source": "ilk-izlenim",
-      "caption": "İlk izlenimin ikinci bir şansı yoktur.\n\nO yüzden ilk dokunuşu özenle tasarladık."
+      "id": "46-a23",
+      "source": "ads/a23",
+      "caption": "Kâğıt çöpe.\n\nBir yılda dağıttığın kâğıt kartvizitler çekmecelerde kayboluyor. Tek bir gold kart yeter."
     },
     {
-      "id": "47-edisyon-black",
-      "source": "edisyon-black",
-      "caption": "Siyah. Sessiz bir güç.\n\nMat siyah metal Dijivizit."
+      "id": "47-a01",
+      "source": "ads/a01",
+      "caption": "Kartvizit bitti.\n\nBir kez al, yıllarca güncelle. Telefona dokundur, bilgilerin tek dokunuşla rehbere kaydedilsin."
     },
     {
-      "id": "48-atolye",
-      "source": "atolye",
-      "caption": "Eskişehir'den, özenle.\n\nOsmangazi Mah. Basın Şehitleri Cad. No:174\nOdunpazarı / Eskişehir\n0540 626 19 65"
+      "id": "48-a34",
+      "source": "ads/a34",
+      "caption": "Detaylar fark yaratır.\n\nKenardan kenara gold. Lazer kazıma logo, NFC işareti."
     },
     {
-      "id": "49-edisyon-wood",
-      "source": "edisyon-wood",
-      "caption": "Doğanın imzası.\n\nKoyu ahşap Dijivizit."
+      "id": "49-a08",
+      "source": "ads/a08",
+      "caption": "Sıcak bir tanışma.\n\nAçık ahşap NFC kartvizit. Hafif, doğal, akılda kalıcı."
     },
     {
-      "id": "50-siparis",
-      "source": "siparis",
-      "caption": "Kartınızı seçin.\n\nKaplamanızı seçin, bilgilerinizi bırakın; sizi arayıp kartınızı birlikte hazırlayalım.\n\ndijivizit.com/siparis"
+      "id": "50-a42",
+      "source": "ads/a42",
+      "caption": "Profilini doldur.\n\nFotoğraf, telefon, WhatsApp, sosyal hesaplar, IBAN, belgeler. Hepsi tek sayfada."
+    },
+    {
+      "id": "51-a45",
+      "source": "ads/a45",
+      "caption": "Numaran değişti. Kartın değişmedi.\n\nPanelden güncelle; kartını daha önce alan herkes yeni bilgini görür."
+    },
+    {
+      "id": "52-a57",
+      "source": "ads/a57",
+      "caption": "Hastanız sizi kaydetsin.\n\nRandevu linki, konum, WhatsApp ve telefon numaranız tek kartta. Klinikler ve sağlık profesyonelleri için siyah metal NFC kartvizit."
+    },
+    {
+      "id": "53-a41",
+      "source": "ads/a41",
+      "caption": "Kaplamanı seç.\n\nMetal, ahşap ya da mat PVC. 2.500 TL'den başlayan fiyatlar."
+    },
+    {
+      "id": "54-a27",
+      "source": "ads/a27",
+      "caption": "Ahşap kart. Dijital profil.\n\nTelefona dokundur, profilin açılsın. Pili yok, şarjı yok, yıllarca çalışır."
+    },
+    {
+      "id": "55-a29",
+      "source": "ads/a29",
+      "caption": "Kim, ne zaman, nereden açtı?\n\nKartının kaç kez, hangi şehirden açıldığını panelinde gör."
+    },
+    {
+      "id": "56-a46",
+      "source": "ads/a46",
+      "caption": "IBAN'ını tek dokunuşla paylaş.\n\nFatura ve banka bilgilerin profilinde; karşı taraf tek dokunuşla kopyalar."
+    },
+    {
+      "id": "57-a36",
+      "source": "ads/a36",
+      "caption": "Cebinde parlıyor.\n\nParlak gümüş NFC kartvizit, 4.000 TL. KDV ve kargo dahil."
+    },
+    {
+      "id": "58-a48",
+      "source": "ads/a48",
+      "caption": "Sıfır uygulama. Sıfır zahmet.\n\nNe sen ne karşındaki uygulama indirir. Profil tarayıcıda açılır."
+    },
+    {
+      "id": "59-a37",
+      "source": "ads/a37",
+      "caption": "Elinde gold.\n\nAyna parlaklığında gold NFC kartvizit. Fark edilmemek imkânsız."
+    },
+    {
+      "id": "60-a52",
+      "source": "ads/a52",
+      "caption": "Bir kart, bin tanışma.\n\nGold metal NFC kartvizit: telefona dokundurun, iletişim bilgileriniz, sosyal medyanız ve web siteniz anında karşı tarafın ekranında."
+    },
+    {
+      "id": "61-a32",
+      "source": "ads/a32",
+      "caption": "14 gün cayma hakkı.\n\nÖdeme Shopier güvencesiyle. Okunmayan kart ücretsiz değişir."
+    },
+    {
+      "id": "62-a30",
+      "source": "ads/a30",
+      "caption": "Tanıştın. Unutma.\n\nKişiye not ve takip tarihi ekle; günü gelince e-postana hatırlatma gelsin."
+    },
+    {
+      "id": "63-a02",
+      "source": "ads/a02",
+      "caption": "Tek dokunuş. Rehberde.\n\nKartı telefona yaklaştır; telefon, WhatsApp, konum ve sosyal hesapların karşındakinin rehberinde."
+    },
+    {
+      "id": "64-a26",
+      "source": "ads/a26",
+      "caption": "Numara yazdırmak tarih oldu.\n\nKarşındaki tek dokunuşla tüm bilgilerini rehberine kaydeder."
+    },
+    {
+      "id": "65-a14",
+      "source": "ads/a14",
+      "caption": "Kenarına kadar gold.\n\nAyna parlaklığında yüzey, lazer kazıma logo."
+    },
+    {
+      "id": "66-a33",
+      "source": "ads/a33",
+      "caption": "Bir yüzü yeter.\n\nBaskı yalnızca önde: solda logo, sağda NFC işareti."
+    },
+    {
+      "id": "67-a16",
+      "source": "ads/a16",
+      "caption": "Dokunduğun an anlarsın.\n\nKadife dokulu mat yüzey, hafif ve ince."
+    },
+    {
+      "id": "68-a55",
+      "source": "ads/a55",
+      "caption": "Anlaşma bitti, kart masada.\n\nMat siyah metal NFC kartvizit; toplantıdan sonra akılda kalan son izlenim. Bilgileriniz değişirse kartı değiştirmezsiniz, profilinizi güncellersiniz."
+    },
+    {
+      "id": "69-a47",
+      "source": "ads/a47",
+      "caption": "Çalışan ayrıldı, kart kaldı.\n\nKartın hangi profili açacağını panelden değiştir; yeni çalışana devret."
+    },
+    {
+      "id": "70-a06",
+      "source": "ads/a06",
+      "caption": "Parlak bir ilk izlenim.\n\nParlak gümüş ön yüz, gümüş çerçeveli mat arka yüz. 4.000 TL, KDV ve kargo dahil."
+    },
+    {
+      "id": "71-a03",
+      "source": "ads/a03",
+      "caption": "Altı kaplama. Tek dokunuş.\n\n2.500 TL'den başlayan fiyatlar · KDV dahil · Ücretsiz kargo"
+    },
+    {
+      "id": "72-a13",
+      "source": "ads/a13",
+      "caption": "Gerçek ahşap. Gerçek doku.\n\nLogo lazerle yakılır, baskı silinmez. Her kartın damar deseni tek."
+    },
+    {
+      "id": "73-a09",
+      "source": "ads/a09",
+      "caption": "Kadife gibi mat siyah.\n\nİnce, hafif, mat siyah PVC NFC kartvizit. 2.500 TL, kargo bedava."
+    },
+    {
+      "id": "74-a25",
+      "source": "ads/a25",
+      "caption": "Dokun. O kadar.\n\niPhone ve NFC'li Android telefonlarda uygulama olmadan açılır."
+    },
+    {
+      "id": "75-a24",
+      "source": "ads/a24",
+      "caption": "Yeniden bastırma.\n\nBilgin değişince kartı değil, profili güncellersin."
+    },
+    {
+      "id": "76-a15",
+      "source": "ads/a15",
+      "caption": "Yakından daha güzel.\n\nParlak gümüş, koyu lazer kazıma. Silinmez, solmaz."
     }
   ]
 }
