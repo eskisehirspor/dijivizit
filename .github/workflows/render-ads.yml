@@ -97,10 +97,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin instagram-assets
-          git checkout instagram-assets
-          mkdir -p ads/renders ads/posts
-          cp renders/*.png ads/renders/ 2>/dev/null || true
-          cp composed/*.jpg ads/posts/
+          git worktree add ../assets origin/instagram-assets
+          mkdir -p ../assets/ads/renders ../assets/ads/posts
+          cp renders/*.png ../assets/ads/renders/ 2>/dev/null || true
+          cp composed/*.jpg ../assets/ads/posts/
+          cd ../assets
           git add ads
           git commit -m "Ad posts (${{ github.run_id }})" || exit 0
-          git push origin instagram-assets
+          git push origin HEAD:instagram-assets
