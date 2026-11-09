@@ -38,14 +38,20 @@ export const NEW_GUIDES: Guide[] = [
           "Kâğıt kartvizit basıldığı anda sabitlenir; telefon, unvan ya da adres değişince yeniden basmanız gerekir. Cep kartvizitinde bilgilerinizi panelden güncellersiniz, daha önce kartınızı alan herkes güncel hâlini görür.",
           "Kâğıt kartvizit çoğu zaman bir çekmecede kaybolur. Cep kartvizitindeki bilgiler ise tek dokunuşla telefon rehberine kaydedilir; WhatsApp, Instagram, konum ve web siteniz bir dokunuş uzaklıkta olur.",
         ],
-        link: { href: "/rehber/nfc-kartvizit-mi-kagit-kartvizit-mi", label: "NFC kartvizit mi, kâğıt kartvizit mi?" },
+        link: {
+          href: "/rehber/nfc-kartvizit-mi-kagit-kartvizit-mi",
+          label: "NFC kartvizit mi, kâğıt kartvizit mi?",
+        },
       },
       {
         heading: "Cep kartviziti nasıl oluşturulur?",
         paragraphs: [
           "Dijivizit'te profilinizi birkaç dakikada oluşturursunuz: fotoğrafınızı, iletişim bilgilerinizi ve linklerinizi eklersiniz, size özel profil linki ve QR kodunuz hazır olur. İsterseniz telefona dokundurunca profilinizi açan metal, ahşap veya PVC NFC kart da alabilirsiniz.",
         ],
-        link: { href: "/rehber/dijital-kartvizit-nasil-olusturulur", label: "Dijital kartvizit nasıl oluşturulur?" },
+        link: {
+          href: "/rehber/dijital-kartvizit-nasil-olusturulur",
+          label: "Dijital kartvizit nasıl oluşturulur?",
+        },
       },
       {
         heading: "Kimler kullanır?",
@@ -1961,6 +1967,208 @@ export const NEW_GUIDES: Guide[] = [
       {
         q: "Dijivizit'te ekip özellikleri var mı?",
         a: "Evet. Ekip panelinden kartları çalışanlara atarsınız, çalışan değişince kartı devredersiniz. 10 ve üzeri adette %20 indirim uygulanır ve kartlara firma logosu işlenir.",
+      },
+    ],
+  },
+  {
+    slug: "dijital-kartvizit-uygulamasi",
+    label: "Dijital kartvizit uygulaması",
+    title: "Dijital Kartvizit Uygulaması: Uygulama Gerekir mi?",
+    description:
+      "Dijital kartvizit uygulaması indirmek şart mı? Uygulamalı ve uygulamasız dijital kartvizit farkları, karşı tarafın deneyimi ve seçerken bakılacaklar.",
+    image: "/rehber/dijital-kartvizit-nasil-olusturulur.jpg",
+    imageAlt: "Telefon ekranında Dijivizit dijital kartvizit profili",
+    published: "2026-11-09",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Dijital kartvizit kullanmak için çoğu zaman uygulama gerekmez. Asıl önemli olan, kartvizitinizi alan kişinin hiçbir şey indirmeden profilinizi açıp sizi rehberine kaydedebilmesidir. Bazı hizmetler profilinizi düzenlemeniz için bir uygulama sunar; bu sizin tercihinizdir. Karşı tarafa uygulama indirtmek ise tanışmayı yavaşlatır.",
+        ],
+      },
+      {
+        heading: "Dijital kartvizit uygulaması ne işe yarar?",
+        paragraphs: [
+          "Dijital kartvizit uygulaması denince genellikle iki şey kastedilir: kendi kartvizitinizi oluşturup düzenlediğiniz bir yönetim aracı ya da başkalarının kartvizitlerini okuyup sakladığınız bir tarayıcı. İkisi de işe yarar, ama ikisi de kartvizitin kendisi değildir.",
+          "Kartvizitin kendisi, bağlantıya, QR koda ya da NFC karta dokununca açılan profil sayfasıdır. Bu sayfa telefonun tarayıcısında açılıyorsa karşı taraf için hiçbir uygulama gerekmez.",
+        ],
+      },
+      {
+        heading: "Uygulamalı ve uygulamasız: farklar",
+        paragraphs: [],
+        list: [
+          "Karşı taraf: uygulamasız profilde kişi yalnızca kartı okutur ya da linke dokunur; uygulama isteyen sistemlerde önce indirme ve kayıt adımı gelir.",
+          "Telefon uyumu: tarayıcıda açılan profil iPhone'da da Android'de de aynı görünür; uygulamanın her iki mağazada güncel olması gerekir.",
+          "Düzenleme: uygulamalı hizmetlerde profili telefondan düzenlersiniz; web tabanlı hizmetlerde aynı işi tarayıcıdaki panelden yaparsınız.",
+          "Yer ve bildirim: uygulama telefonda yer kaplar, güncelleme ister; web paneli için bir şey kurmazsınız.",
+          "Güncelleme: iki modelde de bilgileriniz değişince profili düzenlersiniz; kartı yeniden bastırmanız gerekmez.",
+        ],
+      },
+      {
+        heading: "Karşı tarafın gözünden",
+        paragraphs: [
+          "Tanışma birkaç saniyelik bir andır. Kartınızı okutan kişiye bir uygulama indirmesini söylemek, çoğu zaman o anın kaybolması demektir. Bu yüzden seçerken ilk soru şu olmalı: kartvizitimi alan kişi hiçbir şey kurmadan beni rehberine kaydedebiliyor mu?",
+          "Güncel iPhone'lar NFC kartı kendiliğinden okur; Android telefonlarda NFC'nin açık olması yeterlidir. NFC'si olmayan ya da kapalı olan telefonlarda aynı profil QR kodla açılır.",
+        ],
+        link: {
+          href: "/rehber/nfc-kartvizit-hangi-telefonlarda-calisir",
+          label: "NFC kartvizit hangi telefonlarda çalışır?",
+        },
+      },
+      {
+        heading: "Dijivizit'te uygulama gerekir mi?",
+        paragraphs: [
+          'Hayır. Dijivizit profili her telefonun tarayıcısında açılır; karşınızdaki kişi "Rehberime Kaydet" ile sizi tek dokunuşla kaydeder. Siz de profilinizi, ziyaretçilerin bıraktığı bilgileri ve analitiği tarayıcıdan girdiğiniz panelden yönetirsiniz.',
+        ],
+        list: [
+          "NFC kart, profil linki ve QR kod aynı profili açar.",
+          'Ziyaretçi "Bilgilerimi bırak" ile kendi adını ve numarasını size iletir.',
+          "Size verilen kâğıt kartvizitin fotoğrafını çekersiniz; ad, unvan, şirket ve telefon kendiliğinden dolar.",
+          "Profilinizi Apple Cüzdan'a ekleyip kart yanınızda değilken QR'ı telefonunuzdan gösterebilirsiniz.",
+          "Kaybolan kartı panelden tek tıkla kapatırsınız.",
+        ],
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit özellikleri" },
+      },
+      {
+        heading: "Seçerken nelere bakmalı?",
+        paragraphs: [],
+        list: [
+          "Karşı taraftan uygulama istiyor mu?",
+          "Tek dokunuşla rehbere kayıt var mı?",
+          "NFC'nin yanında link ve QR kod da veriliyor mu?",
+          "Profil adresi tahmin edilemez mi, kaybolan kart kapatılabiliyor mu?",
+          "Toplam maliyet ne: kart, yıllık profil ücreti, KDV ve kargo?",
+        ],
+        link: {
+          href: "/rehber/en-iyi-dijital-kartvizit-nasil-secilir",
+          label: "Dijital kartvizit seçerken 7 kriter",
+        },
+      },
+      {
+        heading: "Uygulama indirmeden deneyin",
+        paragraphs: [
+          "Bilgilerinizi yazıp profilinizin telefonda nasıl görüneceğini ücretsiz önizleyebilir, rehbere kaydeden QR kodunuzu indirebilirsiniz. Kart istemiyorsanız kartsız dijital kartvizitle link ve QR kodunuz 2 saat içinde e-postanızda olur; aylık 59,90 TL, yıllık 718,80 TL olarak peşin ödenir.",
+        ],
+        link: { href: "/dijital-kartvizit-olustur", label: "Ücretsiz dijital kartvizit oluştur" },
+      },
+    ],
+    faq: [
+      {
+        q: "Dijital kartvizit için hangi uygulamayı indirmeliyim?",
+        a: "Karşı tarafın uygulama indirmesine gerek olmayan bir hizmet seçin. Dijivizit'te ne sizin ne de kartınızı okutan kişinin uygulama indirmesi gerekir; her şey tarayıcıda açılır.",
+      },
+      {
+        q: "Uygulamasız dijital kartvizit iPhone'da çalışır mı?",
+        a: "Evet. Güncel iPhone'lar NFC kartı ayrıca bir şey açmadan okur ve profil Safari'de açılır. Kart yanınızda değilse QR kodu okutmak yeterlidir.",
+      },
+      {
+        q: "Uygulama olmadan profilimi nasıl güncellerim?",
+        a: "Telefonunuzun ya da bilgisayarınızın tarayıcısından panele girip bilgilerinizi değiştirirsiniz. Değişiklik kaydedildiğinde kartınızı, linkinizi ya da QR kodunuzu okutan herkes yeni bilgileri görür.",
+      },
+      {
+        q: "Ücretsiz dijital kartvizit uygulaması var mı?",
+        a: "Ücretsiz seçenekler var; çoğu temel özellikleri ücretsiz verip diğerlerini ücretli plana bırakır. Dijivizit'te dijital kartvizitinizi ücretsiz önizleyebilir, rehbere kaydeden QR kodunuzu üyelik olmadan ücretsiz indirebilirsiniz.",
+      },
+    ],
+  },
+  {
+    slug: "kartvizit-nasil-verilir",
+    label: "Kartvizit nasıl verilir",
+    title: "Kartvizit Nasıl Verilir? Görgü Kuralları ve İpuçları",
+    description:
+      "Kartvizit nasıl verilir ve nasıl alınır? Doğru zamanlama, tutuş, toplantı ve fuar görgü kuralları ile dijital ve NFC kartvizit paylaşırken dikkat edilecekler.",
+    image: "/rehber/nfc-kartvizit-nereden-alinir.jpg",
+    imageAlt: "İş toplantısında siyah metal NFC kartvizit karşı tarafa uzatılıyor",
+    published: "2026-11-09",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Kartvizit, tanışma ve kısa bir sohbetten sonra, yazısı karşı tarafa dönük şekilde ve tercihen iki elle ya da sağ elle verilir. Alırken kartı birkaç saniye inceleyin, cebinize atmak yerine kartlığa ya da masaya koyun. Kartı ilk saniyede uzatmak yerine sohbetin doğal bir anını beklemek daha kibar durur.",
+        ],
+      },
+      {
+        heading: "Ne zaman verilir?",
+        paragraphs: [
+          "Kartvizit bir tanışmanın sonucudur, başlangıcı değil. En uygun an, karşınızdakiyle ortak bir konu bulduktan ya da tekrar görüşme fikri doğduktan sonradır.",
+        ],
+        list: [
+          "Toplantıda: başta tanışırken ya da toplantı bitiminde verilir; toplantı sırasında araya girerek dağıtılmaz.",
+          "Yemekte: yemek boyunca değil, sonunda verilir.",
+          "Fuarda ve etkinlikte: birkaç dakikalık konuşmanın sonunda, karşı taraf ilgi gösterdiyse verilir.",
+          "İstenmeden herkese dağıtmayın; bir kişiye birden fazla kart vermeyin.",
+        ],
+      },
+      {
+        heading: "Nasıl verilir?",
+        paragraphs: [],
+        list: [
+          "Kartı yazısı karşı tarafa dönük ve okunacak yönde tutun.",
+          "İki elle ya da sağ elle verin; kartı masaya fırlatmayın, uzatın.",
+          "Verirken adınızı ve ne iş yaptığınızı tek cümleyle söyleyin.",
+          "Kart temiz ve düz olsun; buruşuk, lekeli ya da üzerinde elle düzeltme olan kartı vermeyin.",
+          "Kartlarınızı cüzdanın arkasında değil, kolayca çıkarabileceğiniz bir kartlıkta taşıyın.",
+        ],
+      },
+      {
+        heading: "Kartvizit alırken",
+        paragraphs: [
+          "Kartı veren kişiye saygı, kartı nasıl aldığınızla da anlaşılır. Kartı alın, adına ve unvanına birkaç saniye bakın, gerekirse adını telaffuz ederek teşekkür edin.",
+        ],
+        list: [
+          "Kartı hemen arka cebe atmayın.",
+          "Toplantıda kartları önünüze, karşınızdakilerin oturma sırasına göre dizebilirsiniz; adları karıştırmazsınız.",
+          "Kişinin önünde kartın üzerine not almayın; notunuzu sonra yazın.",
+          "Kartınız yanınızda değilse özür dileyip iletişim bilgilerinizi hemen başka bir yolla iletin.",
+        ],
+      },
+      {
+        heading: "Uluslararası görüşmelerde",
+        paragraphs: [
+          "Bazı kültürlerde kartvizit alışverişi daha resmîdir. Japonya'da kart iki elle, yazısı karşıya dönük ve hafifçe eğilerek verilir; alınan kart toplantı boyunca masada durur. Çin'de de iki elle vermek ve kartı dikkatle incelemek saygı göstergesidir. Yabancı iş ortaklarıyla görüşmeden önce o ülkenin alışkanlıklarına kısaca göz atmak iyi bir izlenim bırakır.",
+        ],
+      },
+      {
+        heading: "Dijital ve NFC kartvizitte görgü",
+        paragraphs: [
+          "NFC kartvizitte kart elden çıkmaz; karşınızdakinin telefonuna dokundurulur ve profiliniz açılır. Burada da aynı incelik geçerlidir: önce izin isteyin, kartı kendiniz okutun, telefonu karşınızdakinin elinden almayın.",
+        ],
+        list: [
+          'Kısa bir cümle yeterli: "Telefonunuzu uzatır mısınız, bilgilerim rehberinize kaydolsun."',
+          "Telefonda NFC kapalıysa ısrar etmeyin; QR kodu gösterin.",
+          'Dijivizit profilinde karşınızdaki kişi "Bilgilerimi bırak" ile kendi numarasını size iletebilir; kartını unutmuşsa ona bu yolu önerin.',
+          "Dijital kartvizit linkini mesajla gönderirken kısa bir tanıtım cümlesi ekleyin; yalnızca link göndermek soğuk durur.",
+        ],
+        link: {
+          href: "/rehber/dijital-kartvizit-nasil-paylasilir",
+          label: "Dijital kartvizit nasıl paylaşılır?",
+        },
+      },
+      {
+        heading: "Görüşmeden sonra",
+        paragraphs: [
+          "Kartvizitin değeri, sonrasında yapılan takiple ortaya çıkar. Görüşmeden sonraki birkaç gün içinde kısa bir mesaj ya da e-posta atın ve konuştuğunuz konuyu hatırlatın.",
+          'Dijivizit panelinde aldığınız kâğıt kartvizitin fotoğrafını çekerek kişiyi kaydedebilir, "Bir hafta sonra hatırlat" dediğiniz kişiler için günü gelince e-posta alırsınız; WhatsApp mesajı hazır yazılmış olur.',
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit nasıl çalışır?" },
+      },
+    ],
+    faq: [
+      {
+        q: "Kartvizit tek elle verilir mi?",
+        a: "Türkiye'de sağ elle vermek yeterince kibardır. İki elle vermek daha resmî ve saygılı durur; özellikle Japonya, Çin ve Kore'den iş ortaklarıyla görüşürken iki elle verin.",
+      },
+      {
+        q: "Kartvizit kime önce verilir?",
+        a: "Genellikle ziyaret eden taraf ya da kendini tanıtan kişi önce verir. Kalabalık bir toplantıda en kıdemli kişiden başlamak uygun olur.",
+      },
+      {
+        q: "Kartvizitim bittiyse ne yapmalıyım?",
+        a: "Özür dileyin ve bilgilerinizi hemen iletin: telefon numaranızı yazdırın ya da dijital kartvizit linkinizi mesajla gönderin. NFC kartvizit ya da QR kodlu profil kullanıyorsanız kart bitmez; aynı kart herkese okutulur.",
+      },
+      {
+        q: "Fuarda kartvizit nasıl verilir?",
+        a: "Kısa bir sohbetten sonra, ilgi gösteren kişiye verin. Kalabalıkta NFC ya da QR ile paylaşmak hızlıdır ve kartlarınızın bitmesi sorunu ortadan kalkar.",
       },
     ],
   },
