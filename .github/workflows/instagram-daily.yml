@@ -57,3 +57,15 @@ jobs:
           FORCE_INDEX: ${{ inputs.force_index }}
           SKIP_STORY: ${{ inputs.skip_story && '1' || '' }}
         run: node scripts/instagram-publish.mjs
+
+      # Same post on the LinkedIn page, once LINKEDIN_* secrets exist. A LinkedIn
+      # failure never undoes or blocks the Instagram post.
+      - name: Share on LinkedIn
+        if: github.event_name == 'workflow_dispatch' && inputs.force_index != ''
+        continue-on-error: true
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AUTHOR: ${{ secrets.LINKEDIN_AUTHOR }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          FORCE_INDEX: ${{ inputs.force_index }}
+        run: node scripts/linkedin-publish.mjs
