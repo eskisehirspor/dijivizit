@@ -86,6 +86,6 @@ export const config = {
     // Skips static assets, the auth callback handlers (which manage their own
     // cookies), and public cards under /p/ — those must stay anonymous and
     // cacheable, and never touch the session.
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|p/|auth/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|p/|auth/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|tsv)$).*)",
   ],
 };

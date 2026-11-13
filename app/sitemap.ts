@@ -1,14 +1,15 @@
 import type { MetadataRoute } from "next";
 
 import { MARKETING_ORIGIN } from "@/lib/hosts";
+import { CONTENT_UPDATED as CONTENT_UPDATED_ISO } from "@/lib/marketing/content-updated";
 import { GUIDES } from "@/lib/marketing/guides";
 import { LANDINGS } from "@/lib/marketing/landings";
 import { SEGMENTS } from "@/lib/marketing/segments";
 import { TOOLS } from "@/lib/marketing/tools";
 import { FINISHES } from "@/lib/orders/finishes";
 
-/** Bump when landing, product, tool or city/profession copy changes. */
-const CONTENT_UPDATED = new Date("2026-11-13");
+/** Bump lib/marketing/content-updated.ts when landing, product, tool or city/profession copy changes. */
+const CONTENT_UPDATED = new Date(CONTENT_UPDATED_ISO);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

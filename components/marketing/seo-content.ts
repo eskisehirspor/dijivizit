@@ -1,5 +1,6 @@
 /** Copy for the indexable sections of dijivizit.com, shared by the page and
  * its JSON-LD so the structured data always matches what is on screen. */
+import { FINISHES, PRICING, PROMISES, formatTry, type Finish } from "@/lib/orders/finishes";
 
 export const USE_CASES = [
   {
@@ -20,14 +21,69 @@ export const USE_CASES = [
   },
 ] as const;
 
-export const COMPARISON = [
-  ["Bilgi değişince", "Yeniden baskı", "Panelden anında güncelleme"],
-  ["Paylaşım", "Elden ele, kaybolur", "NFC dokunuş veya QR kod"],
-  ["İçerik", "Ad, telefon, e-posta", "Telefon, WhatsApp, sosyal, IBAN, belgeler"],
-  ["Rehbere kayıt", "Elle yazılır", "Tek dokunuşla"],
-  ["Karşı tarafın bilgisi", "Siz de kart istersiniz", "Bilgisini kartınıza bırakır"],
-  ["Takip", "Unutulur", "Hatırlatma ve hazır WhatsApp mesajı"],
-  ["Ömür", "Bir baskı dönemi", "Yıllarca aynı kart"],
+const priceOf = (material: Finish["material"]) =>
+  FINISHES.find((f) => f.material === material)!.price;
+
+/** Column headers for the homepage comparison table. */
+export const COMPARISON_COLUMNS = [
+  "Kâğıt kartvizit",
+  "Kartsız dijital kartvizit (link + QR)",
+  "Dijivizit NFC kartvizit",
+] as const;
+
+/** Rows: [label, paper, card-less digital, NFC card]. Prices come from finishes.ts. */
+export const COMPARISON: readonly (readonly [string, string, string, string])[] = [
+  [
+    "İlk maliyet",
+    "Baskı başına ödenir; her değişiklikte yeniden basılır.",
+    `${formatTry(priceOf("digital"))}/ay; yıllık ${formatTry(PRICING.digitalYearlyFee)} peşin ödenir. Kart ve kargo ücreti yok.`,
+    `PVC ve ahşap ${formatTry(priceOf("pvc"))}, metal ${formatTry(priceOf("metal"))}; tek seferlik. Profil ilk ${PRICING.profileFreeYears === 1 ? "" : `${PRICING.profileFreeYears} `}yıl ücretsiz, sonra ${formatTry(PRICING.profileMonthlyFee)}/ay.`,
+  ],
+  [
+    "Bilgi değişince",
+    "Kartlar yeniden bastırılır.",
+    "Panelden anında güncellenir; link ve QR kod aynı kalır.",
+    "Panelden anında güncellenir; kart aynı kalır.",
+  ],
+  [
+    "Paylaşım şekli",
+    "Elden ele verilir, kaybolur.",
+    "Link (WhatsApp, e-posta imzası, sosyal medya) ve QR kod.",
+    "Telefona NFC dokunuş, QR kod ve link.",
+  ],
+  ["Rehbere kayıt", "Bilgiler elle yazılır.", "Tek dokunuşla (vCard).", "Tek dokunuşla (vCard)."],
+  [
+    "İstatistik",
+    "Yok; kartın işe yarayıp yaramadığı bilinmez.",
+    "Kaç kez açıldığı, hangi şehir ve cihazlardan görüntülendiği.",
+    "Kaç kez açıldığı, hangi şehir ve cihazlardan görüntülendiği.",
+  ],
+  [
+    "Çevre etkisi / yeniden baskı",
+    "Bilgi değiştiğinde ve kart bittiğinde yeni baskı.",
+    "Baskı yok.",
+    "Tek kart yıllarca kullanılır; yeniden baskı gerekmez.",
+  ],
+  [
+    "Kurumsal yönetim",
+    "Her çalışan için ayrı baskı; çalışan ayrılınca kartları kullanılamaz.",
+    `${PRICING.bulkMinQuantity} ve üzeri kişilik ekiplerde %${PRICING.bulkDiscountPercent} indirim.`,
+    `Ekip panelinden kart atama ve devir; ${PRICING.bulkMinQuantity} ve üzeri adette %${PRICING.bulkDiscountPercent} indirim ve firma logosu.`,
+  ],
+];
+
+/** Card facts already stated on the product and landing pages. */
+export const CARD_SPECS = [
+  ["Ölçü", "Banka kartı ölçüsü, 85,6 × 54 mm (PVC); cüzdanın kart bölmesine girer."],
+  ["Kaplamalar", "Mat siyah PVC, siyah metal, gümüş, gold, koyu ve açık ahşap."],
+  ["Baskı", "Yalnızca ön yüz: solda logo, sağda NFC işareti. Metalde lazer kazıma, ahşapta yakma."],
+  ["Pil", "Yok. NFC çip enerjisini dokunulan telefondan alır."],
+  ["Uyumluluk", "iPhone XS ve sonrası, NFC'li Android telefonlar; diğerleri için QR kod ve link."],
+  [
+    "Teslimat",
+    `${PROMISES.deliveryHours} saatte, kargo ücretsiz; kartsız ürün ${PROMISES.digitalDeliveryHours} saatte e-postada.`,
+  ],
+  ["Değişim", "Okunmayan kart ücretsiz yenisiyle değiştirilir; 14 gün cayma hakkı."],
 ] as const;
 
 export const FAQ = [

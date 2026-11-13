@@ -9,13 +9,16 @@ import { WhyDijivizit } from "@/components/marketing/why-dijivizit";
 import { LifestyleImage } from "@/components/marketing/lifestyle-image";
 import { ScrollSequence, type SequenceCaption } from "@/components/marketing/scroll-sequence";
 import {
+  CARD_SPECS,
   COMPARISON,
+  COMPARISON_COLUMNS,
   FAQ,
   GUIDE_BLOCKS,
   KEYWORDS,
   USE_CASES,
 } from "@/components/marketing/seo-content";
 import { APP_ORIGIN, MARKETING_ORIGIN } from "@/lib/hosts";
+import { CONTENT_UPDATED, formatContentUpdated } from "@/lib/marketing/content-updated";
 import { routes } from "@/lib/routes";
 
 const TITLE = "Dijital Kartvizit | NFC ve QR Akıllı Kartvizit | Dijivizit";
@@ -42,6 +45,17 @@ const JSON_LD = {
       alternateName: ["Dijivizit NFC Kartvizit", "dijivizit.com"],
       inLanguage: "tr-TR",
       publisher: { "@id": `${MARKETING_ORIGIN}/#organization` },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${MARKETING_ORIGIN}/#webpage`,
+      url: `${MARKETING_ORIGIN}/`,
+      name: TITLE,
+      description: DESCRIPTION,
+      inLanguage: "tr-TR",
+      isPartOf: { "@id": `${MARKETING_ORIGIN}/#website` },
+      about: { "@id": `${MARKETING_ORIGIN}/#organization` },
+      dateModified: CONTENT_UPDATED,
     },
     {
       "@type": "FAQPage",
@@ -264,45 +278,92 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-border/60">
-        <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 py-28 sm:py-36 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-20">
+      <section id="karsilastirma" className="scroll-mt-20 border-t border-border/60">
+        <div className="mx-auto w-full max-w-6xl px-6 py-28 sm:py-36">
+          <div className="flex max-w-3xl flex-col gap-4">
+            <p className="text-sm font-medium tracking-wide text-muted-foreground">Karşılaştırma</p>
+            <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
+              Dijital kartvizit, kâğıt kartvizit ve NFC kartvizit karşılaştırması
+            </h2>
+            <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
+              Kâğıt kartvizit her değişiklikte yeniden basılır. Dijital kartvizit bir kez kurulur,
+              panelden güncellenir; NFC kart buna telefona dokundurarak paylaşmayı ekler.
+            </p>
+          </div>
+          <div className="mt-16 overflow-x-auto">
+            <table className="w-full min-w-[46rem] text-left text-base">
+              <caption className="sr-only">
+                Kâğıt kartvizit, kartsız dijital kartvizit ve Dijivizit NFC kartvizit
+                karşılaştırması
+              </caption>
+              <thead>
+                <tr className="border-b border-border text-sm text-muted-foreground">
+                  <th scope="col" className="py-4 pr-6 font-medium">
+                    <span className="sr-only">Özellik</span>
+                  </th>
+                  {COMPARISON_COLUMNS.map((col, i) => (
+                    <th
+                      key={col}
+                      scope="col"
+                      className={
+                        i === COMPARISON_COLUMNS.length - 1
+                          ? "py-4 font-medium text-foreground"
+                          : "py-4 pr-6 font-medium"
+                      }
+                    >
+                      {col}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARISON.map(([label, paper, digital, nfc]) => (
+                  <tr key={label} className="border-b border-border/60 align-top">
+                    <th scope="row" className="w-[18%] py-5 pr-6 font-medium">
+                      {label}
+                    </th>
+                    <td className="py-5 pr-6 text-muted-foreground">{paper}</td>
+                    <td className="py-5 pr-6 text-muted-foreground">{digital}</td>
+                    <td className="py-5">{nfc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Fiyatlara KDV dahildir.{" "}
+            <Link
+              href="/dijital-kartvizit-fiyatlari"
+              className="font-medium text-foreground underline underline-offset-4"
+            >
+              Tüm dijital kartvizit fiyatları
+            </Link>
+            . Son güncelleme: <time dateTime={CONTENT_UPDATED}>{formatContentUpdated()}</time>
+          </p>
+        </div>
+        <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 pb-28 sm:pb-36 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-20">
           <div className="min-w-0">
             <div className="flex max-w-2xl flex-col gap-4">
               <p className="text-sm font-medium tracking-wide text-muted-foreground">
-                Kağıt kartvizit ve dijital kartvizit
+                Teknik özellikler
               </p>
-              <h2 className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl">
-                Bir kez al. Hep güncel kalsın.
-              </h2>
+              <h3 className="text-3xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-4xl">
+                NFC kartvizit, kısaca.
+              </h3>
             </div>
-            <div className="mt-16 overflow-x-auto">
-              <table className="w-full min-w-[30rem] text-left text-base">
-                <thead>
-                  <tr className="border-b border-border text-sm text-muted-foreground">
-                    <th scope="col" className="py-4 pr-6 font-medium">
-                      <span className="sr-only">Özellik</span>
-                    </th>
-                    <th scope="col" className="py-4 pr-6 font-medium">
-                      Kağıt kartvizit
-                    </th>
-                    <th scope="col" className="py-4 font-medium text-foreground">
-                      Dijivizit NFC kartvizit
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPARISON.map(([label, paper, digital]) => (
-                    <tr key={label} className="border-b border-border/60">
-                      <th scope="row" className="py-5 pr-6 font-medium">
-                        {label}
-                      </th>
-                      <td className="py-5 pr-6 text-muted-foreground">{paper}</td>
-                      <td className="py-5">{digital}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <dl className="mt-12 grid gap-0">
+              {CARD_SPECS.map(([term, detail]) => (
+                <div
+                  key={term}
+                  className="grid gap-1 border-t border-border/60 py-5 sm:grid-cols-[10rem_1fr] sm:gap-6"
+                >
+                  <dt className="font-medium">{term}</dt>
+                  <dd className="text-base leading-relaxed text-pretty text-muted-foreground">
+                    {detail}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
           <LifestyleImage
             src="/landing/lifestyle/collection.webp"
