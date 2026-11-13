@@ -8,7 +8,7 @@ import { TOOLS } from "@/lib/marketing/tools";
 import { FINISHES } from "@/lib/orders/finishes";
 
 /** Bump when landing, product, tool or city/profession copy changes. */
-const CONTENT_UPDATED = new Date("2026-11-07");
+const CONTENT_UPDATED = new Date("2026-11-13");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

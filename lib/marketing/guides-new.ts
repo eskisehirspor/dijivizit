@@ -952,12 +952,13 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "kartvizit-olculeri",
     label: "Kartvizit ölçüleri",
-    title: "Kartvizit Ölçüleri: Standart Kartvizit Boyutu Kaç cm?",
+    title: "Kartvizit Ölçüleri: Kartvizit Boyutu Kaç cm? (85 × 55 mm)",
     description:
-      "Kartvizit ölçüleri nedir? Türkiye'de standart kartvizit boyutu 85 × 55 mm, NFC kartlarda 85,6 × 54 mm. Kesim payı, güvenli alan ve baskı için ölçü rehberi.",
+      "Kartvizit kaç cm? Türkiye'de standart kartvizit 8,5 × 5,5 cm (85 × 55 mm), NFC kartvizit 85,6 × 54 mm. Kesim payı, güvenli alan ve piksel ölçüleri rehberi.",
     image: "/rehber/metal-kartvizit.jpg",
     imageAlt: "Mat siyah metal Dijivizit NFC kartvizit",
     published: "2026-11-05",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Kısa cevap",
@@ -975,6 +976,10 @@ export const NEW_GUIDES: Guide[] = [
           "Avrupa'da yaygın ölçü: 85 × 55 mm",
           "Japonya kartviziti (meishi): 91 × 55 mm",
         ],
+        link: {
+          href: "/rehber/kredi-karti-olculeri",
+          label: "Kredi kartı kaç cm? Ayrıntılı ölçüler",
+        },
       },
       {
         heading: "Kesim payı (taşma) nedir?",
@@ -1313,12 +1318,13 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "nfc-kart-programlama",
     label: "NFC kart programlama",
-    title: "NFC Kart Nasıl Programlanır? NFC Tools ile Adım Adım",
+    title: "NFC Tools Nasıl Kullanılır? NFC Kart Programlama Rehberi",
     description:
-      "NFC kart nasıl programlanır? NFC Tools ile karta URL yazma, NDEF kaydı, NTAG213, NTAG215 ve NTAG216 kapasiteleri, kilitleme uyarısı ve yönetilen profil.",
+      "NFC Tools nasıl kullanılır, NFC kart nasıl kodlanır? Karta URL yazma adımları, NDEF kaydı, NTAG213/215/216 kapasiteleri ve geri alınamayan kilitleme uyarısı.",
     image: "/rehber/nfc-kartvizit-hangi-telefonlarda-calisir.jpg",
     imageAlt: "Gold NFC kartvizit telefona yaklaştırılıyor",
     published: "2026-11-05",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Kısa cevap",
@@ -2169,6 +2175,410 @@ export const NEW_GUIDES: Guide[] = [
       {
         q: "Fuarda kartvizit nasıl verilir?",
         a: "Kısa bir sohbetten sonra, ilgi gösteren kişiye verin. Kalabalıkta NFC ya da QR ile paylaşmak hızlıdır ve kartlarınızın bitmesi sorunu ortadan kalkar.",
+      },
+    ],
+  },
+  {
+    slug: "kredi-karti-olculeri",
+    label: "Kredi kartı ölçüleri",
+    title: "Kredi Kartı Kaç cm? Ölçüsü 8,56 × 5,40 cm (ID-1)",
+    description:
+      "Kredi kartı kaç cm? ISO/IEC 7810 ID-1 standardında 85,60 × 53,98 mm, kalınlık 0,76 mm. Banka kartı, kimlik kartı ve kartvizitle ölçü karşılaştırması.",
+    image: "/rehber/qr-kod-kartvizit.jpg",
+    imageAlt: "Deri kartlıktan çıkarılan kredi kartı boyutunda siyah Dijivizit NFC kartvizit",
+    published: "2026-11-13",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Kredi kartı 85,60 × 53,98 mm, yani yaklaşık 8,56 × 5,40 cm boyutunda ve 0,76 mm kalınlığındadır; bu ölçü ISO/IEC 7810 standardındaki ID-1 formatıdır ve köşeleri yaklaşık 3,18 mm yarıçapla yuvarlatılır.",
+          "Kredi kartları ve banka kartları bu standarda göre üretilir; cüzdanların kart bölmeleri ve kartlıklar da bu ölçüye göre tasarlanır.",
+        ],
+      },
+      {
+        heading: "Kredi kartı ölçüleri: mm, cm ve inç",
+        paragraphs: [],
+        list: [
+          "Uzun kenar: 85,60 mm = 8,56 cm = 3,370 inç",
+          "Kısa kenar: 53,98 mm = 5,40 cm = 2,125 inç",
+          "Kalınlık: 0,76 mm = 0,076 cm = 0,030 inç",
+          "Köşe yarıçapı: yaklaşık 3,18 mm = 0,318 cm = 0,125 inç",
+          "En-boy oranı: yaklaşık 1,586",
+        ],
+      },
+      {
+        heading: "Banka kartı, kimlik kartı ve ehliyet aynı boyutta mı?",
+        paragraphs: [
+          "Banka kartı ve kredi kartı aynı ID-1 standardını kullanır; ikisi de 85,60 × 53,98 mm'dir. Çipli T.C. kimlik kartı da ID-1, yani kredi kartı boyutundadır; eski kimlik kartlarından daha küçüktür.",
+          "Sürücü belgesi bilgileri çipli kimlik kartına yüklenebilir; ehliyet özellikli kimlik kartı da aynı kart olduğu için ölçüsü aynıdır.",
+        ],
+      },
+      {
+        heading: "Kartvizit ile kredi kartı arasındaki fark",
+        paragraphs: [
+          "Türkiye'de standart kâğıt kartvizit 85 × 55 mm'dir. Kredi kartı 85,60 × 53,98 mm olduğu için kartvizitten 0,6 mm daha uzun, yaklaşık 1 mm daha kısadır. Elde fark neredeyse hissedilmez, ama baskı dosyası hazırlarken iki ölçü birbirinin yerine kullanılmamalıdır.",
+        ],
+        list: [
+          "Kâğıt kartvizit: 85 × 55 mm, köşeler genellikle düz",
+          "Kredi kartı ve NFC kart: 85,60 × 53,98 mm, köşeler yuvarlatılmış",
+          "Kalınlık: kâğıt kartvizitte gramajla ölçülür (genellikle 300–400 gr/m²), kredi kartında 0,76 mm",
+        ],
+        link: { href: "/rehber/kartvizit-olculeri", label: "Kartvizit ölçüleri rehberi" },
+      },
+      {
+        heading: "NFC kartvizit neden kredi kartı boyutunda?",
+        paragraphs: [
+          "NFC kartvizitler genellikle kredi kartı ölçüsündedir: cüzdanın kart bölmesine, kartlıklara ve telefon kılıflarının kart cebine banka kartınız gibi oturur. Kâğıt kartvizit gibi ayrı bir kutuda taşınmaz.",
+          "Dijivizit'in PVC, metal ve ahşap NFC kartları da kredi kartı boyutundadır. Mat siyah PVC ve ahşap kartlar 2.500 TL, metal kartlar 4.000 TL'dir; KDV dahil, kargo ücretsiz, 72 saatte teslim.",
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+      },
+      {
+        heading: "Metal ve ahşap kartlarda ölçü",
+        paragraphs: [
+          "Metal ve ahşap NFC kartlar da aynı en ve boy ölçüsündedir. Malzeme farklı olduğu için elde hissi değişir; metal kart belirgin şekilde daha ağırdır ve lazer kazıma yüzeyi silinmez.",
+        ],
+        link: { href: "/metal-kartvizit", label: "Metal kartvizit" },
+      },
+      {
+        heading: "Baskı ve tasarım için ölçüler",
+        paragraphs: [
+          "Kredi kartı boyutunda bir kart tasarlarken dosyayı net ölçüyle değil, kesim payıyla hazırlayın. Photoshop'ta yeni belgeyi 300 piksel/inç çözünürlükle açın; baskı için renk modunu CMYK seçin.",
+        ],
+        list: [
+          "Net ölçü 85,6 × 54 mm: 300 dpi'da 1011 × 638 piksel",
+          "2 mm kesim paylı dosya 89,6 × 58 mm: yaklaşık 1058 × 685 piksel",
+          "3 mm kesim paylı dosya 91,6 × 60 mm: yaklaşık 1082 × 709 piksel",
+          "Güvenli alan: yazı ve logoları kenardan en az 3–5 mm içeride tutun",
+          "Köşeler yuvarlatıldığı için köşelere önemli bir öğe koymayın",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Kredi kartı kaç cm?",
+        a: "Kredi kartı 8,56 × 5,40 cm'dir; milimetre olarak 85,60 × 53,98 mm. Bu ölçü ISO/IEC 7810 ID-1 standardıdır.",
+      },
+      {
+        q: "Kredi kartı kalınlığı kaç mm?",
+        a: "ID-1 standardındaki kartların kalınlığı 0,76 mm'dir.",
+      },
+      {
+        q: "Banka kartı kaç cm?",
+        a: "Banka kartı da kredi kartıyla aynı ölçüdedir: 8,56 × 5,40 cm (85,60 × 53,98 mm), 0,76 mm kalınlık.",
+      },
+      {
+        q: "Kredi kartı ile kartvizit aynı boyutta mı?",
+        a: "Neredeyse. Standart kartvizit 85 × 55 mm, kredi kartı 85,60 × 53,98 mm'dir. NFC kartvizitler genellikle kredi kartı ölçüsündedir.",
+      },
+      {
+        q: "Kredi kartı kaç piksel?",
+        a: "300 dpi'da 85,6 × 54 mm'lik bir kart 1011 × 638 pikseldir. 3 mm kesim payıyla dosya yaklaşık 1082 × 709 piksel olur.",
+      },
+    ],
+  },
+  {
+    slug: "oppo-nfc-acma",
+    label: "Oppo NFC açma",
+    title: "Oppo NFC Nasıl Açılır? ColorOS'ta Adım Adım",
+    description:
+      "Oppo telefonda NFC nasıl açılır? ColorOS'ta Ayarlar > Bağlantı ve paylaşım > NFC yolu, hızlı ayarlar düğmesi ve NFC kartvizitin telefona doğru okutulması.",
+    image: "/rehber/telefonda-nfc-nasil-acilir.jpg",
+    imageAlt:
+      "Siyah NFC kartvizit telefonun arkasına yaklaştırılmış, ekranda dijital kartvizit profili açık",
+    published: "2026-11-13",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Oppo telefonlarda NFC, Ayarlar > Bağlantı ve paylaşım > NFC yolundan açılır. Daha hızlısı, ekranın üstünden aşağı kaydırıp hızlı ayarlardaki NFC düğmesine dokunmaktır. NFC açıldıktan sonra kartı telefonun arkasına 1-2 saniye tutmanız yeterlidir; uygulama gerekmez.",
+        ],
+      },
+      {
+        heading: "Ayarlardan NFC'yi açma",
+        paragraphs: [
+          "Menü adları ColorOS sürümüne göre küçük farklar gösterebilir; bazı eski sürümlerde NFC, Diğer kablosuz bağlantılar bölümündedir.",
+        ],
+        list: [
+          "Ayarlar'ı açın.",
+          '"Bağlantı ve paylaşım" bölümüne girin.',
+          "NFC'ye dokunun ve anahtarı açın.",
+          'Menüyü bulamazsanız ayarların arama kutusuna "NFC" yazın.',
+          "Hızlı yol: ekranın üstünden aşağı kaydırın ve NFC düğmesine dokunun. Düğme yoksa düzenle simgesinden panele ekleyin.",
+        ],
+      },
+      {
+        heading: "Realme ve OnePlus'ta da aynı mı?",
+        paragraphs: [
+          "Realme ve OnePlus telefonlar da ColorOS tabanlı bir arayüz kullandığı için NFC ayarı genellikle aynı yerdedir: Ayarlar > Bağlantı ve paylaşım > NFC. Farklıysa arama kutusuna NFC yazmak en hızlı yoldur.",
+        ],
+      },
+      {
+        heading: "Telefonumda NFC yoksa?",
+        paragraphs: [
+          "Her Oppo modelinde NFC bulunmaz; özellikle bazı giriş seviyesi modellerde bu özellik olmayabilir. Ayarlarda arama yaptığınızda NFC çıkmıyorsa telefonunuzda NFC yoktur. Bu durumda karşınızdaki kişi profilinizin QR kodunu kamerayla okutur; Dijivizit kartlarıyla birlikte profil linkiniz ve QR kodunuz da verilir.",
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+      },
+      {
+        heading: "NFC kartvizit nasıl okutulur?",
+        paragraphs: [
+          "NFC açıkken ekranın kilidini açın ve kartı telefonun arka yüzünün orta ya da üst-orta kısmına yaklaştırın; okuma noktası modele göre biraz değişir. Kartı 1-2 saniye sabit tutun, ekranda çıkan bildirime dokununca profil tarayıcıda açılır. Kalın, metal plakalı ya da mıknatıslı kılıflar okumayı zorlaştırabilir.",
+        ],
+        link: { href: "/rehber/nfc-kartvizit-okumuyor", label: "NFC kartvizit okumuyor mu?" },
+      },
+      {
+        heading: "Diğer markalar",
+        paragraphs: [
+          "Samsung, iPhone, Xiaomi, Huawei, General Mobile, Omix ve diğer telefonlarda NFC açma adımları genel rehberde.",
+        ],
+        link: { href: "/rehber/telefonda-nfc-nasil-acilir", label: "Telefonda NFC nasıl açılır?" },
+      },
+    ],
+    faq: [
+      {
+        q: "Oppo telefonda NFC nerede?",
+        a: "Ayarlar > Bağlantı ve paylaşım > NFC yolundadır. Ekranın üstünden aşağı kaydırınca açılan hızlı ayarlar panelinde de NFC düğmesi bulunur.",
+      },
+      {
+        q: "Oppo'da NFC açık ama kart okunmuyor, ne yapmalıyım?",
+        a: "Ekran kilidini açın, kartı arka yüzün ortasına 1-2 saniye sabit tutun ve kılıfı çıkarıp deneyin. Olmazsa profilin QR kodunu okutun.",
+      },
+      {
+        q: "NFC açık kalırsa pil tüketir mi?",
+        a: "Çok az. NFC yalnızca birkaç santimetre mesafede ve ekran açıkken çalışır; günlük pil kullanımında fark edilmez.",
+      },
+    ],
+  },
+  {
+    slug: "samsung-nfc-acma",
+    label: "Samsung NFC açma",
+    title: "Samsung NFC Nasıl Açılır? One UI'da Adım Adım",
+    description:
+      "Samsung Galaxy telefonda NFC nasıl açılır? Ayarlar > Bağlantılar > NFC ve temassız ödemeler yolu, hızlı ayarlar düğmesi ve NFC kartvizitin okutulması.",
+    image: "/rehber/nfc-kartvizit-hangi-telefonlarda-calisir.jpg",
+    imageAlt: "Gold NFC kartvizit telefona yaklaştırılıyor",
+    published: "2026-11-13",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Samsung Galaxy telefonlarda NFC, Ayarlar > Bağlantılar > NFC ve temassız ödemeler yolundan açılır. Hızlı ayarlar panelinde de NFC düğmesi vardır. NFC açıldıktan sonra kartı telefonun arkasına 1-2 saniye tutmanız yeterlidir; uygulama gerekmez.",
+        ],
+      },
+      {
+        heading: "Ayarlardan NFC'yi açma",
+        paragraphs: [
+          "Menü adları One UI sürümüne göre küçük farklar gösterebilir; bulamazsanız ayarların arama kutusuna NFC yazın.",
+        ],
+        list: [
+          "Ayarlar'ı açın.",
+          "Bağlantılar bölümüne girin.",
+          '"NFC ve temassız ödemeler" anahtarını açın.',
+        ],
+      },
+      {
+        heading: "Hızlı ayarlardan açma",
+        paragraphs: [],
+        list: [
+          "Ekranın üstünden iki kez aşağı kaydırın.",
+          "NFC düğmesine dokunun.",
+          "Düğme görünmüyorsa panelin düzenle (kalem) simgesinden NFC'yi ekleyin.",
+        ],
+      },
+      {
+        heading: "NFC ve temassız ödeme aynı ayar mı?",
+        paragraphs: [
+          "Evet. Samsung'da tek bir anahtar hem NFC veri okumayı hem temassız ödemeyi açar. NFC genellikle fabrikadan açık gelir, ama bir sistem güncellemesi ya da ağ ayarlarının sıfırlanması onu kapatabilir. NFC kartvizit okumak için bu anahtarın açık olması yeterlidir; ödeme uygulaması kurmanız gerekmez.",
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+      },
+      {
+        heading: "NFC kartvizit nasıl okutulur?",
+        paragraphs: [
+          "NFC açıkken ekranın kilidini açın ve kartı telefonun arka yüzünün orta ya da üst-orta kısmına yaklaştırın; okuma noktası modele göre biraz değişir. Kartı 1-2 saniye sabit tutun, ekranda çıkan bildirime dokununca profil tarayıcıda açılır. Kalın, metal plakalı ya da mıknatıslı kılıflar okumayı zorlaştırabilir.",
+        ],
+        link: { href: "/rehber/nfc-kartvizit-okumuyor", label: "NFC kartvizit okumuyor mu?" },
+      },
+      {
+        heading: "Diğer markalar",
+        paragraphs: [
+          "Oppo, iPhone, Xiaomi, Huawei, General Mobile, Omix ve diğer telefonlarda NFC açma adımları genel rehberde.",
+        ],
+        link: { href: "/rehber/telefonda-nfc-nasil-acilir", label: "Telefonda NFC nasıl açılır?" },
+      },
+    ],
+    faq: [
+      {
+        q: "Samsung'da NFC nerede?",
+        a: "Ayarlar > Bağlantılar > NFC ve temassız ödemeler yolundadır. Hızlı ayarlar panelinde de NFC düğmesi bulunur.",
+      },
+      {
+        q: "Telefonumda NFC olup olmadığını nasıl anlarım?",
+        a: "Ayarların arama kutusuna NFC yazın. Sonuç çıkmıyorsa telefonunuzda NFC yoktur; bu durumda profilin QR kodunu kamerayla okutabilirsiniz.",
+      },
+      {
+        q: "NFC açık kalırsa pil tüketir mi?",
+        a: "Çok az. NFC yalnızca birkaç santimetre mesafede ve ekran açıkken çalışır; günlük pil kullanımında fark edilmez.",
+      },
+    ],
+  },
+  {
+    slug: "iphone-nfc-acma",
+    label: "iPhone NFC açma",
+    title: "iPhone NFC Nasıl Açılır? Ayar Yok, Böyle Okutulur",
+    description:
+      "iPhone NFC nasıl açılır? Açma ayarı yoktur: XS ve sonrası etiketleri arka planda okur, iPhone 7, 8 ve X'te Denetim Merkezi'ndeki NFC Etiketi Okuyucu kullanılır.",
+    image: "/rehber/nfc-kartvizit-nedir.jpg",
+    imageAlt: "Siyah metal NFC kartvizit telefonun arkasına dokunuyor, ekranda dijital profil açık",
+    published: "2026-11-13",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "iPhone'da NFC'yi açıp kapatan bir ayar yoktur. iPhone XS, XR ve sonraki modeller NFC etiketlerini arka planda kendiliğinden okur; ekran açıkken kartı telefonun üst arka kısmına yaklaştırmanız yeterlidir. iPhone 7, 8 ve X'te ise Denetim Merkezi'ndeki NFC Etiketi Okuyucu'ya dokunarak okutursunuz.",
+        ],
+      },
+      {
+        heading: "iPhone XS, XR ve sonrası",
+        paragraphs: [],
+        list: [
+          "Ekranı açın.",
+          "Kartı telefonun üst arka kısmına, kameraların yakınına yaklaştırın.",
+          "Ekranın üstünde çıkan bildirime dokunun; telefon kilitliyse önce kilidi açmanız istenir.",
+          "Profil tarayıcıda açılır.",
+        ],
+        link: {
+          href: "/rehber/nfc-kartvizit-hangi-telefonlarda-calisir",
+          label: "NFC kartvizit hangi telefonlarda çalışır?",
+        },
+      },
+      {
+        heading: "Arka planda okuma ne zaman çalışmaz?",
+        paragraphs: ["Ekran açık olsa bile şu durumlarda iPhone etiketi arka planda okumaz:"],
+        list: [
+          "Kamera açıkken",
+          "Cüzdan ya da Apple Pay kullanılırken",
+          "Uçak modu açıkken",
+          "Telefon yeniden başlatıldıktan sonra kilidi hiç açılmamışken",
+          "Başka bir uygulama NFC okuması yaparken",
+        ],
+      },
+      {
+        heading: "iPhone 7, 8 ve X",
+        paragraphs: [
+          "Bu modeller etiketleri arka planda okumaz; Denetim Merkezi'ndeki NFC Etiketi Okuyucu'yu kullanırsınız. iPhone 6s ve daha eski modeller NFC etiketi okuyamaz; bu telefonlarda profilin QR kodunu kamerayla okutun.",
+        ],
+        list: [
+          "Ayarlar > Denetim Merkezi'ne girin ve NFC Etiketi Okuyucu'yu ekleyin.",
+          "Denetim Merkezi'ni açıp NFC Etiketi Okuyucu'ya dokunun.",
+          "Kartı telefonun üst arka kısmına tutun.",
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+      },
+      {
+        heading: "NFC kartvizit nasıl okutulur?",
+        paragraphs: [
+          "iPhone'da NFC anteni üst kenara yakındır. Kartı arka yüzün üst kısmına, kameraların hemen altına yaklaştırın ve 1-2 saniye sabit tutun. Kalın, metal plakalı ya da mıknatıslı kılıflar okumayı zorlaştırabilir; okumazsa kılıfı çıkarıp deneyin ya da QR koda geçin. Dijivizit kartlarıyla birlikte profil linkiniz ve QR kodunuz da verilir.",
+        ],
+        link: { href: "/rehber/nfc-kartvizit-okumuyor", label: "NFC kartvizit okumuyor mu?" },
+      },
+      {
+        heading: "Android telefonlar",
+        paragraphs: [
+          "Android'de NFC ayardan açılıp kapatılır. Samsung, Oppo, Xiaomi, Poco ve diğer markalarda NFC açma adımları genel rehberde.",
+        ],
+        link: { href: "/rehber/telefonda-nfc-nasil-acilir", label: "Telefonda NFC nasıl açılır?" },
+      },
+    ],
+    faq: [
+      {
+        q: "iPhone'da NFC ayarı nerede?",
+        a: "Ayarlarda NFC anahtarı yoktur. iPhone XS ve sonraki modeller ekran açıkken etiketleri kendiliğinden okur; iPhone 7, 8 ve X'te Denetim Merkezi'ndeki NFC Etiketi Okuyucu kullanılır.",
+      },
+      {
+        q: "iPhone 11, 12, 13 ve sonrasında NFC nasıl açılır?",
+        a: "Açmanız gerekmez. Bu modeller arka planda okur; kartı ekran açıkken üst arka kısma yaklaştırın ve çıkan bildirime dokunun.",
+      },
+      {
+        q: "iPhone NFC kartvizit okumuyor, ne yapmalıyım?",
+        a: "Kameranın ve Cüzdan'ın kapalı olduğundan, uçak modunun açık olmadığından emin olun; kartı üst arka kısma tutun ve kılıfı çıkarıp deneyin. Olmazsa profilin QR kodunu okutun.",
+      },
+      {
+        q: "iPhone ile NFC karta yazılabilir mi?",
+        a: "Evet. iOS 13 ve sonrası yüklü iPhone 7 ve sonrası modeller, NFC Tools gibi uygulamalarla etikete bağlantı yazabilir.",
+      },
+    ],
+  },
+  {
+    slug: "xiaomi-poco-nfc-acma",
+    label: "Xiaomi ve Poco NFC açma",
+    title: "Xiaomi, Redmi ve Poco NFC Nasıl Açılır? HyperOS",
+    description:
+      "Xiaomi, Redmi ve Poco telefonda NFC nasıl açılır? HyperOS'ta Kontrol Merkezi düğmesi, Ayarlar'daki NFC yolu ve NFC kartvizitin telefona doğru okutulması.",
+    image: "/rehber/dijital-kartvizit-nedir.jpg",
+    imageAlt: "Siyah NFC kartvizit telefona dokunduruluyor, ekranda dijital kartvizit profili açık",
+    published: "2026-11-13",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Xiaomi, Redmi ve Poco telefonlarda NFC'yi açmanın en hızlı yolu, ekranın sağ üstünden aşağı kaydırıp Kontrol Merkezi'ndeki NFC düğmesine dokunmaktır. Ayarlardan açmak için HyperOS'ta yol genellikle Ayarlar > Diğer bağlantı seçenekleri > NFC'dir; bazı model ve sürümlerde NFC, Bağlantı ve paylaşım bölümündedir.",
+        ],
+      },
+      {
+        heading: "Ayarlardan NFC'yi açma",
+        paragraphs: [],
+        list: [
+          "Ayarlar'ı açın.",
+          '"Diğer bağlantı seçenekleri"ne dokunun (bazı sürümlerde "Bağlantı ve paylaşım").',
+          "NFC'ye dokunun ve anahtarı açın.",
+          'Menüyü bulamazsanız ayarların arama kutusuna "NFC" yazın.',
+        ],
+      },
+      {
+        heading: "Kontrol Merkezi'nden açma",
+        paragraphs: [],
+        list: [
+          "Ekranın sağ üstünden aşağı kaydırın.",
+          "NFC simgesine dokunun.",
+          "Simge yoksa Kontrol Merkezi'ni düzenleyip NFC'yi ekleyin.",
+        ],
+      },
+      {
+        heading: "Telefonumda NFC var mı?",
+        paragraphs: [
+          "Her Xiaomi, Redmi ve Poco modelinde NFC bulunmaz; aynı serinin NFC'li ve NFC'siz sürümleri de olabilir. Ayarların arama kutusuna NFC yazın; sonuç çıkmıyorsa telefonunuzda NFC yoktur. Bu durumda profilin QR kodu kamerayla okutulur; Dijivizit kartlarıyla birlikte profil linkiniz ve QR kodunuz da verilir.",
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+      },
+      {
+        heading: "NFC kartvizit nasıl okutulur?",
+        paragraphs: [
+          "NFC açıkken ekranın kilidini açın ve kartı telefonun arka yüzünün orta ya da üst-orta kısmına yaklaştırın; okuma noktası modele göre biraz değişir. Kartı 1-2 saniye sabit tutun, ekranda çıkan bildirime dokununca profil tarayıcıda açılır. NFC bir güncellemeden sonra çalışmayı bıraktıysa sistem güncellemelerini kontrol edin.",
+        ],
+        link: { href: "/rehber/nfc-kartvizit-okumuyor", label: "NFC kartvizit okumuyor mu?" },
+      },
+      {
+        heading: "Diğer markalar",
+        paragraphs: [
+          "Samsung, Oppo, iPhone, Huawei, General Mobile, Omix ve diğer telefonlarda NFC açma adımları genel rehberde.",
+        ],
+        link: { href: "/rehber/telefonda-nfc-nasil-acilir", label: "Telefonda NFC nasıl açılır?" },
+      },
+    ],
+    faq: [
+      {
+        q: "Poco'da NFC nasıl açılır?",
+        a: "Ekranın sağ üstünden aşağı kaydırıp Kontrol Merkezi'ndeki NFC düğmesine dokunun. Ayarlardan açmak için Diğer bağlantı seçenekleri (bazı sürümlerde Bağlantı ve paylaşım) > NFC yolunu izleyin.",
+      },
+      {
+        q: "Redmi telefonda NFC nerede?",
+        a: "Redmi de Xiaomi'nin arayüzünü kullanır: Kontrol Merkezi'nde NFC düğmesi, ayarlarda Diğer bağlantı seçenekleri ya da Bağlantı ve paylaşım altında NFC bulunur.",
+      },
+      {
+        q: "NFC açık kalırsa pil tüketir mi?",
+        a: "Çok az. NFC yalnızca birkaç santimetre mesafede ve ekran açıkken çalışır; günlük pil kullanımında fark edilmez.",
       },
     ],
   },

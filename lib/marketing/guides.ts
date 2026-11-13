@@ -558,14 +558,14 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "telefonda-nfc-nasil-acilir",
     label: "Telefonda NFC nasıl açılır?",
-    title: "Telefonda NFC Nasıl Açılır? iPhone, Samsung, Xiaomi, Poco, Oppo",
+    title: "NFC Açma 2026: Oppo, Samsung, Poco, General Mobile, Omix",
     description:
-      "NFC nasıl açılır? iPhone, Samsung, Xiaomi, Redmi, Poco, Oppo, Realme, Huawei ve yerli Android telefonlarda NFC açma adımları; kart nereye tutulur?",
+      "Telefonda NFC nasıl açılır? Oppo, Samsung, Poco, Xiaomi, General Mobile, Omix, Huawei ve iPhone'da NFC açma adımları 2026; NFC kart nereye tutulur?",
     image: "/rehber/telefonda-nfc-nasil-acilir.jpg",
     imageAlt:
       "Siyah NFC kartvizit telefonun arkasına yaklaştırılmış, ekranda dijital kartvizit profili açık",
     published: "2026-11-02",
-    updated: "2026-11-07",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Kısaca",
@@ -580,6 +580,7 @@ const BASE_GUIDES: Guide[] = [
           "iPhone XS ve sonraki modeller NFC etiketlerini arka planda kendiliğinden okur. Ekran açıkken kartı telefonun üst arka kısmına, kameraların yakınına tutun; ekranın üstünde çıkan bildirime dokunun.",
           'iPhone 7, 8 ve X modellerinde Denetim Merkezi\'ne "NFC Etiketi Okuyucu" düğmesini ekleyip ona dokunarak kartı okutabilirsiniz: Ayarlar > Denetim Merkezi > NFC Etiketi Okuyucu.',
         ],
+        link: { href: "/rehber/iphone-nfc-acma", label: "iPhone'da NFC: ayrıntılı rehber" },
       },
       {
         heading: "Samsung'da NFC",
@@ -590,16 +591,21 @@ const BASE_GUIDES: Guide[] = [
           '"NFC ve temassız ödemeler" seçeneğini açın.',
           "Daha hızlısı: ekranın üstünden iki kez aşağı kaydırıp hızlı ayarlardaki NFC düğmesine dokunun.",
         ],
+        link: { href: "/rehber/samsung-nfc-acma", label: "Samsung'da NFC: ayrıntılı rehber" },
       },
       {
         heading: "Xiaomi, Redmi ve Poco'da NFC",
         paragraphs: [],
         list: [
           "Ayarlar'ı açın.",
-          '"Bağlantı ve paylaşım" bölümüne girin.',
+          'HyperOS\'ta "Diğer bağlantı seçenekleri", bazı model ve sürümlerde "Bağlantı ve paylaşım" bölümüne girin.',
           "NFC'yi açın.",
           "Kontrol merkezinde de NFC düğmesi bulunur.",
         ],
+        link: {
+          href: "/rehber/xiaomi-poco-nfc-acma",
+          label: "Xiaomi, Redmi ve Poco'da NFC: ayrıntılı rehber",
+        },
       },
       {
         heading: "Oppo, Realme ve OnePlus'ta NFC",
@@ -612,6 +618,7 @@ const BASE_GUIDES: Guide[] = [
           "NFC'yi açın.",
           "Hızlı ayarlar panelinde NFC düğmesi yoksa düzenle simgesinden ekleyebilirsiniz.",
         ],
+        link: { href: "/rehber/oppo-nfc-acma", label: "Oppo'da NFC: ayrıntılı rehber" },
       },
       {
         heading: "Huawei ve Honor'da NFC",
@@ -655,7 +662,7 @@ const BASE_GUIDES: Guide[] = [
       },
       {
         q: "Poco ve Redmi telefonlarda NFC nerede?",
-        a: "Ayarlar > Bağlantı ve paylaşım > NFC yolundadır. Kontrol merkezini aşağı çekip NFC düğmesine dokunarak da açabilirsiniz.",
+        a: "HyperOS'ta genellikle Ayarlar > Diğer bağlantı seçenekleri > NFC, bazı sürümlerde Ayarlar > Bağlantı ve paylaşım > NFC yolundadır. Kontrol merkezini aşağı çekip NFC düğmesine dokunarak da açabilirsiniz.",
       },
       {
         q: "Oppo telefonda NFC nasıl açılır?",
