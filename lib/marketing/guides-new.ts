@@ -3,6 +3,14 @@
  * one search intent per guide, every product claim must match the product.
  */
 import type { Guide } from "@/lib/marketing/guides";
+import { FINISHES, PRICING, formatTry } from "@/lib/orders/finishes";
+
+const priceOf = (material: (typeof FINISHES)[number]["material"]) =>
+  FINISHES.find((f) => f.material === material)!.price;
+const METAL_PRICE = priceOf("metal");
+const WOOD_PRICE = priceOf("wood");
+const PVC_PRICE = priceOf("pvc");
+const DIGITAL_MONTHLY = priceOf("digital");
 
 export const NEW_GUIDES: Guide[] = [
   {
@@ -21,6 +29,7 @@ export const NEW_GUIDES: Guide[] = [
           "Cep kartviziti, kâğıt yerine telefonda taşınan kartvizittir. Mobil kartvizit, telefon kartviziti, elektronik kartvizit ve dijital kartvizit aynı şeyin farklı adlarıdır: adınız, unvanınız, telefonunuz, e-postanız, adresiniz ve sosyal hesaplarınız tek bir web sayfasında toplanır, bu sayfa bir link, QR kod ya da NFC kartla paylaşılır.",
           "Karşınızdaki kişinin uygulama indirmesine gerek yoktur; link ya da QR kod telefonun tarayıcısında açılır, tek dokunuşla bilgileriniz rehbere kaydedilir.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Cep kartviziti nasıl paylaşılır?",
@@ -92,6 +101,7 @@ export const NEW_GUIDES: Guide[] = [
           "Evet, ücretsiz bir dijital kartvizitle başlayabilirsiniz. Bilgilerinizi bir QR koda yazdırıp kâğıt kartvizitinize, sunumunuza ya da e-posta imzanıza eklemek hiçbir ücret gerektirmez. Okutan kişi sizi doğrudan rehberine kaydeder.",
           "Ücretsiz seçeneğin sınırı, bilgilerin kodun içine sabitlenmesidir. Güncellenebilen bir profil, paylaşılabilir bir bağlantı, kimlerin açtığını gösteren analitik ve size geri dönüş sağlayan bir form istiyorsanız ücretli bir dijital kartvizite ihtiyaç duyarsınız.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Ücretsiz olarak neler yapabilirsiniz?",
@@ -187,6 +197,7 @@ export const NEW_GUIDES: Guide[] = [
           "Mesleğiniz ne olursa olsun, iyi bir dijital kartvizit aynı iskelete oturur: üstte net bir fotoğraf, ad soyad ve tek satırlık unvan; hemen altında en çok kullandığınız iletişim kanalı; ardından sosyal medya, adres ve belgeler. Farkı yaratan, hangi bilginin en üstte durduğu ve profile hangi belgeyi eklediğinizdir.",
           "Aşağıdaki örnekler, farklı mesleklerde profilin nasıl kurulabileceğini anlatıyor. Dijivizit profilinde bağlantıların sırasını panelden değiştirebilir, her bağlantıya kendi etiketinizi verebilirsiniz.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Emlak danışmanı",
@@ -419,6 +430,7 @@ export const NEW_GUIDES: Guide[] = [
           "Linktree ve benzeri link-in-bio araçları, sosyal medya biyografisine tek bir bağlantı koyup o bağlantının arkasında birçok linki listelemek için tasarlanmıştır. İçerik üreticileri, markalar ve sanatçılar için takipçiyi YouTube videosuna, mağazaya ya da yeni bir kampanyaya yönlendirmenin pratik bir yoludur.",
           "Dijital kartvizit ise tanıştığınız kişinin sizi kaydetmesi ve size ulaşması için tasarlanır. Öncelik link sayısı değil; telefon, WhatsApp, e-posta ve rehbere kayıttır. Hangisinin daha iyi olduğu, ne yapmak istediğinize bağlıdır.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Link-in-bio aracı ne zaman daha uygun?",
@@ -504,6 +516,7 @@ export const NEW_GUIDES: Guide[] = [
           "Akıllı kartvizit, içinde NFC çip bulunan ve bilgilerinizi kartın üzerine basmak yerine internetteki dijital profilinize bağlayan kartvizittir. Kartı karşınızdaki kişinin telefonuna yaklaştırdığınızda profiliniz açılır; kişi sizi tek dokunuşla rehberine kaydeder.",
           "Akıllı kartvizit, NFC kartvizit ve dijital kartvizit çoğu zaman aynı anlamda kullanılır. Doğrusu şu: akıllı kartvizit üç parçanın birleşimidir.",
         ],
+        link: { href: "/akilli-kartvizit", label: "Akıllı kartvizit" },
       },
       {
         heading: "Üç parça: NFC, QR ve dijital profil",
@@ -678,12 +691,14 @@ export const NEW_GUIDES: Guide[] = [
     image: "/rehber/en-iyi-dijital-kartvizit-nasil-secilir.jpg",
     imageAlt: "Elde tutulan mat siyah Dijivizit NFC kartvizit",
     published: "2026-11-05",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Kısa cevap",
         paragraphs: [
           "Markaya göre değişir. Bazı firmalar kartı tek seferlik satar, bazıları profil için aylık ya da yıllık abonelik alır. Dijivizit'te kart fiyatına ilk yılın dijital profili dahildir; sonrasında aylık 59,90 TL'dir ve otomatik çekim yapılmaz. Kart istemeyenler için kartsız dijital kartvizit yıllık 718,80 TL'dir.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Neden bir dijital kartvizit sürekli ücret alır?",
@@ -712,12 +727,12 @@ export const NEW_GUIDES: Guide[] = [
           "Fiyatlara KDV dahildir, kargo ücretsizdir. Kartla birlikte gelen dijital profil ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartsız dijital kartvizit yıllık olarak peşin ödenir. Otomatik yenileme ve otomatik çekim yapılmaz.",
         ],
         list: [
-          "Mat siyah PVC NFC kart: 2.500 TL, ilk yıl profil dahil",
-          "Koyu ya da açık ahşap NFC kart: 2.500 TL, ilk yıl profil dahil",
-          "Siyah, gümüş ya da gold metal NFC kart: 4.000 TL, ilk yıl profil dahil",
-          "İlk yıldan sonra profil: aylık 59,90 TL",
-          "Kartsız dijital kartvizit (link + QR): aylık 59,90 TL, yıllık 718,80 TL peşin",
-          "10 ve üzeri adet: %20 indirim",
+          `Mat siyah PVC NFC kart: ${formatTry(PVC_PRICE)}, ilk yıl profil dahil`,
+          `Koyu ya da açık ahşap NFC kart: ${formatTry(WOOD_PRICE)}, ilk yıl profil dahil`,
+          `Siyah, gümüş ya da gold metal NFC kart: ${formatTry(METAL_PRICE)}, ilk yıl profil dahil`,
+          `İlk yıldan sonra profil: aylık ${formatTry(PRICING.profileMonthlyFee)}`,
+          `Kartsız dijital kartvizit (link + QR): aylık ${formatTry(DIGITAL_MONTHLY)}, yıllık ${formatTry(PRICING.digitalYearlyFee)} peşin`,
+          `${PRICING.bulkMinQuantity} ve üzeri adet: %${PRICING.bulkDiscountPercent} indirim`,
         ],
         link: { href: "/kartvizit", label: "Tüm fiyatlar" },
       },
@@ -1044,18 +1059,20 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "kartvizit-fiyatlari",
     label: "Kartvizit fiyatları",
-    title: "Kartvizit Fiyatları 2026: Kâğıt mı, NFC Kartvizit mi?",
+    title: "Kartvizit Fiyatları Neye Göre Değişir? Kâğıt ve NFC (2026)",
     description:
       "Kartvizit fiyatları 2026: 1000 adet kâğıt kartvizit baskı maliyeti neye göre değişir, NFC kartvizit ne kadar ve hangisi uzun vadede daha ekonomik?",
     image: "/rehber/nfc-kartvizit-mi-kagit-kartvizit-mi.jpg",
     imageAlt: "Toplantı masasında siyah NFC kartvizit karşıdaki kişiye uzatılıyor",
     published: "2026-11-05",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Kısa cevap",
         paragraphs: [
           "Kâğıt kartvizit fiyatı adet, kâğıt, baskı yönü ve selefon gibi ek işlemlere göre değişir; 1000 adetlik standart baskı Kasım 2026'da baktığımız Türk matbaa sayfalarında birkaç yüz TL ile 1.000 TL arasında. NFC kartvizit ise tek kart olarak satılır: Dijivizit'te 2.500 TL ya da 4.000 TL, KDV ve kargo dahil.",
         ],
+        link: { href: "/dijital-kartvizit-fiyatlari", label: "Dijital kartvizit fiyatları" },
       },
       {
         heading: "Kâğıt kartvizit fiyatını ne belirler?",
@@ -1149,6 +1166,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "E-kartvizit, iletişim bilgilerinizi kâğıt yerine bir web sayfasında, QR kodda ya da vCard dosyasında taşıyan elektronik kartvizittir. Sanal kartvizit, online kartvizit ve dijital kartvizit aynı şeyi anlatır. Bir bağlantı, QR kod ya da NFC kartla paylaşılır; karşı taraf sizi tek dokunuşla telefon rehberine kaydeder.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Aynı şeyin farklı adları",
@@ -1681,6 +1699,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Dijital kartvizit yedi yolla paylaşılır: NFC kartı telefona dokundurarak, QR kodu okutarak, profil linkini mesajla göndererek, e-posta imzasına ekleyerek, Apple Cüzdan'dan göstererek, sosyal medya biyografisine koyarak ve sunum ya da broşürlere basarak. Hepsi aynı profili açar; karşı taraf sizi tek dokunuşla rehberine kaydeder.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Yöntemler bir bakışta",
@@ -1991,6 +2010,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Dijital kartvizit kullanmak için çoğu zaman uygulama gerekmez. Asıl önemli olan, kartvizitinizi alan kişinin hiçbir şey indirmeden profilinizi açıp sizi rehberine kaydedebilmesidir. Bazı hizmetler profilinizi düzenlemeniz için bir uygulama sunar; bu sizin tercihinizdir. Karşı tarafa uygulama indirtmek ise tanışmayı yavaşlatır.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Dijital kartvizit uygulaması ne işe yarar?",

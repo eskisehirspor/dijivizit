@@ -228,7 +228,7 @@ export async function PublicCardView({
           {t.rich("footer", {
             brand: (chunks) => (
               <a
-                href={`${MARKETING_ORIGIN}/dijital-kartvizit`}
+                href={`${MARKETING_ORIGIN}/`}
                 className="font-medium text-foreground hover:underline"
               >
                 {chunks}

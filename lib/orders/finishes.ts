@@ -82,7 +82,7 @@ export function isDigital(finish: Finish): boolean {
 /** Physical cards only, for pickers and renders that show a card. */
 export const CARD_FINISHES = FINISHES.filter((f) => f.material !== "digital");
 
-/** "4.000 TL" for cards, "50 TL/ay" for the monthly digital product. */
+/** "4.000 TL" for cards, "59,90 TL/ay" for the monthly digital product. */
 export function formatPrice(finish: Finish, amount: number = finish.price): string {
   return isDigital(finish) ? `${formatTry(amount)}/ay` : formatTry(amount);
 }

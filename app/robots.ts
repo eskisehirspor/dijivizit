@@ -6,6 +6,9 @@ import { isAppHostname, MARKETING_ORIGIN } from "@/lib/hosts";
 /**
  * dijivizit.com is the public, indexable site. app.dijivizit.com is the
  * signed-in application and stays out of search results entirely.
+ *
+ * Public profiles (/p/...) are crawlable on purpose: they carry a noindex
+ * robots meta tag, which Google can only see if it may fetch the page.
  */
 export default async function robots(): Promise<MetadataRoute.Robots> {
   const host = (await headers()).get("host")?.split(":")[0] ?? "";
@@ -15,7 +18,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   }
 
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/p/", "/auth/"] },
+    rules: { userAgent: "*", allow: "/", disallow: ["/auth/"] },
     sitemap: `${MARKETING_ORIGIN}/sitemap.xml`,
     host: MARKETING_ORIGIN,
   };

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { MARKETING_ORIGIN } from "@/lib/hosts";
-import { pricingTerms, productImage, productJsonLd, productUrl } from "@/lib/marketing/products";
+import { pricingTerms, productImage, productUrl } from "@/lib/marketing/products";
 import { PromiseStrip, WhyDijivizit } from "@/components/marketing/why-dijivizit";
 import { FINISHES, formatPrice, formatTry } from "@/lib/orders/finishes";
 
@@ -31,7 +31,7 @@ export default function ProductsPage() {
           "@type": "ListItem",
           position: i + 1,
           url: productUrl(f),
-          item: productJsonLd(f),
+          name: f.name,
         })),
       },
       {
@@ -62,8 +62,8 @@ export default function ProductsPage() {
         </h1>
         <p className="text-lg text-muted-foreground">
           Metal, ahşap ya da mat siyah PVC: altı seçenek. Her kartta NFC çip ve dijital profil;
-          profil linki ve QR kod da sizde. Kart istemeyenler için kartsız dijital kartvizit: link + QR, aylık 59,90
-          TL (yıllık 718,80 TL).
+          profil linki ve QR kod da sizde. Kart istemeyenler için kartsız dijital kartvizit: link +
+          QR, aylık 59,90 TL (yıllık 718,80 TL).
         </p>
         <PromiseStrip className="pt-2" />
       </div>

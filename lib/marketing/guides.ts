@@ -46,6 +46,7 @@ const BASE_GUIDES: Guide[] = [
           "NFC kartvizit, içinde küçük bir NFC çip bulunan akıllı bir kartvizittir. Kartı karşınızdaki kişinin telefonuna yaklaştırdığınızda telefonun ekranında dijital profiliniz açılır: adınız, unvanınız, telefonunuz, e-postanız, sosyal medya hesaplarınız ve web siteniz tek sayfada görünür.",
           "Kâğıt kartvizitin aksine bilgileriniz kartın üzerine basılı değildir; internette duran profilinize bağlıdır. Numaranız ya da unvanınız değiştiğinde kartı yeniden bastırmazsınız, profilinizi güncellersiniz.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Nasıl çalışır?",
@@ -103,19 +104,20 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "metal-kartvizit",
     label: "Metal kartvizit",
-    title: "Metal Kartvizit Rehberi: Üretim, Dayanıklılık, Bakım",
+    title: "Metal Kartvizit Nedir? Dayanıklılık, Bakım ve NFC",
     description:
       "Mat siyah metal, fırçalanmış gold ve gümüş NFC metal kartvizit. Lazer kazıma, silinmeyen yüzey; link, QR kod ve tek dokunuşla açılan dijital profil.",
     image: "/rehber/metal-kartvizit.jpg",
     imageAlt: "Mat siyah metal Dijivizit NFC kartvizit",
     published: "2026-10-25",
-    updated: "2026-11-05",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Metal kartvizit neden farklı?",
         paragraphs: [
           "Metal kartvizit elinize aldığınız anda fark edilir: ağırlığı, soğuk yüzeyi ve keskin lazer kazıması kâğıdın veremeyeceği bir ciddiyet taşır. Dijivizit metal kartlarında bu his, NFC teknolojisiyle birleşir; kart hem göz alıcı bir obje hem de tek dokunuşla bilgilerinizi paylaşan akıllı bir kartvizittir.",
         ],
+        link: { href: "/metal-kartvizit", label: "Metal kartvizit" },
       },
       {
         heading: "Üç metal kaplama",
@@ -143,13 +145,13 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "ahsap-kartvizit",
     label: "Ahşap kartvizit",
-    title: "Ahşap Kartvizit Rehberi: Ahşap Türü, Dayanıklılık, Bakım",
+    title: "Ahşap Kartvizit Nedir? Ahşap Türü, Dayanıklılık, Bakım",
     description:
       "Koyu ve açık tonlu gerçek ahşap NFC kartvizit. Lazerle yakılmış logo, her kartta kendine özgü doku, tek dokunuşla paylaşılan dijital profil.",
     image: "/rehber/ahsap-kartvizit.jpg",
     imageAlt: "Koyu ahşap NFC kartvizit telefona dokunuyor",
     published: "2026-10-25",
-    updated: "2026-11-05",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Doğal bir ilk izlenim",
@@ -157,6 +159,7 @@ const BASE_GUIDES: Guide[] = [
           "Ahşap kartvizit sıcak, samimi ve akılda kalıcıdır. Gerçek ahşaptan üretildiği için her kartın damar dokusu birbirinden biraz farklıdır; elinize aldığınız kart yalnızca size aittir.",
           "Dijivizit ahşap kartlarının içinde NFC çip bulunur. Çip görünmez ama kart telefona yaklaştırıldığında dijital profiliniz açılır.",
         ],
+        link: { href: "/ahsap-kartvizit", label: "Ahşap kartvizit" },
       },
       {
         heading: "İki ahşap tonu",
@@ -189,24 +192,26 @@ const BASE_GUIDES: Guide[] = [
     image: "/rehber/dijital-kartvizit-nasil-olusturulur.jpg",
     imageAlt: "Telefon ekranında Dijivizit dijital kartvizit profili",
     published: "2026-10-25",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Hemen dene",
         paragraphs: [
           "Ücretsiz aracımızla bilgilerini yaz, önizlemeyi gör ve rehbere kaydeden QR kodunu indir. Üyelik gerekmez.",
         ],
-        link: { href: "/dijital-kartvizit-olustur", label: "Ücretsiz dijital kartvizit oluştur" },
+        link: { href: "/dijital-kartvizit-olustur", label: "Dijital kartvizit oluştur" },
       },
       {
         heading: "Dijital kartvizit nedir?",
         paragraphs: [
           "Dijital kartvizit, iletişim bilgilerinizi tek bir web sayfasında toplayan ve bağlantı, QR kod ya da NFC kart ile paylaşılan modern kartvizittir. Karşınızdaki kişi sayfayı açtığında sizi tek dokunuşla arayabilir, WhatsApp'tan yazabilir veya rehberine kaydedebilir.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "1. Kaplamanızı seçin",
         paragraphs: [
-          "Dijivizit'te süreç fiziksel kartla başlar. Mat siyah PVC, mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap veya açık ahşap kaplamalardan birini seçip sipariş talebi oluşturursunuz. Ekibimiz sizi arayarak kart üzerindeki isim, unvan ve logo detaylarını netleştirir.",
+          "Dijivizit'te süreç fiziksel kartla başlar. Mat siyah PVC, mat siyah metal, fırçalanmış gold, fırçalanmış gümüş, koyu ahşap veya açık ahşap kaplamalardan birini seçip sipariş talebi oluşturursunuz. Ekibimiz sizi arayarak sipariş detaylarını netleştirir; kartın ön yüzünde yalnızca logo ve temassız işareti yer alır.",
         ],
       },
       {
@@ -282,18 +287,20 @@ const BASE_GUIDES: Guide[] = [
   {
     slug: "kurumsal-dijital-kartvizit",
     label: "Kurumsal dijital kartvizit",
-    title: "Kurumsal Dijital Kartvizit: Ekipler İçin NFC Kartvizit",
+    title: "Kurumsal Dijital Kartvizit Nasıl Seçilir? Ekipler İçin Rehber",
     description:
       "Şirketiniz için kurumsal NFC dijital kartvizit. Tüm ekibe aynı tasarım, merkezi bilgi güncelleme, ayrılan çalışanda kartı devretme kolaylığı.",
     image: "/rehber/kurumsal-dijital-kartvizit.jpg",
     imageAlt: "Kurumsal ekip için Dijivizit NFC kartvizitler",
     published: "2026-10-25",
+    updated: "2026-11-13",
     sections: [
       {
         heading: "Ekipler için tek tip, her zaman güncel",
         paragraphs: [
           "Kurumsal kartvizit siparişleri genellikle aynı döngüye takılır: yeni çalışan geldiğinde baskı beklenir, unvan değiştiğinde kutularca kartvizit çöpe gider. Dijital kartvizit bu döngüyü bitirir. Her çalışanın kartı aynı kurumsal tasarımı taşır, bilgileri ise profilden güncellenir.",
         ],
+        link: { href: "/kurumsal-kartvizit", label: "Kurumsal kartvizit" },
       },
       {
         heading: "Şirketlere sağladığı avantajlar",
@@ -329,7 +336,7 @@ const BASE_GUIDES: Guide[] = [
           "Dijital kartvizit, adınızı, unvanınızı, telefonunuzu, e-postanızı ve sosyal medya hesaplarınızı tek bir web sayfasında toplayan kartvizittir. Bu sayfa bir bağlantı, bir QR kod ya da bir NFC kart ile paylaşılır.",
           "Karşınızdaki kişi sayfayı açtığında sizi tek dokunuşla arayabilir, WhatsApp'tan yazabilir ya da bilgilerinizi rehberine kaydedebilir. Bilgileriniz kartın üzerine basılı olmadığı için değiştiğinde yeniden baskı gerekmez.",
         ],
-        link: { href: "/", label: "Dijivizit dijital kartvizit: modeller ve fiyatlar" },
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Dijital kartvizit nasıl paylaşılır?",
@@ -390,6 +397,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Bilgileriniz sık değişiyorsa, çok sayıda kişiyle tanışıyorsanız ya da akılda kalıcı bir ilk izlenim istiyorsanız NFC kartvizit daha mantıklıdır. Yılda birkaç kartvizit dağıtıyorsanız ve bilgileriniz hiç değişmiyorsa kâğıt kartvizit yeterli olabilir.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "Güncellik",
@@ -752,6 +760,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "En iyi dijital kartvizit, kartı nasıl kullanacağınıza göre değişir. Tek başına çalışan bir serbest meslek sahibi için profilin güzel görünmesi ve kolay güncellenmesi öndedir; bir şirket için ise kartları tek panelden yönetmek ve çalışan değişince kartı devretmek. Aşağıdaki 7 kriter karşılaştırma yaparken işinizi kolaylaştırır.",
         ],
+        link: { href: "/", label: "Dijital kartvizit" },
       },
       {
         heading: "1. Karşı tarafta uygulama gerekmemeli",

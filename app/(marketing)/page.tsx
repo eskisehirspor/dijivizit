@@ -15,7 +15,6 @@ import {
   KEYWORDS,
   USE_CASES,
 } from "@/components/marketing/seo-content";
-import { CONTACT } from "@/lib/contact";
 import { APP_ORIGIN, MARKETING_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
 
@@ -35,28 +34,6 @@ export const metadata: Metadata = {
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": ["Organization", "LocalBusiness"],
-      "@id": `${MARKETING_ORIGIN}/#organization`,
-      name: "Dijivizit",
-      legalName: "ASD Tasarım Ltd. Şti.",
-      url: MARKETING_ORIGIN,
-      logo: `${MARKETING_ORIGIN}/email/logomark.png`,
-      image: `${MARKETING_ORIGIN}/landing/finishes/black.webp`,
-      email: CONTACT.orderEmail,
-      telephone: CONTACT.phoneE164,
-      hasMap: CONTACT.mapsProfileUrl,
-      sameAs: [CONTACT.mapsProfileUrl, CONTACT.instagramUrl],
-      geo: { "@type": "GeoCoordinates", latitude: CONTACT.geo.lat, longitude: CONTACT.geo.lng },
-      areaServed: { "@type": "Country", name: "Türkiye" },
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: CONTACT.street,
-        addressLocality: CONTACT.district,
-        addressRegion: CONTACT.city,
-        addressCountry: CONTACT.country,
-      },
-    },
     {
       "@type": "WebSite",
       "@id": `${MARKETING_ORIGIN}/#website`,
@@ -156,7 +133,20 @@ export default function HomePage() {
         captions={CAPTIONS}
       />
 
-      <div className="mx-auto w-full max-w-6xl px-6 pt-28 sm:pt-36">
+      <section
+        aria-label="Dijital kartvizit nedir?"
+        className="mx-auto w-full max-w-6xl px-6 pt-28 sm:pt-36"
+      >
+        <p className="max-w-3xl text-xl leading-relaxed text-pretty text-muted-foreground sm:text-2xl">
+          <strong className="font-semibold text-foreground">Dijital kartvizit</strong>, adınızı,
+          unvanınızı, telefonunuzu, WhatsApp&rsquo;ınızı, e-postanızı ve sosyal medya hesaplarınızı
+          tek bir web sayfasında toplayan, her zaman güncel kalan kartvizittir. NFC kartla telefona
+          dokundurularak, QR kodla ya da linkle paylaşılır; karşınızdaki kişi uygulama indirmeden
+          açar ve sizi tek dokunuşla rehberine kaydeder.
+        </p>
+      </section>
+
+      <div className="mx-auto w-full max-w-6xl px-6 pt-20 sm:pt-24">
         <WhyDijivizit />
       </div>
 

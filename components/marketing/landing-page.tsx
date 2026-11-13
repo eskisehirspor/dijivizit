@@ -6,7 +6,7 @@ import { GUIDES } from "@/lib/marketing/guides";
 import { LANDINGS, type Landing } from "@/lib/marketing/landings";
 import { SEGMENTS } from "@/lib/marketing/segments";
 import { TOOLS } from "@/lib/marketing/tools";
-import { pricingTerms, productImage, productJsonLd, productUrl } from "@/lib/marketing/products";
+import { pricingTerms, productImage, productUrl } from "@/lib/marketing/products";
 import { PromiseStrip, WhyDijivizit } from "@/components/marketing/why-dijivizit";
 import { CARD_FINISHES, FINISHES, formatPrice, formatTry } from "@/lib/orders/finishes";
 
@@ -56,7 +56,7 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
             "@type": "ListItem",
             position: i + 1,
             url: productUrl(f),
-            item: productJsonLd(f),
+            name: f.name,
           })),
         },
       },
