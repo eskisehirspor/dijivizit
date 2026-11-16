@@ -2602,4 +2602,190 @@ export const NEW_GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    slug: "nfc-etiket-nedir",
+    label: "NFC etiket nedir?",
+    title: "NFC Etiket Nedir, Ne İşe Yarar? Nasıl Çalışır?",
+    description:
+      "NFC etiket nedir, pil gerekir mi, nasıl çalışır? Etiketin içinde ne saklanır, NTAG çeşitleri, metal yüzeyde kullanım ve NFC etiketin kartvizitte kullanımı.",
+    image: "/rehber/nfc-kartvizit-hangi-telefonlarda-calisir.jpg",
+    imageAlt: "Gold NFC kartvizit telefona yaklaştırılıyor",
+    published: "2026-11-16",
+    sections: [
+      {
+        heading: "Kısaca NFC etiket",
+        paragraphs: [
+          "NFC etiket, küçük bir çip ve ona bağlı bir antenden oluşan, telefona yaklaştırıldığında içindeki bilgiyi aktaran pasif bir parçadır. Çıkartma, kart, anahtarlık ya da bileklik gibi farklı biçimlerde üretilir. Çoğu etikette tek bir kayıt durur: bir web adresi, bir metin ya da bir telefon numarası.",
+          "Telefon etiketi okuduğunda bu kaydı açar. İçinde web adresi olan bir etiket tarayıcıda o sayfayı açar; NFC kartvizitler de bu şekilde çalışır.",
+        ],
+        link: { href: "/rehber/nfc-kartvizit-nedir", label: "NFC kartvizit nasıl çalışır?" },
+      },
+      {
+        heading: "Pil gerekir mi, nasıl çalışır?",
+        paragraphs: [
+          "NFC etiketlerde pil yoktur. Telefon yaklaştırıldığında telefonun oluşturduğu elektromanyetik alan etiketteki anteni besler; çip bu kısa süreli enerjiyle uyanır ve kaydını gönderir. Bu yüzden etiketin şarjı bitmez ve bakım istemez.",
+          "Okuma mesafesi birkaç santimetredir. Etiketi telefonun okuma noktasına, genellikle arka yüzün üst ya da orta kısmına yaklaştırmak gerekir. Mesafenin bu kadar kısa olması, etiketin uzaktan fark edilmeden okunmasını da zorlaştırır.",
+        ],
+      },
+      {
+        heading: "Etiketin içinde ne saklanır?",
+        paragraphs: [
+          "Telefonların doğrudan anladığı ortak biçime NDEF denir. Bir NDEF kaydı şunlardan biri olabilir:",
+        ],
+        list: [
+          "Web adresi (en yaygın kullanım)",
+          "Düz metin",
+          "Telefon numarası ya da e-posta adresi",
+          "Wi-Fi ağ bilgisi (Android'de)",
+          "Kişi kartı (vCard); ancak hafıza küçük olduğu için çoğunlukla yalnızca temel bilgiler sığar",
+        ],
+        link: { href: "/rehber/vcf-dosyasi-nedir", label: "VCF ve vCard nedir?" },
+      },
+      {
+        heading: "NTAG çeşitleri ve kapasite",
+        paragraphs: [
+          "Etiket ve kartlarda en sık NTAG213, NTAG215 ve NTAG216 çipleri kullanılır. Aralarındaki fark kullanıcı hafızasıdır: NTAG213'te 144, NTAG215'te 504, NTAG216'da 888 bayt bulunur. Bir web adresi için en küçüğü bile yeterlidir; hafıza ancak etikete tam bir kişi kartı yazmak istediğinizde önem kazanır.",
+          "Boş bir etikete NFC Tools gibi bir uygulamayla telefondan kayıt yazılabilir. Etiket salt okunur hâle getirilirse içeriği kalıcı olarak sabitlenir ve bir daha değiştirilemez.",
+        ],
+        link: { href: "/rehber/nfc-kart-programlama", label: "NFC kart nasıl programlanır?" },
+      },
+      {
+        heading: "Metal yüzeyde NFC etiket",
+        paragraphs: [
+          "Sıradan bir NFC çıkartma metal bir yüzeye yapıştırıldığında çoğu zaman okunmaz; metal, telefonun oluşturduğu alanı bozar. Metal üzerinde kullanılacak etiketler, araya yalıtıcı bir katman konarak bunun için özel olarak üretilir. Metal kartvizitlerde de çip, sinyalin geçeceği şekilde yerleştirilir.",
+        ],
+        link: { href: "/metal-kartvizit", label: "Metal NFC kartvizit" },
+      },
+      {
+        heading: "NFC etiket nerelerde kullanılır?",
+        paragraphs: [],
+        list: [
+          "Kartvizit: dokundurunca dijital profil açılır.",
+          "Ürün ve ambalaj: kullanım kılavuzu ya da ürün sayfası açılır.",
+          "Restoran ve mağaza: masadaki etiketle menü, mağazadaki etiketle yorum sayfası açılır.",
+          "Ev ve ofis: iPhone'da Kestirmeler'in otomasyonları, Android'de çeşitli uygulamalar etikete dokununca bir işlemi başlatabilir.",
+          "Etkinlik ve fuar: stant ya da yaka kartından tanıtım sayfası açılır.",
+        ],
+        link: {
+          href: "/dijital-kartvizit/restoran-kafe",
+          label: "Restoran ve kafeler için dijital kartvizit",
+        },
+      },
+      {
+        heading: "NFC etiket mi, NFC kartvizit mi?",
+        paragraphs: [
+          "Boş bir etiket alıp içine kendi web adresinizi yazmak mümkündür; ancak o zaman adresin açtığı sayfayı, sayfanın güncel kalmasını ve etiket kaybolduğunda ne olacağını da sizin düşünmeniz gerekir. NFC kartvizitte kart, dijital profil ve QR kod birlikte gelir.",
+          `Dijivizit kartları mat siyah PVC, ahşap ve metal olarak üretilir; PVC ve ahşap ${formatTry(PVC_PRICE)}, metal ${formatTry(METAL_PRICE)}'dir ve ilk yıl dijital profil ücretsizdir. Profilinizi panelden güncellersiniz, kart kaybolursa panelden kapatırsınız. Dijivizit ayrı NFC çıkartma satmaz.`,
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+      },
+    ],
+    faq: [
+      {
+        q: "NFC etiket pil ile mi çalışır?",
+        a: "Hayır. NFC etiketin pili yoktur; telefon yaklaştırıldığında telefonun oluşturduğu alandan aldığı enerjiyle çalışır. Şarj etmeniz ya da pil değiştirmeniz gerekmez.",
+      },
+      {
+        q: "NFC etiketi okumak için uygulama gerekir mi?",
+        a: "İçinde web adresi olan bir etiketi okumak için gerekmez. iPhone XS ve sonrası etiketi arka planda okur; Android'de NFC'nin açık olması yeterlidir. Etikete yazmak için ise NFC Tools gibi bir uygulama kullanılır.",
+      },
+      {
+        q: "NFC etiket kaç metreden okunur?",
+        a: "Metreden değil, birkaç santimetreden okunur. Etiketi telefonun okuma noktasına neredeyse dokundurmanız gerekir.",
+      },
+      {
+        q: "NFC etiketin içeriği sonradan değiştirilebilir mi?",
+        a: "Etiket kilitlenmediyse evet, yeniden yazılabilir. Salt okunur yapılan etiketin içeriği değiştirilemez. NFC kartvizitte karttaki adres sabit kalır; değişen bilgileri profilden güncellersiniz.",
+      },
+    ],
+  },
+  {
+    slug: "dijital-kartvizit-apple-cuzdan",
+    label: "Apple Cüzdan'a kartvizit ekleme",
+    title: "Dijital Kartvizit Apple Cüzdan'a Nasıl Eklenir?",
+    description:
+      "Dijital kartvizit Apple Cüzdan'a nasıl eklenir? iPhone'da adım adım ekleme, Cüzdan'daki QR kodun gösterilmesi, güncelleme, silme ve Android için seçenekler.",
+    image: "/rehber/dijital-kartvizit-nasil-olusturulur.jpg",
+    imageAlt: "Telefon ekranında Dijivizit dijital kartvizit profili",
+    published: "2026-11-16",
+    sections: [
+      {
+        heading: "Neden Cüzdan'a eklenir?",
+        paragraphs: [
+          "Fiziksel kartvizitiniz her zaman yanınızda olmayabilir; telefonunuz ise çoğu zaman yanınızdadır. Dijital kartvizitinizi iPhone'daki Cüzdan uygulamasına eklediğinizde, profilinizin QR kodu uçuş kartı ya da etkinlik bileti gibi tek dokunuşla açılan bir kartta durur. Karşınızdaki kişi kendi telefonunun kamerasıyla okutur, profiliniz açılır ve sizi rehberine kaydeder.",
+        ],
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
+      },
+      {
+        heading: "Cüzdan kartında neler görünür?",
+        paragraphs: [
+          "Dijivizit'in Cüzdan kartı siyah zeminli, sade bir karttır. Ön yüzde adınız, varsa unvanınız ve şirketiniz ile profilinize açılan QR kod bulunur. Kartın arka yüzünde telefonunuz, e-posta adresiniz ve profil linkiniz yazar.",
+        ],
+      },
+      {
+        heading: "iPhone'da adım adım ekleme",
+        paragraphs: [
+          "Cüzdan kartı Dijivizit panelinden indirilir. En kolayı işlemi doğrudan iPhone'dan yapmaktır:",
+        ],
+        list: [
+          "iPhone'da Safari ile Dijivizit hesabınıza giriş yapın.",
+          "Profilinizin yayında olduğundan emin olun.",
+          "Panelde Kartlarım sayfasını açın.",
+          "Apple Cüzdan'a ekle düğmesine dokunun.",
+          "Açılan önizlemede sağ üstteki Ekle'ye dokunun; kart Cüzdan'a eklenir.",
+        ],
+      },
+      {
+        heading: "Cüzdan'dan nasıl gösterilir?",
+        paragraphs: [
+          "Cüzdan uygulamasını açın ve Dijivizit kartınıza dokunun. QR kod ekranda büyük görünür; karşınızdaki kişi kamerasını açıp okutur. Uygulama indirmesine gerek yoktur, profiliniz tarayıcıda açılır.",
+          "Ekran parlaklığının düşük olması okumayı zorlaştırabilir. QR okunmazsa parlaklığı artırın ve telefonu biraz uzaklaştırıp yaklaştırarak deneyin.",
+        ],
+        link: {
+          href: "/rehber/dijital-kartvizit-nasil-paylasilir",
+          label: "Dijital kartvizit nasıl paylaşılır?",
+        },
+      },
+      {
+        heading: "Bilgilerim değişirse ne olur?",
+        paragraphs: [
+          "Cüzdan kartındaki QR kod profil linkinize açılır. Profilde yaptığınız her değişiklik, QR'ı okutan kişiye her zaman güncel hâliyle görünür; bu yüzden numaranızı ya da linklerinizi değiştirdiğinizde Cüzdan kartını yenilemeniz gerekmez.",
+          "Kartın üzerinde yazan adınız, unvanınız ya da şirketiniz ise karta eklendiği andaki hâlidir. Bunlardan birini değiştirdiyseniz eski kartı Cüzdan'dan silip panelden yeniden ekleyin.",
+        ],
+      },
+      {
+        heading: "Ekip kartlarında Cüzdan",
+        paragraphs: [
+          "Şirketinizin size atadığı bir Dijivizit kartı varsa, o kartın Cüzdan kartını da kendi hesabınızdan, Kartlarım sayfasından ekleyebilirsiniz. Kartı ekip yöneticisi değil, kartı kullanan kişi ekler.",
+        ],
+        link: { href: "/kurumsal-kartvizit", label: "Kurumsal kartvizit" },
+      },
+      {
+        heading: "Android ve Google Cüzdan",
+        paragraphs: [
+          "Dijivizit şu an yalnızca Apple Cüzdan kartı sunar; Google Cüzdan kartı yoktur. Android telefonda profilinizin QR kodunu fotoğraf olarak kaydedip gerektiğinde ekranda gösterebilir ya da profil linkinizi tarayıcının ana ekrana ekle seçeneğiyle ana ekrana ekleyebilirsiniz.",
+          "Henüz bir dijital kartvizitiniz yoksa ücretsiz araçla üyelik olmadan bilgilerinizi rehbere kaydeden bir QR kod da oluşturabilirsiniz.",
+        ],
+        link: { href: "/qr-kartvizit-olustur", label: "Ücretsiz QR kartvizit oluştur" },
+      },
+    ],
+    faq: [
+      {
+        q: "Dijital kartvizit Apple Cüzdan'a nasıl eklenir?",
+        a: "iPhone'da Safari ile Dijivizit panelinize giriş yapın, Kartlarım sayfasında Apple Cüzdan'a ekle düğmesine dokunun ve açılan önizlemede Ekle'ye basın.",
+      },
+      {
+        q: "Cüzdan kartı ücretli mi?",
+        a: "Hayır. Apple Cüzdan kartı Dijivizit profilinin içindedir; ayrıca bir ücret ödenmez.",
+      },
+      {
+        q: "Bilgilerimi değiştirince Cüzdan kartını yenilemem gerekir mi?",
+        a: "Telefon, e-posta ve linkler profilde güncellendiği için gerekmez. Kartın üzerinde yazan adınızı, unvanınızı ya da şirketinizi değiştirdiyseniz kartı silip yeniden ekleyin.",
+      },
+      {
+        q: "Google Cüzdan'a dijital kartvizit eklenir mi?",
+        a: "Dijivizit şu an Google Cüzdan kartı sunmuyor. Android'de profil QR kodunuzu fotoğraf olarak kaydedip gösterebilir ya da profil linkinizi ana ekrana ekleyebilirsiniz.",
+      },
+    ],
+  },
 ];
