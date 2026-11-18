@@ -191,7 +191,11 @@
       "cards": "Kartlarım",
       "cardsDescription": "Her fiziksel kart için ayrı bağlantı; kaybolanı kapatın.",
       "team": "Ekip",
-      "teamDescription": "Şirket kartlarını yönetin, çalışan değişince kartı devredin."
+      "teamDescription": "Şirket kartlarını yönetin, çalışan değişince kartı devredin.",
+      "manageAppearance": "Görünüm ve özel link",
+      "manageAppearanceDescription": "Renk teması, kapak görseli ve dijivizit.com/p/adınız bağlantısı.",
+      "manageProducts": "Ürün ve hizmetler",
+      "manageProductsDescription": "Fotoğraf, fiyat ve bağlantıyla ürün veya hizmet ekleyin."
     },
     "invites": {
       "nav": "Davet kodları",
@@ -586,6 +590,10 @@
         "form": "Lütfen işaretli alanları kontrol edin.",
         "failed": "Bilgileriniz şu an iletilemedi. Lütfen daha sonra tekrar deneyin."
       }
+    },
+    "products": {
+      "title": "Ürün ve Hizmetler",
+      "open": "İncele"
     }
   },
   "profile": {
@@ -596,7 +604,9 @@
       "backToDashboard": "Panele dön",
       "manageAvatar": "Profil fotoğrafını yönet",
       "manageLinks": "İletişim bağlantılarını yönet",
-      "manageSkills": "Uzmanlık ve yetenekleri yönet"
+      "manageSkills": "Uzmanlık ve yetenekleri yönet",
+      "manageAppearance": "Görünüm ve özel link",
+      "manageProducts": "Ürün ve hizmetler"
     },
     "fields": {
       "fullName": "Ad soyad",
@@ -834,6 +844,82 @@
       "shown": "Artık kartında görünüyor.",
       "hidden": "Kartından gizlendi.",
       "failed": "Ayar kaydedilemedi. Lütfen tekrar dene."
+    },
+    "appearance": {
+      "title": "Görünüm ve özel link",
+      "subtitle": "Kartınızın rengini, kapak görselini ve kişisel bağlantınızı seçin.",
+      "backToEdit": "Profili düzenlemeye dön",
+      "preview": "Önizle",
+      "errors": {
+        "saveFailed": "Kaydedilemedi. Lütfen tekrar deneyin."
+      },
+      "theme": {
+        "title": "Renk teması",
+        "subtitle": "Kaydet düğmesi ve simgeler bu renkte görünür. Gece temaları kartı koyu yapar.",
+        "saved": "Tema kaydedildi.",
+        "saveFailed": "Tema kaydedilemedi. Lütfen tekrar deneyin.",
+        "names": {
+          "default": "Siyah",
+          "navy": "Lacivert",
+          "emerald": "Zümrüt",
+          "burgundy": "Bordo",
+          "orange": "Turuncu",
+          "violet": "Mor",
+          "gold": "Altın",
+          "night": "Gece",
+          "night-gold": "Gece altın"
+        }
+      },
+      "cover": {
+        "title": "Kapak görseli",
+        "subtitle": "Profilinizin en üstünde geniş bir görsel: logonuz, mağazanız ya da ürününüz.",
+        "upload": "Kapak yükle",
+        "replace": "Kapağı değiştir",
+        "remove": "Kapağı kaldır",
+        "saved": "Kapak görseli kaydedildi.",
+        "removed": "Kapak görseli kaldırıldı.",
+        "hint": "Yatay bir görsel seçin (yaklaşık 3:1). JPG, PNG veya WEBP, en fazla 2 MB."
+      },
+      "vanity": {
+        "title": "Özel bağlantı",
+        "subtitle": "Karışık kod yerine adınızla açılan bir bağlantı. Kartınızdaki eski bağlantı ve QR kod da çalışmaya devam eder.",
+        "hint": "Küçük harf, rakam ve tire kullanın (3-40 karakter, 11 karakter olamaz). Boş bırakıp kaydederseniz kaldırılır.",
+        "saved": "Özel bağlantınız kaydedildi.",
+        "errors": {
+          "invalid": "Bu bağlantı kullanılamaz. Küçük harf, rakam ve tire kullanın; 3-40 karakter olsun, 11 karakter olmasın.",
+          "taken": "Bu bağlantı başka biri tarafından alınmış. Başka bir tane deneyin.",
+          "db": "Kaydedilemedi. Lütfen tekrar deneyin."
+        }
+      }
+    },
+    "products": {
+      "title": "Ürün ve hizmetler",
+      "subtitle": "Kartınızda fotoğraf, fiyat ve bağlantıyla görünen ürün veya hizmetler. En fazla 20 tane.",
+      "backToEdit": "Profili düzenlemeye dön",
+      "addTitle": "Yeni ürün veya hizmet",
+      "add": "Ekle",
+      "added": "Eklendi.",
+      "deleted": "Silindi.",
+      "delete": "Sil",
+      "deleteConfirm": "\"{title}\" silinsin mi?",
+      "visible": "Kartta göster",
+      "empty": "Henüz ürün veya hizmet eklemediniz.",
+      "limitReached": "En fazla {max} ürün ekleyebilirsiniz. Yeni eklemek için birini silin.",
+      "fields": {
+        "title": "Ad",
+        "description": "Kısa açıklama (isteğe bağlı)",
+        "price": "Fiyat (isteğe bağlı)",
+        "pricePlaceholder": "Örn. 1.500 TL",
+        "url": "Bağlantı (isteğe bağlı)",
+        "image": "Fotoğraf ekle (isteğe bağlı)"
+      },
+      "errors": {
+        "saveFailed": "Kaydedilemedi. Lütfen alanları kontrol edin.",
+        "limit": "En fazla 20 ürün ekleyebilirsiniz.",
+        "image": "Fotoğraf yüklenemedi. Lütfen tekrar deneyin.",
+        "db": "Kaydedilemedi. Lütfen tekrar deneyin.",
+        "deleteFailed": "Silinemedi. Lütfen tekrar deneyin."
+      }
     }
   },
   "validation": {
@@ -917,6 +1003,13 @@
     },
     "terms": {
       "required": "Devam etmek için metinleri onaylamanız gerekir."
+    },
+    "product": {
+      "titleRequired": "Ad gerekli.",
+      "titleTooLong": "Ad en fazla 80 karakter olabilir.",
+      "descriptionTooLong": "Açıklama en fazla 300 karakter olabilir.",
+      "priceTooLong": "Fiyat en fazla 40 karakter olabilir.",
+      "urlInvalid": "Geçerli bir bağlantı girin."
     }
   },
   "errors": {

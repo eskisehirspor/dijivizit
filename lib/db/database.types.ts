@@ -767,6 +767,56 @@ export type Database = {
           },
         ]
       }
+      profile_products: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          image_path: string | null
+          is_visible: boolean
+          price: string | null
+          profile_id: string
+          title: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          image_path?: string | null
+          is_visible?: boolean
+          price?: string | null
+          profile_id: string
+          title: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          image_path?: string | null
+          is_visible?: boolean
+          price?: string | null
+          profile_id?: string
+          title?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_products_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile_skills: {
         Row: {
           created_at: string
@@ -811,6 +861,7 @@ export type Database = {
           address: string | null
           avatar_path: string | null
           company: string | null
+          cover_path: string | null
           created_at: string
           full_name: string | null
           id: string
@@ -821,12 +872,14 @@ export type Database = {
           theme: string
           title: string | null
           updated_at: string
+          vanity_slug: string | null
         }
         Insert: {
           about?: string | null
           address?: string | null
           avatar_path?: string | null
           company?: string | null
+          cover_path?: string | null
           created_at?: string
           full_name?: string | null
           id: string
@@ -837,12 +890,14 @@ export type Database = {
           theme?: string
           title?: string | null
           updated_at?: string
+          vanity_slug?: string | null
         }
         Update: {
           about?: string | null
           address?: string | null
           avatar_path?: string | null
           company?: string | null
+          cover_path?: string | null
           created_at?: string
           full_name?: string | null
           id?: string
@@ -853,6 +908,7 @@ export type Database = {
           theme?: string
           title?: string | null
           updated_at?: string
+          vanity_slug?: string | null
         }
         Relationships: []
       }
@@ -900,6 +956,7 @@ export type Database = {
       get_own_analytics_detail: { Args: { p_days?: number }; Returns: Json }
       get_own_analytics_summary: { Args: never; Returns: Json }
       get_public_card: { Args: { p_public_id: string }; Returns: Json }
+      public_id_for_slug: { Args: { p_slug: string }; Returns: string }
       record_card_event: {
         Args: {
           p_city?: string

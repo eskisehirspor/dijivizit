@@ -1,0 +1,117 @@
+{
+  "common": {
+    "loading": "Loading…",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyFailed": "Couldn't copy. Please try again."
+  },
+  "contacts": {
+    "errors": {
+      "form": "Please check the highlighted fields.",
+      "name": "Name must be at least 2 characters.",
+      "phone": "Enter a valid phone number.",
+      "email": "Enter a valid email address.",
+      "reachable": "Enter at least a phone number or an email.",
+      "consent": "Please give your consent to continue.",
+      "tooLong": "This field is too long."
+    }
+  },
+  "profile": {
+    "links": {
+      "platforms": {
+        "phone": "Phone",
+        "email": "Email",
+        "website": "Website",
+        "address": "Address",
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram",
+        "x": "X",
+        "whatsapp": "WhatsApp"
+      }
+    },
+    "documents": {
+      "types": {
+        "cv": "CV",
+        "product_catalog": "Product catalogue",
+        "price_list": "Price list",
+        "brochure": "Brochure",
+        "presentation": "Presentation",
+        "technical": "Technical document",
+        "other": "Other"
+      }
+    }
+  },
+  "card": {
+    "notFoundTitle": "Card not found",
+    "notFoundBody": "This link may be invalid, or the card may have been unpublished.",
+    "call": "Call",
+    "sendEmail": "Send email",
+    "visitWebsite": "Website",
+    "saveContact": "Save to Contacts",
+    "share": {
+      "trigger": "Share",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "email": "Email",
+      "emailSubject": "My digital business card",
+      "copyLink": "Copy link",
+      "copied": "Link copied",
+      "copyFailed": "Couldn't copy the link",
+      "qrCode": "QR code",
+      "qr": {
+        "title": "QR code",
+        "description": "A QR code with the link to this profile.",
+        "previewLabel": "Profile QR code",
+        "downloadPng": "Download PNG",
+        "downloadFailed": "Couldn't download the QR code. Please try again."
+      }
+    },
+    "bank": {
+      "title": "Bank details",
+      "accountHolder": "Account holder",
+      "iban": "IBAN",
+      "bankName": "Bank",
+      "copyAccountHolder": "Copy account holder",
+      "copyIban": "Copy IBAN"
+    },
+    "billing": {
+      "title": "Billing details",
+      "companyTitle": "Company name",
+      "companyAddress": "Company address",
+      "taxNumber": "Tax number",
+      "taxOffice": "Tax office",
+      "copyCompanyTitle": "Copy company name",
+      "copyCompanyAddress": "Copy company address",
+      "copyTaxNumber": "Copy tax number"
+    },
+    "documents": { "title": "Documents" },
+    "products": { "title": "Products & Services", "open": "View" },
+    "skills": { "titles": { "expertise_areas": "Areas of expertise", "skills": "Skills" } },
+    "footer": "<brand>Dijivizit · digital business card</brand> · <create>Create your own digital card</create> · <privacy>Privacy</privacy>",
+    "leave": {
+      "trigger": "Leave my details",
+      "title": "Leave your details",
+      "description": "{name} can call or write back to you. Your details are only shared with the card owner.",
+      "descriptionNoName": "The card owner can call or write back to you. Your details are only shared with the card owner.",
+      "fullName": "Full name",
+      "phone": "Phone",
+      "email": "Email",
+      "company": "Company (optional)",
+      "message": "Note (optional)",
+      "messagePlaceholder": "E.g. We met at the fair, I'd like a quote.",
+      "reachableHint": "Enter at least a phone number or an email.",
+      "consent": "I agree that my details are shared with the owner of this card and kept in their contact list. <link>Privacy notice</link>",
+      "submit": "Send",
+      "sending": "Sending…",
+      "successTitle": "Your details were sent",
+      "successBody": "The card owner will get in touch soon. You can also save the card to your contacts.",
+      "close": "Close",
+      "errors": {
+        "expired": "The form expired or was sent too quickly. Please try again.",
+        "rateLimited": "Too many attempts. Please try again in a minute.",
+        "form": "Please check the highlighted fields.",
+        "failed": "Your details couldn't be sent right now. Please try again later."
+      }
+    }
+  }
+}

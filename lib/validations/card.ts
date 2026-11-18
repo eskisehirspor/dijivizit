@@ -42,6 +42,15 @@ export const publicCardDocumentSchema = z.object({
   fileName: z.string(),
 });
 
+export const publicCardProductSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string().nullable(),
+  price: z.string().nullable(),
+  url: z.string().nullable(),
+  imagePath: z.string().nullable(),
+});
+
 export const publicCardSchema = z.object({
   publicId: z.string(),
   fullName: z.string().nullable(),
@@ -50,6 +59,7 @@ export const publicCardSchema = z.object({
   about: z.string().nullable(),
   address: z.string().nullable(),
   avatarPath: z.string().nullable(),
+  coverPath: z.string().nullable().optional(),
   theme: z.string(),
   locale: z.string(),
   skillsSectionTitle: z.enum(["expertise_areas", "skills"]).default("expertise_areas"),
@@ -58,6 +68,7 @@ export const publicCardSchema = z.object({
   documents: z.array(publicCardDocumentSchema).default([]),
   links: z.array(publicCardLinkSchema),
   skills: z.array(publicCardSkillSchema),
+  products: z.array(publicCardProductSchema).default([]),
 });
 
 export type PublicCardLink = z.infer<typeof publicCardLinkSchema>;
@@ -65,4 +76,5 @@ export type PublicCardSkill = z.infer<typeof publicCardSkillSchema>;
 export type PublicCardBankAccount = z.infer<typeof publicCardBankAccountSchema>;
 export type PublicCardBillingInfo = z.infer<typeof publicCardBillingInfoSchema>;
 export type PublicCardDocument = z.infer<typeof publicCardDocumentSchema>;
+export type PublicCardProduct = z.infer<typeof publicCardProductSchema>;
 export type PublicCard = z.infer<typeof publicCardSchema>;

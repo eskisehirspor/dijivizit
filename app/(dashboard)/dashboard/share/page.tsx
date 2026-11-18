@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 import { CopyUrlButton } from "@/components/dashboard/copy-url-button";
 import { ShareQrCode } from "@/components/share/share-qr-code";
+import { getOwnAppearance } from "@/lib/dal/profile-appearance";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
@@ -20,7 +21,8 @@ export default async function SharePage() {
     redirect(routes.dashboard);
   }
 
-  const publicPath = routes.publicCard(profile.public_id);
+  const vanity = (await getOwnAppearance())?.vanitySlug;
+  const publicPath = routes.publicCard(vanity ?? profile.public_id);
   const publicUrl = `${clientEnv.NEXT_PUBLIC_SITE_URL}${publicPath}`;
 
   return (

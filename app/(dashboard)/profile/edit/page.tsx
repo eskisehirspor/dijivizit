@@ -54,6 +54,18 @@ export default async function ProfileEditPage() {
           >
             {t("manageSkills")}
           </Link>
+          <Link
+            href={routes.profileAppearance}
+            className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+          >
+            {t("manageAppearance")}
+          </Link>
+          <Link
+            href={routes.profileProducts}
+            className="text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-muted-foreground"
+          >
+            {t("manageProducts")}
+          </Link>
         </div>
       </div>
 

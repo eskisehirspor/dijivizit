@@ -1,6 +1,8 @@
 import { Receipt } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
+import type { Locale } from "@/lib/i18n/config";
+
 import { InfoCard } from "@/components/card/info-card";
 
 export async function PublicBillingCard({
@@ -8,13 +10,15 @@ export async function PublicBillingCard({
   companyAddress,
   taxNumber,
   taxOffice,
+  locale = "tr",
 }: {
   companyTitle: string;
   companyAddress: string;
   taxNumber: string;
   taxOffice: string;
+  locale?: Locale;
 }) {
-  const t = await getTranslations("card.billing");
+  const t = await getTranslations({ locale, namespace: "card.billing" });
 
   return (
     <InfoCard

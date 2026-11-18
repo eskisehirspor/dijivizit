@@ -121,6 +121,7 @@ describe("vcardInputFromPublicCard", () => {
         { platform: "whatsapp", label: null, value: "https://wa.me/905551112233" },
       ],
       skills: [],
+      products: [],
     };
 
     expect(vcardInputFromPublicCard(card, "https://dijivizit.com/p/AbCdEfGh123")).toMatchObject({
@@ -155,6 +156,7 @@ describe("vcardInputFromPublicCard", () => {
       documents: [],
       links: [{ platform: "whatsapp", label: null, value: "https://wa.me/905423521515" }],
       skills: [],
+      products: [],
     };
 
     expect(vcardInputFromPublicCard(card, "https://dijivizit.com/p/AbCdEfGh123").phone).toBe(

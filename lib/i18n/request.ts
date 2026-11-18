@@ -1,12 +1,11 @@
 import { getRequestConfig } from "next-intl/server";
 
-import messages from "@/messages/tr.json";
+import { DEFAULT_LOCALE, type Locale } from "./config";
+import { messagesFor } from "./messages";
 
-import { DEFAULT_LOCALE } from "./config";
-
-// A static import is used while there is exactly one locale. Adding a second
-// one means swapping this for a dynamic import keyed by the resolved locale.
-export default getRequestConfig(async () => ({
-  locale: DEFAULT_LOCALE,
-  messages,
-}));
+// Turkish everywhere, unless a public card asks for English explicitly via
+// getTranslations({ locale: "en" }) / getMessages({ locale: "en" }).
+export default getRequestConfig(async ({ locale }) => {
+  const resolved: Locale = locale === "en" ? "en" : DEFAULT_LOCALE;
+  return { locale: resolved, messages: messagesFor(resolved) as never };
+});

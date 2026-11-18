@@ -25,6 +25,8 @@ export const routes = {
   profileLinks: "/profile/links",
   profileSkills: "/profile/skills",
   profileAvatar: "/profile/avatar",
+  profileAppearance: "/profile/appearance",
+  profileProducts: "/profile/products",
   profileBank: "/profile/bank",
   profileBilling: "/profile/billing",
   profileDocuments: "/profile/documents",

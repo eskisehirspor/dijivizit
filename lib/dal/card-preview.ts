@@ -20,11 +20,11 @@ export async function getOwnCardPreview(): Promise<PublicCard | null> {
   const user = await requireUser();
   const supabase = await createClient();
 
-  const [profile, links, skills, documents, bank, billing] = await Promise.all([
+  const [profile, links, skills, documents, bank, billing, products] = await Promise.all([
     supabase
       .from("profiles")
       .select(
-        "public_id, full_name, title, company, about, address, avatar_path, theme, locale, skills_section_title",
+        "public_id, full_name, title, company, about, address, avatar_path, cover_path, theme, locale, skills_section_title",
       )
       .eq("id", user.id)
       .maybeSingle(),
@@ -50,6 +50,13 @@ export async function getOwnCardPreview(): Promise<PublicCard | null> {
     // select("*") so this keeps working whether or not is_visible exists yet.
     supabase.from("bank_accounts").select("*").eq("user_id", user.id).maybeSingle(),
     supabase.from("billing_infos").select("*").eq("user_id", user.id).maybeSingle(),
+    supabase
+      .from("profile_products")
+      .select("id, title, description, price, url, image_path")
+      .eq("profile_id", user.id)
+      .eq("is_visible", true)
+      .order("display_order")
+      .order("created_at"),
   ]);
 
   if (!profile.data) {
@@ -68,6 +75,7 @@ export async function getOwnCardPreview(): Promise<PublicCard | null> {
     about: p.about,
     address: p.address,
     avatarPath: p.avatar_path,
+    coverPath: p.cover_path,
     theme: p.theme,
     locale: p.locale,
     skillsSectionTitle: p.skills_section_title === "skills" ? "skills" : "expertise_areas",
@@ -97,6 +105,14 @@ export async function getOwnCardPreview(): Promise<PublicCard | null> {
     skills: (skills.data ?? []).map((skill) => ({
       name: skill.name,
       type: skill.type === "skill" ? "skill" : "expertise",
+    })),
+    products: (products.data ?? []).map((product) => ({
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      url: product.url,
+      imagePath: product.image_path,
     })),
   };
 }

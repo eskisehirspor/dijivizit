@@ -9,6 +9,7 @@ import { formatDay, istanbulToday } from "@/lib/contacts/format";
 import { getAuthenticatedUser } from "@/lib/dal/auth";
 import { listOwnDueFollowUps } from "@/lib/dal/contacts";
 import { viewerIsInviteOwner } from "@/lib/dal/invitations";
+import { getOwnAppearance } from "@/lib/dal/profile-appearance";
 import { getOwnProfile } from "@/lib/dal/profile";
 import { clientEnv } from "@/lib/env/client";
 import { routes } from "@/lib/routes";
@@ -27,7 +28,8 @@ export default async function DashboardPage() {
     listOwnDueFollowUps(today),
   ]);
 
-  const publicPath = profile ? routes.publicCard(profile.public_id) : null;
+  const vanity = profile ? (await getOwnAppearance())?.vanitySlug : null;
+  const publicPath = profile ? routes.publicCard(vanity ?? profile.public_id) : null;
   const publicUrl = publicPath ? `${clientEnv.NEXT_PUBLIC_SITE_URL}${publicPath}` : null;
   const isPublished = profile?.is_published ?? false;
 

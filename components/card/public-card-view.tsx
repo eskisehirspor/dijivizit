@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { User } from "lucide-react";
 
@@ -7,6 +7,7 @@ import { iconForLinkPlatform } from "@/components/card/platform-icons";
 import { PublicBankCard } from "@/components/card/public-bank-card";
 import { PublicBillingCard } from "@/components/card/public-billing-card";
 import { PublicDocumentsSection } from "@/components/card/public-documents-section";
+import { PublicProductsSection } from "@/components/card/public-products-section";
 import { PublicShareMenu } from "@/components/card/public-share-menu";
 import { PublicSkillsSection } from "@/components/card/public-skills-section";
 import { TrackProfileView } from "@/components/card/track-profile-view";
@@ -25,6 +26,8 @@ import {
 import { clientEnv } from "@/lib/env/client";
 import { MARKETING_ORIGIN } from "@/lib/hosts";
 import { routes } from "@/lib/routes";
+import type { Locale } from "@/lib/i18n/config";
+import { cardTheme } from "@/lib/profile/themes";
 import { cn } from "@/lib/utils";
 
 function initialsFromName(name: string): string {
@@ -48,36 +51,62 @@ export async function PublicCardView({
   card,
   preview = false,
   banner,
+  locale = "tr",
 }: {
   card: PublicCard;
   preview?: boolean;
   banner?: ReactNode;
+  locale?: Locale;
 }) {
   // Inside the dashboard layout there is already a <main>.
   const Wrapper = preview ? "div" : "main";
-  const [avatarUrl, platforms, t] = await Promise.all([
+  const [avatarUrl, coverUrl, platforms, t] = await Promise.all([
     getAvatarUrl(card.avatarPath),
-    getTranslations("profile.links.platforms"),
-    getTranslations("card"),
+    getAvatarUrl(card.coverPath ?? null),
+    getTranslations({ locale, namespace: "profile.links.platforms" }),
+    getTranslations({ locale, namespace: "card" }),
   ]);
 
   const headline = [card.title, card.company].filter(Boolean).join(" · ");
   const initials = card.fullName ? initialsFromName(card.fullName) : null;
   const publicUrl = `${clientEnv.NEXT_PUBLIC_SITE_URL}${routes.publicCard(card.publicId)}`;
   const contactLinks = visiblePublicContactLinks(card.links, publicUrl, card.address);
+  const theme = cardTheme(card.theme);
+  const themed = theme.id !== "default";
+  const themeStyle = themed
+    ? ({ "--primary": theme.accent, "--primary-foreground": theme.accentText } as CSSProperties)
+    : undefined;
 
   return (
-    <Wrapper className="flex min-h-full flex-1 justify-center px-6 py-12 sm:py-16">
+    <Wrapper
+      className={cn(
+        "flex min-h-full flex-1 justify-center px-6 py-12 sm:py-16",
+        theme.dark && "dark bg-background text-foreground",
+        coverUrl && "pt-0 sm:pt-0",
+      )}
+      style={themeStyle}
+    >
       {preview ? null : <TrackProfileView publicId={card.publicId} />}
       <div className="flex w-full max-w-sm animate-rise flex-col gap-10">
         {banner}
+        {coverUrl ? (
+          <div className="-mx-6 -mb-24 aspect-[3/1] overflow-hidden sm:mx-0 sm:mt-8 sm:rounded-xl">
+            {/* eslint-disable-next-line @next/next/no-img-element -- remote storage URL */}
+            <img src={coverUrl} alt="" className="size-full object-cover" />
+          </div>
+        ) : null}
         <div className="relative flex flex-col items-center gap-6 text-center">
           {preview ? null : (
             <div className="absolute top-0 right-0">
               <PublicShareMenu publicId={card.publicId} publicUrl={publicUrl} />
             </div>
           )}
-          <div className="size-[200px] shrink-0 overflow-hidden rounded-full bg-muted ring-1 ring-border/60">
+          <div
+            className={cn(
+              "size-[200px] shrink-0 overflow-hidden rounded-full bg-muted ring-1 ring-border/60",
+              coverUrl && "size-[160px] ring-4 ring-background",
+            )}
+          >
             {avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element -- remote storage URLs; next/image failed in-app
               <img
@@ -167,7 +196,12 @@ export async function PublicCardView({
                       "focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none",
                     )}
                   >
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                    <span
+                      className={cn(
+                        "flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground",
+                        themed && "text-primary",
+                      )}
+                    >
                       <Icon aria-hidden="true" className="size-4" strokeWidth={1.75} />
                     </span>
                     <span className="min-w-0 flex-1">
@@ -194,6 +228,7 @@ export async function PublicCardView({
 
         {card.bankAccount ? (
           <PublicBankCard
+            locale={locale}
             accountHolder={card.bankAccount.accountHolder}
             iban={card.bankAccount.iban}
             bankName={card.bankAccount.bankName}
@@ -202,6 +237,7 @@ export async function PublicCardView({
 
         {card.billingInfo ? (
           <PublicBillingCard
+            locale={locale}
             companyTitle={card.billingInfo.companyTitle}
             companyAddress={card.billingInfo.companyAddress}
             taxNumber={card.billingInfo.taxNumber}
@@ -210,12 +246,16 @@ export async function PublicCardView({
         ) : null}
 
         <PublicDocumentsSection
+          locale={locale}
           publicId={card.publicId}
           documents={card.documents}
           preview={preview}
         />
 
+        <PublicProductsSection locale={locale} products={card.products} />
+
         <PublicSkillsSection
+          locale={locale}
           titleKey={
             isSkillsSectionTitle(card.skillsSectionTitle)
               ? card.skillsSectionTitle

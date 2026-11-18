@@ -6,6 +6,8 @@ import {
   Eye,
   FileText,
   Link2,
+  Package,
+  Palette,
   Pencil,
   Receipt,
   Share2,
@@ -17,6 +19,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 type QuickAction = {
@@ -92,6 +95,20 @@ export async function QuickActions({
       description: t("manageAvatarDescription"),
       icon: <UserRound aria-hidden="true" className="size-4" />,
       href: avatarHref,
+    },
+    {
+      key: "appearance",
+      title: t("manageAppearance"),
+      description: t("manageAppearanceDescription"),
+      icon: <Palette aria-hidden="true" className="size-4" />,
+      href: routes.profileAppearance,
+    },
+    {
+      key: "products",
+      title: t("manageProducts"),
+      description: t("manageProductsDescription"),
+      icon: <Package aria-hidden="true" className="size-4" />,
+      href: routes.profileProducts,
     },
     {
       key: "links",

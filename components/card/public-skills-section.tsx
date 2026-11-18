@@ -1,17 +1,21 @@
 import { FileBadge } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
+import type { Locale } from "@/lib/i18n/config";
+
 import type { SkillsSectionTitle } from "@/lib/profile/skills-section-title";
 import type { PublicCardSkill } from "@/lib/validations/card";
 
 export async function PublicSkillsSection({
   titleKey,
   skills,
+  locale = "tr",
 }: {
   titleKey: SkillsSectionTitle;
   skills: PublicCardSkill[];
+  locale?: Locale;
 }) {
-  const t = await getTranslations("card.skills");
+  const t = await getTranslations({ locale, namespace: "card.skills" });
 
   if (skills.length === 0) {
     return null;

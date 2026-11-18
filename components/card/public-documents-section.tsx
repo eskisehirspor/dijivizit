@@ -1,6 +1,8 @@
 import { FileText } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
+import type { Locale } from "@/lib/i18n/config";
+
 import type { PublicCardDocument } from "@/lib/validations/card";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
@@ -9,13 +11,15 @@ export async function PublicDocumentsSection({
   publicId,
   documents,
   preview = false,
+  locale = "tr",
 }: {
   publicId: string;
   documents: PublicCardDocument[];
   /** Owner preview: unpublished cards can't serve public document links. */
   preview?: boolean;
+  locale?: Locale;
 }) {
-  const t = await getTranslations("card.documents");
+  const t = await getTranslations({ locale, namespace: "card.documents" });
 
   if (documents.length === 0) {
     return null;

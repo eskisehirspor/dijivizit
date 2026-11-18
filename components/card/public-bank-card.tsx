@@ -1,6 +1,8 @@
 import { Building2 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
+import type { Locale } from "@/lib/i18n/config";
+
 import { InfoCard } from "@/components/card/info-card";
 import { formatIbanDisplay } from "@/lib/bank/turkish-iban";
 
@@ -8,12 +10,14 @@ export async function PublicBankCard({
   accountHolder,
   iban,
   bankName,
+  locale = "tr",
 }: {
   accountHolder: string;
   iban: string;
   bankName: string;
+  locale?: Locale;
 }) {
-  const t = await getTranslations("card.bank");
+  const t = await getTranslations({ locale, namespace: "card.bank" });
 
   return (
     <InfoCard
