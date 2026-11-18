@@ -656,7 +656,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Sorun değil. Profilinizin QR kodunu kendi telefonunuzun ekranından gösterirsiniz; karşınızdaki kişi kamerayla okutur. NFC'si olmayan eski telefonlar dahil her telefon profili açar.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modellerine bakın" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modellerine bakın" },
       },
     ],
     faq: [

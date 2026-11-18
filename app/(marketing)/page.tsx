@@ -407,7 +407,7 @@ export default function HomePage() {
             </h2>
             <p className="max-w-sm text-base leading-relaxed text-pretty text-muted-foreground">
               Ayrıntılar için{" "}
-              <Link href="/nfc-kartvizit" className="text-foreground underline underline-offset-4">
+              <Link href="/kartvizit" className="text-foreground underline underline-offset-4">
                 NFC kartvizit
               </Link>
               ,{" "}

@@ -183,7 +183,7 @@ export const GUIDE_BLOCKS = [
   {
     title: "NFC mi, QR kod mu?",
     body: "NFC kart yüz yüze tanışmada en hızlısıdır: dokundurmak yeter. QR kod ve link ise her telefonda çalışır; e-posta imzasında, sunumda ve sosyal medyada paylaşılır. Dijivizit'te üçü birlikte gelir.",
-    href: "/nfc-kartvizit",
+    href: "/kartvizit",
   },
   {
     title: "Rehbere kaydetme (vCard)",

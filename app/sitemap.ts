@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       images: [`${MARKETING_ORIGIN}/landing/finishes/black.webp`],
     },
-    ...LANDINGS.map((l) => ({
+    ...LANDINGS.filter((l) => l.slug !== "nfc-kartvizit").map((l) => ({
       url: `${MARKETING_ORIGIN}/${l.slug}`,
       lastModified: CONTENT_UPDATED,
       changeFrequency: "weekly" as const,

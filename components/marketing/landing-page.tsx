@@ -21,6 +21,11 @@ export function landingMetadata(l: Landing): Metadata {
   };
 }
 
+/** /nfc-kartvizit is canonicalised to /kartvizit, so links go there directly. */
+function landingHref(slug: string) {
+  return slug === "nfc-kartvizit" ? "/kartvizit" : `/${slug}`;
+}
+
 /** A category page: product grid with prices, explanatory sections, comparison, FAQ. */
 export function LandingPage({ landing: l }: { landing: Landing }) {
   const products = l.finishes ? FINISHES.filter((f) => l.finishes!.includes(f.id)) : FINISHES;
@@ -327,7 +332,7 @@ export function LandingPage({ landing: l }: { landing: Landing }) {
           <ul className="flex flex-col gap-2">
             {siblings.map((s) => (
               <li key={s.slug}>
-                <Link href={`/${s.slug}`} className="underline-offset-4 hover:underline">
+                <Link href={landingHref(s.slug)} className="underline-offset-4 hover:underline">
                   {s.term}
                 </Link>
               </li>

@@ -39,7 +39,7 @@ const ORGANIZATION_JSON_LD = {
 /** Hub links only; the full guide list lives on /rehber. */
 const FOOTER_LINKS = [
   { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
-  { href: "/nfc-kartvizit", label: "NFC kartvizit" },
+  { href: "/kartvizit", label: "NFC kartvizit" },
   { href: "/akilli-kartvizit", label: "Akıllı kartvizit" },
   { href: "/metal-kartvizit", label: "Metal kartvizit" },
   { href: "/kurumsal-kartvizit", label: "Kurumsal kartvizit" },

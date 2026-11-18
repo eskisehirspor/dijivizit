@@ -386,7 +386,7 @@ export const NEW_GUIDES: Guide[] = [
           "NFC kartvizitte iletişim bilgileriniz kartın içindeki bağlantıyla açılan profilde durur. Bu yüzden kartın yüzeyini sade tutabilirsiniz. Dijivizit kartlarında adınız yazmaz; Dijivizit logosu ve temassız işareti metal yüzeye lazerle kazınır ya da ahşaba lazerle yakılır (10 ve üzeri kurumsal siparişte firma logonuz). Kartın arka yüzü boştur; aynı profile açılan QR kodunuz ise dijital olarak sizdedir.",
           "Numaranız ya da unvanınız değiştiğinde kartı yeniden bastırmazsınız; profilinizi güncellersiniz.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "Tasarım ve baskı için birkaç ipucu",
@@ -464,7 +464,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Link-in-bio sayfaları çoğunlukla bir bağlantı olarak paylaşılır. Dijital kartvizitte aynı profil, telefona dokundurulan bir NFC kartla, kamerayla okutulan bir QR kodla ya da bir bağlantıyla açılır. Dijivizit'te PVC, metal ve ahşap NFC kartlarla birlikte aynı profile giden link ve QR kod verilir; kartsız dijital kartvizitte de profil linki ve QR kod verilir.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit nasıl çalışır?" },
+        link: { href: "/kartvizit", label: "NFC kartvizit nasıl çalışır?" },
       },
       {
         heading: "Analitik ve geri dönüş",
@@ -1031,7 +1031,7 @@ export const NEW_GUIDES: Guide[] = [
           "NFC kartlar, banka ve kimlik kartlarıyla aynı üretim standardını kullanır. Bu ölçü cüzdanların kart bölmelerine, kartlıklara ve telefon kılıflarının kart cebine tam oturur. 85 × 55 mm'lik kâğıt kartvizitten yaklaşık 1 mm daha kısadır; elde aradaki fark hissedilmez.",
           "Dijivizit'in PVC, metal ve ahşap kartları kredi kartı boyutundadır. Ön yüzde Dijivizit logosu ve temassız işareti bulunur, arka yüz boştur.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "Kalınlık",
@@ -1223,7 +1223,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Toplantıda, fuarda ya da mağazada çok sayıda insanla yüz yüze tanışıyorsanız NFC kart işinizi hızlandırır: karşınızdakinin kamerasını açmasına gerek kalmaz. Dijivizit'te PVC, ahşap ve metal NFC kartlara geçtiğinizde profil linkiniz ve QR kodunuz aynı kalır.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
     ],
     faq: [
@@ -1404,7 +1404,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Dijivizit kartları profilinize bağlı olarak 72 saatte kapınıza gelir. Aynı profile açılan link ve QR kod da sizde olur. Bilgilerinizi panelden değiştirirsiniz; karta uygulamayla bir şey yazmanız gerekmez. Kart okunmazsa ücretsiz yenisiyle değiştirilir.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
     ],
     faq: [
@@ -1719,7 +1719,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Yüz yüze tanışmada en hızlı yöntemdir. Kartı karşınızdakinin telefonunun arkasına yaklaştırırsınız, profil açılır. Uygulama gerekmez; güncel iPhone'lar kendiliğinden okur, Android'de NFC'nin açık olması yeterlidir.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "2. QR kod",
@@ -2176,7 +2176,7 @@ export const NEW_GUIDES: Guide[] = [
           "Kartvizitin değeri, sonrasında yapılan takiple ortaya çıkar. Görüşmeden sonraki birkaç gün içinde kısa bir mesaj ya da e-posta atın ve konuştuğunuz konuyu hatırlatın.",
           'Dijivizit panelinde aldığınız kâğıt kartvizitin fotoğrafını çekerek kişiyi kaydedebilir, "Bir hafta sonra hatırlat" dediğiniz kişiler için günü gelince e-posta alırsınız; WhatsApp mesajı hazır yazılmış olur.',
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit nasıl çalışır?" },
+        link: { href: "/kartvizit", label: "NFC kartvizit nasıl çalışır?" },
       },
     ],
     faq: [
@@ -2251,7 +2251,7 @@ export const NEW_GUIDES: Guide[] = [
           "NFC kartvizitler genellikle kredi kartı ölçüsündedir: cüzdanın kart bölmesine, kartlıklara ve telefon kılıflarının kart cebine banka kartınız gibi oturur. Kâğıt kartvizit gibi ayrı bir kutuda taşınmaz.",
           "Dijivizit'in PVC, metal ve ahşap NFC kartları da kredi kartı boyutundadır. Mat siyah PVC ve ahşap kartlar 2.500 TL, metal kartlar 4.000 TL'dir; KDV dahil, kargo ücretsiz, 72 saatte teslim.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "Metal ve ahşap kartlarda ölçü",
@@ -2338,7 +2338,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Her Oppo modelinde NFC bulunmaz; özellikle bazı giriş seviyesi modellerde bu özellik olmayabilir. Ayarlarda arama yaptığınızda NFC çıkmıyorsa telefonunuzda NFC yoktur. Bu durumda karşınızdaki kişi profilinizin QR kodunu kamerayla okutur; Dijivizit kartlarıyla birlikte profil linkiniz ve QR kodunuz da verilir.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "NFC kartvizit nasıl okutulur?",
@@ -2411,7 +2411,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Evet. Samsung'da tek bir anahtar hem NFC veri okumayı hem temassız ödemeyi açar. NFC genellikle fabrikadan açık gelir, ama bir sistem güncellemesi ya da ağ ayarlarının sıfırlanması onu kapatabilir. NFC kartvizit okumak için bu anahtarın açık olması yeterlidir; ödeme uygulaması kurmanız gerekmez.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "NFC kartvizit nasıl okutulur?",
@@ -2494,7 +2494,7 @@ export const NEW_GUIDES: Guide[] = [
           "Denetim Merkezi'ni açıp NFC Etiketi Okuyucu'ya dokunun.",
           "Kartı telefonun üst arka kısmına tutun.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "NFC kartvizit nasıl okutulur?",
@@ -2570,7 +2570,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Her Xiaomi, Redmi ve Poco modelinde NFC bulunmaz; aynı serinin NFC'li ve NFC'siz sürümleri de olabilir. Ayarların arama kutusuna NFC yazın; sonuç çıkmıyorsa telefonunuzda NFC yoktur. Bu durumda profilin QR kodu kamerayla okutulur; Dijivizit kartlarıyla birlikte profil linkiniz ve QR kodunuz da verilir.",
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
       {
         heading: "NFC kartvizit nasıl okutulur?",
@@ -2677,7 +2677,7 @@ export const NEW_GUIDES: Guide[] = [
           "Boş bir etiket alıp içine kendi web adresinizi yazmak mümkündür; ancak o zaman adresin açtığı sayfayı, sayfanın güncel kalmasını ve etiket kaybolduğunda ne olacağını da sizin düşünmeniz gerekir. NFC kartvizitte kart, dijital profil ve QR kod birlikte gelir.",
           `Dijivizit kartları mat siyah PVC, ahşap ve metal olarak üretilir; PVC ve ahşap ${formatTry(PVC_PRICE)}, metal ${formatTry(METAL_PRICE)}'dir ve ilk yıl dijital profil ücretsizdir. Profilinizi panelden güncellersiniz, kart kaybolursa panelden kapatırsınız. Dijivizit ayrı NFC çıkartma satmaz.`,
         ],
-        link: { href: "/nfc-kartvizit", label: "NFC kartvizit modelleri" },
+        link: { href: "/kartvizit", label: "NFC kartvizit modelleri" },
       },
     ],
     faq: [
