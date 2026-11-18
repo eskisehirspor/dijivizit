@@ -52,7 +52,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title,
       description,
       url,
-      images: productGallery(finish).map((g) => ({ url: g.src, width: 1600, height: 2000, alt: g.alt })),
+      images: productGallery(finish).map((g) => ({
+        url: g.src,
+        width: 1600,
+        height: 2000,
+        alt: g.alt,
+      })),
     },
   };
 }

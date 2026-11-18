@@ -7,7 +7,7 @@ export function ProductGallery({ images }: { images: { src: string; alt: string 
   return (
     <div className="flex flex-col gap-3">
       <div
-        className="flex snap-x snap-mandatory gap-3 overflow-x-auto rounded-3xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory [scrollbar-width:none] gap-3 overflow-x-auto rounded-3xl [&::-webkit-scrollbar]:hidden"
         aria-label="Ürün fotoğrafları"
         tabIndex={0}
       >
@@ -31,9 +31,7 @@ export function ProductGallery({ images }: { images: { src: string; alt: string 
         ))}
       </div>
       {many ? (
-        <p className="text-xs text-muted-foreground">
-          {images.length} fotoğraf · kaydırarak görün
-        </p>
+        <p className="text-xs text-muted-foreground">{images.length} fotoğraf · kaydırarak görün</p>
       ) : null}
     </div>
   );

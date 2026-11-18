@@ -64,9 +64,7 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
 for (const ad of ADS) {
   if (only && !only.has(ad.id)) continue;
-  const img = ad.photo
-    ? path.join(root, ad.photo)
-    : path.join(renders, `${ad.bg ?? ad.id}.png`);
+  const img = ad.photo ? path.join(root, ad.photo) : path.join(renders, `${ad.bg ?? ad.id}.png`);
   if (!fs.existsSync(img)) continue;
   const tmp = path.join(out, `${ad.id}.html`);
   fs.writeFileSync(tmp, html(ad, `file://${path.resolve(img)}`));

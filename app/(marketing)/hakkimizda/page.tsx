@@ -99,8 +99,9 @@ export default function AboutPage() {
         <p className="text-lg leading-relaxed text-pretty text-muted-foreground">
           Dijivizit, ASD Tasarım Ltd. Şti.&apos;nin markasıdır. PVC, metal ve ahşap NFC
           kartvizitleri Eskişehir&apos;de üretiyor, dijital profil altyapısını kendimiz
-          geliştiriyoruz. Kartı telefona dokundurduğunuzda ya da profilinizin QR kodunu okuttuğunuzda
-          profiliniz açılır; karşı taraf sizi tek dokunuşla rehberine kaydeder. Uygulama gerekmez.
+          geliştiriyoruz. Kartı telefona dokundurduğunuzda ya da profilinizin QR kodunu
+          okuttuğunuzda profiliniz açılır; karşı taraf sizi tek dokunuşla rehberine kaydeder.
+          Uygulama gerekmez.
         </p>
         <PromiseStrip className="pt-2" />
       </header>
