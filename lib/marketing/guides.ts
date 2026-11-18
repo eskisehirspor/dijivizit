@@ -46,7 +46,7 @@ const BASE_GUIDES: Guide[] = [
           "NFC kartvizit, içinde küçük bir NFC çip bulunan akıllı bir kartvizittir. Kartı karşınızdaki kişinin telefonuna yaklaştırdığınızda telefonun ekranında dijital profiliniz açılır: adınız, unvanınız, telefonunuz, e-postanız, sosyal medya hesaplarınız ve web siteniz tek sayfada görünür.",
           "Kâğıt kartvizitin aksine bilgileriniz kartın üzerine basılı değildir; internette duran profilinize bağlıdır. Numaranız ya da unvanınız değiştiğinde kartı yeniden bastırmazsınız, profilinizi güncellersiniz.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Nasıl çalışır?",
@@ -206,7 +206,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Dijital kartvizit, iletişim bilgilerinizi tek bir web sayfasında toplayan ve bağlantı, QR kod ya da NFC kart ile paylaşılan modern kartvizittir. Karşınızdaki kişi sayfayı açtığında sizi tek dokunuşla arayabilir, WhatsApp'tan yazabilir veya rehberine kaydedebilir.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "1. Kaplamanızı seçin",
@@ -336,7 +336,7 @@ const BASE_GUIDES: Guide[] = [
           "Dijital kartvizit, adınızı, unvanınızı, telefonunuzu, e-postanızı ve sosyal medya hesaplarınızı tek bir web sayfasında toplayan kartvizittir. Bu sayfa bir bağlantı, bir QR kod ya da bir NFC kart ile paylaşılır.",
           "Karşınızdaki kişi sayfayı açtığında sizi tek dokunuşla arayabilir, WhatsApp'tan yazabilir ya da bilgilerinizi rehberine kaydedebilir. Bilgileriniz kartın üzerine basılı olmadığı için değiştiğinde yeniden baskı gerekmez.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Dijital kartvizit nasıl paylaşılır?",
@@ -397,7 +397,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "Bilgileriniz sık değişiyorsa, çok sayıda kişiyle tanışıyorsanız ya da akılda kalıcı bir ilk izlenim istiyorsanız NFC kartvizit daha mantıklıdır. Yılda birkaç kartvizit dağıtıyorsanız ve bilgileriniz hiç değişmiyorsa kâğıt kartvizit yeterli olabilir.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Güncellik",
@@ -760,7 +760,7 @@ const BASE_GUIDES: Guide[] = [
         paragraphs: [
           "En iyi dijital kartvizit, kartı nasıl kullanacağınıza göre değişir. Tek başına çalışan bir serbest meslek sahibi için profilin güzel görünmesi ve kolay güncellenmesi öndedir; bir şirket için ise kartları tek panelden yönetmek ve çalışan değişince kartı devretmek. Aşağıdaki 7 kriter karşılaştırma yaparken işinizi kolaylaştırır.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "1. Karşı tarafta uygulama gerekmemeli",

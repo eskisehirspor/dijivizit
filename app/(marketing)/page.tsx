@@ -21,7 +21,7 @@ import { APP_ORIGIN, MARKETING_ORIGIN } from "@/lib/hosts";
 import { CONTENT_UPDATED, formatContentUpdated } from "@/lib/marketing/content-updated";
 import { routes } from "@/lib/routes";
 
-const TITLE = "Dijital Kartvizit | NFC ve QR Akıllı Kartvizit | Dijivizit";
+const TITLE = "Dijivizit | NFC Kartvizit ve Dijital Kartvizit";
 const DESCRIPTION =
   "Dijital kartvizit ve NFC kartvizit: telefona dokundur, profilin açılsın. Metal, ahşap ve PVC kart, QR kod, rehbere tek dokunuşla kayıt. 72 saatte kargoda.";
 
@@ -415,7 +415,7 @@ export default function HomePage() {
                 href="/dijital-kartvizit"
                 className="text-foreground underline underline-offset-4"
               >
-                dijital kartvizit özellikleri
+                dijital kartvizit
               </Link>{" "}
               ve{" "}
               <Link

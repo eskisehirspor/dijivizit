@@ -128,11 +128,11 @@ export const LANDINGS: Landing[] = [
   },
   {
     slug: "dijital-kartvizit",
-    term: "Dijital kartvizit özellikleri",
-    title: "Dijital Kartvizit Özellikleri: Profil, QR ve NFC | Dijivizit",
+    term: "Dijital kartvizit",
+    title: "Dijital Kartvizit: NFC Kart, QR Kod ve Profil (2026) | Dijivizit",
     description:
-      "Dijital kartvizit: telefon, WhatsApp, e-posta, sosyal medya ve IBAN tek sayfada. Link, QR ya da NFC kartla paylaşın; bilgileriniz değişince anında güncelleyin.",
-    h1: "Dijital kartvizit özellikleri",
+      "Dijital kartvizit nedir, nasıl oluşturulur, fiyatı ne kadar? Telefon, WhatsApp, sosyal medya ve IBAN tek sayfada; NFC kart, QR ya da linkle paylaşın. İlk yıl ücretsiz.",
+    h1: "Dijital kartvizit",
     lead: "Bütün iletişim bilgileriniz, sosyal hesaplarınız, IBAN'ınız ve belgeleriniz tek bir sayfada. Bağlantıyla, QR kodla ya da NFC kartla paylaşılır; bilgileriniz değiştiğinde siz güncellersiniz, herkes yenisini görür.",
     sections: [
       {
@@ -172,6 +172,38 @@ export const LANDINGS: Landing[] = [
         heading: "Kim, ne zaman, nereden açtı?",
         paragraphs: [
           "Analitik panelinde kartınızın kaç kez açıldığını, hangi şehirlerden ve hangi telefonlarla açıldığını, ziyaretçilerin neye dokunduğunu ve kaçının sizi rehberine kaydettiğini görürsünüz.",
+        ],
+      },
+      {
+        heading: "Dijital kartvizit nasıl oluşturulur?",
+        paragraphs: [
+          "Dijivizit'te dijital kartvizit oluşturmak birkaç dakika sürer ve teknik bilgi gerektirmez:",
+        ],
+        list: [
+          "1. Hesabınızı açın ve adınızı, unvanınızı, şirketinizi yazın",
+          "2. Fotoğrafınızı ya da logonuzu yükleyin",
+          "3. Telefon, WhatsApp, e-posta, web sitesi ve sosyal hesaplarınızı ekleyin",
+          "4. Profilinizi yayınlayın; bağlantınız ve QR kodunuz hemen hazırdır",
+          "5. İsterseniz NFC kart sipariş edin; kart 72 saat içinde kargoya verilir ve profilinize bağlı gelir",
+        ],
+      },
+      {
+        heading: "NFC kart mı, QR kod mu, uygulama mı?",
+        paragraphs: [
+          "NFC kart yüz yüze tanışmada en hızlı yoldur: kartı telefona dokundurursunuz, profil açılır. QR kod her telefonda kamerayla okunur; broşür, sunum ve fuar standı için idealdir. Bağlantı ise WhatsApp, e-posta imzası ve sosyal medya biyografisinde işe yarar.",
+          "Uygulama tabanlı dijital kartvizitlerde karşı tarafın da çoğu zaman aynı uygulamayı indirmesi gerekir. Dijivizit'te üç yol da aynı profili açar ve karşı tarafın hiçbir şey indirmesi gerekmez.",
+        ],
+      },
+      {
+        heading: "Dijital kartvizit fiyatları",
+        paragraphs: [
+          "NFC kartla birlikte dijital profil ilk yıl ücretsizdir; sonrasında aylık 59,90 TL'dir. Kartlar ahşap ve mat siyah PVC'de 2.500 TL, siyah, gümüş ve gold metalde 4.000 TL'dir; KDV ve kargo dahildir. Kartsız, yalnızca link ve QR kodla kullanım aylık 59,90 TL'dir. 10 ve üzeri adette %20 indirim uygulanır.",
+        ],
+      },
+      {
+        heading: "Dijital kartvizit güvenilir mi?",
+        paragraphs: [
+          "Profilinizde yalnızca sizin eklediğiniz bilgiler görünür; IBAN ve fatura bilgileri siz açmadıkça gizli kalır. Kartınız kaybolursa panelden tek tıkla kapatırsınız ve kart artık hiçbir şey açmaz. Ödemeler Shopier güvencesiyle alınır, okunmayan kart ücretsiz değiştirilir ve 14 gün cayma hakkınız vardır.",
         ],
       },
       {

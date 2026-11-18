@@ -29,7 +29,7 @@ export const NEW_GUIDES: Guide[] = [
           "Cep kartviziti, kâğıt yerine telefonda taşınan kartvizittir. Mobil kartvizit, telefon kartviziti, elektronik kartvizit ve dijital kartvizit aynı şeyin farklı adlarıdır: adınız, unvanınız, telefonunuz, e-postanız, adresiniz ve sosyal hesaplarınız tek bir web sayfasında toplanır, bu sayfa bir link, QR kod ya da NFC kartla paylaşılır.",
           "Karşınızdaki kişinin uygulama indirmesine gerek yoktur; link ya da QR kod telefonun tarayıcısında açılır, tek dokunuşla bilgileriniz rehbere kaydedilir.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Cep kartviziti nasıl paylaşılır?",
@@ -101,7 +101,7 @@ export const NEW_GUIDES: Guide[] = [
           "Evet, ücretsiz bir dijital kartvizitle başlayabilirsiniz. Bilgilerinizi bir QR koda yazdırıp kâğıt kartvizitinize, sunumunuza ya da e-posta imzanıza eklemek hiçbir ücret gerektirmez. Okutan kişi sizi doğrudan rehberine kaydeder.",
           "Ücretsiz seçeneğin sınırı, bilgilerin kodun içine sabitlenmesidir. Güncellenebilen bir profil, paylaşılabilir bir bağlantı, kimlerin açtığını gösteren analitik ve size geri dönüş sağlayan bir form istiyorsanız ücretli bir dijital kartvizite ihtiyaç duyarsınız.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Ücretsiz olarak neler yapabilirsiniz?",
@@ -197,7 +197,7 @@ export const NEW_GUIDES: Guide[] = [
           "Mesleğiniz ne olursa olsun, iyi bir dijital kartvizit aynı iskelete oturur: üstte net bir fotoğraf, ad soyad ve tek satırlık unvan; hemen altında en çok kullandığınız iletişim kanalı; ardından sosyal medya, adres ve belgeler. Farkı yaratan, hangi bilginin en üstte durduğu ve profile hangi belgeyi eklediğinizdir.",
           "Aşağıdaki örnekler, farklı mesleklerde profilin nasıl kurulabileceğini anlatıyor. Dijivizit profilinde bağlantıların sırasını panelden değiştirebilir, her bağlantıya kendi etiketinizi verebilirsiniz.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Emlak danışmanı",
@@ -430,7 +430,7 @@ export const NEW_GUIDES: Guide[] = [
           "Linktree ve benzeri link-in-bio araçları, sosyal medya biyografisine tek bir bağlantı koyup o bağlantının arkasında birçok linki listelemek için tasarlanmıştır. İçerik üreticileri, markalar ve sanatçılar için takipçiyi YouTube videosuna, mağazaya ya da yeni bir kampanyaya yönlendirmenin pratik bir yoludur.",
           "Dijital kartvizit ise tanıştığınız kişinin sizi kaydetmesi ve size ulaşması için tasarlanır. Öncelik link sayısı değil; telefon, WhatsApp, e-posta ve rehbere kayıttır. Hangisinin daha iyi olduğu, ne yapmak istediğinize bağlıdır.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Link-in-bio aracı ne zaman daha uygun?",
@@ -698,7 +698,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Markaya göre değişir. Bazı firmalar kartı tek seferlik satar, bazıları profil için aylık ya da yıllık abonelik alır. Dijivizit'te kart fiyatına ilk yılın dijital profili dahildir; sonrasında aylık 59,90 TL'dir ve otomatik çekim yapılmaz. Kart istemeyenler için kartsız dijital kartvizit yıllık 718,80 TL'dir.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Neden bir dijital kartvizit sürekli ücret alır?",
@@ -1166,7 +1166,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "E-kartvizit, iletişim bilgilerinizi kâğıt yerine bir web sayfasında, QR kodda ya da vCard dosyasında taşıyan elektronik kartvizittir. Sanal kartvizit, online kartvizit ve dijital kartvizit aynı şeyi anlatır. Bir bağlantı, QR kod ya da NFC kartla paylaşılır; karşı taraf sizi tek dokunuşla telefon rehberine kaydeder.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Aynı şeyin farklı adları",
@@ -1699,7 +1699,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Dijital kartvizit yedi yolla paylaşılır: NFC kartı telefona dokundurarak, QR kodu okutarak, profil linkini mesajla göndererek, e-posta imzasına ekleyerek, Apple Cüzdan'dan göstererek, sosyal medya biyografisine koyarak ve sunum ya da broşürlere basarak. Hepsi aynı profili açar; karşı taraf sizi tek dokunuşla rehberine kaydeder.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Yöntemler bir bakışta",
@@ -2010,7 +2010,7 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           "Dijital kartvizit kullanmak için çoğu zaman uygulama gerekmez. Asıl önemli olan, kartvizitinizi alan kişinin hiçbir şey indirmeden profilinizi açıp sizi rehberine kaydedebilmesidir. Bazı hizmetler profilinizi düzenlemeniz için bir uygulama sunar; bu sizin tercihinizdir. Karşı tarafa uygulama indirtmek ise tanışmayı yavaşlatır.",
         ],
-        link: { href: "/", label: "Dijital kartvizit" },
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit" },
       },
       {
         heading: "Dijital kartvizit uygulaması ne işe yarar?",
