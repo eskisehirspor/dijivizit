@@ -1336,7 +1336,7 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "nfc-kart-programlama",
     label: "NFC kart programlama",
-    title: "NFC Tools Nasıl Kullanılır? NFC Kart Programlama Rehberi",
+    title: "NFC Tools Nasıl Kullanılır? Karta Link Yazma (5 Adım)",
     description:
       "NFC Tools nasıl kullanılır, NFC kart nasıl kodlanır? Karta URL yazma adımları, NDEF kaydı, NTAG213/215/216 kapasiteleri ve geri alınamayan kilitleme uyarısı.",
     image: "/rehber/nfc-kartvizit-hangi-telefonlarda-calisir.jpg",
@@ -2201,9 +2201,9 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "kredi-karti-olculeri",
     label: "Kredi kartı ölçüleri",
-    title: "Kredi Kartı Kaç cm? Ölçüsü 8,56 × 5,40 cm (ID-1)",
+    title: "Kredi Kartı Kaç Cm? 8,56 × 5,40 cm, 0,76 mm (Tablo)",
     description:
-      "Kredi kartı kaç cm? ISO/IEC 7810 ID-1 standardında 85,60 × 53,98 mm, kalınlık 0,76 mm. Banka kartı, kimlik kartı ve kartvizitle ölçü karşılaştırması.",
+      "Kredi kartı 8,56 × 5,40 cm (85,60 × 53,98 mm), kalınlığı 0,76 mm. Banka kartı, kimlik ve kartvizit ölçüleriyle karşılaştırma tablosu; cm, mm, inç ve piksel karşılıkları.",
     image: "/rehber/qr-kod-kartvizit.jpg",
     imageAlt: "Deri kartlıktan çıkarılan kredi kartı boyutunda siyah Dijivizit NFC kartvizit",
     published: "2026-11-13",
@@ -2300,9 +2300,9 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "oppo-nfc-acma",
     label: "Oppo NFC açma",
-    title: "Oppo NFC Nasıl Açılır? ColorOS'ta Adım Adım",
+    title: "Oppo NFC Açma: 3 Adım + Oppo'da NFC Var mı? (ColorOS)",
     description:
-      "Oppo telefonda NFC nasıl açılır? ColorOS'ta Ayarlar > Bağlantı ve paylaşım > NFC yolu, hızlı ayarlar düğmesi ve NFC kartvizitin telefona doğru okutulması.",
+      "Oppo'da NFC: Ayarlar > Bağlantı ve paylaşım > NFC ya da hızlı ayarlar düğmesi. Oppo telefonda NFC var mı nasıl anlaşılır, NFC nerede, kart nereye tutulur?",
     image: "/rehber/telefonda-nfc-nasil-acilir.jpg",
     imageAlt:
       "Siyah NFC kartvizit telefonun arkasına yaklaştırılmış, ekranda dijital kartvizit profili açık",
@@ -2373,9 +2373,9 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "samsung-nfc-acma",
     label: "Samsung NFC açma",
-    title: "Samsung NFC Nasıl Açılır? One UI'da Adım Adım",
+    title: "Samsung NFC Açma: 3 Adım + NFC Nerede? (Galaxy A, S)",
     description:
-      "Samsung Galaxy telefonda NFC nasıl açılır? Ayarlar > Bağlantılar > NFC ve temassız ödemeler yolu, hızlı ayarlar düğmesi ve NFC kartvizitin okutulması.",
+      "Samsung'da NFC: Ayarlar > Bağlantılar > NFC ve temassız ödemeler. Galaxy A ve S serisinde NFC nerede, telefonda NFC var mı nasıl anlaşılır ve kart nereye tutulur?",
     image: "/rehber/nfc-kartvizit-hangi-telefonlarda-calisir.jpg",
     imageAlt: "Gold NFC kartvizit telefona yaklaştırılıyor",
     published: "2026-11-13",
@@ -2533,9 +2533,9 @@ export const NEW_GUIDES: Guide[] = [
   {
     slug: "xiaomi-poco-nfc-acma",
     label: "Xiaomi ve Poco NFC açma",
-    title: "Xiaomi, Redmi ve Poco NFC Nasıl Açılır? HyperOS",
+    title: "Redmi NFC Açma: Xiaomi, Redmi, Poco'da 3 Adım (HyperOS)",
     description:
-      "Xiaomi, Redmi ve Poco telefonda NFC nasıl açılır? HyperOS'ta Kontrol Merkezi düğmesi, Ayarlar'daki NFC yolu ve NFC kartvizitin telefona doğru okutulması.",
+      "Redmi, Xiaomi ve Poco'da NFC: Kontrol Merkezi'ndeki NFC düğmesi ya da Ayarlar > Diğer bağlantı seçenekleri > NFC. Telefonda NFC var mı, nerede, kart nereye tutulur?",
     image: "/rehber/dijital-kartvizit-nedir.jpg",
     imageAlt: "Siyah NFC kartvizit telefona dokunduruluyor, ekranda dijital kartvizit profili açık",
     published: "2026-11-13",
