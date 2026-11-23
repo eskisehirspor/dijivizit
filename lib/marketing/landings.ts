@@ -263,6 +263,7 @@ export const LANDINGS: Landing[] = [
       "yeni-isletme-kontrol-listesi",
       "dijital-kartvizit-uygulamasi",
       "dijital-kartvizit-apple-cuzdan",
+      "kartvizit-telefona-kaydetme",
     ],
     siblings: ["nfc-kartvizit", "akilli-kartvizit"],
   },

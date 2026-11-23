@@ -185,7 +185,12 @@ export const TOOLS: Tool[] = [
         a: "İmza Gmail ve Outlook uygulamalarında, hesabına bilgisayardan eklediğin haliyle görünür. iPhone Mail uygulamasının imza alanı biçimlendirmeyi kısmen korur; en iyi sonuç için imzayı bilgisayardan ekle.",
       },
     ],
-    guides: ["dijital-kartvizit-nedir", "kartvizite-ne-yazilir", "qr-kod-kartvizit"],
+    guides: [
+      "e-posta-imzasi-nasil-eklenir",
+      "dijital-kartvizit-nedir",
+      "kartvizite-ne-yazilir",
+      "qr-kod-kartvizit",
+    ],
   },
   {
     slug: "kartvizit-maliyet-hesaplama",

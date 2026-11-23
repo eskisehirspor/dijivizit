@@ -1639,6 +1639,10 @@ export const NEW_GUIDES: Guide[] = [
           "Size verilen kâğıt kartvizitin fotoğrafını çekin; ad, unvan, şirket ve telefon otomatik okunur.",
           'Her kişiye o anda bir not ekleyin: "Fiyat teklifi istedi", "Numune gönderilecek".',
         ],
+        link: {
+          href: "/rehber/kartvizit-telefona-kaydetme",
+          label: "Kartvizit telefona nasıl kaydedilir?",
+        },
       },
       {
         heading: "Fuardan sonra",
@@ -1740,6 +1744,10 @@ export const NEW_GUIDES: Guide[] = [
         paragraphs: [
           'İmzanıza "Dijital kartvizitim" gibi kısa bir bağlantı ekleyin. Her e-posta, alıcının sizi rehberine kaydedebileceği bir fırsata dönüşür. İmzayı sade tutun: ad, unvan, telefon ve tek bir kartvizit bağlantısı yeterlidir.',
         ],
+        link: {
+          href: "/rehber/e-posta-imzasi-nasil-eklenir",
+          label: "E-posta imzası nasıl eklenir?",
+        },
       },
       {
         heading: "5. Apple Cüzdan",
@@ -2785,6 +2793,209 @@ export const NEW_GUIDES: Guide[] = [
       {
         q: "Google Cüzdan'a dijital kartvizit eklenir mi?",
         a: "Dijivizit şu an Google Cüzdan kartı sunmuyor. Android'de profil QR kodunuzu fotoğraf olarak kaydedip gösterebilir ya da profil linkinizi ana ekrana ekleyebilirsiniz.",
+      },
+    ],
+  },
+  {
+    slug: "e-posta-imzasi-nasil-eklenir",
+    label: "E-posta imzası ekleme",
+    title: "E-posta İmzası Nasıl Eklenir? Gmail, Outlook, Apple Mail",
+    description:
+      "E-posta imzası nasıl eklenir? Gmail, Outlook ve Apple Mail'de imza ekleme adımları, imzada neler olmalı, telefonda imza ve imzaya dijital kartvizit ekleme.",
+    image: "/rehber/dijital-kartvizit-nasil-olusturulur.jpg",
+    imageAlt: "Telefon ekranında Dijivizit dijital kartvizit profili",
+    published: "2026-11-23",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "E-posta imzası, programın ayarlarındaki İmza bölümünden eklenir. Gmail'de Ayarlar > Tüm ayarları görüntüle > Genel > İmza; Outlook'ta Ayarlar > Hesaplar > İmzalar; Apple Mail'de Mail > Ayarlar > İmzalar yolunu izlersiniz. İmzayı bir kez oluşturup yeni e-postalar ve yanıtlar için varsayılan yaparsınız.",
+          "İmzayı elle biçimlendirmek yerine hazır bir HTML imza kopyalayıp yapıştırmak daha hızlıdır ve her programda daha düzgün görünür.",
+        ],
+        link: { href: "/e-posta-imzasi-olustur", label: "Ücretsiz e-posta imzası oluştur" },
+      },
+      {
+        heading: "İyi bir imzada neler olmalı?",
+        paragraphs: [
+          "İmza, karşınızdakinin size nasıl ulaşacağını tek bakışta görmesi içindir. Kısa tutun; dört beş satır çoğu zaman yeterlidir.",
+        ],
+        list: [
+          "Ad soyad ve unvan",
+          "Şirket adı ve web sitesi",
+          "Tek bir telefon numarası",
+          "İsteğe bağlı tek bir bağlantı: dijital kartvizitiniz, randevu sayfanız ya da portfolyonuz",
+        ],
+        link: { href: "/rehber/kartvizite-ne-yazilir", label: "Kartvizite ne yazılır?" },
+      },
+      {
+        heading: "Gmail'de imza ekleme",
+        paragraphs: ["Gmail'in web sürümünde imza şu adımlarla eklenir:"],
+        list: [
+          "Sağ üstteki dişli simgesine tıklayın ve Tüm ayarları görüntüle'yi seçin.",
+          "Genel sekmesinde aşağı inip İmza bölümünü bulun.",
+          "Yeni oluştur'a tıklayın, imzaya bir ad verin ve imzanızı kutuya yazın ya da yapıştırın.",
+          "Varsayılan imzalar bölümünde yeni e-postalar ve yanıtlar için bu imzayı seçin.",
+          "Sayfanın en altındaki Değişiklikleri Kaydet'e tıklayın.",
+        ],
+      },
+      {
+        heading: "Outlook'ta imza ekleme",
+        paragraphs: [
+          "Yeni Outlook'ta ve Outlook web'de Ayarlar > Hesaplar > İmzalar bölümünden yeni bir imza oluşturur, ardından yeni iletiler ve yanıtlar için varsayılan imzayı seçersiniz. Klasik Outlook'ta aynı ayar Dosya > Seçenekler > Posta > İmzalar yolundadır.",
+          "Outlook'ta imza hesaba göre tutulur. Birden çok e-posta hesabınız varsa varsayılan imzayı her hesap için ayrı ayrı seçin.",
+        ],
+      },
+      {
+        heading: "Apple Mail ve iPhone'da imza",
+        paragraphs: [
+          "Mac'te Mail uygulamasını açın, menüden Mail > Ayarlar > İmzalar'ı seçin. Soldan hesabınızı seçip artı düğmesiyle yeni imza ekleyin. Kopyaladığınız biçimli imzayı yapıştırıyorsanız Her zaman varsayılan yazı tipimle eşleştir seçeneğini kapatın; yoksa renkler ve yazı tipleri sıfırlanır.",
+          "iPhone'daki Mail uygulamasının imzası telefon ayarlarındadır: Ayarlar'da Mail bölümünü açıp İmza'ya dokunursunuz (iOS sürümüne göre Mail, Uygulamalar başlığı altında olabilir). Bu alan biçimlendirmeyi yalnızca kısmen korur; sade bir imza burada daha iyi sonuç verir.",
+        ],
+      },
+      {
+        heading: "Telefondaki Gmail ve Outlook uygulamaları",
+        paragraphs: [
+          "Gmail ve Outlook'un telefon uygulamalarında imza ayarı bilgisayardakinden ayrı olabilir. Telefondan gönderdiğiniz bir e-postada imzanız eksik ya da farklı görünüyorsa uygulamanın kendi ayarlarındaki imza alanını kontrol edin; menü adları uygulama sürümüne göre değişir.",
+          "Telefondan sık e-posta gönderiyorsanız imzanızı kısa tutun ve her yerde aynı bağlantıyı kullanın. Böylece hangi cihazdan yazarsanız yazın alıcı size aynı sayfadan ulaşır.",
+        ],
+      },
+      {
+        heading: "İmzanıza dijital kartvizit bağlantısı ekleyin",
+        paragraphs: [
+          "İmzadaki telefon ve e-posta okunur ama rehbere kendiliğinden kaydedilmez. İmzaya eklediğiniz dijital kartvizit bağlantısına tıklayan kişi ise profilinizi açar ve Rehberime Kaydet düğmesiyle sizi tek dokunuşla kaydeder; fotoğrafınız, WhatsApp'ınız ve sosyal medya hesaplarınız da aynı sayfadadır.",
+          "Numaranız ya da unvanınız değiştiğinde imzayı her cihazda tek tek düzeltmek yerine profilinizi güncellersiniz; bağlantı aynı kalır. Dijivizit'in ücretsiz e-posta imzası aracı, isterseniz bu bağlantı için ayrı bir satır ekler.",
+        ],
+        link: { href: "/dijital-kartvizit", label: "Dijital kartvizit nedir, ne sunar?" },
+      },
+      {
+        heading: "Sık yapılan hatalar",
+        paragraphs: [],
+        list: [
+          "İmzayı tek bir resim olarak eklemek: birçok program resmi engeller ya da ek olarak gönderir, numara da kopyalanamaz.",
+          "Beş ayrı logo ve sosyal medya simgesi: imza kalabalıklaşır, e-postanın kendisinden uzun görünür.",
+          "Birden fazla telefon numarası: karşı taraf hangisini arayacağını bilemez.",
+          "Yanıtlarda imzayı kapatmayı unutmak ya da her yanıta tam imza eklemek: uzun yazışmalarda kısa bir imza yeterlidir.",
+          "Şirket yazışmalarında yasal bilgileri atlamak: ticaret şirketlerinin iş yazışmalarında ticaret unvanı ve ticaret sicil numarası gibi bilgileri yazması gerekebilir; hangi bilgilerin zorunlu olduğunu mali müşavirinize danışın.",
+        ],
+        link: {
+          href: "/dijital-kartvizit/mali-musavir",
+          label: "Mali müşavirler için dijital kartvizit",
+        },
+      },
+    ],
+    faq: [
+      {
+        q: "Gmail'de imza nereden eklenir?",
+        a: "Gmail'in web sürümünde dişli simgesine tıklayıp Tüm ayarları görüntüle'yi seçin. Genel sekmesindeki İmza bölümünde Yeni oluştur'a tıklayın, imzanızı yazın ve sayfanın altındaki Değişiklikleri Kaydet'e basın.",
+      },
+      {
+        q: "Yapıştırdığım imza bozuluyor, neden?",
+        a: "İmzayı düz metin kutusuna değil programın imza düzenleyicisine yapıştırın. Apple Mail'de Her zaman varsayılan yazı tipimle eşleştir seçeneğini kapatın. Tablo ve satır içi stillerle hazırlanmış bir HTML imza Gmail, Outlook ve Apple Mail'de daha tutarlı görünür.",
+      },
+      {
+        q: "E-posta imzasına logo eklemeli miyim?",
+        a: "Zorunlu değil. Birçok program imzadaki görselleri engeller ya da ek olarak gösterir. Logonuzu ve fotoğrafınızı dijital kartvizit profilinize koyup imzaya yalnızca bağlantısını eklemek daha güvenilir bir yoldur.",
+      },
+      {
+        q: "Ücretsiz e-posta imzası nasıl oluşturulur?",
+        a: "Dijivizit'in e-posta imzası aracına adınızı, unvanınızı ve iletişim bilgilerinizi yazın, imzayı kopyalayıp programınızın imza alanına yapıştırın. Araç ücretsizdir ve üyelik istemez.",
+      },
+    ],
+  },
+  {
+    slug: "kartvizit-telefona-kaydetme",
+    label: "Kartviziti telefona kaydetme",
+    title: "Kartvizit Telefona Nasıl Kaydedilir? Kâğıt ve Dijital",
+    description:
+      "Kartvizit telefona nasıl kaydedilir? Kâğıt kartviziti kamerayla rehbere ekleme, iPhone ve Android adımları, dijital ve QR kartviziti tek dokunuşla kaydetme.",
+    image: "/rehber/nfc-kartvizit-mi-kagit-kartvizit-mi.jpg",
+    imageAlt: "Toplantı masasında siyah NFC kartvizit karşıdaki kişiye uzatılıyor",
+    published: "2026-11-23",
+    sections: [
+      {
+        heading: "Kısa cevap",
+        paragraphs: [
+          "Kâğıt kartvizit, telefonun kamerasıyla yazıları okutarak ya da bilgileri elle girerek rehbere kaydedilir. Dijital kartvizitte bu adıma gerek kalmaz: NFC kartı telefona dokundurursunuz ya da QR kodu okutursunuz, açılan profilde Rehberime Kaydet'e dokunursunuz ve kişi bilgileriyle birlikte rehbere eklenir.",
+        ],
+      },
+      {
+        heading: "Kâğıt kartviziti iPhone'a kaydetme",
+        paragraphs: [
+          "iPhone'da Canlı Metin özelliği kameranın gördüğü yazıları tanır. Kamera uygulamasını açıp kartviziti çerçeveye alın; yazılar algılanınca köşede beliren metin düğmesine dokunun.",
+          "Telefon numarası ve e-posta adresi altı çizili görünür. Numaraya dokunup basılı tuttuğunuzda arama, mesaj ve kişilere ekleme gibi seçenekler çıkar. Ad, unvan ve şirketi ise seçip kopyalayarak açtığınız kişi kartına yapıştırabilirsiniz.",
+        ],
+        link: { href: "/rehber/iphone-nfc-acma", label: "iPhone'da NFC kartvizit nasıl okutulur?" },
+      },
+      {
+        heading: "Kâğıt kartviziti Android'e kaydetme",
+        paragraphs: [
+          "Android telefonlarda Google Lens kartvizitteki yazıları tanır. Lens'i kamera uygulamasından ya da Google uygulamasından açıp kartı okutun. Lens telefon numarası veya e-posta için arama ya da kişi ekleme önerebilir; öneri çıkmazsa metni seçip kopyalayarak Kişiler uygulamasındaki yeni kişi kartına yapıştırın.",
+          "Fotoğraf net değilse rakamlar yanlış okunabilir. Kaydetmeden önce numarayı ve e-postayı kartla karşılaştırın.",
+        ],
+      },
+      {
+        heading: "Okutmayı kolaylaştıran ipuçları",
+        paragraphs: [],
+        list: [
+          "Kartı koyu ve düz bir zemine koyun; yansıma yapan ışıktan kaçının.",
+          "Telefonu kartla paralel tutun, kartın tamamı çerçevede olsun.",
+          "Parlak ya da yaldızlı baskılarda kartı hafifçe eğerek parlamayı azaltın.",
+          "Kaydettiğiniz kişiye nerede tanıştığınızı not edin; birkaç hafta sonra kim olduğunu hatırlamak kolaylaşır.",
+        ],
+      },
+      {
+        heading: "Dijivizit'te kâğıt kartvizit tarama",
+        paragraphs: [
+          "Dijivizit hesabınızda Kişiler bölümündeki kartvizit tarama ile size verilen kâğıt kartvizitin fotoğrafını çekersiniz; ad, unvan, şirket, telefon ve e-posta otomatik doldurulur. Bilgileri kontrol edip kaydedersiniz, isterseniz nerede tanıştığınızı ve etiket eklersiniz. Fotoğraf yalnızca okunmak için işlenir, saklanmaz.",
+          "Kişiler listenize not ve takip hatırlatması ekleyebilir, listeyi CSV dosyası olarak indirebilirsiniz. Fuar ve etkinlik dönüşü onlarca kartı aynı gün kaydetmek için pratik bir yoldur.",
+        ],
+        link: { href: "/rehber/fuarda-kartvizit", label: "Fuarda kartvizit ve networking" },
+      },
+      {
+        heading: "Dijital kartvizit rehbere nasıl kaydedilir?",
+        paragraphs: [
+          "Dijital kartvizit profili açıldığında sayfadaki Rehberime Kaydet düğmesine dokunun. Telefon bir kişi kartı (vCard) indirir:",
+        ],
+        list: [
+          "iPhone: Açılan kartta Yeni Kişi Oluştur'u ya da Mevcut Kişiye Ekle'yi seçin.",
+          "Android: Dosyayı Kişiler uygulamasıyla açın ve hangi hesaba kaydedileceğini seçin.",
+          "Bilgisayar: İnen VCF dosyasını Google Kişiler ya da Outlook'a içe aktarın.",
+        ],
+        link: { href: "/rehber/vcf-dosyasi-nedir", label: "VCF dosyası nedir, nasıl açılır?" },
+      },
+      {
+        heading: "QR kodlu kartvizit nasıl kaydedilir?",
+        paragraphs: [
+          "Kartvizitteki QR kodu telefonun kamerasıyla okutun. Kodun içinde bir profil linki varsa sayfa açılır ve oradan Rehberime Kaydet ile kaydedersiniz. Kodun içine bilgiler doğrudan yazılmışsa (vCard QR) telefon kişiyi eklemeyi kendisi önerir; internet bağlantısı bile gerekmez.",
+          "Kendi kâğıt kartvizitinize bu türde bir kod eklemek isterseniz ücretsiz araçla üyelik olmadan oluşturabilirsiniz.",
+        ],
+        link: { href: "/qr-kartvizit-olustur", label: "Ücretsiz QR kartvizit oluştur" },
+      },
+      {
+        heading: "Karşı tarafın işini kolaylaştırın",
+        paragraphs: [
+          "Siz kartvizit verdiğinizde de aynı soru karşınızdakinin başına gelir. Kâğıt kartvizit çoğu zaman cüzdanda kalır, rehbere hiç girmez. NFC kartvizitte kişi kartı telefona dokundurur, profiliniz açılır ve tek dokunuşla sizi kaydeder; dilerse Bilgilerimi bırak formuyla kendi bilgisini de size iletir.",
+          "Dijivizit NFC kartlar PVC, ahşap ve metal seçenekleriyle gelir; kartla birlikte aynı profile açılan QR kodunuz da olur.",
+        ],
+        link: { href: "/nfc-kartvizit", label: "NFC kartvizit" },
+      },
+    ],
+    faq: [
+      {
+        q: "Kâğıt kartvizit telefona otomatik kaydedilir mi?",
+        a: "Tam otomatik değil. iPhone'da Canlı Metin, Android'de Google Lens kartvizitteki numara ve e-postayı tanır; kişi eklemeyi siz onaylarsınız. Ad ve şirket gibi bilgileri kontrol edip gerekirse düzeltmeniz gerekir.",
+      },
+      {
+        q: "Kartvizit tarama için uygulama indirmem gerekir mi?",
+        a: "Gerekmez. iPhone'un kamerası ve Android'deki Google Lens kartvizitteki yazıları okur. Kartvizitleri tek listede, notlarla birlikte tutmak isterseniz Dijivizit hesabınızdaki kartvizit tarama özelliğini kullanabilirsiniz.",
+      },
+      {
+        q: "Dijital kartviziti kaydetmek için uygulama gerekir mi?",
+        a: "Hayır. Profil tarayıcıda açılır; Rehberime Kaydet düğmesi telefonun kendi Kişiler uygulamasına bir kişi kartı ekler.",
+      },
+      {
+        q: "NFC kartvizit okutunca rehbere direkt kaydedilir mi?",
+        a: "Kart dokundurulduğunda önce profil açılır; kişi Rehberime Kaydet'e dokunarak kaydeder. Böylece kimse sizin onayınız olmadan rehbere eklenmez ve profil her zaman güncel bilgilerinizi gösterir.",
       },
     ],
   },
